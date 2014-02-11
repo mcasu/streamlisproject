@@ -1,12 +1,12 @@
 <?PHP
-require_once("./include/membersite_config.php");
+require_once("../include/membersite_config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();
 
 if(!$fgmembersite->CheckLogin())
 {
-    $utils->RedirectToURL("login.php");
+    $utils->RedirectToURL("../login.php");
     exit;
 }
 
@@ -15,8 +15,9 @@ if(!$fgmembersite->CheckLogin())
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-      <title>Home page</title>
-      <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css">
+      <title>JW LIS Streaming - On-demand</title>
+      <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
+	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
 	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript">
@@ -25,7 +26,7 @@ if(!$fgmembersite->CheckLogin())
 			$('.play-button').click(function (event){
  
 			var url = $(this).attr("href");
-			var windowName = "popUp";//$(this).attr("name");
+			var windowName = "Player";//$(this).attr("name");
 			var windowSpecs = 'width=640,height=480, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
  
 			window.open(url, windowName, windowSpecs);
@@ -47,7 +48,7 @@ if(!$fgmembersite->CheckLogin())
 </div>
 
 <hr margin="0"/>
-<h2>ELENCO EVENTI LIVE PER PUBLISHER:</h2>
+<h2>ELENCO EVENTI ON-DEMAND PER PUBLISHER:</h2>
 <hr margin="0"/>
 
 <?php
@@ -71,26 +72,35 @@ try
 
                 if ($publisher_role_name=="publisher")
                 {
-                        $live_events = $dbactions->GetLiveEventsByPublisher($publisher_code);
+                        $ondemand_events = $dbactions->GetOndemandEventsByPublisher($publisher_code);
 			echo '<p><b>'. $publisher_name . '</b> (Code '.$publisher_code.')'.
-                        '<img align="center" src="images/group.png" border="0" height="48" width="48"/>';
+                        '<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';
 
-			if (!$live_events || mysql_num_rows($live_events)<1)
+			if (!$ondemand_events || mysql_num_rows($ondemand_events)<1)
 			{
-				echo '</br>Nessun evento live disponibile per questa congregazione.';
+				echo '</br>Nessun evento on-demand disponibile per questa congregazione.';
 			}
-                                while($row = mysql_fetch_array($live_events))
+				echo '<table class="imagetable">'.
+				'<tr>'.
+				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>AZIONI</th>'.
+				'</tr>';
+
+                                while($row = mysql_fetch_array($ondemand_events))
                                 {
-	                                        $live_id=$row['live_id'];
-	                                        $live_app=$row['app_name'];
-	                                        $live_stream=$row['stream_name'];
-					
-						echo '<br/>Evento ID '.$live_id.' APP '.$live_app.' STREAM '.$live_stream.
-						' <a class="play-button" href="jwplayer/play-live.php?app_name='.$live_app.'&stream_name='.$live_stream.'" target="_blank"><img align="center" src="images/play.png" width="36"/></a>';
-						echo '<br/>';
+	                        	$ondemand_id=$row['ondemand_id'];
+	                                $ondemand_app_name=$row['ondemand_app_name'];
+	                                $ondemand_filename=$row['ondemand_filename'];
+				
+					echo '<tr>';
+			                        echo '<td>' . $ondemand_id . '</td>';
+			                        echo '<td>' . $ondemand_app_name . '</td>';
+			                        echo '<td>' . $ondemand_filename . '</td>';
+			                        echo '<td>  <a class="play-button" href="#" target="_blank"><img align="center" src="../images/play.png" width="32"/></a></td>';
+				        echo '</tr>';	
                                 }
-                        echo '</p>'.
-                                '<hr style="margin: 1em 0" />';
+			echo '</table>';
+                        echo '</p>';
+                        echo '<hr style="margin: 1em 0" />';
                 }
         }
     }

@@ -15,7 +15,7 @@ if(isset($_POST['submitted']))
 	}
 	else
 	{
-        	$utils->RedirectToURL("home-normal.php");
+        	$utils->RedirectToURL("viewer/live-normal.php");
 	}
    }
 }
@@ -34,7 +34,7 @@ if(isset($_POST['submitted']))
 <!-- Form Code Start -->
 <div align=center>
 	<h2 align="center">Benvenuto su JW LIS Streaming</h2>
-	<img src="../images/logo.png" alt="JW LIS Streaming" align="center" height="48" width="48"> 
+	<img src="images/logo.png" alt="JW LIS Streaming" align="center" height="48" width="48"> 
 </div>
 <div id='fg_membersite' align="center">
 <form id='login' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
