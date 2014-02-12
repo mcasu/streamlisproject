@@ -80,6 +80,8 @@ try
 			{
 				echo '</br>Nessun evento on-demand disponibile per questa congregazione.';
 			}
+			else
+			{
 				echo '<table class="imagetable">'.
 				'<tr>'.
 				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>AZIONI</th>'.
@@ -88,6 +90,7 @@ try
                                 while($row = mysql_fetch_array($ondemand_events))
                                 {
 	                        	$ondemand_id=$row['ondemand_id'];
+	                                $ondemand_publish_code=$row['ondemand_publish_code'];
 	                                $ondemand_app_name=$row['ondemand_app_name'];
 	                                $ondemand_filename=$row['ondemand_filename'];
 				
@@ -95,11 +98,12 @@ try
 			                        echo '<td>' . $ondemand_id . '</td>';
 			                        echo '<td>' . $ondemand_app_name . '</td>';
 			                        echo '<td>' . $ondemand_filename . '</td>';
-			                        echo '<td>  <a class="play-button" href="#" target="_blank"><img align="center" src="../images/play.png" width="32"/></a></td>';
+			                        echo '<td>  <a class="play-button" href="../jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank"><img align="center" src="../images/play.png" width="28"/></a></td>';
 				        echo '</tr>';	
                                 }
 			echo '</table>';
                         echo '</p>';
+			}
                         echo '<hr style="margin: 1em 0" />';
                 }
         }

@@ -28,13 +28,23 @@ function OnRecordDone($nginx_id,$ondemand_path,$client_addr,$record_path)
 
 	$path_parts = pathinfo($record_path);
 	$filename = $path_parts['basename'];
-		
-	if (rename($record_path, $ondemand_path.$filename))
+	
+	if (rename($record_path, $ondemand_path."TEMP_".$filename))
 	{
-		return true;
+		$yamdi_commandline='/usr/bin/yamdi -i '.$ondemand_path."TEMP_".$filename.' -o '.$ondemand_path.$filename;
+		$last_line = system($yamdi_commandline, $retval);
+	
+		unlink($ondemand_path."TEMP_".$filename);
+	
+		if (symlink($ondemand_path.$filename, "/var/stream/".$filename))
+		{
+			return true;	
+		}
+		error_log('Creazione del link simbolico [/var/stream/'.$filename.'] fallita!');
+		return false;
 	}
 
-	error_log("Copia del file registrato fallita!");
+	error_log('Copia del file registrato in ['.$ondemand_path.'TEMP_'.$filename.'] fallita!');
 	return false;	
 }
 

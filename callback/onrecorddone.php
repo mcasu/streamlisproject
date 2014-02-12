@@ -11,7 +11,7 @@ $stream_name = $_POST['name'];
 $client_addr = $_POST['addr'];
 $record_path = $_POST['path'];
 
-$ondemand_path="/var/stream/".$app_name."/".$stream_name."/";
+$ondemand_path="/var/stream/".$stream_name."/";
 
 $path_parts = pathinfo($record_path);
 $ondemand_filename = $path_parts['basename'];
