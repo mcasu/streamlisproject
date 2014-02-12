@@ -1,0 +1,6 @@
+
+- Usare Yamdi per indicizzare i file flv dopo la registrazione
+
+- Permettere ai publisher e gli admin di liberare uno stream_name
+
+
