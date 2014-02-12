@@ -7,15 +7,15 @@ $fgmembersite->LogOut();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-      <title>Login</title>
+      <title>JW LIS Streaming - Logout</title>
       <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css" />
       <script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
 </head>
 <body>
 
-<h2>You have logged out</h2>
+<h2>Sei uscito da JW LIS Streaming.</h2>
 <p>
-<a href='login.php'>Login Again</a>
+<a href='login.php'>Entra ancora</a>
 </p>
 
 </body>

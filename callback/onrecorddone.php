@@ -16,9 +16,11 @@ $ondemand_path="/var/stream/".$stream_name."/";
 $path_parts = pathinfo($record_path);
 $ondemand_filename = $path_parts['basename'];
 
+
 if ($fsactions->OnRecordDone($nginx_id,$ondemand_path,$client_addr,$record_path))
 {
-	$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename);
+	$movie = new ffmpeg_movie($ondemand_path.$ondemand_filename, false);
+	$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie);
 }
 
 ?>

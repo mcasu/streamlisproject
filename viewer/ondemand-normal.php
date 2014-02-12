@@ -73,7 +73,7 @@ try
                 if ($publisher_role_name=="publisher")
                 {
                         $ondemand_events = $dbactions->GetOndemandEventsByPublisher($publisher_code);
-			echo '<p><b>'. $publisher_name . '</b> (Code '.$publisher_code.')'.
+			echo '<p><b>'. $publisher_name . '</b> '.
                         '<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';
 
 			if (!$ondemand_events || mysql_num_rows($ondemand_events)<1)
@@ -84,7 +84,7 @@ try
 			{
 				echo '<table class="imagetable">'.
 				'<tr>'.
-				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>AZIONI</th>'.
+				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>AZIONI</th>'.
 				'</tr>';
 
                                 while($row = mysql_fetch_array($ondemand_events))
@@ -93,12 +93,18 @@ try
 	                                $ondemand_publish_code=$row['ondemand_publish_code'];
 	                                $ondemand_app_name=$row['ondemand_app_name'];
 	                                $ondemand_filename=$row['ondemand_filename'];
+	                                $ondemand_movie_duration=$row['ondemand_movie_duration'];
+	                                $ondemand_movie_bitrate=$row['ondemand_movie_bitrate'];
+	                                $ondemand_movie_codec=$row['ondemand_movie_codec'];
 				
 					echo '<tr>';
-			                        echo '<td>' . $ondemand_id . '</td>';
-			                        echo '<td>' . $ondemand_app_name . '</td>';
-			                        echo '<td>' . $ondemand_filename . '</td>';
-			                        echo '<td>  <a class="play-button" href="../jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank"><img align="center" src="../images/play.png" width="28"/></a></td>';
+			                        echo '<td align="center">' . $ondemand_id . '</td>';
+			                        echo '<td align="center">' . $ondemand_app_name . '</td>';
+			                        echo '<td align="center">' . $ondemand_filename . '</td>';
+			                        echo '<td align="center">' . $ondemand_movie_duration . '</td>';
+			                        echo '<td align="center">' . $ondemand_movie_bitrate . '</td>';
+			                        echo '<td align="center">' . $ondemand_movie_codec . '</td>';
+			                        echo '<td align="left">  <a class="play-button" href="../jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank"><img align="center" src="../images/play.png" width="28"/></a></td>';
 				        echo '</tr>';	
                                 }
 			echo '</table>';

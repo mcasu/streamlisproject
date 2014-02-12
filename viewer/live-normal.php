@@ -39,7 +39,7 @@ if(!$fgmembersite->CheckLogin())
 <body>
 <?php include("header-normal.php"); ?>
 
-<div align="right"><b><?= $fgmembersite->UserFullName(); ?></b>, Welcome back!</div>
+<div align="right"><b><?= $fgmembersite->UserFullName(); ?></b>, Benvenuto!</div>
 <div id='fg_membersite_content'>
 
 <div>
@@ -72,25 +72,43 @@ try
                 if ($publisher_role_name=="publisher")
                 {
                         $live_events = $dbactions->GetLiveEventsByPublisher($publisher_code);
-			echo '<p><b>'. $publisher_name . '</b> (Code '.$publisher_code.')'.
+			echo '<p><b>'. $publisher_name . '</b> '.
                         '<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';
 
 			if (!$live_events || mysql_num_rows($live_events)<1)
 			{
 				echo '</br>Nessun evento live disponibile per questa congregazione.';
 			}
+			else
+			{
+				echo '<table class="imagetable">'.
+                                '<tr>'.
+                                '<th>ID EVENTO</th><th>DATA</th><th>ORA</th><th>APP</th><th>STREAM NAME</th><th>PUBBLICATO DA</th><th>AZIONI</th>'.
+                                '</tr>';
+
                                 while($row = mysql_fetch_array($live_events))
                                 {
-	                                        $live_id=$row['live_id'];
-	                                        $live_app=$row['app_name'];
-	                                        $live_stream=$row['stream_name'];
-					
-						echo '<br/>Evento ID '.$live_id.' APP '.$live_app.' STREAM '.$live_stream.
-						' <a class="play-button" href="../jwplayer/play-live.php?app_name='.$live_app.'&stream_name='.$live_stream.'" target="_blank"><img align="center" src="../images/play.png" width="36"/></a>';
-						echo '<br/>';
+	                                $live_id=$row['live_id'];
+	                                $app_name=$row['app_name'];
+	                                $stream_name=$row['stream_name'];
+	                                $live_date=$row['live_date'];
+	                                $live_time=$row['live_time'];
+	                                $client_addr=$row['client_addr'];
+				
+					echo '<tr>';
+                                                echo '<td align="center">' . $live_id . '</td>';
+                                                echo '<td align="center">' . $live_date . '</td>';
+                                                echo '<td align="center">' . $live_time . '</td>';
+                                                echo '<td align="center">' . $app_name . '</td>';
+                                                echo '<td align="center">' . $stream_name . '</td>';
+                                                echo '<td align="center">' . $client_addr . '</td>';
+                                                echo '<td align="left">  <a class="play-button" href="../jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank"><img align="center" src="../images/play.png" width="28"/></a></td>';
+                                        echo '</tr>';
                                 }
-                        echo '</p>'.
-                                '<hr style="margin: 1em 0" />';
+			echo '</table>';
+                        echo '</p>';
+			}
+                        echo '<hr style="margin: 1em 0" />';
                 }
         }
     }

@@ -47,7 +47,7 @@ if(isset($_POST['submitted']))
 
 <div><span class='error'><?php echo $dbactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
-    <label for='username' >UserName:</label><br/>
+    <label for='username' >Nome utente:</label><br/>
     <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="50" /><br/>
     <span id='login_username_errorloc' class='error'></span>
 </div>
@@ -59,7 +59,7 @@ if(isset($_POST['submitted']))
 
 </br>
 <div class='container'>
-    <input type='submit' name='Submit' value='ENTRA' />
+    <input align="center" type='submit' name='Submit' value='ENTRA' />
 </div>
 <div class='short_explanation'><a href='reset-pwd-req.php'>Password dimenticata?</a></div>
 </fieldset>

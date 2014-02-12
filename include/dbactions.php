@@ -308,7 +308,7 @@ class DBActions
 		return strtolower(str_replace(' ', '_', $publish_code));
 	}
 
-    function OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code)
+    function OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code,$mysqldate,$mysqltime)
         {
 
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -326,6 +326,8 @@ class DBActions
 
                 $insert_query = 'insert into live (
                 nginx_id,
+		live_date,
+		live_time,
                 app_name,
                 stream_name,
                 client_addr,
@@ -333,6 +335,8 @@ class DBActions
                 values
                 (
                 "' . $this->SanitizeForSQL($nginx_id) . '",
+                "' . $this->SanitizeForSQL($mysqldate) . '",
+                "' . $this->SanitizeForSQL($mysqltime) . '",
                 "' . $this->SanitizeForSQL($app_name) . '",
                 "' . $this->SanitizeForSQL($stream_name) . '",
                 "' . $this->SanitizeForSQL($client_addr) . '",
@@ -372,7 +376,7 @@ class DBActions
                 return true;
         }
 
-	function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename)
+	function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie)
         {
 
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -388,17 +392,27 @@ class DBActions
                     return false;
                 }
 
+		$video_duration=$movie->getDuration();
+		$video_bitrate=$movie->getVideoBitRate();
+		$video_codec=$movie->getVideoCodec();
+
                 $insert_query = 'insert into ondemand (
                 ondemand_publish_code,
                 ondemand_path,
                 ondemand_app_name,
-                ondemand_filename)
+                ondemand_filename,
+		ondemand_movie_duration,
+		ondemand_movie_bitrate,
+		ondemand_movie_codec)
                 values
                 (
                 "' . $this->SanitizeForSQL($stream_name) . '",
                 "' . $this->SanitizeForSQL($ondemand_path) . '",
                 "' . $this->SanitizeForSQL($app_name) . '",
-                "' . $this->SanitizeForSQL($ondemand_filename) . '"
+                "' . $this->SanitizeForSQL($ondemand_filename) . '",
+                "' . $this->SanitizeForSQL($video_duration) . '",
+                "' . $this->SanitizeForSQL($video_bitrate) . '",
+                "' . $this->SanitizeForSQL($video_codec) . '"
                 )';
 
                 if(!mysql_query( $insert_query ,$this->connection))
@@ -610,7 +624,7 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select * from live where stream_name = \''.$publish_code.'\' order by app_name';
+                $select_query = 'select * from live where stream_name = \''.$publish_code.'\' order by app_name,live_date';
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)

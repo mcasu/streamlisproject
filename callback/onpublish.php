@@ -17,6 +17,9 @@ else
 	$publish_code = "0000";
 }
 
-$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code);
+$mysqldate = date("Y-m-d"); 
+$mysqltime = date("H:i:s"); 
+
+$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime);
 
 ?>
