@@ -17,9 +17,6 @@
       </ul>
    </li>
    <li class='has-sub last'><a href='links_manage.php'><span>Relazioni</span></a>
-      <ul>
-         <li class='last'><a href='#'><span>Gestisci relazioni</span></a></li>
-      </ul>
    </li>
    <li class='has-sub last'>
 	<a href='#'>Profilo<img src="../images/user.png" align="right" hspace="4" height="32" width="32"></a>

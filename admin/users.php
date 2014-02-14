@@ -28,20 +28,26 @@ if (!$user_role || $user_role!="1")
 	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
 <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript">
-	$(function(){
-		$("a.userdelete").click(function(){
+<script type="text/javascript">
+$(function()
+{
+	$("a.userdelete").click(function()
+	{
 		var td_id=$(this).parent().attr('id');
 		par=$(this).parent();
-  $.post("user_delete.php",{user_id:td_id,},
-  function(data,status){
-	/*alert("Data: " + data + "\nStatus: " + status);*/
-	par.parent().fadeOut(1000, function() 
-	{
-		par.parent().remove();
+
+		if (confirm("Vuoi davvero eliminare?")){
+		$.post("user_delete.php",{user_id:td_id,},
+		function(data,status)
+		{
+			/*alert("Data: " + data + "\nStatus: " + status);*/
+			par.parent().fadeOut(1000, function() 
+			{
+				par.parent().remove();
+			});
+		});
+		}
 	});
-  });
-});
 });
         </script>
 

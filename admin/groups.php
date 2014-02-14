@@ -30,18 +30,24 @@ if (!$user_role || $user_role!="1")
 <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript">
         $(function(){
-                $("a.groupdelete").click(function(){
-                var td_id=$(this).parent().attr('id');
-                par=$(this).parent();
-  $.post("group_delete.php",{group_id:td_id,},
-  function(data,status){
-        /*alert("Data: " + data + "\nStatus: " + status);*/
-        par.parent().fadeOut(1000, function()
-        {
-                par.parent().remove();
-        });
-  });
-});
+                $("a.groupdelete").click(function()
+		{
+                	var td_id=$(this).parent().attr('id');
+	                par=$(this).parent();
+			
+			if (confirm("Vuoi davvero eliminare?")){
+			$.post("group_delete.php",{group_id:td_id,},
+	
+			function(data,status)
+			{
+		    	    /*alert("Data: " + data + "\nStatus: " + status);*/
+		        	par.parent().fadeOut(1000, function()
+			        {
+			                par.parent().remove();
+		        	});
+			});
+			}
+		});
 });
         </script>
 

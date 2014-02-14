@@ -542,7 +542,34 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select group_links.viewer_id, groups.group_name as viewer_name from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where group_links.publisher_id = \''.$publisher_id.'\';';
+                $select_query = 'select group_links.viewer_id, groups.group_name as viewer_name from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_name';
+
+                $result = mysql_query($select_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    return false;
+                }
+                return $result;
+        }
+
+	function GetViewersAvailable($publisher_id)
+        {
+                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $select_query = 'select groups.group_name,groups.group_id from groups where group_role = \'2\' and group_id not in (select viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where publisher_id = \''.$publisher_id.'\') order by group_name;';
+                /*$select_query = 'select group_links.viewer_id, groups.group_name as viewer_name from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where group_links.publisher_id != \''.$publisher_id.'\' order by viewer_name';*/
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)
