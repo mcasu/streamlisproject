@@ -25,19 +25,36 @@ if(isset($_GET['stream_name']))
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="skin/functional.css">
 	
-	<script type="text/javascript" src="jwplayer.js" ></script>
 </head>
 <body>
-        <div class="span-18" align="center">
-            <h1>On-demand Video Streaming</h1>
-        </div>
-		<center>
-		<div id="player" style="text-align:center"></div>
+    <script src="../../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="flowplayer.js" ></script>
+    
+    <div class="span-18" align="center"> <h1>On-demand Video Streaming</h1> </div>
 		
-		<?php
-		
-		echo '<script type="text/javascript">'.
+	<center>
+	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/vod">'; ?>
+		<video autoplay>
+			<?php echo '<source type="video/flash" src="'.$filename.'">'; ?>
+	        </video>
+	    </div>		
+<?php
+	
+echo '<script>';
+
+    'flowplayer.conf = {'.
+	'live: true,'.
+	'rtmp: "rtmp://54.213.120.163:1935/vod/'.$filename.'",'.
+	'ratio: 3/4,'.
+	'width: 480px,'.
+	'height: 640px,'.
+	'swf: "flowplayer.swf"'.
+	 '};';
+
+
+	    /* echo '<script type="text/javascript">'.
 			'jwplayer("player").setup({
                         file: "rtmp://54.213.120.163:1935/vod/'.$filename.'",
                         autostart: true,
@@ -46,9 +63,10 @@ if(isset($_GET['stream_name']))
                         width: 640,
                         height: 480,
                         });'.
-			'</script>';
+			'</script>'; */
+    echo '</script>';
 
-		?>
+?>
 		</center>
 </body>
 </html>
