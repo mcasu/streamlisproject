@@ -27,6 +27,7 @@ if(isset($_GET['stream_name']))
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//releases.flowplayer.org/5.4.6/skin/minimalist.css">
+    <script src="//releases.flowplayer.org/5.4.6/flowplayer.min.js"></script>
 </head>
 <body>
 		<!-- HEADER -->
@@ -34,7 +35,7 @@ if(isset($_GET['stream_name']))
             <h1>Live Video Streaming</h1>
         </div>
 		<center>
-		<div class="flowplayer" id="player" data-engine="flash" style="text-align:center">
+		<div class="flowplayer" id="player" style="text-align:center">
 		    <video>
 			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
 		    </video>
@@ -42,7 +43,8 @@ if(isset($_GET['stream_name']))
 		
 <?php
 	
-echo '<script type="text/javascript">'.
+	
+echo '<script>'.
 
     'flowplayer.conf = {'.
 	'live: true,'.
