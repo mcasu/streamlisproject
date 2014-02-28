@@ -21,6 +21,9 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
+$path_parts = pathinfo($filename);
+$filename_withoutext=$path_parts['basename'];
+
 ?>
 <html lang="en">
 <head>
@@ -37,7 +40,8 @@ if(isset($_GET['stream_name']))
 	<center>
 	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/vod">'; ?>
 		<video autoplay>
-			<?php echo '<source type="video/flash" src="'.$filename.'">'; ?>
+			<?php echo '<source type="video/flash" src="'.$filename_withoutext.'.flv">'; ?>
+			<?php echo '<source type="video/mp4" src="'.$filename_withoutext.'.mp4">'; ?>
 	        </video>
 	    </div>		
 <?php

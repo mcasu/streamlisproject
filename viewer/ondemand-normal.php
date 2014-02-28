@@ -106,9 +106,9 @@ try
 			                        echo '<td align="center">' . $ondemand_movie_codec . '</td>';
 			                        echo '<td align="left">'.
 						'<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-						'<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="84" height="24"/></button></a>'.
+						'<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="86" height="24"/></button></a>'.
 						'<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-						'<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="84" height="24"/></button></a>'.
+						'<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="86" height="24"/></button></a>'.
 						'</td>';
 				        echo '</tr>';	
                                 }
