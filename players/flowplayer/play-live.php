@@ -42,7 +42,7 @@ if(isset($_GET['stream_name']))
 		</div>
 
 <script src="../../js/jquery-1.11.0.min.js"></script>    
-<script src="//releases.flowplayer.org/5.4.6/flowplayer.min.js"></script>
+<script src="flowplayer.min.js"></script>
 
 <?php
 	
@@ -52,7 +52,9 @@ echo '<script>'.
     'flowplayer.conf = {'.
 	'live: true,'.
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'",'.
-	'ratio: 9/16,'.
+	'ratio: 3/4,'.
+	'width: 640px,'.
+	'height: 480px,'.
 	'swf: "//releases.flowplayer.org/5.4.3/flowplayer.swf" };'.
     '</script>';
 
