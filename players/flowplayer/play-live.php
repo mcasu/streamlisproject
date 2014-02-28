@@ -36,7 +36,8 @@ if(isset($_GET['stream_name']))
 		
 		<?php
 	
-echo '$f("player", "flowplayer.swf", {
+echo '<script type="text/javascript">'.
+    '$f("player", "flowplayer.swf", {
  
     clip: {
         url: \'live\',
@@ -56,7 +57,8 @@ echo '$f("player", "flowplayer.swf", {
             netConnectionUrl: \'rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'
         }
     }
-});';
+});'.
+'</script>';
 
 		?>
 		</center>
