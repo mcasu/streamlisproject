@@ -18,8 +18,7 @@ if(isset($_POST['submitted']))
         	$utils->RedirectToURL("viewer/live-normal.php");
 	}
    }
-}
-Ciao
+}																									
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
@@ -31,7 +30,7 @@ Ciao
 </head>
 <body>
 
-<!-- Form Code Start -->
+
 <div align=center>
 	<h2 align="center">Benvenuto su JW LIS Streaming</h2>
 	<img src="images/logo.png" alt="JW LIS Streaming" align="center" height="48" width="48"> 
@@ -64,8 +63,6 @@ Ciao
 <div class='short_explanation'><a href='reset-pwd-req.php'>Password dimenticata?</a></div>
 </fieldset>
 </form>
-<!-- client-side Form Validations:
-Uses the excellent form validation script from JavaScript-coder.com-->
 
 <script type='text/javascript'>
 // <![CDATA[
@@ -81,9 +78,6 @@ Uses the excellent form validation script from JavaScript-coder.com-->
 // ]]>
 </script>
 </div>
-<!--
-Form Code End (see html-form-guide.com for more info.)
--->
 
 </body>
 </html>

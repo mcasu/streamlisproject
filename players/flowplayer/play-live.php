@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?PHP
 require_once("../../include/membersite_config.php");
 
@@ -24,7 +25,8 @@ if(isset($_GET['stream_name']))
 ?>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//releases.flowplayer.org/5.4.6/skin/minimalist.css">
 </head>
 <body>
 		<!-- HEADER -->
@@ -32,35 +34,25 @@ if(isset($_GET['stream_name']))
             <h1>Live Video Streaming</h1>
         </div>
 		<center>
-		<div id="player" style="text-align:center"></div>
+		<div class="flowplayer" id="player" data-engine="flash" style="text-align:center">
+		    <video>
+			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
+		    </video>
+		</div>
 		
-		<?php
+<?php
 	
 echo '<script type="text/javascript">'.
-    '$f("player", "flowplayer.swf", {
- 
-    clip: {
-        url: \'live\',
-        live: true,
-        // configure clip to use influxis as our provider, it uses our rtmp plugin
-        provider: \'influxis\'
-    },
- 
-    // streaming plugins are configured under the plugins node
-    plugins: {
- 
-        // here is our rtpm plugin configuration
-        influxis: {
-            url: "flowplayer.rtmp-3.2.13.swf",
- 
-            // netConnectionUrl defines where the streams are found
-            netConnectionUrl: \'rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'
-        }
-    }
-});'.
-'</script>';
 
-		?>
+    'flowplayer.conf = {'.
+	'live: true,'.
+	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.",'.
+	'ratio: 9/16,'.
+	'// work around a bug in the flash engine regarding live streams'.
+	'swf: \"//releases.flowplayer.org/5.4.3/flowplayer.swf\" };'.
+    '</script>';
+
+?>
 		</center>
 </body>
 </html>
