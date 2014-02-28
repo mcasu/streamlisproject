@@ -48,7 +48,6 @@ if(isset($_GET['stream_name']))
 	
 echo '<script>';
 
-/*
     'flowplayer.conf = {'.
 	'live: true,'.
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'",'.
@@ -56,23 +55,6 @@ echo '<script>';
 	'width: 640px,'.
 	'height: 480px,'.
 	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
-*/	
-
-echo 'flowplayer("player", "flowplayer-3.2.18.swf", {'.
-        'clip: {'.
-            'url : "'.$stream_name.'",'. /*this is the name of the stream assset in the encoder*/
-	    'live : true,'.  /*// tell flowplayer it's live*/
-	    'provider: "rtmp"'.
-	'},'.
- 
-	'plugins: {'.
-	    'rtmp: {'.
-	    'url: "flowplayer.rtmp-3.2.13.swf",'.
-	    'netConnectionUrl: "rtmp://54.213.120.163:1935/'.$app_name.'",'.  /*this is the rest of the URL excluding the stream name that you set in the encoder*/
-	    'subscribe: true'.  /*subscribe to the stream*/
-                    '}'.
-                 '}'.
-        '});';
 
 echo '</script>';
 
