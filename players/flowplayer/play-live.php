@@ -26,7 +26,7 @@ if(isset($_GET['stream_name']))
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="//releases.flowplayer.org/5.4.6/skin/minimalist.css">
+    <link rel="stylesheet" href="skin/minimalist.css">
     
 </head>
 <body>
@@ -55,7 +55,9 @@ echo '<script>';
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'",'.
 	'width: 640px,'.
 	'height: 480px,'.
-	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
+	/*'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" */
+	'swf: "flowplayer.swf"'.
+	 '};';
 
 echo '</script>';
 
