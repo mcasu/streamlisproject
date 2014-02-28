@@ -41,7 +41,7 @@ if(isset($_GET['stream_name']))
 	<center>
 	    <?php echo '<div class="flowplayer play-button" id="player" data-engine="flash" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/'.$app_name.'">'; ?>
 	        <video preload="none" autoplay>
-			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
+			<?php echo '<source src="'.$stream_name.'">'; ?>
 	        </video>
 	    </div>
 
@@ -53,6 +53,7 @@ echo '<script>';
     'flowplayer.conf = {'.
 	'live: true,'.
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'",'.
+	'ratio: 3/4,'.
 	'width: 640px,'.
 	'height: 480px,'.
 	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
