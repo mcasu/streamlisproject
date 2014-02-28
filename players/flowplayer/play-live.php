@@ -39,8 +39,8 @@ if(isset($_GET['stream_name']))
         </div>
 	
 	<center>
-	    <?php echo '<div class="flowplayer" id="player" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/'.$app_name.'">'; ?>
-	        <video>
+	    <?php echo '<div class="flowplayer play-button" id="player" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/'.$app_name.'">'; ?>
+	        <video preload="none">
 			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
 	        </video>
 	    </div>
