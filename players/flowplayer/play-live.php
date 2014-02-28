@@ -32,14 +32,14 @@ if(isset($_GET['stream_name']))
 <body>
 
 <script src="../../js/jquery-1.11.0.min.js"></script>    
-<script src="flowplayer.min.js"></script>
+<script src="flowplayer-3.2.13.min.js"></script>
 
         <div class="span-18" align="center">
             <h1>Live Video Streaming</h1>
         </div>
 	
 	<center>
-	    <div class="flowplayer play-button fixed-controls" id="player" style="text-align:center">
+	    <div class="flowplayer play-button fixed-controls" data-engine="flash" id="player">
 	        <video preload="none">
 			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
 	        </video>
