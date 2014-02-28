@@ -36,7 +36,7 @@ if(isset($_GET['stream_name']))
 		
 		<?php
 	
-echo '$f("live", "flowplayer.swf", {
+echo '$f("player", "flowplayer.swf", {
  
     clip: {
         url: \'live\',
