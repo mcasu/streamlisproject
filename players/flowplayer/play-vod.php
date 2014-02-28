@@ -21,8 +21,8 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
-$path_parts = pathinfo($filename);
-$filename_withoutext=$path_parts['basename'];
+/*$path_parts = pathinfo($filename);*/
+$filename_withoutext=substr($filename, 1, strlen($filename)-4);
 
 ?>
 <html lang="en">
