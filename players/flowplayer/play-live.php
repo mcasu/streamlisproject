@@ -30,19 +30,20 @@ if(isset($_GET['stream_name']))
     
 </head>
 <body>
-		<!-- HEADER -->
-        <div class="span-18" align="center">
-            <h1>Live Video Streaming</h1>
-        </div>
-		<center>
-		<div class="flowplayer" id="player" style="text-align:center">
-		    <video>
-			<?php echo '<source type="video/flash" src="rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'">'; ?>
-		    </video>
-		</div>
 
 <script src="../../js/jquery-1.11.0.min.js"></script>    
 <script src="flowplayer.min.js"></script>
+
+        <div class="span-18" align="center">
+            <h1>Live Video Streaming</h1>
+        </div>
+	
+	<center>
+	    <div class="flowplayer play-button fixed-controls" id="player" style="text-align:center">
+	        <video preload="none">
+			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
+	        </video>
+	    </div>
    
 <?php
 	
