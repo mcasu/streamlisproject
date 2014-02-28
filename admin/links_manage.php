@@ -92,6 +92,15 @@ catch(Exception $e)
 $(document).ready(function()
 {
 
+$("input.viewer_add").click(function()
+{
+    var str = "";
+    $( "select.group_unlinked option:selected" ).each(function() {
+	str += $( this ).text() + " ";
+    });
+    alert(str);
+});
+    
 $(".toggle_container").hide();
 
 $("h2.expand_heading").toggle(function()
@@ -177,7 +186,7 @@ try
 		
 	        	                                echo '<tr>';
 								echo '<td>';
-								echo '<select style="min-width:120px" multiple>';
+								echo '<select class="group_linked" style="min-width:120px" multiple>';
 			                                        while($row = mysql_fetch_array($viewers))
 			                                        {
 			                                                $viewer_id=$row['viewer_id'];
@@ -191,7 +200,7 @@ try
 								echo '<td rowspan="2">';
 								echo '<input class="viewer_add" type="submit" name="viewer_add" value="<<"/>';
 								echo '<br/>';
-								echo '<input type="submit" class="viewer_del" name="viewer_del" value=">>"/>';
+								echo '<input class="viewer_del" type="submit" name="viewer_del" value=">>"/>';
 								echo '</td>';
 
                 		       	         	$viewers_available=$dbactions->GetViewersAvailable($group_id);
@@ -202,7 +211,7 @@ try
 		                                        else
 		                                        {
 								echo '<td>';
-								echo '<select style="min-width:120px" multiple>';
+								echo '<select class="group_unlinked" style="min-width:120px" multiple>';
 		                                                while($row = mysql_fetch_array($viewers_available))
 		                                                {
 									

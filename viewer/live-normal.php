@@ -102,7 +102,13 @@ try
                                                 echo '<td align="center">' . $app_name . '</td>';
                                                 echo '<td align="center">' . $stream_name . '</td>';
                                                 echo '<td align="center">' . $client_addr . '</td>';
-                                                echo '<td align="left">  <a class="play-button" href="../jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank"><img align="center" src="../images/play.png" width="28"/></a></td>';
+                                                echo '<td align="left">'.
+						    '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+						    '<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="60"/></button></a>'.
+						    
+						    '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+						    '<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="60"/></button></a>'.
+						    '</td>';
                                         echo '</tr>';
                                 }
 			echo '</table>';
