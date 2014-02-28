@@ -27,8 +27,7 @@ if(isset($_GET['stream_name']))
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//releases.flowplayer.org/5.4.6/skin/minimalist.css">
-    <script src="../../js/jquery-1.11.0.min.js"></script>    
-    <script src="flowplayer-3.2.13.min.js"></script>    
+    
 </head>
 <body>
 		<!-- HEADER -->
@@ -41,6 +40,9 @@ if(isset($_GET['stream_name']))
 		    </video>-->
 		</div>
 
+<script src="../../js/jquery-1.11.0.min.js"></script>    
+<script src="flowplayer-3.2.13.min.js"></script>
+   
 <?php
 	
 echo '<script>';
