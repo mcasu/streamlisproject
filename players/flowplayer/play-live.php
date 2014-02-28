@@ -46,10 +46,9 @@ echo '<script type="text/javascript">'.
 
     'flowplayer.conf = {'.
 	'live: true,'.
-	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.",'.
+	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'",'.
 	'ratio: 9/16,'.
-	'// work around a bug in the flash engine regarding live streams'.
-	'swf: \"//releases.flowplayer.org/5.4.3/flowplayer.swf\" };'.
+	'swf: "flowplayer.swf" };'.
     '</script>';
 
 ?>
