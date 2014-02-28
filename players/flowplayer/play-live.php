@@ -53,7 +53,6 @@ echo '<script>';
     'flowplayer.conf = {'.
 	'live: true,'.
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'",'.
-	'ratio: 3/4,'.
 	'width: 640px,'.
 	'height: 480px,'.
 	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
