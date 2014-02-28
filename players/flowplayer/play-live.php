@@ -57,7 +57,7 @@ echo '<script>';
 	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
 */	
 
-echo 'flowplayer("player", "flowplayer-3.2.18.swf", {'.
+echo 'flowplayer("player", "http://releases.flowplayer.org/5.4.3/flowplayer.swf", {'.
         'clip: {'.
             'url : "'.$stream_name.'",'. /*this is the name of the stream assset in the encoder*/
 	    'live : true,'.  /*// tell flowplayer it's live*/
