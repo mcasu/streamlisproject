@@ -48,7 +48,7 @@ echo '<script type="text/javascript">'.
 	'live: true,'.
 	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'",'.
 	'ratio: 9/16,'.
-	'swf: "flowplayer.swf" };'.
+	'swf: "//releases.flowplayer.org/5.4.3/flowplayer.swf" };'.
     '</script>';
 
 ?>
