@@ -42,7 +42,7 @@ if(isset($_GET['stream_name']))
 		</div>
 
 <script src="../../js/jquery-1.11.0.min.js"></script>    
-<script src="flowplayer-3.2.13.min.js"></script>
+<script src="flowplayer.min.js"></script>
    
 <?php
 	
