@@ -35,7 +35,7 @@ if(isset($_GET['stream_name']))
             <h1>Live Video Streaming</h1>
         </div>
 		<center>
-		<div id="player" style="text-align:center">
+		<div style="display:block" id="player" style="text-align:center">
 		    <!--<video>
 		    </video>-->
 		</div>
