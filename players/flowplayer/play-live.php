@@ -36,7 +36,7 @@ if(isset($_GET['stream_name']))
             <h1>Live Video Streaming</h1>
         </div>
 		<center>
-		<div class="flowplayer" id="player" style="text-align:center">
+		<div id="player" style="text-align:center">
 		    <!--<video>
 		    </video>-->
 		</div>
@@ -55,7 +55,7 @@ echo '<script>';
 	'swf: "http://releases.flowplayer.org/5.4.3/flowplayer.swf" };';
 */	
 
-echo '$f("player", "flowplayer-3.2.18.swf", {'.
+echo 'flowplayer("player", "flowplayer-3.2.18.swf", {'.
         'clip: {'.
             'url : "'.$stream_name.'",'. /*this is the name of the stream assset in the encoder*/
 	    'live : true,'.  /*// tell flowplayer it's live*/
