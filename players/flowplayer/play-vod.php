@@ -22,7 +22,7 @@ if(isset($_GET['stream_name']))
 }
 
 /*$path_parts = pathinfo($filename);*/
-$filename_withoutext=substr($filename, 1, strlen($filename)-5);
+$filename_withoutext=substr($filename, 0, strlen($filename)-5);
 
 ?>
 <html lang="en">
