@@ -104,13 +104,10 @@ try
                                                 echo '<td align="center">' . $client_addr . '</td>';
                                                 echo '<td align="left">'.
 						    '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-<<<<<<< HEAD
 						    '<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="60"/></button></a>'.
 						    
 						    '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 						    '<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="60"/></button></a>'.
-=======
->>>>>>> d1f8c5182133567ffdae80155815fcb20ff96007
 						    '</td>';
                                         echo '</tr>';
                                 }
