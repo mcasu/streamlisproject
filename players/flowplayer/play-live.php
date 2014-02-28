@@ -1,12 +1,12 @@
 <?PHP
-require_once("../include/membersite_config.php");
+require_once("../../include/membersite_config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();
 
 if(!$fgmembersite->CheckLogin())
 {
-    $utils->RedirectToURL("login.php");
+    $utils->RedirectToURL("../../login.php");
     exit;
 }
 
