@@ -22,7 +22,7 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
-if ($hostname == "lnxstreamserver-dev")
+if ($myhostname == "lnxstreamserver-dev")
 {
     $ip_actual = $ip_private;
 }
@@ -48,7 +48,8 @@ else
         </div>
 	
 	<center>
-	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" data-rtmp="rtmp://54.213.120.163:1935/'.$app_name.'">'; ?>
+	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" '.
+			'data-rtmp="rtmp://'.$ip_actual.':1935/'.$app_name.'">'; ?>
 	        <video autoplay>
 			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
 	        </video>
