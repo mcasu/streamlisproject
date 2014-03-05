@@ -21,7 +21,7 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
-if ($hostname == "lnxstreamserver-dev")
+if ($myhostname == "lnxstreamserver-dev")
 {
     $ip_actual = $ip_private;
 }
