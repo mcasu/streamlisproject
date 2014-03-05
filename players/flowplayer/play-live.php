@@ -22,6 +22,15 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
+if ($hostname == "lnxstreamserver-dev")
+{
+    $ip_actual = $ip_private;
+}
+else
+{
+    $ip_actual = $ip_public;
+}
+
 ?>
 <html lang="en">
 <head>
@@ -52,7 +61,7 @@ echo '<script>';
 
     'flowplayer.conf = {'.
 	'live: true,'.
-	'rtmp: "rtmp://54.213.120.163:1935/'.$app_name.'/'.$stream_name.'",'.
+	'rtmp: "rtmp://'.$ip_actual.':1935/'.$app_name.'/'.$stream_name.'",'.
 	'ratio: 3/4,'.
 	'width: 480px,'.
 	'height: 640px,'.

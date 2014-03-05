@@ -2,6 +2,11 @@
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/fg_membersite.php");
 
+$ip_public="54.213.120.163";
+$ip_private="192.168.5.128";
+
+$myhostname = gethostname();
+
 $fgmembersite = new FGMembersite();
 $dbactions = $fgmembersite->GetDBActionsInstance();
 

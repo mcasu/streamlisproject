@@ -21,6 +21,15 @@ if(isset($_GET['stream_name']))
 	$stream_name=$_GET['stream_name'];
 }
 
+if ($hostname == "lnxstreamserver-dev")
+{
+    $ip_actual = $ip_private;
+}
+else
+{
+    $ip_actual = $ip_public;
+}
+
 ?>
 <html lang="en">
 <head>
@@ -39,7 +48,7 @@ if(isset($_GET['stream_name']))
 		
 		echo '<script type="text/javascript">'.
 			'jwplayer("player").setup({
-                        file: "rtmp://54.213.120.163:1935/vod/'.$filename.'",
+                        file: "rtmp://'.$ip_actual.':1935/vod/'.$filename.'",
                         autostart: true,
                         controls: true,
                         aspectratio: "4:3",
