@@ -14,7 +14,7 @@ if(!$fgmembersite->CheckLogin())
 $user_role = $fgmembersite->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
-        $utils->RedirectToURL("../home-normal.php");
+        $utils->RedirectToURL("../viewer/live-normal.php");
 }
 
 try
