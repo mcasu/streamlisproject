@@ -94,13 +94,85 @@ $(document).ready(function()
 
 $("input.viewer_add").click(function()
 {
-    var str = "";
-    $( "select.group_unlinked option:selected" ).each(function() {
-	str += $( this ).text() + " ";
+    var group_id = $(this).parent().parent().attr('id');
+    var group_unlinked_id = "gul_" + group_id;
+    var group_linked_id = "gl_" + group_id;
+    
+    //alert(group_unlinked_id);
+    
+    var viewertoadd = "";
+    $( "#" + group_unlinked_id + " option:selected" ).each(function()
+    {
+	viewer_id = $(this).attr('id');
+	viewertoadd += viewer_id + "|";
     });
-    alert(str);
+    //alert(viewertoadd);
+    
+
+    $.post("link_add.php",{viewerlist:viewertoadd,publisher_id:group_id}, function(data,status) {
+	//alert("Data: " + data + "\nStatus: " + status);
+
+	if (status == "success")
+	{
+	    viewertoadd = "";
+	    $( "#" + group_unlinked_id + " option:selected" ).each(function()
+	    {
+		viewer_id = $(this).attr('id');
+		$("#" + group_linked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
+				
+		viewertoadd += $(this).text() + "|";
+		
+		$(this).fadeOut(1000, function()
+		{
+		    $(this).remove();
+		});
+	    });
+	}	    
+    });
+
 });
     
+$("input.viewer_del").click(function()
+{
+    var group_id = $(this).parent().parent().attr('id');
+    var group_unlinked_id = "gul_" + group_id;
+    var group_linked_id = "gl_" + group_id;
+    
+    //alert(group_linked_id);
+    
+    var viewertodel = "";
+    $( "#" + group_linked_id + " option:selected" ).each(function()
+    {
+	viewer_id = $(this).attr('id');
+	viewertodel += viewer_id + "|";
+    });
+    //alert(viewertodel);
+    
+
+    $.post("link_del.php",{viewerlist:viewertodel,publisher_id:group_id}, function(data,status) {
+	//alert("Data: " + data + "\nStatus: " + status);
+
+	if (status == "success")
+	{
+	    viewertodel = "";
+	    $( "#" + group_linked_id + " option:selected" ).each(function()
+	    {
+		viewer_id = $(this).attr('id');
+		$("#" + group_unlinked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
+				
+		viewertodel += $(this).text() + "|";
+		
+		$(this).fadeOut(1000, function()
+		{
+		    $(this).remove();
+		});
+	    });
+	}	    
+    });
+    
+});    
+    
+
 $(".toggle_container").hide();
 
 $("h2.expand_heading").toggle(function()
@@ -132,6 +204,7 @@ $(".expand_all").click(function()
 });
 
 });
+
 </script>
 </head>
 <body>
@@ -184,9 +257,9 @@ try
 		                                                '<th>VIEWER ASSOCIATI</th><th>AZIONI</th><th>VIEWER DISPONIBILI</th>'.
 		                                        '</tr>';
 		
-	        	                                echo '<tr>';
+	        	                                echo '<tr id='.$group_id.'>';
 								echo '<td>';
-								echo '<select class="group_linked" style="min-width:120px" multiple>';
+								echo '<select class="group_linked" id="gl_'.$group_id.'" style="min-width:120px" multiple>';
 			                                        while($row = mysql_fetch_array($viewers))
 			                                        {
 			                                                $viewer_id=$row['viewer_id'];
@@ -204,14 +277,15 @@ try
 								echo '</td>';
 
                 		       	         	$viewers_available=$dbactions->GetViewersAvailable($group_id);
-		                                        if (mysql_num_rows($viewers_available) < 1)
+		                                        
+							/*if (mysql_num_rows($viewers_available) < 1)
 		                                        {
 		                                                echo '<td>Nessun viewer disponibile</td>';
 		                                        }
-		                                        else
+		                                        else*/
 		                                        {
 								echo '<td>';
-								echo '<select class="group_unlinked" style="min-width:120px" multiple>';
+								echo '<select class="group_unlinked" id="gul_'.$group_id.'" style="min-width:120px" multiple>';
 		                                                while($row = mysql_fetch_array($viewers_available))
 		                                                {
 									

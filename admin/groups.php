@@ -35,17 +35,18 @@ if (!$user_role || $user_role!="1")
                 	var td_id=$(this).parent().attr('id');
 	                par=$(this).parent();
 			
-			if (confirm("Vuoi davvero eliminare?")){
-			$.post("group_delete.php",{group_id:td_id,},
-	
-			function(data,status)
+			if (confirm("Vuoi davvero eliminare?"))
 			{
-		    	    /*alert("Data: " + data + "\nStatus: " + status);*/
-		        	par.parent().fadeOut(1000, function()
-			        {
-			                par.parent().remove();
-		        	});
-			});
+			    $.post("group_delete.php",{group_id:td_id,},
+	    
+			    function(data,status)
+			    {
+				/*alert("Data: " + data + "\nStatus: " + status);*/
+				    par.parent().fadeOut(1000, function()
+				    {
+					    par.parent().remove();
+				    });
+			    });
 			}
 		});
 });

@@ -524,9 +524,93 @@ class DBActions
                     $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
                     return false;
                 }
+		
+		$delete_query = 'delete from group_links where viewer_id = \''.$group_id.'\' or publisher_id = \''.$group_id.'\'';
+		$result = mysql_query($delete_query ,$this->connection);
+		if(!$result)
+                {
+                    $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+                    return false;
+                }
+		
                 return $result;
         }
 
+	function AddViewersLink($viewer_list, $publisher_id)
+	{
+		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+		
+		$viewers = explode("|", $viewer_list);
+		
+		foreach ($viewers as $viewtoadd)
+		{
+			if ($viewtoadd != "")
+			{
+				$insert_query = 'insert into group_links (
+				publisher_id,
+				viewer_id)
+				values
+				(
+				"' . $this->SanitizeForSQL($publisher_id) . '",
+				"' . $this->SanitizeForSQL($viewtoadd) . '"
+				)';
+			
+				if(!mysql_query( $insert_query ,$this->connection))
+				{
+				    $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
+				    return false;
+				}		
+			}
+		}
+		
+                return true;	
+	}
+	
+	function DelViewersLink($viewer_list, $publisher_id)
+	{
+		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+		
+		$viewers = explode("|", $viewer_list);
+
+		$str = implode(",", $viewers);
+		$viewerstodel = substr_replace($str, "",-1);
+		
+		$delete_query = 'delete from group_links where publisher_id in ('.
+		$this->SanitizeForSQL($publisher_id).
+		') and viewer_id in ('.
+		$viewerstodel.')';
+		
+		if(!mysql_query( $delete_query ,$this->connection))
+		{
+		    $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+		    return false;
+		}
+		
+                return true;	
+	}
+	
 	function GetViewersByPublisher($publisher_id)
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

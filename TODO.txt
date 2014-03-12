@@ -1,6 +1,9 @@
 
-- Usare Yamdi per indicizzare i file flv dopo la registrazione
+FATTO - Usare Yamdi per indicizzare i file flv dopo la registrazione
 
-- Permettere ai publisher e gli admin di liberare uno stream_name
+- Aggiungere una callback all'avvio di Nginx per verificare la configurazione iniziale (es. creare cartelle necessarie e assegnare permessi corretti)
+
+- Permettere ai publisher e gli admin di liberare uno stream_name (BUG: se la connessione del publisher cade, lo stream name rimane occupato e quando la linea torna il publisher non riesce ad usare lo stesso stream name)
+
 
 
