@@ -1,10 +1,7 @@
 
 <div id='cssmenu'>
 <ul>
-   <li class='has-sub'><a href='index.php'><span>Home</span></a>
-      <ul>
-         <li class='last'><a href='/stat'><span>Statistiche</span></a></li>
-      </ul>
+   <li class='has-sub'><a href='home-admin.php'><span>Home</span></a>
   </li>
    <li class='has-sub'><a href='groups.php'><span>Congregazioni</span></a>
       <ul>
