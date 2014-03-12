@@ -11,7 +11,7 @@ if(isset($_POST['submitted']))
 	$user_role = $fgmembersite->GetSessionUserRole();	
 	if ($user_role && $user_role=="1")
 	{
-        	$utils->RedirectToURL("admin/");
+        	$utils->RedirectToURL("admin/home-admin.php");
 	}
 	else
 	{
