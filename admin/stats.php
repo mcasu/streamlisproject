@@ -34,5 +34,7 @@ if (!$user_role || $user_role!="1")
 <div><p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p></div>
 
 
+<iframe height="700" width="100%" src="/stat"></iframe>
+
 </body>
 </html>

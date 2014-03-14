@@ -61,32 +61,7 @@ catch(Exception $e)
 	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-<style type="text/css" media="screen">
-.container {
-  width: 100%;
-  overflow: hidden;
-}
-.left {
-  float: left;
-  width: 50%;
-  margin: 10 2%;
-}
-
-.right {
-  float: left;
-  width: 32%;
-  margin: 10 2%;
-}
-
-.center {
-  float: left;
-  width: 32%;
-  margin: 1% 10%;
-}
-
-</style>
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function()
@@ -175,38 +150,23 @@ $("input.viewer_del").click(function()
 
 $(".toggle_container").hide();
 
-$("h2.expand_heading").toggle(function()
-{
-	$(this).addClass("active");
-        }, 
-	function () 
-	{
-        	$(this).removeClass("active");
-});
+$("h2.trigger").css("cursor","pointer").toggle(function(){
+  	$(this).addClass("active"); 
+  }, function () {
+  $(this).removeClass("active");
+  });
 
-$("h2.expand_heading").click(function()
+$("h2.trigger").click(function()
 {
 	$(this).next(".toggle_container").slideToggle("slow");
-});
-
-$(".expand_all").toggle(function()
-	{
-        	$(this).addClass("expanded");
-        }, 
-	function () 
-	{
-        	$(this).removeClass("expanded");
-});
-
-$(".expand_all").click(function()
-	{
-        	$(".toggle_container").slideToggle("slow");
 });
 
 });
 
 </script>
 </head>
+
+
 <body>
 <?php include("header.php"); ?>
 <br/>
@@ -219,10 +179,9 @@ Ciao <b><?= $fgmembersite->UserFullName(); ?></b></div>
 
 <h2>ELENCO CONGREGAZIONI PUBLISHER:</h2>
 
-<div id='fg_membersite_content'>
+<div>
 <?php 
 
-/*echo '<div lass="expand_top"><div class="expand_all"></div></div><br/><br/>';*/
 
 try
 {
@@ -236,71 +195,68 @@ try
 		if ($group_role_name=="publisher")
 		{
 			$viewers = $dbactions->GetViewersByPublisher($group_id);
-				echo '<div class="expand_wrapper">';
-				echo '<h2 class="expand_heading"><a href="#"><img align="left" style="margin: 0px 8px" src="../images/group.png" border="0" height="30" width="32"/>'.$group_name.'</a></h2>';
+				
+				echo '<h2 class="toggle trigger">'.
+					'<a href="#">'.$group_name.'</a>'.
+				     '</h2>';  /*<img class="group_logo" src="../images/group.png" height="30" width="32"/>*/
 					
-					echo '<div class="toggle_container">'.
-				        	'<div class="box">';
-						echo '<div class="container" id="'.$group_id.'">';
-	                                       
-						if (mysql_num_rows($viewers) < 1)
-						{ 
-							echo 'Nessun gruppo ha relazioni con questa congregazione.<br/>';
-						}
-						else
-						{
-							echo 'Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:<br/>';
-						}
-		                                echo '<div class="left">';
-		                                        echo '<table class="imagetable">'.
-		                                        '<tr>'.
-		                                                '<th>VIEWER ASSOCIATI</th><th>AZIONI</th><th>VIEWER DISPONIBILI</th>'.
-		                                        '</tr>';
-		
-	        	                                echo '<tr id='.$group_id.'>';
-								echo '<td>';
-								echo '<select class="group_linked" id="gl_'.$group_id.'" style="min-width:120px" multiple>';
-			                                        while($row = mysql_fetch_array($viewers))
-			                                        {
-			                                                $viewer_id=$row['viewer_id'];
-			                                                $viewer_name=$row['viewer_name'];
-			
-		        	                                        echo '<option id="'.$viewer_id.'">'.$viewer_name.'</option>';
-			                                        }
-								echo '</select>';
-								echo '</td>';
-					
-								echo '<td rowspan="2">';
-								echo '<input class="viewer_add" type="submit" name="viewer_add" value="<<"/>';
-								echo '<br/>';
-								echo '<input class="viewer_del" type="submit" name="viewer_del" value=">>"/>';
-								echo '</td>';
+					echo '<div class="toggle_container" id="'.$group_id.'">';
+					    if (mysql_num_rows($viewers) < 1)
+					    { 
+						    echo 'Nessun gruppo ha relazioni con questa congregazione.<br/>';
+					    }
+					    else
+					    {
+						    echo 'Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:<br/>';
+					    }
+					    
+					    echo '<div class="left">';
+						echo '<div id="fg_membersite_content">';
+						echo '<table class="imagetable">'.
+						'<tr>'.
+							'<th>VIEWER ASSOCIATI</th><th>AZIONI</th><th>VIEWER DISPONIBILI</th>'.
+						'</tr>';
+	
+						echo '<tr id='.$group_id.'>';
+						
+						    // TD VIEWER ASSOCIATI
+						    echo '<td>';
+						    echo '<select class="group_linked" id="gl_'.$group_id.'" style="min-width:120px" multiple>';
+						    while($row = mysql_fetch_array($viewers))
+						    {
+							    $viewer_id=$row['viewer_id'];
+							    $viewer_name=$row['viewer_name'];
+	    
+							    echo '<option id="'.$viewer_id.'">'.$viewer_name.'</option>';
+						    }
+						    echo '</select>';
+						    echo '</td>';
+				
+						    // TD PULSANTI
+						    echo '<td rowspan="2">';
+						    echo '<input class="viewer_add" type="submit" name="viewer_add" value="<<"/>';
+						    echo '<br/>';
+						    echo '<input class="viewer_del" type="submit" name="viewer_del" value=">>"/>';
+						    echo '</td>';
 
-                		       	         	$viewers_available=$dbactions->GetViewersAvailable($group_id);
-		                                        
-							/*if (mysql_num_rows($viewers_available) < 1)
-		                                        {
-		                                                echo '<td>Nessun viewer disponibile</td>';
-		                                        }
-		                                        else*/
-		                                        {
-								echo '<td>';
-								echo '<select class="group_unlinked" id="gul_'.$group_id.'" style="min-width:120px" multiple>';
-		                                                while($row = mysql_fetch_array($viewers_available))
-		                                                {
-									
-		                                                        echo '<option id="'.$row['group_id'].'">'.$row['group_name'].'</option>';
-		                                                }
-								echo '</select>';
-								echo '</td>';
-		                                        }
-		                                        echo '</tr>';
-							echo '</table>';
-		                                echo '</div>';
-
-					echo '</div>'.
-					'</div>';
-				echo '</div>';
+						    $viewers_available=$dbactions->GetViewersAvailable($group_id);
+						
+						    // TD VIEWER NON ASSOCIATI
+						    echo '<td>';
+						    echo '<select class="group_unlinked" id="gul_'.$group_id.'" style="min-width:120px" multiple>';
+						    while($row = mysql_fetch_array($viewers_available))
+						    {
+							    
+							    echo '<option id="'.$row['group_id'].'">'.$row['group_name'].'</option>';
+						    }
+						    echo '</select>';
+						    echo '</td>';
+						    
+						echo '</tr>';
+						echo '</table>';
+						echo '</div>';
+					    echo '</div>'; /* FINE DIV CLASS "left" */
+				echo '</div>'; /* FINE DIV CLASS "toggle_container" */
 		}
         }
     }
