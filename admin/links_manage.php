@@ -207,7 +207,7 @@ try
 					    }
 					    else
 					    {
-						    echo 'Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:<br/>';
+						    echo '<div style="margin: 0 0 0 10px"> Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:</div>';
 					    }
 					    
 					    echo '<div class="left">';

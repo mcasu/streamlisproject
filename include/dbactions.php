@@ -535,6 +535,32 @@ class DBActions
 		
                 return $result;
         }
+	
+	function DeleteEventOnDemand($ondemand_id)
+	{
+		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $delete_query = 'delete from ondemand where ondemand_id = \''.$ondemand_id.'\'';
+
+                $result = mysql_query($delete_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+                    return false;
+                }
+                return $result;
+	}
 
 	function AddViewersLink($viewer_list, $publisher_id)
 	{

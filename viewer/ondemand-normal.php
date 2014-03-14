@@ -83,7 +83,7 @@ try
 			{
 				echo '<table class="imagetable">'.
 				'<tr>'.
-				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>AZIONI</th>'.
+				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th>'.
 				'</tr>';
 
                                 while($row = mysql_fetch_array($ondemand_events))
