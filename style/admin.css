@@ -21,8 +21,9 @@ h2.active
   background:url(../images/togglebar.png) left bottom no-repeat;
 }
 
-h2.expand_heading a:hover {
-    color: #ccc;
+h2.toggle a:hover {
+    /*color: #ccc;*/
+    color: #0ab0f6;
 }
 
 div.toggle_container {

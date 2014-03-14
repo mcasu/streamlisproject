@@ -82,6 +82,7 @@
   background: linear-gradient(to bottom, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#8a8a8a', endColorstr='#787878', GradientType=0);
   filter: none;
+  color: #0ab0f6;
 }
 #cssmenu > ul > li:first-child a {
   border-radius: 5px 0 0 5px;
