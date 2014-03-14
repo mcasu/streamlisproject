@@ -6,11 +6,11 @@ h2.toggle {
   font-weight: bold;
 }
 h2.toggle a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    line-height: 31px;
-    display: block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 31px;
+  display: block;
 }
 h2.trigger
 {
@@ -27,7 +27,7 @@ h2.toggle a:hover {
 }
 
 div.toggle_container {
-    margin: 0 0 4px;
+    margin: 0 0 4px 0;
     padding: 10px;
     background: #ffffff;
     border-top: 0px solid #d6d6d6;
@@ -40,4 +40,10 @@ div.left {
   float: left;
   width: 50%;
   margin: 10px 20px;
+}
+
+label {
+  color: #0ab0f6;
+  font-size: 14px;
+  margin: 0 0 0 10px;
 }

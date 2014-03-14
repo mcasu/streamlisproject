@@ -83,7 +83,7 @@ try
 			{
 				echo '<table class="imagetable">'.
                                 '<tr>'.
-                                '<th>ID EVENTO</th><th>DATA</th><th>ORA</th><th>APP</th><th>STREAM NAME</th><th>PUBBLICATO DA</th><th>AZIONI</th>'.
+                                '<th>ID EVENTO</th><th>DATA</th><th>ORA</th><th>APP</th><th>STREAM NAME</th><th>PUBBLICATO DA</th><th>GUARDA IL VIDEO</th>'.
                                 '</tr>';
 
                                 while($row = mysql_fetch_array($live_events))
