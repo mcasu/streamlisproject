@@ -69,6 +69,18 @@ catch(Exception $e)
 $(document).ready(function()
 {
 
+$('.play-button').click(function (event){
+ 
+    var url = $(this).attr("href");
+    var windowName = "Player";//$(this).attr("name");
+    var windowSpecs = 'width=640,height=480, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
+    
+    window.open(url, windowName, windowSpecs);
+    
+    event.preventDefault();
+    
+    });
+
 $(".toggle_container").hide();
 
 $("h2.trigger").css("cursor","pointer").toggle(function(){
