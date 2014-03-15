@@ -156,7 +156,7 @@ try
 			echo '<div class="toggle_container" id="'.$group_id.'">';
 			    if (!$ondemand_events || $ondemand_events_number<1)
 			    {
-				echo 'Nessun evento on-demand disponibile per questa congregazione.';
+				echo '<div style="margin: 0 0 0 10px">Nessun evento on-demand disponibile per questa congregazione.</div>';
 			    }
 			    else
 			    {

@@ -203,11 +203,11 @@ try
 					echo '<div class="toggle_container" id="'.$group_id.'">';
 					    if (mysql_num_rows($viewers) < 1)
 					    { 
-						    echo 'Nessun gruppo ha relazioni con questa congregazione.<br/>';
+						    echo '<div style="margin: 0 0 0 10px">Nessun gruppo ha relazioni con questa congregazione.</div>';
 					    }
 					    else
 					    {
-						    echo '<div style="margin: 0 0 0 10px"> Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:</div>';
+						    echo '<div style="margin: 0 0 0 10px">Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:</div>';
 					    }
 					    
 					    echo '<div class="left">';
