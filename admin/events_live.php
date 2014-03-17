@@ -130,13 +130,13 @@ try
 		    $live_events = $dbactions->GetLiveEventsByPublisher($group_publish_code);
 		    $live_events_number = mysql_num_rows($live_events);
 			echo '<h2 class="toggle trigger">'.
-				'<a href="#">'.$group_name.'<label align="right">'.$live_events_number.'</label></a>'.
+				'<a href="#">'.$group_name.'<label class="eventnum" align="right">'.$live_events_number.'</label></a>'.
 			     '</h2>';  /*<img class="group_logo" src="../images/group.png" height="30" width="32"/>*/
 				
 			echo '<div class="toggle_container" id="'.$group_id.'">';
 			    if (!$live_events || $live_events_number<1)
 			    {
-				echo 'Nessun evento live disponibile per questa congregazione.';
+				echo '<div style="margin: 0 0 0 10px">Nessun evento live disponibile per questa congregazione.</div>';
 			    }
 			    else
 			    {

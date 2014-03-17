@@ -150,8 +150,10 @@ try
 		    $ondemand_events = $dbactions->GetOndemandEventsByPublisher($group_publish_code);
 		    $ondemand_events_number = mysql_num_rows($ondemand_events);
 			echo '<h2 class="toggle trigger">'.
-				'<a href="#">'.$group_name.'<label align="right">'.$ondemand_events_number.'</label></a>'.
-			     '</h2>';  /*<img class="group_logo" src="../images/group.png" height="30" width="32"/>*/
+				'<a href="#">'.$group_name.
+				'<img class= "group_logo" src="../images/group.png" />'.
+				'<label class="eventnum">['.$ondemand_events_number.' eventi]</label></a>'.
+			     '</h2>';
 				
 			echo '<div class="toggle_container" id="'.$group_id.'">';
 			    if (!$ondemand_events || $ondemand_events_number<1)
@@ -164,7 +166,7 @@ try
 				    echo '<div id="fg_membersite_content">';
 				    echo '<table class="imagetable">'.
 					'<tr>'.
-					'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th><th>AZIONI</th>'.
+					'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE (Kbit/s)</th><th>CODEC</th><th>GUARDA IL VIDEO</th><th>AZIONI</th>'.
 					'</tr>';
 	
 					while($row = mysql_fetch_array($ondemand_events))
@@ -173,8 +175,9 @@ try
 						$ondemand_publish_code=$row['ondemand_publish_code'];
 						$ondemand_app_name=$row['ondemand_app_name'];
 						$ondemand_filename=$row['ondemand_filename'];
-						$ondemand_movie_duration=$row['ondemand_movie_duration'];
-						$ondemand_movie_bitrate=$row['ondemand_movie_bitrate'];
+						$duration_time = $utils->SecondsToTime($row['ondemand_movie_duration'],true);
+						$ondemand_movie_duration= $duration_time['h'] . " ore " . $duration_time['m'] . " minuti " . $duration_time['s'] . " secondi" ;
+						$ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 						$ondemand_movie_codec=$row['ondemand_movie_codec'];
 					
 						echo '<tr>';

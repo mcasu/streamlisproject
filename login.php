@@ -35,6 +35,7 @@ if(isset($_POST['submitted']))
 	<h2 align="center">Benvenuto su JW LIS Streaming</h2>
 	<img src="images/logo.png" alt="JW LIS Streaming" align="center" height="48" width="48"> 
 </div>
+
 <div id='fg_membersite' align="center">
 <form id='login' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
@@ -47,18 +48,18 @@ if(isset($_POST['submitted']))
 <div><span class='error'><?php echo $dbactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
     <label for='username' >Nome utente:</label><br/>
-    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="50" /><br/>
+    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
     <span id='login_username_errorloc' class='error'></span>
 </div>
 <div class='container'>
     <label for='password' >Password:</label><br/>
-    <input type='password' name='password' id='password' maxlength="50" /><br/>
+    <input type='password' name='password' id='password' maxlength="128" /><br/>
     <span id='login_password_errorloc' class='error'></span>
 </div>
 
 </br>
 <div class='container'>
-    <input align="center" type='submit' name='Submit' value='ENTRA' />
+    <input class="login" align="center" type='submit' name='Submit' value='ENTRA' />
 </div>
 <div class='short_explanation'><a href='reset-pwd-req.php'>Password dimenticata?</a></div>
 </fieldset>

@@ -7,7 +7,7 @@
 <body>
 <div id='cssmenu'>
 <ul>
-   <li class='active'><a href='live-normal.php'><span>Live streaming</span></a>
+   <li class='has-sub'><a href='live-normal.php'><span>Live streaming</span></a>
   </li>
    <li class='has-sub'><a href='ondemand-normal.php'><span>On-demand streaming</span></a>
    </li>

@@ -1,29 +1,43 @@
 h2.toggle {
-  width: 80%;
+  width: 680px;
   padding: 0 0 0 40px;
   height: 31px;
   margin: 0 0 0 10px;
   font-weight: bold;
 }
+h2 label.eventnum {
+  /*color: #0ab0f6;*/
+  color: #3ed0d2;
+  font-size: 14px;
+  margin: 0 0 0 10px;
+}
 h2.toggle a {
+  width: 100%;
   color: #fff;
   text-decoration: none;
   font-size: 16px;
   line-height: 31px;
   display: block;
 }
+a img.group_logo {
+  margin: 0 0 0 15px;
+  height: 30px;
+  width: 32px;
+  vertical-align: middle;
+}
+
 h2.trigger
 {
-  background:url(../images/togglebar.png) left top no-repeat;
+  background:url(../images/togglebar_green.png) left top no-repeat;
 }
 h2.active
 {
-  background:url(../images/togglebar.png) left bottom no-repeat;
+  background:url(../images/togglebar_green.png) left bottom no-repeat;
 }
 
 h2.toggle a:hover {
     /*color: #ccc;*/
-    color: #0ab0f6;
+    color: #3ed0d2;
 }
 
 div.toggle_container {
@@ -42,8 +56,3 @@ div.left {
   margin: 10px 12px;
 }
 
-label {
-  color: #0ab0f6;
-  font-size: 14px;
-  margin: 0 0 0 10px;
-}

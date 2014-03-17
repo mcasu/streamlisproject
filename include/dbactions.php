@@ -704,12 +704,11 @@ class DBActions
                     $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
                     return false;
                 }
-
-                $select_query = 'select group_links.publisher_id, groups.group_name as publisher_name,groups.group_type,group_roles.role_name as group_role_name, groups.publish_code '.
-		'from group_links '.
-		'INNER JOIN groups ON group_links.publisher_id = groups.group_id '.
-		'INNER JOIN group_roles ON group_roles.role_id = groups.group_id '.
-		'where group_links.viewer_id = \''.$viewer_id.'\';';
+		
+		$select_query = 'select group_links.publisher_id, groups.group_name as publisher_name, groups.publish_code as publisher_code '.
+				'from group_links '.
+				'INNER JOIN groups ON group_links.publisher_id = groups.group_id '.
+				'where group_links.viewer_id = \''.$viewer_id.'\';';
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)

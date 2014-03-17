@@ -17,8 +17,9 @@ if(!$fgmembersite->CheckLogin())
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
       <title>JW LIS Streaming - On-demand</title>
       <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
+	<link rel="STYLESHEET" type="text/css" href="../style/admin.css">
 
-	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
         <script type="text/javascript">
 	
 		$(document).ready(function(){
@@ -33,6 +34,19 @@ if(!$fgmembersite->CheckLogin())
 			event.preventDefault();
  
 			});
+		    
+		    $(".toggle_container").hide();
+
+		    $("h2.trigger").css("cursor","pointer").toggle(function(){
+			    $(this).addClass("active"); 
+		      }, function () {
+		      $(this).removeClass("active");
+		      });
+		    
+		    $("h2.trigger").click(function()
+		    {
+			    $(this).next(".toggle_container").slideToggle("slow");
+		    });
 		});
 	</script>
 </head>
@@ -46,9 +60,7 @@ if(!$fgmembersite->CheckLogin())
 <p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p>
 </div>
 
-<hr margin="0"/>
 <h2>ELENCO EVENTI ON-DEMAND PER PUBLISHER:</h2>
-<hr margin="0"/>
 
 <?php
 
@@ -65,57 +77,63 @@ try
         {
                 $publisher_id=$row['publisher_id'];
                 $publisher_name=$row['publisher_name'];
-                $publisher_type=$row['group_type'];
-                $publisher_role_name=$row['group_role_name'];
-                $publisher_code=$row['publish_code'];
+		$publisher_code=$row['publisher_code'];
 
-                if ($publisher_role_name=="publisher")
-                {
-                        $ondemand_events = $dbactions->GetOndemandEventsByPublisher($publisher_code);
-			echo '<p><b>'. $publisher_name . '</b> '.
-                        '<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';
+		$ondemand_events = $dbactions->GetOndemandEventsByPublisher($publisher_code);
+		
+		/*echo '<p><b>'. $publisher_name . '</b> '.
+		'<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';*/
 
-			if (!$ondemand_events || mysql_num_rows($ondemand_events)<1)
+		$ondemand_events_number = mysql_num_rows($ondemand_events);
+		echo '<h2 class="toggle trigger">'.
+			'<a href="#">'.$publisher_name.
+			'<img class= "group_logo" src="../images/group.png" />'.
+			'<label class="eventnum" align="right">['.$ondemand_events_number.' eventi]</label></a>'.
+		     '</h2>'; 
+			
+		echo '<div class="toggle_container" id="'.$group_id.'">';
+		if (!$ondemand_events || $ondemand_events_number<1)
+		{
+		    echo '<div style="margin: 0 0 0 10px">Nessun evento on-demand disponibile per questa congregazione.</div>';
+		}
+		else
+		{
+		    echo '<div class="left">';
+			echo '<table class="imagetable">'.
+			'<tr>'.
+			'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th>'.
+			'</tr>';
+    
+			while($row = mysql_fetch_array($ondemand_events))
 			{
-				echo '</br>Nessun evento on-demand disponibile per questa congregazione.';
+			    $ondemand_id=$row['ondemand_id'];
+			    $ondemand_publish_code=$row['ondemand_publish_code'];
+			    $ondemand_app_name=$row['ondemand_app_name'];
+			    $ondemand_filename=$row['ondemand_filename'];
+			    $duration_time = $utils->SecondsToTime($row['ondemand_movie_duration'],true);
+			    $ondemand_movie_duration= $duration_time['h'] . " ore " . $duration_time['m'] . " minuti " . $duration_time['s'] . " secondi" ;
+			    $ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
+			    $ondemand_movie_codec=$row['ondemand_movie_codec'];
+		    
+			    echo '<tr>';
+				    echo '<td align="center">' . $ondemand_id . '</td>';
+				    echo '<td align="center">' . $ondemand_app_name . '</td>';
+				    echo '<td align="center">' . $ondemand_filename . '</td>';
+				    echo '<td align="center">' . $ondemand_movie_duration . '</td>';
+				    echo '<td align="center">' . $ondemand_movie_bitrate . '</td>';
+				    echo '<td align="center">' . $ondemand_movie_codec . '</td>';
+				    echo '<td align="left">'.
+				    '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+				    '<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="86" height="24"/></button></a>'.
+				    '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+				    '<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="86" height="24"/></button></a>'.
+				    '</td>';
+			    echo '</tr>';	
 			}
-			else
-			{
-				echo '<table class="imagetable">'.
-				'<tr>'.
-				'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th>'.
-				'</tr>';
-
-                                while($row = mysql_fetch_array($ondemand_events))
-                                {
-	                        	$ondemand_id=$row['ondemand_id'];
-	                                $ondemand_publish_code=$row['ondemand_publish_code'];
-	                                $ondemand_app_name=$row['ondemand_app_name'];
-	                                $ondemand_filename=$row['ondemand_filename'];
-	                                $ondemand_movie_duration=$row['ondemand_movie_duration'];
-	                                $ondemand_movie_bitrate=$row['ondemand_movie_bitrate'];
-	                                $ondemand_movie_codec=$row['ondemand_movie_codec'];
-				
-					echo '<tr>';
-			                        echo '<td align="center">' . $ondemand_id . '</td>';
-			                        echo '<td align="center">' . $ondemand_app_name . '</td>';
-			                        echo '<td align="center">' . $ondemand_filename . '</td>';
-			                        echo '<td align="center">' . $ondemand_movie_duration . '</td>';
-			                        echo '<td align="center">' . $ondemand_movie_bitrate . '</td>';
-			                        echo '<td align="center">' . $ondemand_movie_codec . '</td>';
-			                        echo '<td align="left">'.
-						'<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-						'<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="86" height="24"/></button></a>'.
-						'<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-						'<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="86" height="24"/></button></a>'.
-						'</td>';
-				        echo '</tr>';	
-                                }
 			echo '</table>';
-                        echo '</p>';
-			}
-                        echo '<hr style="margin: 1em 0" />';
-                }
+		    echo '</div>'; /* FINE DIV CLASS "left" */
+		}
+            echo '</div>'; /* FINE DIV CLASS "toggle_container" */
         }
     }
     catch(Exception $e)

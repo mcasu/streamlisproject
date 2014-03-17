@@ -60,9 +60,17 @@ border-radius: 10px;
 
 #fg_membersite input[type="submit"]
 {
-   width:100px;
-   height:30px;
+   width:200px;
+   height:40px;
+   text-align: center;
+   font-weight: bold;
+   font-size: 14px;
    padding-left:0px;
+   background-color: #3ed0d2;
+}
+#fg_membersite input[type="submit"]:hover
+{
+   background-color: #009898;
 }
 
 #fg_membersite textarea
@@ -120,7 +128,7 @@ border-radius: 10px;
 #fg_membersite .short_explanation
 {
    font-family : Arial, sans-serif;
-   font-size: 0.6em;
+   font-size: 0.8em;
    color:#333;   
 }
 
