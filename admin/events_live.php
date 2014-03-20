@@ -1,6 +1,6 @@
 
 <?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/membersite_config.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();
@@ -130,8 +130,10 @@ try
 		    $live_events = $dbactions->GetLiveEventsByPublisher($group_publish_code);
 		    $live_events_number = mysql_num_rows($live_events);
 			echo '<h2 class="toggle trigger">'.
-				'<a href="#">'.$group_name.'<label class="eventnum" align="right">'.$live_events_number.'</label></a>'.
-			     '</h2>';  /*<img class="group_logo" src="../images/group.png" height="30" width="32"/>*/
+				'<a href="#">'.$group_name.
+				'<img class= "group_logo" src="../images/group.png" />'.
+				'<label class="eventnum" align="right">['.$live_events_number.' eventi]</label></a>'.
+			     '</h2>';
 				
 			echo '<div class="toggle_container" id="'.$group_id.'">';
 			    if (!$live_events || $live_events_number<1)

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?PHP
-require_once("../../include/membersite_config.php");
+require_once("../../include/config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();

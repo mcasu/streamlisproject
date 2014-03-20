@@ -2,21 +2,23 @@
 
 class DBActions
 {
-
 	var $error_message;
 
 	/* Database variables*/
 	var $connection;
 	var $database;
-	var $tablename;
 
-    function InitDB($host,$uname,$pwd,$database,$tablename)
+	function DBActions($host, $uname, $pwd, $database)
+	{
+		$this->InitDB($host, $uname, $pwd, $database);
+	}
+
+    function InitDB($host,$uname,$pwd,$database)
     {
         $this->db_host  = $host;
         $this->username = $uname;
         $this->pwd  = $pwd;
         $this->database  = $database;
-        $this->tablename = $tablename;
     }
 
     function DBLogin()

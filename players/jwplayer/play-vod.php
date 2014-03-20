@@ -1,5 +1,5 @@
 <?PHP
-require_once("../../include/membersite_config.php");
+require_once("../../include/config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();
@@ -49,7 +49,7 @@ else
 		
 		echo '<script type="text/javascript">'.
 			'jwplayer("player").setup({
-                        file: "rtmp://'.$ip_actual.':1935/vod/'.$filename.'",
+                        file: "rtmp://'.$ip_actual.':1935/vod-flash/'.$filename.'",
                         autostart: true,
                         controls: true,
                         aspectratio: "4:3",

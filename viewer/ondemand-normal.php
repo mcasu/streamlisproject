@@ -1,5 +1,5 @@
 <?PHP
-require_once("../include/membersite_config.php");
+require_once("../include/config.php");
 
 $utils = $fgmembersite->GetUtilsInstance();
 $dbactions = $fgmembersite->GetDBActionsInstance();
@@ -54,7 +54,6 @@ if(!$fgmembersite->CheckLogin())
 <?php include("header-normal.php"); ?>
 
 <div align="right"><b><?= $fgmembersite->UserFullName(); ?></b>, Welcome back!</div>
-<div id='fg_membersite_content'>
 
 <div>
 <p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p>
@@ -80,10 +79,6 @@ try
 		$publisher_code=$row['publisher_code'];
 
 		$ondemand_events = $dbactions->GetOndemandEventsByPublisher($publisher_code);
-		
-		/*echo '<p><b>'. $publisher_name . '</b> '.
-		'<img align="center" src="../images/group.png" border="0" height="48" width="48"/>';*/
-
 		$ondemand_events_number = mysql_num_rows($ondemand_events);
 		echo '<h2 class="toggle trigger">'.
 			'<a href="#">'.$publisher_name.
@@ -91,7 +86,7 @@ try
 			'<label class="eventnum" align="right">['.$ondemand_events_number.' eventi]</label></a>'.
 		     '</h2>'; 
 			
-		echo '<div class="toggle_container" id="'.$group_id.'">';
+		echo '<div class="toggle_container" id="'.$publisher_id.'">';
 		if (!$ondemand_events || $ondemand_events_number<1)
 		{
 		    echo '<div style="margin: 0 0 0 10px">Nessun evento on-demand disponibile per questa congregazione.</div>';
@@ -99,6 +94,7 @@ try
 		else
 		{
 		    echo '<div class="left">';
+			echo '<div id="fg_membersite_content">';
 			echo '<table class="imagetable">'.
 			'<tr>'.
 			'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th>'.
@@ -131,6 +127,7 @@ try
 			    echo '</tr>';	
 			}
 			echo '</table>';
+			echo '</div>';
 		    echo '</div>'; /* FINE DIV CLASS "left" */
 		}
             echo '</div>'; /* FINE DIV CLASS "toggle_container" */
@@ -145,6 +142,5 @@ try
 
 
 <br><br><br>
-</div>
 </body>
 </html>

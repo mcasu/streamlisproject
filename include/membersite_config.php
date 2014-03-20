@@ -7,6 +7,9 @@ $ip_private="192.168.5.128";
 
 $myhostname = gethostname();
 
+$ondemand_hls_path="/var/stream/hls";
+$ondemand_flash_path="/var/stream/flv";
+
 $fgmembersite = new FGMembersite();
 $dbactions = $fgmembersite->GetDBActionsInstance();
 
