@@ -41,10 +41,36 @@ class FGMembersite
         $this->rand_key = '0iQx5oBk66oVZep';
 
 	$this->utilsInstance = new Utils();
-	$this->dbactionsInstance = new DBActions($host, $uname, $pwd, $database);
-	$this->fsactionsInstance = new FSActions();
+        $this->dbactionsInstance = new DBActions($host, $uname, $pwd, $database);
+        $this->fsactionsInstance = new FSActions();
     }
     
+/*** MEMBERS ***/
+    function UserId()
+    {
+	return isset($_SESSION['user_id'])?$_SESSION['user_id']:'';
+    }
+    function UserFullName()
+    {
+        return isset($_SESSION['name_of_user'])?$_SESSION['name_of_user']:'';
+    }
+    
+    function UserEmail()
+    {
+        return isset($_SESSION['email_of_user'])?$_SESSION['email_of_user']:'';
+    }
+    
+    function UserGroupId()
+    {
+        return isset($_SESSION['user_group_id'])?$_SESSION['user_group_id']:'';
+    }
+    
+    function UserGroupName()
+    {
+        return isset($_SESSION['user_group_name'])?$_SESSION['user_group_name']:'';
+    }
+/*** FINE MEMBERS ***/
+
     function SetAdminEmail($email)
     {
         $this->admin_email = $email;
@@ -77,14 +103,18 @@ class FGMembersite
         
         $this->CollectRegistrationSubmission($uservars);
         
-        if(!$this->SaveToDatabase($uservars))
-
+	$user_id = $this->SaveToDatabase($uservars);
+	
+        if(!$user_id)
         {
             return false;
         }
-        
+	
+        $uservars['user_id'] = $this->utilsInstance->Sanitize($user_id);
+	
         if(!$this->SendUserConfirmationEmail($uservars))
         {
+	    $this->dbactionsInstance->DeleteUser($uservars['user_id']);
             return false;
         }
 
@@ -174,17 +204,17 @@ class FGMembersite
          return true;
     }
    
-	function GetSessionUserRole()
-	{
-		if(empty($_SESSION['user_role_id']))
-		{
-            		$this->HandleError("User role for this session not found!");
-			return false;
-		}
+    function GetSessionUserRole()
+    {
+	    if(empty($_SESSION['user_role_id']))
+	    {
+		    $this->HandleError("User role for this session not found!");
+		    return false;
+	    }
 
-		return $_SESSION['user_role_id']; 
-		
-	}
+	    return $_SESSION['user_role_id']; 
+	    
+    }
 
     function GetFSActionsInstance() 
     {
@@ -201,26 +231,6 @@ class FGMembersite
 	return $this->utilsInstance;
     }
 
-    function UserFullName()
-    {
-        return isset($_SESSION['name_of_user'])?$_SESSION['name_of_user']:'';
-    }
-    
-    function UserEmail()
-    {
-        return isset($_SESSION['email_of_user'])?$_SESSION['email_of_user']:'';
-    }
-    
-    function UserGroupId()
-    {
-        return isset($_SESSION['user_group_id'])?$_SESSION['user_group_id']:'';
-    }
-    
-    function UserGroupName()
-    {
-        return isset($_SESSION['user_group_name'])?$_SESSION['user_group_name']:'';
-    }
-    
     function LogOut()
     {
         session_start();
@@ -234,13 +244,13 @@ class FGMembersite
     
     function EmailResetPasswordLink()
     {
-        if(empty($_POST['email']))
+        if(empty($_POST['username']))
         {
-            $this->HandleError("Email is empty!");
+            $this->HandleError("Username is empty!");
             return false;
         }
         $user_rec = array();
-        if(false === $this->dbactionsInstance->GetUserFromEmail($_POST['email'], $user_rec))
+        if(false === $this->dbactionsInstance->GetUserByUsername($_POST['username'], $user_rec))
         {
             return false;
         }
@@ -253,17 +263,24 @@ class FGMembersite
     
     function ResetPassword()
     {
-        if(empty($_GET['email']))
+        if(empty($_GET['user_id']))
+        {
+            $this->HandleError("UserId is empty!");
+            return false;
+        }
+	if(empty($_GET['email']))
         {
             $this->HandleError("Email is empty!");
             return false;
         }
         if(empty($_GET['code']))
         {
-            $this->HandleError("reset code is empty!");
+            $this->HandleError("Reset code is empty!");
             return false;
         }
-        $email = trim($_GET['email']);
+	
+	$email = trim($_GET['email']);
+        $user_id = trim($_GET['user_id']);
         $code = trim($_GET['code']);
         
         if($this->GetResetPasswordCode($email) != $code)
@@ -273,7 +290,7 @@ class FGMembersite
         }
         
         $user_rec = array();
-        if(!$this->dbactionsInstance->GetUserFromEmail($email,$user_rec))
+        if(!$this->dbactionsInstance->GetUserById($user_id,$user_rec))
         {
             return false;
         }
@@ -313,7 +330,7 @@ class FGMembersite
         }
         
         $user_rec = array();
-        if(!$this->dbactionsInstance->GetUserFromEmail($this->UserEmail(),$user_rec))
+        if(!$this->dbactionsInstance->GetUserById($this->UserId(),$user_rec))
         {
             return false;
         }
@@ -322,7 +339,7 @@ class FGMembersite
         
         if($user_rec['password'] != md5($pwd))
         {
-            $this->HandleError("The old password does not match!");
+            $this->HandleError("The old password [".md5($pwd)."] does not match! [".$user_rec['password']."]");
             return false;
         }
         $newpwd = trim($_POST['newpwd']);
@@ -344,8 +361,6 @@ class FGMembersite
         $errormsg = nl2br(htmlentities($this->error_message));
         return $errormsg;
     }    
-    //-------Private Helper functions-----------
-    
     function HandleError($err)
     {
         $this->error_message .= $err."\r\n";
@@ -444,7 +459,8 @@ class FGMembersite
     function SendResetPasswordLink($user_rec)
     {
         $email = $user_rec['email'];
-        
+        $user_id = $user_rec['id_user'];
+	
         $mailer = new PHPMailer();
         
         $mailer->CharSet = 'utf-8';
@@ -456,8 +472,9 @@ class FGMembersite
         $mailer->From = $this->GetFromAddress();
         
         $link = $this->GetAbsoluteURLFolder().
-                '/resetpwd.php?email='.
-                urlencode($email).'&code='.
+                '/resetpwd.php?user_id='.
+                urlencode($user_id).'&email='.
+		urlencode($email).'&code='.
                 urlencode($this->GetResetPasswordCode($email));
 
         $mailer->Body ="Hello ".$user_rec['name']."\r\n\r\n".
@@ -643,13 +660,15 @@ class FGMembersite
         {
             $this->HandleError("This UserName is already used. Please try another username");
             return false;
-        }        
-        if(!$this->dbactionsInstance->InsertIntoDB($uservars,$this->rand_key))
+        }
+	
+	$user_id = $this->dbactionsInstance->InsertIntoDB($uservars,$this->rand_key);
+        if(!$user_id)
         {
             $this->HandleError("Inserting to Database failed!");
             return false;
         }
-        return true;
+        return $user_id;
     }
     
     function SaveGroupToDatabase(&$groupvars)

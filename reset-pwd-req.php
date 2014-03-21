@@ -35,11 +35,11 @@ if(isset($_POST['submitted']))
 
 <div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
 <div class='container'>
-    <label for='username' >Your Email*:</label><br/>
-    <input type='text' name='email' id='email' value='<?php echo $utils->SafeDisplay('email') ?>' maxlength="50" /><br/>
+    <label for='username' >Your username*:</label><br/>
+    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
     <span id='resetreq_email_errorloc' class='error'></span>
 </div>
-<div class='short_explanation'>A link to reset your password will be sent to the email address</div>
+<div class='short_explanation'>Tra poco riceverai una mail con un link per fare il reset della password.</div>
 <div class='container'>
     <input type='submit' name='Submit' value='Submit' />
 </div>
@@ -56,8 +56,8 @@ Uses the excellent form validation script from JavaScript-coder.com-->
     frmvalidator.EnableOnPageErrorDisplay();
     frmvalidator.EnableMsgsTogether();
 
-    frmvalidator.addValidation("email","req","Please provide the email address used to sign-up");
-    frmvalidator.addValidation("email","email","Please provide the email address used to sign-up");
+    frmvalidator.addValidation("username","req","Per favore inserire lo username utilizzato per il login.");
+    frmvalidator.addValidation("username","username","Per favore inserire lo username utilizzato per il login.");
 
 // ]]>
 </script>

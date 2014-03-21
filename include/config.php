@@ -17,6 +17,9 @@ $database = 'streamlisdb';
 
 /*** FILE SYSTEM CONFIG ***/
 
+$live_tmp_flash_path = "/tmp/stream/flash/";
+$live_tmp_hls_path = "/tmp/stream/hls/";
+
 // Do not forget the '/' char at the end of path
 // These values must be the same as you can see into the nginx config file
 $ondemand_hls_record_filepath = '/var/stream/hls/';

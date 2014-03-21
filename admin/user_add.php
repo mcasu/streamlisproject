@@ -62,14 +62,14 @@ if(isset($_POST['submitted']))
 </div>
 <div class='container'>
     <label for='username' >UserName*:</label><br/>
-    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="50" /><br/>
+    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
     <span id='register_username_errorloc' class='error'></span>
 </div>
 <div class='container' style='height:80px;'>
     <label for='password' >Password*:</label><br/>
     <div class='pwdwidgetdiv' id='thepwddiv' ></div>
     <noscript>
-    <input type='password' name='password' id='password' maxlength="50" />
+    <input type='password' name='password' id='password' maxlength="128" />
     </noscript>    
     <div id='register_password_errorloc' class='error' style='clear:both'></div>
 </div>
@@ -142,7 +142,6 @@ if(isset($_POST['submitted']))
 Uses the excellent form validation script from JavaScript-coder.com-->
 
 <script type='text/javascript'>
-// <![CDATA[
     var pwdwidget = new PasswordWidget('thepwddiv','password');
     pwdwidget.MakePWDWidget();
     
@@ -159,7 +158,6 @@ Uses the excellent form validation script from JavaScript-coder.com-->
     
     frmvalidator.addValidation("password","req","Please provide a password");
 
-// ]]>
 </script>
 
 </br>

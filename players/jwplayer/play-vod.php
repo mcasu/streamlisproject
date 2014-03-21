@@ -49,7 +49,7 @@ else
 		
 		echo '<script type="text/javascript">'.
 			'jwplayer("player").setup({
-                        file: "rtmp://'.$ip_actual.':1935/vod-flash/'.$filename.'",
+                        file: "rtmp://www.jwstream.org:1935/vod-flash/'.$filename.'",
                         autostart: true,
                         controls: true,
                         aspectratio: "4:3",

@@ -193,24 +193,44 @@ class DBActions
 	return $row['group_id'];
     }
 
-    function GetUserFromEmail($email,&$user_rec)
+    function GetUserById($user_id,&$user_rec)
     {
         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
         }
-        $email = $this->SanitizeForSQL($email);
+        $id = $this->SanitizeForSQL($user_id);
 
-        $result = mysql_query("Select * from users where email='$email'",$this->connection);
+        $result = mysql_query("Select * from users where id_user='$id'",$this->connection);
 
         if(!$result || mysql_num_rows($result) <= 0)
         {
-            $this->HandleError("There is no user with email: $email");
+            $this->HandleError("There is no user with ID: $id");
             return false;
         }
         $user_rec = mysql_fetch_assoc($result);
 
+        return true;
+    }
+    
+    function GetUserByUsername($username,&$user_rec)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+        $name = $this->SanitizeForSQL($username);
+
+        $result = mysql_query("Select * from users where name='$name'",$this->connection);
+
+        if(!$result || mysql_num_rows($result) <= 0)
+        {
+            $this->HandleError("Non esistono utenti con username: $name");
+            return false;
+        }
+        $user_rec = mysql_fetch_assoc($result);
 
         return true;
     }
@@ -266,7 +286,7 @@ class DBActions
             $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
             return false;
         }
-        return true;
+        return mysql_insert_id();
     }
 
 	function InsertGroupIntoDB(&$groupvars)

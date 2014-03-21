@@ -46,10 +46,10 @@ else
 		<div id="player" style="text-align:center"></div>
 		
 		<?php
-		
+		 
 		echo '<script type="text/javascript">'.
 			'jwplayer("player").setup({
-                        file: "rtmp://'.$ip_actual.':1935/'.$app_name.'/'.$stream_name.'",
+                        file: "rtmp://www.jwstream.org:1935/'.$app_name.'/'.$stream_name.'",
                         autostart: true,
                         controls: true,
                         aspectratio: "4:3",

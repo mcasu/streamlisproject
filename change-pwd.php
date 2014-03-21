@@ -41,11 +41,13 @@ if(isset($_POST['submitted']))
 <div class='short_explanation'>* required fields</div>
 
 <div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+
+
 <div class='container'>
     <label for='oldpwd' >Old Password*:</label><br/>
     <div class='pwdwidgetdiv' id='oldpwddiv' ></div><br/>
     <noscript>
-    <input type='password' name='oldpwd' id='oldpwd' maxlength="50" />
+    <input type='password' name='oldpwd' id='oldpwd' maxlength="128" />
     </noscript>    
     <span id='changepwd_oldpwd_errorloc' class='error'></span>
 </div>
@@ -54,7 +56,7 @@ if(isset($_POST['submitted']))
     <label for='newpwd' >New Password*:</label><br/>
     <div class='pwdwidgetdiv' id='newpwddiv' ></div>
     <noscript>
-    <input type='password' name='newpwd' id='newpwd' maxlength="50" /><br/>
+    <input type='password' name='newpwd' id='newpwd' maxlength="128" /><br/>
     </noscript>
     <span id='changepwd_newpwd_errorloc' class='error'></span>
 </div>
