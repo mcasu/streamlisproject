@@ -246,15 +246,16 @@ class FGMembersite
     {
         if(empty($_POST['username']))
         {
-            $this->HandleError("Username is empty!");
+            $this->HandleError("Il campo username è vuoto!");
             return false;
         }
         $user_rec = array();
-        if(false === $this->dbactionsInstance->GetUserByUsername($_POST['username'], $user_rec))
+        if(!$this->dbactionsInstance->GetUserByUsername($_POST['username'], $user_rec))
         {
+	    $this->HandleError("Impossibile recuperare le informazioni dell'utente!");
             return false;
         }
-        if(false === $this->SendResetPasswordLink($user_rec))
+        if(!$this->SendResetPasswordLink($user_rec))
         {
             return false;
         }

@@ -223,7 +223,7 @@ class DBActions
         }
         $name = $this->SanitizeForSQL($username);
 
-        $result = mysql_query("Select * from users where name='$name'",$this->connection);
+        $result = mysql_query("Select * from users where username='$name'",$this->connection);
 
         if(!$result || mysql_num_rows($result) <= 0)
         {
