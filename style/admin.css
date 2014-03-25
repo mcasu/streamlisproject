@@ -1,5 +1,5 @@
 h2.toggle {
-  width: 680px;
+  width: 665px;
   padding: 0 0 0 40px;
   height: 31px;
   margin: 0 0 0 10px;
@@ -7,9 +7,10 @@ h2.toggle {
 }
 h2 label.eventnum {
   /*color: #0ab0f6;*/
-  color: #3ed0d2;
+  float: right;
+  color: #3c78c3; /*#3ed0d2;*/
   font-size: 14px;
-  margin: 0 0 0 10px;
+  margin-right: 10px;
 }
 h2.toggle a {
   width: 100%;
@@ -19,6 +20,25 @@ h2.toggle a {
   line-height: 31px;
   display: block;
 }
+
+/*h2.toggle a:after {
+  content: ">"; //"\2192"; Right arrow
+  color: #fff;
+  display: block;
+  float: right;
+  margin-right: 1rem;
+  font-size: 1.5em;
+  font-weight: bold;
+  //font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono";
+  //font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
+}*/
+
+h2.toggle a:hover {
+    /*color: #ccc;*/
+    color: #3c78c3; /*#3ed0d2;*/
+}
+
 a img.group_logo {
   margin: 0 0 0 15px;
   height: 30px;
@@ -28,16 +48,11 @@ a img.group_logo {
 
 h2.trigger
 {
-  background:url(../images/togglebar_green.png) left top no-repeat;
+  background:url(../images/togglebar_azure.png) left top no-repeat;
 }
 h2.active
 {
-  background:url(../images/togglebar_green.png) left bottom no-repeat;
-}
-
-h2.toggle a:hover {
-    /*color: #ccc;*/
-    color: #3ed0d2;
+  background:url(../images/togglebar_azure.png) left bottom no-repeat;
 }
 
 div.toggle_container {
@@ -52,7 +67,7 @@ div.toggle_container {
 
 div.left {
   float: left;
-  width: 50%;
+  width: 70%;
   margin: 10px 12px;
 }
 

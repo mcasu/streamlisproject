@@ -1,17 +1,17 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
+$utils = $mainactions->GetUtilsInstance();
 
 if(isset($_GET['code']))
 {
-   if($fgmembersite->ConfirmUser())
+   if($mainactions->ConfirmUser())
    {
         $utils->RedirectToURL("thank-you-regd.php");
    }
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
         $utils->RedirectToURL("../viewer/live-normal.php");
@@ -37,7 +37,7 @@ Please enter the confirmation code in the box below
 <div id='fg_membersite'>
 <form id='confirm' action='<?php echo $utils->GetSelfScript(); ?>' method='get' accept-charset='UTF-8'>
 <div class='short_explanation'>* required fields</div>
-<div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+<div><span class='error'><?php echo $mainactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
     <label for='code' >Confirmation Code:* </label><br/>
     <input type='text' name='code' id='code' maxlength="50" /><br/>

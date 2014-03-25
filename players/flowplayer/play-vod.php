@@ -1,10 +1,10 @@
 <?PHP
 require_once("../../include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../../login.php");
     exit;

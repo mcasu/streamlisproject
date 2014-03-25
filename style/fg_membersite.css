@@ -5,38 +5,54 @@ You can customize all the aspects of the form in this style sheet
 
 #fg_membersite fieldset
 {
-   width: 230px;
-   padding:20px;
-   border:1px solid #ccc;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
--khtml-border-radius: 10px;
-border-radius: 10px;   
+   width: 350px;
+   height: 160%;
+   padding: 10px;
+   margin: 20px;
+   border:2px solid #0b75b2;
+   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -khtml-border-radius: 10px;
+   border-radius: 10px;
+   background-color: #333;
 }
 
-#fg_membersite legend, #fg_membersite h2
+#fg_membersite h2
 {
+   width: 100%;
+   margin: 10px 0 20px 0;
+   padding: 4px;
    font-family : Arial, sans-serif;
-   font-size: 1.3em;
+   font-size: 2.0em;
    font-weight:bold;
-   color:#333;
+   background-color: #333;
+   color:#fff;
+}
+
+#fg_membersite fieldset .login-legend {
+   font-family : Arial, sans-serif;
+   font-size: 1.8em;
+   font-weight:bold;
+   color:#0b75f6;
 }
 
 #fg_membersite label
 {
    font-family : Arial, sans-serif;
-   font-size:0.8em;
+   font-size:1.0em;
    font-weight: bold;
+   color: #fff;
 }
 
-#fg_membersite input[type="text"],#fg_membersite textarea,
+#fg_membersite textarea,
+#fg_membersite input[type="text"],
 #fg_membersite input[type="password"]
 {
   font-family : Arial, Verdana, sans-serif;
-  font-size: 0.8em;
+  font-size: 0.9em;
   line-height:140%;
   color : #000; 
-  padding : 3px; 
+  padding : 2px; 
   border : 1px solid #999;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -48,29 +64,25 @@ border-radius: 10px;
 #fg_membersite input[type="text"],
 #fg_membersite input[type="password"]
 {
-  height:18px;
+  height:20px;
   width:220px;
-}
-
- #fg_membersite #scaptcha
-{
-  width:60px;
-  height:18px;
 }
 
 #fg_membersite input[type="submit"]
 {
    width:200px;
    height:40px;
+   margin: 10px;
    text-align: center;
    font-weight: bold;
    font-size: 14px;
-   padding-left:0px;
-   background-color: #3ed0d2;
+   color : #fff;
+   border: none;
+   background-color: #3c78c3; /*#0b75b2; ex #3ed0d2*/
 }
 #fg_membersite input[type="submit"]:hover
 {
-   background-color: #009898;
+   background-color: #0b7592; /* ex #009898 */
 }
 
 #fg_membersite textarea
@@ -80,18 +92,19 @@ border-radius: 10px;
 }
 
 #fg_membersite input[type="text"]:focus,
+#fg_membersite input[type="password"]:focus,
 #fg_membersite textarea:focus
 {
-  color : #009;
-  border : 1px solid #990000;
+  color : #000;
+  border : 1px solid #3c78c3;
   background-color : #ffff99;
   font-weight:bold;
 }
 
 #fg_membersite .container
 {
-   margin-top:8px;
-   margin-bottom: 8px;
+   margin-top:30px;
+   margin-bottom: 10px;
 }
 
 #fg_membersite .error
@@ -107,28 +120,10 @@ border-radius: 10px;
     clear:both;
 }
 
-#fg_membersite  fieldset#antispam
-{
-   padding:2px;
-   border-top:1px solid #EEE;
-   border-left:0;
-   border-right:0;
-   border-bottom:0;
-   width:350px;
-}
-
-#fg_membersite fieldset#antispam legend
-{
-   font-family : Arial, sans-serif;
-   font-size: 0.8em;
-   font-weight:bold;
-   color:#333;   
-}
-
 #fg_membersite .short_explanation
 {
    font-family : Arial, sans-serif;
-   font-size: 0.8em;
+   font-size: 1.0em;
    color:#333;   
 }
 
@@ -139,6 +134,14 @@ border-radius: 10px;
    width:10px;
    height:3px;
 }
+
+#fg_membersite div.pwd-reset a {
+   color: #fff;
+}
+#fg_membersite div.pwd-reset a:visited {
+   color: #fff;
+}
+
 #fg_membersite #fg_crdiv
 {
    font-family : Arial, sans-serif;
@@ -179,25 +182,35 @@ padding-bottom:10px;
         font-family: verdana,arial,sans-serif;
         font-size:10px;
         color:#333333;
-        border-width: 1px;
-        border-color: #999999;
-        border-collapse: collapse;
+        border-width: 2px;
+        border-color: #333;
+        /*1border-collapse: collapse;*/
+}
+
+#fg_membersite_content table.imagetable tr.head {
+	height: 16px;
+        color: #fff;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
 }
 
 #fg_membersite_content table.imagetable tr {
 	height: 10px;
 }
 #fg_membersite_content table.imagetable th {
-        background:#b5cfd2 url('../images/cell-blue.jpg');
+        background-color:#3c78c3;
         border-width: 1px;
         padding: 4px;
         border-style: solid;
-        border-color: #999999;
+        border-color: #333; /*#999999;*/
+        text-align: center;
 }
 #fg_membersite_content table.imagetable td {
-        background:#dcddc0 url('../images/cell-grey.jpg');
+        background-color: #fff; /*#cddc0;*/
         border-width: 1px;
         padding: 4px;
         border-style: solid;
-        border-color: #999999;
+        border-color: #333;
+        text-align: center;
 }

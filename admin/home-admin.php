@@ -1,16 +1,16 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
 	$utils->RedirectToURL("../viewer/live-normal.php");
@@ -27,11 +27,11 @@ if (!$user_role || $user_role!="1")
 </head>
 <body>
 <?php include("header.php"); ?>
-</br>
+<br/>
 <div align="right" id='fg_membersite_content'>
-<b><?= $fgmembersite->UserFullName(); ?></b>, Welcome back!</div>
+<b><?= $mainactions->UserFullName(); ?></b>, Welcome back!</div>
 
-<div><p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p></div>
+<div><p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p></div>
 
 
 </body>

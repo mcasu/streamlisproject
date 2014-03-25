@@ -20,7 +20,7 @@ require_once("utils.php");
 require_once("dbactions.php");
 require_once("fsactions.php");
 
-class FGMembersite
+class MainActions
 {
     var $admin_email;
     var $from_address;
@@ -35,7 +35,7 @@ class FGMembersite
     var $error_message;
     
     //-----Initialization -------
-    function FGMembersite($host, $uname, $pwd, $database)
+    function MainActions($host, $uname, $pwd, $database)
     {
         $this->sitename = 'YourWebsiteName.com';
         $this->rand_key = '0iQx5oBk66oVZep';

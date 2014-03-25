@@ -1,16 +1,16 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
         $utils->RedirectToURL("../viewer/live-normal.php");
@@ -60,16 +60,16 @@ $(function()
 <br/>
 
 <div align="right" id='fg_membersite_content'>
-User logged <b><?= $fgmembersite->UserFullName(); ?></b></div>
+User logged <b><?= $mainactions->UserFullName(); ?></b></div>
 
 <div id='fg_membersite_content'>
-<p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b></p>
+<p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></p>
 </div>
 <br/>
 
 <div id='fg_membersite_content'>
 <table class="imagetable" id="users_table">
-<tr>
+<tr class="head">
 	<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th><th>AZIONI</th>
 </tr>
 <?php

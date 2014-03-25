@@ -2,16 +2,16 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
         $utils->RedirectToURL("../viewer/live-normal.php");
@@ -171,10 +171,10 @@ $("h2.trigger").click(function()
 <?php include("header.php"); ?>
 <br/>
 <div align="right" id='fg_membersite_content'>
-Ciao <b><?= $fgmembersite->UserFullName(); ?></b></div>
+Ciao <b><?= $mainactions->UserFullName(); ?></b></div>
 
 <div id='fg_membersite_content'>
-<p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p>
+<p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p>
 </div>
 
 <h2>ELENCO CONGREGAZIONI PUBLISHER:</h2>
@@ -213,7 +213,7 @@ try
 					    echo '<div class="left">';
 						echo '<div id="fg_membersite_content">';
 						echo '<table class="imagetable">'.
-						'<tr>'.
+						'<tr class="head">'.
 							'<th>VIEWER ASSOCIATI</th><th>AZIONI</th><th>VIEWER DISPONIBILI</th>'.
 						'</tr>';
 	

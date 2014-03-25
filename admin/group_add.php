@@ -1,17 +1,17 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 $GroupHasCreated=false;
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
         $utils->RedirectToURL("../viewer/live-normal.php");
@@ -19,7 +19,7 @@ if (!$user_role || $user_role!="1")
 
 if(isset($_POST['submitted']))
 {
-   $GroupHasCreated=$fgmembersite->CreateGroup();
+   $GroupHasCreated=$mainactions->CreateGroup();
 }
 
 ?>
@@ -29,11 +29,11 @@ if(isset($_POST['submitted']))
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title>JW LIS Streaming - Nuovo utente</title>
     <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
-	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
-    <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
+    <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     <link rel="STYLESHEET" type="text/css" href="../style/pwdwidget.css" />
-    <script src="../scripts/pwdwidget.js" type="text/javascript"></script>      
-
+    
+    <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
+    <script type="text/javascript" src="../scripts/pwdwidget.js"></script>      
 </head>
 <body>
 
@@ -43,18 +43,20 @@ if(isset($_POST['submitted']))
 <div id='fg_membersite'>
 <form id='register' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
-<legend>Nuovo gruppo </legend>
+<div align="left">
+   <label class="login-legend">Nuovo gruppo</label>   
+</div>
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 
 <div class='short_explanation'>* required fields</div>
-<input type='text'  class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($fgmembersite->rand_key); ?>' />
+<input type='text'  class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->rand_key); ?>' />
 
 <div><span class='error'><?php echo $dbactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
     <label for='group_name' >Group Name*: </label><br/>
-    <input type='text' name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="50" /><br/>
-    <span id='register_name_errorloc' class='error'></span>
+    <input type='text' name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="128" /><br/>
+    <span id='register_group_name_errorloc' class='error'></span>
 </div>
 
 
@@ -109,12 +111,10 @@ if(isset($_POST['submitted']))
 Uses the excellent form validation script from JavaScript-coder.com-->
 
 <script type='text/javascript'>
-// <![CDATA[
     var frmvalidator  = new Validator("register");
     frmvalidator.EnableOnPageErrorDisplay();
     frmvalidator.EnableMsgsTogether();
     frmvalidator.addValidation("group_name","req","Please provide the group name");
-// ]]>
 </script>
 
 </br>

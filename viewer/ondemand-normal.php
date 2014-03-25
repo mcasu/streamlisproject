@@ -1,10 +1,10 @@
 <?PHP
 require_once("../include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
@@ -52,11 +52,11 @@ if(!$fgmembersite->CheckLogin())
 </head>
 <body>
 <?php include("header-normal.php"); ?>
-
-<div align="right"><b><?= $fgmembersite->UserFullName(); ?></b>, Welcome back!</div>
+<br/>
+<div align="right"><b><?= $mainactions->UserFullName(); ?></b>, Benvenuto!</div>
 
 <div>
-<p>La tua congregazione e' <b><?= $fgmembersite->UserGroupName(); ?></b>.</p>
+<p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p>
 </div>
 
 <h2>ELENCO EVENTI ON-DEMAND PER PUBLISHER:</h2>
@@ -65,7 +65,7 @@ if(!$fgmembersite->CheckLogin())
 
 try
     {
-	$publishers = $dbactions->GetPublishersByViewer($fgmembersite->UserGroupId());
+	$publishers = $dbactions->GetPublishersByViewer($mainactions->UserGroupId());
 
         if (!$publishers)
         {
@@ -96,7 +96,7 @@ try
 		    echo '<div class="left">';
 			echo '<div id="fg_membersite_content">';
 			echo '<table class="imagetable">'.
-			'<tr>'.
+			'<tr class="head">'.
 			'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE</th><th>CODEC</th><th>GUARDA IL VIDEO</th>'.
 			'</tr>';
     

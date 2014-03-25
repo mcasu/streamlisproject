@@ -1,123 +1,103 @@
-#cssmenu ul,
-#cssmenu li,
-#cssmenu span,
-#cssmenu a {
+#headermenu {
+  background-color: #333;
+  width: 100%;
+  margin: 0;
+}
+
+#headermenu ul,
+#headermenu li,
+#headermenu span,
+#headermenu a {
   margin: 0;
   padding: 0;
   position: relative;
 }
-#cssmenu:after,
-#cssmenu ul:after {
+#headermenu:after,
+#headermenu ul:after {
   content: '';
   display: block;
   clear: both;
 }
-#cssmenu a {
-  color: #ffffff;
+#headermenu a {
+  color: #fff;
   display: inline-block;
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-size: 16px;
-  min-width: 35px;
+  min-width: 40px;
   text-align: center;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: 0 -1px 0 #333333;
+  /*text-shadow: 0 -1px 0 #333333;*/
 }
-#cssmenu ul {
+#headermenu ul {
   list-style: none;
 }
-#cssmenu > ul > li {
+#headermenu > ul > li {
   float: left;
   display: inline;
 }
-#cssmenu > ul > li.active a {
-  background: #646464 url(images/grad_dark.png) repeat-x left bottom;
-  background: -moz-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #646464), color-stop(100%, #4a4a4a));
-  background: -webkit-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -o-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -ms-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: linear-gradient(to bottom, #646464 0%, #4a4a4a 100%);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#646464', endColorstr='#4a4a4a', GradientType=0);
-  box-shadow: inset 0 0 10px #222222, inset 0 10px 10px #222222;
-  -moz-box-shadow: inset 0 0 10px #222222, inset 0 10px 10px #222222;
-  -webkit-box-shadow: inset 0 0 10px #222222, inset 0 10px 10px #222222;
-  filter: none;
-}
-#cssmenu > ul > li.active a:hover {
-  background: -moz-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #646464), color-stop(100%, #4a4a4a));
-  background: -webkit-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -o-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: -ms-linear-gradient(top, #646464 0%, #4a4a4a 100%);
-  background: linear-gradient(to bottom, #646464 0%, #4a4a4a 100%);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#646464', endColorstr='#4a4a4a', GradientType=0);
-  filter: none;
-}
-#cssmenu > ul > li a {
-  box-shadow: inset 0 0 0 1px #8a8a8a;
-  -moz-box-shadow: inset 0 0 0 1px #8a8a8a;
-  -webkit-box-shadow: inset 0 0 0 1px #8a8a8a;
-  background: #4a4a4a url(images/grad_dark.png) repeat-x left top;
-  background: -moz-linear-gradient(top, #8a8a8a 0%, #707070 50%, #626262 51%, #787878 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8a8a8a), color-stop(50%, #707070), color-stop(51%, #626262), color-stop(100%, #787878));
-  background: -webkit-linear-gradient(top, #8a8a8a 0%, #707070 50%, #626262 51%, #787878 100%);
-  background: -o-linear-gradient(top, #8a8a8a 0%, #707070 50%, #626262 51%, #787878 100%);
-  background: -ms-linear-gradient(top, #8a8a8a 0%, #707070 50%, #626262 51%, #787878 100%);
-  background: linear-gradient(to bottom, #8a8a8a 0%, #707070 50%, #626262 51%, #787878 100%);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#8a8a8a', endColorstr='#787878', GradientType=0);
-  border-bottom: 1px solid #5d5d5d;
-  border-top: 1px solid #5d5d5d;
+
+#headermenu ul li a {
+  /*border-bottom: 1px solid #5d5d5d;*/
+  /*border-top: 1px solid #5d5d5d;*/
   border-right: 1px solid #5d5d5d;
-  line-height: 34px;
+  line-height: 48px;
   padding: 0 35px;
-  filter: none;
 }
-#cssmenu > ul > li a:hover {
-  background: #8a8a8a url(images/grad_dark.png) repeat-x left bottom;
-  background: -moz-linear-gradient(top, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #646464), color-stop(50%, #4a4a4a), color-stop(51%, #3b3b3b), color-stop(100%, #525252));
-  background: -webkit-linear-gradient(top, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
-  background: -o-linear-gradient(top, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
-  background: -ms-linear-gradient(top, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
-  background: linear-gradient(to bottom, #646464 0%, #4a4a4a 50%, #3b3b3b 51%, #525252 100%);
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#8a8a8a', endColorstr='#787878', GradientType=0);
-  filter: none;
-  color: #3ed0d2;
+#headermenu .has-sub ul li a {
+  /*border-top: 1px solid #5d5d5d;*/
+  border-bottom: 1px solid #5d5d5d;
+  border-left: 1px solid #5d5d5d;
+  border-right: 1px solid #5d5d5d;
+  display: block;
+  line-height: 120%;
+  text-align: center;
+  padding: 8px 35px;
 }
-#cssmenu > ul > li:first-child a {
+#headermenu > ul > li a:hover , #headermenu ul li .current{
+  color: #fff;
+  background-color:#3c78c3;
+}
+
+/*#headermenu > ul > li:first-child a {
   border-radius: 5px 0 0 5px;
   -moz-border-radius: 5px 0 0 5px;
   -webkit-border-radius: 5px 0 0 5px;
   border-left: 1px solid #5d5d5d;
 }
-#cssmenu > ul > li:last-child a {
+#headermenu > ul > li:last-child a {
   border-radius: 0 5px 5px 0;
   -moz-border-radius: 0 5px 5px 0;
   -webkit-border-radius: 0 5px 5px 0;
-}
-#cssmenu .has-sub:hover ul {
+}*/
+
+#headermenu .has-sub:hover ul {
   display: block;
 }
-#cssmenu .has-sub ul {
+#headermenu .has-sub ul {
   display: none;
   position: absolute;
-  top: 36px;
-  left: -1px;
-  min-width: 100%;
+  top: 48px; /* la posizione verticale assoluta da dove partono le voci dei sub-menu */
+  left: 4px;
+  min-width: 40px;
   text-align: center;
-  /* IE7 */
+}
+#headermenu .has-sub ul li {
+  background-color: #333;
+  text-align: center;
+}
+#headermenu .has-sub a img {
+  vertical-align: middle;
+  margin: 0 0 0 8px;
+}
 
-  width: 100%;
+.logo {
+  float: left;
 }
-#cssmenu .has-sub ul li {
-  text-align: center;
-}
-#cssmenu .has-sub ul li a {
-  border-top: 0 none;
-  border-left: 1px solid #5d5d5d;
-  display: block;
-  line-height: 120%;
-  padding: 9px 5px;
-  text-align: center;
+.logo img {
+  background-color: #fff;
+  height: 48px;
+  width: 48px;
+  margin-right: 6px;
+  margin-top: 2px;
 }

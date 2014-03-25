@@ -1,12 +1,12 @@
 <?PHP
 require_once("./include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
+$utils = $mainactions->GetUtilsInstance();
 
 $emailsent = false;
 if(isset($_POST['submitted']))
 {
-   if($fgmembersite->EmailResetPasswordLink())
+   if($mainactions->EmailResetPasswordLink())
    {
         $utils->RedirectToURL("reset-pwd-link-sent.html");
         exit;
@@ -27,21 +27,23 @@ if(isset($_POST['submitted']))
 <div id='fg_membersite'>
 <form id='resetreq' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
-<legend>Reset Password</legend>
+<div align="left">
+   <label class="login-legend">Reset password</label>   
+</div>
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 
 <div class='short_explanation'>* required fields</div>
 
-<div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+<div><span class='error'><?php echo $mainactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
-    <label for='username' >Your username*:</label><br/>
+    <label for='username' >Inserisci il tuo username*:</label><br/>
     <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
-    <span id='resetreq_email_errorloc' class='error'></span>
+    <span id='resetreq_username_errorloc' class='error'></span>
 </div>
-<div class='short_explanation'>Tra poco riceverai una mail con un link per fare il reset della password.</div>
+<div class='short_explanation'>Cliccando sul tasto RESET ti verrà inviata una mail con un link per fare il reset della password.</div>
 <div class='container'>
-    <input type='submit' name='Submit' value='Submit' />
+    <input type='submit' name='Submit' value='RESET' />
 </div>
 
 </fieldset>

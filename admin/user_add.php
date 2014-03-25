@@ -1,17 +1,17 @@
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
-$dbactions = $fgmembersite->GetDBActionsInstance();
+$utils = $mainactions->GetUtilsInstance();
+$dbactions = $mainactions->GetDBActionsInstance();
 $UserHasCreated=false;
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("../login.php");
     exit;
 }
 
-$user_role = $fgmembersite->GetSessionUserRole();
+$user_role = $mainactions->GetSessionUserRole();
 if (!$user_role || $user_role!="1")
 {
         $utils->RedirectToURL("../viewer/live-normal.php");
@@ -19,7 +19,7 @@ if (!$user_role || $user_role!="1")
 
 if(isset($_POST['submitted']))
 {
-   $UserHasCreated=$fgmembersite->CreateUser();
+   $UserHasCreated=$mainactions->CreateUser();
 }
 
 ?>
@@ -42,17 +42,19 @@ if(isset($_POST['submitted']))
 <div id='fg_membersite'>
 <form id='register' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
-<legend>Nuovo utente</legend>
+<div align="left">
+   <label class="login-legend">Nuovo utente</label>   
+</div>
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 
 <div class='short_explanation'>* required fields</div>
-<input type='text'  class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($fgmembersite->rand_key); ?>' />
+<input type='text'  class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->rand_key); ?>' />
 
-<div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+<div><span class='error'><?php echo $mainactions->GetErrorMessage(); ?></span></div>
 <div class='container'>
     <label for='name' >Full Name*: </label><br/>
-    <input type='text' name='name' id='name' value='<?php echo $utils->SafeDisplay('name') ?>' maxlength="50" /><br/>
+    <input type='text' name='name' id='name' value='<?php echo $utils->SafeDisplay('name') ?>' maxlength="128" /><br/>
     <span id='register_name_errorloc' class='error'></span>
 </div>
 <div class='container'>
@@ -65,7 +67,7 @@ if(isset($_POST['submitted']))
     <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
     <span id='register_username_errorloc' class='error'></span>
 </div>
-<div class='container' style='height:80px;'>
+<div class='container'>
     <label for='password' >Password*:</label><br/>
     <div class='pwdwidgetdiv' id='thepwddiv' ></div>
     <noscript>

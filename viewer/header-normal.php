@@ -5,23 +5,23 @@
 	<link rel='stylesheet' type='text/css' href='../style/header.css' />
 </head>
 <body>
-<div id='cssmenu'>
+<div id='headermenu'>
 <ul>
    <li class='has-sub'><a href='live-normal.php'><span>Live streaming</span></a>
   </li>
    <li class='has-sub'><a href='ondemand-normal.php'><span>On-demand streaming</span></a>
    </li>
-   <li class='has-sub last'>
-	<a href='#'>Profilo<img src="../images/user.png" align="right" hspace="4" height="32" width="32"></a>
+   <li class='has-sub'>
+	<a href='#'>Profilo<img src="../images/user.png"></a>
       <ul>
          <li><a href='../change-pwd.php'><span>Cambia password</span></a></li>
-         <li class='last'><a href='../logout.php'><span>Esci</span></a></li>
+         <li><a href='../logout.php'><span>Esci</span></a></li>
       </ul>
    </li>
-	<li> 
-	<img src="../images/logo.png" alt="JW LIS Streaming" align="center" hspace="20" height="48" width="48">
-	</li>
 </ul>
+</div>
+<div class="logo">
+   <img src="../images/logo_flat.png" alt="JW LIS Streaming">
 </div>
 </body>
 </html>

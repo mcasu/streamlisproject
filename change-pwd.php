@@ -1,9 +1,9 @@
 <?PHP
 require_once("./include/config.php");
 
-$utils = $fgmembersite->GetUtilsInstance();
+$utils = $mainactions->GetUtilsInstance();
 
-if(!$fgmembersite->CheckLogin())
+if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("login.php");
     exit;
@@ -11,7 +11,7 @@ if(!$fgmembersite->CheckLogin())
 
 if(isset($_POST['submitted']))
 {
-   if($fgmembersite->ChangePassword())
+   if($mainactions->ChangePassword())
    {
         $utils->RedirectToURL("changed-pwd.html");
    }
@@ -34,36 +34,38 @@ if(isset($_POST['submitted']))
 <div id='fg_membersite'>
 <form id='changepwd' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
-<legend>Change Password</legend>
+<div align="left">
+   <label class="login-legend">Cambia password</label>   
+</div>
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 
 <div class='short_explanation'>* required fields</div>
 
-<div><span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span></div>
+<div><span class='error'><?php echo $mainactions->GetErrorMessage(); ?></span></div>
 
 
 <div class='container'>
-    <label for='oldpwd' >Old Password*:</label><br/>
+    <label for='oldpwd' >Password attuale*:</label><br/>
     <div class='pwdwidgetdiv' id='oldpwddiv' ></div><br/>
     <noscript>
-    <input type='password' name='oldpwd' id='oldpwd' maxlength="128" />
+    <input type='password' name='oldpwd' id='oldpwd' maxlength="128" /><br/>
     </noscript>    
     <span id='changepwd_oldpwd_errorloc' class='error'></span>
 </div>
 
 <div class='container'>
-    <label for='newpwd' >New Password*:</label><br/>
+    <label for='newpwd' >Password nuova*:</label><br/>
     <div class='pwdwidgetdiv' id='newpwddiv' ></div>
     <noscript>
     <input type='password' name='newpwd' id='newpwd' maxlength="128" /><br/>
     </noscript>
-    <span id='changepwd_newpwd_errorloc' class='error'></span>
+    <br/><span id='changepwd_newpwd_errorloc' class='error'></span>
 </div>
 
-<br/><br/><br/>
+<br/><br/>
 <div class='container'>
-    <input type='submit' name='Submit' value='Submit' />
+    <input type='submit' name='Submit' value='Cambia' />
 </div>
 
 </fieldset>
@@ -87,9 +89,9 @@ Uses the excellent form validation script from JavaScript-coder.com-->
     frmvalidator.EnableOnPageErrorDisplay();
     frmvalidator.EnableMsgsTogether();
 
-    frmvalidator.addValidation("oldpwd","req","Please provide your old password");
+    frmvalidator.addValidation("oldpwd","req","Per favore inserire la password attuale.");
     
-    frmvalidator.addValidation("newpwd","req","Please provide your new password");
+    frmvalidator.addValidation("newpwd","req","Per favore inserire la password nuova.");
 
 // ]]>
 </script>

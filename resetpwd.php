@@ -2,7 +2,7 @@
 require_once("./include/config.php");
 
 $success = false;
-if($fgmembersite->ResetPassword())
+if($mainactions->ResetPassword())
 {
     $success=true;
 }
@@ -27,7 +27,7 @@ Your new password is sent to your email address.
 }else{
 ?>
 <h2>Error</h2>
-<span class='error'><?php echo $fgmembersite->GetErrorMessage(); ?></span>
+<span class='error'><?php echo $mainactions->GetErrorMessage(); ?></span>
 <?php
 }
 ?>
