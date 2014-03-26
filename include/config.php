@@ -3,8 +3,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/mainactions.php");
 
 /*** NETWORK CONFIG ***/
-$ip_public="54.213.120.163";
-$ip_private="192.168.5.128";
+/*$ip_public="54.186.64.204";*/
+/*$ip_private="192.168.5.128";*/
+$ip_public="www.jwstream.org";
+$ip_private="www.jwstream.org";
 
 $myhostname = gethostname();
 
