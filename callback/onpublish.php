@@ -24,5 +24,6 @@ if (!$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream
 {
 	error_log("Publishing the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 }
+error_log("Publishing the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 
 ?>

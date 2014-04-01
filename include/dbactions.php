@@ -370,6 +370,7 @@ class DBActions
                     $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
                     return false;
                 }
+		$this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
                 return true;
         }
 
