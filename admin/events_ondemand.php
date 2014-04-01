@@ -80,10 +80,10 @@ $("a.event_ondemand_delete").click(function()
 
 	    function(data,status)
 	    {
-		/*alert("Data: " + data + "\nStatus: " + status);*/
-		    par.parent().fadeOut(1000, function()
+		alert("Data: " + data + "\nStatus: " + status);
+		    par.parent().parent().fadeOut(1000, function()
 		    {
-			    par.parent().remove();
+			    par.parent().parent().remove();
 		    });
 	    });
 	}
@@ -181,12 +181,20 @@ try
 						{
 						    $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
 						}
-						 echo '<ul class="video_element">';   
-							echo '<li>';
+						 echo '<ul class="video_element">';
+						 
+	    					    echo '<li>';
+							echo '<div id="'.$ondemand_id.'" class="video_delete">';
+							    echo '<a class="event_ondemand_delete">'.
+							    '<img src="../images/delete.png"/></a>';
+							echo '</div>';
+						    echo '</li>';
+						    
+						    echo '<li>';
 							    echo '<div class="video_thumb">';
 								echo '<img src="'.$thumbnail_img.'"/>';
 							    echo '</div>';
-							echo '</li>';
+						    echo '</li>';
 							
 							echo '<li>';
 							    echo '<div class="video_info">';

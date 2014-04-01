@@ -57,11 +57,11 @@ h2.active
 
 div.toggle_container {
     margin: 0 0 4px 0;
-    padding: 4px 0 0 0;
+    padding: 2px 0 0 0;
     background: #ffffff;
     border-top: 0px solid #d6d6d6;
     font-size: 1.2em;
-    width: 1000px;
+    width: 1200px;
     overflow: auto;
 }
 
@@ -113,11 +113,18 @@ li div.video_info
   color: #000;
 }
 
+li div.video_delete
+{
+  margin-left: 0;
+  vertical-align: middle;
+  text-align: left;
+}
+
 li div.player_desktop, li div.player_smartphone, li div.player_iphone
 {
   margin-left: 40px;
   margin-top: 6px;
-  max-width: 100px;
+  max-width: 120px;
   font-size: 0.6em;
   text-align: center;
 }
@@ -131,4 +138,10 @@ a.play-button, a.play-button img
 {
   width: 48px;
   height: 48px;
+}
+
+a.event_ondemand_delete, a.event_ondemand_delete img
+{
+  width: 32px;
+  height: 32px;
 }
