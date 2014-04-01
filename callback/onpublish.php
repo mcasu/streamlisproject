@@ -20,6 +20,9 @@ else
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s"); 
 
-$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime);
+if (!$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime))
+{
+	error_log("Publishing the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+}
 
 ?>

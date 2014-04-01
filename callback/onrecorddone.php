@@ -56,7 +56,10 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 		}
 	}
 	
-	$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie);
+	if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
+	{
+		error_log("Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	}
 }
 
 ?>
