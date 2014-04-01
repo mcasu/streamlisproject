@@ -22,17 +22,6 @@ $ondemand_basename = $path_parts['basename'];
 $ondemand_filename = $path_parts['filename'];
 $record_tmp_dir = $path_parts['dirname'];
 
-/*
-$timeout=3600;
-$count=0;
-while(! file_exists($record_tmp_dir."/".$ondemand_basename.".txt"))
-{
-	sleep(1);
-
-	$count++;
-	if ($count == $timeout) break;
-}*/
-
 if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
 {
 	$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
@@ -67,7 +56,7 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 		}
 	}
 	
-	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
+	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_hls_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
 	if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
 	{
