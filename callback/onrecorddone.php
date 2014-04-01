@@ -18,13 +18,45 @@ $record_path = $_POST['path'];
 $ondemand_path=$ondemand_flash_record_filepath;
 
 $path_parts = pathinfo($record_path);
-$ondemand_filename = $path_parts['basename'];
+$ondemand_basename = $path_parts['basename'];
+$ondemand_filename = $path_parts['filename'];
 
 
-if ($fsactions->OnRecordDone($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
+if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
 {
-	$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_filename, false);
-	$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_filename,$movie);
+	$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
+	
+	/*** CREATE VIDEO THUMBNAIL ***/
+	// Get video thumbnail from 20000sec frame.
+	$frame = $movie->getFrame($movie->getFrameRate() * 20000);
+	
+	if (!$frame)
+	{
+		// Get video thumbnail from 5sec frame.
+		$frame = $movie->getFrame($movie->getFrameRate() * 5);	
+	}
+	
+	if ($frame)
+	{
+		//$frame->resize(320, 240);
+		$image = $frame->toGDImage();
+		// Save the image to disk
+		$img_filename = $ondemand_path.$stream_name."/".$ondemand_filename.'.jpg';
+		
+		if (imagejpeg($image, $img_filename, 100))
+		{
+			if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
+			{
+				error_log("Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
+			}
+		}
+		else
+		{
+			
+		}
+	}
+	
+	$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie);
 }
 
 ?>

@@ -18,14 +18,15 @@ $(document).ready(function()
 
 <div id='headermenu'>
 <ul>
-   <li><a href='home-admin.php'><span>Home</span></a>
-  </li>
+   <li><a href='home-admin.php'><span>Home</span></a></li>
+   
    <li class='has-sub'><a href='#'><span>Eventi</span></a>
       <ul>
          <li><a href='events_live.php'><span>Live</span></a></li>
 	 <li><a href='events_ondemand.php'><span>OnDemand</span></a></li>
       </ul>
    </li>
+   
    <li class='has-sub'><a href='#'><span>Monitor</span></a>
       <ul>
          <li><a href='stats.php'><span>Statistiche Nginx</span></a></li>

@@ -163,12 +163,7 @@ try
 			    else
 			    {
 				echo '<div class="left">';
-				    echo '<div id="fg_membersite_content">';
-				    echo '<table class="imagetable">'.
-					'<tr class="head">'.
-					'<th>ID EVENTO</th><th>APP</th><th>FILE</th><th>DURATA</th><th>BITRATE (Kbit/s)</th><th>CODEC</th><th>GUARDA IL VIDEO</th><th>AZIONI</th>'.
-					'</tr>';
-	
+				    	
 					while($row = mysql_fetch_array($ondemand_events))
 					{
 						$ondemand_id=$row['ondemand_id'];
@@ -180,25 +175,59 @@ try
 						$ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 						$ondemand_movie_codec=$row['ondemand_movie_codec'];
 					
-						echo '<tr>';
-							echo '<td align="center">' . $ondemand_id . '</td>';
-							echo '<td align="center">' . $ondemand_app_name . '</td>';
-							echo '<td align="center">' . $ondemand_filename . '</td>';
-							echo '<td align="center">' . $ondemand_movie_duration . '</td>';
-							echo '<td align="center">' . $ondemand_movie_bitrate . '</td>';
-							echo '<td align="center">' . $ondemand_movie_codec . '</td>';
-							echo '<td align="left">'.
-							'<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-							'<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="86" height="24"/></button></a>'.
-							'<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-							'<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="86" height="24"/></button></a>'.
-							'</td>';
-							echo '<td id="'.$ondemand_id.'"><a class="event_ondemand_delete" href="javascript:void()"/>'.
-							'<img src="../images/delete.png" width="20"/></td>';
-						echo '</tr>';	
+						$thumbnail_img = '../images/thumbnails/'.basename($ondemand_filename,".flv").'.jpg';
+						
+						if (!file_exists($thumbnail_img))
+						{
+						    $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
+						}
+						 echo '<ul class="video_element">';   
+							echo '<li>';
+							    echo '<div class="video_thumb">';
+								echo '<img src="'.$thumbnail_img.'"/>';
+							    echo '</div>';
+							echo '</li>';
+							
+							echo '<li>';
+							    echo '<div class="video_info">';
+								echo '<b>Nome video: </b>'.$ondemand_filename;
+								echo '<br/>';
+								echo '<b>Durata del video: </b>'.$ondemand_movie_duration;
+								echo '<br/>';
+								echo '<b>Bitrate: </b>'.$ondemand_movie_bitrate;
+								echo '<br/>';
+								echo '<b>Codec: </b>'.$ondemand_movie_codec;
+							    echo '</div>';
+							echo '</li>';
+							
+							echo '<li>';
+							    echo '<div class="player_desktop">';
+								echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+								'<img src="../images/desktop.png"/></a>';
+								echo '<br/>';
+								echo "<label>Guarda il video con PC Desktop</label>";
+							    echo '</div>';
+							echo '</li>';
+							
+							echo '<li>';    
+							    echo '<div class="player_smartphone">';
+								echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+								'<img src="../images/os_android.png"/></a>';
+								echo '<br/>';
+								echo "<label>Guarda il video con Smartphone Android</label>";
+							    echo '</div>';
+							echo '</li>';
+							
+							echo '<li>';    
+							    echo '<div class="player_iphone">';
+								echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+								'<img src="../images/os_apple.png"/></a>';
+								echo '<br/>';
+								echo "<label>Guarda il video con Apple Iphone</label>";
+							    echo '</div>';
+							echo '</li>';
+						echo '</ul>';
 					}
-				echo '</table>';
-				    echo '</div>';
 				echo '</div>'; /* FINE DIV CLASS "left" */
 			    }
 		    echo '</div>'; /* FINE DIV CLASS "toggle_container" */

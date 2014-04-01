@@ -10,11 +10,13 @@ $event_id = $_POST['event_id'];
 $result = $dbactions->DeleteEventOnDemand($event_id);
 if (!$result)
 {
-	echo "On-demand Event ID ".$event_id." FAILED\r\n".$dbactions->GetErrorMessage();
+	echo "Deleting On-demand Event ID ".$event_id." from database FAILED\r\n".$dbactions->GetErrorMessage();
+	error_log("Deleting On-demand Event ID ".$event_id." from database FAILED\r\n".$dbactions->GetErrorMessage());
 }
 else
 {
-	echo "On-demand Event ID ".$event_id." SUCCESS";
+	echo "Deleting On-demand Event ID ".$event_id." from database SUCCESS";
+	
 }
 
 ?>

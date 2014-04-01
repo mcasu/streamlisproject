@@ -8,7 +8,7 @@ h2.toggle {
 h2 label.eventnum {
   /*color: #0ab0f6;*/
   float: right;
-  color: #3c78c3; /*#3ed0d2;*/
+  /*color: #3c78c3;*/ /*#3ed0d2;*/
   font-size: 14px;
   margin-right: 10px;
 }
@@ -57,17 +57,78 @@ h2.active
 
 div.toggle_container {
     margin: 0 0 4px 0;
-    padding: 10px 0 0 0;
+    padding: 4px 0 0 0;
     background: #ffffff;
     border-top: 0px solid #d6d6d6;
     font-size: 1.2em;
-    width: 100%;
-    overflow: hidden;
+    width: 1000px;
+    overflow: auto;
 }
 
 div.left {
   float: left;
-  width: 70%;
-  margin: 10px 12px;
+  width: 98%;
+  margin: 4px 0 0 10px;
 }
 
+ul.video_element
+{
+  list-style: none;
+  display: inline-block;
+  margin-top: 0;
+  margin-left: 0;
+  width: 97%;
+}
+
+ul.video_element:hover
+{
+  background-color: #3c78c3;
+  color: #fff;
+}
+
+ul.video_element li
+{
+  float: left; /* don't change */
+  vertical-align: middle;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+  overflow: visible;
+}
+
+ul.video_element img
+{
+  vertical-align: middle;
+  height: 100px;
+  width: 126px;
+}
+
+li div.video_thumb
+{
+  text-align: center;
+}
+
+li div.video_info
+{
+  margin: 1px 0 0 15px;
+  font-size: 0.8em;
+  color: #000;
+}
+
+li div.player_desktop, li div.player_smartphone, li div.player_iphone
+{
+  margin-left: 40px;
+  margin-top: 6px;
+  max-width: 100px;
+  font-size: 0.6em;
+  text-align: center;
+}
+
+div.player_desktop label, div.player_smartphone label, div.player_iphone label
+{
+  margin-top: 6px;
+}
+
+a.play-button, a.play-button img
+{
+  width: 48px;
+  height: 48px;
+}

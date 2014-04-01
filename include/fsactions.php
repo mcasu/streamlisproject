@@ -10,7 +10,7 @@ function FSActions()
 
 }
 
-function OnRecordDone($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name)
+function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name)
 {
 	if (!isset($ondemand_path))
 	{

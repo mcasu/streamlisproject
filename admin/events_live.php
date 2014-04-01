@@ -143,21 +143,63 @@ try
 			    else
 			    {
 				echo '<div class="left">';
-				    echo '<div id="fg_membersite_content">';
-				    echo '<table class="imagetable">'.
-				    '<tr class="head">'.
-				    '<th>ID EVENTO</th><th>DATA</th><th>ORA</th><th>APP</th><th>STREAM NAME</th><th>PUBBLICATO DA</th><th>GUARDA IL VIDEO</th>'.
-				    '</tr>';
     
 				    while($row = mysql_fetch_array($live_events))
 				    {
-					    $live_id=$row['live_id'];
-					    $app_name=$row['app_name'];
-					    $stream_name=$row['stream_name'];
-					    $live_date=$row['live_date'];
-					    $live_time=$row['live_time'];
-					    $client_addr=$row['client_addr'];
+					$live_id=$row['live_id'];
+					$app_name=$row['app_name'];
+					$stream_name=$row['stream_name'];
+					$live_date=$row['live_date'];
+					$live_time=$row['live_time'];
+					$client_addr=$row['client_addr'];
 				    
+				        $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
+				    
+					echo '<ul class="video_element">';   
+					    echo '<li>';
+						echo '<div class="video_thumb">';
+						    echo '<img src="'.$thumbnail_img.'"/>';
+						echo '</div>';
+					    echo '</li>';
+							
+					    echo '<li>';
+						echo '<div class="video_info">';
+						    echo '<b>Path: </b>'.$app_name.'/'.$stream_name;
+						    echo '<br/>';
+						    echo '<b>Data di pubblicazione: </b>'.$live_date.' ore '.$live_time;
+						    echo '<br/>';
+						    echo '<b>Pubblicato da: </b>'.$client_addr;
+						echo '</div>';
+					    echo '</li>';
+							
+					    echo '<li>';
+						    echo '<div class="player_desktop">';
+							echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+							'<img src="../images/desktop.png"/></a>';
+							echo '<br/>';
+							echo "<label>Guarda il video con PC Desktop</label>";
+						    echo '</div>';
+						echo '</li>';
+						
+						echo '<li>';    
+						    echo '<div class="player_smartphone">';
+							echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+							'<img src="../images/os_android.png"/></a>';
+							echo '<br/>';
+							echo "<label>Guarda il video con Smartphone Android</label>";
+						    echo '</div>';
+						echo '</li>';
+						
+						echo '<li>';    
+						    echo '<div class="player_iphone">';
+							echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+							'<img src="../images/os_apple.png"/></a>';
+							echo '<br/>';
+							echo "<label>Guarda il video con Apple Iphone</label>";
+						    echo '</div>';
+					    echo '</li>';
+					echo '</ul>';	
+					/*
 					    echo '<tr>';
 						    echo '<td align="center">' . $live_id . '</td>';
 						    echo '<td align="center">' . $live_date . '</td>';
@@ -172,10 +214,8 @@ try
 							'<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 							'<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="84" height="24"/></button></a>'.
 							'</td>';
-					    echo '</tr>';
+					    echo '</tr>';*/
 				    }
-				    echo '</table>';
-				    echo '</div>';
 				echo '</div>'; /* FINE DIV CLASS "left" */
 			    }
 		    echo '</div>'; /* FINE DIV CLASS "toggle_container" */
