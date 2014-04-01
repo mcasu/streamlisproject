@@ -56,7 +56,7 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 		}
 	}
 	
-	if (!file_exists($ondemand_hls_record_filepath)) mkdir($ondemand_hls_record_filepath, 0755, true);
+	if (!file_exists($ondemand_hls_record_filepath.$stream_name)) mkdir($ondemand_hls_record_filepath.$stream_name, 0755, true);
 	
 	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_hls_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
