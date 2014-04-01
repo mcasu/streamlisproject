@@ -33,8 +33,6 @@ while(! file_exists($record_tmp_dir."/".$ondemand_basename.".txt"))
 	if ($count == $timeout) break;
 }*/
 
-$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$record_tmp_dir.' '.$ondemand_basename.' '.$record_path);
-
 if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
 {
 	$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
@@ -68,6 +66,8 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 			
 		}
 	}
+	
+	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
 	if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
 	{
