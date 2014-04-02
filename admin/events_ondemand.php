@@ -175,6 +175,8 @@ try
 						$ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 						$ondemand_movie_codec=$row['ondemand_movie_codec'];
 					
+						$ondemand_hls_filename = basename($ondemand_filename, ".flv");
+					
 						$thumbnail_img = '../images/thumbnails/'.basename($ondemand_filename,".flv").'.jpg';
 						
 						if (!file_exists($thumbnail_img))
@@ -228,7 +230,7 @@ try
 							
 							echo '<li>';    
 							    echo '<div class="player_iphone">';
-								echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+								echo '<a class="play-button" href="../players/videojsplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_hls_filename.'" target="_blank">'.
 								'<img src="../images/os_apple.png"/></a>';
 								echo '<br/>';
 								echo "<label>Guarda il video con Apple Iphone</label>";
