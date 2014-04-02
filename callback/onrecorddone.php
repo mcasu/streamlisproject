@@ -61,7 +61,7 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_hls_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
 	$ondemand_hls_fullpath = $ondemand_hls_record_filepath.$stream_name."/";
-	if (!symlink($ondemand_hls_fullpath.$ondemand_filename, $ondemand_hls_record_filepath.$ondemand_filename))
+	if (!symlink($ondemand_hls_fullpath.$ondemand_filename."mp4", $ondemand_hls_record_filepath.$ondemand_filename."mp4"))
 	{
 		error_log('Creazione del link simbolico ['.$ondemand_hls_record_filepath.$ondemand_filename.'] fallita!');
 	}
