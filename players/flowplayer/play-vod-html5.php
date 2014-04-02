@@ -50,10 +50,9 @@ $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 		echo '<div class="flowplayer fixed-controls play-button no-volume no-mute"'.
 		'data-rtmp="rtmp://www.jwstream.org:1935/vod-hls">';
 		    echo '<video autoplay>';
-			/*echo '<source type="video/flash" src="'.$filename_withoutext.'.flv">'; */
 			echo '<source type="video/mp4" src="'.$filename_withoutext.'.mp4">';
 		    echo '</video>';
-	    echo '</div>';
+		echo '</div>';
 	    ?>
 </body>
 </html>

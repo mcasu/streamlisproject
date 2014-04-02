@@ -30,7 +30,6 @@ else
     $ip_actual = $ip_public;
 }
 
-/*$path_parts = pathinfo($filename);*/
 $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 
 ?>

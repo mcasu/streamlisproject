@@ -175,7 +175,7 @@ try
 						$ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 						$ondemand_movie_codec=$row['ondemand_movie_codec'];
 					
-						$ondemand_hls_filename = basename($ondemand_filename, ".flv");
+						$ondemand_hls_filename = basename($ondemand_filename);
 					
 						$thumbnail_img = '../images/thumbnails/'.basename($ondemand_filename,".flv").'.jpg';
 						
