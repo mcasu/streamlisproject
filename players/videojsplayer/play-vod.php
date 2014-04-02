@@ -43,9 +43,11 @@ else
             <h1>On-demand HTML5 Video Streaming</h1>
         </div>
 		<center>
-		    <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" data-setup="{}">
-			<source src="rtmp://www.jwstream.org:1935/vod-hls/'.$filename.'" type='video/mp4'>
-		    </video>
+		    <?php
+			echo '<video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" data-setup="{}">';
+			    echo '<source src="rtmp://www.jwstream.org:1935/vod-hls/'.$filename.'" type="video/mp4">';
+			echo '</video>';
+		    ?>
 	</div>
 </body>
 </html>
