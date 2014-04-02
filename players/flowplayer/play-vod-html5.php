@@ -54,5 +54,7 @@ $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 		    echo '</video>';
 		echo '</div>';
 	    ?>
+	
+	    </center>
 </body>
 </html>
