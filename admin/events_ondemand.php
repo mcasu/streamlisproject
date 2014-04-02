@@ -230,7 +230,7 @@ try
 							
 							echo '<li>';    
 							    echo '<div class="player_iphone">';
-								echo '<a class="play-button" href="../players/videojsplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_hls_filename.'" target="_blank">'.
+								echo '<a class="play-button" href="../players/videojsplayer/play-vod-html5.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_hls_filename.'" target="_blank">'.
 								'<img src="../images/os_apple.png"/></a>';
 								echo '<br/>';
 								echo "<label>Guarda il video con Apple Iphone</label>";
