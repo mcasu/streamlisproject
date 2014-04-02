@@ -31,23 +31,29 @@ else
     $ip_actual = $ip_public;
 }
 
+$filename_withoutext=substr($filename, 0, strlen($filename)-4);
+
 ?>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://vjs.zencdn.net/4.5/video-js.css" rel="stylesheet">
-    <script src="http://vjs.zencdn.net/4.5/video.js"></script>
+    <link rel="stylesheet" href="skin/functional.css">
+    <script src="../../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="flowplayer.js" ></script>
 </head>
 <body>
         <div class="span-18" align="center">
             <h1>On-demand HTML5 Video Streaming</h1>
         </div>
 		<center>
-		    <?php
-			echo '<video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" data-setup="{}">';
-			    echo '<source src="rtmp://www.jwstream.org:1935/vod-hls/'.$filename.'" type="video/mp4">';
-			echo '</video>';
-		    ?>
-	</div>
+	    <?php
+		echo '<div class="flowplayer fixed-controls play-button no-volume no-mute"'.
+		'data-rtmp="rtmp://www.jwstream.org:1935/vod-hls">';
+		    echo '<video autoplay>';
+			/*echo '<source type="video/flash" src="'.$filename_withoutext.'.flv">'; */
+			echo '<source type="video/mp4" src="'.$filename_withoutext.'.mp4">';
+		    echo '</video>';
+	    echo '</div>';
+	    ?>
 </body>
 </html>
