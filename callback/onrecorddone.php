@@ -56,14 +56,14 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 		}
 	}
 	
-	if (!file_exists($ondemand_hls_record_filepath.$stream_name)) mkdir($ondemand_hls_record_filepath.$stream_name, 0755, true);
+	if (!file_exists($ondemand_mp4_record_filepath.$stream_name)) mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
 	
-	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_hls_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
+	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_mp4_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
-	$ondemand_hls_fullpath = $ondemand_hls_record_filepath.$stream_name."/";
-	if (!symlink($ondemand_hls_fullpath.$ondemand_filename.".mp4", $ondemand_hls_record_filepath.$ondemand_filename.".mp4"))
+	$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
+	if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
 	{
-		error_log('Creazione del link simbolico ['.$ondemand_hls_record_filepath.$ondemand_filename.'.mp4] fallita!');
+		error_log('Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
 	}
 	
 	if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))

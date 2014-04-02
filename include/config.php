@@ -24,6 +24,7 @@ $live_tmp_hls_path = "/tmp/stream/hls/";
 // These values must be the same as you can see into the nginx config file
 $ondemand_hls_record_filepath = '/var/stream/hls/';
 $ondemand_flash_record_filepath = '/var/stream/flash/';
+$ondemand_mp4_record_filepath = '/var/stream/mp4/';
 
 /*** SITE CONFIG ***/
 
