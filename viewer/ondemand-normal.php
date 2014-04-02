@@ -151,28 +151,13 @@ try
 					    
 					    echo '<li>';    
 						echo '<div class="player_iphone">';
-						    echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+						    echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
 						    '<img src="../images/os_apple.png"/></a>';
 						    echo '<br/>';
 						    echo "<label>Guarda il video con Apple Iphone</label>";
 						echo '</div>';
 					    echo '</li>';
 				    echo '</ul>';
-		    /*
-			    echo '<tr>';
-				    echo '<td align="center">' . $ondemand_id . '</td>';
-				    echo '<td align="center">' . $ondemand_app_name . '</td>';
-				    echo '<td align="center">' . $ondemand_filename . '</td>';
-				    echo '<td align="center">' . $ondemand_movie_duration . '</td>';
-				    echo '<td align="center">' . $ondemand_movie_bitrate . '</td>';
-				    echo '<td align="center">' . $ondemand_movie_codec . '</td>';
-				    echo '<td align="left">'.
-				    '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-				    '<button type="button"><img align="center" src="../images/jwplayer-logo.png" width="86" height="24"/></button></a>'.
-				    '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-				    '<button type="button"><img align="center" src="../images/flowplayer-logo.png" width="86" height="24"/></button></a>'.
-				    '</td>';
-			    echo '</tr>';	*/
 			}
 		    echo '</div>'; /* FINE DIV CLASS "left" */
 		}
