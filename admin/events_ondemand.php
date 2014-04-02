@@ -200,7 +200,7 @@ try
 							
 							echo '<li>';
 							    echo '<div class="video_info">';
-								echo '<b>Nome video: </b>'.$ondemand_filename;
+								echo '<b>Nome video: </b>'.basename($ondemand_filename,".flv");
 								echo '<br/>';
 								echo '<b>Durata del video: </b>'.$ondemand_movie_duration;
 								echo '<br/>';
