@@ -106,6 +106,8 @@ try
 			    $ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 			    $ondemand_movie_codec=$row['ondemand_movie_codec'];
 		    
+			    $ondemand_mp4_filename = basename($ondemand_filename,".flv").".mp4";
+			    
 			    $thumbnail_img = '../images/thumbnails/'.basename($ondemand_filename,".flv").'.jpg';
 						
 				    if (!file_exists($thumbnail_img))
