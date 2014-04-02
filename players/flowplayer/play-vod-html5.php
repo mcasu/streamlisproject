@@ -34,6 +34,8 @@ else
 $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 
 ?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
