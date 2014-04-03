@@ -192,7 +192,7 @@ try
 						
 						echo '<li>';    
 						    echo '<div class="player_iphone">';
-							echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+							echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 							'<img src="../images/os_apple.png"/></a>';
 							echo '<br/>';
 							echo "<label>Guarda il video con Apple Iphone</label>";
