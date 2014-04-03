@@ -52,23 +52,27 @@ if ($fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$r
 		}
 		else
 		{
-			
+			error_log("WARNING - Unable to create video thumbnail ".$img_filename);
 		}
 	}
 	
-	if (!file_exists($ondemand_mp4_record_filepath.$stream_name)) mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
+	if (!file_exists($ondemand_mp4_record_filepath.$stream_name))
+	{
+		mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
+		error_log("WARNING - Created folder ".$ondemand_mp4_record_filepath.$stream_name);
+	}
 	
 	$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_mp4_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
 	
 	$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
 	if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
 	{
-		error_log('Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
+		error_log('ERROR - Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
 	}
 	
 	if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
 	{
-		error_log("Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+		error_log("ERROR - Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 	}
 }
 
