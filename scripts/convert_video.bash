@@ -2,6 +2,7 @@
 
 SOURCE=$1
 DEST=$2
+BASENAME=$3
 
 LOGFILE="/var/log/nginx/avconv-$BASENAME.log"
 

@@ -45,7 +45,7 @@ if (!file_exists($ondemand_mp4_record_filepath.$stream_name))
 	error_log("WARNING - Created folder ".$ondemand_mp4_record_filepath.$stream_name);
 }
 
-$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.$stream_name.'/'.$ondemand_filename.'.mp4');
+$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.$stream_name.'/'.$ondemand_filename.'.mp4 '.$ondemand_basename);
 
 $ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
 if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
