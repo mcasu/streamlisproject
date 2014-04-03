@@ -14,13 +14,13 @@ function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_p
 {
 	if (!isset($ondemand_path))
 	{
-		error_log("On-demand path [".$ondemand_path."] errato.");
+		error_log("ERROR - On-demand path [".$ondemand_path."] errato.");
 		exit;
 	}
 	
 	if (!isset($record_path))
 	{
-		error_log("Recorded file path [".$record_path."] errato.");
+		error_log("ERROR - Recorded file path [".$record_path."] errato.");
 		exit;
 	}
 
@@ -42,11 +42,11 @@ function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_p
 		{
 			return true;	
 		}
-		error_log('Creazione del link simbolico ['.$ondemand_path.$filename.'] fallita!');
+		error_log('EEROR - Creazione del link simbolico ['.$ondemand_path.$filename.'] fallita!');
 		return false;
 	}
 
-	error_log('Copia del file registrato in ['.$ondemand_fullpath.'TEMP_'.$filename.'] fallita!');
+	error_log('ERROR - Copia del file registrato in ['.$ondemand_fullpath.'TEMP_'.$filename.'] fallita!');
 	return false;	
 }
 
