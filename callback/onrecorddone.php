@@ -29,14 +29,14 @@ if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$
 	exit;	
 }
 
+$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
+
 /*** SAVE VIDEO INFO INTO DATABASE ***/
 if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
 {
 	error_log("ERROR - Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
-
-$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
 
 /*** CREATE VIDEO THUMBNAIL ***/
 // Get video thumbnail from 20000sec frame.
