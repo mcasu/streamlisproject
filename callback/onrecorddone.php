@@ -38,6 +38,21 @@ if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name
 	exit;
 }
 
+/*** CONVERT VIDEO TO .MP4 AND SAVE TO DISK ***/
+if (!file_exists($ondemand_mp4_record_filepath.$stream_name))
+{
+	mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
+	error_log("WARNING - Created folder ".$ondemand_mp4_record_filepath.$stream_name);
+}
+
+$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.$stream_name.'/'.$ondemand_filename.'.mp4');
+
+$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
+if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
+{
+	error_log('ERROR - Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
+}
+
 /*** CREATE VIDEO THUMBNAIL ***/
 // Get video thumbnail from 20000sec frame.
 $frame = $movie->getFrame($movie->getFrameRate() * 20000);
@@ -59,28 +74,13 @@ if ($frame)
 	{
 		if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
 		{
-			error_log("Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
+			error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
 		}
 	}
 	else
 	{
 		error_log("WARNING - Unable to create video thumbnail ".$img_filename);
 	}
-}
-
-/*** CONVERT VIDEO TO .MP4 AND SAVE TO DISK ***/
-if (!file_exists($ondemand_mp4_record_filepath.$stream_name))
-{
-	mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
-	error_log("WARNING - Created folder ".$ondemand_mp4_record_filepath.$stream_name);
-}
-
-$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_mp4_record_filepath.$stream_name.' '.$ondemand_filename.' '.$ondemand_path.$stream_name."/".$ondemand_basename);
-
-$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
-if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
-{
-	error_log('ERROR - Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
 }
 
 ?>
