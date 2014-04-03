@@ -39,7 +39,7 @@ else
 </head> 
 <body>
     <?php
-	echo '<video controls src="http://www.jwstream.org/'.$app_name.'/'.$stream_name.'.m3u8"  height="240" width="320" >';
+	echo '<video controls src="http://www.jwstream.org/hls/'.$stream_name.'.m3u8"  height="240" width="320" >';
 	echo '</video>';
     ?>
 </body> 
