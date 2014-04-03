@@ -9,7 +9,7 @@ TODAY=$(date +"%Y%m%d %H%M%S")
 
 echo "$TODAY *** Start conversion ***" > $LOGFILE
 echo "$TODAY - Convert file $PATH to $DIRNAME/$BASENAME.mp4" >> $LOGFILE
-/usr/bin/avconv -y -i $PATH -vcodec libx264 $DIRNAME/$BASENAME.mp4 >>$LOGFILE 2>&1
+time /usr/bin/avconv -y -i $PATH -vcodec libx264 $DIRNAME/$BASENAME.mp4 >>$LOGFILE 2>&1
 
 RESULT=$?
 
