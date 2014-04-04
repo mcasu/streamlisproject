@@ -38,9 +38,11 @@ else
     <title>HTTP Live Streaming</title> 
 </head> 
 <body>
+    <center>
     <?php
-	echo '<video controls src="http://www.jwstream.org/hls/'.$stream_name.'.m3u8"  height="240" width="320" >';
+	echo '<video controls src="http://www.jwstream.org/hls/'.$stream_name.'/index.m3u8"  height="240" width="320" >';
 	echo '</video>';
     ?>
+    </center>
 </body> 
 </html>
