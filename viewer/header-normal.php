@@ -11,6 +11,8 @@
   </li>
    <li class='has-sub'><a href='ondemand-normal.php'><span>On-demand streaming</span></a>
    </li>
+   <li class='has-sub'><a href='answer-register.php'><span>Registra le tue risposte (Beta)</span></a>
+   </li>
    <li class='has-sub'>
 	<a href='#'>Profilo<img src="../images/user.png"></a>
       <ul>
