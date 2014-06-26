@@ -330,6 +330,60 @@ class DBActions
 		return strtolower(str_replace(' ', '_', $publish_code));
 	}
 
+	function PublishNameAlreadyExists($app_name,$stream_name)
+	{
+		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+		
+		$select_query = 'select * from live where app_name=\''.$app_name.'\' and stream_name=\''.$stream_name.'\'';      
+
+                $result = mysql_query($select_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    return false;
+                }
+		
+		$num_rows = mysql_num_rows($result);
+		
+                return $num_rows;
+	}
+	
+	function DeletePublishNameDuplicated($app_name,$stream_name)
+	{
+		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+		
+		$delete_query = 'delete from live where app_name = "' . $this->SanitizeForSQL($app_name) . '" and stream_name = "' . $this->SanitizeForSQL($stream_name) . '"';
+
+                if(!mysql_query( $delete_query ,$this->connection))
+                {
+                    $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+                    return false;
+                }
+                return true;
+	}
+	
     function OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code,$mysqldate,$mysqltime)
         {
 

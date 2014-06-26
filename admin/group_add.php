@@ -41,6 +41,7 @@ if(isset($_POST['submitted']))
 </br>
 <!-- Form Code Start -->
 <div id='fg_membersite'>
+    
 <form id='register' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 <fieldset >
 <div align="left">

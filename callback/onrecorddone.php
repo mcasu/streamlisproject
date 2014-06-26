@@ -54,11 +54,12 @@ if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_rec
 }
 
 /*** CREATE VIDEO THUMBNAIL ***/
-// Get video thumbnail from 20000sec frame.
-$frame = $movie->getFrame($movie->getFrameRate() * 20000);
+// Get video thumbnail from [1800sec = 30m] frame.
+$frame = $movie->getFrame($movie->getFrameRate() * 1800);
 
 if (!$frame)
 {
+	error_log("WARNING - Stream  [". $stream_name ."/". $ondemand_filename ."]: unable to create the thumbnail from 1800 second frame.");
 	// Get video thumbnail from 5sec frame.
 	$frame = $movie->getFrame($movie->getFrameRate() * 5);	
 }
