@@ -60,28 +60,32 @@ $frame = $movie->getFrame($movie->getFrameRate() * 1800);
 if (!$frame)
 {
 	error_log("WARNING - Stream  [". $stream_name ."/". $ondemand_filename ."]: unable to create the thumbnail from 1800 second frame.");
+	
 	// Get video thumbnail from 5sec frame.
-	$frame = $movie->getFrame($movie->getFrameRate() * 5);	
+	$frame = $movie->getFrame($movie->getFrameRate() * 5);
+	
+	if (!$frame)
+	{
+		error_log("ERROR - Stream  [". $stream_name ."/". $ondemand_filename ."]: failed to create the thumbnail from 5 second frame.");
+		exit(0);
+	}
 }
 
-if ($frame)
+//$frame->resize(320, 240);
+$image = $frame->toGDImage();
+// Save the image to disk
+$img_filename = $ondemand_path.$stream_name."/".$ondemand_filename.'.jpg';
+
+if (imagejpeg($image, $img_filename, 100))
 {
-	//$frame->resize(320, 240);
-	$image = $frame->toGDImage();
-	// Save the image to disk
-	$img_filename = $ondemand_path.$stream_name."/".$ondemand_filename.'.jpg';
-	
-	if (imagejpeg($image, $img_filename, 100))
+	if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
 	{
-		if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
-		{
-			error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
-		}
+		error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
 	}
-	else
-	{
-		error_log("WARNING - Unable to create video thumbnail ".$img_filename);
-	}
+}
+else
+{
+	error_log("ERROR - Unable to create video thumbnail ".$img_filename);
 }
 
 ?>
