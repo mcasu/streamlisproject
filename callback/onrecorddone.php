@@ -54,19 +54,24 @@ if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_rec
 }
 
 /*** CREATE VIDEO THUMBNAIL ***/
-// Get video thumbnail from [1800sec = 30m] frame.
-$frame = $movie->getFrame($movie->getFrameRate() * 1800);
+//Get video frame rate
+$videorate = $movie->getFrameRate();
+//Get video frame number
+$framecount = $movie->getFrameCount();
+
+// Get video thumbnail from 1000sec frame.
+$frame = $movie->getFrame($videorate * 1000);
 
 if (!$frame)
 {
-	error_log("WARNING - Stream  [". $stream_name ."/". $ondemand_filename ."]: unable to create the thumbnail from 1800 second frame.");
+	error_log("WARNING - Stream [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1800 second frame.");
 	
 	// Get video thumbnail from 5sec frame.
-	$frame = $movie->getFrame($movie->getFrameRate() * 5);
+	$frame = $movie->getFrame($videorate * 5);
 	
 	if (!$frame)
 	{
-		error_log("ERROR - Stream  [". $stream_name ."/". $ondemand_filename ."]: failed to create the thumbnail from 5 second frame.");
+		error_log("ERROR - Stream  [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5 second frame.");
 		exit(0);
 	}
 }
