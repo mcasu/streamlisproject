@@ -147,6 +147,9 @@ function()
 		    return;
 		}
 		
+		/************************************************************************
+		 *** Controllo se esiste il file .mp4 nella cartella della congregazione
+		 ***********************************************************************/
 		var uri =  iphone_href.substr(4);
 		var fullurl = 'http://' + document.location.hostname + '/mp4/' + divleft_id + uri;
 		
@@ -167,24 +170,48 @@ function()
 			}
 		});
 		
-		//alert("Controllo " + index + ": " + iphone_id);
+		/**************************************************************************
+		 *** Controllo se la richiesta http al link .mp4 risponde correttamente ***
+		 *************************************************************************/
+		link_url = "http://" + document.location.hostname + iphone_href;
+		$.ajax({
+		    url: link_url,
+		    type:'HEAD',
+		    error:
+			function(){
+			    iphoneobj.removeClass("active");
+			    iphoneobj.hide();
+			    videoloadobj.show();
+			    //alert("Url [ " + link_url + " ] FAILED.");
+			},
+		    success:
+			function(){
+			    videoloadobj.hide();
+			    iphoneobj.show();
+			    iphoneobj.addClass("active");
+			    //alert("Url [ " + link_url + " ] SUCCESS.");
+			}
+		});
 		
+		/*
 		url = "http://" + document.location.hostname + iphone_href;
-		var jqxhr = $.get(url, function() {
-		    })
-		    .done(function() {
+		var jqxhr = $.get(url, function() {})
+		    .done(function()
+		    {
 			videoloadobj.hide();
 			iphoneobj.show();
 			iphoneobj.addClass("active");
 			//alert( "GET [" + url + "] for [" + iphone_id + "] SUCCESS" );
 		    })
-		    .fail(function() {
+		    .fail(function()
+		    {
 			iphoneobj.removeClass("active");
 			iphoneobj.hide();
 			videoloadobj.show();
 			//alert( "GET [" + url + "] for [" + iphone_id + "] FAILED" );
 		    });
-	    });
+		    */
+		});
 	}
     });
     
