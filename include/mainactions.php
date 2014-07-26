@@ -37,7 +37,8 @@ class MainActions
     //-----Initialization -------
     function MainActions($host, $uname, $pwd, $database)
     {
-        $this->sitename = 'YourWebsiteName.com';
+        $this->sitename = 'YourWebsiteName.com'
+	;
         $this->rand_key = '0iQx5oBk66oVZep';
 
 	$this->utilsInstance = new Utils();
@@ -48,26 +49,30 @@ class MainActions
 /*** MEMBERS ***/
     function UserId()
     {
-	return isset($_SESSION['user_id'])?$_SESSION['user_id']:'';
+	return isset($_SESSION[$this->GetLoginSessionVar()]['user_id'])?$_SESSION[$this->GetLoginSessionVar()]['user_id']:'';
+    }
+    function UserName()
+    {
+	return isset($_SESSION[$this->GetLoginSessionVar()]['username'])?$_SESSION[$this->GetLoginSessionVar()]['username']:'';
     }
     function UserFullName()
     {
-        return isset($_SESSION['name_of_user'])?$_SESSION['name_of_user']:'';
+        return isset($_SESSION[$this->GetLoginSessionVar()]['user_fullname'])?$_SESSION[$this->GetLoginSessionVar()]['user_fullname']:'';
     }
     
     function UserEmail()
     {
-        return isset($_SESSION['email_of_user'])?$_SESSION['email_of_user']:'';
+        return isset($_SESSION[$this->GetLoginSessionVar()]['user_email'])?$_SESSION[$this->GetLoginSessionVar()]['user_email']:'';
     }
     
     function UserGroupId()
     {
-        return isset($_SESSION['user_group_id'])?$_SESSION['user_group_id']:'';
+        return isset($_SESSION[$this->GetLoginSessionVar()]['user_group_id'])?$_SESSION[$this->GetLoginSessionVar()]['user_group_id']:'';
     }
     
     function UserGroupName()
     {
-        return isset($_SESSION['user_group_name'])?$_SESSION['user_group_name']:'';
+        return isset($_SESSION[$this->GetLoginSessionVar()]['user_group_name'])?$_SESSION[$this->GetLoginSessionVar()]['user_group_name']:'';
     }
 /*** FINE MEMBERS ***/
 
@@ -179,22 +184,27 @@ class MainActions
         
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
-        
-        if(!isset($_SESSION)){ session_start(); }
-        if(!$this->dbactionsInstance->CheckLoginInDB($username,$password))
+	
+	$userdata = $this->dbactionsInstance->CheckLoginInDB($username,$password);
+	
+        if(!$userdata)
         {
             return false;
         }
-        
-        $_SESSION[$this->GetLoginSessionVar()] = $username;
-        
+
+	session_start();
+	$sessionvar = $this->GetLoginSessionVar();
+	$_SESSION[$sessionvar] = $userdata;
+	
+	// Set the user logged flag into the database.
+        $this->dbactionsInstance->SetUserLoginStatus($username, true);
+      
         return true;
     }
     
     function CheckLogin()
     {
-         if(!isset($_SESSION)){ session_start(); }
-
+         session_start();
          $sessionvar = $this->GetLoginSessionVar();
          
          if(empty($_SESSION[$sessionvar]))
@@ -206,13 +216,13 @@ class MainActions
    
     function GetSessionUserRole()
     {
-	    if(empty($_SESSION['user_role_id']))
+	    if(empty($_SESSION[$this->GetLoginSessionVar()]['user_role_id']))
 	    {
 		    $this->HandleError("User role for this session not found!");
 		    return false;
 	    }
 
-	    return $_SESSION['user_role_id']; 
+	    return $_SESSION[$this->GetLoginSessionVar()]['user_role_id']; 
 	    
     }
 
@@ -233,12 +243,15 @@ class MainActions
 
     function LogOut()
     {
-        session_start();
-        
-        $sessionvar = $this->GetLoginSessionVar();
+	session_start();
+	$sessionvar = $this->GetLoginSessionVar();
+	
+	$userdata = $_SESSION[$sessionvar];
+	$username = $userdata['username'];
+	
+	$this->dbactionsInstance->SetUserLoginStatus($username, false);
         
         $_SESSION[$sessionvar]=NULL;
-        
         unset($_SESSION[$sessionvar]);
     }
     

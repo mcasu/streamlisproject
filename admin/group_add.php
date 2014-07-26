@@ -31,6 +31,9 @@ if(isset($_POST['submitted']))
     <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     <link rel="STYLESHEET" type="text/css" href="../style/pwdwidget.css" />
+
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
     
     <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
     <script type="text/javascript" src="../scripts/pwdwidget.js"></script>      

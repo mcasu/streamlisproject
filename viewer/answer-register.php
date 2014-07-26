@@ -22,7 +22,8 @@ if(!$mainactions->CheckLogin())
 	<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-
+	<script type="text/javascript" src="../include/session.js"></script>
+	
 	<script language="JavaScript" src="../js/scriptcam/scriptcam.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function()

@@ -117,81 +117,6 @@ $("h2.trigger").click(function()
 	$(this).next(".toggle_container").slideToggle("slow");
 });
 
-
-$('.player_iphone').hide();
-
-var root = $(this).find('h2.trigger');
-var auto_refresh = setInterval(
-function()
-{
-    //alert("Ciao pippo");
-    root.each(function( index )
-    {
-	//alert( index + " GroupId: " + $(this).next('.toggle_container').attr('id'));
-	if ( $(this).hasClass("active") )
-	{
-	    divleft = $(this).next('div.toggle_container').find('div.left');
-	    var divleft_id = divleft.attr('id');
-	    //alert("Oggetto: " + divleft_id);
-	    	    
-	    divleft.children().each(function( index )
-	    {
-		var iphoneobj = $(this).find(".player_iphone:first");
-		var videoloadobj = $(this).find(".video_loading:first");
-		var iphone_href = iphoneobj.children().first('a').attr('href');
-		var iphone_id = iphoneobj.attr('id');
-	
-		if (iphoneobj.hasClass("active"))
-		{
-		    //alert(index + " già controllato e attivo: " + iphone_id);
-		    return;
-		}
-		
-		var uri =  iphone_href.substr(4);
-		var fullurl = 'http://' + document.location.hostname + '/mp4/' + divleft_id + uri;
-		
-		$.ajax({
-		    url: fullurl,
-		    type:'HEAD',
-		    error:
-			function(){
-			    iphoneobj.removeClass("active");
-			    iphoneobj.hide();
-			    videoloadobj.hide();
-			    return;
-			    //alert("Url [ " + fullurl + " ] FAILED.");
-			},
-		    success:
-			function(){
-			    //alert("Url [ " + fullurl + " ] SUCCESS.");
-			}
-		});
-		
-		//alert("Controllo " + index + ": " + iphone_id);
-		
-		url = "http://" + document.location.hostname + iphone_href;
-		var jqxhr = $.get(url, function() {
-		    })
-		    .done(function() {
-			videoloadobj.hide();
-			iphoneobj.show();
-			iphoneobj.addClass("active");
-			//alert( "GET [" + url + "] for [" + iphone_id + "] SUCCESS" );
-		    })
-		    .fail(function() {
-			iphoneobj.removeClass("active");
-			iphoneobj.hide();
-			videoloadobj.show();
-			//alert( "GET [" + url + "] for [" + iphone_id + "] FAILED" );
-		    });
-	    });
-	}
-    });
-    
-    //$('.player_iphone').load('ondemand_apple_div_load.php?url="' + $(this).attr('id') + '"').fadeIn("slow");
-}, 10000);
-
-
 });
 
 </script>
@@ -240,8 +165,8 @@ try
 			    }
 			    else
 			    {
-				echo '<div class="left" id="'.$group_publish_code.'">';
-				    	
+				echo '<div class="left">';
+				    	/*
 					while($row = mysql_fetch_array($ondemand_events))
 					{
 						$ondemand_id=$row['ondemand_id'];
@@ -306,19 +231,8 @@ try
 							    echo '</div>';
 							echo '</li>';
 							
-							echo '<li>';
-							    echo '<div class="video_loading id="'.basename($ondemand_filename,".flv").'">';
-								echo '<img src="../images/os_apple.png"/>';
-								echo '<br/>';
-								echo '<div id="block_1" class="barlittle"></div>
-								<div id="block_2" class="barlittle"></div>
-								<div id="block_3" class="barlittle"></div>
-								<div id="block_4" class="barlittle"></div>
-								<div id="block_5" class="barlittle"></div>';
-								echo '<br/>';
-								echo '<label>Creazione video per Apple in corso...</label>';
-							    echo '</div>';
-							    echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
+							echo '<li>';    
+							    echo '<div class="player_iphone">';
 								echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
 								'<img src="../images/os_apple.png"/></a>';
 								echo '<br/>';
@@ -326,7 +240,7 @@ try
 							    echo '</div>';
 							echo '</li>';
 						echo '</ul>';
-					}
+					} */
 				echo '</div>'; /* FINE DIV CLASS "left" */
 			    }
 		    echo '</div>'; /* FINE DIV CLASS "toggle_container" */

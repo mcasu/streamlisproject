@@ -24,7 +24,10 @@ if (!$user_role || $user_role!="1")
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
       <title>Confirm registration</title>
       <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
+      
+      <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
       <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
+      <script type="text/javascript" src="../include/session.js"></script>
 </head>
 <body>
 

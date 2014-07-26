@@ -24,6 +24,10 @@ if (!$user_role || $user_role!="1")
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
       <title>Home page</title>
       <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
+
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
+    
 </head>
 <body>
 <?php include("header.php"); ?>
@@ -33,6 +37,55 @@ if (!$user_role || $user_role!="1")
 
 <div><p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p></div>
 
+<p><b>Utenti loggati:</b></p>
+<div id='fg_membersite_content'>
+<table class="imagetable" id="users_table">
+<tr class="head">
+	<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th>
+</tr>
+<?php
+    try
+    {
+        $result = $dbactions->GetUsers();
+
+        if (!$result)
+        {
+                error_log("No Results");
+        }
+
+        while($row = mysql_fetch_array($result))
+        {
+                $user_id=$row['user_id'];
+                $user_name=$row['user_name'];
+                $user_mail=$row['user_mail'];
+                $username=$row['username'];
+                $confirmcode=$row['confirmcode']=="y"?"SI":"NO";
+                $user_group_name=$row['user_group_name'];
+                $user_role_name=$row['user_role_name'];
+		$user_logged=$row['user_logged'];
+    
+	    if ($user_logged == '0')
+	    {
+		continue;
+	    }
+		
+		echo '<tr class="users_table">';
+			echo "<td>" . $user_name . "</td>";
+			echo "<td>" . $user_id . "</td>";
+			echo "<td>" . $user_mail . "</td>";
+			echo "<td>" . $username . "</td>";
+			echo "<td>" . $user_group_name . "</td>";
+			echo "<td>" . $user_role_name . "</td>";
+		echo '</tr>';
+        }
+    }
+    catch(PDOException $e)
+    {
+        echo 'No Results';
+    }
+?>
+</table>
+</div>
 
 </body>
 </html>

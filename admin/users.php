@@ -27,7 +27,9 @@ if (!$user_role || $user_role!="1")
 	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
+    
 <script type="text/javascript">
 $(function()
 {

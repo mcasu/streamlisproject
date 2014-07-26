@@ -29,10 +29,14 @@ if(isset($_POST['submitted']))
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title>JW LIS Streaming - Nuovo utente</title>
     <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
-	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
-    <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
+    <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     <link rel="STYLESHEET" type="text/css" href="../style/pwdwidget.css" />
-    <script src="../scripts/pwdwidget.js" type="text/javascript"></script>      
+
+    <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
+    <script src="../scripts/pwdwidget.js" type="text/javascript"></script>
+    
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
 </head>
 <body>
 

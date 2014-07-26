@@ -97,13 +97,15 @@ class DBActions
         }
 
         $row = mysql_fetch_assoc($result);
-
-        $_SESSION['user_id']  = $row['id_user'];
-        $_SESSION['name_of_user']  = $row['name'];
-        $_SESSION['email_of_user'] = $row['email'];
-        $_SESSION['user_group_id'] = $row['user_group_id'];
-        $_SESSION['user_role_id'] = $row['user_role_id'];
-
+	$userdata = array();
+	
+	$userdata['user_id']  = $row['id_user'];
+	$userdata['username']  = $row['username'];
+        $userdata['user_fullname']  = $row['name'];
+        $userdata['user_email'] = $row['email'];
+        $userdata['user_group_id'] = $row['user_group_id'];
+        $userdata['user_role_id'] = $row['user_role_id'];
+	
         $select_query = "select * from groups where group_id='".$row['user_group_id']. "'";
 
         $result = mysql_query($select_query ,$this->connection);
@@ -119,9 +121,10 @@ class DBActions
                 $this->HandleError("Error getting group data.");
                 return false;
         }
-        $_SESSION['user_group_name'] = $row_group['group_name'];
+        
+	$userdata['user_group_name'] = $row_group['group_name'];
 
-        return true;
+        return $userdata;
     }
 
     function UpdateDBRecForConfirmation(&$user_rec)
@@ -163,7 +166,7 @@ class DBActions
 
         $newpwd = $this->SanitizeForSQL($newpwd);
 
-        $qry = "Update users Set password='".md5($newpwd)."' Where  id_user=".$user_rec['id_user']."";
+        $qry = "update users set password='".md5($newpwd)."' Where  id_user=".$user_rec['id_user']."";
 
         if(!mysql_query( $qry ,$this->connection))
         {
@@ -172,7 +175,26 @@ class DBActions
         }
         return true;
     }
+    
 
+    function SetUserLoginStatus($username, $status)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+
+        $qry = 'update users set user_logged = "'.$status.'" where username = "'.$username.'"';
+
+        if(!mysql_query( $qry ,$this->connection))
+        {
+            $this->HandleDBError("Error updating the user login status \nquery:$qry");
+            return false;
+        }
+        return true;
+    }
+    
     function GetGroupInfoByName($group_name)
     {
 	if(!$this->DBLogin())
@@ -888,7 +910,7 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,confirmcode,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name from users '.
+                $select_query = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,confirmcode,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged from users '.
                 'INNER JOIN user_roles ON users.user_role_id = user_roles.role_id '.
                 'INNER JOIN groups ON users.user_group_id = groups.group_id '.
                 'order by name';

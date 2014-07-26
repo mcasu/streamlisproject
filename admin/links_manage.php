@@ -61,7 +61,8 @@ catch(Exception $e)
 	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function()

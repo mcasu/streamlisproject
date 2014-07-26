@@ -7,7 +7,7 @@ $dbactions = $mainactions->GetDBActionsInstance();
 if(isset($_POST['submitted']))
 {
    if($mainactions->Login())
-   {
+   {      
 	$user_role = $mainactions->GetSessionUserRole();	
 	if ($user_role && $user_role=="1")
 	{
