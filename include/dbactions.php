@@ -226,7 +226,7 @@ class DBActions
             return false;
         }
 	
-	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and (now() - last_update) > \''. strtotime($seconds).'\'';
+	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and (now() - last_update) > '.strtotime($seconds).'';
 	
 	$result = mysql_query( $query ,$this->connection);
 	if(!$result)
