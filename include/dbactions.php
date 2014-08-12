@@ -226,15 +226,16 @@ class DBActions
             return false;
         }
 	
-	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and (now() - last_update) > '.strtotime($seconds).'';
+	$query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > '.$seconds;
 	
-	$result = mysql_query( $query ,$this->connection);
+	$result = mysql_query($query ,$this->connection);
 	if(!$result)
         {
-            $this->HandleDBError("Error updating the user login status \nquery:$query");
+            $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n");
             return false;
         }
 	
+	//error_log("QUERY CLEAN: ". $query);
         return mysql_affected_rows();
     }
     

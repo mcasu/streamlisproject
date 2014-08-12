@@ -14,11 +14,11 @@ else
 }
 
 $result = $dbactions->CleanLoginOlderThan($seconds);
-if (!$result || $result == -1)
+if ($result == '-1')
 {
     // clean failed
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
-    echo "1 - FAILED\n";
+    echo "1 - FAILED [". $result . "]\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
     exit(1);
 }
 else
