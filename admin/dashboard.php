@@ -37,7 +37,7 @@ if (!$user_role || $user_role!="1")
 		location.reload(); 
 	    }
 					    
-	    var auto_refresh = setInterval(AutoRefresh, 10000);
+	    var auto_refresh = setInterval(AutoRefresh, 60000);
 	    
 	    $(".toggle_container").hide();
 

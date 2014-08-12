@@ -11,7 +11,7 @@ if(isset($_POST['submitted']))
 	$user_role = $mainactions->GetSessionUserRole();	
 	if ($user_role && $user_role=="1")
 	{
-        	$utils->RedirectToURL("admin/home-admin.php");
+        	$utils->RedirectToURL("admin/dashboard.php");
 	}
 	else
 	{
