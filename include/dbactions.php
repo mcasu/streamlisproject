@@ -102,6 +102,8 @@ class DBActions
 	
 	if ($row['user_logged'] == '1')
 	{
+		// Se un utente ha "abbandonato" la sessione chiudendo il browser per più di 5m = 300sec
+		// allora distruggo la sessione e faccio logout
 		if ($session_alive_time <= 300)
 		{
 			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
@@ -109,7 +111,7 @@ class DBActions
 		}
 		
 		$this->UpdateUserLoginStatus($row['username'], false);
-		session_destroy();
+		//session_destroy();
 	}
 	
 	$userdata = array();
@@ -224,7 +226,7 @@ class DBActions
             return false;
         }
 	
-	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and last_login != NULL and (now() - last_login) > '. $seconds.'';
+	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and (now() - last_update) > \''. strtotime($seconds).'\'';
 	
 	$result = mysql_query( $query ,$this->connection);
 	if(!$result)
@@ -233,8 +235,7 @@ class DBActions
             return false;
         }
 	
-	
-        return true;
+        return mysql_affected_rows();
     }
     
     function GetGroupInfoByName($group_name)

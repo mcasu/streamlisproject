@@ -213,6 +213,7 @@ class MainActions
          }
 	 
 	 $userdata = $_SESSION[$sessionvar];
+	 // The users' session expire after 10800 sec = 3 hours
 	 if (time() - $userdata['last_update'] > 10800)
 	 {
 	    $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], false);

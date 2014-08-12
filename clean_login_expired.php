@@ -6,24 +6,26 @@ $dbactions = $mainactions->GetDBActionsInstance();
 
 if (!isset($_POST['seconds']))
 {
-    $seconds = '10800'; // default value 10800 seconds
+    $seconds = '10800'; // default value 10800 seconds = 3 hours
 }
 else
 {
     $seconds = $_POST['seconds'];
 }
 
-
-if (!$dbactions->CleanLoginOlderThan($seconds))
+$result = $dbactions->CleanLoginOlderThan($seconds);
+if (!result || $result == -1)
 {
     // clean failed
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
-    echo "1";
+    echo "1 - FAILED\n";
+    exit(1);
 }
 else
 {
     //clean successful
-    echo "0";
+    echo "0 - SUCCESS - Pulito [".$result."] utenti.\n";
+    exit(0);
 }
 
 ?>
