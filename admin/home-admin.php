@@ -25,8 +25,20 @@ if (!$user_role || $user_role!="1")
       <title>Home page</title>
       <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 
-    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+        {
+	    function AutoRefresh()
+	    {
+		location.reload(); 
+	    }
+					    
+	    var auto_refresh = setInterval(AutoRefresh, 5000);
+	});
+    </script>
     
 </head>
 <body>
@@ -41,7 +53,7 @@ if (!$user_role || $user_role!="1")
 <div id='fg_membersite_content'>
 <table class="imagetable" id="users_table">
 <tr class="head">
-	<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th>
+	<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th><th>ULTIMO UPDATE</th>
 </tr>
 <?php
     try
@@ -63,6 +75,8 @@ if (!$user_role || $user_role!="1")
                 $user_group_name=$row['user_group_name'];
                 $user_role_name=$row['user_role_name'];
 		$user_logged=$row['user_logged'];
+		$user_last_login=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_login']));
+		$user_last_update=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_update']));
     
 	    if ($user_logged == '0')
 	    {
@@ -76,6 +90,8 @@ if (!$user_role || $user_role!="1")
 			echo "<td>" . $username . "</td>";
 			echo "<td>" . $user_group_name . "</td>";
 			echo "<td>" . $user_role_name . "</td>";
+			echo "<td>" . $user_last_login . "</td>";
+			echo "<td>" . $user_last_update . "</td>";
 		echo '</tr>';
         }
     }

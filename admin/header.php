@@ -1,10 +1,12 @@
 <head>
    <link rel='stylesheet' type='text/css' href='../style/header.css' />
    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+   <script type="text/javascript" src="../include/check_browser_closed.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function()
 {
+//wireUpEvents();
 
 /*$("a.top").click(function()
 {
@@ -18,7 +20,7 @@ $(document).ready(function()
 
 <div id='headermenu'>
 <ul>
-   <li><a href='home-admin.php'><span>Home</span></a></li>
+   <li><a href='dashboard.php'><span>Dashboard</span></a></li>
    
    <li class='has-sub'><a href='#'><span>Eventi</span></a>
       <ul>
