@@ -10,6 +10,7 @@ function CheckForSession() {
 					if(res == "1")
                                         {
                                             alert('Your session has been expired!');
+                                            location.reload();
 					}
                                         else
                                         {

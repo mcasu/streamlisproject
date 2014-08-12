@@ -12,8 +12,6 @@ if ($mainactions->CheckLogin())
 else
 {
     //session expired
-    $username = $mainactions->UserName();
-    $dbactions->SetUserLoginStatus($username, false);
     echo "1";
 }
 

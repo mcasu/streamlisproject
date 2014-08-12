@@ -92,11 +92,26 @@ class DBActions
 
         if(!$result || mysql_num_rows($result) <= 0)
         {
-            $this->HandleError("Error logging in. The username or password does not match");
+            $this->HandleError("ERRORE LOGIN - Il nome utente o la password inseriti non sono validi.");
             return false;
         }
 
         $row = mysql_fetch_assoc($result);
+	
+	$session_alive_time = time() - strtotime($row['last_update']);
+	
+	if ($row['user_logged'] == '1')
+	{
+		if ($session_alive_time <= 300)
+		{
+			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
+			return false;
+		}
+		
+		$this->UpdateUserLoginStatus($row['username'], false);
+		session_destroy();
+	}
+	
 	$userdata = array();
 	
 	$userdata['user_id']  = $row['id_user'];
@@ -124,6 +139,8 @@ class DBActions
         
 	$userdata['user_group_name'] = $row_group['group_name'];
 
+	$userdata['last_update'] = time();
+	
         return $userdata;
     }
 
@@ -177,7 +194,7 @@ class DBActions
     }
     
 
-    function SetUserLoginStatus($username, $status)
+    function UpdateUserLoginStatus($username, $status, $islogin = false)
     {
 	if(!$this->DBLogin())
         {
@@ -185,13 +202,38 @@ class DBActions
             return false;
         }
 
-        $qry = 'update users set user_logged = "'.$status.'" where username = "'.$username.'"';
+	$query = 'update users set user_logged = "'.$status.'", last_update = now() where username = "'.$username.'"';
+	if ($islogin)
+	{
+		$query = 'update users set user_logged = "'.$status.'", last_login = now(), last_update = now() where username = "'.$username.'"';	
+	}
 
-        if(!mysql_query( $qry ,$this->connection))
+        if(!mysql_query( $query ,$this->connection))
         {
-            $this->HandleDBError("Error updating the user login status \nquery:$qry");
+            $this->HandleDBError("Error updating the user login status \nquery:$query");
             return false;
         }
+        return true;
+    }
+    
+    function CleanLoginOlderThan($seconds)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+	
+	$query = 'UPDATE users SET user_logged = \'0\' WHERE user_logged = \'1\' and last_login != NULL and (now() - last_login) > '. $seconds.'';
+	
+	$result = mysql_query( $query ,$this->connection);
+	if(!$result)
+        {
+            $this->HandleDBError("Error updating the user login status \nquery:$query");
+            return false;
+        }
+	
+	
         return true;
     }
     
@@ -895,7 +937,7 @@ class DBActions
                 return $result;
         }
 
-	function GetUsers()
+	function GetUsers($onlyLogged = false)
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
@@ -909,16 +951,27 @@ class DBActions
                     $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
                     return false;
                 }
+		
+		$query_select = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,confirmcode,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
+                
+		$query_where = '';
+		if ($onlyLogged)
+		{
+			$query_where = 'where users.user_logged = \'1\' ';	
+		}
 
-                $select_query = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,confirmcode,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged from users '.
-                'INNER JOIN user_roles ON users.user_role_id = user_roles.role_id '.
-                'INNER JOIN groups ON users.user_group_id = groups.group_id '.
-                'order by name';
+		$query_join = 'INNER JOIN user_roles ON users.user_role_id = user_roles.role_id '.
+		'INNER JOIN groups ON users.user_group_id = groups.group_id ';
 
-                $result = mysql_query($select_query ,$this->connection);
+		$query_orderby = 'order by name';
+		
+		
+                $query_total = $query_select . $query_join . $query_where . $query_orderby;
+
+                $result = mysql_query($query_total ,$this->connection);
                 if(!$result)
                 {
-                    $this->HandleDBError("Error deleting data from the table\nquery:$select_query");
+                    $this->HandleDBError("Error deleting data from the table\nquery:$query_total");
                     return false;
                 }
                 return $result;

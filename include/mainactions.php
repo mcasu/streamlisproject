@@ -197,7 +197,7 @@ class MainActions
 	$_SESSION[$sessionvar] = $userdata;
 	
 	// Set the user logged flag into the database.
-        $this->dbactionsInstance->SetUserLoginStatus($username, true);
+        $this->dbactionsInstance->UpdateUserLoginStatus($username, true, true);
       
         return true;
     }
@@ -211,6 +211,17 @@ class MainActions
          {
             return false;
          }
+	 
+	 $userdata = $_SESSION[$sessionvar];
+	 if (time() - $userdata['last_update'] > 10800)
+	 {
+	    $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], false);
+	    $_SESSION[$sessionvar]=NULL;
+	    unset($_SESSION[$sessionvar]);
+	    return false;
+	 }
+	 
+	 $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], true);
          return true;
     }
    
@@ -249,7 +260,7 @@ class MainActions
 	$userdata = $_SESSION[$sessionvar];
 	$username = $userdata['username'];
 	
-	$this->dbactionsInstance->SetUserLoginStatus($username, false);
+	$this->dbactionsInstance->UpdateUserLoginStatus($username, false);
         
         $_SESSION[$sessionvar]=NULL;
         unset($_SESSION[$sessionvar]);

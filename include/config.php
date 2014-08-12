@@ -26,6 +26,9 @@ $ondemand_hls_record_filepath = '/var/stream/hls/';
 $ondemand_flash_record_filepath = '/var/stream/flash/';
 $ondemand_mp4_record_filepath = '/var/stream/mp4/';
 
+/* DATE & TIME CONFIG*/
+setlocale(LC_ALL, 'it_IT.UTF-8');
+
 /*** SITE CONFIG ***/
 
 $mainactions = new MainActions($host, $uname, $pwd, $database);
