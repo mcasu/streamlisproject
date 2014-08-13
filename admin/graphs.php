@@ -37,7 +37,7 @@ if (!$user_role || $user_role!="1")
 <div><p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p></div>
 
 
-<iframe height="700" width="100%" src="/Kibana"></iframe>
+<iframe height="700" width="100%" src="/monitorix"></iframe>
 
 </body>
 </html>
