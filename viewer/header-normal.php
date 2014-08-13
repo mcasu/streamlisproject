@@ -7,14 +7,14 @@
 <body>
 <div id='headermenu'>
 <ul>
-   <li class='has-sub'><a href='live-normal.php'><span>Live streaming</span></a>
+   <li class='has-sub'><a href='live-normal.php'>Live streaming<img src="../images/event.png" height="32" width="32"></a>
   </li>
-   <li class='has-sub'><a href='ondemand-normal.php'><span>On-demand streaming</span></a>
+   <li class='has-sub'><a href='ondemand-normal.php'>On-demand streaming<img src="../images/ondemand.png" height="32" width="32"></a>
    </li>
-   <li class='has-sub'><a href='answer-register.php'><span>Registra le tue risposte (Beta)</span></a>
+   <li class='has-sub'><a href='answer-register.php'>Registra le tue risposte (Beta)<img src="../images/register.png" height="32" width="32"></a>
    </li>
    <li class='has-sub'>
-	<a href='#'>Profilo<img src="../images/user.png"></a>
+	<a href='#'>Profilo<img src="../images/profile.png" height="32" width="32"></a>
       <ul>
          <li><a href='../change-pwd.php'><span>Cambia password</span></a></li>
          <li><a href='../logout.php'><span>Esci</span></a></li>

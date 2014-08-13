@@ -61,7 +61,7 @@ if (!$user_role || $user_role!="1")
 <?php include("header.php"); ?>
 <br/>
 <div align="right" id='fg_membersite_content'>
-<b><?= $mainactions->UserFullName(); ?></b>, Welcome back!</div>
+<b><?= $mainactions->UserFullName(); ?></b>, benvenuto!</div>
 
 <div><p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p></div>
 
