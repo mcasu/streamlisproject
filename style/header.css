@@ -1,24 +1,61 @@
 #headermenu {
   background-color: #333;
-  width: 100%;
-  min-width: 1000px;
   margin: 0;
+  /*width: 1600px;*/
+  width: 100%;
+  min-width: 1300px;
+  overflow: visible;
+}
+#headermenu ul .root {
+  list-style: none;
+  width: 98%;
 }
 
 #headermenu ul,
 #headermenu li,
 #headermenu span,
 #headermenu a {
+  list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
 }
-#headermenu:after,
+
 #headermenu ul:after {
-  content: '';
   display: block;
   clear: both;
+  content: '';
 }
+
+/***************************************************************************************/
+/** Normalmente i sub menu sono nascosti (display: none). **/
+/** Quando si passa con il mouse (hover) vengono mostrati a blocchi (display: block) ***/
+/***************************************************************************************/
+
+#headermenu .has-sub ul {
+  display: none;
+  position: absolute;
+  top: 48px; /* la posizione verticale assoluta da dove partono le voci dei sub-menu */
+  left: 4px;
+  min-width: 40px;
+  text-align: center;
+}
+#headermenu .has-sub ul li {
+  background-color: #333;
+  text-align: center;
+}
+#headermenu .has-sub:hover ul {
+  display: block;
+}
+
+/*************************************************************************************/
+
+
+#headermenu > ul > li {
+  float: left;
+  display: inline;
+}
+
 #headermenu a {
   color: #fff;
   display: inline-block;
@@ -30,14 +67,6 @@
   text-decoration: none;
   /*text-shadow: 0 -1px 0 #333333;*/
 }
-#headermenu ul {
-  list-style: none;
-}
-#headermenu > ul > li {
-  float: left;
-  display: inline;
-}
-
 #headermenu ul li a {
   /*border-bottom: 1px solid #5d5d5d;*/
   /*border-top: 1px solid #5d5d5d;*/
@@ -55,38 +84,13 @@
   text-align: center;
   padding: 8px 35px;
 }
-#headermenu > ul > li a:hover , #headermenu ul li .current{
+#headermenu > ul > li a:hover,
+#headermenu ul li .current{
   color: #fff;
   background-color:#3c78c3;
 }
 
-/*#headermenu > ul > li:first-child a {
-  border-radius: 5px 0 0 5px;
-  -moz-border-radius: 5px 0 0 5px;
-  -webkit-border-radius: 5px 0 0 5px;
-  border-left: 1px solid #5d5d5d;
-}
-#headermenu > ul > li:last-child a {
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-}*/
 
-#headermenu .has-sub:hover ul {
-  display: block;
-}
-#headermenu .has-sub ul {
-  display: none;
-  position: absolute;
-  top: 48px; /* la posizione verticale assoluta da dove partono le voci dei sub-menu */
-  left: 4px;
-  min-width: 40px;
-  text-align: center;
-}
-#headermenu .has-sub ul li {
-  background-color: #333;
-  text-align: center;
-}
 #headermenu .has-sub a img {
   vertical-align: middle;
   margin: 0 0 0 8px;
@@ -94,6 +98,8 @@
 
 .logo {
   float: left;
+  display: block;
+  clear: both;
 }
 .logo img {
   background-color: #fff;

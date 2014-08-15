@@ -19,7 +19,9 @@ $(document).ready(function()
 </head>
 
 <div id='headermenu'>
-<ul>
+
+<ul class="root">
+   
    <li class='has-sub'>
       <a href='dashboard.php'>Dashboard<img src="../images/dashboard.png" height="32" width="32"></a>
    </li>
@@ -56,9 +58,10 @@ $(document).ready(function()
          <li><a href='../logout.php'><span>Esci</span></a></li>
       </ul>
    </li>
-</ul>  
    
+</ul>  
 </div>
+
 <div class="logo">
    <img src="../images/logo_flat.png" alt="JW LIS Streaming">
 </div>
