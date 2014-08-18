@@ -4,10 +4,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
-$app_name = $_POST['app'];
 $nginx_id = $_POST['clientid'];
-$stream_name = $_POST['name'];
+$event_call = $_POST['call'];
+$app_name = null;
+$stream_name = null;
 $client_addr = $_POST['addr'];
+$flash_ver = null;
+$page_url = null;
+
 if(isset($_POST['code'])) 
 {
 	$publish_code = $_POST['code'];
@@ -17,40 +21,41 @@ else
 	$publish_code = "0000";
 }
 
+if(isset($_POST['app']))
+{
+	$app_name = $_POST['app'];
+}
+
+if(isset($_POST['name']))
+{
+	$stream_name = $_POST['name'];
+}
+
+if(isset($_POST['flashver']))
+{
+	$flash_ver = $_POST['flashver'];
+}
+
+if(isset($_POST['pageurl']))
+{
+	$page_url = $_POST['pageurl'];
+}
+
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s"); 
 
-
-/***  If publish stream name already exists then reload nginx to clean connection status ***/
-/*
-$num_rows = $dbactions->PublishNameAlreadyExists($app_name,$stream_name);
-if ($num_rows > 0)
-{
-	
-	// Delete record with publish name duplicated
-	if ($dbactions->DeletePublishNameDuplicated($app_name,$stream_name))
-	{
-		//Reload Nginx service
-		$last_line = system('echo "numero record: '.$num_rows.'" > /tmp/'.$stream_name.'.txt', $retval);
-		$last_line = system('sudo /etc/init.d/nginx force-reload', $retval);
-		
-		if ($retval != '0')
-		{
-			error_log("BadName publishing error has occurred but nginx reloading has FAILED!");
-		}
-	}
-	else
-	{
-		$last_line = system('echo "numero record: '.$num_rows.' - delete fallita!!" > /tmp/'.$stream_name.'.txt', $retval);
-	}
-	
-}
-*/
 	
 /*** Save live publish info into database ***/
 if (!$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime))
 {
 	error_log("Publishing the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	exit;
+}
+
+/*** Save publish event into database ***/
+if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url))
+{
+	error_log("Saving PUBLISH event to the database ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
 

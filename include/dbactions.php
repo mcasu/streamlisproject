@@ -450,6 +450,54 @@ class DBActions
                 return true;
 	}
 	
+	
+	function SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url)
+        {
+
+                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $insert_query = 'insert into events (
+                nginx_id,
+		event_date,
+		event_time,
+		event_call,
+                app_name,
+                stream_name,
+                client_addr,
+                flash_ver,
+		page_url)
+                values
+                (
+                "' . $this->SanitizeForSQL($nginx_id) . '",
+                "' . $this->SanitizeForSQL($mysqldate) . '",
+                "' . $this->SanitizeForSQL($mysqltime) . '",
+		"' . $this->SanitizeForSQL($event_call) . '",
+                "' . $this->SanitizeForSQL($app_name) . '",
+                "' . $this->SanitizeForSQL($stream_name) . '",
+                "' . $this->SanitizeForSQL($client_addr) . '",
+                "' . $this->SanitizeForSQL($flash_ver) . '",
+		"' . $this->SanitizeForSQL($page_url) . '"
+                )';
+
+                if(!mysql_query( $insert_query ,$this->connection))
+                {
+                    $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
+                    return false;
+                }
+                return true;
+        }
+	
     function OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code,$mysqldate,$mysqltime)
         {
 
@@ -591,6 +639,32 @@ class DBActions
                 return $result;
         }
 
+	function GetUserNumbersByRole()
+        {
+                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $select_query = 'SELECT user_role_id, user_roles.role_name as role_name, count(*) as user_number FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id GROUP BY user_role_id';   
+
+                $result = mysql_query($select_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    return false;
+                }
+                return $result;
+        }
+	
 	function GetUserRoles()
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

@@ -39,20 +39,24 @@ if (!$user_role || $user_role!="1")
 					    
 	    var auto_refresh = setInterval(AutoRefresh, 60000);
 	    
-	    $(".toggle_container").hide();
-
 	    $("h2.trigger").css("cursor","pointer").toggle(function()
 	    {
-		$(this).addClass("active");
+		$(this).removeClass("active");
+		
 	    }, function ()
 	    {
-		$(this).removeClass("active");
+		$(this).addClass("active");
 	    });
 	    
 	    $("h2.trigger").click(function()
 	    {
 		    $(this).next(".toggle_container").slideToggle("slow");
 	    });
+	    
+	    $('#dashboard_graph_user_type').load('/loadgraph.php');
+	    
+	    $("h2.trigger").addClass("active");
+	    $(".toggle_container").show();
 	});
     </script>
     
@@ -93,8 +97,13 @@ if (!$user_role || $user_role!="1")
 		echo '<div style="margin: 0 0 0 10px">Nessun utente loggato.</div>';
 	    }
 	    else
-	    {
+	    {	
 		echo '<div class="left">';
+		
+		    echo '<div id="dashboard_graph_user_type" style="display:inline; float:left; width:500px; height:300px;"></div>';
+		    
+		    echo '<div style="display:inline; float:left; margin:10px; ">';
+		    
 		    echo '<table class="imagetable" id="users_table">';
 			echo '<tr class="head">';
 			echo '<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th><th>ULTIMO UPDATE</th>';
@@ -130,6 +139,7 @@ if (!$user_role || $user_role!="1")
 			    echo '</tr>';
 		    }
 		    echo '</table>';
+		    echo '</div>';
 		    
 		echo '</div>'; /* FINE DIV CLASS "left" */
 	    }

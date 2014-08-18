@@ -1,4 +1,5 @@
 (function($){
+  
   OndemandMp4Loading = function() {
     var root = $("body").find('h2.trigger');
     //alert("Ciao pippo");
