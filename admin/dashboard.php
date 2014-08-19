@@ -53,7 +53,7 @@ if (!$user_role || $user_role!="1")
 		    $(this).next(".toggle_container").slideToggle("slow");
 	    });
 	    
-	    $('#dashboard_graph_user_type').load('/loadgraph.php');
+	    $('#dashboard_user_numberbyrole').load('/loadgraph.php?type=user_numberbyrole');
 	    
 	    $("h2.trigger").addClass("active");
 	    $(".toggle_container").show();
@@ -100,13 +100,13 @@ if (!$user_role || $user_role!="1")
 	    {	
 		echo '<div class="left">';
 		
-		    echo '<div id="dashboard_graph_user_type" style="display:inline; float:left; width:500px; height:300px;"></div>';
+		    echo '<div id="dashboard_user_numberbyrole"></div>';
 		    
-		    echo '<div style="display:inline; float:left; margin:10px; ">';
+		    echo '<div class="table_container">';
 		    
 		    echo '<table class="imagetable" id="users_table">';
 			echo '<tr class="head">';
-			echo '<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th><th>ULTIMO UPDATE</th>';
+			echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
 			echo '</tr>';
 		
 	            while($row = mysql_fetch_array($result))
@@ -129,13 +129,11 @@ if (!$user_role || $user_role!="1")
 		
 			    echo '<tr class="users_table">';
 				    echo "<td>" . $user_name . "</td>";
-				    echo "<td>" . $user_id . "</td>";
 				    echo "<td>" . $user_mail . "</td>";
 				    echo "<td>" . $username . "</td>";
 				    echo "<td>" . $user_group_name . "</td>";
 				    echo "<td>" . $user_role_name . "</td>";
 				    echo "<td>" . $user_last_login . "</td>";
-				    echo "<td>" . $user_last_update . "</td>";
 			    echo '</tr>';
 		    }
 		    echo '</table>';

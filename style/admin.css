@@ -62,12 +62,14 @@ div.toggle_container {
     border-top: 0px solid #d6d6d6;
     font-size: 1.2em;
     width: 1400px;
+    height: 100%;
     overflow: auto;
 }
 
 div.left {
   float: left;
   width: 98%;
+  height: 100%;
   margin: 4px 0 0 10px;
 }
 
@@ -233,4 +235,17 @@ div.video_loading img
         -webkit-transform: scale(0.7);
         opacity: 0.1;
     };
+}
+
+#dashboard_user_numberbyrole div {
+  display:inline-block;
+  float: left;
+  width:400px;
+  height:250px;
+}
+
+div.table_container {
+  display:inline-block;
+  float: left;
+  margin:10px;
 }

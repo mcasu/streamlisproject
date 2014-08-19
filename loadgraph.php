@@ -2,18 +2,26 @@
 
 require_once("./include/config.php");
 
+if (!isset($_GET["type"]))
+{
+    exit;
+}
+
+$type = $_GET["type"];
+
 $dbactions = $mainactions->GetDBActionsInstance();
 
-$user_num_byrole = $dbactions->GetUserNumbersByRole();
+        $user_num_byrole = $dbactions->GetUserNumbersByRole();
+    
+        if ($user_num_byrole)
+        {
+            while ($row = mysql_fetch_array($user_num_byrole))
+            {
+                $categories[] = $row['role_name'];
+                $data[] = $row['user_number'];
+            }
+        }
 
-if ($user_num_byrole)
-{
-    while ($row = mysql_fetch_array($user_num_byrole))
-    {
-        $categories[] = $row['role_name'];
-        $data[] = $row['user_number'];
-    }
-}
 
 ?>
 
@@ -26,10 +34,11 @@ if ($user_num_byrole)
     <script type="text/javascript">
 	$(document).ready(function()
         {
-            $('#dashboard_graph_user_type').highcharts({
+            $('#user_numberbyrole').highcharts({
                 chart: {
                     type: 'bar',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    borderColor: '#333'
                 },
                 title: {
                     text: 'Numero utenti per tipo'
@@ -38,14 +47,13 @@ if ($user_num_byrole)
                     title: {
                         text: ''
                     },
-                    categories: ['ADMIN', 'NORMAL', 'PUBLISHER'],
-                    tickInterval: 1
+                    categories: ['ADMIN', 'NORMAL', 'PUBLISHER']
                 },
                 yAxis: {
                     title: {
                         text: ''
                     },
-                    tickInterval: 1
+                    tickInterval: 2
                 },
                 series: [{
                     name: 'Numero di utenti',
@@ -60,7 +68,15 @@ if ($user_num_byrole)
     
 <?PHP
 
-echo '<div id="dashboard_graph_user_type"></div>';
+    switch ($type)
+    {
+        case "user_numberbyrole":
+            echo '<div id="user_numberbyrole"></div>';
+            break;
+        default:
+            echo '<div>IMPOSSIBILE CARICARE IL GRAFICO</div>';
+            break;
+    }
 
 ?>
 </body>
