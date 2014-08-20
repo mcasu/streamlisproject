@@ -53,7 +53,7 @@ if (!$user_role || $user_role!="1")
 		    $(this).next(".toggle_container").slideToggle("slow");
 	    });
 	    
-	    $('#dashboard_user_numberbyrole').load('/loadgraph.php?type=user_numberbyrole');
+	    $('#dashboard_user_charts').load('/charts/loadcharts_user.php');
 	    
 	    $("h2.trigger").addClass("active");
 	    $(".toggle_container").show();
@@ -100,7 +100,7 @@ if (!$user_role || $user_role!="1")
 	    {	
 		echo '<div class="left">';
 		
-		    echo '<div id="dashboard_user_numberbyrole"></div>';
+		    echo '<div id="dashboard_user_charts"></div>';
 		    
 		    echo '<div class="table_container">';
 		    
@@ -144,6 +144,7 @@ if (!$user_role || $user_role!="1")
 	    
 	echo '</div>'; /* FINE DIV CLASS "toggle_container" */
 
+	
     }
     catch(PDOException $e)
     {

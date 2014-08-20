@@ -237,7 +237,7 @@ div.video_loading img
     };
 }
 
-#dashboard_user_numberbyrole div {
+#dashboard_user_charts div {
   display:inline-block;
   float: left;
   width:400px;
