@@ -141,7 +141,7 @@ try
 				    echo '<li>';
 					    echo '<div class="player_desktop">';
 						echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-						'<img src="../images/desktop.png"/></a>';
+						'<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 						echo '<br/>';
 						echo "<label>Guarda il video con PC Desktop</label>";
 					    echo '</div>';
@@ -150,7 +150,7 @@ try
 					echo '<li>';    
 					    echo '<div class="player_smartphone">';
 						echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-						'<img src="../images/os_android.png"/></a>';
+						'<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
 						echo '<br/>';
 						echo "<label>Guarda il video con device Android</label>";
 					    echo '</div>';
@@ -159,7 +159,7 @@ try
 					echo '<li>';    
 					    echo '<div class="player_iphone">';
 						echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-						'<img src="../images/os_apple.png"/></a>';
+						'<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
 						echo '<br/>';
 						echo "<label>Guarda il video con device Apple</label>";
 					    echo '</div>';
