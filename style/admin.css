@@ -270,7 +270,7 @@ div.video_loading
 #dashboard_user_charts div {
   display:inline-block;
   float: left;
-  width:400px;
+  width:100%;
   height:250px;
 }
 
