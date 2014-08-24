@@ -87,7 +87,18 @@ $("a.event_ondemand_delete").click(function()
 		/*alert("Data: " + data + "\nStatus: " + status);*/
 		    par.parent().parent().fadeOut(1000, function()
 		    {
-			var video_title_obj = par.parent().parent().parent().find(".video_element_title:first");
+			var video_title_obj = null;
+			par.parent().parent().parent().find("div.video_element_title").each(function( index )
+					    {
+						var video_title_tmp = $(this);
+						//alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
+						if ( video_title_tmp.attr("id") == ondemand_id)
+						{
+						    video_title_obj = video_title_tmp;
+						}
+					    });
+			
+			//alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
 			video_title_obj.remove();
 			par.parent().parent().remove();
 		    });
@@ -225,7 +236,7 @@ try
 						    $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
 						}
 						
-						echo '<div class="video_element_title">';
+						echo '<div class="video_element_title" id="'.$ondemand_id.'">';
 						    if (is_null($ondemand_onlydate))						
 						    {
 							$ondemand_date_day = strftime("%u", strtotime($row['ondemand_date']));
