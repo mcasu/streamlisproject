@@ -661,7 +661,7 @@ class DBActions
                 $select_query = 'SELECT users.username, users.last_login, user_roles.role_name as role_name '.
 		'FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id '.
 		'WHERE users.user_logged = 1 '.
-		'GROUP BY user_role_id ORDER BY users.last_login';   
+		'ORDER BY users.last_login';   
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)
