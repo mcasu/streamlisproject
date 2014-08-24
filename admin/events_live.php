@@ -191,7 +191,7 @@ try
 							echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 							'<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 							echo '<br/>';
-							echo "<label>Guarda il video con PC Desktop</label>";
+							echo "<label>Guarda il video con <br/>PC Desktop</label>";
 						    echo '</div>';
 						echo '</li>';
 						
@@ -200,7 +200,7 @@ try
 							echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 							'<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
 							echo '<br/>';
-							echo "<label>Guarda il video con device Android</label>";
+							echo "<label>Guarda il video con <br/>device Android</label>";
 						    echo '</div>';
 						echo '</li>';
 						
@@ -209,7 +209,7 @@ try
 							echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
 							'<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
 							echo '<br/>';
-							echo "<label>Guarda il video con device Apple</label>";
+							echo "<label>Guarda il video con <br/>device Apple</label>";
 						    echo '</div>';
 					    echo '</li>';
 					echo '</ul>';	

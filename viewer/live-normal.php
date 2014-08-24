@@ -105,8 +105,21 @@ try
 				$live_date=$row['live_date'];
 				$live_time=$row['live_time'];
 				$client_addr=$row['client_addr'];
+				$live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
 				
 				$thumbnail_img = "../images/thumbnails/video_thumbnail.png";
+				
+				echo '<div class="video_element_title">';
+				    $live_date_day = strftime("%u", strtotime($row['live_date']));
+				    if ( ($live_date_day) && ($live_date_day > 5))
+				    {
+					echo '<h2>ADUNANZA PUBBLICA - '.$live_date_formatted. '</h2>';    
+				    }
+				    elseif (($live_date_day) && ($live_date_day <= 5))
+				    {
+					echo '<h2>ADUNANZA DI SERVIZIO - '.$live_date_formatted. '</h2>';
+				    }
+				echo '</div>';
 				    
 				echo '<ul class="video_element">';   
 				    echo '<li>';
