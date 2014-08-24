@@ -153,9 +153,22 @@ try
 					$live_date=$row['live_date'];
 					$live_time=$row['live_time'];
 					$client_addr=$row['client_addr'];
+					$live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
 				    
 				        $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
 				    
+					echo '<div class="video_element_title">';
+					    $live_date_day = strftime("%u", strtotime($row['live_date']));
+					    if ( ($live_date_day) && ($live_date_day > 5))
+					    {
+						echo '<h2>ADUNANZA PUBBLICA - '.$live_date_formatted. '</h2>';    
+					    }
+					    elseif (($live_date_day) && ($live_date_day <= 5))
+					    {
+						echo '<h2>ADUNANZA DI SERVIZIO - '.$live_date_formatted. '</h2>';
+					    }
+					echo '</div>';
+					
 					echo '<ul class="video_element">';   
 					    echo '<li>';
 						echo '<div class="video_thumb">';
@@ -167,7 +180,7 @@ try
 						echo '<div class="video_info">';
 						    echo '<b>Path: </b>'.$app_name.'/'.$stream_name;
 						    echo '<br/>';
-						    echo '<b>Data di pubblicazione: </b>'.$live_date.' ore '.$live_time;
+						    echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
 						    echo '<br/>';
 						    echo '<b>Pubblicato da: </b>'.$client_addr;
 						echo '</div>';
@@ -176,7 +189,7 @@ try
 					    echo '<li>';
 						    echo '<div class="player_desktop">';
 							echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-							'<img src="../images/desktop.png"/></a>';
+							'<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 							echo '<br/>';
 							echo "<label>Guarda il video con PC Desktop</label>";
 						    echo '</div>';
@@ -185,7 +198,7 @@ try
 						echo '<li>';    
 						    echo '<div class="player_smartphone">';
 							echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-							'<img src="../images/os_android.png"/></a>';
+							'<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
 							echo '<br/>';
 							echo "<label>Guarda il video con device Android</label>";
 						    echo '</div>';
@@ -194,7 +207,7 @@ try
 						echo '<li>';    
 						    echo '<div class="player_iphone">';
 							echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-							'<img src="../images/os_apple.png"/></a>';
+							'<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
 							echo '<br/>';
 							echo "<label>Guarda il video con device Apple</label>";
 						    echo '</div>';

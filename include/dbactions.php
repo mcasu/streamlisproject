@@ -451,7 +451,7 @@ class DBActions
 	}
 	
 	
-	function SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url)
+	function SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url,$username = null)
         {
 
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -476,7 +476,8 @@ class DBActions
                 stream_name,
                 client_addr,
                 flash_ver,
-		page_url)
+		page_url,
+		username)
                 values
                 (
                 "' . $this->SanitizeForSQL($nginx_id) . '",
@@ -487,7 +488,8 @@ class DBActions
                 "' . $this->SanitizeForSQL($stream_name) . '",
                 "' . $this->SanitizeForSQL($client_addr) . '",
                 "' . $this->SanitizeForSQL($flash_ver) . '",
-		"' . $this->SanitizeForSQL($page_url) . '"
+		"' . $this->SanitizeForSQL($page_url) . '",
+		"' . $this->SanitizeForSQL($username) . '"
                 )';
 
                 if(!mysql_query( $insert_query ,$this->connection))
@@ -566,7 +568,7 @@ class DBActions
                 return true;
         }
 
-	function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie)
+	function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie, $mysqldate = null)
         {
 
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -593,7 +595,8 @@ class DBActions
                 ondemand_filename,
 		ondemand_movie_duration,
 		ondemand_movie_bitrate,
-		ondemand_movie_codec)
+		ondemand_movie_codec,
+		ondemand_date)
                 values
                 (
                 "' . $this->SanitizeForSQL($stream_name) . '",
@@ -602,7 +605,8 @@ class DBActions
                 "' . $this->SanitizeForSQL($ondemand_filename) . '",
                 "' . $this->SanitizeForSQL($video_duration) . '",
                 "' . $this->SanitizeForSQL($video_bitrate) . '",
-                "' . $this->SanitizeForSQL($video_codec) . '"
+                "' . $this->SanitizeForSQL($video_codec) . '",
+		"' . $this->SanitizeForSQL($mysqldate) . '"
                 )';
 
                 if(!mysql_query( $insert_query ,$this->connection))

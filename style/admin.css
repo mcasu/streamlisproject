@@ -73,12 +73,26 @@ div.left {
   margin: 4px 0 0 10px;
 }
 
+div.video_element_title
+{
+  text-align: left;
+  margin: 0;
+}
+
+div.video_element_title h2
+{
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+  font-size: 1.0em;
+  margin: 0;
+}
+
 ul.video_element
 {
   list-style: none;
   display: inline-block;
   margin-top: 0;
   margin-left: 0;
+  margin-bottom: 1px;
   width: 97%;
 }
 
@@ -101,6 +115,7 @@ ul.video_element img
   vertical-align: middle;
   height: 100px;
   width: 126px;
+  margin-top: 6px;
 }
 
 li div.video_thumb
@@ -110,7 +125,7 @@ li div.video_thumb
 
 li div.video_info
 {
-  margin: 1px 0 0 15px;
+  margin: 8px 0 0 15px;
   font-size: 0.8em;
   color: #000;
 }
@@ -133,13 +148,33 @@ li div.player_desktop, li div.player_smartphone, li div.player_iphone
 
 div.player_desktop label, div.player_smartphone label, div.player_iphone label
 {
-  margin-top: 6px;
+  margin-top: 8px;
+  font-weight: bold;
 }
 
-a.play-button, a.play-button img
+a.play-button
 {
   width: 48px;
   height: 48px;
+}
+
+a.play-button img.video_imgdevice
+{
+  width: 42px;
+  height: 42px;
+  margin: 2px;
+}
+
+div.player_desktop img.video_imgos, div.player_iphone img.video_imgos
+{
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+}
+
+a.play-button img.video_imgdevice:hover
+{
+  opacity: 0.5;
 }
 
 a.event_ondemand_delete, a.event_ondemand_delete img
@@ -147,6 +182,11 @@ a.event_ondemand_delete, a.event_ondemand_delete img
   width: 32px;
   height: 32px;
 }
+
+
+/******************************/
+/* *** VIDEO LOADING CSS3 *** */
+/******************************/
 
 div.video_loading
 {
@@ -156,16 +196,6 @@ div.video_loading
   font-size: 0.6em;
   text-align: center;
 }
-
-div.video_loading img
-{
-  width: 48px;
-  height: 48px;
-}
-
-/******************************/
-/* *** VIDEO LOADING CSS3 *** */
-/******************************/
 
 .barlittle {
     background-color: #2187e7;

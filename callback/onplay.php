@@ -36,8 +36,14 @@ if(isset($_POST['pageurl']))
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s");
 
+$username = null;
+if ($mainactions->CheckLogin())
+{
+	$username = $mainactions->UserName();	
+}
+
 /*** Save play event into database ***/
-if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url))
+if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url,$username))
 {
 	error_log("Saving PLAY event to the database ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 	exit;

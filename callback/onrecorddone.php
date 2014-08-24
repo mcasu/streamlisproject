@@ -11,6 +11,8 @@ $stream_name = $_POST['name'];
 $client_addr = $_POST['addr'];
 $record_path = $_POST['path'];
 
+$mysqldate = date("Y-m-d");
+
 // HLS path
 //$ondemand_path=$ondemand_hls_record_filepath;
 
@@ -22,6 +24,16 @@ $ondemand_basename = $path_parts['basename'];
 $ondemand_filename = $path_parts['filename'];
 $record_tmp_dir = $path_parts['dirname'];
 
+$strtoremove_lenght = strlen($stream_name);
+$ondemand_datetime = substr($ondemand_filename, $strtoremove_lenght + 1);
+
+list($ondemand_onlydate, $ondemand_onlytime) = split("_", $ondemand_datetime);
+
+$date_temp = strftime("%Y-%m-%d", strtotime($ondemand_onlydate));
+//$time_temp = strftime("%H:%M:%S", strtotime(str_replace("-",":", $ondemand_onlytime)));
+
+//error_log("INFO - ONDEMAND DATE: " . $date_temp);
+
 /*** SAVE FLV VIDEO TO DISK ***/
 if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
 {
@@ -32,7 +44,7 @@ if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$
 $movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
 
 /*** SAVE VIDEO INFO INTO DATABASE ***/
-if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie))
+if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie,$date_temp))
 {
 	error_log("ERROR - Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
 	exit;

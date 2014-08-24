@@ -186,7 +186,34 @@ try
 						$ondemand_movie_duration= $duration_time['h'] . " ore " . $duration_time['m'] . " minuti " . $duration_time['s'] . " secondi" ;
 						$ondemand_movie_bitrate=number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
 						$ondemand_movie_codec=$row['ondemand_movie_codec'];
-					
+						
+						// Check if the database contains a correct date
+						$date_parse = date_parse($row['ondemand_date']);
+						if ($date_parse["error_count"] != 0 ||
+						    !checkdate($date_parse["month"], $date_parse["day"], $date_parse["year"]))
+						{
+						    $ondemand_date = NULL;
+						}
+    						
+						$ondemand_onlydate = $ondemand_onlytime = NULL;
+						if (is_null($ondemand_date))
+						{
+						    $path_parts = pathinfo($ondemand_filename);
+						    
+						    $strtoremove_lenght = strlen($ondemand_publish_code);
+						    $ondemand_datetime = substr($path_parts['filename'], $strtoremove_lenght + 1);
+						    
+						    list($ondemand_onlydate, $ondemand_onlytime) = split("_", $ondemand_datetime);
+						    
+						    $ondemand_date = strftime("%A %d %B %Y", strtotime($ondemand_onlydate));
+						}
+						else
+						{
+						    //$ondemand_date = new DateTime($row['ondemand_date']);
+						    //$ondemand_date = strftime("%A %d %B %Y %H:%M:%S", strtotime($row['ondemand_date']));
+						    $ondemand_date = strftime("%A %d %B %Y", strtotime($row['ondemand_date']));
+						}
+						
 						$ondemand_mp4_filename = basename($ondemand_filename,".flv").".mp4";
 					
 						$thumbnail_img = '../images/thumbnails/'.basename($ondemand_filename,".flv").'.jpg';
@@ -195,7 +222,28 @@ try
 						{
 						    $thumbnail_img = "../images/thumbnails/video_thumbnail.png";
 						}
-						 echo '<ul class="video_element">';
+						
+						echo '<div class="video_element_title">';
+						    if (is_null($ondemand_onlydate))						
+						    {
+							$ondemand_date_day = strftime("%u", strtotime($row['ondemand_date']));
+						    }
+						    else
+						    {
+							$ondemand_date_day = strftime("%u", strtotime($ondemand_onlydate));
+						    }
+						    
+						    if ( ($ondemand_date_day) && ($ondemand_date_day > 5))
+						    {
+							echo '<h2>ADUNANZA PUBBLICA - '.$ondemand_date. '</h2>';    
+						    }
+						    elseif (($ondemand_date_day) && ($ondemand_date_day <= 5))
+						    {
+							echo '<h2>ADUNANZA DI SERVIZIO - '.$ondemand_date. '</h2>';
+						    }
+						echo '</div>';
+						
+						echo '<ul class="video_element">';
 						 
 	    					    echo '<li>';
 							echo '<div id="'.$ondemand_id.'" class="video_delete">';
@@ -225,12 +273,14 @@ try
 							echo '<li>';
 							    echo '<div class="player_desktop">';
 								echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-								'<img src="../images/desktop.png"/></a>';
+								    '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 								echo '<br/>';
 								echo "<label>Guarda il video con PC Desktop</label>";
+								echo '<br/>';
+								echo '<img class="video_imgos" src="../images/os_windows.png"/> <img class="video_imgos" src="../images/os_linux.png"/>';
 							    echo '</div>';
 							echo '</li>';
-							
+							/*
 							echo '<li>';    
 							    echo '<div class="player_smartphone">';
 								echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
@@ -239,10 +289,10 @@ try
 								echo "<label>Guarda il video con Smartphone Android</label>";
 							    echo '</div>';
 							echo '</li>';
-							
+							*/
 							echo '<li>';
 							    echo '<div class="video_loading id="'.basename($ondemand_filename,".flv").'">';
-								echo '<img src="../images/os_apple.png"/>';
+								echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
 								echo '<br/>';
 								echo '<div id="block_1" class="barlittle"></div>
 								<div id="block_2" class="barlittle"></div>
@@ -250,13 +300,16 @@ try
 								<div id="block_4" class="barlittle"></div>
 								<div id="block_5" class="barlittle"></div>';
 								echo '<br/>';
-								echo '<label>Creazione video per Apple in corso...</label>';
+								echo '<label>Creazione video per Tablet o Smartphone in corso...</label>';
 							    echo '</div>';
+							    
 							    echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
 								echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
-								'<img src="../images/os_apple.png"/></a>';
+								'<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
 								echo '<br/>';
-								echo "<label>Guarda il video con Apple Iphone</label>";
+								echo "<label>Guarda il video con Tablet o Smartphone</label>";
+								echo '<br/>';
+								echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
 							    echo '</div>';
 							echo '</li>';
 						echo '</ul>';
