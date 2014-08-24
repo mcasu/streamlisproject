@@ -275,7 +275,7 @@ try
 								echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
 								    '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 								echo '<br/>';
-								echo "<label>Guarda il video con PC Desktop</label>";
+								echo "<label>Guarda il video con <br/>PC Desktop</label>";
 								echo '<br/>';
 								echo '<img class="video_imgos" src="../images/os_windows.png"/> <img class="video_imgos" src="../images/os_linux.png"/>';
 							    echo '</div>';
@@ -307,7 +307,7 @@ try
 								echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
 								'<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
 								echo '<br/>';
-								echo "<label>Guarda il video con Tablet o Smartphone</label>";
+								echo "<label>Guarda il video con <br/>Tablet o Smartphone</label>";
 								echo '<br/>';
 								echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
 							    echo '</div>';
