@@ -121,6 +121,7 @@ ul.video_element img
 li div.video_thumb
 {
   text-align: center;
+  vertical-align: middle;
 }
 
 li div.video_info
@@ -141,7 +142,7 @@ li div.player_desktop, li div.player_smartphone, li div.player_iphone
 {
   margin-left: 40px;
   margin-top: 6px;
-  max-width: 120px;
+  max-width: 200px;
   font-size: 0.6em;
   text-align: center;
 }
