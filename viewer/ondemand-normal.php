@@ -39,11 +39,14 @@ if(!$mainactions->CheckLogin())
 		    
 		    $(".toggle_container").hide();
 
-		    $("h2.trigger").css("cursor","pointer").toggle(function(){
-			    $(this).addClass("active"); 
-		      }, function () {
-		      $(this).removeClass("active");
-		      });
+		    $("h2.trigger").css("cursor","pointer").toggle(function()
+		    {
+			$(this).addClass("active");
+			OndemandMp4Loading();
+		    }, function ()
+		    {
+			$(this).removeClass("active");
+		    });
 		    
 		    $("h2.trigger").click(function()
 		    {
