@@ -87,7 +87,9 @@ $("a.event_ondemand_delete").click(function()
 		/*alert("Data: " + data + "\nStatus: " + status);*/
 		    par.parent().parent().fadeOut(1000, function()
 		    {
-			    par.parent().parent().remove();
+			var video_title_obj = par.parent().parent().parent().find(".video_element_title:first");
+			video_title_obj.remove();
+			par.parent().parent().remove();
 		    });
 	    });
 	}
