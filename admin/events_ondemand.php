@@ -63,11 +63,9 @@ catch(Exception $e)
 	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-<script type="text/javascript" src="../js/moment.min.js"></script>
-<script type="text/javascript" src="../js/underscore.js"></script>
-<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../include/session.js"></script>
-<script type="text/javascript" src="../include/functions.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
+    <script type="text/javascript" src="../include/functions.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function()
@@ -139,7 +137,9 @@ $('.player_iphone').hide();
 
 var auto_refresh = setInterval(OndemandMp4Loading, 10000);
 
+
 });
+
 
 </script>
 </head>
@@ -154,6 +154,8 @@ Ciao <b><?= $mainactions->UserFullName(); ?></b></div>
 <div id='fg_membersite_content'>
 <p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p>
 </div>
+
+<div id="calendar"></div>
 
 <h2>ELENCO EVENTI ON-DEMAND:</h2>
 
@@ -209,7 +211,7 @@ try
 						}
     						
 						$ondemand_onlydate = $ondemand_onlytime = NULL;
-						if (is_null($ondemand_date))
+						if (!isset($ondemand_date) || is_null($ondemand_date))
 						{
 						    $path_parts = pathinfo($ondemand_filename);
 						    
