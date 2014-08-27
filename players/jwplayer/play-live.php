@@ -52,9 +52,12 @@ else
                         file: "rtmp://www.jwstream.org:1935/'.$app_name.'/'.$stream_name.'",
                         autostart: true,
                         controls: true,
+			rtmp: {
+			    bufferlength: 0.1  
+			},
                         aspectratio: "4:3",
                         width: 640,
-                        height: 480,
+                        height: 480
                         });'.
 			'</script>';
 
