@@ -27,7 +27,7 @@ if (!$user_role || $user_role!="1")
     <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     
-    <!--<script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>-->
+    <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
     
     <script type="text/javascript" src="../js/bistri/conference.js"></script>
 
