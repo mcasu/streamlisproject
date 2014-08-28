@@ -70,7 +70,9 @@ onBistriConferenceReady = function () {
     } );
 
     // when a new remote stream is received
-    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream ) {
+    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
+    {
+        alert("Insert new remote stream into div: " + q( "#video_container" ).attr('class'));
         // insert the new remote stream into div#video_container node
         BistriConference.attachStream( remoteStream, q( "#video_container" ) );
     } );

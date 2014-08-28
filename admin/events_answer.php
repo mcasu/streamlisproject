@@ -62,7 +62,7 @@ if (!$user_role || $user_role!="1")
     </div>
     
     <div class="pane" id="pane_2" style="display: none">
-	<div id="video_container"></div>
+	<div class="myvideo" id="video_container"></div>
 	<input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block">
     </div>
 
