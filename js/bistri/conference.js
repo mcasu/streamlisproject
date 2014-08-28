@@ -45,6 +45,7 @@ onBistriConferenceReady = function () {
             showPanel( "pane_2" );
             // insert the local webcam stream into div#video_container node
             BistriConference.attachStream( localStream, q( "#video_container" ) );
+            
             // then, for every single members present in the room ...
             for ( var i=0, max=data.members.length; i<max; i++ )
             {
@@ -55,6 +56,11 @@ onBistriConferenceReady = function () {
         } );
     } );
 
+    BistriConference.signaling.addHandler( "onIncomingRequest", function ( request ) {
+        // display an alert message
+       alert(request);
+    } );
+        
     // when an error occurred while trying to join a room
     BistriConference.signaling.addHandler( "onJoinRoomError", function ( error ) {
         // display an alert message
