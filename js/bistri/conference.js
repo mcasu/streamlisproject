@@ -46,9 +46,11 @@ onBistriConferenceReady = function () {
             // insert the local webcam stream into div#video_container node
             BistriConference.attachStream( localStream, q( "#video_container" ) );
             // then, for every single members present in the room ...
-            for ( var i=0, max=data.members.length; i<max; i++ ) {
+            for ( var i=0, max=data.members.length; i<max; i++ )
+            {
+                alert("Chiamo ID: " + data.members[i].id + " nella room: " + data.room);
                 // ... request a call
-                BistriConference.call( data.members[ i ].id, data.room );
+                BistriConference.call( data.members[i].id, data.room );
             }
         } );
     } );
