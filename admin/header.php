@@ -30,6 +30,7 @@ $(document).ready(function()
       <ul>
          <li><a href='events_live.php'><span>Live</span></a></li>
 	 <li><a href='events_ondemand.php'><span>OnDemand</span></a></li>
+	 <li><a href='events_answer.php'><span>Risposte</span></a></li>
       </ul>
    </li>
    
