@@ -32,7 +32,7 @@ if (!$user_role || $user_role!="1")
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
     <script type="text/javascript" src="../js/bistri/conference.js"></script>-->
 
-    <script src="//cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
+    <script src="//www.rtcmulticonnection.org/latest.js"></script>
 
 
     <style>
