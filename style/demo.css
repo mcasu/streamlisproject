@@ -1,0 +1,184 @@
+	body {
+		/*background-image: url( ../images/wood.png );*/
+	}
+
+	.bistri-logo {
+		position: absolute;
+		top: 20px;
+		left: 50px;
+		width: 280px;
+		height: 60px;
+		background-repeat: no-repeat;
+		/*background-image: url( ../images/logo-bistri-developers-280x60.png );*/
+	}
+
+	/* stripes animation */
+	.stripes {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: -32px;
+		height: 14px;
+		background-color: #49afcd;
+		/*background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAQ0lEQVR42uXNoQ0AIBTEUPZf4o96nKsiCEQFTZ7uupXkqE3lwfw9T+LOy52XNIc0hzSHNYc0hzSHNIc0hzSHNIc0xwb6PzfnUz+PRwAAAABJRU5ErkJggg==");*/
+		-webkit-animation: stripes-anim 1s infinite linear;
+		-moz-animation: stripes-anim 1s infinite linear;
+	}
+
+	@-webkit-keyframes stripes-anim {
+		0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+	}
+
+	@-moz-keyframes stripes-anim {
+		0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+	}
+
+	/* conference */
+
+	.row {
+		margin: 0;
+	}
+
+	.conference {
+		position: absolute;
+		margin-left: -470px;
+		margin-top: -245px;
+		padding-bottom: 10px;
+		padding-top: 10px;
+		left: 50%;
+		top: 50%;
+		width: 940px;
+		height: 470px;
+		border-radius: 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border: 1px solid #D0D0D0;
+		box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+		background-color: #FFF;
+		/*background-image: url( ../images/cream.png );*/
+	}
+
+	.compatibility,
+	.connecting,
+	.device-selector{
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		border-radius: 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		background-color: #FFF;
+		/*background-image: url( ../images/cream.png )*/
+	}
+
+	.compatibility div,
+	.connecting div {
+		position: absolute;
+		top: 45%;
+		font-size: 20px;
+                line-height: 30px;
+	}
+
+	.device-selector .span12 {
+		padding: 166px 0;
+	}
+
+	.connection{
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+
+	.device-selector input[type=button] {
+		width: 50%;
+	}
+
+	.device-selector .warn {
+		margin: 0 auto;
+		width: 50%;
+	}
+
+	.remote-streams .span6 {
+		position: relative;
+		margin: 4px;
+		height: 226px;
+		line-height: 226px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		/*background-image: url( ../images/webcam.png );*/
+		background-color: rgb(239, 239, 239);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+	}
+
+	.remote-streams video {
+		position: absolute;
+		top:0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	.control {
+		margin-top: 4px;
+		margin-left: 20px !important;
+	}
+
+	.control input[type=button] {
+		width: 100%;
+	}
+
+	.control .conference-link {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		width: 100%;
+	}
+
+	.control textarea {
+		-webkit-box-sizing: border-box;
+		width: 100%;
+	}
+
+	.control .doc {
+		margin-top: 20px;
+	}
+
+	.chat .messages {
+		overflow-y: auto;
+		height: 150px;
+		display: block;
+		padding: 9.5px;
+		margin: 0 0 10px;
+		font-size: 13px;
+		line-height: 20px;
+		word-break: break-all;
+		word-wrap: break-word;
+		background-color: #f5f5f5;
+		border: 1px solid #ccc;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+
+	.chat form {
+		overflow: hidden;
+		margin: 0;
+	}
+
+	.chat form input[type=text] {
+		float: left;
+		width: 220px;
+	}
+
+	.chat form input[type=submit] {
+		float: right;
+	}
