@@ -105,7 +105,7 @@ function joinConference(){
     // if "Conference Name" field is not empty ...
     if( roomToJoin ){
         // ... join the room
-        BistriConference.joinRoom( roomToJoin );
+        BistriConference.joinRoom( roomToJoin, 6 );
     }
     else{
         // otherwise, display an alert
