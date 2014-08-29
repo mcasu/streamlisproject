@@ -106,8 +106,8 @@ var onBistriConferenceReady = function(){
 
 	// first we need to initialize the api with appId and appKey.
 	BistriConference.init( {
-		appId: "38077edb",
-		appKey: "4f304359baa6d0fd1f9106aaeb116f33",
+		appId: "435f88e5",
+		appKey: "b0560d8d190b7c67629c336399406afe",
 		chromeExtentionId: "paoaiaehoigfjoojpeababegjiijdoan",
 		debug: true,
 		userId: undefined,
