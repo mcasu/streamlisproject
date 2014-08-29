@@ -217,7 +217,7 @@ Users that are online are highlighted in blue.</p>
 	  vlineClient.logout();
 	});
 	</script>
-    <!-- /vLine -------------------------------------------->
+    <!-- vLine -------------------------------------------->
     
   </body>
 </html>
