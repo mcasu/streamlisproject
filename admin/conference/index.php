@@ -1,7 +1,7 @@
 <html><head>
 <meta charset="UTF-8">
 <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-<link href="../style/demo.css" rel="stylesheet">
+<link href="../../style/demo.css" rel="stylesheet">
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/paoaiaehoigfjoojpeababegjiijdoan"></head>
 <body>
 	<a href="https://developers.bistri.com" target="_blank" class="bistri-logo"></a>
@@ -70,7 +70,7 @@
 
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 	<script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=3"></script>
-	<script type="text/javascript" src="../js/bistri/api-demo.js"></script>
+	<script type="text/javascript" src="../../js/bistri/api-demo.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
