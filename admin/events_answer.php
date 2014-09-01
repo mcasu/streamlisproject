@@ -11,12 +11,13 @@
 		<div class="row-fluid">
 			<div class="span8 remote-streams">
 				<div class="row">
-					<div class="span6" id="video-1"><video src="blob:https%3A//api.bistri.com/3104de25-fbad-49fc-8cdb-b31cb787f294" id="Jy1B6S9zphJ3dxXd2c3U4a2Bd3PsIw9SfsRH" autoplay=""></video></div>
+					<div class="span6" id="video-1">
+					</div>
 					<div class="span6" id="video-2"></div>
 				</div>
 				<div class="row">
 					<div class="span6" id="video-3"></div>
-					<div class="span6 local-stream"><video src="blob:https%3A//api.bistri.com/8eb01e91-a42c-44c5-906b-a00e11ef0fbf" id="adDrHYmwDiVap3h5jsgCrlLw937j92MDOdtM" autoplay=""></video></div>
+					<div class="span6 local-stream"></div>
 				</div>
 			</div>
 			<div class="span4 control" data-bind="visible: joinedRoom">
