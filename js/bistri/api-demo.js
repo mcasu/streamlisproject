@@ -19,7 +19,7 @@ function getRoomIdFromHash(){
 }
 
 function getConferenceLink( id ){
-	return location.protocol + "//" + location.host + "/demo#" + id ;
+	return location.protocol + "//" + location.host + "/admin/conference#" + id ;
 }
 
 // KO viewmodel
