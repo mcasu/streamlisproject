@@ -98,7 +98,7 @@
 		text-align: center;
 		margin: 4px;
 		height: 226px;
-		/*line-height: 226px;*/
+		width: 200px;
 		background-repeat: no-repeat;
 		background-position: center center;
 		/*background-image: url( ../images/webcam.png );*/
