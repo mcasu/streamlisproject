@@ -99,20 +99,7 @@
 		position: relative;
 		margin: 4px;
 		height: 226px;
-		line-height: 226px;
-		background-repeat: no-repeat;
-		background-position: center center;
-		/*background-image: url( ../images/webcam.png );*/
-		background-color: rgb(239, 239, 239);
-		border: 1px solid rgba(0, 0, 0, 0.15);
-	}
-	
-	.local-stream {
-		float: left;
-		height: 240px;
-		width: 240px;
-		margin-top: 20px;
-		margin-left: 10px;
+		/*line-height: 226px;*/
 		background-repeat: no-repeat;
 		background-position: center center;
 		/*background-image: url( ../images/webcam.png );*/
@@ -120,7 +107,7 @@
 		border: 1px solid rgba(0, 0, 0, 0.15);
 	}
 
-	.remote-streams video, .local-stream video {
+	.remote-streams video {
 		position: absolute;
 		top:0;
 		left: 0;
