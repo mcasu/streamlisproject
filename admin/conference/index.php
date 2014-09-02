@@ -22,7 +22,7 @@
 			</div>
 			<div class="span4 control" data-bind="visible: joinedRoom">
 				<!--div class="local-stream"></div-->
-				<pre class="conference-link">Copy and share the following link with your friends to start the<br>conference:<br><textarea data-bind="click: selectContent"></textarea></pre>
+				<pre class="conference-link">Copia il seguente link e mandalo ai tuoi amici per iniziare una conferenza:<textarea data-bind="click: selectContent"></textarea></pre>
 
 				<div class="chat">
 					<div class="messages" style="background-color: rgb(255, 255, 255);">
@@ -39,7 +39,6 @@
 				</div>
 
 				<input type="button" value="Quit Conference" class="btn btn-danger" data-bind="click: quitConference">
-				<p class="doc">Want to learn how to use Bistri WebRTC Api ? Take a look at the <a href="https://api.developers.bistri.com/documentation" target="_blank">Api Documentation</a></p>
 
 			</div>
 		</div>
@@ -61,8 +60,6 @@
 				<!--p><input type="button" value="Use Audio" data-bind="click: startAudio" class="btn btn-info btn-large"/></p-->
 				<p><input type="button" value="Use SD webcam" data-bind="click: startWebcamSD" class="btn btn-info btn-large"></p>
 				<p><input type="button" value="Use HD webcam" data-bind="click: startWebcamHD" class="btn btn-info btn-large"></p>
-				<p><input type="button" value="Share screen (*)" data-bind="click: shareScreen" class="btn btn-info btn-large"></p>
-				<p class="warn">(*): Screen sharing feature is compatible with Chrome 34+</p>
 			</div>
 		</div>
 
