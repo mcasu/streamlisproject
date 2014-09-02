@@ -13,11 +13,11 @@
 			
 			<div class="local-stream">
 				<div class="row">
-					<div class="span6" id="video-local"></div>
+					<div class="span6" id="video-5"></div>
 				</div>
 			</div>
 				
-			<div class="remote-streams">
+			<div class="span8 remote-streams">
 				<div class="row">
 					<div class="span6" id="video-1"></div>
 					<div class="span6" id="video-2"></div>
