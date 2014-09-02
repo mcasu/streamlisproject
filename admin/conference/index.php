@@ -6,9 +6,10 @@
 <body>
 	<a href="https://developers.bistri.com" target="_blank" class="bistri-logo"></a>
 	<div class="stripes" style="display: none;"></div>
+	
+	<div class="local-stream"></div>
+	
 	<div class="conference container-fluid">
-
-		<div class="span6 local-stream"></div>
 		
 		<div class="row-fluid">
 			<div class="span8 remote-streams">
