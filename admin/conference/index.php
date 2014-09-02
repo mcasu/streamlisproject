@@ -27,9 +27,7 @@
 				<div class="chat">
 					<div class="messages" style="background-color: rgb(255, 255, 255);">
 						<!-- ko foreach: messages -->
-						<div data-bind="text: $data">me &gt; ciao</div>
-						
-						<div data-bind="text: $data">peer 1 &gt; ariciao</div>
+						<div data-bind="text: $data"></div>
 						<!-- /ko -->
 					</div>
 					<form data-bind="submit: sendMessage">
