@@ -11,10 +11,12 @@
 		
 		<div class="row-fluid">
 			
-			<div class="local-stream"></div>
+			<div class="local-stream">
 				<div class="row">
 					<div class="span6" id="video-local"></div>
 				</div>
+			</div>
+				
 			<div class="remote-streams">
 				<div class="row">
 					<div class="span6" id="video-1"></div>
