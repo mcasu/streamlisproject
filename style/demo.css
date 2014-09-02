@@ -42,14 +42,14 @@
 
 	.conference {
 		position: absolute;
-		margin-left: -470px;
-		margin-top: -245px;
+		/*margin-left: -470px;
+		margin-top: -245px;*/
 		padding-bottom: 10px;
 		padding-top: 10px;
 		left: 50%;
 		top: 50%;
-		width: 940px;
-		height: 470px;
+		width: 1200px;
+		height: 600px;
 		border-radius: 6px;
 		-moz-border-radius: 6px;
 		-webkit-border-radius: 6px;
@@ -117,7 +117,7 @@
 		border: 1px solid rgba(0, 0, 0, 0.15);
 	}
 
-	.remote-streams video {
+	.remote-streams video, .local-stream video {
 		position: absolute;
 		top:0;
 		left: 0;
@@ -176,9 +176,11 @@
 
 	.chat form input[type=text] {
 		float: left;
-		width: 220px;
+		width: 240px;
+		height: 40px;
 	}
 
 	.chat form input[type=submit] {
 		float: right;
+		height: 40px;
 	}

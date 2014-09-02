@@ -8,16 +8,17 @@
 	<div class="stripes" style="display: none;"></div>
 	<div class="conference container-fluid">
 
+		<div class="span6 local-stream"></div>
+		
 		<div class="row-fluid">
 			<div class="span8 remote-streams">
 				<div class="row">
-					<div class="span6" id="video-1">
-					</div>
+					<div class="span6" id="video-1"></div>
 					<div class="span6" id="video-2"></div>
 				</div>
 				<div class="row">
 					<div class="span6" id="video-3"></div>
-					<div class="span6 local-stream"></div>
+					<div class="span6" id="video-4"></div>
 				</div>
 			</div>
 			<div class="span4 control" data-bind="visible: joinedRoom">

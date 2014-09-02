@@ -89,7 +89,7 @@ ViewModel.prototype = {
 			// when the local stream has been started and attached to the page
 			// we are ready join the conference room.
 			// event "onJoinedRoom" is triggered when the operation successed.
-			BistriConference.joinRoom( roomId, 4 );
+			BistriConference.joinRoom( roomId, 5 );
 		} );
 	}
 };
