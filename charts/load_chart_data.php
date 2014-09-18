@@ -21,7 +21,15 @@ switch ($type)
 	$rows = GraphDataUserLoggedByLoginTime($dbactions);
 	print json_encode($rows, JSON_NUMERIC_CHECK);
 	break;
+    case "event_ondemand_numberbypublisher":
+	$rows = GraphDataEventOndemandNumberByPublisher($dbactions);
+	print json_encode($rows, JSON_NUMERIC_CHECK);
+	break;
 }
+
+/***************************/
+/* FUNZIONI GRAFICI UTENTI */
+/***************************/
 
 function GraphDataUserNumberByRole($dbactions)
 {
@@ -82,6 +90,31 @@ function GraphDataUserLoggedByLoginTime($dbactions)
 	array_push($rows,$category);
 	array_push($rows,$series1);
 	
+	return $rows;
+    }
+}
+
+/***************************/
+/* FUNZIONI GRAFICI EVENTI */
+/***************************/
+
+function GraphDataEventOndemandNumberByPublisher($dbactions)
+{
+    $result = $dbactions->GetUserNumbersByRole();
+    $result = $dbactions->GetEventOndemandNumberByPublisher();
+    
+    if ($result)
+    {
+	$rows = array();
+	while ($row = mysql_fetch_array($result))
+	{
+	    // role
+	    $values[0] = $row['publisher_name'];
+	    // user number
+	    $values[1] = $row['event_number'];
+	    
+	    array_push($rows, $values);
+	}
 	return $rows;
     }
 }

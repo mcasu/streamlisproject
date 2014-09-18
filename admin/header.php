@@ -62,6 +62,6 @@ $(document).ready(function()
 </ul>  
 </div>
 
-<div class="logo">
+<!--<div class="logo">
    <img src="../images/logo_flat.png" alt="JW LIS Streaming">
-</div>
+</div>-->

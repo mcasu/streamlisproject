@@ -698,6 +698,33 @@ class DBActions
                 return $result;
         }
 	
+	function GetEventOndemandNumberByPublisher()
+        {
+                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $select_query = 'SELECT groups.group_name as publisher_name, groups.publish_code, count(*) as event_number FROM ondemand INNER JOIN groups ON ondemand.ondemand_publish_code = groups.publish_code '.
+		'group by groups.publish_code order by groups.group_name';
+
+                $result = mysql_query($select_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    return false;
+                }
+                return $result;
+        }
+	
 	function GetUserRoles()
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

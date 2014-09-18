@@ -28,6 +28,7 @@ if (!$user_role || $user_role!="1")
 
     <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
+    <script type="text/javascript" src="../js/highcharts-2.2.4/highcharts.js"></script>
     
     <script type="text/javascript">
 	$(document).ready(function()
@@ -54,6 +55,8 @@ if (!$user_role || $user_role!="1")
 	    });
 	    
 	    $('#dashboard_user_charts').load('/charts/loadcharts_user.php');
+	    
+	    $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
 	    
 	    $("h2.trigger").addClass("active");
 	    $(".toggle_container").show();
@@ -144,6 +147,16 @@ if (!$user_role || $user_role!="1")
 	    
 	echo '</div>'; /* FINE DIV CLASS "toggle_container" */
 
+	echo '<h2 class="toggle trigger">'.
+	    '<a href="#">Eventi'.
+	    '<img class= "group_logo" src="../images/event.png" /></a>'.
+	'</h2>';
+	
+	echo '<div class="toggle_container">';
+	    echo '<div class="left">';
+			    echo '<div id="dashboard_event_charts"></div>';
+	    echo '</div>'; /* FINE DIV CLASS "left" */
+	echo '</div>'; /* FINE DIV CLASS "toggle_container" */
 	
     }
     catch(PDOException $e)

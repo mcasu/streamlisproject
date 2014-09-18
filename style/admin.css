@@ -268,12 +268,17 @@ div.video_loading
     };
 }
 
-#dashboard_user_charts div {
+/*******************/
+/*** CSS GRAFICI ***/
+/*******************/
+
+#dashboard_user_charts div, #dashboard_event_charts div {
   display:inline-block;
   float: left;
-  width:600px;
+  width:800px;
   height:250px;
 }
+
 
 div.table_container {
   display:inline-block;
