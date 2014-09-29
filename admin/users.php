@@ -18,41 +18,74 @@ if (!$user_role || $user_role!="1")
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 <head>
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
-	<title>JW LIS Streaming - Utenti</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>JW LIS Streaming - Utenti</title>
 	
-	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
-	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
-
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="../include/session.js"></script>
+    <link rel='stylesheet' type='text/css' href='../style/header.css' />
+    <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
-<script type="text/javascript">
-$(function()
+    <script type="text/javascript">
+    
+$(document).ready(function()
 {
-	$("a.userdelete").click(function()
+    $("#btn_user_delete").prop('disabled', true);
+    
+    $("input:radio").click(function(lastSelectedRow)
+    {
+	$("#users_table").find("tr").removeClass("active");
+	
+	var isChecked = $(this).prop("checked");
+	var selectedRow = $(this).parent("td").parent("tr");
+    
+	if (isChecked)
 	{
-		var td_id=$(this).parent().attr('id');
-		par=$(this).parent();
+	    selectedRow.addClass("active");
+	    $("#btn_user_delete").prop('disabled', false);
+	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
+	}
+	else
+	{
+	    selectedRow.removeClass("active");
+	    //selectedRow.css({ "background-color": '', "color": "black" });
+	}
+	
+    });
 
-		if (confirm("Vuoi davvero eliminare?")){
-		$.post("user_delete.php",{user_id:td_id,},
-		function(data,status)
-		{
-			/*alert("Data: " + data + "\nStatus: " + status);*/
-			par.parent().fadeOut(1000, function() 
-			{
-				par.parent().remove();
-			});
-		});
-		}
-	});
+    $("#btn_user_delete").click(function()
+    {
+	var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
+	
+	var tr_id=tr_obj.attr('id');
+	//alert("Vuoi cancellare id: " + tr_id);
+	
+	if (confirm("Vuoi davvero eliminare l'utente con ID [" + tr_id + "]?"))
+	{
+	    $.post("user_delete.php",{user_id:tr_id,},
+	    function(data,status)
+	    {
+		    //alert("Data: " + data + "\nStatus: " + status);
+		    tr_obj.fadeOut(1000, function() 
+		    {
+			    tr_obj.remove();
+			    $("#btn_user_delete").prop('disabled', true);
+		    });
+	    });
+	}
+    });
+
+    
 });
-        </script>
 
+</script>
+    
 </head>
 
 
@@ -61,58 +94,60 @@ $(function()
 
 <br/>
 
-<div align="right" id='fg_membersite_content'>
-User logged <b><?= $mainactions->UserFullName(); ?></b></div>
-
-<div id='fg_membersite_content'>
-<p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></p>
+<div align="right" style="margin:0 6px 0 0">
+    <h5><b><?= $mainactions->UserFullName(); ?></b>, bentornato!</h5>
 </div>
-<br/>
 
-<div id='fg_membersite_content'>
-<table class="imagetable" id="users_table">
-<tr class="head">
-	<th>NOME</th><th>ID</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th><th>AZIONI</th>
-</tr>
-<?php
-    try
-    {
-        $result = $dbactions->GetUsers();
+<p><h4 style="margin:0 0 0 6px"> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
-        if (!$result)
-        {
-                error_log("No Results");
-        }
+<div class="container-fluid">
+    <div class="panel panel-default">
 
-        while($row = mysql_fetch_array($result))
-        {
-                $user_id=$row['user_id'];
-                $user_name=$row['user_name'];
-                $user_mail=$row['user_mail'];
-                $username=$row['username'];
-                $confirmcode=$row['confirmcode']=="y"?"SI":"NO";
-                $user_group_name=$row['user_group_name'];
-                $user_role_name=$row['user_role_name'];
+    <div class="panel-heading">
+	<button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button></div>
 
-		echo '<tr class="users_table">';
-			echo "<td>" . $user_name . "</td>";
-			echo "<td>" . $user_id . "</td>";
-			echo "<td>" . $user_mail . "</td>";
-			echo "<td>" . $username . "</td>";
-			echo "<td>" . $user_group_name . "</td>";
-			echo "<td>" . $user_role_name . "</td>";
-			echo "<td>" . $confirmcode . "</td>";
-			echo "<td id=\"".$user_id."\"><a class=\"userdelete\" href=\"javascript:void()\"/>".
-			"<img src=\"../images/delete.png\" width=\"20\"/></td>";
-		echo '</tr>';
-        }
-    }
-    catch(PDOException $e)
-    {
-        echo 'No Results';
-    }
-?>
-</table>
+	<div class="panel-body">
+	    <table class="table table-hover" id="users_table">
+	
+	    <?php
+	    
+		$result = $dbactions->GetUsers();
+		
+		if ($result)
+		{
+		    echo '<tr class="head">';
+		    echo'<th></th><th>NOME</th><th>ID</th><th>MAIL</th>'.
+		    '<th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th>';
+		    echo '</tr>';
+		    
+		    while ($row = mysql_fetch_array($result))
+		    {
+			$values[0]=$row['user_name'];
+			$values[1]=$row['user_id'];
+			$values[2]=$row['user_mail'];
+			$values[3]=$row['username'];
+			$values[4]=$row['user_group_name'];
+			$values[5]=$row['user_role_name'];
+			$values[6]=$row['confirmcode']=="y"?"SI":"NO";
+			
+			echo '<tr class="users_table" id="' .$values[1].'">';
+				    echo '<td><input type="radio" name="user_selected" /></td>';
+				    echo '<td>' . $values[0] . '</td>';
+				    echo '<td>' . $values[1] . '</td>';
+				    echo '<td>' . $values[2] . '</td>';
+				    echo '<td>' . $values[3] . '</td>';
+				    echo '<td>' . $values[4] . '</td>';
+				    echo '<td>' . $values[5] . '</td>';
+				    echo '<td>' . $values[6] . '</td>';
+			echo '</tr>';
+		    }
+		    
+		}
+	    
+	    ?>
+	    </table>
+	</div>
+    </div>
 </div>
 
 </body>

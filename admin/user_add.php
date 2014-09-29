@@ -29,6 +29,7 @@ if(isset($_POST['submitted']))
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title>JW LIS Streaming - Nuovo utente</title>
     <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
+    <link rel='stylesheet' type='text/css' href='../style/header.css' />
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     <link rel="STYLESHEET" type="text/css" href="../style/pwdwidget.css" />
 
