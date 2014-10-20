@@ -14,27 +14,38 @@ if($mainactions->ResetPassword())
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Reset Password</title>
+    <title>JW LIS Streaming - Reset Password</title>
     <link rel="stylesheet" href="/style/bootstrap.min.css"/>
 </head>
 
 <body>
-<?php
-if($success)
-{
-    echo '<h2>Nuova password generata con successo!</h2>';
-    echo '<div class="alert alert-success" role="alert">
-        <h4>Abbiamo spedito al tuo account di posta la nuova password.</h4>';
-    echo '</div>';
-}
-else
-{
-    echo '<h2>Procedura di generazione nuova password fallita!</h2>';
-    echo '<div class="alert alert-danger" role="alert">
-        <h4>'. $mainactions->GetErrorMessage() .'</h4>';
-    echo '</div>';
-}
-?>
 
+<div class="container-fluid">
+    <?php
+    if($success)
+    {
+        echo '<div class="alert alert-success" role="alert">';
+            echo '<h2>Nuova password generata con successo!</h2>';
+            echo '<h5>Abbiamo spedito al tuo account di posta la nuova password.</h5>';
+            echo '<br/>';
+            echo '<p>';
+                echo '<a href="/login.php">Vai alla pagina di login.</a>';
+            echo '</p>';
+        echo '</div>';
+    }
+    else
+    {
+        
+        echo '<div class="alert alert-danger" role="alert">';
+            echo '<h2>Procedura di generazione nuova password fallita!</h2>';
+            echo '<h5>'. $mainactions->GetErrorMessage() .'</h5>';
+            echo '<br/>';
+            echo '<p>';
+                echo '<a href="/login.php">Vai alla pagina di login.</a>';
+            echo '</p>';
+        echo '</div>';
+    }
+    ?>
+</div>
 </body>
 </html>
