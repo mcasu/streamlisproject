@@ -16,7 +16,7 @@
    <li class='has-sub'>
 	<a href='#'>Profilo<img src="../images/profile.png" height="32" width="32"></a>
       <ul>
-         <li><a href='../change-pwd.php'><span>Cambia password</span></a></li>
+         <li><a href='change-pwd.php'><span>Cambia password</span></a></li>
          <li><a href='../logout.php'><span>Esci</span></a></li>
       </ul>
    </li>

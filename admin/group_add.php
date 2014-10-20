@@ -1,21 +1,26 @@
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>JW LIS Streaming - Nuova congregazione</title>
+    
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-$GroupHasCreated=false;
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type='text/javascript' src='../js/jquery.validate.js'></script>
+    
+    <script type="text/javascript" src="../include/session.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
 
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../login.php");
-    exit;
-}
+<body>
 
-$user_role = $mainactions->GetSessionUserRole();
-if (!$user_role || $user_role!="1")
-{
-        $utils->RedirectToURL("../viewer/live-normal.php");
-}
+<?php
+
+include("header.php");
 
 if(isset($_POST['submitted']))
 {
@@ -23,114 +28,151 @@ if(isset($_POST['submitted']))
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-    <title>JW LIS Streaming - Nuovo utente</title>
-    <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css" />
-    <link rel='stylesheet' type='text/css' href='../style/header.css' />
-    <link rel='stylesheet' type='text/css' href='../style/admin.css' />
-    <link rel="STYLESHEET" type="text/css" href="../style/pwdwidget.css" />
-
-    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="../include/session.js"></script>
-    
-    <script type='text/javascript' src='../scripts/gen_validatorv31.js'></script>
-    <script type="text/javascript" src="../scripts/pwdwidget.js"></script>      
-</head>
-<body>
-
-<?php include("header.php"); ?>
 </br>
-<!-- Form Code Start -->
-<div id='fg_membersite'>
-    
-<form id='register' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-<fieldset >
-<div align="left">
-   <label class="login-legend">Nuovo gruppo</label>   
-</div>
+<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
+<p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
-<input type='hidden' name='submitted' id='submitted' value='1'/>
+<div class="container-fluid">
+    <div class="panel panel-primary">
+      
+      <div class="panel-heading">
+	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>NUOVA CONGREGAZIONE</b></h2>
+      </div>
+      
+      <div class="panel-body">
+	<form role="form" id="create_group_form" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
+	<fieldset >
+	
+	<div class="form-group btn_actions">
+	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea congregazione</button>
+	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
+	</div>
+	</br>
+	<?php
 
-<div class='short_explanation'>* required fields</div>
-<input type='text'  class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->rand_key); ?>' />
-
-<div><span class='error'><?php echo $dbactions->GetErrorMessage(); ?></span></div>
-<div class='container'>
-    <label for='group_name' >Group Name*: </label><br/>
-    <input type='text' name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="128" /><br/>
-    <span id='register_group_name_errorloc' class='error'></span>
-</div>
-
-
-<div class='container'>
-	<label for='group_type' >Tipo di gruppo*:</label><br/>
-	<select name="group_type" id="group_type">
+	    if (isset($GroupHasCreated) && $GroupHasCreated)
+	    {
+		    echo '<br/><div class="alert alert-success" role="alert">';
+			echo '<h4>Congregazione creata con successo!</h4>';
+			    echo '<br/>';
+			    echo '<br/>';
+			    echo '<button type="button" class="btn btn-success btn_action_reload">Crea un\'altra congregazione</button>';
+		    echo '</div>';
+	    }
+	    elseif(isset($GroupHasCreated))
+	    {
+		echo '<br/><div class="alert alert-danger" role="alert">';
+		    echo '<h4><b>Creazione della congregazione fallita!</b></h4>';
+		    echo '<i>'.$mainactions->GetErrorMessage().'</i>';
+		    echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
+		    echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
+		echo '</div>';
+	    }
+	?>
+	    
+	<input type='hidden' name='submitted' id='submitted' value='1'/>
+	<input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->rand_key); ?>' />
+	
+	<div class="form-group">
+	    <div class="control-group">
+		<!-- CAMPO NOME CONGREGAZIONE -->
+		<label for='group_name' >Nome congregazione:</label><br/>
+		<div class="controls">
+		    <input type="text" class="form-control" placeholder="Nome congregazione" name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="128" /><br/>
+		</div>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <!-- CAMPO TIPO CONGREGAZIONE -->
+	    <label for='group_type' >Tipo di gruppo:</label><br/>
+	    <select class="form-control" name="group_type" id="group_type">
 		<option value="Congregazione">Congregazione</option>
-		<option value="Gruppo">Gruppo</option>
+		<option value="Gruppo">Gruppo</option>	
+	    </select>
+	<br/>
+
+	<!-- CAMPO RUOLO DELLA CONGREGAZIONEs -->
+        <label for='group_roles' >Ruolo della congregazione:</label><br/>
+        <select class="form-control" name="group_role_name" id="group_role_name">
+	    <?php
+		try
+		{
+		    $result = $dbactions->GetGroupRoles();
+	    
+		    if (!$result)
+		    {
+			    error_log("No Results");
+		    }
+	    
+		    while($row = mysql_fetch_array($result))
+		    {
+			    $group_role_name=$row['group_role_name'];
+			    echo '<option value="' . $group_role_name . '">' . $group_role_name . '</option>"';
+		    }
+		}
+		catch(PDOException $e)
+		{
+		    echo 'No Results';
+		}
+	    ?>
 	</select>
+	
+	</br>
+	</br>
+	</br>
+	<div class="form-group btn_actions">
+	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea congregazione</button>
+	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
+	</div>
+    
+	</fieldset>
+	</form>
+    </div>
 </div>
-
-<div class='container'>
-    <label for='group_roles' >Ruolo del gruppo*:</label><br/>
-    <select name="group_role_name" id="group_role_name">
-<?php
-    try
-    {
-        /*** query the database ***/
-        $result = $dbactions->GetGroupRoles();
-
-        if (!$result)
-        {
-                error_log("No Results");
-        }
-
-        while($row = mysql_fetch_array($result))
-        {
-                $group_role_name=$row['group_role_name'];
-                echo '<option value="' . $group_role_name . '">' . $group_role_name . '</option>"';
-        }
-    }
-    catch(PDOException $e)
-    {
-        echo 'No Results';
-    }
-?>
-</select>
-</div>
-
-</br>
-</br>
-
-<div class='container'>
-    <input type='submit' name='Submit' value='Crea' />
-</div>
-
-</fieldset>
-</form>
-
-
-<!-- client-side Form Validations:
-Uses the excellent form validation script from JavaScript-coder.com-->
 
 <script type='text/javascript'>
-    var frmvalidator  = new Validator("register");
-    frmvalidator.EnableOnPageErrorDisplay();
-    frmvalidator.EnableMsgsTogether();
-    frmvalidator.addValidation("group_name","req","Please provide the group name");
-</script>
-
-</br>
-<?php   
-
-if ($GroupHasCreated)
+    
+jQuery(document).ready(function ()
 {
-	echo "<h2>Gruppo creato con successo!</h2>";
-}
+    $('#create_group_form').validate(
+    {
+	rules: {
+	    group_name: {
+		required: true,
+		minlength: 4
+	    }
+	},
+	
+	highlight: function(element)
+	{
+	    $(element).closest('.control-group').removeClass('success').removeClass('has-success').addClass('error');
+	},
+	
+	success: function(element)
+	{
+	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
+	}
+    });
 
-?>
+    if( $('.alert').is(':visible') )
+    {
+	$('.btn_action_reset').attr('disabled', "disabled");
+    }
+    if( $('.alert-success').is(':visible') )
+    {
+	$('.btn_actions').hide();
+	$('input').attr('disabled',true);
+	$('select').attr('disabled',true);
+    }
+    $('.btn_action_reload').click(function()
+    {
+	var url = "group_add.php";
+	$(location).attr('href',url);
+    });
+
+});
+</script>
 
 </body>
 </html>

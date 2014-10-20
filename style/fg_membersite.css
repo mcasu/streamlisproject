@@ -127,13 +127,6 @@ You can customize all the aspects of the form in this style sheet
    color:#333;   
 }
 
-/* spam_trap: This input is hidden. This is here to trick the spam bots*/
-#fg_membersite .spmhidip
-{
-   display:none;
-   width:10px;
-   height:3px;
-}
 
 #fg_membersite div.pwd-reset a {
    color: #fff;

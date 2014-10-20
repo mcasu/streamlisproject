@@ -1,41 +1,24 @@
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../login.php");
-    exit;
-}
-
-$user_role = $mainactions->GetSessionUserRole();
-if (!$user_role || $user_role!="1")
-{
-	$utils->RedirectToURL("../viewer/live-normal.php");
-}
-
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-      <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-      <title>Home page</title>
-      <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
-    <link rel='stylesheet' type='text/css' href='../style/header.css' />
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      
+    <title>Graphics</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel='stylesheet' type='text/css' href='../style/admin.css' />
     
-    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
 <?php include("header.php"); ?>
 </br>
-<div align="right" id='fg_membersite_content'>
-<b><?= $mainactions->UserFullName(); ?></b>, Welcome back!</div>
 
-<div><p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p></div>
+<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
+<p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 
 <iframe height="700" width="100%" src="/monitorix"></iframe>

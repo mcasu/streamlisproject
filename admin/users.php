@@ -1,22 +1,3 @@
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../login.php");
-    exit;
-}
-
-$user_role = $mainactions->GetSessionUserRole();
-if (!$user_role || $user_role!="1")
-{
-        $utils->RedirectToURL("../viewer/live-normal.php");
-}
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 <head>
@@ -25,14 +6,14 @@ if (!$user_role || $user_role!="1")
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>JW LIS Streaming - Utenti</title>
 	
-    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-    <script type="text/javascript" src="../include/session.js"></script>
-    <link rel='stylesheet' type='text/css' href='../style/header.css' />
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
-    <script type="text/javascript">
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../include/session.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    
+<script type="text/javascript">
     
 $(document).ready(function()
 {
@@ -94,11 +75,8 @@ $(document).ready(function()
 
 <br/>
 
-<div align="right" style="margin:0 6px 0 0">
-    <h5><b><?= $mainactions->UserFullName(); ?></b>, bentornato!</h5>
-</div>
-
-<p><h4 style="margin:0 0 0 6px"> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
+<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
+<p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <div class="container-fluid">
     <div class="panel panel-default">

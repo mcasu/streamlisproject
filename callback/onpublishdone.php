@@ -37,6 +37,7 @@ if(isset($_POST['pageurl']))
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s");
 
+/*** Delete record from live table ***/
 if (!$dbactions->OnPublishDone($nginx_id,$app_name,$stream_name,$client_addr))
 {
     error_log("ERROR OnPublishDone failed: ".$dbactions->GetErrorMessage());

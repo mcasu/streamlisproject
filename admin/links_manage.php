@@ -1,77 +1,25 @@
-
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../login.php");
-    exit;
-}
-
-$user_role = $mainactions->GetSessionUserRole();
-if (!$user_role || $user_role!="1")
-{
-        $utils->RedirectToURL("../viewer/live-normal.php");
-}
-
-try
-{
-        $result = $dbactions->GetGroups();
-
-        if (!$result)
-        {
-                error_log("No Results");
-        }
-
-        $count=0;
-        $group_array=Array();
-        while($row = mysql_fetch_array($result))
-        {
-                $group_id=$row['group_id'];
-                $group_name=$row['group_name'];
-                $group_type=$row['group_type'];
-                $group_role_name=$row['group_role_name'];
-
-                $group_array[$group_id]=Array();
-                $group_array[$group_id]['group_id']=$row['group_id'];
-                $group_array[$group_id]['group_name']=$row['group_name'];
-                $group_array[$group_id]['group_type']=$row['group_type'];
-                $group_array[$group_id]['group_role_name']=$row['group_role_name'];
-
-                $count++;
-        }
-}
-catch(Exception $e)
-{
-        echo 'No Results';
-}
-
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 
 <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>JW LIS Streaming - Gestisci relazioni</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
 
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-	<title>JW LIS Streaming - Gestisci relazioni</title>
-	<link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
-	<link rel='stylesheet' type='text/css' href='../style/header.css' />
-	<link rel='stylesheet' type='text/css' href='../style/admin.css' />
-
-    <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function()
 {
 
-$("input.viewer_add").click(function()
+$("button.viewer_add").click(function()
 {
-    var group_id = $(this).parent().parent().attr('id');
+    var group_id = $(this).parent().parent().parent().attr('id');
     var group_unlinked_id = "gul_" + group_id;
     var group_linked_id = "gl_" + group_id;
     
@@ -109,9 +57,9 @@ $("input.viewer_add").click(function()
 
 });
     
-$("input.viewer_del").click(function()
+$("button.viewer_del").click(function()
 {
-    var group_id = $(this).parent().parent().attr('id');
+    var group_id = $(this).parent().parent().parent().attr('id');
     var group_unlinked_id = "gul_" + group_id;
     var group_linked_id = "gl_" + group_id;
     
@@ -148,20 +96,6 @@ $("input.viewer_del").click(function()
     });
     
 });    
-    
-
-$(".toggle_container").hide();
-
-$("h2.trigger").css("cursor","pointer").toggle(function(){
-  	$(this).addClass("active"); 
-  }, function () {
-  $(this).removeClass("active");
-  });
-
-$("h2.trigger").click(function()
-{
-	$(this).next(".toggle_container").slideToggle("slow");
-});
 
 });
 
@@ -172,21 +106,45 @@ $("h2.trigger").click(function()
 <body>
 <?php include("header.php"); ?>
 <br/>
-<div align="right" id='fg_membersite_content'>
-Ciao <b><?= $mainactions->UserFullName(); ?></b></div>
 
-<div id='fg_membersite_content'>
-<p>La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b>.</p>
-</div>
+<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
+<p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <h2>ELENCO CONGREGAZIONI PUBLISHER:</h2>
 
-<div>
 <?php 
 
 
 try
 {
+        $result = $dbactions->GetGroups();
+
+        if (!$result)
+        {
+                error_log("No Results");
+        }
+
+        $count=0;
+        $group_array=Array();
+        while($row = mysql_fetch_array($result))
+        {
+                $group_id=$row['group_id'];
+                $group_name=$row['group_name'];
+                $group_type=$row['group_type'];
+                $group_role_name=$row['group_role_name'];
+
+                $group_array[$group_id]=Array();
+                $group_array[$group_id]['group_id']=$row['group_id'];
+                $group_array[$group_id]['group_name']=$row['group_name'];
+                $group_array[$group_id]['group_type']=$row['group_type'];
+                $group_array[$group_id]['group_role_name']=$row['group_role_name'];
+
+                $count++;
+        }
+
+        echo '<div class="container-fluid">';
+	echo '<div class="panel-group" id="accordionMain">';	
+
         foreach ($group_array AS $id => $row)
         {
                 $group_id=$row['group_id'];
@@ -198,69 +156,89 @@ try
 		{
 			$viewers = $dbactions->GetViewersByPublisher($group_id);
 				
-				echo '<h2 class="toggle trigger">'.
-					'<a href="#">'.$group_name.'</a>'.
-				     '</h2>';  /*<img class="group_logo" src="../images/group.png" height="30" width="32"/>*/
-					
-					echo '<div class="toggle_container" id="'.$group_id.'">';
-					    if (mysql_num_rows($viewers) < 1)
-					    { 
-						    echo '<div style="margin: 0 0 0 10px">Nessun gruppo ha relazioni con questa congregazione.</div>';
-					    }
-					    else
-					    {
-						    echo '<div style="margin: 0 0 0 10px">Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:</div>';
-					    }
-					    
-					    echo '<div class="left">';
-						echo '<div id="fg_membersite_content">';
-						echo '<table class="imagetable">'.
-						'<tr class="head">'.
-							'<th>VIEWER ASSOCIATI</th><th>AZIONI</th><th>VIEWER DISPONIBILI</th>'.
-						'</tr>';
-	
-						echo '<tr id='.$group_id.'>';
-						
-						    // TD VIEWER ASSOCIATI
-						    echo '<td>';
-						    echo '<select class="group_linked" id="gl_'.$group_id.'" style="min-width:120px" multiple>';
-						    while($row = mysql_fetch_array($viewers))
-						    {
-							    $viewer_id=$row['viewer_id'];
-							    $viewer_name=$row['viewer_name'];
-	    
-							    echo '<option id="'.$viewer_id.'">'.$viewer_name.'</option>';
-						    }
-						    echo '</select>';
-						    echo '</td>';
 				
-						    // TD PULSANTI
-						    echo '<td rowspan="2">';
-						    echo '<input class="viewer_add" type="submit" name="viewer_add" value="<<"/>';
-						    echo '<br/>';
-						    echo '<input class="viewer_del" type="submit" name="viewer_del" value=">>"/>';
-						    echo '</td>';
+			echo '<div class="panel panel-primary">'.
+			    /*** PANEL HEADING ***/
+			    '<div class="panel-heading">'.
+				'<a class="title" data-toggle="collapse" data-parent="#accordionMain" href="#accordionOndemand_'.$group_id.'">'.
+				    '<h3 class="panel-title">'.
+					'<span class="glyphicon glyphicon-chevron-left pull-left"></span>'.
+					'<span><img src="../images/group.png" height="34" width="32"></span>'.
+					'<span> <b>'.$group_name.'</b> </span>  '.
+					'<span class="glyphicon glyphicon-chevron-right pull-right"></span>'.
+				    '</h3>'.
+				'</a>'.
+			    '</div>';
+				
+			    /*** PANEL BODY ***/
+			    echo '<div id="accordionOndemand_'.$group_id.'" class="panel-collapse collapse">';
+			    echo '<div class="panel-body">';
+				
+			    if (mysql_num_rows($viewers) < 1)
+			    { 
+				    echo '<h4>Nessun gruppo ha relazioni con questa congregazione.</h4>';
+			    }
+			    else
+			    {
+				    echo '<h4>Elenco congregazioni che possono vedere le adunanze di <b>'.$group_name.'</b>:</h4>';
+			    }
+			    
+			    echo '<div>';
+				echo '<table class="table table-bordered">'.
+				'<tr class="head">'.
+					'<th class="text-center">VIEWER ASSOCIATI</th><th class="text-center">AZIONI</th><th class="text-center">VIEWER DISPONIBILI</th>'.
+				'</tr>';
 
-						    $viewers_available=$dbactions->GetViewersAvailable($group_id);
+				echo '<tr id='.$group_id.'>';
+				
+				    // TD VIEWER ASSOCIATI
+				    echo '<td>';
+				    echo '<select multiple class="form-control group_linked" id="gl_'.$group_id.'">';
+				    while($row = mysql_fetch_array($viewers))
+				    {
+					    $viewer_id=$row['viewer_id'];
+					    $viewer_name=$row['viewer_name'];
+
+					    echo '<option id="'.$viewer_id.'">'.$viewer_name.'</option>';
+				    }
+				    echo '</select>';
+				    echo '</td>';
+		
+				    // TD PULSANTI
+				    echo '<td>';
+					echo '<p class="text-center">';
+					    echo '<button class="btn btn-primary viewer_add" type="submit" style="width:140px"><span class="glyphicon glyphicon-arrow-left"></span> Aggiungi il viewer</button>';
+					    echo '<br/>';
+					    echo '<br/>';
+					    echo '<button class="btn btn-primary viewer_del" type="submit" style="width:140px">Elimina il viewer <span class="glyphicon glyphicon-arrow-right"></button>';
+					echo '</p>';
+				    echo '</td>';
+
+				    $viewers_available=$dbactions->GetViewersAvailable($group_id);
+				
+				    // TD VIEWER NON ASSOCIATI
+				    echo '<td>';
+					echo '<select multiple class="form-control group_unlinked" id="gul_'.$group_id.'">';
+					while($row = mysql_fetch_array($viewers_available))
+					{
 						
-						    // TD VIEWER NON ASSOCIATI
-						    echo '<td>';
-						    echo '<select class="group_unlinked" id="gul_'.$group_id.'" style="min-width:120px" multiple>';
-						    while($row = mysql_fetch_array($viewers_available))
-						    {
-							    
-							    echo '<option id="'.$row['group_id'].'">'.$row['group_name'].'</option>';
-						    }
-						    echo '</select>';
-						    echo '</td>';
-						    
-						echo '</tr>';
-						echo '</table>';
-						echo '</div>';
-					    echo '</div>'; /* FINE DIV CLASS "left" */
-				echo '</div>'; /* FINE DIV CLASS "toggle_container" */
+						echo '<option id="'.$row['group_id'].'">'.$row['group_name'].'</option>';
+					}
+					echo '</select>';
+				    echo '</td>';
+				    
+				echo '</tr>';
+				echo '</table>';
+			    echo '</div>';
+				    
+			echo '</div>'; /* FINE PANEL BODY */
+			echo '</div>';
+		    echo '</div>'; /* FINE PANEL PRIMARY */
 		}
         }
+	
+	echo '</div>';
+	echo '</div>';
     }
     catch(Exception $e)
     {
@@ -269,6 +247,5 @@ try
 
 ?>
 
-</div>
 </body>
 </html>

@@ -344,14 +344,14 @@ class MainActions
             return false;
         }
         
-        if(empty($_POST['oldpwd']))
+        if(empty($_POST['oldpassword']))
         {
-            $this->HandleError("Old password is empty!");
+            $this->HandleError("Il campo password attuale non può essere vuoto!");
             return false;
         }
-        if(empty($_POST['newpwd']))
+        if(empty($_POST['newpassword']))
         {
-            $this->HandleError("New password is empty!");
+            $this->HandleError("Il campo nuova password non può essere vuoto!");
             return false;
         }
         
@@ -361,14 +361,14 @@ class MainActions
             return false;
         }
         
-        $pwd = trim($_POST['oldpwd']);
+        $pwd = trim($_POST['oldpassword']);
         
         if($user_rec['password'] != md5($pwd))
         {
             $this->HandleError("The old password [".md5($pwd)."] does not match! [".$user_rec['password']."]");
             return false;
         }
-        $newpwd = trim($_POST['newpwd']);
+        $newpwd = trim($_POST['newpassword']);
         
         if(!$this->dbactionsInstance->ChangePasswordInDB($user_rec, $newpwd))
         {

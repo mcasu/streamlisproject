@@ -19,6 +19,110 @@
   color: #000;
 }
 
+.nav {
+  background-color: #333;
+  font-size: 1.2em;
+}
+
+.nav a {
+  color: #fff;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  color: #fff;
+  background-color: #3c78c3;
+}
+
+.nav > li > a:hover {
+  color: #fff;
+  background-color: #3c78c3;
+}
+
+.nav img {
+  margin: 0 4px 0 2px;
+  padding: 2px 2px 2px 2px;
+}
+
+.dropdown-menu {
+  background-color: #333;
+  color: #fff;
+}
+
+.dropdown-menu > li > a {
+  color: #fff;
+}
+.dropdown-menu > li > a:hover {
+  color: #fff;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #333;
+  border-color: #333;
+  padding: 1px 1px;
+  height: 40px;
+}
+
+.panel-primary > .panel-heading:hover {
+  background-color: #3c78c3;
+}
+
+.panel-title {
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  /*padding: 10px 10px;*/
+}
+
+a:hover, a:focus {
+    color: #2A5488;
+    text-decoration: none;
+}
+
+.panel-primary {
+  border-color: #333;
+}
+.panel-primary > .panel-heading .badge {
+  margin: 0 8px;
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+  margin-top: 10px;
+}
+
+.glyphicon-chevron-left {
+  margin-right: 8px;
+  margin-left: 2px;
+}
+.glyphicon-chevron-right {
+  margin-left: 8px;
+  margin-right: 2px;
+}
+
+/***************************************************/
+/***************************************************/
+
+
+/************************/
+/**** USERS PAGE CSS ****/
+/************************/
+
+/* spam_trap: This input is hidden. This is here to trick the spam bots*/
+.spmhidip
+{
+   display:none;
+   width:10px;
+   height:3px;
+}
+
+label.error
+{
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+    
+/***********************************************/
 
 h2.toggle {
   width: 665px;
@@ -62,7 +166,7 @@ h2.toggle a:hover {
 }
 
 a img.group_logo {
-  margin: 0 0 6px 15px;
+  margin: 6px 0 0 0;
   height: 30px;
   width: 32px;
   vertical-align: middle;
@@ -95,16 +199,10 @@ div.left {
   margin: 4px 0 0 10px;
 }
 
+
 div.video_element_title
 {
   text-align: left;
-  margin: 0;
-}
-
-div.video_element_title h2
-{
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
-  font-size: 1.0em;
   margin: 0;
 }
 
@@ -115,7 +213,7 @@ ul.video_element
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 1px;
-  width: 97%;
+  width: 98%;
 }
 
 ul.video_element:hover
@@ -181,14 +279,16 @@ a.play-button
   height: 48px;
 }
 
-a.play-button img.video_imgdevice
+a.play-button img.video_imgdevice,
+div.video_loading img.video_imgdevice
 {
   width: 42px;
   height: 42px;
   margin: 2px;
 }
 
-div.player_desktop img.video_imgos, div.player_iphone img.video_imgos
+div.player_desktop img.video_imgos,
+div.player_iphone img.video_imgos
 {
   width: 32px;
   height: 32px;

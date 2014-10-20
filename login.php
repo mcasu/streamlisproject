@@ -6,7 +6,8 @@ $dbactions = $mainactions->GetDBActionsInstance();
 
 if(isset($_POST['submitted']))
 {
-   if($mainactions->Login())
+   $UserLogged = $mainactions->Login();
+   if($UserLogged)
    {      
 	$user_role = $mainactions->GetSessionUserRole();	
 	if ($user_role && $user_role=="1")
@@ -21,64 +22,117 @@ if(isset($_POST['submitted']))
 }																									
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 <head>
-      <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-      <title>JW LIS Streaming - Login</title>
-      <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css" />
-      <script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
+   <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
+   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+   <title>JW LIS Streaming - Login</title>
+   <link rel="stylesheet" href="/style/bootstrap.min.css">
+   <link rel='stylesheet' type='text/css' href='/style/admin.css' />
+   <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
+   <script type='text/javascript' src='/js/jquery.validate.js'></script>
+   <script src="/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-
-<div id='fg_membersite' align="center">
-<div align=center>
-	<h2 align="center">Benvenuto su JW LIS Streaming</h2>
-	<img src="images/logo_flat.png" alt="JW LIS Streaming" align="center" height="56" width="60"> 
-</div>
-
-<form id='login' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-<fieldset>
-
-<div align="left">
-   <label class="login-legend">Login</label>   
-</div>
-
-<input type='hidden' name='submitted' id='submitted' value='1'/>
-
-<div><span class='error'><?php echo $dbactions->GetErrorMessage(); ?></span></div>
-<div class='container'>
-    <label for='username' >Nome utente:</label><br/>
-    <input type='text' name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
-    <span id='login_username_errorloc' class='error'></span>
-</div>
-<div class='container'>
-    <label for='password' >Password:</label><br/>
-    <input type='password' name='password' id='password' maxlength="128" /><br/>
-    <span id='login_password_errorloc' class='error'></span>
-</div>
-
-</br>
-<div class='container'>
-    <input class="login" align="center" type='submit' name='Submit' value='ENTRA' />
-</div>
-<div class="pwd-reset"><a href='reset-pwd-req.php'>Password dimenticata?</a></div>
-</fieldset>
-</form>
+   
+<div class="container-fluid">
+   <div class="panel panel-default">
+      
+      <div class="panel-heading text-center" style="background-color: #333;">
+	 <h1 class="panel-title" style="vertical-align: middle; font-size: 1.5em;">Benvenuto in JW Stream LIS</h1>
+      </div>
+   
+      <div class="panel-body">
+	    
+	 <div class="col-sm-6 col-md-4 col-md-offset-4">
+	     <div class="panel panel-default">
+		<div class="panel-body">
+		   <p class="text-center">
+		      <img src="images/logo_flat.png" alt="JW Stream LIS" height="56" width="60">
+		   </p>
+		   <br/>
+		   
+		   <?php
+		      if (isset($UserLogged) && $UserLogged == false)
+		      {
+			 echo '<div class="alert alert-danger alert-dismissible" role="alert">';
+			    echo '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;';
+			       echo '</span><span class="sr-only">Close</span>';
+			    echo '</button>'. $dbactions->GetErrorMessage();
+			 echo '</div>';
+		      }
+		   ?>
+		   
+		   <form role="form" id='login_form' action='<?php echo $utils->GetSelfScript(); ?>' method='post'>
+		      <fieldset>
+			 
+			 <input type='hidden' name='submitted' id='submitted' value='1'/>
+			 
+			    <div class="form-group">
+			       <div class="control-group">
+				   <!-- CAMPO USERNAME -->
+				   <label for='username' >Nome utente:</label><br/>
+				   <div class="controls">
+				       <input required autofocus type="text" class="form-control" placeholder="Nome utente" name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
+				   </div>
+			       </div>
+			       <div class="control-group">
+				   <!-- CAMPO PASSWORD -->
+				   <label for='password' >Password:</label><br/>
+				   <div class="controls">
+				       <input required type="password" class="form-control" placeholder="Password" name='password' id='password' maxlength="128"/><br/>
+				   </div>
+				  <label class="pull-right">
+				     <a href='reset-pwd-req.php'>Password dimenticata?</a>
+				  </label>
+			       </div>
+			   </div>
+			 
+			 <br/>
+			 <br/>
+			 
+			 <button class="btn btn-lg btn-primary btn-block" type="submit">
+			     <b>ENTRA</b></button>
+			 
+		      </fieldset>
+		   </form>
+		</div> <!-- FINE DIV PANEL-BODY INTERNO -->
+	     </div>
+	 </div>
+      </div> <!-- FINE DIV PANEL-BODY ESTERNO -->
+   </div> <!-- FINE DIV PANEL -->
+</div> <!-- FINE DIV CONTAINER-FLUID -->
+   
 
 <script type='text/javascript'>
-// <![CDATA[
 
-    var frmvalidator  = new Validator("login");
-    frmvalidator.EnableOnPageErrorDisplay();
-    frmvalidator.EnableMsgsTogether();
+$('#login_form').validate(
+    {
+	rules: {
+	    username: {
+		required: true,
+		minlength: 6
+	    },
+	    password: {
+		required: true,
+		minlength: 8
+	    }
+	},
+	
+	highlight: function(element)
+	{
+	    $(element).closest('.control-group').removeClass('success').removeClass('has-success').addClass('error');
+	},
+	
+	success: function(element)
+	{
+	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
+	}
+    });
 
-    frmvalidator.addValidation("username","req","Per favore inserire il nome utente.");
-    
-    frmvalidator.addValidation("password","req","Per favore inserire la password");
-
-// ]]>
 </script>
-</div>
 
 </body>
 </html>
