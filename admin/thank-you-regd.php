@@ -4,7 +4,7 @@
       <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
     
-      <title>Statistics</title>
+      <title>JW LIS Streaming - Registrazione</title>
       <link rel="stylesheet" href="../style/bootstrap.min.css">
       <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
       <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
@@ -12,10 +12,15 @@
 </head>
 <body>
 
-<h3>Thanks for registering!</h3>
-<p>
-Now you can access to JW LIS Streaming service: <a href='../login.php'>Login</a>
-</p>
+<div class="container-fluid">
+      <div class="alert alert-success" role="alert">
+            <h3>Grazie per esserti registrato su JW Streaming LIS!</h3>
+            <br/>
+            <p>
+                  <a href='/login.php'>Vai alla pagina di login.</a>
+            </p>
+      </div>
 </div>
+
 </body>
 </html>

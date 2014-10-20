@@ -4,14 +4,6 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
-if(isset($_GET['code']))
-{
-   if($mainactions->ConfirmUser())
-   {
-        $utils->RedirectToURL("thank-you-regd.php");
-   }
-}
-
 if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("/login.php");
@@ -23,7 +15,6 @@ if (!$user_role || $user_role!="1")
 {
 	$utils->RedirectToURL("/viewer/live-normal.php");
 }
-
 
 ?>
 

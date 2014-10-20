@@ -1,10 +1,3 @@
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 <head>
@@ -22,6 +15,21 @@ $utils = $mainactions->GetUtilsInstance();
 </head>
 
 <body>
+
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
+
+$utils = $mainactions->GetUtilsInstance();
+
+if(isset($_GET['code']))
+{
+   if($mainactions->ConfirmUser())
+   {
+        $utils->RedirectToURL("/admin/thank-you-regd.php");
+   }
+}
+?>
+
 
 <div class="container-fluid">
    <div class="panel panel-primary pull-left">
