@@ -1,5 +1,5 @@
 <?PHP
-require_once("/include/config.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
 $utils = $mainactions->GetUtilsInstance();
 
@@ -18,15 +18,16 @@ $utils = $mainactions->GetUtilsInstance();
    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
    <script type='text/javascript' src='/js/jquery.validate.js'></script>
    <script src="/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="../include/session.js"></script>
+   <script type="text/javascript" src="/include/session.js"></script>
 </head>
+
 <body>
 
 <div class="container-fluid">
    <div class="panel panel-default pull-left">
       
       <div class="panel-heading">
-	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>CONFERMA LA REGISTRAZIONE</b></h2>
+	<h2 class="panel-title"><b>CONFERMA LA REGISTRAZIONE</b></h2>
       </div>
       
       <div class="panel-body">  
