@@ -24,7 +24,7 @@ $utils = $mainactions->GetUtilsInstance();
 <body>
 
 <div class="container-fluid">
-   <div class="panel panel-default pull-left">
+   <div class="panel panel-primary pull-left">
       
       <div class="panel-heading">
 	<h2 class="panel-title"><b>CONFERMA LA REGISTRAZIONE</b></h2>
