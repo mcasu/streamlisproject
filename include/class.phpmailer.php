@@ -72,7 +72,7 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  var $From              = 'lnxstreamserver@jw.org';
+  var $From              = 'lnxstreamserver@jwstream.org';
 
   /**
    * Sets the From name of the message.
@@ -84,7 +84,7 @@ class PHPMailer {
    * will be sent via -f to sendmail or as 'MAIL FROM' in smtp mode.
    * @var string
    */
-  var $Sender            = 'lnxstreamserver@jwlis.org';
+  var $Sender            = 'lnxstreamserver@jwstream.org';
 
   /**
    * Sets the Subject of the message.

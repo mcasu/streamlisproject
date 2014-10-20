@@ -401,7 +401,7 @@ class MainActions
 
         $host = $_SERVER['SERVER_NAME'];
 
-        $from ="lnxstreamserver@jwlis.org";
+        $from ="lnxstreamserver@jwstream.org";
         return $from;
     } 
     
