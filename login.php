@@ -113,11 +113,11 @@ $('#login_form').validate(
 	rules: {
 	    username: {
 		required: true,
-		minlength: 6
+		minlength: 4
 	    },
 	    password: {
 		required: true,
-		minlength: 8
+		minlength: 6 /* lasciato a 6 per retrocompatibilità - a regime portare a 8 */
 	    }
 	},
 	
