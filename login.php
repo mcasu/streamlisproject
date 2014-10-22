@@ -117,7 +117,7 @@ $('#login_form').validate(
 	    },
 	    password: {
 		required: true,
-		minlength: 6 /* lasciato a 6 per retrocompatibilità - a regime portare a 8 */
+		minlength: 4 /* lasciato a 4 per retrocompatibilità - a regime portare a 8 */
 	    }
 	},
 	
