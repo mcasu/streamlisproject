@@ -1,25 +1,11 @@
-<?PHP
-require_once("../include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../login.php");
-    exit;
-}
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title>Risposte</title>
-    <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-	<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.min.js"></script>
 	<script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 	<script type="text/javascript" src="../include/session.js"></script>
