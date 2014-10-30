@@ -208,7 +208,7 @@ try
 					    
 					    if (!file_exists($thumbnail_img))
 					    {
-						$thumbnail_img = "../images/thumbnails/video_thumbnail.png";
+						$thumbnail_img = "../images/video_thumbnail.png";
 					    }
 					    
 					    echo '<li class="list-group-item video_list_element">';

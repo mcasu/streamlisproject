@@ -101,10 +101,12 @@ class MainActions
         
         $uservars = array();
         
+        /*
         if(!$this->ValidateRegistrationSubmission())
         {
             return false;
         }
+        */
         
         $this->CollectRegistrationSubmission($uservars);
         

@@ -127,7 +127,7 @@ try
 				$client_addr=$row['client_addr'];
 				$live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
 			    
-				$thumbnail_img = "../images/thumbnails/video_thumbnail.png";
+				$thumbnail_img = "../images/video_thumbnail.png";
 			    
 				echo '<div class="video_element_title">';
 				    $live_date_day = strftime("%u", strtotime($row['live_date']));
