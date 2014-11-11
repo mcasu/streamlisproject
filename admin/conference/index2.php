@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/style/bootstrap.min.css"/>
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
-    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../include/session.js"></script>
-    <script type="text/javascript" src="../js/highcharts-2.2.4/highcharts.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/include/session.js"></script>
+    <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     
 </head>
 
@@ -81,8 +81,8 @@
 </div>
     
 
-    <script type="text/javascript" src="../../js/bistri/conference.js"></script>
-    <script type="text/javascript" src="../../js/bistri/api-demo.js"></script>
+    <script type="text/javascript" src="/js/bistri/conference.js"></script>
+    <script type="text/javascript" src="/js/bistri/api-demo.js"></script>
 </body>
     
 </html>
