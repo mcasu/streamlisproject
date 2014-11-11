@@ -35,7 +35,7 @@ if (!$user_role || $user_role!="1")
 	 <ul class="dropdown-menu" role="menu">
 	    <li><a href='events_live.php'>Live</a></li>
 	    <li><a href='events_ondemand.php'>OnDemand</a></li>
-            <li><a href='conference/index2.php'>Conference</a></li>
+            <li><a href='conference.php'>Conference</a></li>
 	 </ul>
       </li>
       
