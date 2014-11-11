@@ -18,7 +18,7 @@
 
 <body>
 
-<?php include("header.php");
+<?php include("/admin/header.php");
 
     $result = $dbactions->GetGroups();
 
