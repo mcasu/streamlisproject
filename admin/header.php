@@ -18,7 +18,7 @@ if (!$user_role || $user_role!="1")
 
 ?>
 
-<ul class="nav nav-pills">
+<ul class="navbar">
       
       <li>
 	 <a href='dashboard.php' class="active">

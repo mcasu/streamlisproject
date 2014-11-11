@@ -49,6 +49,8 @@
 ?>
     
 <div class="container-fluid">
+    
+    <p>
     <div class="panel panel-primary">
         
         <div class="panel-heading">
@@ -74,10 +76,11 @@
                 }
             ?>
             </select>
-            
+            <br/>
             <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
         </div>
     </div>
+    </p>
 </div>
     
 
