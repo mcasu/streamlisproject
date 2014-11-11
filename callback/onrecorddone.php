@@ -95,10 +95,12 @@ $img_filename = $ondemand_path.$stream_name."/".$ondemand_filename.'.jpg';
 
 if (imagejpeg($image, $img_filename, 100))
 {
-	if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
-	{
-		error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
-	}
+    if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) mkdir("/usr/local/nginx/html/images/thumbnails/", 0755, true);
+    
+    if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
+    {
+            error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
+    }
 }
 else
 {
