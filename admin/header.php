@@ -18,8 +18,8 @@ if (!$user_role || $user_role!="1")
 
 ?>
 
-<ul class="navbar">
-      
+<ul class="navbar" role="navigation">
+    <div class="container-fluid">
       <li>
 	 <a href='dashboard.php' class="active">
 	       <img src="../images/dashboard.png" height="32" width="32">
@@ -90,5 +90,5 @@ if (!$user_role || $user_role!="1")
 	    <li><a href='../logout.php'><span>Esci</span></a></li>
 	 </ul>
       </li>
-      
+    </div>
 </ul>
