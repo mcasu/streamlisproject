@@ -201,7 +201,7 @@ var onBistriConferenceReady = function ()
 // when button "Join Conference Room" has been clicked
 function joinConference()
 {
-    var roomToJoin = $( "#roomSelector option:selected" ).value();
+    var roomToJoin = $( "#roomSelector option:selected" ).val();
     alert("Join to room: " + roomToJoin);
     
     // if "Conference Name" field is not empty ...
