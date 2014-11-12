@@ -58,6 +58,10 @@
   background-color: #3c78c3;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-color: #333;
+    color: #fff;
+}
 
 .dropdown-menu {
   background-color: #333;
