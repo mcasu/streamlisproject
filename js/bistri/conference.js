@@ -17,7 +17,8 @@ onBistriConferenceReady = function () {
     // https://api.developers.bistri.com/login
     BistriConference.init( {
         appId: "435f88e5",
-        appKey: "b0560d8d190b7c67629c336399406afe"
+        appKey: "b0560d8d190b7c67629c336399406afe",
+        debug: true
     } );
 
     /* Set events handler */
@@ -120,7 +121,10 @@ onBistriConferenceReady = function () {
 function joinConference()
 {
     //var roomToJoin = q( "#room_field" ).value;
+    
     var roomToJoin = $( "#roomSelector option:selected" ).value();
+    alert("Join to room: " + roomToJoin);
+    
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
