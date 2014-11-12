@@ -45,14 +45,22 @@ onBistriConferenceReady = function () {
             showPanel( "pane_2" );
             // insert the local webcam stream into div#video_container node
             BistriConference.attachStream( localStream, q( "#video_container" ) );
+            
             // then, for every single members present in the room ...
-            for ( var i=0, max=data.members.length; i<max; i++ ) {
+            for ( var i=0, max=data.members.length; i<max; i++ )
+            {
+                alert("Chiamo ID: " + data.members[i].id + " nella room: " + data.room);
                 // ... request a call
-                BistriConference.call( data.members[ i ].id, data.room );
+                BistriConference.call( data.members[i].id, data.room );
             }
         } );
     } );
 
+    BistriConference.signaling.addHandler( "onIncomingRequest", function ( request ) {
+        // display an alert message
+       alert(request);
+    } );
+        
     // when an error occurred while trying to join a room
     BistriConference.signaling.addHandler( "onJoinRoomError", function ( error ) {
         // display an alert message
@@ -68,7 +76,9 @@ onBistriConferenceReady = function () {
     } );
 
     // when a new remote stream is received
-    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream ) {
+    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
+    {
+        alert("Insert new remote stream into div: " + q( "#video_container" ).attr('class'));
         // insert the new remote stream into div#video_container node
         BistriConference.attachStream( remoteStream, q( "#video_container" ) );
     } );
@@ -95,7 +105,7 @@ function joinConference(){
     // if "Conference Name" field is not empty ...
     if( roomToJoin ){
         // ... join the room
-        BistriConference.joinRoom( roomToJoin );
+        BistriConference.joinRoom( roomToJoin, 6 );
     }
     else{
         // otherwise, display an alert
