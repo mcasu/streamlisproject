@@ -55,7 +55,8 @@ var onBistriConferenceReady = function () {
 
 
     // when an error occured on the server side
-    BistriConference.signaling.addHandler( "onError", function ( error ) {
+    BistriConference.signaling.addHandler( "onError", function ( error ) 
+    {
         // display an alert message
         alert( error.text + " (" + error.code + ")" );
     } );
@@ -129,7 +130,7 @@ function joinConference()
         // otherwise, display an alert
         alert( "You must enter a room name!" );
     }
-};
+}
 
 // when button "Quit Conference Room" has been clicked
 function quitConference()
@@ -140,10 +141,10 @@ function quitConference()
     // Hide Quit Conference input button and show Join Conference input button
     $("#quit").hide();
     $("join").show();
-};
+}
 
 function q( query )
 {
     // return the DOM node matching the query
     return document.querySelector( query );
-};
+}
