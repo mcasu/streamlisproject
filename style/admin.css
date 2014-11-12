@@ -30,9 +30,20 @@
   color: #fff;
 }
 
-.nav .open > a, .navbar-nav .open > a,
-.nav .open > a:hover, .navbar-nav .open > a:hover,
-.nav .open > a:focus, .navbar-nav .open > a:focus {
+.nav .open > a, 
+.navbar-nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  color: #fff;
+  background-color: #3c78c3;
+}
+
+.navbar-nav .open > a:hover {
+  color: #fff;
+  background-color: #3c78c3;
+}
+
+.navbar-nav .open > a:focus {
   color: #fff;
   background-color: #3c78c3;
 }
