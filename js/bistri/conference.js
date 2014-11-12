@@ -25,13 +25,7 @@ onBistriConferenceReady = function () {
     // when local user is connected to the server
     BistriConference.signaling.addHandler( "onConnected", function () {
         // show pane with id "pane_1"
-        showPanel( "pane_1" );
-    } );
-
-    // when an error occured on the server side
-    BistriConference.signaling.addHandler( "onError", function ( error ) {
-        // display an alert message
-        alert( error.text + " (" + error.code + ")" );
+        //$("#panelJoin").show();
     } );
 
     // when the user has joined a room
@@ -41,10 +35,11 @@ onBistriConferenceReady = function () {
         // ask the user to access to his webcam
         BistriConference.startStream( "webcamSD", function( localStream ){
             // when webcam access has been granted
-            // show pane with id "pane_2"
-            showPanel( "pane_2" );
+            // show panel with video containers
+            $("#panelVideo").show();
+            
             // insert the local webcam stream into div#video_container node
-            BistriConference.attachStream( localStream, q( "#video_container" ) );
+            BistriConference.attachStream( localStream, q( "#myvideo" ) );
             
             // then, for every single members present in the room ...
             for ( var i=0, max=data.members.length; i<max; i++ )
@@ -55,6 +50,14 @@ onBistriConferenceReady = function () {
             }
         } );
     } );
+
+
+    // when an error occured on the server side
+    BistriConference.signaling.addHandler( "onError", function ( error ) {
+        // display an alert message
+        alert( error.text + " (" + error.code + ")" );
+    } );
+
 
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( request ) {
         // display an alert message
@@ -68,19 +71,33 @@ onBistriConferenceReady = function () {
     } );
 
     // when the local user has quitted the room
-    BistriConference.signaling.addHandler( "onQuittedRoom", function( room ) {
+    BistriConference.signaling.addHandler( "onQuittedRoom", function( room ) 
+    {
         // show pane with id "pane_1"
-        showPanel( "pane_1" );
+        //showPanel( "pane_1" );
         // stop the local stream
         BistriConference.stopStream();
     } );
 
     // when a new remote stream is received
-    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
+    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
     {
-        alert("Insert new remote stream into div: " + q( "#video_container" ).attr('class'));
-        // insert the new remote stream into div#video_container node
-        BistriConference.attachStream( remoteStream, q( "#video_container" ) );
+        // when a remote stream is received we attach it to a node in the page to display it
+	var nodes = document.querySelectorAll( "#remoteStreams" );
+        
+        for(var i=0;  i < nodes.length; i++ )
+        {
+            if( !nodes[ i ].firstChild )
+            {
+                if( peers[ pid ] )
+                {
+                        peers[ pid ].name = "peer " + ( i + 1 );
+                }
+                alert("Insert new remote stream into div: " + nodes[ i ].attr('id'));
+                BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
+                break;
+            }
+        }
     } );
 
     // when a local or a remote stream has been stopped
@@ -97,38 +114,43 @@ onBistriConferenceReady = function () {
 
     // open a new session on the server
     BistriConference.connect();
-}
+};
 
 // when button "Join Conference Room" has been clicked
-function joinConference(){
-    var roomToJoin = q( "#room_field" ).value;
+function joinConference()
+{
+    //var roomToJoin = q( "#room_field" ).value;
+    var roomToJoin = $( "#roomSelector option:selected" ).value();
     // if "Conference Name" field is not empty ...
-    if( roomToJoin ){
+    if( roomToJoin )
+    {
         // ... join the room
-        BistriConference.joinRoom( roomToJoin, 6 );
+        BistriConference.joinRoom( roomToJoin, 3 );
+        
+        // Show Quit Conference input button and hide Join Conference input button
+        $("#quit").show();
+        $("join").hide();
     }
-    else{
+    else
+    {
         // otherwise, display an alert
-        alert( "you must enter a room name !" )
+        alert( "You must enter a room name!" );
     }
-}
+};
 
 // when button "Quit Conference Room" has been clicked
-function quitConference(){
+function quitConference()
+{
     // quit the current conference room
     BistriConference.quitRoom( room );
-}
+    
+    // Hide Quit Conference input button and show Join Conference input button
+    $("#quit").hide();
+    $("join").show();
+};
 
-function showPanel( id ){
-    var panes = document.querySelectorAll( ".pane" );
-    // for all nodes matching the query ".pane"
-    for( var i=0, max=panes.length; i<max; i++ ){
-        // hide all nodes except the one to show
-        panes[ i ].style.display = panes[ i ].id == id ? "block" : "none";
-    };
-}
-
-function q( query ){
+function q( query )
+{
     // return the DOM node matching the query
     return document.querySelector( query );
-}
+};

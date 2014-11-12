@@ -19,7 +19,7 @@
 <body>
 
 <?php include("header.php");
-
+  
     $result = $dbactions->GetGroups();
 
     if (!$result)
@@ -51,7 +51,7 @@
 <div class="container-fluid">
     
     <p>
-    <div class="panel panel-primary">
+    <div id="panelJoin" class="panel panel-default">
         
         <div class="panel-heading">
             <h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>Inizia una conferenza con la tua congregazione</b></h2>
@@ -59,7 +59,7 @@
         
         <div class="panel-body">
             <label for='groups' >Congregazione:</label><br/>
-	    <select class="form-control" name="group_name" id="group_name">
+	    <select id="roomSelector" class="form-control" name="group_name" id="group_name">
             <?php    
                 foreach ($group_array AS $id => $row)
                 {
@@ -80,15 +80,39 @@
             <br/>
             <br/>
             <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
+            <input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block"></input>
             <br/>
         </div>
     </div>
     </p>
+    
+    <div id="panelVideo" class="panel panel-default">
+        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+        <div id="localStreams" class="row">
+          <div class="col-xs-6 col-md-4"></div>
+          <div id="myvideo" class="col-xs-6 col-md-4"></div>
+          <div class="col-xs-6 col-md-4"></div>
+        </div>
+
+        <!-- Columns are always 50% wide, on mobile and desktop -->
+        <div id="remoteStreams" class="row">
+          <div id="video-1" class="col-xs-6"></div>
+          <div id="video-2" class="col-xs-6"></div>
+        </div>
+    </div>
 </div>
     
 
     <script type="text/javascript" src="/js/bistri/conference.js"></script>
-    <script type="text/javascript" src="/js/bistri/api-demo.js"></script>
+    <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->
+    
+    <script type="text/javascript">
+	$(document).ready(function()
+        {
+            $("#quit").hide();
+            $("#panelVideo").hide();
+        }
+    </script>
 </body>
     
 </html>
