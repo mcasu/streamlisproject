@@ -54,7 +54,7 @@
     <div id="panelJoin" class="panel panel-default">
         
         <div class="panel-heading">
-            <h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>Inizia una conferenza con la tua congregazione</b></h2>
+            <!--<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>Inizia una conferenza con la tua congregazione</b></h2>-->
         </div>
         
         <div class="panel-body">
