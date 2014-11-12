@@ -219,7 +219,8 @@ function joinConference()
         } );
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
-        $("join").hide();
+        $("#join").hide();
+        $("#panelVideo").show();
     }
     else
     {
@@ -236,7 +237,7 @@ function quitConference()
     
     // Hide Quit Conference input button and show Join Conference input button
     $("#quit").hide();
-    $("join").show();
+    $("#join").show();
 }
 
 function q( query )
