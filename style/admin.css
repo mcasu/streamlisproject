@@ -26,8 +26,12 @@
   font-size: 1.2em;
 }
 
-.nav a, .navbar-nav a {
+.nav a {
   color: #fff;
+}
+
+.navbar-nav > li > a {
+    color: #fff;
 }
 
 .nav .open > a,
