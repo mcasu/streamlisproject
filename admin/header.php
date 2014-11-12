@@ -23,7 +23,7 @@ if (!$user_role || $user_role!="1")
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
-              <img alt="Brand" src="../images/logo_flat.png" width="16" height="16">
+              <img alt="Brand" src="../images/logo_flat.png" width="32" height="32">
           </a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
