@@ -2,7 +2,7 @@ var room;
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
-onBistriConferenceReady = function () {
+var onBistriConferenceReady = function () {
 
     // test if the browser is WebRTC compatible
     if ( !BistriConference.isCompatible() ) {
@@ -80,7 +80,7 @@ onBistriConferenceReady = function () {
     } );
 
     // when a new remote stream is received
-    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
+    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
     {
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = document.querySelectorAll( "#remoteStreams" );
@@ -89,10 +89,6 @@ onBistriConferenceReady = function () {
         {
             if( !nodes[ i ].firstChild )
             {
-                if( peers[ pid ] )
-                {
-                        peers[ pid ].name = "peer " + ( i + 1 );
-                }
                 alert("Insert new remote stream into div: " + nodes[ i ].attr('id'));
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
