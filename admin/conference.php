@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/include/session.js"></script>
     <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bistri/conference.js"></script>
     
 </head>
 
@@ -102,8 +103,6 @@
     </div>
 </div>
     
-
-    <script type="text/javascript" src="/js/bistri/conference.js"></script>
     <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->
     
     <script type="text/javascript">
