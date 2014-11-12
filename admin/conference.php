@@ -111,7 +111,7 @@
         {
             $("#quit").hide();
             $("#panelVideo").hide();
-        }
+        });
     </script>
 </body>
     
