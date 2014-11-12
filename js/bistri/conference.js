@@ -22,13 +22,14 @@ onBistriConferenceReady = function () {
     } );
 
     /* Set events handler */
+    
+    // bind function "joinConference" to button "Join Conference Room"
+    q( "#join" ).addEventListener( "click", joinConference );
 
-    // when local user is connected to the server
-    BistriConference.signaling.addHandler( "onConnected", function () {
-        // show pane with id "pane_1"
-        //$("#panelJoin").show();
-    } );
-
+    // bind function "quitConference" to button "Quit Conference Room"
+    q( "#quit" ).addEventListener( "click", quitConference );
+    
+    
     // when the user has joined a room
     BistriConference.signaling.addHandler( "onJoinedRoom", function ( data ) {
         // set the current room name
@@ -72,10 +73,8 @@ onBistriConferenceReady = function () {
     } );
 
     // when the local user has quitted the room
-    BistriConference.signaling.addHandler( "onQuittedRoom", function( room ) 
+    BistriConference.signaling.addHandler( "onQuittedRoom", function( ) 
     {
-        // show pane with id "pane_1"
-        //showPanel( "pane_1" );
         // stop the local stream
         BistriConference.stopStream();
     } );
@@ -106,12 +105,6 @@ onBistriConferenceReady = function () {
         // remove the stream from the page
         BistriConference.detachStream( stream );
     } );
-
-    // bind function "joinConference" to button "Join Conference Room"
-    q( "#join" ).addEventListener( "click", joinConference );
-
-    // bind function "quitConference" to button "Quit Conference Room"
-    q( "#quit" ).addEventListener( "click", quitConference );
 
     // open a new session on the server
     BistriConference.connect();
