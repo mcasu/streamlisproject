@@ -207,10 +207,10 @@ try
 				    // TD PULSANTI
 				    echo '<td>';
 					echo '<p class="text-center">';
-					    echo '<button class="btn btn-primary viewer_add" type="submit" style="width:140px"><span class="glyphicon glyphicon-arrow-left"></span> Aggiungi il viewer</button>';
+					    echo '<button class="btn btn-primary viewer_add" type="submit" style="width:150px"><span class="glyphicon glyphicon-arrow-left"></span> Aggiungi il viewer</button>';
 					    echo '<br/>';
 					    echo '<br/>';
-					    echo '<button class="btn btn-primary viewer_del" type="submit" style="width:140px">Elimina il viewer <span class="glyphicon glyphicon-arrow-right"></button>';
+					    echo '<button class="btn btn-primary viewer_del" type="submit" style="width:150px">Elimina il viewer <span class="glyphicon glyphicon-arrow-right"></button>';
 					echo '</p>';
 				    echo '</td>';
 
