@@ -32,7 +32,7 @@ if (!$user_role || $user_role!="1")
     
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     
-            <ul class="nav nav-pills navbar-nav">
+            <ul class="nav navbar-nav">
                 <li>
                    <a href='dashboard.php' class="active">
                          <img src="../images/dashboard.png" height="32" width="32">
