@@ -30,7 +30,7 @@
   color: #fff;
 }
 
-.nav .open > a
+.nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
   color: #fff;
