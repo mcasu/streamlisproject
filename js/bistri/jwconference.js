@@ -53,7 +53,7 @@ var onBistriConferenceReady = function ()
             // send a call request to peer
             BistriConference.call( data.members[ i ].id, data.room );
             // send data channel request to peer
-            BistriConference.openDataChannel( member.id, "myChannel", room, { reliable: true } );
+            BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
         }
     });
     
