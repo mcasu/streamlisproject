@@ -12,7 +12,8 @@ var onBistriConferenceReady = function ()
     BistriConference.init( {
         appId: "435f88e5",
         appKey: "b0560d8d190b7c67629c336399406afe",
-        debug: true
+        debug: true,
+        userName: "Bistri User"
     } );
 
     /* Set events handler */
@@ -42,17 +43,18 @@ var onBistriConferenceReady = function ()
     {
         // set the current room name
         room = data.room;
+        roomMembers = data.members;
 
         // once user has successfully joined the room we start a call and open a data channel with every single room members
-        for( var i = 0; i < data.members.length; i++ )
+        for( var member in roomMembers )
         {
-            peers[ data.members[ i ].id ] = data.members[ i ];
-
+            console.log( "member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
+            
+            //peers[member.id] = member;
             // send a call request to peer
-            BistriConference.call( data.members[ i ].id, data.room );
-
+            BistriConference.call( member.id, room );
             // send data channel request to peer
-            BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
+            //BistriConference.openDataChannel( member.id, "myChannel", room, { reliable: true } );
         }
     });
     
@@ -78,18 +80,23 @@ var onBistriConferenceReady = function ()
     } );
 
     // we register an handler for "onPeerJoinedRoom" event, triggered when a remote user join a room
-    BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data ){
-                    peers[ data.pid ] = data;
+    BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data )
+    {
+        console.log( "Un membro è entrato nella room: " + data.pid );
+        //peers[ data.pid ] = data;
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
     BistriConference.signaling.addHandler( "onPeerQuittedRoom", function( data )
     {
+        console.log( "Un membro è uscito dalla room: " + data.pid );
+        /*
             if( data.pid in peers )
             {
                     delete peers[ data.pid ];
                     isAvailablePeers();
             }
+        */
     } );
 
     // when a local or a remote stream has been stopped
@@ -98,9 +105,6 @@ var onBistriConferenceReady = function ()
         // remove the stream from the page
         BistriConference.detachStream( stream );
     } );
-
-
-
 
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
     {
@@ -124,6 +128,7 @@ var onBistriConferenceReady = function ()
     // when a new remote stream is received
     BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
     {
+        console.log("Aggiungo unu nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = document.querySelectorAll( "#remoteStreams" );
         
