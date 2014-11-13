@@ -133,7 +133,7 @@ var onBistriConferenceReady = function ()
         
         for(var i=0;  i < nodes.length; i++ )
         {    
-            console.log("Nodo id: " + nodes[ i ].attr('id'));
+            //console.log("Nodo id: " + nodes[ i ].attr('id'));
             if( !nodes[ i ].firstChild )
             {
                 if( peers[ pid ] )
@@ -141,7 +141,7 @@ var onBistriConferenceReady = function ()
                     peers[ pid ].name = "peer " + ( i + 1 );
                 }
 
-                console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
+                //console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
             }
