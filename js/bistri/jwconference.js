@@ -43,16 +43,15 @@ var onBistriConferenceReady = function ()
     {
         // set the current room name
         room = data.room;
-        roomMembers = data.members;
 
         // once user has successfully joined the room we start a call and open a data channel with every single room members
-        for( var member in roomMembers )
+        for( var i = 0; i < data.members.length; i++ )
         {
             console.log( "Hai fatto il join con member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
             
-            peers[member.id] = member;
+            peers[ data.members[ i ].id ] = data.members[ i ];
             // send a call request to peer
-            BistriConference.call( member.id, room );
+            BistriConference.call( data.members[ i ].id, data.room );
             // send data channel request to peer
             BistriConference.openDataChannel( member.id, "myChannel", room, { reliable: true } );
         }
