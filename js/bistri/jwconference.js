@@ -50,7 +50,7 @@ var onBistriConferenceReady = function ()
         {
             console.log( "Hai fatto il join con member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
             
-            //peers[member.id] = member;
+            peers[member.id] = member;
             // send a call request to peer
             BistriConference.call( member.id, room );
             // send data channel request to peer
@@ -90,13 +90,12 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onPeerQuittedRoom", function( data )
     {
         console.log( "Un membro è uscito dalla room: " + data.pid );
-        /*
-            if( data.pid in peers )
-            {
-                    delete peers[ data.pid ];
-                    isAvailablePeers();
-            }
-        */
+        
+        if( data.pid in peers )
+        {
+                delete peers[ data.pid ];
+                isAvailablePeers();
+        }
     } );
 
     // when a local or a remote stream has been stopped
@@ -109,7 +108,7 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
     {
         // display an alert message
-       //console.log("Richiesta in entrata: " + data);
+       console.log("Richiesta in entrata: " + data);
        
        BistriConference.startStream( "640x480", function( remoteStream )
        {
@@ -138,13 +137,11 @@ var onBistriConferenceReady = function ()
             console.log("Nodo id: " + nodes[ i ].attr('id'));
             if( !nodes[ i ].firstChild )
             {
-                /*
                 if( peers[ pid ] )
                 {
                     peers[ pid ].name = "peer " + ( i + 1 );
                 }
-                */
-               
+
                 console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
