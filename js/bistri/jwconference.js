@@ -54,7 +54,7 @@ var onBistriConferenceReady = function ()
             // send a call request to peer
             BistriConference.call( member.id, room );
             // send data channel request to peer
-            //BistriConference.openDataChannel( member.id, "myChannel", room, { reliable: true } );
+            BistriConference.openDataChannel( member.id, "myChannel", room, { reliable: true } );
         }
     });
     
@@ -128,7 +128,7 @@ var onBistriConferenceReady = function ()
     // when a new remote stream is received
     BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream )
     {
-        console.log("Aggiungo unu nuovo stream...");
+        console.log("Aggiungo un nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = document.querySelectorAll( ".remoteStreams" );
         console.log("Remote streams div numbers: " + nodes.length);
