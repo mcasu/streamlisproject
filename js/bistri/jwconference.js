@@ -128,7 +128,7 @@ var onBistriConferenceReady = function ()
     {
         console.log("Aggiungo un nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
-	var nodes = document.querySelectorAll( ".remoteStreams" );
+	var nodes = $( ".remoteStreams" );
         console.log("Remote streams div numbers: " + nodes.length);
         
         for(var i=0;  i < nodes.length; i++ )
