@@ -109,7 +109,7 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
     {
         // display an alert message
-       alert(data);
+       console.log("Richiesta in entrata: " + data);
        
        BistriConference.startStream( "640x480", function( remoteStream )
        {
@@ -133,7 +133,8 @@ var onBistriConferenceReady = function ()
 	var nodes = document.querySelectorAll( "#remoteStreams" );
         
         for(var i=0;  i < nodes.length; i++ )
-        {
+        {    
+            console.log("Nodo id: " + nodes[ i ].attr('id'));
             if( !nodes[ i ].firstChild )
             {
                 if( peers[ pid ] )
