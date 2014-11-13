@@ -97,9 +97,9 @@
         </div>
 
         <!-- Columns are always 50% wide, on mobile and desktop -->
-        <div id="remoteStreams" class="row">
-          <div id="video-1" class="col-xs-6"></div>
-          <div id="video-2" class="col-xs-6"></div>
+        <div class="row">
+          <div id="video-1" class="col-xs-6 remoteStreams"></div>
+          <div id="video-2" class="col-xs-6 remoteStreams"></div>
         </div>
     </div>
 </div>

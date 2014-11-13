@@ -130,18 +130,22 @@ var onBistriConferenceReady = function ()
     {
         console.log("Aggiungo unu nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
-	var nodes = document.querySelectorAll( "#remoteStreams" );
+	var nodes = document.querySelectorAll( ".remoteStreams" );
+        console.log("Remote streams div numbers: " + nodes.length);
         
         for(var i=0;  i < nodes.length; i++ )
         {    
             console.log("Nodo id: " + nodes[ i ].attr('id'));
             if( !nodes[ i ].firstChild )
             {
+                /*
                 if( peers[ pid ] )
                 {
                     peers[ pid ].name = "peer " + ( i + 1 );
                 }
-                alert("Insert new remote stream into div: " + nodes[ i ].attr('id'));
+                */
+               
+                console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
             }
