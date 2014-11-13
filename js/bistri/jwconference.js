@@ -47,7 +47,7 @@ var onBistriConferenceReady = function ()
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
-            console.log( "Hai fatto il join con member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
+            console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
             
             peers[ data.members[ i ].id ] = data.members[ i ];
             // send a call request to peer
