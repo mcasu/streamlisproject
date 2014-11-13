@@ -48,7 +48,7 @@ var onBistriConferenceReady = function ()
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var member in roomMembers )
         {
-            console.log( "member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
+            console.log( "Hai fatto il join con member id: ", roomMembers[ member ].id, "member display name:", roomMembers[ member ].name );
             
             //peers[member.id] = member;
             // send a call request to peer
@@ -109,7 +109,7 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
     {
         // display an alert message
-       console.log("Richiesta in entrata: " + data);
+       //console.log("Richiesta in entrata: " + data);
        
        BistriConference.startStream( "640x480", function( remoteStream )
        {
