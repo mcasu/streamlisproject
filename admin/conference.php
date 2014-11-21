@@ -90,8 +90,8 @@
  
     <div id="panelVideo">
 
-        <div class="container">
-            <div id="panelVideoLocal" class="panel panel-primary pull-left">
+        <div class="container pull-left">
+            <div id="panelVideoLocal" class="panel panel-primary">
                <div class="panel-heading">
                    <h4 class="panel-title">Mio video</h4>
                </div>
