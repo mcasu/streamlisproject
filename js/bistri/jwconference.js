@@ -213,10 +213,10 @@ function joinConference()
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
-        BistriConference.startStream("640x480", function( localStream )
+        BistriConference.startStream("320x240", function( localStream )
         {
             // when the local stream is received we attach it to a node in the page to display it
-            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true, fullscreen: true } );
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
 
             // when the local stream has been started and attached to the page
             // we are ready join the conference room.
