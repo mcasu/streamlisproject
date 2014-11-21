@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Dashboard</title>
+    <title>Conference</title>
     <link rel="stylesheet" href="/style/bootstrap.min.css"/>
     <link rel='stylesheet' type='text/css' href='/style/admin.css' />
 
@@ -87,22 +87,35 @@
         </div>
     </div>
     </p>
-    
-    <div id="panelVideo" class="panel panel-default">
-        <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-        <div id="localStreams" class="row">
-          <div class="col-xs-6 col-md-4"></div>
-          <div id="myvideo" class="col-xs-6 col-md-4"></div>
-          <div class="col-xs-6 col-md-4"></div>
-        </div>
+ 
+    <div id="panelVideo">
 
-        <!-- Columns are always 50% wide, on mobile and desktop -->
-        <div class="row">
-          <div id="video-1" class="col-xs-6 remoteStreams"></div>
-          <div id="video-2" class="col-xs-6 remoteStreams"></div>
-        </div>
+        <div id="panelVideoLocal" class="panel panel-default">
+           <div class="panel-heading pull-left">
+               <h4 class="panel-title">Video di <b><?php $mainactions->UserFullName(); ?></b></h4>
+           </div>
+           <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+           <div id="localStreams" class="row">
+             <div class="col-xs-6 col-md-4" id="myvideo" style="width:320px;height:240px"></div>
+             <div class="col-xs-6 col-md-4"></div>
+             <div class="col-xs-6 col-md-4"></div>
+           </div>
+       </div>
+
+       <div id="panelVideoRemote" class="panel panel-default">
+           <div class="panel-heading">
+               <h4 class="panel-title">Video di <b><?php $mainactions->UserFullName(); ?></b></h4>
+           </div>
+
+           <!-- Columns are always 50% wide, on mobile and desktop -->
+           <div class="row">
+             <div id="video-1" class="col-xs-6 remoteStreams"></div>
+             <div id="video-2" class="col-xs-6 remoteStreams"></div>
+           </div>
+       </div>
+     
     </div>
-</div>
+</div>    
     
     <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->
     
