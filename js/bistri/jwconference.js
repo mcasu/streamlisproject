@@ -242,6 +242,7 @@ function quitConference()
     BistriConference.quitRoom( room );
     
     // Hide Quit Conference input button and show Join Conference input button
+    $("#panelVideo").hide();
     $("#quit").hide();
     $("#join").show();
 }
