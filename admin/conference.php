@@ -91,17 +91,15 @@
     <div id="panelVideo">
 
         <div id="panelVideoLocal" class="panel panel-primary">
-           <div class="panel-heading pull-left">
+           <div class="panel-heading">
                <h4 class="panel-title">Mio video</h4>
            </div>
            
            <div class="panel-body">
             <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
             <div id="localStreams" class="row">
-              <div class="panel panel-primary">
-                 <div class="panel-heading">
-                     <h5 class="panel-title"><b><?php $mainactions->UserFullName(); ?></b></h5>
-                 </div>
+              <div class="panel panel-default">
+                 <h5 class="panel-title pull-left"><b><?php $mainactions->UserFullName(); ?></b></h5>
                  <div class="col-xs-6 col-md-4" id="myvideo"></div>
               </div>
 
@@ -119,13 +117,8 @@
            <div class="panel-body">
             <!-- Columns are always 50% wide, on mobile and desktop -->
             <div class="row">
-              <div class="panel panel-default">
-                 <div id="video-1" class="col-xs-6 remoteStreams"></div>
-              </div>
-
-              <div class="panel panel-default">
-                 <div id="video-2" class="col-xs-6 remoteStreams"></div>
-              </div>
+                <div id="video-1" class="col-xs-6 remoteStreams"></div>
+                <div id="video-2" class="col-xs-6 remoteStreams"></div>
             </div>
            </div>
        </div>

@@ -624,7 +624,7 @@ class MainActions
 	
         $mailer->Body ="<html><body>Caro fratello <b>".$uservars['name']."</b>".
 	" della congregazione ". $uservars['group_name'].",<br/><br/>". 
-        'Grazie per la tua regsitrazione su '.$this->sitename."<br/><br/>".
+        'Grazie per la tua registrazione su '.$this->sitename."<br/><br/>".
         'Per favore clicca sul seguente link per confermare la tua registrazione: '.
         '<a href="'.$confirm_url.'">Conferma la tua registrazione.</a>'."<br/><br/>".
 	"Queste sono le tue credenziali di accesso:<br/>".
