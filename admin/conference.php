@@ -90,7 +90,8 @@
  
     <div id="panelVideo">
 
-        <div class="container pull-left">
+        <div class="container">
+            <p class="pull-left"
             <div id="panelVideoLocal" class="panel panel-primary">
                <div class="panel-heading">
                    <h4 class="panel-title">Mio video</h4>
@@ -109,6 +110,7 @@
                 </div>
                </div>
            </div>
+        </p>
         </div>
         
        <div id="panelVideoRemote" class="panel panel-primary">
