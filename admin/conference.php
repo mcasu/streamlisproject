@@ -91,26 +91,26 @@
     <div id="panelVideo">
 
         <div class="container">
-            <p class="pull-left"
-            <div id="panelVideoLocal" class="panel panel-primary">
-               <div class="panel-heading">
-                   <h4 class="panel-title">Mio video</h4>
-               </div>
+            <p class="pull-left">
+                <div id="panelVideoLocal" class="panel panel-primary">
+                   <div class="panel-heading">
+                       <h4 class="panel-title">Mio video</h4>
+                   </div>
 
-               <div class="panel-body">
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div id="localStreams" class="row">
-                  <div class="panel panel-default">
-                     <h5 class="panel-title pull-left" style="margin-left: 2px;margin-top: 2px;"><b><?php $mainactions->UserFullName(); ?></b></h5>
-                     <div class="col-xs-6 col-md-4" id="myvideo"></div>
-                  </div>
+                   <div class="panel-body">
+                    <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                    <div id="localStreams" class="row">
+                      <div class="panel panel-default">
+                         <h5 class="panel-title pull-left" style="margin-left: 2px;margin-top: 2px;"><b><?php $mainactions->UserFullName(); ?></b></h5>
+                         <div class="col-xs-6 col-md-4" id="myvideo"></div>
+                      </div>
 
-                  <div class="col-xs-6 col-md-4"></div>
-                  <div class="col-xs-6 col-md-4"></div>
+                      <div class="col-xs-6 col-md-4"></div>
+                      <div class="col-xs-6 col-md-4"></div>
+                    </div>
+                   </div>
                 </div>
-               </div>
-           </div>
-        </p>
+            </p>
         </div>
         
        <div id="panelVideoRemote" class="panel panel-primary">
