@@ -100,7 +100,7 @@
                 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
                 <div id="localStreams" class="row">
                   <div class="panel panel-default">
-                     <h5 class="panel-title pull-left" style="margin-left: 2px;margin-top: 2px;"><b><?php $mainactions->UserFullName(); ?></b></h5>
+                     <h5 class="panel-title pull-center" style="margin-left: 2px;margin-top: 2px;"><b><?php $mainactions->UserFullName(); ?></b></h5>
                      <div class="col-xs-6 col-md-4" id="myvideo"></div>
                   </div>
 
