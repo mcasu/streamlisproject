@@ -91,10 +91,9 @@
     <div id="panelVideo">
 
         <div class="container">
-            <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
             <div id="localStreams" class="panel panel-primary">
               <div class="panel-heading">
-                  <h4 class="panel-title pull-center">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
+                  <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
               </div>
                 <div class="panel-body">
                     <div id="myvideo" class="pull-center"></div>
@@ -104,7 +103,7 @@
         
        <div id="panelVideoRemote" class="panel panel-primary">
            <div class="panel-heading">
-               <h4 class="panel-title" style="margin-left: 2px;margin-top: 2px;">Altri fratelli</h4>
+               <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">Altri fratelli</h4>
            </div>
 
            <div class="panel-body">
