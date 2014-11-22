@@ -94,7 +94,7 @@
             <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
             <div id="localStreams" class="panel panel-primary">
               <div class="panel-heading">
-                  <h4 class="panel-title pull-center">Video di <b><?php $mainactions->UserFullName(); ?></b></h4>
+                  <h4 class="panel-title pull-center">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
               </div>
                 <div class="panel-body">
                     <div id="myvideo"></div>
