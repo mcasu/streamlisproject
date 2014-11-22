@@ -52,6 +52,7 @@
     
 <div class="container-fluid">
     
+    <input type="hidden" class="username" id="<?= $mainactions->UserName(); ?>"/>
     <p>
     <div id="panelJoin" class="panel panel-default">
         
