@@ -209,7 +209,7 @@ var onBistriConferenceReady = function ()
 function joinConference()
 {
     var roomToJoin = $( "#roomSelector option:selected" ).val();
-    alert("Join to room: " + roomToJoin);
+    //alert("Join to room: " + roomToJoin);
     
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
