@@ -1,7 +1,7 @@
 var peers = {};
 var room;
 var userId;
-var username = q(".username").attr("id");
+var username = q(".username").id;
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
