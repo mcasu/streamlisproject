@@ -97,7 +97,7 @@
                   <h4 class="panel-title pull-center">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
               </div>
                 <div class="panel-body">
-                    <div id="myvideo"></div>
+                    <div id="myvideo" class="pull-center"></div>
                 </div>
             </div>
         </div>
