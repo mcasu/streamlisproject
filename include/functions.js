@@ -117,7 +117,7 @@ CheckLiveExistsForPublishCode = function(publishCode)
             }
             else
             {
-                alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' . res);
+                alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
                 return false;
             }
         }
