@@ -8,7 +8,7 @@ $fname = filter_input(INPUT_GET, 'fname');
 
 switch ($fname) 
 {
-    case "check_live_exists_for_publish_code":
+    case check_live_exists_for_publish_code:
         $publishCode = filter_input(INPUT_GET, 'publishCode');
         return CheckLiveExistsForPublishCode($dbactions, $publishCode);
     default:
