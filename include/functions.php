@@ -4,12 +4,12 @@ require_once("config.php");
 
 $dbactions = $mainactions->GetDBActionsInstance();
 
-$fname = filter_input(INPUT_GET, 'fname');
+$fname = filter_input(INPUT_POST, 'fname');
 
 switch ($fname) 
 {
     case "check_live_exists_for_publish_code":
-        $publishCode = filter_input(INPUT_GET, 'publishCode');
+        $publishCode = filter_input(INPUT_POST, 'publishCode');
         return CheckLiveExistsForPublishCode($dbactions, $publishCode);
     default:
         break;
