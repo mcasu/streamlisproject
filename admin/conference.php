@@ -138,6 +138,11 @@
                 {
                     alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
+                    $('#join').prop('disabled', true);
+                }
+                else
+                {
+                    $('#join').prop('disabled', false);
                 }
             });
         });
