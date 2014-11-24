@@ -10,7 +10,6 @@ switch ($fname)
 {
     case "check_live_exists_for_publish_code":
         $publishCode = filter_input(INPUT_GET, 'publishCode');
-        error_log("INFO - Eseguo la funzione [check_live_exists_for_publish_code] per ". $publishCode);
         return CheckLiveExistsForPublishCode($dbactions, $publishCode);
     default:
         break;
@@ -21,6 +20,8 @@ function CheckLiveExistsForPublishCode($dbactions, $publish_code)
 {
     $live_events = $dbactions->GetLiveEventsByPublisher($publish_code);
     $live_events_number = mysql_num_rows($live_events);
+    
+    error_log("INFO - Eseguo la funzione [CheckLiveExistsForPublishCode] per ". $publish_code . " - " . $live_events_number);
     
     if ($live_events && $live_events_number > 0)
     {
