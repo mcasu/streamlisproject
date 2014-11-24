@@ -121,6 +121,9 @@ CheckLiveExistsForPublishCode = function(publishCode)
                 return false;
             }
         }
+    }).done(function( data ) 
+    {
+        alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + data);
     });
 };
                 
