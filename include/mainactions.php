@@ -15,7 +15,6 @@ PARTICULAR PURPOSE.
 
 */
 require_once("class.phpmailer.php");
-require_once("formvalidator.php");
 require_once("utils.php");
 require_once("dbactions.php");
 require_once("fsactions.php");

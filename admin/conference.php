@@ -11,6 +11,7 @@
 
     <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/include/session.js"></script>
+    <script type="text/javascript" src="/include/functions.js"></script>
     <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=3"></script>
@@ -79,6 +80,9 @@
             ?>
             </select>
             <br/>
+            <div class="alert alert-danger" role="alert">
+                <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
+            </div>
             <br/>
             <br/>
             <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
@@ -125,6 +129,17 @@
         {
             $("#quit").hide();
             $("#panelVideo").hide();
+            $(".alert-danger").hide();
+            
+            $('#roomSelector').on('change', function() 
+            {
+                $(".alert-danger").hide();
+                if (!CheckLiveExistsForPublishCode($('#roomSelector').val()))
+                {
+                    alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
+                    $(".alert-danger").show();
+                }
+            });
         });
     </script>
     
