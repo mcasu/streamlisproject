@@ -112,12 +112,12 @@ CheckLiveExistsForPublishCode = function(publishCode)
         {
             if(res === true)
             {
-                //alert('La congregazione con code [' + publishCode + '] sta trasmettendo.');
+                alert('La congregazione con code [' + publishCode + '] sta trasmettendo.');
                 return true;
             }
             else
             {
-                //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo.');
+                alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo.');
                 return false;
             }
         }
