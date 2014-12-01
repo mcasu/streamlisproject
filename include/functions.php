@@ -56,7 +56,7 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
                 
                 $group_name = $dbactions->GetGroupNameByPublishCode($publish_code);
 
-                echo '<option value="' . $live_id . '">Adunanza di <b>' . $group_name . '</b> del <b>' . $live_date_formatted . '</b></option>"';
+                echo '<option id="'. $app_name . '" value="' . $stream_name . '">Adunanza di <b>' . $group_name . '</b> del <b>' . $live_date_formatted . '</b></option>"';
             }
         echo '</select>';
         echo '<br/>';
