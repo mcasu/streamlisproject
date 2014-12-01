@@ -56,6 +56,8 @@ var onBistriConferenceReady = function ()
             // send data channel request to peer
             BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
         }
+        
+        $("#joined_user_number").find(".label").text(data.members.length);
     });
     
     // when the local user has quitted the room
@@ -84,6 +86,7 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         //peers[ data.pid ] = data;
+        //$("#joined_user_number").find(".label").text(data.members.length);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
@@ -228,6 +231,7 @@ function joinConference()
         $("#quit").show();
         $("#join").hide();
         $("#panelVideo").show();
+        $("#joined_user_number").show();
     }
     else
     {

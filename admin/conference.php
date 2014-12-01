@@ -87,6 +87,8 @@
             <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
             <input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block"></input>
             <br/>
+            
+            <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5>
         </div>
     </div>
     </p>
@@ -130,6 +132,7 @@
             $("#quit").hide();
             $("#panelVideo").hide();
             $(".alert-danger").hide();
+            $("#joined_user_number").hide();
             
             CheckGroupStatus();
             
