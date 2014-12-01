@@ -134,7 +134,7 @@
             $('#roomSelector').on('change', function() 
             {
                 $(".alert-danger").hide();
-                var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
+                var result = CheckLiveExistsForPublishCode($('#roomSelector'));
                 alert("Result: " + result);
                 if (result  === "false")
                 {
