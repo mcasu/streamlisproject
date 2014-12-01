@@ -214,7 +214,11 @@ function joinConference()
     var roomToJoin = $( "#roomSelector option:selected" ).val();
     //alert("Join to room: " + roomToJoin);
     
+    var streamNameToView = $( "#streamSelector option:selected" ).val();
+    var appNameToView = $( "#streamSelector option:selected" ).id();
     
+    alert("Stream: " + streamNameToView + " App: " + appNameToView);
+    //
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
