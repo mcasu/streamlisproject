@@ -11,7 +11,6 @@
 
     <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/include/session.js"></script>
-    <script type="text/javascript" src="/include/functions.js"></script>
     <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=3"></script>
@@ -123,6 +122,7 @@
 </div>    
     
     <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->
+    <script type="text/javascript" src="/include/functions.js"></script>
     
     <script type="text/javascript">
 	$(document).ready(function()
@@ -134,7 +134,7 @@
             $('#roomSelector').on('change', function() 
             {
                 $(".alert-danger").hide();
-                if (!CheckLiveExistsForPublishCode($('#roomSelector').val()))
+                if (CheckLiveExistsForPublishCode($('#roomSelector').val()))
                 {
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();

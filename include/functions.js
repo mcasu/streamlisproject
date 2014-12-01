@@ -99,7 +99,6 @@ OndemandMp4Loading = function() {
 
 };
   
-
 CheckLiveExistsForPublishCode = function(publishCode) 
 {
     var params = "fname=check_live_exists_for_publish_code&publishCode=" + publishCode;
