@@ -61,7 +61,7 @@
         
         <div class="panel-body">
             <label for='groups' >Congregazione:</label><br/>
-	    <select id="roomSelector" class="form-control" name="group_name" id="group_name">
+	    <select id="roomSelector" class="form-control" placeholder="Seleziona la congregazione..." name="group_name" id="group_name">
             <?php    
                 foreach ($group_array AS $id => $row)
                 {
@@ -135,10 +135,9 @@
             {
                 $(".alert-danger").hide();
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
-                alert("Result: " + result);
                 if (result  === "false")
                 {
-                    alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
+                    //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
                     $('#join').prop('disabled', true);
                 }
