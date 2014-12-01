@@ -102,6 +102,7 @@ OndemandMp4Loading = function() {
 CheckLiveExistsForPublishCode = function(publishCode) 
 {
     var params = "fname=check_live_exists_for_publish_code&publishCode=" + publishCode;
+    var result;
     jQuery.ajax({
         type: "POST",
         url: "/include/functions.php",
@@ -112,18 +113,17 @@ CheckLiveExistsForPublishCode = function(publishCode)
             if(res === "true")
             {
                 //alert('La congregazione con code [' + publishCode + '] sta trasmettendo - ' + res);
-                return "true";
             }
             else
             {
                 //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
-                return "false";
             }
+            
+            result = res;
         }
-    }).done(function( data ) 
-    {
-        //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + data);
     });
+    
+    return result;
 };
                 
 })(jQuery);
