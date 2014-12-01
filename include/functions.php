@@ -39,7 +39,7 @@ function CheckLiveExistsForPublishCode($dbactions, $publish_code)
 }
 
 
-function GetStreamSelectorContainer($publish_code) 
+function GetStreamSelectorContainer($dbactions, $publish_code) 
 {
     echo '<div id="streamSelectorContainer" class="container">';
         echo '<label id="streamSelectorLabel" for="streams">Live stream disponibili:</label><br/>';
