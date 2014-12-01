@@ -138,7 +138,7 @@
                 alert("Result: " + result);
                 if (result  === "false")
                 {
-                    //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
+                    alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
                     $('#join').prop('disabled', true);
                 }
