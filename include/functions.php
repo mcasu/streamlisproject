@@ -12,7 +12,7 @@ switch ($fname)
         $publishCode = filter_input(INPUT_POST, 'publishCode');
         return CheckLiveExistsForPublishCode($dbactions, $publishCode);
     case "get_stream_selector_container":
-        $publishCode = filter_input(INPUT_POST, 'publishCode');
+        $publishCode = filter_input(INPUT_GET, 'publishCode');
         return GetStreamSelectorContainer($publishCode);
     default:
         break;
