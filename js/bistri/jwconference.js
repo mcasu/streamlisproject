@@ -218,6 +218,7 @@ function joinConference()
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
+        /*
         BistriConference.startStream("320x240", function( localStream )
         {
             // when the local stream is received we attach it to a node in the page to display it
@@ -228,6 +229,10 @@ function joinConference()
             // event "onJoinedRoom" is triggered when the operation successed.
             BistriConference.joinRoom( roomToJoin, 3 );
         } );
+        */
+       
+        BistriConference.joinRoom( roomToJoin, 3 );
+        
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
         $("#join").hide();
