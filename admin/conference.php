@@ -134,7 +134,7 @@
             $('#roomSelector').on('change', function() 
             {
                 $(".alert-danger").hide();
-                if (CheckLiveExistsForPublishCode($('#roomSelector').val()))
+                if (!CheckLiveExistsForPublishCode($('#roomSelector').val()))
                 {
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
