@@ -84,7 +84,7 @@
                 <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
             </div>
             <br/>
-            <div id="streamSelectorContainer" class="container pull-left">
+            <div id="streamSelectorContainer" class="container-fluid">
                 
             </div>
          
