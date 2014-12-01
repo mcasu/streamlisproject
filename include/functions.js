@@ -107,16 +107,17 @@ CheckLiveExistsForPublishCode = function(publishCode)
         type: "POST",
         url: "/include/functions.php",
         data: params,
+        async: false,
         cache: false,
         success: function(res)
         {
             if(res === "true")
             {
-                //alert('La congregazione con code [' + publishCode + '] sta trasmettendo - ' + res);
+                alert('La congregazione con code [' + publishCode + '] sta trasmettendo - ' + res);
             }
             else
             {
-                //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
+                alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
             }
             
             result = res;
