@@ -20,34 +20,15 @@
 
 <body>
 
-<?php include("header.php");
+<?php include("header-normal.php");
   
-    $result = $dbactions->GetGroups();
+    $result = $dbactions->GetPublishersByViewer($mainactions->UserGroupId());
 
     if (!$result)
     {
         error_log("No Results");
     }
 
-    $count=0;
-    $group_array=Array();
-    while($row = mysql_fetch_array($result))
-    {
-        $group_id=$row['group_id'];
-        $group_name=$row['group_name'];
-        $group_type=$row['group_type'];
-        $group_role_name=$row['group_role_name'];
-        $group_publish_code=$row['publish_code'];
-
-        $group_array[$group_id]=Array();
-        $group_array[$group_id]['group_id']=$row['group_id'];
-        $group_array[$group_id]['group_name']=$row['group_name'];
-        $group_array[$group_id]['group_type']=$row['group_type'];
-        $group_array[$group_id]['group_role_name']=$row['group_role_name'];
-        $group_array[$group_id]['publish_code']=$row['publish_code'];
-
-        $count++;
-    }
 ?>
     
 <div class="container-fluid">
@@ -66,18 +47,13 @@
                 <label for='groups' >Congregazione:</label><br/>
                 <select id="roomSelector" class="form-control" name="group_name" id="group_name">
                 <?php    
-                    foreach ($group_array AS $id => $row)
+                    while($row = mysql_fetch_array($result))
                     {
-                        $group_id=$row['group_id'];
-                        $group_name=$row['group_name'];
-                        $group_type=$row['group_type'];
-                        $group_role_name=$row['group_role_name'];
-                        $group_publish_code=$row['publish_code'];
+                        $publisher_id=$row['publisher_id'];
+                        $publisher_name=$row['publisher_name'];
+                        $publisher_code=$row['publisher_code'];
 
-                        if ($group_role_name=="publisher")
-                        {
-                            echo '<option value="' . $group_publish_code . '">' . $group_name . '</option>"';
-                        }
+                        echo '<option value="' . $publisher_code . '">' . $publisher_name . '</option>"';
                     }
                 ?>
                 </select>
@@ -136,7 +112,6 @@
     </div>
 </div>    
     
-    <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->
     <script type="text/javascript" src="/include/functions.js"></script>
     
     <script type="text/javascript">

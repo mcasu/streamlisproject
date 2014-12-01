@@ -2,6 +2,7 @@ var peers = {};
 var room;
 var userId;
 var username = q(".username").id;
+var userrole = q(".userrole").id;
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
@@ -57,7 +58,7 @@ var onBistriConferenceReady = function ()
             BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
         }
         
-        $("#joined_user_number").find(".label").text(data.members.length);
+        $("#joined_user_number").find(".label").text((data.members.length + 1));
     });
     
     // when the local user has quitted the room
@@ -86,7 +87,7 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         //peers[ data.pid ] = data;
-        $("#joined_user_number").find(".label").text(data.members.length);
+        $("#joined_user_number").find(".label").text(peers.length);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
@@ -221,30 +222,34 @@ function joinConference()
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
-        /*
-        BistriConference.startStream("320x240", function( localStream )
+        // if the user is an admin or a publisher then show the current live stream selected.
+        if (userrole === "1" || userrole === "3")
         {
-            // when the local stream is received we attach it to a node in the page to display it
-            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+            jwplayer("player").setup({
+                             file: "rtmp://www.jwstream.org:1935/" + appNameToView + '/' + streamNameToView,
+                             autostart: true,
+                             controls: true,
+                             rtmp: {
+                                 bufferlength: 0.1  
+                             },
+                             aspectratio: "4:3",
+                             width: 320,
+                             height: 240
+                             });            
+        }
+        else // for the normal users we attach the local video stream.
+        {
+            BistriConference.startStream("320x240", function( localStream )
+            {
+                // when the local stream is received we attach it to a node in the page to display it
+                BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
 
-            // when the local stream has been started and attached to the page
-            // we are ready join the conference room.
-            // event "onJoinedRoom" is triggered when the operation successed.
-            BistriConference.joinRoom( roomToJoin, 3 );
-        } );
-        */
-       
-       jwplayer("player").setup({
-                        file: "rtmp://www.jwstream.org:1935/" + appNameToView + '/' + streamNameToView,
-                        autostart: true,
-                        controls: true,
-			rtmp: {
-			    bufferlength: 0.1  
-			},
-                        aspectratio: "4:3",
-                        width: 320,
-                        height: 240
-                        });
+                // when the local stream has been started and attached to the page
+                // we are ready join the conference room.
+                // event "onJoinedRoom" is triggered when the operation successed.
+                BistriConference.joinRoom( roomToJoin, 3 );
+            } );
+       }
                         
         BistriConference.joinRoom( roomToJoin, 3 );
         
