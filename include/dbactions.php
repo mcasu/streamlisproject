@@ -258,6 +258,26 @@ class DBActions
 
 	return $row['group_id'];
     }
+    
+    function GetGroupNameByPublishCode($publish_code)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+	$select_query = 'select group_name from groups where publish_code =\'' . $publish_code . '\'';
+
+        $result = mysql_query($select_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+	return $row['group_name'];
+    }
 
     function GetUserById($user_id,&$user_rec)
     {

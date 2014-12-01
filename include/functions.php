@@ -53,8 +53,10 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
                 $live_time=$row['live_time'];
                 $client_addr=$row['client_addr'];
                 $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
+                
+                $group_name = $dbactions->GetGroupNameByPublishCode($publish_code);
 
-                echo '<option value="' . $live_id . '">' . $stream_name . ' del ' . $live_date_formatted . '</option>"';
+                echo '<option value="' . $live_id . '">Adunanza di <b>' . $group_name . '</b> del <b>' . $live_date_formatted . '</b></option>"';
             }
         echo '</select>';
         echo '<br/>';
