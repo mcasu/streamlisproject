@@ -57,4 +57,5 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
                 echo '<option value="' . $live_id . '">' . $stream_name . ' del ' . $live_date_formatted . '</option>"';
             }
         echo '</select>';
+        echo '<br/>';
 }
