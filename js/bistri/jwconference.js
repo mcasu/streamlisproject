@@ -214,6 +214,7 @@ function joinConference()
     var roomToJoin = $( "#roomSelector option:selected" ).val();
     //alert("Join to room: " + roomToJoin);
     
+    
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
@@ -247,6 +248,7 @@ function quitConference()
     BistriConference.quitRoom( room );
     
     // Hide Quit Conference input button and show Join Conference input button
+    $("#joined_user_number").hide();
     $("#panelVideo").hide();
     $("#quit").hide();
     $("#join").show();

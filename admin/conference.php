@@ -14,6 +14,7 @@
     <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=3"></script>
+    <script type="text/javascript" src="/players/jwplayer/jwplayer.js" ></script>
     
 </head>
 
@@ -61,7 +62,7 @@
         
         <div class="panel-body">
             <label for='groups' >Congregazione:</label><br/>
-	    <select id="roomSelector" class="form-control" placeholder="Seleziona la congregazione..." name="group_name" id="group_name">
+	    <select id="roomSelector" class="form-control" name="group_name" id="group_name">
             <?php    
                 foreach ($group_array AS $id => $row)
                 {
@@ -83,6 +84,11 @@
                 <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
             </div>
             <br/>
+            <div id="streamSelectorContainer" class="container">
+                
+            </div>
+         
+            <br/>
             <br/>
             <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
             <input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block"></input>
@@ -102,6 +108,7 @@
               </div>
                 <div class="panel-body">
                     <div id="myvideo" class="pull-center"></div>
+                    <div id="player" class="pull-center"></div>
                 </div>
             </div>
         </div>
@@ -130,6 +137,8 @@
 	$(document).ready(function()
         {
             $("#quit").hide();
+            $('#join').prop('disabled', true);
+            $('#streamSelectorContainer').hide();
             $("#panelVideo").hide();
             $(".alert-danger").hide();
             $("#joined_user_number").hide();
@@ -154,9 +163,15 @@
                 else
                 {
                     $(".alert-danger").hide();
+                    
+                    $('#streamSelectorContainer').show();
+                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#roomSelector').val());
+                    
                     $('#join').prop('disabled', false);
                 }
             };
+            
+            
         });
     </script>
     
