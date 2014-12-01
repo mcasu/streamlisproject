@@ -165,7 +165,7 @@
                     $(".alert-danger").hide();
                     
                     $('#streamSelectorContainer').show();
-                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#roomSelector').val());
+                    $('#streamSelectorContainer').load('../include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#roomSelector').val());
                     
                     $('#join').prop('disabled', false);
                 }

@@ -37,20 +37,22 @@ function CheckLiveExistsForPublishCode($dbactions, $publish_code)
 
 function GetStreamSelectorContainer($publish_code) 
 {
-    echo '<label id="streamSelectorLabel" for="streams">Live stream disponibili:</label><br/>';
-    echo '<select id="streamSelector" class="form-control" name="stream_name">';
-        $live_events = $dbactions->GetLiveEventsByPublisher($publish_code);
-        while($row = mysql_fetch_array($live_events))
-        {
-            $live_id=$row['live_id'];
-            $app_name=$row['app_name'];
-            $stream_name=$row['stream_name'];
-            $live_date=$row['live_date'];
-            $live_time=$row['live_time'];
-            $client_addr=$row['client_addr'];
-            $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
+    echo '<div id="streamSelectorContainer" class="container">';
+        echo '<label id="streamSelectorLabel" for="streams">Live stream disponibili:</label><br/>';
+        echo '<select id="streamSelector" class="form-control" name="stream_name">';
+            $live_events = $dbactions->GetLiveEventsByPublisher($publish_code);
+            while($row = mysql_fetch_array($live_events))
+            {
+                $live_id=$row['live_id'];
+                $app_name=$row['app_name'];
+                $stream_name=$row['stream_name'];
+                $live_date=$row['live_date'];
+                $live_time=$row['live_time'];
+                $client_addr=$row['client_addr'];
+                $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
 
-            echo '<option value="' . $live_id . '">' . $stream_name . ' del ' . $live_date_formatted . '</option>"';
-        }
-    echo '</select>';
+                echo '<option value="' . $live_id . '">' . $stream_name . ' del ' . $live_date_formatted . '</option>"';
+            }
+        echo '</select>';
+    echo '</div>';
 }
