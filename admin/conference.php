@@ -61,28 +61,33 @@
         </div>
         
         <div class="panel-body">
-            <label for='groups' >Congregazione:</label><br/>
-	    <select id="roomSelector" class="form-control" name="group_name" id="group_name">
-            <?php    
-                foreach ($group_array AS $id => $row)
-                {
-                    $group_id=$row['group_id'];
-                    $group_name=$row['group_name'];
-                    $group_type=$row['group_type'];
-                    $group_role_name=$row['group_role_name'];
-                    $group_publish_code=$row['publish_code'];
-
-                    if ($group_role_name=="publisher")
+            <div class="container-fluid">
+                <label for='groups' >Congregazione:</label><br/>
+                <select id="roomSelector" class="form-control" name="group_name" id="group_name">
+                <?php    
+                    foreach ($group_array AS $id => $row)
                     {
-                        echo '<option value="' . $group_publish_code . '">' . $group_name . '</option>"';
+                        $group_id=$row['group_id'];
+                        $group_name=$row['group_name'];
+                        $group_type=$row['group_type'];
+                        $group_role_name=$row['group_role_name'];
+                        $group_publish_code=$row['publish_code'];
+
+                        if ($group_role_name=="publisher")
+                        {
+                            echo '<option value="' . $group_publish_code . '">' . $group_name . '</option>"';
+                        }
                     }
-                }
-            ?>
-            </select>
+                ?>
+                </select>
+            </div>
+            
             <br/>
+            
             <div class="alert alert-danger" role="alert">
                 <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
             </div>
+            
             <br/>
             <div id="streamSelectorContainer" class="container-fluid">
                 
