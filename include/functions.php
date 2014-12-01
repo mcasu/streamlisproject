@@ -17,7 +17,7 @@ switch ($fname)
         return CheckLiveExistsForPublishCode($dbactions, $publishCode);
     case "get_stream_selector_container":
         $publishCode = filter_input(INPUT_GET, 'publishCode');
-        return GetStreamSelectorContainer($publishCode);
+        return GetStreamSelectorContainer($dbactions, $publishCode);
     default:
         break;
 }
