@@ -216,9 +216,8 @@ function joinConference()
     
     var streamNameToView = $( "#streamSelector option:selected" ).val();
     var appNameToView = $( "#streamSelector option:selected" ).attr("id");
+    //alert("Stream: " + streamNameToView + " App: " + appNameToView);
     
-    alert("Stream: " + streamNameToView + " App: " + appNameToView);
-    //
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
@@ -235,6 +234,18 @@ function joinConference()
         } );
         */
        
+       jwplayer("player").setup({
+                        file: "rtmp://www.jwstream.org:1935/" + appNameToView + '/' + streamNameToView,
+                        autostart: true,
+                        controls: true,
+			rtmp: {
+			    bufferlength: 0.1  
+			},
+                        aspectratio: "4:3",
+                        width: 320,
+                        height: 240
+                        });
+                        
         BistriConference.joinRoom( roomToJoin, 3 );
         
         // Show Quit Conference input button and hide Join Conference input button
