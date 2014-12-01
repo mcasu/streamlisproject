@@ -41,7 +41,6 @@ function CheckLiveExistsForPublishCode($dbactions, $publish_code)
 
 function GetStreamSelectorContainer($dbactions, $publish_code) 
 {
-    echo '<div id="streamSelectorContainer" class="container">';
         echo '<label id="streamSelectorLabel" for="streams">Live stream disponibili:</label><br/>';
         echo '<select id="streamSelector" class="form-control" name="stream_name">';
             $live_events = $dbactions->GetLiveEventsByPublisher($publish_code);
@@ -58,5 +57,4 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
                 echo '<option value="' . $live_id . '">' . $stream_name . ' del ' . $live_date_formatted . '</option>"';
             }
         echo '</select>';
-    echo '</div>';
 }

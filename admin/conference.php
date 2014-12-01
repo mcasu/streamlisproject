@@ -84,7 +84,7 @@
                 <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
             </div>
             <br/>
-            <div id="streamSelectorContainer" class="container">
+            <div id="streamSelectorContainer" class="container pull-left">
                 
             </div>
          
@@ -159,6 +159,7 @@
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
                     $('#join').prop('disabled', true);
+                    $('#streamSelectorContainer').hide();
                 }
                 else
                 {
