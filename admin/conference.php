@@ -134,14 +134,15 @@
             $('#roomSelector').on('change', function() 
             {
                 $(".alert-danger").hide();
-                if (!CheckLiveExistsForPublishCode($('#roomSelector').val()))
+                if ( CheckLiveExistsForPublishCode($('#roomSelector').val()) === "false")
                 {
-                    //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
+                    alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
                     $('#join').prop('disabled', true);
                 }
                 else
                 {
+                    $(".alert-danger").hide();
                     $('#join').prop('disabled', false);
                 }
             });
