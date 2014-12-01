@@ -5,6 +5,10 @@ require_once("config.php");
 $dbactions = $mainactions->GetDBActionsInstance();
 
 $fname = filter_input(INPUT_POST, 'fname');
+if (!isset($fname) || !$fname)
+{
+    $fname = filter_input(INPUT_GET, 'fname');
+}
 
 switch ($fname) 
 {
