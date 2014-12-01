@@ -135,19 +135,7 @@
             
             $('#roomSelector').on('change', function() 
             {
-                $(".alert-danger").hide();
-                var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
-                if (result  === "false")
-                {
-                    //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
-                    $(".alert-danger").show();
-                    $('#join').prop('disabled', true);
-                }
-                else
-                {
-                    $(".alert-danger").hide();
-                    $('#join').prop('disabled', false);
-                }
+                CheckGroupStatus();
             });
             
             function CheckGroupStatus()
