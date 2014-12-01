@@ -215,7 +215,7 @@ function joinConference()
     //alert("Join to room: " + roomToJoin);
     
     var streamNameToView = $( "#streamSelector option:selected" ).val();
-    var appNameToView = $( "#streamSelector option:selected" ).id();
+    var appNameToView = $( "#streamSelector option:selected" ).attr("id");
     
     alert("Stream: " + streamNameToView + " App: " + appNameToView);
     //
