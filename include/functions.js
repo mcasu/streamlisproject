@@ -110,16 +110,14 @@ CheckLiveExistsForPublishCode = function(publishCode)
         cache: false,
         success: function(res)
         {
-            if(res === true)
+            if(res === "true")
             {
                 alert('La congregazione con code [' + publishCode + '] sta trasmettendo - ' + res);
                 return true;
             }
-            else
-            {
-                alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
-                return false;
-            }
+            
+            alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
+            return false;
         }
     }).done(function( data ) 
     {

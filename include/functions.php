@@ -23,7 +23,10 @@ function CheckLiveExistsForPublishCode($dbactions, $publish_code)
     
     if ($live_events && $live_events_number > 0)
     {
-        return "true";
+        echo "true";
     }
-    return "false";
+    else    
+    {
+        echo "false";
+    }
 }
