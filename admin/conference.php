@@ -112,8 +112,8 @@
                   <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
               </div>
                 <div class="panel-body">
-                    <div id="myvideo" class="pull-center"></div>
-                    <div id="player" class="pull-center"></div>
+                    <div id="myvideo"></div>
+                    <div id="player"></div>
                 </div>
             </div>
         </div>

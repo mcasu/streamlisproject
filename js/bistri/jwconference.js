@@ -86,7 +86,7 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         //peers[ data.pid ] = data;
-        //$("#joined_user_number").find(".label").text(data.members.length);
+        $("#joined_user_number").find(".label").text(data.members.length);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
