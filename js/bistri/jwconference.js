@@ -247,7 +247,7 @@ function joinConference()
                 // when the local stream has been started and attached to the page
                 // we are ready join the conference room.
                 // event "onJoinedRoom" is triggered when the operation successed.
-                BistriConference.joinRoom( roomToJoin, 3 );
+                //BistriConference.joinRoom( roomToJoin, 3 );
             } );
        }
                         
