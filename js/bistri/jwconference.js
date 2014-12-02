@@ -46,6 +46,13 @@ var onBistriConferenceReady = function ()
         // set the current room name
         room = data.room;
 
+        if (userrole === "2" && data.members.length === 0)
+        {
+            alert("La room non è aperta.");
+            quitConference();
+            return;
+        }
+        
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
@@ -235,7 +242,8 @@ function joinConference()
                              aspectratio: "4:3",
                              width: 320,
                              height: 240
-                             });            
+                             });     
+            BistriConference.joinRoom( roomToJoin, 3 );
         }
         else // for the normal users we attach the local video stream.
         {
@@ -247,11 +255,9 @@ function joinConference()
                 // when the local stream has been started and attached to the page
                 // we are ready join the conference room.
                 // event "onJoinedRoom" is triggered when the operation successed.
-                //BistriConference.joinRoom( roomToJoin, 3 );
+                BistriConference.joinRoom( roomToJoin, 3 );
             } );
-       }
-                        
-        BistriConference.joinRoom( roomToJoin, 3 );
+       }                     
         
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
