@@ -48,7 +48,7 @@ var onBistriConferenceReady = function ()
 
         if (userrole === "2" && data.members.length === 0)
         {
-            alert("La room non è aperta.");
+            alert("Non ci sono conferenze attive per l'adunanza selezionata.\nChiedi agli anziani della congregazione selezionata di attivare la conferenza.");
             quitConference();
             return;
         }
