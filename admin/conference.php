@@ -101,39 +101,46 @@
             <br/>
             
             <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5>
+            
+            <div id="panelVideo">
+                <div class="container">
+                    <div id="localStreamsMyVideo" class="panel panel-primary">
+                      <div class="panel-heading">
+                          <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
+                      </div>
+                        <div class="panel-body">
+                            <div id="myvideo"></div>
+                        </div>
+                    </div>
+                    <div id="localStreamsPlayer" class="panel panel-primary">
+                      <div class="panel-heading">
+                          <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
+                      </div>
+                        <div class="panel-body">
+                            <div id="player"></div>
+                        </div>
+                    </div>
+                </div>
+
+               <div id="panelVideoRemote" class="panel panel-primary">
+                   <div class="panel-heading">
+                       <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">Altri fratelli</h4>
+                   </div>
+
+                   <div class="panel-body">
+                    <!-- Columns are always 50% wide, on mobile and desktop -->
+                    <div class="row">
+                        <div id="video-1" class="col-xs-6 remoteStreams"></div>
+                        <div id="video-2" class="col-xs-6 remoteStreams"></div>
+                    </div>
+                   </div>
+               </div>
+            </div>            
+            
         </div>
     </div>
     </p>
  
-    <div id="panelVideo">
-
-        <div class="container">
-            <div id="localStreams" class="panel panel-primary">
-              <div class="panel-heading">
-                  <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
-              </div>
-                <div class="panel-body">
-                    <div id="myvideo"></div>
-                    <div id="player"></div>
-                </div>
-            </div>
-        </div>
-        
-       <div id="panelVideoRemote" class="panel panel-primary">
-           <div class="panel-heading">
-               <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">Altri fratelli</h4>
-           </div>
-
-           <div class="panel-body">
-            <!-- Columns are always 50% wide, on mobile and desktop -->
-            <div class="row">
-                <div id="video-1" class="col-xs-6 remoteStreams"></div>
-                <div id="video-2" class="col-xs-6 remoteStreams"></div>
-            </div>
-           </div>
-       </div>
-     
-    </div>
 </div>    
     
     <!--<script type="text/javascript" src="/js/bistri/api-demo.js"></script>-->

@@ -138,6 +138,10 @@ var onBistriConferenceReady = function ()
     // when a new remote stream is received
     BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
     {
+        if (userrole === "2")
+        {
+            return;
+        }
         console.log("Aggiungo un nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = $( ".remoteStreams" );
