@@ -100,21 +100,21 @@
             <input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block"></input>
             <br/>
             
-            <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5>
+            <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5><br/>
             
             <div id="panelVideo">
                 <div class="container">
                     <div id="localStreamsMyVideo" class="panel panel-primary pull-left" style="margin-right: 6px;">
-                      <div class="panel-heading">
-                          <h4 class="panel-title centered" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
+                      <div class="panel-heading text-center">
+                          <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
                       </div>
                         <div class="panel-body">
                             <div id="myvideo"></div>
                         </div>
                     </div>
                     <div id="localStreamsPlayer" class="panel panel-primary pull-left">
-                      <div class="panel-heading">
-                          <h4 class="panel-title centered" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
+                      <div class="panel-heading text-center">
+                          <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
                       </div>
                         <div class="panel-body">
                             <div id="player"></div>
@@ -123,7 +123,7 @@
                 </div>
 
                <div id="panelVideoRemote" class="panel panel-primary">
-                   <div class="panel-heading">
+                   <div class="panel-heading text-center">
                        <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">Altri fratelli</h4>
                    </div>
 
