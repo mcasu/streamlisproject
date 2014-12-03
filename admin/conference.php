@@ -104,7 +104,7 @@
             
             <div id="panelVideo">
                 <div class="container">
-                    <div id="localStreamsMyVideo" class="panel panel-primary">
+                    <div id="localStreamsMyVideo" class="panel panel-primary pull-left">
                       <div class="panel-heading">
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
                       </div>
@@ -112,7 +112,7 @@
                             <div id="myvideo"></div>
                         </div>
                     </div>
-                    <div id="localStreamsPlayer" class="panel panel-primary">
+                    <div id="localStreamsPlayer" class="panel panel-primary pull-left">
                       <div class="panel-heading">
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
                       </div>
