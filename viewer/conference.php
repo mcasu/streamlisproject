@@ -80,7 +80,7 @@
             
             <div id="panelVideo">
                 <div class="container">
-                    <div id="localStreamsMyVideo" class="panel panel-primary pull-left">
+                    <div id="localStreamsMyVideo" class="panel panel-primary pull-left" style="margin-right: 6px;">
                       <div class="panel-heading">
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
                       </div>
