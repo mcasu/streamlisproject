@@ -132,6 +132,7 @@
                     <div class="row">
                         <div id="video-1" class="col-xs-6 remoteStreams"></div>
                         <div id="video-2" class="col-xs-6 remoteStreams"></div>
+                        <div id="video-3" class="col-xs-6 remoteStreams"></div>
                     </div>
                    </div>
                </div>

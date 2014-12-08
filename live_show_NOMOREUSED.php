@@ -88,7 +88,7 @@ animatedcollapse.init()
 
 <head>
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-      <title>JW LIS Streaming - Gestisci relazioni</title>
+      <title>Stream LIS - Gestisci relazioni</title>
       <link rel="STYLESHEET" type="text/css" href="../style/fg_membersite.css">
 <style type="text/css">
 table.imagetable {

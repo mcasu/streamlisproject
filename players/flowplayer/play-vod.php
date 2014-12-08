@@ -46,7 +46,7 @@ $filename_withoutext=substr($filename, 0, strlen($filename)-4);
     <div class="span-18" align="center"> <h1>On-demand Video Streaming</h1> </div>
 		
 	<center>
-	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" data-rtmp="rtmp://www.jwstream.org:1935/vod-flash">'; ?>
+	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" data-rtmp="rtmp://www.streamlis.it:1935/vod-flash">'; ?>
 		<video autoplay>
 			<?php echo '<source type="video/flash" src="'.$filename_withoutext.'.flv">'; ?>
 			<?php /*echo '<source type="video/mp4" src="'.$filename_withoutext.'.mp4">'; */ ?>

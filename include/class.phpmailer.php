@@ -72,19 +72,19 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  var $From              = 'lnxstreamserver@jwstream.org';
+  var $From              = 'server@streamlis.it';
 
   /**
    * Sets the From name of the message.
    * @var string
    */
-  var $FromName          = 'JW LIS Administrator'; 
+  var $FromName          = 'Stream LIS Administrator'; 
   /**
    * Sets the Sender email (Return-Path) of the message.  If not empty,
    * will be sent via -f to sendmail or as 'MAIL FROM' in smtp mode.
    * @var string
    */
-  var $Sender            = 'lnxstreamserver@jwstream.org';
+  var $Sender            = 'server@streamlis.it';
 
   /**
    * Sets the Subject of the message.

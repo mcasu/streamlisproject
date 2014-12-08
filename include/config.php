@@ -5,8 +5,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/include/mainactions.php");
 /*** NETWORK CONFIG ***/
 /*$ip_public="54.186.64.204";*/
 /*$ip_private="192.168.5.128";*/
-$ip_public="www.jwstream.org";
-$ip_private="www.jwstream.org";
+$ip_public="www.streamlis.it";
+$ip_private="www.streamlis.it";
 
 $myhostname = gethostname();
 
@@ -34,7 +34,7 @@ setlocale(LC_ALL, 'it_IT.UTF-8');
 $mainactions = new MainActions($host, $uname, $pwd, $database);
 
 //Provide your site name here
-$mainactions->SetWebsiteName('JW LIS Streaming');
+$mainactions->SetWebsiteName('Stream LIS');
 
 //Provide the email address where you want to get notifications
 $mainactions->SetAdminEmail('marco.casu@gmail.com');

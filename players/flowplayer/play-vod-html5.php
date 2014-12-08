@@ -51,7 +51,7 @@ $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 	    <?php
 		echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" data-swf="flowplayer.swf">';
 		    echo '<video autoplay >';
-			echo '<source type="video/mp4" src="http://www.jwstream.org/mp4/'.$filename_withoutext.'.mp4">';
+			echo '<source type="video/mp4" src="http://www.streamlis.it/mp4/'.$filename_withoutext.'.mp4">';
 		    echo '</video>';
 		echo '</div>';
 	    ?>

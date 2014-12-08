@@ -49,7 +49,7 @@ else
 	
 	<center>
 	    <?php echo '<div class="flowplayer fixed-controls play-button no-volume no-mute" style="text-align:center" '.
-			'data-rtmp="rtmp://www.jwstream.org:1935/'.$app_name.'">'; ?>
+			'data-rtmp="rtmp://www.streamlis.it:1935/'.$app_name.'">'; ?>
 	        <video autoplay>
 			<?php echo '<source type="video/flash" src="'.$stream_name.'">'; ?>
 	        </video>

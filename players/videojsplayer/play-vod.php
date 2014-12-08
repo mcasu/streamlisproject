@@ -48,7 +48,7 @@ $filename_withoutext=substr($filename, 0, strlen($filename)-4);
 		<center>
 	    <?php
 		echo '<div class="flowplayer fixed-controls play-button no-volume no-mute"'.
-		'data-rtmp="rtmp://www.jwstream.org:1935/vod-hls">';
+		'data-rtmp="rtmp://www.streamlis.it:1935/vod-hls">';
 		    echo '<video autoplay>';
 			echo '<source type="video/mp4" src="'.$filename_withoutext.'.mp4">';
 		    echo '</video>';

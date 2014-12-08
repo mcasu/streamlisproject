@@ -14,7 +14,7 @@ if($mainactions->ResetPassword())
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>JW LIS Streaming - Reset Password</title>
+    <title>Stream LIS - Reset Password</title>
     <link rel="stylesheet" href="/style/bootstrap.min.css"/>
 </head>
 

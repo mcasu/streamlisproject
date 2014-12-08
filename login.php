@@ -27,7 +27,7 @@ if(isset($_POST['submitted']))
    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-   <title>JW LIS Streaming - Login</title>
+   <title>Stream LIS - Login</title>
    <link rel="stylesheet" href="/style/bootstrap.min.css">
    <link rel='stylesheet' type='text/css' href='/style/admin.css' />
    <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
@@ -41,7 +41,7 @@ if(isset($_POST['submitted']))
    <div class="panel panel-default">
       
       <div class="panel-heading text-center" style="background-color: #333;">
-	 <h1 class="panel-title" style="vertical-align: middle; font-size: 1.5em;">Benvenuto in JW Stream LIS</h1>
+	 <h1 class="panel-title" style="vertical-align: middle; font-size: 1.5em;">Benvenuto in Stream LIS</h1>
       </div>
    
       <div class="panel-body">
@@ -50,7 +50,7 @@ if(isset($_POST['submitted']))
 	     <div class="panel panel-default">
 		<div class="panel-body">
 		   <p class="text-center">
-		      <img src="images/logo_flat.png" alt="JW Stream LIS" height="56" width="60">
+		      <img src="images/logo_flat.png" alt="Stream LIS" height="56" width="60">
 		   </p>
 		   <br/>
 		   
