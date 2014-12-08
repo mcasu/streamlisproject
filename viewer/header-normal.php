@@ -45,7 +45,7 @@ $user_role = $mainactions->GetSessionUserRole();
                   
                  <li>
                      <a href='conference.php' class="active">
-                           <img src="../images/ondemand.png" height="32" width="32">
+                           <img src="../images/register.png" height="32" width="32">
                            Risposte
                      </a>
                   </li> 
