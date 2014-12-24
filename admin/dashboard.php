@@ -147,7 +147,7 @@ echo '<div class="container-fluid">';
 	
 	    echo '<div id="accordionEvents" class="panel-collapse collapse in">';
 		echo '<div class="panel-body">';
-		    echo '<div id="dashboard_event_charts"></div>';
+		    echo '<div id="dashboard_event_charts" class="container-fluid"></div>';
 		echo '</div>';
 	    echo '</div>';
 	echo '</div>';
