@@ -86,7 +86,7 @@ echo '<div class="container-fluid">';
 			}
 			else
 			{
-			    echo '<div id="dashboard_user_charts"></div>';
+			    echo '<div id="dashboard_user_charts" style="overflow:auto"></div>';
 			    echo '<br/>';
 			    
 			    echo '<table class="table table-hover">';
