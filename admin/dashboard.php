@@ -89,7 +89,7 @@ echo '<div class="container-fluid">';
 			    echo '<div id="dashboard_user_charts" style="overflow:auto"></div>';
 			    echo '<br/>';
 			    
-                            echo '<div class="container" style="overflow:auto">';
+                            echo '<div class="container-fluid" style="overflow:auto">';
 			    echo '<table class="table table-hover">';
 				echo '<tr class="head">';
 				echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
