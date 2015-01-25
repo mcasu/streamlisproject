@@ -151,13 +151,19 @@ AddCheckBoxIconToList = function(){
             $checkbox.prop('checked', !$checkbox.is(':checked'));
             $checkbox.triggerHandler('change');
             updateDisplay();
+        });
+        
+        $checkbox.on('change', function () {
+            updateDisplay();
             
             var checkedItems = {}, counter = 0;
             $("#check-list-box li.active").each(function(idx, li) {
+                alert("Ho trovato un check attivo.");
                 checkedItems[counter] = $(li).text();
                 counter++;
             });
             
+            alert ("Check attivi: ". counter);
             if (counter !== 0)
             {
                 $("#btn_video_delete").prop('disabled', false);
@@ -168,9 +174,6 @@ AddCheckBoxIconToList = function(){
                 $("#btn_video_delete").prop('disabled', true);
                 $("#btn_video_archive").prop('disabled', true);
             }
-        });
-        $checkbox.on('change', function () {
-            updateDisplay();
         });
           
 
