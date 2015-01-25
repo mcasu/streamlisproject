@@ -157,7 +157,7 @@ AddCheckBoxIconToList = function(){
             updateDisplay();
             
             var checkedItems = {}, counter = 0;
-            $("#check-list-box li.active").each(function(idx, li) {
+            $(".checked-list-box li.active").each(function(idx, li) {
                 alert("Ho trovato un check attivo.");
                 checkedItems[counter] = $(li).text();
                 counter++;
