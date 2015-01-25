@@ -70,23 +70,23 @@ $(document).ready(function()
 		function(data,status)
 		{
 		    alert("Data: " + data + "\nStatus: " + status);
-			$(this).fadeOut(1000, function()
-			{
-			    var video_title_obj = null;
-			    $(this).children(".video_element_title").first().each(function( index )
-						{
-						    var video_title_tmp = $(this);
-						    //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
-						    if ( video_title_tmp.attr("id") === ondemand_id)
-						    {
-							video_title_obj = video_title_tmp;
-						    }
-						});
-			    
-			    alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
-			    video_title_obj.remove();
-			    $(this).remove();
-			});
+                    $(this).children(".video_element").first().fadeOut(1000, function()
+                    {
+                        var video_title_obj = null;
+                        $(this).children(".video_element_title").first().each(function( index )
+                                            {
+                                                var video_title_tmp = $(this);
+                                                //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
+                                                if ( video_title_tmp.attr("id") === ondemand_id)
+                                                {
+                                                    video_title_obj = video_title_tmp;
+                                                }
+                                            });
+
+                        alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
+                        video_title_obj.remove();
+                        $(this).children(".video_element").first().remove();
+                    });
 		});
             });
         
