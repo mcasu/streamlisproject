@@ -26,7 +26,7 @@ $(document).ready(function()
 	    
 	    if (confirm("Vuoi davvero eliminare?"))
 	    {
-		$.post("event_delete.php",{type:"ondemand",event_id:ondemand_id,},
+		$.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
     
 		function(data,status)
 		{
@@ -38,7 +38,7 @@ $(document).ready(function()
 						{
 						    var video_title_tmp = $(this);
 						    //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
-						    if ( video_title_tmp.attr("id") == ondemand_id)
+						    if ( video_title_tmp.attr("id") === ondemand_id)
 						    {
 							video_title_obj = video_title_tmp;
 						    }
@@ -50,6 +50,46 @@ $(document).ready(function()
 			});
 		});
 	    }
+    });
+    
+    $("#btn_video_delete").click(function()
+    {
+        if (confirm("Vuoi davvero eliminare tutti i video selezionati?"))
+	{
+            var checkedItems = {}, counter = 0;
+            $(".checked-list-box li.active").each(function(idx, li) {
+
+                var ondemand_id=$(this).children(".video_element_title").first().attr('id');
+                checkedItems[counter] = ondemand_id;
+                counter++;
+                
+                $.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
+    
+		function(data,status)
+		{
+		    /*alert("Data: " + data + "\nStatus: " + status);*/
+			$(this).fadeOut(1000, function()
+			{
+			    var video_title_obj = null;
+			    $(this).children(".video_element_title").first().each(function( index )
+						{
+						    var video_title_tmp = $(this);
+						    //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
+						    if ( video_title_tmp.attr("id") === ondemand_id)
+						    {
+							video_title_obj = video_title_tmp;
+						    }
+						});
+			    
+			    //alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
+			    video_title_obj.remove();
+			    $(this).remove();
+			});
+		});
+            });
+        
+        }
+            
     });
     
     $('.play-button').click(function (event){
