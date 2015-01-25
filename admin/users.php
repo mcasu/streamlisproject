@@ -81,50 +81,51 @@ $(document).ready(function()
 <div class="container-fluid">
     <div class="panel panel-default">
 
-    <div class="panel-heading">
-	<button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button></div>
+        <div class="panel-heading">
+            <button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button>
+        </div>
 
-	<div class="panel-body">
-	    <table class="table table-hover" id="users_table">
-	
-	    <?php
-	    
-		$result = $dbactions->GetUsers();
-		
-		if ($result)
-		{
-		    echo '<tr class="head">';
-		    echo'<th></th><th>NOME</th><th>ID</th><th>MAIL</th>'.
-		    '<th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th>';
-		    echo '</tr>';
-		    
-		    while ($row = mysql_fetch_array($result))
-		    {
-			$values[0]=$row['user_name'];
-			$values[1]=$row['user_id'];
-			$values[2]=$row['user_mail'];
-			$values[3]=$row['username'];
-			$values[4]=$row['user_group_name'];
-			$values[5]=$row['user_role_name'];
-			$values[6]=$row['confirmcode']=="y"?"SI":"NO";
-			
-			echo '<tr class="users_table" id="' .$values[1].'">';
-				    echo '<td><input type="radio" name="user_selected" /></td>';
-				    echo '<td>' . $values[0] . '</td>';
-				    echo '<td>' . $values[1] . '</td>';
-				    echo '<td>' . $values[2] . '</td>';
-				    echo '<td>' . $values[3] . '</td>';
-				    echo '<td>' . $values[4] . '</td>';
-				    echo '<td>' . $values[5] . '</td>';
-				    echo '<td>' . $values[6] . '</td>';
-			echo '</tr>';
-		    }
-		    
-		}
-	    
-	    ?>
-	    </table>
-	</div>
+        <div class="panel-body">
+            <table class="table table-hover" id="users_table">
+
+            <?php
+
+                $result = $dbactions->GetUsers();
+
+                if ($result)
+                {
+                    echo '<tr class="head">';
+                    echo'<th></th><th>NOME</th><th>ID</th><th>MAIL</th>'.
+                    '<th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th>';
+                    echo '</tr>';
+
+                    while ($row = mysql_fetch_array($result))
+                    {
+                        $values[0]=$row['user_name'];
+                        $values[1]=$row['user_id'];
+                        $values[2]=$row['user_mail'];
+                        $values[3]=$row['username'];
+                        $values[4]=$row['user_group_name'];
+                        $values[5]=$row['user_role_name'];
+                        $values[6]=$row['confirmcode']=="y"?"SI":"NO";
+
+                        echo '<tr class="users_table" id="' .$values[1].'">';
+                                    echo '<td><input type="radio" name="user_selected" /></td>';
+                                    echo '<td>' . $values[0] . '</td>';
+                                    echo '<td>' . $values[1] . '</td>';
+                                    echo '<td>' . $values[2] . '</td>';
+                                    echo '<td>' . $values[3] . '</td>';
+                                    echo '<td>' . $values[4] . '</td>';
+                                    echo '<td>' . $values[5] . '</td>';
+                                    echo '<td>' . $values[6] . '</td>';
+                        echo '</tr>';
+                    }
+
+                }
+
+            ?>
+            </table>
+        </div>
     </div>
 </div>
 
