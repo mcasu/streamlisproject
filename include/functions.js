@@ -158,12 +158,12 @@ AddCheckBoxIconToList = function(){
             
             var checkedItems = {}, counter = 0;
             $(".checked-list-box li.active").each(function(idx, li) {
-                alert("Ho trovato un check attivo.");
+                //alert("Ho trovato un check attivo.");
                 checkedItems[counter] = $(li).text();
                 counter++;
             });
             
-            alert ("Check attivi: ". counter);
+            alert ("Check attivi: " + counter);
             if (counter !== 0)
             {
                 $("#btn_video_delete").prop('disabled', false);
