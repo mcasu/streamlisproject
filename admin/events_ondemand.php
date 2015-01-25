@@ -63,6 +63,8 @@ $(document).ready(function()
                 checkedItems[counter] = ondemand_id;
                 counter++;
                 
+                alert("Cancello elemento: " + ondemand_id);
+                
                 $.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
     
 		function(data,status)
