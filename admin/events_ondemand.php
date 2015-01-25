@@ -125,7 +125,7 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            echo '<span><h2>ELENCO EVENTI ON-DEMAND:</h2></span>';
+            echo '<h2 style="display:inline;">ELENCO EVENTI ON-DEMAND:</h2>';
             echo '<span><button type="button" class="btn btn-danger" id="btn_user_delete">Elimina video</button></span>';
         echo '</div>';
         
