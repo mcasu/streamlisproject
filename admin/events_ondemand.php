@@ -67,7 +67,7 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    /*alert("Data: " + data + "\nStatus: " + status);*/
+		    alert("Data: " + data + "\nStatus: " + status);
 			$(this).fadeOut(1000, function()
 			{
 			    var video_title_obj = null;
