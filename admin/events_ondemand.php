@@ -71,6 +71,9 @@ $(document).ready(function()
     
     $('.player_iphone').hide();
     
+    $("#btn_video_delete").prop('disabled', true);
+    $("#btn_video_archive").prop('disabled', true);
+    
     var auto_refresh = setInterval(OndemandMp4Loading, 10000);
 
 
@@ -125,8 +128,9 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            echo '<h3 style="display:inline; vertical-align:middle; margin-right:10px">ELENCO EVENTI ON-DEMAND</h3>';
-            echo '<button type="button" class="btn btn-danger" id="btn_user_delete">Elimina video</button>';
+            echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
+            echo '<button type="button" class="btn btn-danger" style="display:inline; vertical-align:middle;" id="btn_video_delete">Elimina video</button>';
+            echo '<button type="button" class="btn btn-primary" style="display:inline; vertical-align:middle;" id="btn_video_archive">Archivia video</button>';
         echo '</div>';
         
         echo '<div class="panel-body">';
