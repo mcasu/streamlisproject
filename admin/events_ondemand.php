@@ -125,8 +125,8 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            echo '<h2 style="float:left;">ELENCO EVENTI ON-DEMAND:</h2>';
-            echo '<button type="button" class="btn btn-danger" style="float:left;" id="btn_user_delete">Elimina video</button>';
+            echo '<span><h2>ELENCO EVENTI ON-DEMAND:</h2></span>';
+            echo '<span><button type="button" class="btn btn-danger" id="btn_user_delete">Elimina video</button></span>';
         echo '</div>';
         
         echo '<div class="panel-body">';
