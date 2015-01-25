@@ -127,7 +127,8 @@ CheckLiveExistsForPublishCode = function(publishCode)
     return result;
 };
    
-$('.list-group .checked-list-box .list-group-item').each(function () {
+AddCheckBoxIconToList = function(){
+    $('.list-group .checked-list-box .list-group-item').each(function () {
         
         // Settings
         var $widget = $(this),
@@ -193,16 +194,7 @@ $('.list-group .checked-list-box .list-group-item').each(function () {
         }
         init();
     });
-    
-    $('#get-checked-data').on('click', function(event) {
-        event.preventDefault(); 
-        var checkedItems = {}, counter = 0;
-        $("#check-list-box li.active").each(function(idx, li) {
-            checkedItems[counter] = $(li).text();
-            counter++;
-        });
-        $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
-    });
+};
    
    
 })(jQuery);

@@ -65,7 +65,8 @@ $(document).ready(function()
 	});
 
     $('.panel-collapse').on('shown.bs.collapse', function () {
-	OndemandMp4Loading();
+	AddCheckBoxIconToList();
+        OndemandMp4Loading();
     });
     
     $('.player_iphone').hide();
