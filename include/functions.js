@@ -163,7 +163,7 @@ AddCheckBoxIconToList = function(){
                 counter++;
             });
             
-            alert ("Check attivi: " + counter);
+            //alert ("Check attivi: " + counter);
             if (counter !== 0)
             {
                 $("#btn_video_delete").prop('disabled', false);
