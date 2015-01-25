@@ -162,7 +162,7 @@ try
 			    }
 			    else
 			    {
-				echo '<ul class=" list-group checked-list-box left" id="'.$group_publish_code.'">';
+				echo '<ul class="list-group checked-list-box left" id="'.$group_publish_code.'">';
 				    	
 				    while($row = mysql_fetch_array($ondemand_events))
 				    {
