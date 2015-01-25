@@ -74,14 +74,14 @@ $(document).ready(function()
                     {
                         var video_title_obj = null;
                         $(this).children(".video_element_title").first().each(function( index )
-                                            {
-                                                var video_title_tmp = $(this);
-                                                //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
-                                                if ( video_title_tmp.attr("id") === ondemand_id)
-                                                {
-                                                    video_title_obj = video_title_tmp;
-                                                }
-                                            });
+                        {
+                            var video_title_tmp = $(this);
+                            alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
+                            if ( video_title_tmp.attr("id") === ondemand_id)
+                            {
+                                video_title_obj = video_title_tmp;
+                            }
+                        });
 
                         alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
                         video_title_obj.remove();
