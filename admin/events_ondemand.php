@@ -88,8 +88,6 @@ $(document).ready(function()
 <h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
 <p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
-<h2>ELENCO EVENTI ON-DEMAND:</h2>
-
 <?php 
 
 
@@ -127,6 +125,7 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
+            echo '<h2>ELENCO EVENTI ON-DEMAND:</h2>';
             echo '<button type="button" class="btn btn-danger" id="btn_user_delete">Elimina video</button>';
         echo '</div>';
         
