@@ -128,7 +128,7 @@ CheckLiveExistsForPublishCode = function(publishCode)
 };
    
 AddCheckBoxIconToList = function(){
-    $('.list-group .checked-list-box .list-group-item').each(function () {
+    $('.list-group.checked-list-box .list-group-item').each(function () {
         alert("Creo la checkbox...");
         // Settings
         var $widget = $(this),
