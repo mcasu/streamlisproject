@@ -69,8 +69,8 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).find(".video_element").first().attr('class'));
-                    var ul_video_obj = $(this).find(".video_element").first();
+		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).children(".video_element").attr('class'));
+                    var ul_video_obj = $(this).children(".video_element");
                     ul_video_obj.fadeOut(1000, function()
                     {
                         var video_title_obj = null;
