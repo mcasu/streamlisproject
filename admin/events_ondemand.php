@@ -69,7 +69,7 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    alert("Data: " + data + "\nStatus: " + status);
+		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).children(".video_element").first().attr('class'));
                     $(this).children(".video_element").first().fadeOut(1000, function()
                     {
                         var video_title_obj = null;
