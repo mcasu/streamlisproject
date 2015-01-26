@@ -254,7 +254,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
 
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'">';
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
