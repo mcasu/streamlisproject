@@ -70,7 +70,7 @@ $(document).ready(function()
 		function(data,status)
 		{
 		    alert("Data: " + data + "\nStatus: " + status + 
-                            "\nChildren title first: " + $(this).children(".video_element_title").first().attr('id'));
+                            "\nThis class: " + $(this).attr('class'));
                     var ul_video_obj = $(this).children();
                     /*
                     ul_video_obj.fadeOut(1000, function()
