@@ -73,7 +73,7 @@ $(document).ready(function()
 		    //alert("Data: " + data + "\nStatus: " + status + "\nThis class: " + li_video_obj.attr('class'));
                     
                     li_video_obj.fadeOut(1000);
-                    li_video_obj.remove();
+                    //li_video_obj.remove();
                     
                     /*
                     ul_video_obj.fadeOut(1000, function()
