@@ -269,11 +269,11 @@ try
 
                                                                 if ( ($ondemand_date_day) && ($ondemand_date_day > 5))
                                                                 {
-                                                                    echo '<h4 style="display:inline;"><b>ADUNANZA PUBBLICA - '.$ondemand_date. '</b></h4>';    
+                                                                    echo '<h4><b>ADUNANZA PUBBLICA - '.$ondemand_date. '</b></h4>';    
                                                                 }
                                                                 elseif (($ondemand_date_day) && ($ondemand_date_day <= 5))
                                                                 {
-                                                                    echo '<h4 style="display:inline;"><b>ADUNANZA DI SERVIZIO - '.$ondemand_date. '</b></h4>';
+                                                                    echo '<h4><b>ADUNANZA DI SERVIZIO - '.$ondemand_date. '</b></h4>';
                                                                 }
                                                             echo '</div>';
 
