@@ -256,7 +256,7 @@ try
 
                                                             echo '<div class="video_element_title" id="'.$ondemand_id.'">';
                                                             
-                                                                echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
+                                                                //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
                                                                 if (is_null($ondemand_onlydate))						
                                                                 {
