@@ -254,7 +254,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
 
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline; margin-left:4px;">';
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline; margin-left:6px;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
@@ -269,11 +269,11 @@ try
 
                                                                 if ( ($ondemand_date_day) && ($ondemand_date_day > 5))
                                                                 {
-                                                                    echo '<h4><b>ADUNANZA PUBBLICA - '.$ondemand_date. '</b></h4>';    
+                                                                    echo '<h4 style="display:inline;"><b>ADUNANZA PUBBLICA - '.$ondemand_date. '</b></h4>';    
                                                                 }
                                                                 elseif (($ondemand_date_day) && ($ondemand_date_day <= 5))
                                                                 {
-                                                                    echo '<h4><b>ADUNANZA DI SERVIZIO - '.$ondemand_date. '</b></h4>';
+                                                                    echo '<h4 style="display:inline;"><b>ADUNANZA DI SERVIZIO - '.$ondemand_date. '</b></h4>';
                                                                 }
                                                             echo '</div>';
 
