@@ -368,7 +368,7 @@ try
         
         echo '<div class="panel-footer">';
             echo '<div class="pull-right btn_actions" style="vertical-align:middle;">';
-                echo '<button type="button" class="btn btn-danger" style="display:inline; margin-right:4px;" id="btn_video_delete">Elimina video</button>';
+                echo '<button type="button" class="btn btn-danger" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary" style="display:inline;" id="btn_video_archive">Archivia video</button>';
             echo '</div>';
         echo '</div>';
