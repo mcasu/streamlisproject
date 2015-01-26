@@ -65,12 +65,13 @@ $(document).ready(function()
                 
                 //alert("Cancello elemento: " + ondemand_id);
                 
+                var li_video_obj = $(this);
                 $.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
     
 		function(data,status)
 		{
 		    alert("Data: " + data + "\nStatus: " + status + 
-                            "\nThis class: " + $(this).attr('class'));
+                            "\nThis class: " + li_video_obj.attr('class'));
                     var ul_video_obj = $(this).children();
                     /*
                     ul_video_obj.fadeOut(1000, function()
