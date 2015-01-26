@@ -70,9 +70,13 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    alert("Data: " + data + "\nStatus: " + status + 
-                            "\nThis class: " + li_video_obj.attr('class'));
-                    var ul_video_obj = $(this).children();
+		    //alert("Data: " + data + "\nStatus: " + status + "\nThis class: " + li_video_obj.attr('class'));
+                    
+                    li_video_obj.fadeOut(1000, function()
+                    {
+                        li_video_obj.remove();
+                    }
+                    
                     /*
                     ul_video_obj.fadeOut(1000, function()
                     {
