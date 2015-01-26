@@ -254,7 +254,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
 
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'">';
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline;">';
                                                                 if (is_null($ondemand_onlydate))						
                                                                 {
                                                                     $ondemand_date_day = strftime("%u", strtotime($row['ondemand_date']));
