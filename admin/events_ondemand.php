@@ -69,8 +69,10 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).children(".video_element").attr('class'));
-                    var ul_video_obj = $(this).children(".video_element");
+		    alert("Data: " + data + "\nStatus: " + status + 
+                            "\nChildren first: " + $(this).children().first().attr('class'));
+                    var ul_video_obj = $(this).children();
+                    /*
                     ul_video_obj.fadeOut(1000, function()
                     {
                         var video_title_obj = null;
@@ -88,6 +90,7 @@ $(document).ready(function()
                         video_title_obj.remove();
                         ul_video_obj.remove();
                     });
+                    */
 		});
             });
         
