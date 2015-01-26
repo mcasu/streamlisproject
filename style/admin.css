@@ -233,6 +233,7 @@ ul.video_element
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 1px;
+  padding: 0;
   width: 98%;
 }
 
@@ -246,7 +247,7 @@ ul.video_element li
 {
   float: left; /* don't change */
   vertical-align: middle;
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+  //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   overflow: visible;
 }
 
@@ -324,6 +325,8 @@ a.event_ondemand_delete, a.event_ondemand_delete img
 {
   width: 32px;
   height: 32px;
+  margin-top: 25px;
+  margin-right: 2px;
 }
 
 
