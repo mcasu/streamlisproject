@@ -435,10 +435,7 @@ div.table_container {
 /**********************************/
 .state-icon {
     left: -5px;
-    margin-right: 6px;
     display:inline;
-    width:32px;
-    height:32px;
 }
 .list-group-item-primary {
     color: rgb(255, 255, 255);
