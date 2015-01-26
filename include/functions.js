@@ -166,13 +166,15 @@ AddCheckBoxIconToList = function(){
             //alert ("Check attivi: " + counter);
             if (counter !== 0)
             {
-                $("#btn_video_delete").prop('disabled', false);
-                $("#btn_video_archive").prop('disabled', false);
+                $(".btn-actions").prop('disabled', false);
+                //$("#btn_video_delete").prop('disabled', false);
+                //$("#btn_video_archive").prop('disabled', false);
             }
             else
             {
-                $("#btn_video_delete").prop('disabled', true);
-                $("#btn_video_archive").prop('disabled', true);
+                $(".btn-actions").prop('disabled', true);
+                //$("#btn_video_delete").prop('disabled', true);
+                //$("#btn_video_archive").prop('disabled', true);
             }
         });
           

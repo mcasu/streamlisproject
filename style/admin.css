@@ -248,6 +248,7 @@ ul.video_element li
   float: left; /* don't change */
   vertical-align: middle;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   overflow: visible;
 }
 
