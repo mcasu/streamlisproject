@@ -69,8 +69,9 @@ $(document).ready(function()
     
 		function(data,status)
 		{
-		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).children(".video_element").first().attr('class'));
-                    $(this).children(".video_element").first().fadeOut(1000, function()
+		    alert("Data: " + data + "\nStatus: " + status + "\nVideo element: " + $(this).find("ul.video_element").first().attr('class'));
+                    var ul_video_obj = $(this).find("ul.video_element").first();
+                    ul_video_obj.fadeOut(1000, function()
                     {
                         var video_title_obj = null;
                         $(this).children(".video_element_title").first().each(function( index )
@@ -85,7 +86,7 @@ $(document).ready(function()
 
                         alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
                         video_title_obj.remove();
-                        $(this).children(".video_element").first().remove();
+                        ul_video_obj.remove();
                     });
 		});
             });
