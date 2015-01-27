@@ -259,7 +259,14 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
                     
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline; margin-left:8px;">';
+                                                            echo '<div id="'.$ondemand_id.'" class="pull-right video_delete" style="vertical-align:middle;">';
+                                                                echo '<a class="event_ondemand_delete">'.
+                                                                '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                //'<img src="../images/delete.png"/>'.
+                                                                '</a>';
+                                                            echo '</div>';
+                                                                
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
@@ -282,14 +289,7 @@ try
                                                                 }
                                                             echo '</div>';
 
-                                                            echo '<ul class="video_element">';
-
-                                                                echo '<div id="'.$ondemand_id.'" class="center pull-right video_delete">';
-                                                                    echo '<a class="event_ondemand_delete">'.
-                                                                    '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                    //'<img src="../images/delete.png"/>'.
-                                                                    '</a>';
-                                                                echo '</div>';
+                                                            echo '<ul class="video_element">';                                                                
                                                             
                                                                 echo '<li>';
                                                                     echo '<div id="'.$ondemand_id.'" class="video_delete">';
