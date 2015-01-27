@@ -257,11 +257,11 @@ try
                                                             $thumbnail_img = "../images/video_thumbnail.png";
                                                         }
 
-                                                        echo '<li class="list-group-item video_list_element" style="text-align:center;">';
+                                                        echo '<li class="list-group-item video_list_element" style="display:table-cell; vertical-align:middle;">';
 
                                                             echo '<div id="'.$ondemand_id.'" class="pull-right video_delete">';
                                                                 echo '<a class="event_ondemand_delete">'.
-                                                                '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                '<span class="glyphicon glyphicon-trash" style="width:32px; height:32px;"></span>'.
                                                                 //'<img src="../images/delete.png"/>'.
                                                                 '</a>';
                                                             echo '</div>';
