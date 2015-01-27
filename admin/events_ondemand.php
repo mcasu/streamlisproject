@@ -282,14 +282,14 @@ try
                                                                 }
                                                             echo '</div>';
 
-                                                            echo '<ul class="video_element text-center centering">';
+                                                            echo '<ul class="video_element">';
 
-                                                                echo '<li id="'.$ondemand_id.'" class="pull-right video_delete">';
+                                                                echo '<div id="'.$ondemand_id.'" class="center pull-right video_delete">';
                                                                     echo '<a class="event_ondemand_delete">'.
                                                                     '<span class="glyphicon glyphicon-trash"></span>'.
                                                                     //'<img src="../images/delete.png"/>'.
                                                                     '</a>';
-                                                                echo '</li>';
+                                                                echo '</div>';
                                                             
                                                                 echo '<li>';
                                                                     echo '<div id="'.$ondemand_id.'" class="video_delete">';
