@@ -257,15 +257,8 @@ try
                                                             $thumbnail_img = "../images/video_thumbnail.png";
                                                         }
 
-                                                        echo '<li class="list-group-item video_list_element" style="display:table-cell; vertical-align:middle;">';
-
-                                                            echo '<div id="'.$ondemand_id.'" class="pull-right video_delete">';
-                                                                echo '<a class="event_ondemand_delete">'.
-                                                                '<span class="glyphicon glyphicon-trash" style="width:32px; height:32px;"></span>'.
-                                                                //'<img src="../images/delete.png"/>'.
-                                                                '</a>';
-                                                            echo '</div>';
-                                                            
+                                                        echo '<li class="list-group-item video_list_element">';
+                    
                                                             echo '<div class="video_element_title" id="'.$ondemand_id.'" style="display:inline; margin-left:8px;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
@@ -291,6 +284,13 @@ try
 
                                                             echo '<ul class="video_element">';
 
+                                                                echo '<li id="'.$ondemand_id.'" class="pull-right video_delete">';
+                                                                    echo '<a class="event_ondemand_delete">'.
+                                                                    '<span class="glyphicon glyphicon-trash" style="width:36px; height:36px;"></span>'.
+                                                                    //'<img src="../images/delete.png"/>'.
+                                                                    '</a>';
+                                                                echo '</li>';
+                                                            
                                                                 echo '<li>';
                                                                     echo '<div id="'.$ondemand_id.'" class="video_delete">';
                                                                         echo '<a class="event_ondemand_delete">'.
