@@ -284,7 +284,7 @@ try
 
                                                             echo '<ul class="video_element">';
 
-                                                                echo '<li id="'.$ondemand_id.'" class="pull-right video_delete" style="height:100%; vertical-align:middle;">';
+                                                                echo '<li id="'.$ondemand_id.'" class="text-center pull-right video_delete">';
                                                                     echo '<a class="event_ondemand_delete">'.
                                                                     '<span class="glyphicon glyphicon-trash"></span>'.
                                                                     //'<img src="../images/delete.png"/>'.
