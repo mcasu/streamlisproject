@@ -259,7 +259,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
 
-                                                            echo '<div id="'.$ondemand_id.'" class="pull-right video_delete">';
+                                                            echo '<div id="'.$ondemand_id.'" class="pull-right video_delete" style="vertical-align:middle;">';
                                                                 echo '<a class="event_ondemand_delete">'.
                                                                 '<span class="glyphicon glyphicon-trash"></span>'.
                                                                 //'<img src="../images/delete.png"/>'.
