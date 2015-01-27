@@ -157,8 +157,8 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
-            echo '<div class="pull-right btn_actions" style="vertical-align:middle;">';
+            //echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
+            echo '<div class="pull-right btn_actions" style="display:inline;">';
                 echo '<button type="button" class="btn btn-danger" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
             echo '</div>';
@@ -367,7 +367,7 @@ try
         echo '</div>';
         
         echo '<div class="panel-footer">';
-            echo '<div class="pull-right btn_actions">';
+            echo '<div class="pull-right btn_actions" style="display:inline;">';
                 echo '<button type="button" class="btn btn-danger" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
             echo '</div>';
