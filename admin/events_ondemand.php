@@ -98,7 +98,7 @@ $(document).ready(function()
     
     $('.player_iphone').hide();
     
-    $(".btn_actions").attr('disabled', "disabled");
+    $(".btn_actions").find(".btn").attr('disabled',true);
     
     //$("#btn_video_delete").prop('disabled', true);
     //$("#btn_video_archive").prop('disabled', true);
