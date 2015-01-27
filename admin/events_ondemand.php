@@ -284,7 +284,7 @@ try
 
                                                             echo '<ul class="video_element">';
 
-                                                                echo '<li>';
+                                                                echo '<li pull-right>';
                                                                     echo '<div id="'.$ondemand_id.'" class="video_delete">';
                                                                         echo '<a class="event_ondemand_delete">'.
                                                                         '<img src="../images/delete.png"/></a>';
