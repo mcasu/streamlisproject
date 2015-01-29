@@ -268,6 +268,15 @@ try
 
                                                             echo '<div class="row vertical-align">';
                                                                 
+                                                                // TRASH BUTTON (pull-right)
+                                                                echo '<div class="col-md-4 pull-right">';
+                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
+                                                                        echo '<a class="event_ondemand_delete">'.
+                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                        '</a>';
+                                                                    echo '</button>';
+                                                                echo '</div>';
+                                                                
                                                                 // CHECKBOX
                                                                 echo '<div class="col-md-2">';
                                                                 echo '</div>';
@@ -328,16 +337,6 @@ try
                                                                         echo '</li>';
                                                                     echo '</ul>';
                                                                 echo '</div>';
-
-                                                                // TRASH BUTTON
-                                                                echo '<div class="col-md-4 pull-right">';
-                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
-                                                                        echo '<a class="event_ondemand_delete">'.
-                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                        '</a>';
-                                                                    echo '</button>';
-                                                                echo '</div>';
-                                                            
                                                                 
                                                             echo '</div>';
 

@@ -234,7 +234,7 @@ ul.video_element
   margin-left: 0;
   margin-bottom: 1px;
   padding: 0;
-  width: 99%;
+  //width: 99%;
 }
 
 ul.video_element:hover
