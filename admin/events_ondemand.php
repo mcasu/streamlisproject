@@ -76,7 +76,7 @@ $(document).ready(function()
 	});
 
     $('.panel-collapse').on('shown.bs.collapse', function () {
-	AddCheckBoxIconToList();
+	//AddCheckBoxIconToList();
         OndemandMp4Loading();
     });
     
@@ -269,11 +269,11 @@ try
                                                             echo '<div class="row vertical-align">';
                                                                 
                                                                 // CHECKBOX
-                                                                echo '<div class="col-xs-2 col-md-2">';
+                                                                echo '<div class="col-md-2">';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
-                                                                echo '<div cilass="col-xs-8 col-md-6">';
+                                                                echo '<div cilass="col-md-6">';
                                                                     echo '<ul class="video_element">';                                                                
                                                                         echo '<li>';
                                                                                 echo '<div class="video_thumb">';
@@ -330,7 +330,7 @@ try
                                                                 echo '</div>';
 
                                                                 // TRASH BUTTON
-                                                                echo '<div class="col-xs-2 col-md-4 pull-right">';
+                                                                echo '<div class="col-md-4 pull-right">';
                                                                     echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
                                                                         echo '<a class="event_ondemand_delete">'.
                                                                             '<span class="glyphicon glyphicon-trash"></span>'.
