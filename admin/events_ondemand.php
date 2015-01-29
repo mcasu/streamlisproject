@@ -270,11 +270,15 @@ try
                                                                 echo '<ul class="video_element">';                                                                
 
                                                                     echo '<li class="pull-right">';
-                                                                        echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
-                                                                            echo '<a class="event_ondemand_delete">'.
-                                                                                '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                            '</a>';
-                                                                        echo '</button>';
+                                                                        echo '<div class="row"/>';
+                                                                        echo '<div class="row">';
+                                                                            echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
+                                                                                echo '<a class="event_ondemand_delete">'.
+                                                                                    '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                                '</a>';
+                                                                            echo '</button>';
+                                                                        echo '</div>';
+                                                                        echo '<div class="row"/>';
                                                                     echo '</li>';
 
                                                                     echo '<li>';
