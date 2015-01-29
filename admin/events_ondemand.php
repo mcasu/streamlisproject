@@ -268,12 +268,7 @@ try
                                                             echo '</div>';
                                                             */
                                                               
-                                                            echo '<button type="button" class="btn btn-default btn-lg pull-right video_delete">';
-                                                                echo '<a class="event_ondemand_delete">'.
-                                                                    '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                    //'<img src="../images/delete.png"/>'.
-                                                                '</a>';
-                                                            echo '</button>';
+
                                                             
                                                             echo '<div class="video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
                                                             
@@ -300,6 +295,15 @@ try
 
                                                             echo '<ul class="video_element">';                                                                
  
+                                                            echo '<li class="pull-right center">';
+                                                                echo '<button type="button" class="btn btn-default btn-lg video_delete">';
+                                                                    echo '<a class="event_ondemand_delete">'.
+                                                                        '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                        //'<img src="../images/delete.png"/>'.
+                                                                    '</a>';
+                                                                echo '</button>';
+                                                            echo '</li>';
+                                                            
                                                             /*
                                                                 echo '<li>';
                                                                     echo '<div id="'.$ondemand_id.'" class="video_delete">';
