@@ -22,32 +22,16 @@ $(document).ready(function()
     $("a.event_ondemand_delete").click(function()
     {
 	    var ondemand_id=$(this).parent().attr('id');
-	    par=$(this).parent();
 	    
 	    if (confirm("Vuoi davvero eliminare?"))
 	    {
+                var li_video_obj=$(this).parent().parent().parent().parent();
 		$.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
     
 		function(data,status)
 		{
 		    /*alert("Data: " + data + "\nStatus: " + status);*/
-			par.parent().parent().fadeOut(1000, function()
-			{
-			    var video_title_obj = null;
-			    par.parent().parent().parent().find("div.video_element_title").each(function( index )
-						{
-						    var video_title_tmp = $(this);
-						    //alert("TMP object class: "+ video_title_tmp.attr('class') + " id: "+video_title_tmp.attr('id'));
-						    if ( video_title_tmp.attr("id") === ondemand_id)
-						    {
-							video_title_obj = video_title_tmp;
-						    }
-						});
-			    
-			    //alert("object class: "+ video_title_obj.attr('class') + " id: "+video_title_obj.attr('id'));
-			    video_title_obj.remove();
-			    par.parent().parent().parent().remove();
-			});
+                    li_video_obj.fadeOut(1000);
 		});
 	    }
     });
@@ -295,24 +279,14 @@ try
 
                                                             echo '<ul class="video_element">';                                                                
  
-                                                            echo '<li class="pull-right center">';
-                                                                echo '<button type="button" class="btn btn-default btn-lg video_delete">';
-                                                                    echo '<a class="event_ondemand_delete">'.
-                                                                        '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                        //'<img src="../images/delete.png"/>'.
-                                                                    '</a>';
-                                                                echo '</button>';
-                                                            echo '</li>';
-                                                            
-                                                            /*
-                                                                echo '<li>';
-                                                                    echo '<div id="'.$ondemand_id.'" class="video_delete">';
+                                                                echo '<li class="pull-right">';
+                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
                                                                         echo '<a class="event_ondemand_delete">'.
-                                                                        '<img src="../images/delete.png"/></a>';
-                                                                    echo '</div>';
+                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                        '</a>';
+                                                                    echo '</button>';
                                                                 echo '</li>';
-                                                             */
-
+                                                            
                                                                 echo '<li>';
                                                                         echo '<div class="video_thumb">';
                                                                             echo '<img src="'.$thumbnail_img.'"/>';
