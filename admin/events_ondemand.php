@@ -243,18 +243,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
                                                         
-                                                            /*
-                                                            echo '<div id="'.$ondemand_id.'" class="pull-right video_delete" style="vertical-align:middle;">';
-                                                                echo '<a class="event_ondemand_delete">'.
-                                                                '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                //'<img src="../images/delete.png"/>'.
-                                                                '</a>';
-                                                            echo '</div>';
-                                                            */
-                                                              
-
-                                                            
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
+                                                            echo '<div class="row video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
@@ -277,77 +266,70 @@ try
                                                                 }
                                                             echo '</div>';
 
-                                                            echo '<ul class="video_element">';                                                                
- 
-                                                                echo '<li class="pull-right">';
-                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
-                                                                        echo '<a class="event_ondemand_delete">'.
-                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                        '</a>';
-                                                                    echo '</button>';
-                                                                echo '</li>';
-                                                            
-                                                                echo '<li>';
-                                                                        echo '<div class="video_thumb">';
-                                                                            echo '<img src="'.$thumbnail_img.'"/>';
-                                                                        echo '</div>';
-                                                                echo '</li>';
+                                                            echo '<div class="row">';
+                                                                echo '<ul class="video_element">';                                                                
 
-                                                                    echo '<li>';
-                                                                        echo '<div class="video_info">';
-                                                                            echo '<b>Nome video: </b>'.basename($ondemand_filename,".flv");
-                                                                            echo '<br/>';
-                                                                            echo '<b>Durata del video: </b>'.$ondemand_movie_duration;
-                                                                            echo '<br/>';
-                                                                            echo '<b>Bitrate: </b>'.$ondemand_movie_bitrate;
-                                                                            echo '<br/>';
-                                                                            echo '<b>Codec: </b>'.$ondemand_movie_codec;
-                                                                        echo '</div>';
+                                                                    echo '<li class="pull-right">';
+                                                                        echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
+                                                                            echo '<a class="event_ondemand_delete">'.
+                                                                                '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                            '</a>';
+                                                                        echo '</button>';
                                                                     echo '</li>';
 
                                                                     echo '<li>';
-                                                                        echo '<div class="player_desktop">';
-                                                                            echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-                                                                                '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
-                                                                            echo '<br/>';
-                                                                            echo "<label>Guarda il video con <br/>PC Desktop</label>";
-                                                                            echo '<br/>';
-                                                                            echo '<img class="video_imgos" src="../images/os_windows.png"/> <img class="video_imgos" src="../images/os_linux.png"/>';
-                                                                        echo '</div>';
+                                                                            echo '<div class="video_thumb">';
+                                                                                echo '<img src="'.$thumbnail_img.'"/>';
+                                                                            echo '</div>';
                                                                     echo '</li>';
-                                                                    /*
-                                                                    echo '<li>';    
-                                                                        echo '<div class="player_smartphone">';
-                                                                            echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-                                                                            '<img src="../images/os_android.png"/></a>';
-                                                                            echo '<br/>';
-                                                                            echo "<label>Guarda il video con Smartphone Android</label>";
-                                                                        echo '</div>';
-                                                                    echo '</li>';
-                                                                    */
-                                                                    echo '<li>';
-                                                                        echo '<div class="video_loading" id="'.basename($ondemand_filename,".flv").'">';
-                                                                            echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
-                                                                            echo '<br/>';
-                                                                            echo '<div id="block_1" class="barlittle"></div>
-                                                                            <div id="block_2" class="barlittle"></div>
-                                                                            <div id="block_3" class="barlittle"></div>
-                                                                            <div id="block_4" class="barlittle"></div>
-                                                                            <div id="block_5" class="barlittle"></div>';
-                                                                            echo '<br/>';
-                                                                            echo '<label>Creazione video per Tablet o Smartphone in corso...</label>';
-                                                                        echo '</div>';
 
-                                                                        echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
-                                                                            echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
-                                                                            '<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
-                                                                            echo '<br/>';
-                                                                            echo "<label>Guarda il video con <br/>Tablet o Smartphone</label>";
-                                                                            echo '<br/>';
-                                                                            echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
-                                                                        echo '</div>';
-                                                                    echo '</li>';
-                                                            echo '</ul>';
+                                                                        echo '<li>';
+                                                                            echo '<div class="video_info">';
+                                                                                echo '<b>Nome video: </b>'.basename($ondemand_filename,".flv");
+                                                                                echo '<br/>';
+                                                                                echo '<b>Durata del video: </b>'.$ondemand_movie_duration;
+                                                                                echo '<br/>';
+                                                                                echo '<b>Bitrate: </b>'.$ondemand_movie_bitrate;
+                                                                                echo '<br/>';
+                                                                                echo '<b>Codec: </b>'.$ondemand_movie_codec;
+                                                                            echo '</div>';
+                                                                        echo '</li>';
+
+                                                                        echo '<li>';
+                                                                            echo '<div class="player_desktop">';
+                                                                                echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+                                                                                    '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
+                                                                                echo '<br/>';
+                                                                                echo "<label>Guarda il video con <br/>PC Desktop</label>";
+                                                                                echo '<br/>';
+                                                                                echo '<img class="video_imgos" src="../images/os_windows.png"/> <img class="video_imgos" src="../images/os_linux.png"/>';
+                                                                            echo '</div>';
+                                                                        echo '</li>';
+
+                                                                        echo '<li>';
+                                                                            echo '<div class="video_loading" id="'.basename($ondemand_filename,".flv").'">';
+                                                                                echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
+                                                                                echo '<br/>';
+                                                                                echo '<div id="block_1" class="barlittle"></div>
+                                                                                <div id="block_2" class="barlittle"></div>
+                                                                                <div id="block_3" class="barlittle"></div>
+                                                                                <div id="block_4" class="barlittle"></div>
+                                                                                <div id="block_5" class="barlittle"></div>';
+                                                                                echo '<br/>';
+                                                                                echo '<label>Creazione video per Tablet o Smartphone in corso...</label>';
+                                                                            echo '</div>';
+
+                                                                            echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
+                                                                                echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
+                                                                                '<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
+                                                                                echo '<br/>';
+                                                                                echo "<label>Guarda il video con <br/>Tablet o Smartphone</label>";
+                                                                                echo '<br/>';
+                                                                                echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
+                                                                            echo '</div>';
+                                                                        echo '</li>';
+                                                                echo '</ul>';
+                                                            echo '</div>';
 
                                                         echo '</li>';
                                                 }
