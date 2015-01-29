@@ -243,7 +243,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
                                                         
-                                                            echo '<div class="row video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';
                                                             
                                                                 //echo '<input type="checkbox" id="checkbox" style="display:inline;"/>';
                                                                 
@@ -266,28 +266,20 @@ try
                                                                 }
                                                             echo '</div>';
 
-                                                            echo '<div class="row">';
-                                                                echo '<ul class="video_element">';                                                                
+                                                            echo '<div class="row vertical-align">';
+                                                                
+                                                                // CHECKBOX
+                                                                echo '<div class="col-xs-2 col-md-2">';
+                                                                echo '</div>';
 
-                                                                    echo '<li class="pull-right">';
-                                                                        echo '<div class="row"/>';
-                                                                        echo '<div class="row">';
-                                                                            echo '<div class="col-md-12 center">';
-                                                                            echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
-                                                                                echo '<a class="event_ondemand_delete">'.
-                                                                                    '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                                '</a>';
-                                                                            echo '</button>';
-                                                                            echo '</div>';
-                                                                        echo '</div>';
-                                                                        echo '<div class="row"/>';
-                                                                    echo '</li>';
-
-                                                                    echo '<li>';
-                                                                            echo '<div class="video_thumb">';
-                                                                                echo '<img src="'.$thumbnail_img.'"/>';
-                                                                            echo '</div>';
-                                                                    echo '</li>';
+                                                                // VIDEO THUMBNAIL + INFO + BUTTONS
+                                                                echo '<div cilass="col-xs-8 col-md-6">';
+                                                                    echo '<ul class="video_element">';                                                                
+                                                                        echo '<li>';
+                                                                                echo '<div class="video_thumb">';
+                                                                                    echo '<img src="'.$thumbnail_img.'"/>';
+                                                                                echo '</div>';
+                                                                        echo '</li>';
 
                                                                         echo '<li>';
                                                                             echo '<div class="video_info">';
@@ -334,7 +326,19 @@ try
                                                                                 echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
                                                                             echo '</div>';
                                                                         echo '</li>';
-                                                                echo '</ul>';
+                                                                    echo '</ul>';
+                                                                echo '</div>';
+
+                                                                // TRASH BUTTON
+                                                                echo '<div class="col-xs-2 col-md-4 pull-right">';
+                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
+                                                                        echo '<a class="event_ondemand_delete">'.
+                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                        '</a>';
+                                                                    echo '</button>';
+                                                                echo '</div>';
+                                                            
+                                                                
                                                             echo '</div>';
 
                                                         echo '</li>';
