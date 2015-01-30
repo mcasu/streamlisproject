@@ -267,7 +267,7 @@ try
                                                             echo '<div class="row">';
                                                                 
                                                                 // CHECKBOX
-                                                                echo '<div class="col-md-1" style="text-align:center; height:100%; vertical-align:middle;">';
+                                                                echo '<div class="col-md-1" style="text-align:center; float:none; vertical-align:middle;">';
                                                                     echo '<input type="checkbox" id="checkbox"/>';
                                                                 echo '</div>';
 
