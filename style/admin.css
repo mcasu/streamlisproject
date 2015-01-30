@@ -223,7 +223,7 @@ div.left {
 div.video_element_title
 {
   text-align: left;
-  margin: 0;
+  margin-left: 2px;
 }
 
 ul.video_element

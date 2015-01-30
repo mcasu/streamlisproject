@@ -243,7 +243,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
                                                         
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'" style="margin-left:8px;">';                                                            
+                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'">';                                                            
                                                                                                                                
                                                                 if (is_null($ondemand_onlydate))						
                                                                 {
@@ -266,17 +266,8 @@ try
 
                                                             echo '<div class="row vertical-align">';
                                                                 
-                                                                // TRASH BUTTON (pull-right)
-                                                                echo '<div class="col-md-1 pull-right">';
-                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
-                                                                        echo '<a class="event_ondemand_delete">'.
-                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                        '</a>';
-                                                                    echo '</button>';
-                                                                echo '</div>';
-                                                                
                                                                 // CHECKBOX
-                                                                echo '<div class="col-md-1 pull-left">';
+                                                                echo '<div class="col-md-1">';
                                                                     echo '<input type="checkbox" id="checkbox"/>';
                                                                 echo '</div>';
 
@@ -335,6 +326,15 @@ try
                                                                             echo '</div>';
                                                                         echo '</li>';
                                                                     echo '</ul>';
+                                                                echo '</div>';
+                                                                
+                                                                // TRASH BUTTON
+                                                                echo '<div class="col-md-1">';
+                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
+                                                                        echo '<a class="event_ondemand_delete">'.
+                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
+                                                                        '</a>';
+                                                                    echo '</button>';
                                                                 echo '</div>';
                                                                 
                                                             echo '</div>';
