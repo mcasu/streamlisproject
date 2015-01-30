@@ -105,7 +105,7 @@ $(document).ready(function()
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
         
-        event.stopImmediatePropagation();
+        event.stopPropagation();
     });
     
     $("#btn_video_delete").click(function()
