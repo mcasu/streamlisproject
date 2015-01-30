@@ -36,6 +36,24 @@ $(document).ready(function()
 	    }
     });
     
+    $(".video_checkbox").change(function()
+    {
+        if($(this).attr("checked"))
+        {
+            //call the function to be fired
+            //when your box changes from
+            //unchecked to checked
+            $(this).parent().parent().addClass("active");
+        }
+        else
+        {
+            //call the function to be fired
+            //when your box changes from
+            //checked to unchecked
+            $(this).parent().parent().removeClass("active");
+        }
+    });
+    
     $("#btn_video_delete").click(function()
     {
         if (confirm("Vuoi davvero eliminare tutti i video selezionati?"))
@@ -242,9 +260,9 @@ try
                                                             $thumbnail_img = "../images/video_thumbnail.png";
                                                         }
 
-                                                        echo '<li class="list-group-item video_list_element" style="overflow:auto">';
+                                                        echo '<li class="list-group-item video_list_element" style="overflow:auto" id="'.$ondemand_id.'">';
                                                         
-                                                            echo '<div class="row video_element_title" id="'.$ondemand_id.'">';                                                            
+                                                            echo '<div class="row video_element_title">';                                                            
                                                                                                                                
                                                                 if (is_null($ondemand_onlydate))						
                                                                 {
@@ -269,7 +287,7 @@ try
                                                                 
                                                                 // CHECKBOX
                                                                 echo '<div class="col-md-1 div-checkbox-align">';
-                                                                    echo '<input type="checkbox" id="checkbox"/>';
+                                                                    echo '<input type="checkbox" id="video_checkbox"/>';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
@@ -316,7 +334,7 @@ try
                                                                                     <div id="block_5" class="barlittle"></div>';
                                                                                 echo '</div>';
                                                                                 echo '<br/>';
-                                                                                echo '<label>Creazione video per Tablet o Smartphone in corso...</label>';
+                                                                                echo '<label>Creazione video per <br/>Tablet o Smartphone in corso...</label>';
                                                                             echo '</div>';
 
                                                                             echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
