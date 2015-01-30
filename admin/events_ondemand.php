@@ -38,6 +38,7 @@ $(document).ready(function()
     
     $(".video_checkbox").change(function()
     {
+        alert("sono qui");
         if($(this).attr("checked"))
         {
             //call the function to be fired
