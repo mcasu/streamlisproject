@@ -42,11 +42,12 @@ $(document).ready(function()
         
         if ($(this).hasClass("active"))
         {
-            checkbox_obj.children("input").prop("checked", true);
+            alert("Sono qui: " + checkbox_obj.children("input.video_checkbox").attr("class"));
+            checkbox_obj.children("input.video_checkbox").prop("checked", true);
         }
         else
         {
-            checkbox_obj.children("input").prop("checked", false);
+            checkbox_obj.children("input.video_checkbox").prop("checked", false);
         }
     });
     
