@@ -237,11 +237,13 @@ ul.video_element
   width: 100%;
 }
 
+/*
 ul.video_element:hover
 {
   background-color: #3c78c3;
   color: #fff;
 }
+*/
 
 ul.video_element li
 {
