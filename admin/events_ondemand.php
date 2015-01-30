@@ -304,7 +304,7 @@ try
                                                                 
                                                                 // CHECKBOX
                                                                 echo '<div class="col-md-1 div-checkbox-align">';
-                                                                    echo '<input type="checkbox" class="video_checkbox" id="video_checkbox" styel="width:16px; height:16px;"/>';
+                                                                    echo '<input type="checkbox" class="video_checkbox" id="video_checkbox" style="width:32px; height:32px; position:relative;"/>';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
