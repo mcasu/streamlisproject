@@ -36,8 +36,9 @@ $(document).ready(function()
 	    }
     });
     
-    $("li.video_list_element").click(function()
+    $("li.video_list_element").click(function(e)
     {
+        alert("TARGET ID: " + e.target.id);
         var checkbox_obj = $(this).find("div.div-checkbox-align");
             
         if ($(this).hasClass("active"))
@@ -69,16 +70,16 @@ $(document).ready(function()
         {
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
+        
+        e.stopImmediatePropagation();
     });
     
-    $(".video_checkbox").change(function(e)
+    $(".video_checkbox").change(function()
     {
         alert("Hai cambiato la checkbox.");
-        var video_list_obj = $(this).parent().parent().parent();
-        video_list_obj.trigger("click");
+        /*var video_list_obj = $(this).parent().parent().parent();
+        video_list_obj.trigger("click");*/
         
-        e.stopPropagation();
-        /*
         if($(this).prop("checked"))
         {
             //call the function to be fired
@@ -110,7 +111,7 @@ $(document).ready(function()
         {
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
-        */
+        
     });
     
     $("#btn_video_delete").click(function()
