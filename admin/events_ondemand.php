@@ -36,6 +36,22 @@ $(document).ready(function()
 	    }
     });
     
+    $("li.video_list_element").click(function()
+    {
+        var checkbox_obj = $(this).find("div.div-checkbox-align");
+        
+        if ($(this).hasClass("active"))
+        {
+            checkbox_obj.prop("checked", true);
+            //$(this).removeClass("active");
+        }
+        else
+        {
+            checkbox_obj.prop("checked", false);
+            //$(this).addClass("active");
+        }
+    });
+    
     $(".video_checkbox").change(function()
     {
         if($(this).prop("checked"))
@@ -228,7 +244,7 @@ try
                                         else
                                         {
                                             echo '<div class="container-fluid" style="overflow:auto">';
-                                            echo '<ul class="list-group checked-list-box left" id="'.$group_publish_code.'">';
+                                            echo '<ul class="list-group checked-list-box" id="'.$group_publish_code.'">';
 
                                                 while($row = mysql_fetch_array($ondemand_events))
                                                 {
@@ -304,7 +320,7 @@ try
                                                                 
                                                                 // CHECKBOX
                                                                 echo '<div class="col-md-1 div-checkbox-align">';
-                                                                    echo '<input type="checkbox" class="video_checkbox" id="video_checkbox" style="width:32px; height:32px; position:relative;"/>';
+                                                                    echo '<input type="checkbox" class="video_checkbox" id="video_checkbox"/>';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
