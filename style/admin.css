@@ -266,7 +266,7 @@ ul.video_element:hover
 ul.video_element li
 {
   display: inline-block;
-  float: none; /* don't change */
+  float: none;
   vertical-align: middle;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
@@ -275,10 +275,9 @@ ul.video_element li
 
 ul.video_element img
 {
-  vertical-align: middle;
+  //vertical-align: middle;
   height: 80px;
   width: 100px;
-  //margin-top: 6px;
 }
 
 li div.video_thumb
@@ -289,7 +288,7 @@ li div.video_thumb
 
 li div.video_info
 {
-  margin: 8px 0 0 15px;
+  margin: 0 0 0 15px;
   font-size: 0.9em;
   color: #000;
 }
@@ -303,10 +302,10 @@ li div.video_delete
 
 li div.player_desktop, li div.player_smartphone, li div.player_iphone
 {
-  margin-left: 40px;
+  //margin-left: 40px;
   margin-top: 6px;
   max-width: 200px;
-  font-size: 0.6em;
+  font-size: 0.8em;
   text-align: center;
 }
 
