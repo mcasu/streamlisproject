@@ -39,7 +39,7 @@ $(document).ready(function()
     $("li.video_list_element").click(function()
     {
         var checkbox_obj = $(this).find("div.div-checkbox-align");
-        
+        alert("CLASS: " + checkbox_obj.attr('class'));
         if ($(this).hasClass("active"))
         {
             checkbox_obj.prop("checked", true);
