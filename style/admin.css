@@ -249,7 +249,7 @@ ul.video_element
 
 .div-video-align
 {
-    height: 120px; 
+    height: 140px; 
     float: none; 
     display: inline-block; 
     vertical-align: middle;
@@ -270,7 +270,7 @@ ul.video_element li
   vertical-align: middle;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-  overflow: visible;
+  overflow: auto;
   padding-bottom: 4px;
 }
 
