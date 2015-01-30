@@ -243,11 +243,11 @@ ul.video_element
 
 .div-checkbox-align
 {
-    height: 50px; 
+    height: 40px; 
     float: none; 
     display: inline-block; 
     vertical-align: middle;
-    text-align: center;
+    text-align: right;
 }
 
 .div-btn-actions-align
