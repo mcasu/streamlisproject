@@ -38,7 +38,11 @@ $(document).ready(function()
     
     $("li.video_list_element").click(function(e)
     {
-        alert("TARGET ID: " + e.target.id);
+        if (e.target.id === "video_checkbox")
+        {
+            return true;
+        }
+        
         var checkbox_obj = $(this).find("div.div-checkbox-align");
             
         if ($(this).hasClass("active"))
