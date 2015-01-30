@@ -71,7 +71,7 @@ $(document).ready(function()
         }
     });
     
-    $(".video_checkbox").change(function()
+    $(".video_checkbox").change(function(e)
     {
         if($(this).prop("checked"))
         {
@@ -105,7 +105,7 @@ $(document).ready(function()
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
         
-        event.stopImmediatePropagation();
+        e.stopPropagation();
     });
     
     $("#btn_video_delete").click(function()
