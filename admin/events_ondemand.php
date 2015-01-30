@@ -52,6 +52,23 @@ $(document).ready(function()
             checkbox_obj.children("input.video_checkbox").prop("checked", true);
             $(this).addClass("active");
         }
+        
+        var checkedItems = {}, counter = 0;
+        $(".checked-list-box li.active").each(function(idx, li) {
+            //alert("Ho trovato un check attivo.");
+            checkedItems[counter] = $(li).text();
+            counter++;
+        });
+
+        //alert ("Check attivi: " + counter);
+        if (counter !== 0)
+        {
+            $(".btn_actions").find(".btn").attr('disabled',false);
+        }
+        else
+        {
+            $(".btn_actions").find(".btn").attr('disabled',true);
+        }
     });
     
     $(".video_checkbox").change(function()
@@ -87,6 +104,8 @@ $(document).ready(function()
         {
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
+        
+        event.stopImmediatePropagation();
     });
     
     $("#btn_video_delete").click(function()
