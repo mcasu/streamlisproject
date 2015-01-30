@@ -219,12 +219,16 @@ div.left {
   margin: 4px 0 0 10px;
 }
 
+li.video_list_element
+{
+    min-width: 640px;
+}
 
 li.video_list_element:hover
 {
     background-color: #3c78c3;
     color: #fff;
-    min-width: 600px;
+    min-width: 640px;
 }
 
 div.video_element_title
