@@ -47,13 +47,13 @@ $(document).ready(function()
             
         if ($(this).hasClass("active"))
         {
-            alert("Voce attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
+            //alert("Voce attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
             checkbox_obj.children("input.video_checkbox").prop("checked", false);
             $(this).removeClass("active");
         }
         else
         {
-            alert("Voce NON attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
+            //alert("Voce NON attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
             checkbox_obj.children("input.video_checkbox").prop("checked", true);
             $(this).addClass("active");
         }
@@ -80,9 +80,7 @@ $(document).ready(function()
     
     $(".video_checkbox").change(function()
     {
-        alert("Hai cambiato la checkbox.");
-        /*var video_list_obj = $(this).parent().parent().parent();
-        video_list_obj.trigger("click");*/
+        //alert("Hai cambiato la checkbox.");
         
         if($(this).prop("checked"))
         {
