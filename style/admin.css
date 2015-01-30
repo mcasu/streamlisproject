@@ -224,6 +224,7 @@ li.video_list_element:hover
 {
     background-color: #3c78c3;
     color: #fff;
+    min-width: 600px;
 }
 
 div.video_element_title
