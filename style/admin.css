@@ -241,13 +241,22 @@ ul.video_element
   width: 100%;
 }
 
-.div-checkbox-align, .div-btn-actions-align
+.div-checkbox-align
 {
     height: 50px; 
     float: none; 
     display: inline-block; 
     vertical-align: middle;
     text-align: center;
+}
+
+.div-btn-actions-align
+{
+    height: 50px; 
+    float: none; 
+    display: inline-block; 
+    vertical-align: middle;
+    text-align: right;
 }
 
 .div-video-align
@@ -287,7 +296,7 @@ li div.video_info
   margin-right: 30px;
   margin-left: 6px;
   font-size: 0.9em;
-  color: #000;
+  //color: #000;
 }
 
 li div.video_delete
