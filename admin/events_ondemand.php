@@ -73,6 +73,12 @@ $(document).ready(function()
     
     $(".video_checkbox").change(function(e)
     {
+        var video_list_obj = $(this).parent().parent().parent();
+        video_list_obj.trigger("click");
+        
+        return;
+        
+        /*
         if($(this).prop("checked"))
         {
             //call the function to be fired
@@ -104,8 +110,7 @@ $(document).ready(function()
         {
             $(".btn_actions").find(".btn").attr('disabled',true);
         }
-        
-        e.preventDefault();
+        */
     });
     
     $("#btn_video_delete").click(function()
