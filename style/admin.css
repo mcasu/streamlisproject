@@ -214,7 +214,7 @@ div.toggle_container {
 
 li.video_list_element 
 {
-  min-width: 640px;
+  min-width: 700px;
 }
 
 li.video_list_element:hover
@@ -377,7 +377,9 @@ div.video_loading
     border-bottom: 1px solid #333;
     width: 10px;
     height: 10px;
-    float: left;
+    //float: left;
+    float: none;
+    display:inline-block;
     margin-left: 10px;
     margin-top: 8px;
     text-align: center;
