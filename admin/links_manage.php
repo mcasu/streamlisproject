@@ -108,7 +108,7 @@ $("button.viewer_del").click(function()
 <br/>
 
 <h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
-<p><h4> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
+<p><h4 style="margin-left:4px;">La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <h2>ELENCO CONGREGAZIONI PUBLISHER:</h2>
 
