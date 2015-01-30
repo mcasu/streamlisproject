@@ -71,11 +71,13 @@ $(document).ready(function()
         }
     });
     
-    $(".video_checkbox").change(function()
+    $(".video_checkbox").change(function(e)
     {
+        alert("Hai cambiato la checkbox.");
         var video_list_obj = $(this).parent().parent().parent();
         video_list_obj.trigger("click");
         
+        e.preventDefault();
         /*
         if($(this).prop("checked"))
         {
