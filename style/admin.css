@@ -238,6 +238,24 @@ ul.video_element
   width: 100%;
 }
 
+.div-checkbox-align
+.div-btn-actions-align
+{
+    height: 50px; 
+    float: none; 
+    display: inline-block; 
+    vertical-align: middle;
+    text-align: center;
+}
+
+.div-video-align
+{
+    height: 120px; 
+    float: none; 
+    display: inline-block; 
+    vertical-align: middle;
+}
+
 /*
 ul.video_element:hover
 {
