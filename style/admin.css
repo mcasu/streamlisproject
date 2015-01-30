@@ -271,6 +271,7 @@ ul.video_element li
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   overflow: visible;
+  padding-bottom: 4px;
 }
 
 ul.video_element img
@@ -288,7 +289,8 @@ li div.video_thumb
 
 li div.video_info
 {
-  margin: 0 0 0 15px;
+  margin-right: 20px;
+  margin-left: 4px;
   font-size: 0.9em;
   color: #000;
 }
