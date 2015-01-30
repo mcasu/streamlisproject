@@ -39,15 +39,16 @@ $(document).ready(function()
     $("li.video_list_element").click(function()
     {
         var checkbox_obj = $(this).find("div.div-checkbox-align");
-        
+            
         if ($(this).hasClass("active"))
         {
-            alert("Sono qui: " + checkbox_obj.children("input.video_checkbox").attr("class"));
-            checkbox_obj.children("input.video_checkbox").prop("checked", true);
+            alert("Voce attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
+            checkbox_obj.children("input.video_checkbox").prop("checked", false);
         }
         else
         {
-            checkbox_obj.children("input.video_checkbox").prop("checked", false);
+            alert("Voce NON attiva: " + checkbox_obj.children("input.video_checkbox").attr("class"));
+            checkbox_obj.children("input.video_checkbox").prop("checked", true);
         }
     });
     
