@@ -77,7 +77,7 @@ $(document).ready(function()
         var video_list_obj = $(this).parent().parent().parent();
         video_list_obj.trigger("click");
         
-        e.preventDefault();
+        e.stopPropagation();
         /*
         if($(this).prop("checked"))
         {
