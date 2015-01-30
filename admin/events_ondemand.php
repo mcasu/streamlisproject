@@ -267,12 +267,12 @@ try
                                                             echo '<div class="row">';
                                                                 
                                                                 // CHECKBOX
-                                                                echo '<div class="col-md-1" style="text-align:center; float:none; vertical-align:middle;">';
+                                                                echo '<div class="col-md-1" style="height:50px; text-align:center; display:inline-block; vertical-align:middle;">';
                                                                     echo '<input type="checkbox" id="checkbox"/>';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
-                                                                echo '<div class="col-md-10">';
+                                                                echo '<div class="col-md-10" style="height:100px; text-align:center; display:inline-block; vertical-align:middle;">';
                                                                     echo '<ul class="video_element">';                                                                
                                                                         echo '<li>';
                                                                                 echo '<div class="video_thumb">';
@@ -329,7 +329,7 @@ try
                                                                 echo '</div>';
                                                                 
                                                                 // TRASH BUTTON
-                                                                echo '<div class="col-md-1">';
+                                                                echo '<div class="col-md-1" style="height:50px; text-align:center; display:inline-block; vertical-align:middle;">';
                                                                     echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg video_delete">';
                                                                         echo '<a class="event_ondemand_delete">'.
                                                                             '<span class="glyphicon glyphicon-trash"></span>'.
