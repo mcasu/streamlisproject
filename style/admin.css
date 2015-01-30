@@ -265,6 +265,7 @@ ul.video_element:hover
 
 ul.video_element li
 {
+  display: inline-block;
   float: left; /* don't change */
   vertical-align: middle;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
@@ -277,7 +278,7 @@ ul.video_element img
   vertical-align: middle;
   height: 80px;
   width: 100px;
-  margin-top: 6px;
+  //margin-top: 6px;
 }
 
 li div.video_thumb
@@ -289,7 +290,7 @@ li div.video_thumb
 li div.video_info
 {
   margin: 8px 0 0 15px;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #000;
 }
 
