@@ -192,6 +192,7 @@ try
                                         }
                                         else
                                         {
+                                            echo '<div class="container-fluid" style="overflow:auto">';
                                             echo '<ul class="list-group checked-list-box left" id="'.$group_publish_code.'">';
 
                                                 while($row = mysql_fetch_array($ondemand_events))
@@ -307,11 +308,13 @@ try
                                                                             echo '<div class="video_loading" id="'.basename($ondemand_filename,".flv").'">';
                                                                                 echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
                                                                                 echo '<br/>';
+                                                                                echo '<div class="container-fluid" style="text-align:center;">';
                                                                                 echo '<div id="block_1" class="barlittle"></div>
-                                                                                <div id="block_2" class="barlittle"></div>
-                                                                                <div id="block_3" class="barlittle"></div>
-                                                                                <div id="block_4" class="barlittle"></div>
-                                                                                <div id="block_5" class="barlittle"></div>';
+                                                                                    <div id="block_2" class="barlittle"></div>
+                                                                                    <div id="block_3" class="barlittle"></div>
+                                                                                    <div id="block_4" class="barlittle"></div>
+                                                                                    <div id="block_5" class="barlittle"></div>';
+                                                                                echo '</div>';
                                                                                 echo '<br/>';
                                                                                 echo '<label>Creazione video per Tablet o Smartphone in corso...</label>';
                                                                             echo '</div>';
@@ -342,6 +345,7 @@ try
                                                         echo '</li>';
                                                 }
                                             echo '</ul>'; /* FINE UL */
+                                            echo '</div>';
                                         }
                                     echo '</div>';
                                 echo '</div>';
