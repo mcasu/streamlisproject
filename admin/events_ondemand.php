@@ -38,9 +38,9 @@ $(document).ready(function()
     
     $(".video_checkbox").change(function()
     {
-        alert("sono qui");
-        if($(this).attr("checked"))
+        if($(this).prop("checked"))
         {
+            alert("sono qui");
             //call the function to be fired
             //when your box changes from
             //unchecked to checked
