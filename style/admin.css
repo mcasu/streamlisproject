@@ -220,6 +220,12 @@ div.left {
 }
 
 
+li.video_list_element:hover
+{
+    background-color: #3c78c3;
+    color: #fff;
+}
+
 div.video_element_title
 {
   text-align: left;
@@ -231,10 +237,7 @@ ul.video_element
 {
   list-style: none;
   display: inline-block;
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: 1px;
-  padding: 0;
+  margin-right: 10px;
   width: 100%;
 }
 
@@ -254,14 +257,6 @@ ul.video_element
     display: inline-block; 
     vertical-align: middle;
 }
-
-/*
-ul.video_element:hover
-{
-  background-color: #3c78c3;
-  color: #fff;
-}
-*/
 
 ul.video_element li
 {
@@ -289,8 +284,8 @@ li div.video_thumb
 
 li div.video_info
 {
-  margin-right: 20px;
-  margin-left: 4px;
+  margin-right: 30px;
+  margin-left: 6px;
   font-size: 0.9em;
   color: #000;
 }
