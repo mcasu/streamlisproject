@@ -71,12 +71,10 @@ $(document).ready(function()
         }
     });
     
-    $(".video_checkbox").change(function(e)
+    $(".video_checkbox").change(function()
     {
         var video_list_obj = $(this).parent().parent().parent();
         video_list_obj.trigger("click");
-        
-        return;
         
         /*
         if($(this).prop("checked"))
