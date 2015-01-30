@@ -241,7 +241,7 @@ try
                                                             $thumbnail_img = "../images/video_thumbnail.png";
                                                         }
 
-                                                        echo '<li class="list-group-item video_list_element">';
+                                                        echo '<li class="list-group-item video_list_element" style="overflow:auto">';
                                                         
                                                             echo '<div class="row video_element_title" id="'.$ondemand_id.'">';                                                            
                                                                                                                                

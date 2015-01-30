@@ -219,11 +219,6 @@ div.left {
   margin: 4px 0 0 10px;
 }
 
-li.video_list_element
-{
-    min-width: 640px;
-}
-
 li.video_list_element:hover
 {
     background-color: #3c78c3;
@@ -311,7 +306,7 @@ li div.video_delete
   text-align: left;
 }
 
-li div.player_desktop, li div.player_smartphone, li div.player_iphone
+li div.player_desktop, li div.player_smartphone, li div.player_iphone, li div.video_loading
 {
   //margin-left: 40px;
   margin-top: 6px;
@@ -366,6 +361,7 @@ a.event_ondemand_delete, a.event_ondemand_delete img
 /* *** VIDEO LOADING CSS3 *** */
 /******************************/
 
+/*
 div.video_loading
 {
   margin-left: 40px;
@@ -374,6 +370,7 @@ div.video_loading
   font-size: 0.6em;
   text-align: center;
 }
+*/
 
 .barlittle {
     background-color: #2187e7;
