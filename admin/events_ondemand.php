@@ -38,7 +38,6 @@ $(document).ready(function()
     
     $(".video_checkbox").change(function()
     {
-        alert("Selezionato...");
         if($(this).attr("checked"))
         {
             //call the function to be fired
@@ -288,7 +287,7 @@ try
                                                                 
                                                                 // CHECKBOX
                                                                 echo '<div class="col-md-1 div-checkbox-align">';
-                                                                    echo '<input type="checkbox" id="video_checkbox"/>';
+                                                                    echo '<input type="checkbox" class="video_checkbox" id="video_checkbox"/>';
                                                                 echo '</div>';
 
                                                                 // VIDEO THUMBNAIL + INFO + BUTTONS
