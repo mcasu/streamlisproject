@@ -312,7 +312,7 @@ li div.player_desktop, li div.player_smartphone, li div.player_iphone, li div.vi
   text-align: center;
 }
 
-div.player_desktop label, div.player_smartphone label, div.player_iphone label
+div.player_desktop label, div.player_smartphone label, div.player_iphone label, div.video_loading label
 {
   margin-top: 8px;
   font-weight: bold;
@@ -357,16 +357,6 @@ a.event_ondemand_delete, a.event_ondemand_delete img
 /* *** VIDEO LOADING CSS3 *** */
 /******************************/
 
-/*
-div.video_loading
-{
-  margin-left: 40px;
-  margin-top: 4px;
-  max-width: 120px;
-  font-size: 0.6em;
-  text-align: center;
-}
-*/
 
 .barlittle {
     background-color: #2187e7;

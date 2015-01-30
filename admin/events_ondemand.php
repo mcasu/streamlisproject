@@ -52,6 +52,23 @@ $(document).ready(function()
             //checked to unchecked
             $(this).parent().parent().parent().removeClass("active");
         }
+        
+        var checkedItems = {}, counter = 0;
+        $(".checked-list-box li.active").each(function(idx, li) {
+            //alert("Ho trovato un check attivo.");
+            checkedItems[counter] = $(li).text();
+            counter++;
+        });
+
+        //alert ("Check attivi: " + counter);
+        if (counter !== 0)
+        {
+            $(".btn_actions").find(".btn").attr('disabled',false);
+        }
+        else
+        {
+            $(".btn_actions").find(".btn").attr('disabled',true);
+        }
     });
     
     $("#btn_video_delete").click(function()
@@ -61,7 +78,7 @@ $(document).ready(function()
             var checkedItems = {}, counter = 0;
             $(".checked-list-box li.active").each(function(idx, li) {
 
-                var ondemand_id=$(this).children(".video_element_title").first().attr('id');
+                var ondemand_id=$(this).attr('id');
                 checkedItems[counter] = ondemand_id;
                 counter++;
                 
@@ -326,6 +343,8 @@ try
                                                                             echo '<div class="video_loading" id="'.basename($ondemand_filename,".flv").'">';
                                                                                 echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
                                                                                 echo '<br/>';
+                                                                                echo '<label>Creazione video per <br/>Tablet o Smartphone in corso...</label>';
+                                                                                echo '<br/>';
                                                                                 echo '<div class="container-fluid" style="text-align:center;">';
                                                                                 echo '<div id="block_1" class="barlittle"></div>
                                                                                     <div id="block_2" class="barlittle"></div>
@@ -333,8 +352,6 @@ try
                                                                                     <div id="block_4" class="barlittle"></div>
                                                                                     <div id="block_5" class="barlittle"></div>';
                                                                                 echo '</div>';
-                                                                                echo '<br/>';
-                                                                                echo '<label>Creazione video per <br/>Tablet o Smartphone in corso...</label>';
                                                                             echo '</div>';
 
                                                                             echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
