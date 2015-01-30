@@ -344,6 +344,7 @@ a.play-button img.video_imgdevice:hover
   opacity: 0.5;
 }
 
+/*
 a.event_ondemand_delete, a.event_ondemand_delete img
 {
   width: 32px;
@@ -351,7 +352,7 @@ a.event_ondemand_delete, a.event_ondemand_delete img
   margin-top: 25px;
   margin-right: 2px;
 }
-
+*/
 
 /******************************/
 /* *** VIDEO LOADING CSS3 *** */
