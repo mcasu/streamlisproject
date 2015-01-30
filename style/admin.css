@@ -266,7 +266,7 @@ ul.video_element:hover
 ul.video_element li
 {
   display: inline-block;
-  float: left; /* don't change */
+  float: none; /* don't change */
   vertical-align: middle;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
