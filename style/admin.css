@@ -212,18 +212,15 @@ div.toggle_container {
     overflow: auto;
 }
 
-div.left {
-  float: left;
-  width: 98%;
-  height: 100%;
-  margin: 4px 0 0 10px;
+li.video_list_element 
+{
+  min-width: 640px;
 }
 
 li.video_list_element:hover
 {
     background-color: #3c78c3;
     color: #fff;
-    min-width: 640px;
 }
 
 div.video_element_title
@@ -308,7 +305,6 @@ li div.video_delete
 
 li div.player_desktop, li div.player_smartphone, li div.player_iphone, li div.video_loading
 {
-  //margin-left: 40px;
   margin-top: 6px;
   max-width: 200px;
   font-size: 0.8em;
@@ -327,8 +323,7 @@ a.play-button
   height: 48px;
 }
 
-a.play-button img.video_imgdevice,
-div.video_loading img.video_imgdevice
+a.play-button img.video_imgdevice, div.video_loading img.video_imgdevice
 {
   width: 42px;
   height: 42px;
