@@ -238,8 +238,7 @@ ul.video_element
   width: 100%;
 }
 
-.div-checkbox-align
-.div-btn-actions-align
+.div-checkbox-align, .div-btn-actions-align
 {
     height: 50px; 
     float: none; 
