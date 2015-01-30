@@ -40,18 +40,17 @@ $(document).ready(function()
     {
         if($(this).prop("checked"))
         {
-            alert("sono qui");
             //call the function to be fired
             //when your box changes from
             //unchecked to checked
-            $(this).parent().parent().addClass("active");
+            $(this).parent().parent().parent().addClass("active");
         }
         else
         {
             //call the function to be fired
             //when your box changes from
             //checked to unchecked
-            $(this).parent().parent().removeClass("active");
+            $(this).parent().parent().parent().removeClass("active");
         }
     });
     
