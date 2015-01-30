@@ -243,7 +243,7 @@ try
 
                                                         echo '<li class="list-group-item video_list_element">';
                                                         
-                                                            echo '<div class="video_element_title" id="'.$ondemand_id.'">';                                                            
+                                                            echo '<div class="row video_element_title" id="'.$ondemand_id.'">';                                                            
                                                                                                                                
                                                                 if (is_null($ondemand_onlydate))						
                                                                 {
@@ -267,7 +267,7 @@ try
                                                             echo '<div class="row vertical-align">';
                                                                 
                                                                 // CHECKBOX
-                                                                echo '<div class="col-md-1">';
+                                                                echo '<div class="col-md-1" style="text-align:center;>';
                                                                     echo '<input type="checkbox" id="checkbox"/>';
                                                                 echo '</div>';
 
