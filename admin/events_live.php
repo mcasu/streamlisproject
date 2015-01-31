@@ -160,7 +160,7 @@ try
                                     
                                         // VIDEO THUMBNAIL + INFO + BUTTONS
                                         echo '<div class="col-md-11 div-video-align">';
-                                            echo '<ul class="video_element" id='.$stream_name.'">';   
+                                            echo '<ul class="video_element" id='.$stream_name.'>';   
                                                 echo '<li>';
                                                     echo '<div class="video_thumb">';
                                                         echo '<img src="'.$thumbnail_img.'"/>';
