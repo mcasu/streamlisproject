@@ -42,8 +42,14 @@ $(document).ready(function()
     
     $(".players_counter_refresh").click(function()
     {
+        $(this).prop("disabled", true);
+        
         var players_counter_obj = $(this).next().next("span.players_counter");
+        alert("CLASS: " + players_counter_obj.attr('class'));
         players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
+        
+        $(this).prop("disabled", false);
+
     });
 });
 
