@@ -217,6 +217,11 @@ li.video_list_element
   min-width: 860px;
 }
 
+div.video_list_element 
+{
+  min-width: 860px;
+}
+
 li.video_list_element:hover
 {
     background-color: #3c78c3;
