@@ -18,6 +18,9 @@ switch ($fname)
     case "get_stream_selector_container":
         $publishCode = filter_input(INPUT_GET, 'publishCode');
         return GetStreamSelectorContainer($dbactions, $publishCode);
+    case "get_current_live_players_number":
+        $stream_name = filter_input(INPUT_GET, 'streamName');
+        return GetCurrentLivePlayersNumber($dbactions, $stream_name);
     default:
         break;
 }
@@ -53,11 +56,56 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
                 $live_time=$row['live_time'];
                 $client_addr=$row['client_addr'];
                 $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
-                
+
                 $group_name = $dbactions->GetGroupNameByPublishCode($publish_code);
 
                 echo '<option id="'. $app_name . '" value="' . $stream_name . '">Adunanza di <b>' . $group_name . '</b> del <b>' . $live_date_formatted . '</b></option>"';
             }
         echo '</select>';
         echo '<br/>';
+}
+
+function GetCurrentLivePlayersNumber($dbactions, $stream_name)
+{
+    $today_players = $dbactions->GetTodayLastLivePlayersNumber($stream_name);
+    $player_events = array();
+    // Pushing record to array
+    while($row = mysql_fetch_array($today_players))
+    {        
+        array_push($player_events, $row);
+    }
+    
+    $players_counter = 0;
+    $time_now = date('H:i:s');
+    foreach ($player_events as $pe_first)
+    {       
+        $date_now = new DateTime($pe_first['event_date'] . ' ' . $time_now);
+        $date_event = new DateTime($pe_first['event_date'] . ' ' . $pe_first['event_time']);
+        
+        if ( ($pe_first['event_call'] === 'play') && ($date_now > $date_event) )
+        {
+            if (!PlayDoneEventFound($player_events, $pe_first))
+            {
+                $players_counter++;
+            }
+        }
+    }
+    
+    return $players_counter;
+}
+
+function PlayDoneEventFound($player_events, $event)
+{
+    $play_done_found = false;
+    foreach ($player_events as $pe) 
+    {
+        if ($pe['nginx_id'] === $event['nginx_id'] && 
+                $pe['event_call'] === "play_done" &&
+                $pe['client_addr'] === $event['client_addr'])
+        {
+            $play_done_found = true;
+        }
+    }
+
+    return $play_done_found;
 }

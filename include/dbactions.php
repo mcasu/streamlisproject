@@ -1067,6 +1067,41 @@ class DBActions
                 return $result;
 	}
 
+        function GetTodayLastLivePlayersNumber($stream_name)
+        {
+            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+            if(!$this->connection)
+            {
+                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                return false;
+            }
+            if(!mysql_select_db($this->database, $this->connection))
+            {
+                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                return false;
+            }
+            
+            $date_now = date('Y-m-d');
+            
+            $select_query = 'select event_id, nginx_id, event_date, max(event_time) as event_time, event_call, app_name, stream_name, client_addr from events '.
+                    'where stream_name = \''.$stream_name.'\' and '.
+                    'event_date = \''.$date_now.'\' and '.
+                    'event_call like \'%play%\' and '.
+                    'client_addr not like \'%unix%\' and '.
+                    'client_addr not like \'%127.0.0.1%\' '.
+                    'group by client_addr, event_call '.
+                    'order by event_date, client_addr, nginx_id, event_call';
+
+            $result = mysql_query($select_query ,$this->connection);
+            if(!$result)
+            {
+                $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                return false;
+            }
+            return $result;
+        }
+        
 	function GetOndemandEventsByPublisher($publish_code)
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

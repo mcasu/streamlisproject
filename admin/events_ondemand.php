@@ -416,8 +416,8 @@ try
                                                                 echo '<div class="col-md-1 div-btn-actions-align">';
                                                                     echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg">';
                                                                         echo '<a class="event_ondemand_delete">'.
-                                                                            '<span class="glyphicon glyphicon-trash"></span>'.
-                                                                        '</a>';
+                                                                            '<span class="glyphicon glyphicon-trash"></span>';
+                                                                        echo '</a>';
                                                                     echo '</button>';
                                                                 echo '</div>';
                                                                 
