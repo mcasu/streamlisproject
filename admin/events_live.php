@@ -41,8 +41,6 @@ $(document).ready(function()
         players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
     });
     
-    //$('.players_counter').load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $('#roomSelector').val());
-
 });
 
 </script>
@@ -208,7 +206,7 @@ try
                                         echo '</div>';
                                         
                                         // TRASH BUTTON
-                                        echo '<div class="col-md-1 div-btn-actions-align">';                                            
+                                        echo '<div class="col-md-1 div-btn-status-align">';                                            
                                             echo '<label>Utenti che stanno guardando <br/>questa adunanza:</label>';
                                             echo '<span class="badge players_counter"/>';
                                         echo '</div>';

@@ -256,6 +256,17 @@ ul.video_element
     text-align: right;
 }
 
+.div-btn-status-align
+{
+    height: 40px; 
+    float: none; 
+    display: inline-block; 
+    vertical-align: middle;
+    text-align: center;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-size: 0.9em;
+}
+
 .div-video-align
 {
     height: 140px; 
