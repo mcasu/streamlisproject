@@ -67,16 +67,16 @@ function GetStreamSelectorContainer($dbactions, $publish_code)
 
 function GetCurrentLivePlayersNumber($dbactions, $stream_name)
 {
-    $today_players = $dbactions->GetTodayLastLivePlayersNumber($stream_name);
-    $player_events = array();
-    // Pushing record to array
-    while($row = mysql_fetch_array($today_players))
-    {        
-        array_push($player_events, $row);
-    }
-    
     try 
     {
+        $today_players = $dbactions->GetTodayLastLivePlayersNumber($stream_name);
+        $player_events = array();
+        // Pushing record to array
+        while($row = mysql_fetch_array($today_players))
+        {        
+            array_push($player_events, $row);
+        }
+    
         $players_counter = 0;
         $time_now = date('H:i:s');
         foreach ($player_events as $pe_first)
@@ -95,8 +95,8 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
     } 
     catch (Exception $ex) 
     {
+        $players_counter = "ND";
         error_log("\nINFO - player count: " . $players_counter . "\n" .$ex->getMessage());
-        return "ND";
     }
     
     return $players_counter;
