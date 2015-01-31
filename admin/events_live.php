@@ -44,7 +44,7 @@ $(document).ready(function()
     {
         $(this).prop("disabled", true);
         
-        var players_counter_obj = $(this).next(".badge");
+        var players_counter_obj = $(this).next.next();
         alert("CLASS: " + players_counter_obj.attr('class'));
         players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
         
