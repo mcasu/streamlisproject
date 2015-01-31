@@ -211,7 +211,7 @@ try
                                         
                                         // STATUS BUTTON
                                         echo '<div class="col-md-2 div-btn-status-align">';
-                                            echo '<button type="button" class="btn btn-primary players_counter_refresh">Aggiorna</button>';
+                                            echo '<button type="button" class="btn btn-primary players_counter_refresh">Aggiorna</button><br/>';
                                             echo '<label>Utenti che stanno guardando <br/>questa adunanza:</label><br/>';
                                             echo '<span class="badge players_counter"/>';
                                         echo '</div>';
