@@ -38,7 +38,7 @@ $(document).ready(function()
     
     $("li.video_list_element").click(function(e)
     {
-        alert("TARGET ID: " + e.target.id + " TARGET PARENT ID: " + $(e.target).parent().attr("id"));
+        alert("TARGET ID: " + e.target.id + " TARGET PARENT ID: " + $(e.target).attr("class"));
         if (e.target.id === "video_checkbox")
         {
             return true;
