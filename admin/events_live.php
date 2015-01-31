@@ -40,6 +40,11 @@ $(document).ready(function()
         players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
     });
     
+    $(".players_counter_refresh").click(function()
+    {
+        var players_counter_obj = $(this).next().next()("span.players_counter");
+        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
+    });
 });
 
 </script>
@@ -204,8 +209,9 @@ try
                                             echo '</ul>';	
                                         echo '</div>';
                                         
-                                        // TRASH BUTTON
-                                        echo '<div class="col-md-2 div-btn-status-align">';                                            
+                                        // STATUS BUTTON
+                                        echo '<div class="col-md-2 div-btn-status-align">';
+                                            echo '<button type="button" class="btn btn-primary players_counter_refresh">Aggiorna</button>';
                                             echo '<label>Utenti che stanno guardando <br/>questa adunanza:</label><br/>';
                                             echo '<span class="badge players_counter"/>';
                                         echo '</div>';
