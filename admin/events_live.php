@@ -33,7 +33,6 @@ $(document).ready(function()
     $(".panel-collapse").on('show.bs.collapse', function()
     {
         var stream_name = $(this).find("ul.video_element").attr('id');
-        alert("COLLAPSED!! -> " + stream_name);
         
         $(".players_counter_info").attr('id', stream_name);
         
