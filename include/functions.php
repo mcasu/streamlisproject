@@ -91,6 +91,7 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
         }
     }
     
+    error_log("\nINFO - player count: " . $players_counter);
     return $players_counter;
 }
 
