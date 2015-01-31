@@ -219,7 +219,7 @@ li.video_list_element
 
 div.video_list_element 
 {
-  min-width: 880px;
+  min-width: 900px;
 }
 
 li.video_list_element:hover
@@ -266,7 +266,7 @@ ul.video_element
     height: 40px; 
     float: none; 
     display: inline-block; 
-    vertical-align: middle;
+    vertical-align: top;
     text-align: center;
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
     font-size: 0.9em;
