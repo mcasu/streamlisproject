@@ -209,7 +209,8 @@ try
                                         
                                         // TRASH BUTTON
                                         echo '<div class="col-md-1 div-btn-actions-align">';                                            
-                                            echo 'Utenti presenti: <span class="badge players_counter"/>';
+                                            echo '<label>Utenti che stanno guardando <br/>questa adunanza:</label>';
+                                            echo '<span class="badge players_counter"/>';
                                         echo '</div>';
                                                                 
                                     echo '</div>';
