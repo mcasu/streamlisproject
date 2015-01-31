@@ -37,7 +37,8 @@ $(document).ready(function()
         
         $(".players_counter_info").attr('id', stream_name);
         
-        $('.players_counter').load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
+        var players_counter_obj = $(this).find("span.players_counter");
+        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
     });
     
     //$('.players_counter').load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $('#roomSelector').val());
