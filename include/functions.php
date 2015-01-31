@@ -100,7 +100,8 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
         error_log("\nINFO - player count: " . $players_counter . "\n" .$ex->getMessage());
     }
     
-    return $players_counter;
+    //echo 'Utenti presenti: <span class="badge players_counter"/>';
+    echo $players_counter;
 }
 
 function PlayDoneEventFound($player_events, $event)
