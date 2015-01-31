@@ -157,7 +157,7 @@ try
                                     echo '<div class="row">';
                                     
                                         // VIDEO THUMBNAIL + INFO + BUTTONS
-                                        echo '<div class="col-md-11 div-video-align">';
+                                        echo '<div class="col-md-10 div-video-align">';
                                             echo '<ul class="video_element" id='.$stream_name.'>';   
                                                 echo '<li>';
                                                     echo '<div class="video_thumb">';
@@ -205,7 +205,7 @@ try
                                         echo '</div>';
                                         
                                         // TRASH BUTTON
-                                        echo '<div class="col-md-1 div-btn-status-align">';                                            
+                                        echo '<div class="col-md-2 div-btn-status-align">';                                            
                                             echo '<label>Utenti che stanno guardando <br/>questa adunanza:</label>';
                                             echo '<span class="badge players_counter"/>';
                                         echo '</div>';
