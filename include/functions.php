@@ -86,7 +86,7 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
 
             if ( ($pe_first['event_call'] === 'play') && ($date_now > $date_event) )
             {
-                error_log("EVENTO PLAY - DATE_NOW: ". $date_now . " DATE_EVENT: " . $date_event);
+                error_log("EVENTO PLAY - TIME_NOW: ". $time_now . " DATE_EVENT: " . $pe_first['event_time']);
                 
                 if (!PlayDoneEventFound($player_events, $pe_first))
                 {
