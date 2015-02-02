@@ -110,7 +110,7 @@ function PlayDoneEventFound($player_events, $event)
     $play_done_found = false;
     foreach ($player_events as $pe) 
     {
-        error_log("EVENTO [" .$pe['event_call']. "] - " . $pe['event_time'] . " - " .$pe['nginx_id']);
+        //error_log("EVENTO [" .$pe['event_call']. "] - " . $pe['event_time'] . " - " .$pe['nginx_id']);
        
         $date_event_play_done = new DateTime($pe['event_date'] . ' ' . $pe['event_time']);
         $date_event_play = new DateTime($event['event_date'] . ' ' . $event['event_time']);
@@ -120,7 +120,7 @@ function PlayDoneEventFound($player_events, $event)
                 $pe['client_addr'] === $event['client_addr'] &&
                 $date_event_play_done > $date_event_play)
         {
-            error_log("PLAY DONE FOUND: " . $pe['event_time'] . " - " .$pe['nginx_id'] . " - " .$pe['event_call']);
+            //error_log("PLAY DONE FOUND: " . $pe['event_time'] . " - " .$pe['nginx_id'] . " - " .$pe['event_call']);
             $play_done_found = true;
             break;
         }
