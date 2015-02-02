@@ -1084,6 +1084,17 @@ class DBActions
             
             $date_now = date('Y-m-d');
             
+            $select_query = 'select e1.* from events e1'.
+            'where e1.stream_name = \''.$stream_name.'\' and '.
+            'e1.event_date = \''.$date_now.'\' and '.
+            'e1.event_call like \'%play%\' and '.
+            'e1.client_addr not like \'%unix%\' and '.
+            'e1.client_addr not like \'%127.0.0.1%\' '.
+            'and e1.event_time = '.
+            '(select max(e2.event_time) from events e2 where e2.stream_name = e1.stream_name and e2.event_date = e1.event_date and e2.event_call = e1.event_call and e2.client_addr = e1.client_addr) '.
+            'order by client_addr, nginx_id';
+            
+            /*
             $select_query = 'select event_id, nginx_id, event_date, max(event_time) as event_time, event_call, app_name, stream_name, client_addr from events '.
                     'where stream_name = \''.$stream_name.'\' and '.
                     'event_date = \''.$date_now.'\' and '.
@@ -1092,7 +1103,8 @@ class DBActions
                     'client_addr not like \'%127.0.0.1%\' '.
                     'group by client_addr, event_call '.
                     'order by event_date, client_addr, nginx_id, event_call';
-
+            */
+            
             $result = mysql_query($select_query ,$this->connection);
             if(!$result)
             {
