@@ -118,6 +118,7 @@ function PlayDoneEventFound($player_events, $event)
         {
             error_log("PLAY DONE FOUND: " . $pe['event_time'] . " - " .$pe['nginx_id'] . " - " .$pe['event_call']);
             $play_done_found = true;
+            break;
         }
     }
 
