@@ -1084,7 +1084,7 @@ class DBActions
             
             $date_now = date('Y-m-d');
             
-            $select_query = 'select e1.* from events e1'.
+            $select_query = 'select e1.* from events e1 '.
             'where e1.stream_name = \''.$stream_name.'\' and '.
             'e1.event_date = \''.$date_now.'\' and '.
             'e1.event_call like \'%play%\' and '.
