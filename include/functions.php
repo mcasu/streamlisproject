@@ -86,13 +86,15 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
 
             if ( ($pe_first['event_call'] === 'play') && ($date_now > $date_event) )
             {
+                error_log("EVENTO PLAY - DATE_NOW: ". $date_now . " DATE_EVENT: " . $date_event);
+                
                 if (!PlayDoneEventFound($player_events, $pe_first))
                 {
                     $players_counter++;
                 }
             }
         }
-        error_log("\nINFO - player count: " . $players_counter . "\n" .$dbactions->getErrorMessage());
+        error_log("\nINFO - TIME_NOW: " . $time_now . " player count: " . $players_counter . "\n" .$dbactions->getErrorMessage());
     } 
     catch (Exception $ex) 
     {
