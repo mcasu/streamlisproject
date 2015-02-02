@@ -110,6 +110,8 @@ function PlayDoneEventFound($player_events, $event)
     $play_done_found = false;
     foreach ($player_events as $pe) 
     {
+        error_log("EVENTO [" .$pe['event_call']. "] - " . $pe['event_time'] . " - " .$pe['nginx_id']);
+       
         if ($pe['nginx_id'] === $event['nginx_id'] && 
                 $pe['event_call'] === "play_done" &&
                 $pe['client_addr'] === $event['client_addr'])
