@@ -86,7 +86,7 @@ function GetCurrentLivePlayersNumber($dbactions, $stream_name)
 
             if ( ($pe_first['event_call'] === 'play') && ($date_now > $date_event) )
             {
-                error_log("EVENTO PLAY - DATE_NOW: ". $date_now->format("Y-m-d H:i:s") . " DATE_EVENT: " . $date_event->format("Y-m-d H:i:s"));
+                error_log("EVENTO [" .$pe_first['event_call']. "] - DATE_NOW: ". $date_now->format("Y-m-d H:i:s") . " DATE_EVENT: " . $date_event->format("Y-m-d H:i:s"));
                 
                 if (!PlayDoneEventFound($player_events, $pe_first))
                 {
@@ -114,6 +114,7 @@ function PlayDoneEventFound($player_events, $event)
                 $pe['event_call'] === "play_done" &&
                 $pe['client_addr'] === $event['client_addr'])
         {
+            error_log("PLAY DONE FOUND: " . $pe['event_time'] . " - " .$pe['nginx_id'] . " - " .$pe['event_call']);
             $play_done_found = true;
         }
     }
