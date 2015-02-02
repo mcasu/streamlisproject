@@ -1091,9 +1091,12 @@ class DBActions
             'e1.app_name not like \'%vod%\' and '.
             'e1.client_addr not like \'%unix%\' and '.
             'e1.client_addr not like \'%127.0.0.1%\' '.
+            /*
             'and e1.event_time = '.
             '(select max(e2.event_time) from events e2 '.
             'where e2.stream_name = e1.stream_name and e2.event_date = e1.event_date and e2.event_call = e1.event_call and e2.app_name = e1.app_name and e2.client_addr = e1.client_addr) '.
+             */
+             
             'order by client_addr, nginx_id';
             
             /*
