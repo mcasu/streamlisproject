@@ -19,6 +19,7 @@ try
     }
     else
     {
+        error_log("INFO - Eseguo GetOndemandEventsById()...");
         //echo "Deleting On-demand Event ID ".$event_id." from database SUCCESS";
         $result = $dbactions->GetOndemandEventsById($event_id);
         
@@ -28,8 +29,10 @@ try
             return;
         }
         
+        error_log("INFO - Eseguo mysql_fetch_array()...");
         $event = mysql_fetch_array($result);
 
+        error_log("INFO - Eseguo DeleteOnDemandVideoFromDisk()...");
         $fsactions->DeleteOnDemandVideoFromDisk($event['ondemand_app_name'], $event['ondemand_path'], $event['ondemand_filename']);
     }
 }
