@@ -1160,7 +1160,7 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select * from ondemand where ondemand_id = \''.$eventId.'\' order by ondemand_filename';
+                $select_query = 'select * from ondemand where ondemand_id = \''.$eventId.'\';';
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)
