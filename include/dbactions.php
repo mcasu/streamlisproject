@@ -2,16 +2,16 @@
 
 class DBActions
 {
-	var $error_message;
+    var $error_message;
 
-	/* Database variables*/
-	var $connection;
-	var $database;
+    /* Database variables*/
+    var $connection;
+    var $database;
 
-	function DBActions($host, $uname, $pwd, $database)
-	{
-		$this->InitDB($host, $uname, $pwd, $database);
-	}
+    function DBActions($host, $uname, $pwd, $database)
+    {
+            $this->InitDB($host, $uname, $pwd, $database);
+    }
 
     function InitDB($host,$uname,$pwd,$database)
     {
@@ -1135,6 +1135,32 @@ class DBActions
                 }
 
                 $select_query = 'select * from ondemand where ondemand_publish_code = \''.$publish_code.'\' order by ondemand_filename';
+
+                $result = mysql_query($select_query ,$this->connection);
+                if(!$result)
+                {
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    return false;
+                }
+                return $result;
+        }
+        
+        function GetOndemandEventsById($eventId)
+        {
+                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+                if(!$this->connection)
+                {
+                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                    return false;
+                }
+                if(!mysql_select_db($this->database, $this->connection))
+                {
+                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                    return false;
+                }
+
+                $select_query = 'select * from ondemand where ondemand_id = \''.$eventId.'\' order by ondemand_filename';
 
                 $result = mysql_query($select_query ,$this->connection);
                 if(!$result)

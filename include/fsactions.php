@@ -10,23 +10,81 @@ function FSActions()
 
 }
 
+/**
+ * 
+ * @param string $ondemand_path
+ * @param string $ondemand_filename
+ * @return boolean: TRUE on success or FALSE on failure.
+ */
+function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondemand_filename)
+{
+    $basename = basename($ondemand_filename, ".flv");
+    
+    $videoFlvFullPath = $ondemand_path.$ondemand_filename;
+    $thumbFullPath = $ondemand_path.$basename."jpg";
+    
+    $ondemand_mp4_path = str_replace($ondemand_app_name, "mp4", $ondemand_path);
+    $videoMp4FullPath = $ondemand_mp4_path.$basename."mp4";
+    
+    try
+    {
+        // Delete flv video file
+        if (file_exists($videoFlvFullPath))
+        {
+            unlink($videoFlvFullPath);
+        }
+        
+        // Delete thumbnail image file
+        if (file_exists($thumbFullPath))
+        {
+            unlink($thumbFullPath);
+        }
+        
+        // Delete mp4 video file
+        if (file_exists($videoMp4FullPath))
+        {
+            unlink($videoMp4FullPath);
+        }
+        
+        return TRUE;
+        
+    }
+    catch(Exception $e)
+    {
+        error_log("ERROR - FSActions method DeleteOnDemandVideoFromDisk() - [".$videoFlvFullPath."] - ". $e->getMessage());
+        return FALSE;
+    }
+}
+
+/**
+ * 
+ * @param type $nginx_id
+ * @param type $ondemand_path
+ * @param type $client_addr
+ * @param type $record_path
+ * @param type $stream_name
+ * @return boolean: TRUE on success or FALSE on failure.
+ */
 function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name)
 {
 	if (!isset($ondemand_path))
 	{
 		error_log("ERROR - On-demand path [".$ondemand_path."] errato.");
-		exit;
+		return false;
 	}
 	
 	if (!isset($record_path))
 	{
 		error_log("ERROR - Recorded file path [".$record_path."] errato.");
-		exit;
+		return false;
 	}
 
 	$ondemand_fullpath = $ondemand_path.$stream_name."/";
 	
-	if (!file_exists($ondemand_fullpath)) mkdir($ondemand_fullpath, 0755, true);
+	if (!file_exists($ondemand_fullpath))
+        {
+            mkdir($ondemand_fullpath, 0755, true);
+        }
 
 	$path_parts = pathinfo($record_path);
 	$filename = $path_parts['basename'];
@@ -52,4 +110,3 @@ function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_p
 
 }
 
-?>
