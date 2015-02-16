@@ -26,6 +26,8 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
     $ondemand_mp4_path = str_replace($ondemand_app_name, "mp4", $ondemand_path);
     $videoMp4FullPath = $ondemand_mp4_path.$basename."mp4";
     
+    error_log("INFO - DeleteOnDemandVideoFromDisk() - videoFlvFullPath->[".$videoFlvFullPath."] - videoMp4FullPath->[".$videoMp4FullPath."]");
+    
     try
     {
         // Delete flv video file

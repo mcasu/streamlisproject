@@ -20,15 +20,15 @@ try
     else
     {
         //echo "Deleting On-demand Event ID ".$event_id." from database SUCCESS";
-        $row = $dbactions->GetOndemandEventsById($event_id);
+        $result = $dbactions->GetOndemandEventsById($event_id);
         
-        if (!$row)
+        if (!$result)
         {
             error_log("ERROR - GetOndemandEventsById ID ".$event_id." FAILED\r\n".$dbactions->GetErrorMessage());
             return;
         }
         
-        $event = mysql_fetch_array($row);
+        $event = mysql_fetch_array($result);
 
         $fsactions->DeleteOnDemandVideoFromDisk($event['ondemand_app_name'], $event['ondemand_path'], $event['ondemand_filename']);
     }
