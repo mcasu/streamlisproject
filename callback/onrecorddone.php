@@ -76,7 +76,7 @@ $frame = $movie->getFrame($videorate * 1000);
 
 if (!$frame)
 {
-	error_log("WARNING - Stream [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1800 second frame.");
+	error_log("WARNING - Stream [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000 second frame.");
 	
 	// Get video thumbnail from 5sec frame.
 	$frame = $movie->getFrame($videorate * 5);
