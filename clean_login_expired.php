@@ -14,7 +14,7 @@ else
 }
 
 $result = $dbactions->CleanLoginOlderThan($seconds);
-if ($result == '-1')
+if (!$result || $result === "-1")
 {
     // clean failed
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
@@ -27,5 +27,3 @@ else
     echo "0 - SUCCESS - Pulito [".$result."] utenti.\n";
     exit(0);
 }
-
-?>

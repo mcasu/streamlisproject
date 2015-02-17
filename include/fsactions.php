@@ -22,11 +22,13 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
     
     $videoFlvFullPath = $ondemand_path.$ondemand_filename;
     $thumbFullPath = $ondemand_path.$basename."jpg";
+    $videoFlvLinkFullPath = dirname($ondemand_path)."/".$ondemand_filename;
     
     $ondemand_mp4_path = str_replace($ondemand_app_name, "mp4", $ondemand_path);
     $videoMp4FullPath = $ondemand_mp4_path.$basename."mp4";
+    $videoMp4LinkFullPath = dirname($ondemand_mp4_path)."/".$basename."mp4";
     
-    error_log("INFO - DeleteOnDemandVideoFromDisk() - videoFlvFullPath->[".$videoFlvFullPath."] - videoMp4FullPath->[".$videoMp4FullPath."]");
+    //error_log("INFO - DeleteOnDemandVideoFromDisk() - videoFlvFullPath->[".$videoFlvFullPath."] - videoMp4FullPath->[".$videoMp4FullPath."]");
     
     try
     {
@@ -42,10 +44,22 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
             unlink($thumbFullPath);
         }
         
+        // Delete link to flv video file
+        if (file_exists($videoFlvLinkFullPath))
+        {
+            unlink($videoFlvLinkFullPath);
+        }
+        
         // Delete mp4 video file
         if (file_exists($videoMp4FullPath))
         {
             unlink($videoMp4FullPath);
+        }
+        
+        // Delete link to mp4 video file
+        if (file_exists($videoMp4LinkFullPath))
+        {
+            unlink($videoMp4LinkFullPath);
         }
         
         return TRUE;

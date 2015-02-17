@@ -226,7 +226,7 @@ class DBActions
             return false;
         }
 	
-	$query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > '.$seconds;
+	$query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > \''.$seconds.'\'';
 	
 	$result = mysql_query($query ,$this->connection);
 	if(!$result)
