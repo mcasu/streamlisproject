@@ -229,6 +229,7 @@ class DBActions
 	$query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > \''.$seconds.'\'';
 	
 	$result = mysql_query($query ,$this->connection);
+        error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
 	if(!$result)
         {
             $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n");
