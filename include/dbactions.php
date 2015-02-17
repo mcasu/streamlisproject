@@ -228,10 +228,7 @@ class DBActions
 	
 	$query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > \''.$seconds.'\'';
 	
-        error_log("INFO - QUERY CLEAN: ". $query);
 	$result = mysql_query($query ,$this->connection);
-        error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
-        echo "INFO - Result: [".$result."] - QUERY CLEAN: ". $query;
         
 	if(!$result)
         {
@@ -239,9 +236,6 @@ class DBActions
             return false;
         }
 	
-	error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
-        echo "INFO - Result: [".$result."] - QUERY CLEAN: ". $query;
-        
         return mysql_affected_rows();
     }
     
