@@ -235,7 +235,7 @@ class DBActions
             return false;
         }
 	
-	//error_log("QUERY CLEAN: ". $query);
+	error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
         return mysql_affected_rows();
     }
     
