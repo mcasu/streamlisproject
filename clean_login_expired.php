@@ -19,6 +19,7 @@ else
 }
 
 error_log("INFO - Eseguo CleanLoginOlderThan() with seconds: ". $seconds);
+echo "INFO - Eseguo CleanLoginOlderThan() with seconds: ". $seconds;
 
 $result = $dbactions->CleanLoginOlderThan($seconds);
 

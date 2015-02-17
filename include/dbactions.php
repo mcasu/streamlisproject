@@ -231,6 +231,8 @@ class DBActions
         error_log("INFO - QUERY CLEAN: ". $query);
 	$result = mysql_query($query ,$this->connection);
         error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
+        echo "INFO - Result: [".$result."] - QUERY CLEAN: ". $query;
+        
 	if(!$result)
         {
             $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n");
@@ -238,6 +240,8 @@ class DBActions
         }
 	
 	error_log("INFO - Result: [".$result."] - QUERY CLEAN: ". $query);
+        echo "INFO - Result: [".$result."] - QUERY CLEAN: ". $query;
+        
         return mysql_affected_rows();
     }
     
