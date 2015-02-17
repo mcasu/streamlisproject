@@ -13,7 +13,10 @@ else
     $seconds = $_POST['seconds'];
 }
 
+error_log("INFO - Eseguo CleanLoginOlderThan() with seconds: ". $seconds);
+
 $result = $dbactions->CleanLoginOlderThan($seconds);
+
 if (!$result || $result === "-1")
 {
     // clean failed
