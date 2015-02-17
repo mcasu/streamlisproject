@@ -205,26 +205,30 @@ class MainActions
     
     function CheckLogin()
     {
-         session_start();
-         $sessionvar = $this->GetLoginSessionVar();
-         
-         if(empty($_SESSION[$sessionvar]))
-         {
-            return false;
-         }
-	 
-	 $userdata = $_SESSION[$sessionvar];
-	 // The users' session expire after 10800 sec = 3 hours
-	 if (time() - $userdata['last_update'] > 10800)
-	 {
-	    $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], false);
-	    $_SESSION[$sessionvar]=NULL;
-	    unset($_SESSION[$sessionvar]);
-	    return false;
-	 }
-	 
-	 $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], true);
-         return true;
+        if ( session_status() == PHP_SESSION_NONE ) 
+        {
+            session_start();
+        }
+        
+        $sessionvar = $this->GetLoginSessionVar();
+
+        if(empty($_SESSION[$sessionvar]))
+        {
+           return false;
+        }
+
+        $userdata = $_SESSION[$sessionvar];
+        // The users' session expire after 10800 sec = 3 hours
+        if (time() - $userdata['last_update'] > 10800)
+        {
+           $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], false);
+           $_SESSION[$sessionvar]=NULL;
+           unset($_SESSION[$sessionvar]);
+           return false;
+        }
+
+        $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], true);
+        return true;
     }
    
     function GetSessionUserRole()
