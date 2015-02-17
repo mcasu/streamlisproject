@@ -46,7 +46,7 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
         }
         
         // Delete link to flv video file
-        if (file_exists($videoFlvLinkFullPath))
+        if (is_link($videoFlvLinkFullPath))
         {
             unlink($videoFlvLinkFullPath);
         }
@@ -58,7 +58,7 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
         }
         
         // Delete link to mp4 video file
-        if (file_exists($videoMp4LinkFullPath))
+        if (is_link($videoMp4LinkFullPath))
         {
             unlink($videoMp4LinkFullPath);
         }
