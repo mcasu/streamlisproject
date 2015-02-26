@@ -82,7 +82,7 @@ class Utils
      * @param integer $seconds Number of seconds to parse
      * @return array
      */
-    function SecondsToTime($seconds)
+    public function SecondsToTime($seconds)
     {
         // extract hours
         $hours = floor($seconds / (60 * 60));
@@ -103,6 +103,26 @@ class Utils
         );
         return $obj;
     }
+    
+    public function RenameFileToLowerCase($fullPath)
+    {
+        try
+        {
+            $filename = basename($fullPath);
+            $dir = dirname($fullPath);
+
+            $oldName = $filename;
+            $newName = strtolower($filename);
+
+            rename("$dir/$oldName","$dir/$newName");
+
+            return "$dir/$newName";
+        }
+        catch(Exception $e)
+        {
+            error_log("ERROR - RenameFileToLowerCase() - fullPath->[" . $fullPath . "] - " . $e->getMessage());
+            return FALSE;
+        }
+    }
 }
 
-?>

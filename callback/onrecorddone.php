@@ -20,8 +20,8 @@ $mysqldate = date("Y-m-d");
 $ondemand_path=$ondemand_flash_record_filepath;
 
 $path_parts = pathinfo($record_path);
-$ondemand_basename = $path_parts['basename'];
-$ondemand_filename = $path_parts['filename'];
+$ondemand_basename = strtolower($path_parts['basename']);
+$ondemand_filename = strtolower($path_parts['filename']);
 $record_tmp_dir = $path_parts['dirname'];
 
 $strtoremove_lenght = strlen($stream_name);
@@ -34,32 +34,53 @@ $date_temp = strftime("%Y-%m-%d", strtotime($ondemand_onlydate));
 
 //error_log("INFO - ONDEMAND DATE: " . $date_temp);
 
-/*** SAVE FLV VIDEO TO DISK ***/
-if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_path,$stream_name))
+$videoFullPathLowerCase = NULL;
+if (file_exists($record_path))
 {
-	error_log("ERROR - Save video ".$record_path. " FAILED!");
+    $videoFullPathLowerCase = $utils->RenameFileToLowerCase($record_path);
+}
+
+if (!$videoFullPathLowerCase)
+{
+    exit;
+}
+
+
+/*** SAVE FLV VIDEO TO DISK ***/
+if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,
+                                        $ondemand_path,
+                                        $client_addr,
+                                        $videoFullPathLowerCase, 
+                                        strtolower($stream_name)))
+{
+	error_log("ERROR - SaveOnDemandVideoToDisk() [" .$videoFullPathLowerCase. "] FAILED!");
 	exit;	
 }
 
-$movie = new ffmpeg_movie($ondemand_path.$stream_name."/".$ondemand_basename, false);
+$movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
 
 /*** SAVE VIDEO INFO INTO DATABASE ***/
-if (!$dbactions->OnRecordDone($app_name,$stream_name,$ondemand_path.$stream_name."/",$ondemand_basename,$movie,$date_temp))
+if (!$dbactions->OnRecordDone($app_name,
+                            strtolower($stream_name),
+                            $ondemand_path.strtolower($stream_name)."/",
+                            $ondemand_basename,
+                            $movie,
+                            $date_temp))
 {
-	error_log("ERROR - Recording the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	error_log("ERROR - OnRecordDone() Recording the stream ".strtolower($stream_name)." FAILED! - ".$dbactions->GetErrorMessage());
 	exit;
 }
 
 /*** CONVERT VIDEO TO .MP4 AND SAVE TO DISK ***/
-if (!file_exists($ondemand_mp4_record_filepath.$stream_name))
+if (!file_exists($ondemand_mp4_record_filepath.strtolower($stream_name)))
 {
-	mkdir($ondemand_mp4_record_filepath.$stream_name, 0755, true);
-	error_log("WARNING - Created folder ".$ondemand_mp4_record_filepath.$stream_name);
+	mkdir($ondemand_mp4_record_filepath.strtolower($stream_name), 0755, true);
+	error_log("WARNING - OnRecordDone.php - Created folder ".$ondemand_mp4_record_filepath.strtolower($stream_name));
 }
 
-$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.$stream_name."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.$stream_name.'/'.$ondemand_filename.'.mp4 '.$ondemand_basename);
+$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.strtolower($stream_name)."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.strtolower($stream_name).'/'.$ondemand_filename.'.mp4 '.$ondemand_basename);
 
-$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.$stream_name."/";
+$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.strtolower($stream_name)."/";
 if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
 {
 	error_log('ERROR - Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
@@ -76,14 +97,14 @@ $frame = $movie->getFrame($videorate * 1000);
 
 if (!$frame)
 {
-	error_log("WARNING - Stream [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000 second frame.");
+	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000 second frame.");
 	
 	// Get video thumbnail from 5sec frame.
 	$frame = $movie->getFrame($videorate * 5);
 	
 	if (!$frame)
 	{
-		error_log("ERROR - Stream  [". $stream_name ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5 second frame.");
+		error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5 second frame.");
 		exit(0);
 	}
 }
@@ -91,11 +112,14 @@ if (!$frame)
 //$frame->resize(320, 240);
 $image = $frame->toGDImage();
 // Save the image to disk
-$img_filename = $ondemand_path.$stream_name."/".$ondemand_filename.'.jpg';
+$img_filename = $ondemand_path.strtolower($stream_name)."/".$ondemand_filename.'.jpg';
 
 if (imagejpeg($image, $img_filename, 100))
 {
-    if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) mkdir("/usr/local/nginx/html/images/thumbnails/", 0755, true);
+    if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) 
+    {
+        mkdir("/usr/local/nginx/html/images/thumbnails/", 0755, true);
+    }
     
     if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
     {
@@ -107,4 +131,3 @@ else
 	error_log("ERROR - Unable to create video thumbnail ".$img_filename);
 }
 
-?>

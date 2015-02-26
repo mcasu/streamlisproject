@@ -400,7 +400,7 @@ class DBActions
                 "' . $this->SanitizeForSQL($groupvars['group_name']) . '",
                 "' . $this->SanitizeForSQL($groupvars['group_type']) . '",
                 "' . $this->SanitizeForSQL($row_role['role_id']) . '",
-                "' . $this->SanitizeForSQL($publish_code) . '"
+                "' . $this->SanitizeForSQL(strtolower($publish_code)) . '"
                 )';
 
 	        if(!mysql_query( $insert_query ,$this->connection))
@@ -505,7 +505,7 @@ class DBActions
                 "' . $this->SanitizeForSQL($mysqltime) . '",
 		"' . $this->SanitizeForSQL($event_call) . '",
                 "' . $this->SanitizeForSQL($app_name) . '",
-                "' . $this->SanitizeForSQL($stream_name) . '",
+                "' . $this->SanitizeForSQL(strtolower($stream_name)) . '",
                 "' . $this->SanitizeForSQL($client_addr) . '",
                 "' . $this->SanitizeForSQL($flash_ver) . '",
 		"' . $this->SanitizeForSQL($page_url) . '",
