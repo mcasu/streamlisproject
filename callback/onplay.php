@@ -43,9 +43,9 @@ if ($mainactions->CheckLogin())
 }
 
 /*** Save play event into database ***/
-if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url,$username))
+if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,strtolower($stream_name),$client_addr,$flash_ver,$page_url,$username))
 {
-	error_log("Saving PLAY event to the database ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	error_log("Saving PLAY event to the database ".strtolower($stream_name)." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
 

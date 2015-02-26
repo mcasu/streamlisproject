@@ -46,16 +46,16 @@ $mysqltime = date("H:i:s");
 
 	
 /*** Save live publish info into database ***/
-if (!$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime))
+if (!$dbactions->OnPublish($nginx_id,$app_name,strtolower($stream_name),$client_addr,strtolower($stream_name),$mysqldate,$mysqltime))
 {
-	error_log("Publishing the stream ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	error_log("Publishing the stream ".strtolower($stream_name)." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
 
 /*** Save publish event into database ***/
-if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url))
+if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,strtolower($stream_name),$client_addr,$flash_ver,$page_url))
 {
-	error_log("Saving PUBLISH event to the database ".$stream_name." FAILED! ".$dbactions->GetErrorMessage());
+	error_log("Saving PUBLISH event to the database ".strtolower($stream_name)." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
 
