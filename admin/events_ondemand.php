@@ -408,6 +408,16 @@ try
                                                                                 echo '<br/>';
                                                                                 echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
                                                                             echo '</div>';
+                                                                            
+                                                                            echo '<div class="video_download">';
+                                                                                echo '<button type="button" class="btn btn-default btn-lg">';
+                                                                                    echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>'.
+                                                                                        '<span class="glyphicon glyphicon-download"></span>';
+                                                                                    echo '</a>';
+                                                                                echo '</button>';
+                                                                                echo '<br/>';
+                                                                                echo "<label>Scarica il video</label>";
+                                                                            echo '</div>';
                                                                         echo '</li>';
                                                                     echo '</ul>';
                                                                 echo '</div>';

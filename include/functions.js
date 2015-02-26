@@ -23,6 +23,7 @@ OndemandMp4Loading = function() {
               var ulobj = $(this).find('ul');
               var iphoneobj = ulobj.find(".player_iphone:first");
               var videoloadobj = ulobj.find(".video_loading:first");
+              var videoDownloadObj = ulobj.find(".video_download:first");
 
               //alert(index + " - Oggetto: " + iphoneobj.attr('id') + " " + videoloadobj.attr('id'));
 
@@ -52,6 +53,7 @@ OndemandMp4Loading = function() {
                           iphoneobj.addClass("notavailable");
                           iphoneobj.hide();
                           videoloadobj.hide();
+                          videoDownloadObj.hide();
                           //alert("CONTROLLO CARTELLA:\nUrl [ " + fullurl + " ] FAILED.");
                           return;
                       },
@@ -81,6 +83,7 @@ OndemandMp4Loading = function() {
                       function(){
                           iphoneobj.removeClass("active");
                           iphoneobj.hide();
+                          videoDownloadObj.hide();
                           videoloadobj.show();
                           //alert("CONTROLLO WEB:\nUrl [ " + link_url + " ] FAILED.");
                       },
@@ -88,6 +91,7 @@ OndemandMp4Loading = function() {
                       function(){
                           videoloadobj.hide();
                           iphoneobj.show();
+                          videoDownloadObj.show();
                           iphoneobj.addClass("active");
                           //alert("Url [ " + link_url + " ] SUCCESS.");
                       }
