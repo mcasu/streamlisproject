@@ -321,13 +321,10 @@ li div.video_loading
 
 li div.video_download
 {
-    height: 50px; 
-    float: none; 
-    display: inline-block; 
     vertical-align: middle;
     margin-top: 0;
     max-width: 200px;
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-align: center;
 }
 
