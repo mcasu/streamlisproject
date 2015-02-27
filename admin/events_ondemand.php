@@ -409,6 +409,7 @@ try
                                                                                 echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
                                                                             echo '</div>';
                                                                             
+                                                                            // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
                                                                                 echo '<button type="button" class="btn btn-default btn-lg">';
                                                                                     echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>'.

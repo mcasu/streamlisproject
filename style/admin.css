@@ -167,24 +167,12 @@ h2.toggle a {
   display: block;
 }
 
-/*h2.toggle a:after {
-  content: ">"; //"\2192"; Right arrow
-  color: #fff;
-  display: block;
-  float: right;
-  margin-right: 1rem;
-  font-size: 1.5em;
-  font-weight: bold;
-  //font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono";
-  //font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-  font-family: Verdana, Geneva, sans-serif;
-}*/
-
 h2.toggle a:hover {
     /*color: #ccc;*/
     color: #3c78c3; /*#3ed0d2;*/
 }
 
+/*
 a img.group_logo {
   margin: 6px 0 0 0;
   height: 30px;
@@ -210,7 +198,7 @@ div.toggle_container {
     width: 1400px;
     height: 100%;
     overflow: auto;
-}
+}*/
 
 li.video_list_element 
 {
@@ -320,7 +308,11 @@ li div.video_delete
   text-align: left;
 }
 
-li div.player_desktop, li div.player_smartphone, li div.player_iphone, li div.video_loading
+li div.player_desktop, 
+li div.player_smartphone, 
+li div.player_iphone, 
+li div.video_loading, 
+li div.video_download
 {
   margin-top: 6px;
   max-width: 200px;
@@ -328,7 +320,11 @@ li div.player_desktop, li div.player_smartphone, li div.player_iphone, li div.vi
   text-align: center;
 }
 
-div.player_desktop label, div.player_smartphone label, div.player_iphone label, div.video_loading label
+div.player_desktop label, 
+div.player_smartphone label, 
+div.player_iphone label, 
+div.video_loading label, 
+div.video_download label
 {
   margin-top: 8px;
   font-weight: bold;
@@ -359,16 +355,6 @@ a.play-button img.video_imgdevice:hover
 {
   opacity: 0.5;
 }
-
-/*
-a.event_ondemand_delete, a.event_ondemand_delete img
-{
-  width: 32px;
-  height: 32px;
-  margin-top: 25px;
-  margin-right: 2px;
-}
-*/
 
 /******************************/
 /* *** VIDEO LOADING CSS3 *** */
