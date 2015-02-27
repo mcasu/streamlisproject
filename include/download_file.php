@@ -48,7 +48,9 @@ $file_path = filter_input(INPUT_GET, 'file_path');
 header('Content-disposition: attachment; filename="'.basename($file_path).'"');
 header('Content-Type: application/octet-stream');
 header("Content-Length: " . filesize($file_path));
+header('Content-Transfer-Encoding: chunked'); //changed to chunked
 header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 //header("Content-Type: application/force-download");
 //header("Content-Type: application/download");
 //header('Content-type: video/mp4');
@@ -62,7 +64,3 @@ while(!feof($file))
 	ob_flush();
 	flush();
 }
-
-
-
-//readfile($file_path);
