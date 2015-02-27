@@ -21,11 +21,11 @@ $(document).ready(function()
 {
     $("a.event_ondemand_delete").click(function()
     {
-	    var ondemand_id=$(this).parent().attr('id');
+	    var ondemand_id=$(this).attr('id');
 	    
 	    if (confirm("Vuoi davvero eliminare?"))
 	    {
-                var li_video_obj=$(this).parent().parent().parent().parent();
+                var li_video_obj=$(this).parent().parent().parent();
 		$.post("event_delete.php",{type:"ondemand",event_id:ondemand_id},
     
 		function(data,status)
@@ -41,7 +41,8 @@ $(document).ready(function()
         alert("TARGET ID: " + e.target.id + " TARGET CLASS: " + $(e.target).attr("class"));
         if (e.target.id === "video_checkbox" 
                 || $(e.target).attr("class") === "video_imgdevice"
-                || $(e.target).attr("class").indexOf("event_ondemand_download") >= 0)
+                || $(e.target).attr("class").indexOf("event_ondemand_download") >= 0
+                || $(e.target).attr("class").indexOf("glyphicon-download") >= 0)
         {
             return true;
         }
@@ -415,7 +416,7 @@ try
                                                                         echo '<li>';
                                                                             // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
-                                                                                    echo '<a role="button" class="btn btn-default btn-lg event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
+                                                                                    echo '<a role="button" class="btn btn-primary btn-lg event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
                                                                                         echo '<span class="glyphicon glyphicon-download"></span>';
                                                                                     echo '</a>';
                                                                                 echo '<br/>';
@@ -428,11 +429,9 @@ try
                                                                 
                                                                 // TRASH BUTTON
                                                                 echo '<div class="col-md-1 div-btn-actions-align">';
-                                                                    echo '<button type="button" id="'.$ondemand_id.'" class="btn btn-default btn-lg">';
-                                                                        echo '<a class="event_ondemand_delete">'.
+                                                                        echo '<a id="'.$ondemand_id.'" role="button" class="btn btn-primary btn-lg event_ondemand_delete">'.
                                                                             '<span class="glyphicon glyphicon-trash"></span>';
                                                                         echo '</a>';
-                                                                    echo '</button>';
                                                                 echo '</div>';
                                                                 
                                                             echo '</div>';
