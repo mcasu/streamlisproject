@@ -38,7 +38,7 @@ $(document).ready(function()
     
     $("li.video_list_element").click(function(e)
     {
-        alert("TARGET ID: " + e.target.id + " TARGET CLASS: " + $(e.target).attr("class"));
+        //alert("TARGET ID: " + e.target.id + " TARGET CLASS: " + $(e.target).attr("class"));
         if (e.target.id === "video_checkbox" 
                 || $(e.target).attr("class") === "video_imgdevice"
                 || $(e.target).attr("class").indexOf("event_ondemand_download") >= 0
