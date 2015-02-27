@@ -16,13 +16,14 @@ header("Content-Type: application/download");
 header('Content-type: video/mp4');
 //header("Content-Length: " . filesize($file_url));
 
+$uri = "http://$_SERVER[HTTP_HOST]$file_url";
 
-//$fp = fopen($file_url, "r"); 
-//while (!feof($fp))
-//{
-//    echo fread($fp, 65536); 
-//    flush(); // this is essential for large downloads
-//}  
-//fclose($fp);
+$fp = fopen($uri, "r"); 
+while (!feof($fp))
+{
+    echo fread($fp, 65536); 
+    flush(); // this is essential for large downloads
+}  
+fclose($fp);
 
-readfile("http://$_SERVER[HTTP_HOST]$file_url");
+//readfile();
