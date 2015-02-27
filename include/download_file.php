@@ -7,26 +7,62 @@
  */
 
 ini_set("allow_url_fopen", true);
+define("CHUNK_SIZE", 1024*1024); // Size (in bytes) of tiles chunk
 
+// Read a file and display its content chunk by chunk
+function readfile_chunked($filename, $retbytes = TRUE) 
+{
+    $buffer = "";
+    $cnt =0;
+
+    $handle = fopen($filename, "rb");
+    if ($handle === false) 
+    {
+        return false;
+    }
+    while (!feof($handle)) 
+    {
+        $buffer = fread($handle, CHUNK_SIZE);
+        echo $buffer;
+        ob_flush();
+        flush();
+        if ($retbytes) {
+          $cnt += strlen($buffer);
+        }
+    }
+    $status = fclose($handle);
+    if ($retbytes && $status) 
+    {
+        return $cnt; // return num. bytes delivered like readfile() does.
+    }
+    return $status;
+}
+
+  
 $file_path = filter_input(INPUT_GET, 'file_path');
 
-// the correct way to set the filename is quoting it (double quote):
+// The correct way to set the filename is quoting it (double quote):
 // Some browsers may work without quotation, but for sure not Firefox and as Mozilla explains, 
 // the quotation of the filename in the content-disposition is according to the RFC
 // http://kb.mozillazine.org/Filenames_with_spaces_are_truncated_upon_download
 header('Content-disposition: attachment; filename="'.basename($file_path).'"');
-header("Content-Type: application/force-download");
 header('Content-Type: application/octet-stream');
-header("Content-Type: application/download");
-header('Content-type: video/mp4');
 header("Content-Length: " . filesize($file_path));
+header('Expires: 0');
+//header("Content-Type: application/force-download");
+//header("Content-Type: application/download");
+//header('Content-type: video/mp4');
 
-//$fp = fopen($uri, "r"); 
-//while (!feof($fp))
-//{
-//    echo fread($fp, 65536); 
-//    flush(); // this is essential for large downloads
-//}  
-//fclose($fp);
 
-readfile($file_path);
+set_time_limit(0);
+$file = fopen($file_path,"rb");
+while(!feof($file))
+{
+	print(fread($file, CHUNK_SIZE));
+	ob_flush();
+	flush();
+}
+
+
+
+//readfile($file_path);
