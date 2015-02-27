@@ -417,7 +417,10 @@ try
                                                                             echo '<div class="video_download">';
                                                                                 //echo '<button type="button" class="btn btn-default btn-lg btn-download">';
                                                                                     echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
-                                                                                        echo '<span class="glyphicon glyphicon-download"></span>';
+                                                                                        echo '<span class="glyphicon glyphicon-download">';
+                                                                                            echo '<button type="button" class="btn btn-default btn-lg btn-download">';
+                                                                                            echo '</button>';
+                                                                                        echo '</span>';
                                                                                     echo '</a>';
                                                                                 //echo '</button>';
                                                                                 echo '<br/>';
