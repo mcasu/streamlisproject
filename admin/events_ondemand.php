@@ -412,14 +412,14 @@ try
                                                                         
                                                                         echo '<li>';
                                                                             // DOWNLOAD BUTTON
-                                                                            echo '<div class="video_download" style="margin-left:20px;">';
+                                                                            echo '<div class="video_download">';
+                                                                            echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
                                                                                 echo '<button type="button" class="btn btn-default btn-lg">';
-                                                                                    echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>'.
                                                                                         '<span class="glyphicon glyphicon-download"></span>';
-                                                                                    echo '</a>';
                                                                                 echo '</button>';
                                                                                 echo '<br/>';
                                                                                 echo "<label>Scarica il video</label>";
+                                                                            echo '</a>';
                                                                             echo '</div>';
                                                                         echo '</li>';
                                                                         

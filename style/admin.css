@@ -207,7 +207,7 @@ li.video_list_element
 
 div.video_list_element 
 {
-  min-width: 980px;
+  min-width: 1024px;
 }
 
 li.video_list_element:hover
@@ -311,10 +311,17 @@ li div.video_delete
 li div.player_desktop, 
 li div.player_smartphone, 
 li div.player_iphone, 
-li div.video_loading, 
-li div.video_download
+li div.video_loading
 {
   margin-top: 6px;
+  max-width: 200px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+li div.video_download
+{
+  margin-top: 0;
   max-width: 200px;
   font-size: 0.8em;
   text-align: center;
@@ -409,7 +416,8 @@ a.play-button img.video_imgdevice:hover
     -webkit-animation-delay: .4s;
 }
 
-@-moz-keyframes move {
+@-moz-keyframes move 
+{
     0% {
         -moz-transform: scale(1.2);
         opacity: 1;
@@ -421,7 +429,8 @@ a.play-button img.video_imgdevice:hover
     };
 } 
 
-@-webkit-keyframes move {
+@-webkit-keyframes move 
+{
     0% {
         -webkit-transform: scale(1.2);
         opacity: 1;
