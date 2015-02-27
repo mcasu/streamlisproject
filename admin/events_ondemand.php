@@ -42,7 +42,9 @@ $(document).ready(function()
         if (e.target.id === "video_checkbox" 
                 || $(e.target).attr("class") === "video_imgdevice"
                 || $(e.target).attr("class").indexOf("event_ondemand_download") >= 0
-                || $(e.target).attr("class").indexOf("glyphicon-download") >= 0)
+                || $(e.target).attr("class").indexOf("glyphicon-download") >= 0
+                || $(e.target).attr("class").indexOf("event_ondemand_delete") >= 0
+                || $(e.target).attr("class").indexOf("glyphicon-trash") >= 0)
         {
             return true;
         }

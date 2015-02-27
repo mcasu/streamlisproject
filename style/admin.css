@@ -202,7 +202,7 @@ div.toggle_container {
 
 li.video_list_element 
 {
-  min-width: 860px;
+  min-width: 1024px;
 }
 
 div.video_list_element 
@@ -277,7 +277,7 @@ ul.video_element li
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   overflow: auto;
   padding-bottom: 4px;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 ul.video_element img
@@ -322,6 +322,7 @@ li div.video_loading
 li div.video_download
 {
     margin-top: 0;
+    margin-left: 10px;
     max-width: 200px;
     font-size: 0.9em;
     text-align: center;
