@@ -47,6 +47,7 @@ OndemandMp4Loading = function() {
               $.ajax({
                   url: fullurl,
                   type:'HEAD',
+                  cache: false,
                   error:
                       function(){
                           iphoneobj.removeClass("active");
@@ -79,6 +80,7 @@ OndemandMp4Loading = function() {
               $.ajax({
                   url: link_url,
                   type:'HEAD',
+                  cache: false,
                   error:
                       function(){
                           iphoneobj.removeClass("active");

@@ -51,8 +51,6 @@ header("Content-Length: " . filesize($file_path));
 header('Content-Transfer-Encoding: chunked'); //changed to chunked
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-//header("Content-Type: application/force-download");
-//header("Content-Type: application/download");
 header('Content-type: video/mp4');
 
 
