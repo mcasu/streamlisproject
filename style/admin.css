@@ -321,10 +321,14 @@ li div.video_loading
 
 li div.video_download
 {
-  margin-top: 0;
-  max-width: 200px;
-  font-size: 0.8em;
-  text-align: center;
+    height: 50px; 
+    float: none; 
+    display: inline-block; 
+    vertical-align: middle;
+    margin-top: 0;
+    max-width: 200px;
+    font-size: 0.8em;
+    text-align: center;
 }
 
 div.player_desktop label, 
