@@ -8,22 +8,25 @@
 
 ini_set("allow_url_fopen", true);
 
-$file_url = filter_input(INPUT_GET, 'file_url');
+$file_path = filter_input(INPUT_GET, 'file_path');
 
-header('Content-disposition: attachment; filename=adunanza.mp4');
+// the correct way to set the filename is quoting it (double quote):
+// Some browsers may work without quotation, but for sure not Firefox and as Mozilla explains, 
+// the quotation of the filename in the content-disposition is according to the RFC
+// http://kb.mozillazine.org/Filenames_with_spaces_are_truncated_upon_download
+header('Content-disposition: attachment; filename="'.basename($file_path).'"');
 header("Content-Type: application/force-download");
+header('Content-Type: application/octet-stream');
 header("Content-Type: application/download");
 header('Content-type: video/mp4');
-//header("Content-Length: " . filesize($file_url));
+header("Content-Length: " . filesize($file_path));
 
-$uri = "http://$_SERVER[HTTP_HOST]$file_url";
+//$fp = fopen($uri, "r"); 
+//while (!feof($fp))
+//{
+//    echo fread($fp, 65536); 
+//    flush(); // this is essential for large downloads
+//}  
+//fclose($fp);
 
-$fp = fopen($uri, "r"); 
-while (!feof($fp))
-{
-    echo fread($fp, 65536); 
-    flush(); // this is essential for large downloads
-}  
-fclose($fp);
-
-//readfile();
+readfile($file_path);

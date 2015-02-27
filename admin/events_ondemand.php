@@ -418,7 +418,7 @@ try
                                                                         echo '<li>';
                                                                             // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
-                                                                                    echo '<a role="button" class="btn btn-info btn-lg event_ondemand_download" href="../include/download_file.php?file_url=/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
+                                                                                    echo '<a role="button" class="btn btn-info btn-lg event_ondemand_download" href="../include/download_file.php?file_path='.$ondemand_mp4_record_filepath.$ondemand_mp4_filename.'" target="_blank" download>';
                                                                                         echo '<span class="glyphicon glyphicon-download"></span>';
                                                                                     echo '</a>';
                                                                                 echo '<br/>';
