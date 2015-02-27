@@ -14,7 +14,7 @@ header('Content-disposition: attachment; filename=adunanza.mp4');
 header("Content-Type: application/force-download");
 header("Content-Type: application/download");
 header('Content-type: video/mp4');
-header("Content-Length: " . filesize($file_url));
+//header("Content-Length: " . filesize($file_url));
 
 
 //$fp = fopen($file_url, "r"); 
@@ -25,4 +25,4 @@ header("Content-Length: " . filesize($file_url));
 //}  
 //fclose($fp);
 
-readfile($file_url);
+readfile("http://$_SERVER[HTTP_HOST]$file_url");
