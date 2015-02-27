@@ -38,8 +38,10 @@ $(document).ready(function()
     
     $("li.video_list_element").click(function(e)
     {
-        alert("TARGET ID: " + e.target.id + " TARGET PARENT ID: " + $(e.target).attr("class"));
-        if (e.target.id === "video_checkbox" || $(e.target).attr("class") === "video_imgdevice")
+        //alert("TARGET ID: " + e.target.id + " TARGET PARENT CLASS: " + $(e.target).attr("class"));
+        if (e.target.id === "video_checkbox" 
+                || $(e.target).attr("class") === "video_imgdevice"
+                || $(e.target).attr("class") === "btn-download")
         {
             return true;
         }
@@ -413,7 +415,7 @@ try
                                                                         echo '<li>';
                                                                             // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
-                                                                                echo '<button type="button" class="btn btn-default btn-lg">';
+                                                                                echo '<button type="button" class="btn btn-default btn-lg btn-download">';
                                                                                     echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
                                                                                         echo '<span class="glyphicon glyphicon-download"></span>';
                                                                                     echo '</a>';
