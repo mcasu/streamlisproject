@@ -407,8 +407,10 @@ try
                                                                                 echo "<label>Guarda il video con <br/>Tablet o Smartphone</label>";
                                                                                 echo '<br/>';
                                                                                 echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
-                                                                            echo '</div>';
-                                                                            
+                                                                            echo '</div>';                                                                           
+                                                                        echo '</li>';
+                                                                        
+                                                                        echo '<li>';
                                                                             // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
                                                                                 echo '<button type="button" class="btn btn-default btn-lg">';
@@ -420,6 +422,7 @@ try
                                                                                 echo "<label>Scarica il video</label>";
                                                                             echo '</div>';
                                                                         echo '</li>';
+                                                                        
                                                                     echo '</ul>';
                                                                 echo '</div>';
                                                                 
