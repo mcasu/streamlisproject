@@ -172,34 +172,6 @@ h2.toggle a:hover {
     color: #3c78c3; /*#3ed0d2;*/
 }
 
-/*
-a img.group_logo {
-  margin: 6px 0 0 0;
-  height: 30px;
-  width: 32px;
-  vertical-align: middle;
-}
-
-h2.trigger
-{
-  background:url(../images/togglebar_azure.png) left top no-repeat;
-}
-h2.active
-{
-  background:url(../images/togglebar_azure.png) left bottom no-repeat;
-}
-
-div.toggle_container {
-    margin: 0 0 4px 0;
-    padding: 2px 0 0 0;
-    background: #ffffff;
-    border-top: 0px solid #d6d6d6;
-    font-size: 1.2em;
-    width: 1400px;
-    height: 100%;
-    overflow: auto;
-}*/
-
 li.video_list_element 
 {
   min-width: 1024px;
@@ -273,6 +245,7 @@ ul.video_element li
   display: inline-block;
   float: none;
   vertical-align: middle;
+  text-align: center;
   //font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   overflow: auto;
@@ -298,6 +271,7 @@ li div.video_info
   margin-right: 30px;
   margin-left: 6px;
   font-size: 0.9em;
+  text-align: left;
   //color: #000;
 }
 
