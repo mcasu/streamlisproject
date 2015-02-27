@@ -46,14 +46,14 @@ $file_path = filter_input(INPUT_GET, 'file_path');
 // the quotation of the filename in the content-disposition is according to the RFC
 // http://kb.mozillazine.org/Filenames_with_spaces_are_truncated_upon_download
 header('Content-disposition: attachment; filename="'.basename($file_path).'"');
-header('Content-Type: application/octet-stream');
+//header('Content-Type: application/octet-stream');
 header("Content-Length: " . filesize($file_path));
 header('Content-Transfer-Encoding: chunked'); //changed to chunked
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 //header("Content-Type: application/force-download");
 //header("Content-Type: application/download");
-//header('Content-type: video/mp4');
+header('Content-type: video/mp4');
 
 
 set_time_limit(0);
