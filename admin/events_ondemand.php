@@ -41,7 +41,7 @@ $(document).ready(function()
         alert("TARGET ID: " + e.target.id + " TARGET CLASS: " + $(e.target).attr("class"));
         if (e.target.id === "video_checkbox" 
                 || $(e.target).attr("class") === "video_imgdevice"
-                || $(e.target).attr("class").indexOf("btn-download") >= 0)
+                || $(e.target).attr("class").indexOf("event_ondemand_download") >= 0)
         {
             return true;
         }
@@ -415,14 +415,9 @@ try
                                                                         echo '<li>';
                                                                             // DOWNLOAD BUTTON
                                                                             echo '<div class="video_download">';
-                                                                                //echo '<button type="button" class="btn btn-default btn-lg btn-download">';
-                                                                                    echo '<a class="event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
-                                                                                        echo '<span class="glyphicon glyphicon-download">';
-                                                                                            echo '<button type="button" class="btn btn-default btn-lg btn-download">';
-                                                                                            echo '</button>';
-                                                                                        echo '</span>';
+                                                                                    echo '<a role="button" class="btn btn-default btn-lg event_ondemand_download" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank" download>';
+                                                                                        echo '<span class="glyphicon glyphicon-download"></span>';
                                                                                     echo '</a>';
-                                                                                //echo '</button>';
                                                                                 echo '<br/>';
                                                                                 echo "<label>Scarica il video</label>";
                                                                             echo '</div>';
