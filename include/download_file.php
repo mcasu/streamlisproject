@@ -17,12 +17,12 @@ header('Content-type: video/mp4');
 header("Content-Length: " . filesize($file_url));
 
 
-$fp = fopen($file_url, "r"); 
-while (!feof($fp))
-{
-    echo fread($fp, 65536); 
-    flush(); // this is essential for large downloads
-}  
-fclose($fp);
+//$fp = fopen($file_url, "r"); 
+//while (!feof($fp))
+//{
+//    echo fread($fp, 65536); 
+//    flush(); // this is essential for large downloads
+//}  
+//fclose($fp);
 
-//readfile($file_url);
+readfile($file_url);
