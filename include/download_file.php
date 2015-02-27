@@ -7,7 +7,7 @@
  */
 
 ini_set("allow_url_fopen", true);
-define("CHUNK_SIZE", 1024*1024); // Size (in bytes) of tiles chunk
+define("CHUNK_SIZE", 1024*8); // Size (in bytes) of tiles chunk
 
 // Read a file and display its content chunk by chunk
 function readfile_chunked($filename, $retbytes = TRUE) 
