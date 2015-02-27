@@ -246,6 +246,18 @@ try
 						    echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
 						echo '</div>';
 					    echo '</li>';
+                                            
+                                            echo '<li>';
+                                                // DOWNLOAD BUTTON
+                                                echo '<div class="video_download">';
+                                                        echo '<a role="button" class="btn btn-primary btn-lg event_ondemand_download" href="../include/download_file.php?file_path='.$ondemand_mp4_record_filepath.$ondemand_mp4_filename.'" target="_blank" download>';
+                                                            echo '<span class="glyphicon glyphicon-download"></span>';
+                                                        echo '</a>';
+                                                    echo '<br/>';
+                                                    echo "<label>Scarica il video</label>";
+                                                echo '</div>';
+                                            echo '</li>';
+                                                                        
 				    echo '</ul>';
 				
 				echo '</li>';
