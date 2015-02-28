@@ -44,6 +44,8 @@ $file_path = filter_input(INPUT_GET, 'file_path');
 if (!file_exists($file_path))
 {
     header("HTTP/1.0 404 Not Found");
+    // Set our response code
+    http_response_code(404);
     return;
 }
 
