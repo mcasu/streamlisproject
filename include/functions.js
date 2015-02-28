@@ -1,6 +1,7 @@
 (function($){
   
-OndemandMp4Loading = function() {
+OndemandMp4Loading = function() 
+{
   //var root = $("div.panel-group").find('div.panel-collapse');
   var root = $("div.panel-group");
   //alert("Ciao pippo");

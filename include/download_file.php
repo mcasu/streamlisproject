@@ -41,6 +41,12 @@ function readfile_chunked($filename, $retbytes = TRUE)
   
 $file_path = filter_input(INPUT_GET, 'file_path');
 
+if (!file_exists($file_path))
+{
+    header("HTTP/1.0 404 Not Found");
+    return;
+}
+
 // The correct way to set the filename is quoting it (double quote):
 // Some browsers may work without quotation, but for sure not Firefox and as Mozilla explains, 
 // the quotation of the filename in the content-disposition is according to the RFC
@@ -52,7 +58,6 @@ header('Content-Transfer-Encoding: chunked'); //changed to chunked
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 header('Content-type: video/mp4');
-
 
 set_time_limit(0);
 $file = fopen($file_path,"rb");
