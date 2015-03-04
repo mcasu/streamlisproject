@@ -694,9 +694,9 @@ class DBActions
                 $select_where = 'WHERE users.user_logged = 1 ';
                 if (!empty($publisher_id))
                 {
-                    $where_add = ' AND users.user_group_id in('.
+                    $where_add = ' AND (users.user_group_id in('.
                             'select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
-                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) ';
+                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) or users.user_group_id = \''.$publisher_id.'\') ';
                     
                     $select_where .= $where_add;
                 }

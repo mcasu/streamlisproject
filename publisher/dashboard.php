@@ -49,11 +49,12 @@
 <?php
 try
 {
-        if (!$dbactions->GetUserLoggedByLoginTime($mainactions->UserGroupId()))
-        {
-            error_log("ERROR GetUserLoggetByLoginTime() FAILED! - GROUP_ID->[".$mainactions->UserGroupId()."] - ".$dbactions->GetErrorMessage());
-            exit;
-        }
+    $result = $dbactions->GetUserLoggedByLoginTime($mainactions->UserGroupId());
+    if (!$result)
+    {
+        error_log("ERROR GetUserLoggetByLoginTime() FAILED! - GROUP_ID->[".$mainactions->UserGroupId()."] - ".$dbactions->GetErrorMessage());
+        exit;
+    }
         
 	$users_logged_number = mysql_num_rows($result);
 
