@@ -4,31 +4,39 @@ require_once("./include/config.php");
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
+$user_looged = FALSE;
+
 if(isset($_POST['submitted']))
 {
-   $UserLogged = $mainactions->Login();
-   if($UserLogged)
-   {      
-	$user_role = $mainactions->GetSessionUserRole();	
-	if (!empty($user_role))
-        {
-            switch ($user_role) 
-            {
-                case "1": // admin
-                    $utils->RedirectToURL("admin/dashboard.php");
-                    break;
-                case "2": // normal
-                    $utils->RedirectToURL("viewer/live-normal.php");
-                    break;
-                case "3": // publisher
-                    $utils->RedirectToURL("publisher/dashboard.php");
-                    break;
-                default:
-                    break;
-            }
-        }
-   }
-}																									
+   $user_looged = $mainactions->Login();
+}
+else
+{
+    $user_looged = $mainactions->CheckLogin();
+}
+
+if($user_looged)
+{      
+     $user_role = $mainactions->GetSessionUserRole();	
+     if (!empty($user_role))
+     {
+         switch ($user_role) 
+         {
+             case "1": // admin
+                 $utils->RedirectToURL("admin/dashboard.php");
+                 break;
+             case "2": // normal
+                 $utils->RedirectToURL("viewer/live-normal.php");
+                 break;
+             case "3": // publisher
+                 $utils->RedirectToURL("publisher/dashboard.php");
+                 break;
+             default:
+                 break;
+         }
+     }
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-IT" lang="it-IT">

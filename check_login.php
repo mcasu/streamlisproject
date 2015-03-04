@@ -7,7 +7,6 @@ $dbactions = $mainactions->GetDBActionsInstance();
 if(!$mainactions->CheckLogin())
 {
     $utils->RedirectToURL("/login.php");
-    exit;
 }
 
 //$user_role = $mainactions->GetSessionUserRole();

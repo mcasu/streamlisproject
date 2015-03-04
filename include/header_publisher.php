@@ -33,25 +33,13 @@
                 </li>
 
                 <li class='dropdown'>
-                   <a href='#' class="dropdown-toggle" data-toggle="dropdown">
-                      <img src="../images/monitor.png" height="32" width="32">
-                      Monitor <span class="caret"></span>
-
-                   </a>
-                   <ul class="dropdown-menu" role="menu">
-                      <li><a href='stats.php'>Statistiche Nginx</a></li>
-                      <li><a href='graphs.php'>Grafici</a></li>
-                   </ul>
-                </li>
-
-                <li class='dropdown'>
                    <a href='groups.php' class="dropdown-toggle" data-toggle="dropdown">
                       <img src="../images/group.png" height="32" width="32">
                       Congregazioni <span class="caret"></span>
                    </a>
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='groups.php'><span>Visualizza congregazioni</span></a></li>
-                      <li><a href='group_add.php'><span>Aggiungi congregazione</span></a></li>
+                      <!--<li><a href='group_add.php'><span>Aggiungi congregazione</span></a></li>-->
                    </ul>
                 </li>
 
@@ -62,15 +50,8 @@
                    </a>
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='users.php'><span>Visualizza utenti</span></a></li>
-                      <li><a href='user_add.php'><span>Aggiungi utente</span></a></li>
+                      <!--<li><a href='user_add.php'><span>Aggiungi utente</span></a></li>-->
                    </ul>
-                </li>
-
-                <li>
-                   <a href='links_manage.php'>
-                      <img src="../images/link.png" height="32" width="32">
-                      Relazioni
-                   </a>
                 </li>
 
                 <li class='dropdown pull-right'>
