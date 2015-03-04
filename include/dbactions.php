@@ -734,19 +734,21 @@ class DBActions
                 $select_query = 'SELECT user_role_id, '.
                                 'user_roles.role_name as role_name, '.
                                 'count(*) as user_number '.
-                        'FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id GROUP BY user_role_id ';   
+                        'FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id ';   
 
                 $select_where = '';
                 if (!empty($publisher_id))
                 {
                     $where_add = 'WHERE users.user_group_id in('.
                             'select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
-                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) ';
+                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) or users.user_group_id = \''.$publisher_id.'\' ';
                     
                     $select_where .= $where_add;
                 }
                 
-                $select_total = $select_query . $select_where;
+                $select_groupby = 'GROUP BY user_role_id';
+                
+                $select_total = $select_query . $select_where . $select_groupby;
                 
                 $result = mysql_query($select_total ,$this->connection);
                 if(!$result)
