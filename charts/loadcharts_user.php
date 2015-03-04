@@ -36,7 +36,7 @@
                     name: 'Numero di utenti',
                     data: []
                 }]
-            }
+            };
             
             var options_user_logged_bylogintime = {
                 chart: {
@@ -83,7 +83,7 @@
                     borderWidth: 0
                 },
                 series: []
-            }
+            };
             
             <?php echo json_encode($_GET); ?>
             
