@@ -47,16 +47,10 @@
 
 
 <?php
-    try
-    {
+try
+{
         $result = $dbactions->GetUserLoggedByLoginTime($mainactions->UserGroupId());
 
-        if (!$result)
-        {
-                error_log("No Results");
-		exit;
-        }
-	
 	$users_logged_number = mysql_num_rows($result);
 
 echo '<div class="container-fluid">';
@@ -132,11 +126,11 @@ echo '<div class="container-fluid">';
     echo '</div>';
 echo '</div>';
     
-    }
-    catch(PDOException $e)
-    {
-        echo 'No Results';
-    }
+}
+catch(Exception $e)
+{
+    error_log('ERROR - Publisher dashboard.php - No Results - '.$e->getMessage());
+}
 ?>
 
 </body>
