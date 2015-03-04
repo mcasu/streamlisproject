@@ -85,7 +85,7 @@
                 series: []
             }
             
-            //var $_GET = <?php echo json_encode($_GET); ?>;
+            <?php echo json_encode($_GET); ?>
             
 	    $.getJSON("/charts/load_chart_data.php?type=user_numberbyrole&publisher_id=<?=filter_input(INPUT_GET, 'publisher_id')?>", function(json)
 	    {
