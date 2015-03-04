@@ -33,7 +33,7 @@
 	    var auto_refresh = setInterval(AutoRefresh, 60000);
 	    
 	    
-	    $('#dashboard_user_charts').load('/charts/loadcharts_user.php?publisher_id=<?= $mainactions->UserGroupId(); ?>');
+	    $('#dashboard_user_charts').load("/charts/loadcharts_user.php?publisher_id=<?= $mainactions->UserGroupId(); ?>");
 	    
 	});
     </script>
