@@ -87,13 +87,17 @@
             
             <?php echo json_encode($_GET); ?>
             
-	    $.getJSON("/charts/load_chart_data.php?type=user_numberbyrole&publisher_id=<?=filter_input(INPUT_GET, 'publisher_id')?>", function(json)
+	    $.getJSON("/charts/load_chart_data.php?type=user_numberbyrole", 
+            { publisher_id: <?=filter_input(INPUT_GET, 'publisher_id')?>}, 
+            function(json)
 	    {
 		options_user_numberbyrole.series[0].data = json;
 		chart_user_numberbyrole = new Highcharts.Chart(options_user_numberbyrole);
 	    });
 
-	    $.getJSON("/charts/load_chart_data.php?type=user_logged_bylogintime&publisher_id=<?=filter_input(INPUT_GET, 'publisher_id')?>", function(json)
+	    $.getJSON("/charts/load_chart_data.php?type=user_logged_bylogintime",
+            { publisher_id: <?=filter_input(INPUT_GET, 'publisher_id')?>}, 
+            function(json)
 	    {
 		options_user_logged_bylogintime.xAxis.categories = json[0]['data'];
 		options_user_logged_bylogintime.series[0] = json[1];
