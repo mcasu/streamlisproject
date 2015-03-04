@@ -73,7 +73,7 @@ $(document).ready(function()
 
 
 <body>
-<?php include("../include/header.php"); ?>
+<?php include("../include/header_publisher.php"); ?>
 
 <br/>
 

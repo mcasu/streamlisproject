@@ -20,7 +20,7 @@
 
 <body>
 
-<?php include("../include/header.php"); ?>
+<?php include("../include/header_publisher.php"); ?>
 
     <script type="text/javascript">
 	$(document).ready(function()

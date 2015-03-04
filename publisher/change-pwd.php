@@ -22,7 +22,7 @@
 
 <?php
 
-include("../include/header.php");
+include("../include/header_publisher.php");
    
 if(isset($_POST['submitted']))
 {

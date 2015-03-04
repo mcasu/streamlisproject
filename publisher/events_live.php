@@ -60,7 +60,7 @@ $(document).ready(function()
 
 
 <body>
-<?php include("../include/header.php"); ?>
+<?php include("../include/header_publisher.php"); ?>
 <br/>
 
 <h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
