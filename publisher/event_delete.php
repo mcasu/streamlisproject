@@ -1,4 +1,4 @@
-<?php include("/check_login.php"); ?>
+<?php include("../check_login.php"); ?>
 
 <?PHP
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
