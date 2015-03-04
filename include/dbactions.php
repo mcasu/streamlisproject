@@ -707,6 +707,7 @@ class DBActions
                 
                 $select_total = $select_query . $select_where . $select_orderby;
                 
+                error_log("INFO - quwry->[".$select_total."]");
                 $result = mysql_query($select_total ,$this->connection);
                 if(!$result)
                 {
