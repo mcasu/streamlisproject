@@ -7,18 +7,19 @@ if (!isset($_GET["type"]))
     exit;
 }
 
-$type = $_GET['type'];
+$type = filter_input(INPUT_GET, 'type');
+$publisher_id = filter_input(INPUT_GET, 'publisher_id');
 
 $dbactions = $mainactions->GetDBActionsInstance();
 
 switch ($type)
 {
     case "user_numberbyrole":
-	$rows = GraphDataUserNumberByRole($dbactions);
+	$rows = GraphDataUserNumberByRole($dbactions, empty($publisher_id) ? NULL : $publisher_id);
 	print json_encode($rows, JSON_NUMERIC_CHECK);
 	break;
     case "user_logged_bylogintime":
-	$rows = GraphDataUserLoggedByLoginTime($dbactions);
+	$rows = GraphDataUserLoggedByLoginTime($dbactions, empty($publisher_id) ? NULL : $publisher_id);
 	print json_encode($rows, JSON_NUMERIC_CHECK);
 	break;
     case "event_ondemand_numberbypublisher":
@@ -31,9 +32,9 @@ switch ($type)
 /* FUNZIONI GRAFICI UTENTI */
 /***************************/
 
-function GraphDataUserNumberByRole($dbactions)
+function GraphDataUserNumberByRole($dbactions, $publisher_id)
 {
-    $result = $dbactions->GetUserNumbersByRole();
+    $result = $dbactions->GetUserNumbersByRole($publisher_id);
     
     if ($result)
     {
@@ -51,9 +52,9 @@ function GraphDataUserNumberByRole($dbactions)
     }
 }
 
-function GraphDataUserLoggedByLoginTime($dbactions)
+function GraphDataUserLoggedByLoginTime($dbactions, $publisher_id)
 {
-    $result = $dbactions->GetUserLoggedByLoginTime();
+    $result = $dbactions->GetUserLoggedByLoginTime($publisher_id);
     
     if ($result)
     {

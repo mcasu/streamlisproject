@@ -663,7 +663,7 @@ class DBActions
                 return $result;
         }
 
-	function GetUserLoggedByLoginTime()
+	function GetUserLoggedByLoginTime($publisher_id = NULL)
 	{
 		$this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
@@ -678,21 +678,45 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'SELECT users.username, users.last_login, user_roles.role_name as role_name '.
+                $select_query = 'SELECT users.id_user as user_id, '.
+                                'users.name, '.
+                                'users.email, '.
+                                'users.username, '.
+                                'users.confirmcode, '.
+                                'groups.group_name, '.
+                                'user_roles.role_name as role_name, '.
+                                'users.last_login, '.
+                                'users.last_update, '.
+                                'users.user_logged '.
 		'FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id '.
-		'WHERE users.user_logged = 1 '.
-		'ORDER BY users.last_login';   
+                'INNER JOIN groups ON users.user_group_id = groups.group_id ';
+                
+                $select_where = 'WHERE users.user_logged = 1 ';
+                if (!empty($publisher_id))
+                {
+                    $where_add = ' AND users.user_group_id in('.
+                            'select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
+                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) ';
+                    
+                    $select_where .= $where_add;
+                }
+                
+                
+                $select_orderby = 'ORDER BY users.last_login';
 
-                $result = mysql_query($select_query ,$this->connection);
+                
+                $select_total = $select_query . $select_where . $select_orderby;
+                
+                $result = mysql_query($select_total ,$this->connection);
                 if(!$result)
                 {
-                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_total");
                     return false;
                 }
                 return $result;
 	}
 	
-	function GetUserNumbersByRole()
+	function GetUserNumbersByRole($publisher_id = NULL)
         {
                 $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
@@ -707,12 +731,27 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'SELECT user_role_id, user_roles.role_name as role_name, count(*) as user_number FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id GROUP BY user_role_id';   
+                $select_query = 'SELECT user_role_id, '.
+                                'user_roles.role_name as role_name, '.
+                                'count(*) as user_number '.
+                        'FROM users INNER JOIN user_roles ON users.user_role_id = user_roles.role_id GROUP BY user_role_id ';   
 
-                $result = mysql_query($select_query ,$this->connection);
+                $select_where = '';
+                if (!empty($publisher_id))
+                {
+                    $where_add = 'WHERE users.user_group_id in('.
+                            'select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
+                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) ';
+                    
+                    $select_where .= $where_add;
+                }
+                
+                $select_total = $select_query . $select_where;
+                
+                $result = mysql_query($select_total ,$this->connection);
                 if(!$result)
                 {
-                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_total");
                     return false;
                 }
                 return $result;

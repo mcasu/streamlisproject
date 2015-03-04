@@ -10,14 +10,23 @@ if(isset($_POST['submitted']))
    if($UserLogged)
    {      
 	$user_role = $mainactions->GetSessionUserRole();	
-	if ($user_role && $user_role=="1")
-	{
-        	$utils->RedirectToURL("admin/dashboard.php");
-	}
-	else
-	{
-        	$utils->RedirectToURL("viewer/live-normal.php");
-	}
+	if (!empty($user_role))
+        {
+            switch ($user_role) 
+            {
+                case "1": // admin
+                    $utils->RedirectToURL("admin/dashboard.php");
+                    break;
+                case "2": // normal
+                    $utils->RedirectToURL("viewer/live-normal.php");
+                    break;
+                case "3": // publisher
+                    $utils->RedirectToURL("publisher/dashboard.php");
+                    break;
+                default:
+                    break;
+            }
+        }
    }
 }																									
 ?>
