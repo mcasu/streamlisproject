@@ -88,7 +88,7 @@
             <?php echo json_encode($_GET); ?>
             
 	    $.getJSON("/charts/load_chart_data.php?type=user_numberbyrole", 
-            { publisher_id: <?php echo json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
+            { publisher_id: <?php json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
             function(json)
 	    {
 		options_user_numberbyrole.series[0].data = json;
@@ -96,7 +96,7 @@
 	    });
 
 	    $.getJSON("/charts/load_chart_data.php?type=user_logged_bylogintime",
-            { publisher_id: <?php echo json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
+            { publisher_id: <?php json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
             function(json)
 	    {
 		options_user_logged_bylogintime.xAxis.categories = json[0]['data'];
