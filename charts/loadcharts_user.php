@@ -85,10 +85,10 @@
                 series: []
             }
             
-            <?php echo json_encode($_GET); ?>
+             // echo json_encode($_GET);
             
 	    $.getJSON("/charts/load_chart_data.php?type=user_numberbyrole", 
-            { publisher_id: <?php json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
+            { <?php echo json_encode(filter_input(INPUT_GET, 'publisher_id')); ?>}, 
             function(json)
 	    {
 		options_user_numberbyrole.series[0].data = json;
