@@ -259,6 +259,26 @@ class DBActions
 	return $row['group_id'];
     }
     
+    function GetPublishCodeByGroupId($group_id)
+    {
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+	$select_query = 'select publish_code from groups where group_id =\'' . $group_id . '\'';
+
+        $result = mysql_query($select_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+	return $row['publish_code'];
+    }
+    
     function GetGroupNameByPublishCode($publish_code)
     {
 	if(!$this->DBLogin())
@@ -741,7 +761,7 @@ class DBActions
                 {
                     $where_add = 'WHERE users.user_group_id in('.
                             'select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
-                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) or users.user_group_id = \''.$publisher_id.'\' ';
+                            'where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_id) or users.user_group_id = \''.$publisher_id.'\'';
                     
                     $select_where .= $where_add;
                 }

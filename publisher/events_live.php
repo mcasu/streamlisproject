@@ -73,175 +73,140 @@ $(document).ready(function()
 
 try
 {
-        $result = $dbactions->GetGroups();
-
-        if (!$result)
-        {
-                error_log("No Results");
-        }
-
-        $count=0;
-        $group_array=Array();
-        while($row = mysql_fetch_array($result))
-        {
-                $group_id=$row['group_id'];
-                $group_name=$row['group_name'];
-                $group_type=$row['group_type'];
-                $group_role_name=$row['group_role_name'];
-		$group_publish_code=$row['publish_code'];
-
-                $group_array[$group_id]=Array();
-                $group_array[$group_id]['group_id']=$row['group_id'];
-                $group_array[$group_id]['group_name']=$row['group_name'];
-                $group_array[$group_id]['group_type']=$row['group_type'];
-                $group_array[$group_id]['group_role_name']=$row['group_role_name'];
-		$group_array[$group_id]['publish_code']=$row['publish_code'];
-
-                $count++;
-        }
-
     echo '<div class="container-fluid">';
     echo '<div class="panel-group" id="accordionMain">';
 
     echo '<input type="hidden" class="players_counter_info"/>';
     
-        foreach ($group_array AS $id => $row)
-        {
-                $group_id=$row['group_id'];
-                $group_name=$row['group_name'];
-                $group_type=$row['group_type'];
-                $group_role_name=$row['group_role_name'];
-		$group_publish_code=$row['publish_code'];
-
-		if ($group_role_name=="publisher")
-		{
-		    $live_events = $dbactions->GetLiveEventsByPublisher($group_publish_code);
-		    $live_events_number = mysql_num_rows($live_events);
-		    
-			echo '<div class="panel panel-primary">'.
-			    /*** PANEL HEADING ***/
-			    '<div class="panel-heading">'.
-				'<a data-toggle="collapse" data-parent="#accordionMain" href="#accordionLive_'.$group_id.'">'.
-				    '<h3 class="panel-title">'.
-					'<span class="glyphicon glyphicon-chevron-left pull-left"></span>'.
-					'<span><img src="../images/group.png" height="34" width="32"></span>'.
-					'<span> <b>'.$group_name.'</b> </span>  '.
-					'<span class="badge">'. $live_events_number .'</span>'.
-					'<span class="glyphicon glyphicon-chevron-right pull-right"></span>'.
-				    '</h3>'.
-				'</a>'.
-			    '</div>';
-		    
-			/*** PANEL BODY ***/
-			echo '<div id="accordionLive_'.$group_id.'" class="panel-collapse collapse">';
-			echo '<div class="panel-body">';
-			
-                            echo '<div class="container-fluid" style="overflow:auto">';
-                            if (!$live_events || $live_events_number<1)
-                            {
-                                echo '<div style="margin: 0 0 0 10px">Nessun evento live disponibile per questa congregazione.</div>';
-                            }
-                            else
-                            {
-                                while($row = mysql_fetch_array($live_events))
-                                {
-                                    $live_id=$row['live_id'];
-                                    $app_name=$row['app_name'];
-                                    $stream_name=$row['stream_name'];
-                                    $live_date=$row['live_date'];
-                                    $live_time=$row['live_time'];
-                                    $client_addr=$row['client_addr'];
-                                    $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
-
-                                    $thumbnail_img = "../images/video_thumbnail.png";
-
-                                    echo '<div class="video_element_title">';
-                                        $live_date_day = strftime("%u", strtotime($row['live_date']));
-                                        if ( ($live_date_day) && ($live_date_day > 5))
-                                        {
-                                            echo '<h4><b>ADUNANZA PUBBLICA - '.$live_date_formatted. '</b></h4>';    
-                                        }
-                                        elseif (($live_date_day) && ($live_date_day <= 5))
-                                        {
-                                            echo '<h4><b>ADUNANZA DI SERVIZIO - '.$live_date_formatted. '</b></h4>';
-                                        }
-                                    echo '</div>';
-
-                                    echo '<div class="row video_list_element">';
-                                    
-                                        // VIDEO THUMBNAIL + INFO + BUTTONS
-                                        echo '<div class="col-md-10 div-video-align">';
-                                            echo '<ul class="video_element" id='.$stream_name.'>';   
-                                                echo '<li>';
-                                                    echo '<div class="video_thumb">';
-                                                        echo '<img src="'.$thumbnail_img.'"/>';
-                                                    echo '</div>';
-                                                echo '</li>';
-
-                                                echo '<li>';
-                                                    echo '<div class="video_info">';
-                                                        echo '<b>Path: </b>'.$app_name.'/'.$stream_name;
-                                                        echo '<br/>';
-                                                        echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
-                                                        echo '<br/>';
-                                                        echo '<b>Pubblicato da: </b>'.$client_addr;
-                                                    echo '</div>';
-                                                echo '</li>';
-
-                                                echo '<li>';
-                                                        echo '<div class="player_desktop">';
-                                                            echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
-                                                            echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>PC Desktop</label>";
-                                                        echo '</div>';
-                                                    echo '</li>';
-
-                                                    echo '<li>';    
-                                                        echo '<div class="player_smartphone">';
-                                                            echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
-                                                            echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>device Android</label>";
-                                                        echo '</div>';
-                                                    echo '</li>';
-
-                                                    echo '<li>';    
-                                                        echo '<div class="player_iphone">';
-                                                            echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
-                                                            echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>device Apple</label>";
-                                                        echo '</div>';
-                                                echo '</li>';
-                                            echo '</ul>';	
-                                        echo '</div>';
-                                        
-                                        // STATUS BUTTON
-                                        echo '<div class="col-md-2 div-btn-status-align">';
-                                            echo '<button type="button" class="btn btn-primary players_counter_refresh">Aggiorna</button><br/>';
-                                            echo '<label style="margin-top:2px;">Utenti che stanno guardando <br/>questa adunanza:</label><br/>';
-                                            echo '<span class="badge players_counter"/>';
-                                        echo '</div>';
-                                                                
-                                    echo '</div>';
-                                }
-                            }
-                            echo '</div>';
-			echo '</div>';
-			echo '</div>';
-		    echo '</div>';
-		}
-        }
-	
-    echo '</div>';
-    echo '</div>';
     
-    }
-    catch(Exception $e)
-    {
-        echo 'No Results';
-    }
+    $publish_code = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
+    $live_events = $dbactions->GetLiveEventsByPublisher($publish_code);
+    $live_events_number = mysql_num_rows($live_events);
+
+    echo '<div class="panel panel-primary">'.
+        /*** PANEL HEADING ***/
+        '<div class="panel-heading">'.
+            '<a data-toggle="collapse" data-parent="#accordionMain" href="#accordionLive_'.$mainactions->UserGroupId().'">'.
+                '<h3 class="panel-title">'.
+                    '<span class="glyphicon glyphicon-chevron-left pull-left"></span>'.
+                    '<span><img src="../images/group.png" height="34" width="32"></span>'.
+                    '<span> <b>'.$mainactions->UserGroupName().'</b> </span>  '.
+                    '<span class="badge">'. $live_events_number .'</span>'.
+                    '<span class="glyphicon glyphicon-chevron-right pull-right"></span>'.
+                '</h3>'.
+            '</a>'.
+        '</div>';
+
+    /*** PANEL BODY ***/
+    echo '<div id="accordionLive_'.$mainactions->UserGroupId().'" class="panel-collapse collapse">';
+    echo '<div class="panel-body">';
+
+        echo '<div class="container-fluid" style="overflow:auto">';
+        if (!$live_events || $live_events_number < 1)
+        {
+            echo '<div style="margin: 0 0 0 10px">Nessun evento live disponibile per questa congregazione.</div>';
+        }
+        else
+        {
+            while($row = mysql_fetch_array($live_events))
+            {
+                $live_id=$row['live_id'];
+                $app_name=$row['app_name'];
+                $stream_name=$row['stream_name'];
+                $live_date=$row['live_date'];
+                $live_time=$row['live_time'];
+                $client_addr=$row['client_addr'];
+                $live_date_formatted = strftime("%A %d %B %Y", strtotime($row['live_date']));
+
+                $thumbnail_img = "../images/video_thumbnail.png";
+
+                echo '<div class="video_element_title">';
+                    $live_date_day = strftime("%u", strtotime($row['live_date']));
+                    if ( ($live_date_day) && ($live_date_day > 5))
+                    {
+                        echo '<h4><b>ADUNANZA PUBBLICA - '.$live_date_formatted. '</b></h4>';    
+                    }
+                    elseif (($live_date_day) && ($live_date_day <= 5))
+                    {
+                        echo '<h4><b>ADUNANZA DI SERVIZIO - '.$live_date_formatted. '</b></h4>';
+                    }
+                echo '</div>';
+
+                echo '<div class="row video_list_element">';
+
+                    // VIDEO THUMBNAIL + INFO + BUTTONS
+                    echo '<div class="col-md-10 div-video-align">';
+                        echo '<ul class="video_element" id='.$stream_name.'>';   
+                            echo '<li>';
+                                echo '<div class="video_thumb">';
+                                    echo '<img src="'.$thumbnail_img.'"/>';
+                                echo '</div>';
+                            echo '</li>';
+
+                            echo '<li>';
+                                echo '<div class="video_info">';
+                                    echo '<b>Path: </b>'.$app_name.'/'.$stream_name;
+                                    echo '<br/>';
+                                    echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
+                                    echo '<br/>';
+                                    echo '<b>Pubblicato da: </b>'.$client_addr;
+                                echo '</div>';
+                            echo '</li>';
+
+                            echo '<li>';
+                                    echo '<div class="player_desktop">';
+                                        echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+                                        '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
+                                        echo '<br/>';
+                                        echo "<label>Guarda il video con <br/>PC Desktop</label>";
+                                    echo '</div>';
+                                echo '</li>';
+
+                                echo '<li>';    
+                                    echo '<div class="player_smartphone">';
+                                        echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+                                        '<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
+                                        echo '<br/>';
+                                        echo "<label>Guarda il video con <br/>device Android</label>";
+                                    echo '</div>';
+                                echo '</li>';
+
+                                echo '<li>';    
+                                    echo '<div class="player_iphone">';
+                                        echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+                                        '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
+                                        echo '<br/>';
+                                        echo "<label>Guarda il video con <br/>device Apple</label>";
+                                    echo '</div>';
+                            echo '</li>';
+                        echo '</ul>';	
+                    echo '</div>';
+
+                    // STATUS BUTTON
+                    echo '<div class="col-md-2 div-btn-status-align">';
+                        echo '<button type="button" class="btn btn-primary players_counter_refresh">Aggiorna</button><br/>';
+                        echo '<label style="margin-top:2px;">Utenti che stanno guardando <br/>questa adunanza:</label><br/>';
+                        echo '<span class="badge players_counter"/>';
+                    echo '</div>';
+
+                echo '</div>';
+            }
+        }
+        echo '</div>';
+    echo '</div>';
+    echo '</div>';
+echo '</div>';
+		
+        
+	
+echo '</div>';
+echo '</div>';
+
+}
+catch(Exception $e)
+{
+    error_log('ERROR - Publisher events_live.php - '.$e->getMessage());
+}
 
 ?>
 
