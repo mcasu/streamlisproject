@@ -1009,17 +1009,17 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select group_links.viewer_id, '.
-                        'groups.group_name as viewer_name '.
+                $select_query = 'SELECT group_links.viewer_id, '.
+                        'groups.group_name as viewer_name, '.
                         'groups.group_type, '.
                         'group_roles.role_name, '.
-                        'groups.publish_code'.
-                        'from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
+                        'groups.publish_code '.
+                        'FROM group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
                         'INNER JOIN group_roles ON groups.group_role = group_roles.role_id ';
                         
-                $select_where = 'where group_links.publisher_id = \''.$publisher_id.'\' ';
+                $select_where = 'WHERE group_links.publisher_id = \''.$publisher_id.'\' ';
                 
-                $select_orderby = 'order by viewer_name';
+                $select_orderby = 'ORDER BY viewer_name';
                 
                 $select_total = $select_query . $select_where . $select_orderby;
                 
