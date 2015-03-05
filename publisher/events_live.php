@@ -67,7 +67,7 @@ $(document).ready(function()
 <p><h4 style="margin-left:4px;"> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <h2>ELENCO EVENTI LIVE:</h2>
-
+<br/>
 
 <?php 
 

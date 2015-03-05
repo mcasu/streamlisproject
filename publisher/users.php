@@ -80,6 +80,9 @@ $(document).ready(function()
 <h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
 <p><h4 style="margin-left:4px;">La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
+<h2>ELENCO UTENTI ASSOCIATI:</h2>
+<br/>
+
 <div class="container-fluid">
     <div class="panel panel-default">
 
@@ -92,7 +95,9 @@ $(document).ready(function()
 
             <?php
 
-                $result = $dbactions->GetUsers();
+            try
+            {
+                $result = $dbactions->GetUsersByPublisher($mainactions->UserGroupId());
 
                 if ($result)
                 {
@@ -103,12 +108,12 @@ $(document).ready(function()
 
                     while ($row = mysql_fetch_array($result))
                     {
-                        $values[0]=$row['user_name'];
+                        $values[0]=$row['name'];
                         $values[1]=$row['user_id'];
-                        $values[2]=$row['user_mail'];
+                        $values[2]=$row['email'];
                         $values[3]=$row['username'];
-                        $values[4]=$row['user_group_name'];
-                        $values[5]=$row['user_role_name'];
+                        $values[4]=$row['group_name'];
+                        $values[5]=$row['role_name'];
                         $values[6]=$row['confirmcode']=="y"?"SI":"NO";
 
                         echo '<tr class="users_table" id="' .$values[1].'">';
@@ -122,9 +127,13 @@ $(document).ready(function()
                                     echo '<td>' . $values[6] . '</td>';
                         echo '</tr>';
                     }
-
                 }
-
+                
+            }
+            catch (Exception $e) 
+            {
+                error_log('ERROR - Publisher users.php - '.$e->getMessage());
+            }
             ?>
             </table>
         </div>
