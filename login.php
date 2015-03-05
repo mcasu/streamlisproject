@@ -5,10 +5,12 @@ $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
 $user_logged = FALSE;
+$is_submit = FALSE;
 
 if(isset($_POST['submitted']))
 {
-   $user_logged = $mainactions->Login();
+    $is_submit = TRUE;
+    $user_logged = $mainactions->Login();
 }
 else
 {
@@ -72,7 +74,7 @@ if($user_logged)
 		   <br/>
 		   
 		   <?php
-		      if (isset($user_logged) && $user_logged == false)
+		      if ($is_submit == TRUE && isset($user_logged) && $user_logged == false)
 		      {
 			 echo '<div class="alert alert-danger alert-dismissible" role="alert">';
 			    echo '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;';
