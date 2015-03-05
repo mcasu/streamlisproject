@@ -97,7 +97,7 @@ $(document).ready(function()
 
                 if (!$viewers)
                 {
-                    error_log("ERROR Publisher groups.php - ".$dbactions->getMessage());
+                    error_log("ERROR Publisher groups.php - ".$dbactions->GetErrorMessage());
                 }
 
                 echo '<tr class="head">';
