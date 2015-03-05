@@ -1,23 +1,3 @@
-<?PHP
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("/login.php");
-    exit;
-}
-
-$user_role = $mainactions->GetSessionUserRole();
-if (!$user_role || $user_role!="1")
-{
-	$utils->RedirectToURL("/viewer/live-normal.php");
-}
-
-?>
-
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
