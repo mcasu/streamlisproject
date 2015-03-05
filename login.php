@@ -4,18 +4,18 @@ require_once("./include/config.php");
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
-$user_looged = FALSE;
+$user_logged = FALSE;
 
 if(isset($_POST['submitted']))
 {
-   $user_looged = $mainactions->Login();
+   $user_logged = $mainactions->Login();
 }
 else
 {
-    $user_looged = $mainactions->CheckLogin();
+    $user_logged = $mainactions->CheckLogin();
 }
 
-if($user_looged)
+if($user_logged)
 {      
      $user_role = $mainactions->GetSessionUserRole();	
      if (!empty($user_role))
@@ -72,7 +72,7 @@ if($user_looged)
 		   <br/>
 		   
 		   <?php
-		      if (isset($UserLogged) && $UserLogged == false)
+		      if (isset($user_logged) && $user_logged == false)
 		      {
 			 echo '<div class="alert alert-danger alert-dismissible" role="alert">';
 			    echo '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;';
