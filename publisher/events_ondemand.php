@@ -430,7 +430,7 @@ try
     }
     catch(Exception $e)
     {
-        echo 'No Results';
+        error_log('ERROR - Publisher events_ondemand.php - '.$e->getMessage());
     }
 
 ?>

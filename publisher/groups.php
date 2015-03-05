@@ -91,33 +91,41 @@ $(document).ready(function()
 	
 	    <?php
 	    
-		$result = $dbactions->GetGroups();
-		
-		if ($result)
-		{
-		    echo '<tr class="head">';
-			echo'<th></th><th>CONGREGAZIONE</th><th>ID</th><th>TIPO</th><th>RUOLO</th><th>PUBLISH CODE</th>';
-		    echo '</tr>';
-		    
-		    while ($row = mysql_fetch_array($result))
-		    {
-			$values[0]=$row['group_name'];
-			$values[1]=$row['group_id'];
-			$values[2]=$row['group_type'];
-			$values[3]=$row['group_role_name'];
-			$values[4]=$row['publish_code'];
-			
-			echo '<tr class="groups_table" id="' .$values[1].'">';
-				    echo '<td><input type="radio" name="group_selected" /></td>';
-				    echo '<td>' . $values[0] . '</td>';
-				    echo '<td>' . $values[1] . '</td>';
-				    echo '<td>' . $values[2] . '</td>';
-				    echo '<td>' . $values[3] . '</td>';
-				    echo '<td>' . $values[4] . '</td>';
-			echo '</tr>';
-		    }
-		    
-		}
+            try
+            {
+                $viewers = $dbactions->GetViewersByPublisher($mainactions->UserGroupId());
+
+                if (!$viewers)
+                {
+                    error_log("ERROR Publisher groups.php - ".$dbactions->getMessage());
+                }
+
+                echo '<tr class="head">';
+                    echo'<th></th><th>CONGREGAZIONE</th><th>ID</th><th>TIPO</th><th>RUOLO</th><th>PUBLISH CODE</th>';
+                echo '</tr>';
+
+                while ($row = mysql_fetch_array($result))
+                {
+                    $values[0]=$row['group_name'];
+                    $values[1]=$row['group_id'];
+                    $values[2]=$row['group_type'];
+                    $values[3]=$row['group_role_name'];
+                    $values[4]=$row['publish_code'];
+
+                    echo '<tr class="groups_table" id="' .$values[1].'">';
+                                echo '<td><input type="radio" name="group_selected" /></td>';
+                                echo '<td>' . $values[0] . '</td>';
+                                echo '<td>' . $values[1] . '</td>';
+                                echo '<td>' . $values[2] . '</td>';
+                                echo '<td>' . $values[3] . '</td>';
+                                echo '<td>' . $values[4] . '</td>';
+                    echo '</tr>';
+                }
+            } 
+            catch (Exception $e) 
+            {
+                error_log('ERROR - Publisher groups.php - '.$e->getMessage());
+            }
 	    
 	    ?>
 	    </table>
