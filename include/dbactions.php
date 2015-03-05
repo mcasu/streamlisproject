@@ -1009,12 +1009,24 @@ class DBActions
                     return false;
                 }
 
-                $select_query = 'select group_links.viewer_id, groups.group_name as viewer_name from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where group_links.publisher_id = \''.$publisher_id.'\' order by viewer_name';
-
-                $result = mysql_query($select_query ,$this->connection);
+                $select_query = 'select group_links.viewer_id, '.
+                        'groups.group_name as viewer_name '.
+                        'groups.group_type, '.
+                        'group_roles.role_name, '.
+                        'groups.publish_code'.
+                        'from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
+                        'INNER JOIN group_roles ON groups.group_role = group_roles.role_id ';
+                        
+                $select_where = 'where group_links.publisher_id = \''.$publisher_id.'\' ';
+                
+                $select_orderby = 'order by viewer_name';
+                
+                $select_total = $select_query . $select_where . $select_orderby;
+                
+                $result = mysql_query($select_total ,$this->connection);
                 if(!$result)
                 {
-                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                    $this->HandleDBError("Error selecting data from the table\nquery:$select_total");
                     return false;
                 }
                 return $result;

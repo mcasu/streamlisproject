@@ -106,10 +106,10 @@ $(document).ready(function()
 
                 while ($row = mysql_fetch_array($viewers))
                 {
-                    $values[0]=$row['group_name'];
-                    $values[1]=$row['group_id'];
+                    $values[0]=$row['viewer_name'];
+                    $values[1]=$row['viewer_id'];
                     $values[2]=$row['group_type'];
-                    $values[3]=$row['group_role_name'];
+                    $values[3]=$row['role_name'];
                     $values[4]=$row['publish_code'];
 
                     echo '<tr class="groups_table" id="' .$values[1].'">';
