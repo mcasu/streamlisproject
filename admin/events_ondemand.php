@@ -1,3 +1,5 @@
+<?php include("../check_login.php"); ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 
@@ -184,7 +186,7 @@ $(document).ready(function()
 
 
 <body>
-<?php include("header.php"); ?>
+<?php include("../include/header_admin.php"); ?>
 <br/>
 
 <h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>

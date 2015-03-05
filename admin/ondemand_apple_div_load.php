@@ -1,4 +1,5 @@
-<?PHP
+<?php include("../check_login.php");
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
 $utils = $mainactions->GetUtilsInstance();
