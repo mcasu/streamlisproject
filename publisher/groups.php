@@ -104,7 +104,7 @@ $(document).ready(function()
                     echo'<th></th><th>CONGREGAZIONE</th><th>ID</th><th>TIPO</th><th>RUOLO</th><th>PUBLISH CODE</th>';
                 echo '</tr>';
 
-                while ($row = mysql_fetch_array($result))
+                while ($row = mysql_fetch_array($viewers))
                 {
                     $values[0]=$row['group_name'];
                     $values[1]=$row['group_id'];
