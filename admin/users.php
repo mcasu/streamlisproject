@@ -101,7 +101,7 @@ $(document).ready(function()
                 if ($result)
                 {
                     echo '<thead>';
-                        echo '<tr>';
+                        echo '<tr class="head">';
                             echo'<th></th>';
                             echo '<th>NOME</th>';
                             echo '<th>ID</th>';

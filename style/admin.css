@@ -1,6 +1,6 @@
 /* BOOTSTRAP CUSTOMIZATION */
 
-.table > tbody > tr > th {
+.table > tbody > thead > tr > th {
     background-color: #333;
     color: #fff;
     border-color: #fff;
