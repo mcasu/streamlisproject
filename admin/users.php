@@ -9,18 +9,20 @@
     <title>Stream LIS - Utenti</title>
 	
     <link rel="stylesheet" href="../style/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-table.min.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
     
 <script type="text/javascript">
     
 $(document).ready(function()
 {
+    $('#users_table').DataTable();
+    
     $("#btn_user_delete").prop('disabled', true);
     
     $("input:radio").click(function(lastSelectedRow)
@@ -90,7 +92,7 @@ $(document).ready(function()
         </div>
 
         <div class="panel-body">
-            <table class="table table-hover" id="users_table" data-toggle="table" data-sort-name="user_name" data-sort-order="asc">
+            <table class="table table-hover" id="users_table">
 
             <?php
 
@@ -100,14 +102,14 @@ $(document).ready(function()
                 {
                     echo '<thead>';
                         echo '<tr>';
-                        echo'<th></th>';
-                        echo '<th data-field="user_name" data-sortable="true">NOME</th>';
-                        echo '<th data-field="user_id" data-sortable="true">ID</th>';
-                        echo '<th data-field="user_mail" data-sortable="true">MAIL</th>';
-                        echo '<th data-field="username" data-sortable="true">USERNAME</th>';
-                        echo '<th data-field="user_group_name" data-sortable="true">CONGREGAZIONE</th>';
-                        echo '<th data-field="user_role_name" data-sortable="true">TIPO</th>';
-                        echo '<th data-field="confirmcode">CONFERMATO</th>';
+                            echo'<th></th>';
+                            echo '<th>NOME</th>';
+                            echo '<th>ID</th>';
+                            echo '<th>MAIL</th>';
+                            echo '<th>USERNAME</th>';
+                            echo '<th>CONGREGAZIONE</th>';
+                            echo '<th>TIPO</th>';
+                            echo '<th>CONFERMATO</th>';
                         echo '</tr>';
                     echo '</thead>';
                     
@@ -123,7 +125,7 @@ $(document).ready(function()
                         $values[5]=$row['user_role_name'];
                         $values[6]=$row['confirmcode']=="y"?"SI":"NO";
 
-                        echo '<tr class="users_table" id="' .$values[1].'" data-index="'.$index.'">';
+                        echo '<tr class="users_table" id="' .$values[1].'">';
                                     echo '<td><input type="radio" name="user_selected" /></td>';
                                     echo '<td>' . $values[0] . '</td>';
                                     echo '<td>' . $values[1] . '</td>';
