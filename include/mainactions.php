@@ -100,16 +100,9 @@ class MainActions
         
         $uservars = array();
         
-        /*
-        if(!$this->ValidateRegistrationSubmission())
-        {
-            return false;
-        }
-        */
-        
         $this->CollectRegistrationSubmission($uservars);
         
-	$user_id = $this->SaveToDatabase($uservars);
+	$user_id = $this->SaveUserDataIntoDatabase($uservars);
 	
         if(!$user_id)
         {
@@ -118,11 +111,11 @@ class MainActions
 	
         $uservars['user_id'] = $this->utilsInstance->Sanitize($user_id);
 	
-        if(!$this->SendUserConfirmationEmail($uservars))
-        {
-	    $this->dbactionsInstance->DeleteUser($uservars['user_id']);
-            return false;
-        }
+//        if(!$this->SendUserConfirmationEmail($uservars))
+//        {
+//	    $this->dbactionsInstance->DeleteUser($uservars['user_id']);
+//            return false;
+//        }
 
         $this->SendAdminIntimationEmail($uservars);
         
@@ -173,13 +166,13 @@ class MainActions
     {
         if(empty($_POST['username']))
         {
-            $this->HandleError("UserName is empty!");
+            $this->HandleError("Il campo username è vuoto!");
             return false;
         }
         
         if(empty($_POST['password']))
         {
-            $this->HandleError("Password is empty!");
+            $this->HandleError("Il campo password è vuoto!");
             return false;
         }
         
@@ -664,14 +657,14 @@ class MainActions
         
         $mailer->AddAddress($this->admin_email);
         
-        $mailer->Subject = "New registration: ".$uservars['name'];
+        $mailer->Subject = "Creazione nuovo utente: ".$uservars['name'];
 
         $mailer->From = $this->GetFromAddress();         
         
-        $mailer->Body ="A new user registered at ".$this->sitename."\r\n".
-        "Name: ".$uservars['name']."\r\n".
-        "Email address: ".$uservars['email']."\r\n".
-        "UserName: ".$uservars['username'];
+        $mailer->Body ="Un nuovo utente è stato creato in ".$this->sitename."\r\n".
+        "Nome completo: ".$uservars['name']."\r\n".
+        "Indirizzo email: ".$uservars['email']."\r\n".
+        "Username: ".$uservars['username'];
         
         if(!$mailer->Send())
         {
@@ -680,7 +673,7 @@ class MainActions
         return true;
     }
     
-    function SaveToDatabase(&$uservars)
+    function SaveUserDataIntoDatabase(&$uservars)
     {
         if(!$this->dbactionsInstance->DBLogin())
         {
@@ -689,11 +682,11 @@ class MainActions
         }
         if(!$this->dbactionsInstance->IsFieldUnique($uservars,'username'))
         {
-            $this->HandleError("This UserName is already used. Please try another username");
+            $this->HandleError("Lo username scelto è già utilizzato. Per favore cambia il tuo uername.");
             return false;
         }
 	
-	$user_id = $this->dbactionsInstance->InsertIntoDB($uservars,$this->rand_key);
+	$user_id = $this->dbactionsInstance->InsertIntoDB($uservars);
         if(!$user_id)
         {
             $this->HandleError("Inserting to Database failed!");
@@ -723,4 +716,3 @@ class MainActions
     }
 	
 }
-?>

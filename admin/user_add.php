@@ -57,8 +57,8 @@ if(isset($_POST['submitted']))
 	    {
 		    echo '<br/><div class="alert alert-success" role="alert">';
 			echo '<h4>Utente creato con successo!</h4>';
-			    echo 'Una mail di conferma verrà spedita all\'account di posta indicato.<br/>';
-			    echo 'Per completare la registrazione l\'utente deve cliccare sul link all\'interno della mail.';
+//			    echo 'Una mail di conferma verrà spedita all\'account di posta indicato.<br/>';
+//			    echo 'Per completare la registrazione l\'utente deve cliccare sul link all\'interno della mail.';
 			    echo '<br/>';
 			    echo '<br/>';
 			    echo '<button type="button" class="btn btn-success btn_action_reload">Crea un altro utente</button>';

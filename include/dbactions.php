@@ -341,32 +341,32 @@ class DBActions
         return true;
     }
 
-   function InsertIntoDB(&$uservars,$rand_key)
+   function InsertIntoDB(&$uservars)
     {
 
-        $confirmcode = $this->MakeConfirmationMd5($uservars['email'],$rand_key);
+        //$confirmcode = $this->MakeConfirmationMd5($uservars['email'],$rand_key);
 
-        $uservars['confirmcode'] = $confirmcode;
+        //$uservars['confirmcode'] = $confirmcode;
 
-                $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
+        $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
 
-                $result = mysql_query($select_query_group ,$this->connection);
-                if(!$result)
-                {
-                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query_group");
-                    return false;
-                }
-                $row_group = mysql_fetch_assoc($result);
+        $result = mysql_query($select_query_group ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query_group");
+            return false;
+        }
+        $row_group = mysql_fetch_assoc($result);
 
-                $select_query_role = 'select * from user_roles where role_name =\'' . $uservars['user_role_name'] . '\'';
+        $select_query_role = 'select * from user_roles where role_name =\'' . $uservars['user_role_name'] . '\'';
 
-                $result = mysql_query($select_query_role ,$this->connection);
-                if(!$result)
-                {
-                    $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role");
-                    return false;
-                }
-                $row_role = mysql_fetch_assoc($result);
+        $result = mysql_query($select_query_role ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role");
+            return false;
+        }
+        $row_role = mysql_fetch_assoc($result);
 
         $insert_query = 'insert into users (
                 name,
@@ -384,7 +384,7 @@ class DBActions
                 "' . $this->SanitizeForSQL($uservars['username']) . '",
                 "' . md5($uservars['password']) . '",
                 "' . $this->SanitizeForSQL($row_group['group_id']) . '",
-                "' . $confirmcode . '",
+                "y",
                 "' . $this->SanitizeForSQL($row_role['role_id']) . '"
                 )';
         if(!mysql_query( $insert_query ,$this->connection))
