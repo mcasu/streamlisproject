@@ -9,11 +9,13 @@
     <title>Stream LIS - Utenti</title>
 	
     <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/bootstrap-table.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-table.min.js"></script>
     
 <script type="text/javascript">
     
@@ -88,7 +90,7 @@ $(document).ready(function()
         </div>
 
         <div class="panel-body">
-            <table class="table table-hover" id="users_table">
+            <table class="table table-hover" id="users_table" data-toggle="table" data-sort-name="user_name" data-sort-order="asc">
 
             <?php
 
@@ -97,8 +99,14 @@ $(document).ready(function()
                 if ($result)
                 {
                     echo '<tr class="head">';
-                    echo'<th></th><th>NOME</th><th>ID</th><th>MAIL</th>'.
-                    '<th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th>';
+                    echo'<th></th>';
+                    echo '<th data-field="user_name" data-sortable="true">NOME</th>';
+                    echo '<th data-field="user_id">ID</th>';
+                    echo '<th data-field="user_mail" data-sortable="true">MAIL</th>';
+                    echo '<th data-field="username" data-sortable="true">USERNAME</th>';
+                    echo '<th data-field="user_group_name" data-sortable="true">CONGREGAZIONE</th>';
+                    echo '<th data-field="user_role_name" data-sortable="true">TIPO</th>';
+                    echo '<th data-field="confirmcode">CONFERMATO</th>';
                     echo '</tr>';
 
                     while ($row = mysql_fetch_array($result))
