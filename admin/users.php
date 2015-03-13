@@ -112,6 +112,7 @@ $(document).ready(function()
                     echo '</thead>';
                     
                     echo '<tbody>';
+                    $index = 0;
                     while ($row = mysql_fetch_array($result))
                     {
                         $values[0]=$row['user_name'];
@@ -122,7 +123,7 @@ $(document).ready(function()
                         $values[5]=$row['user_role_name'];
                         $values[6]=$row['confirmcode']=="y"?"SI":"NO";
 
-                        echo '<tr class="users_table" id="' .$values[1].'">';
+                        echo '<tr class="users_table" id="' .$values[1].'" data-index="'.$index.'">';
                                     echo '<td><input type="radio" name="user_selected" /></td>';
                                     echo '<td>' . $values[0] . '</td>';
                                     echo '<td>' . $values[1] . '</td>';
@@ -132,6 +133,8 @@ $(document).ready(function()
                                     echo '<td>' . $values[5] . '</td>';
                                     echo '<td>' . $values[6] . '</td>';
                         echo '</tr>';
+                        
+                        $index++;
                     }
                     echo '</tbody>';
 
