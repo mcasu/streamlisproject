@@ -98,17 +98,19 @@ $(document).ready(function()
 
                 if ($result)
                 {
-                    echo '<tr class="head">';
-                    echo'<th></th>';
-                    echo '<th data-field="user_name" data-sortable="true">NOME</th>';
-                    echo '<th data-field="user_id">ID</th>';
-                    echo '<th data-field="user_mail" data-sortable="true">MAIL</th>';
-                    echo '<th data-field="username" data-sortable="true">USERNAME</th>';
-                    echo '<th data-field="user_group_name" data-sortable="true">CONGREGAZIONE</th>';
-                    echo '<th data-field="user_role_name" data-sortable="true">TIPO</th>';
-                    echo '<th data-field="confirmcode">CONFERMATO</th>';
-                    echo '</tr>';
-
+                    echo '<thead>';
+                        echo '<tr class="head">';
+                        echo'<th></th>';
+                        echo '<th data-field="user_name" data-sortable="true">NOME</th>';
+                        echo '<th data-field="user_id">ID</th>';
+                        echo '<th data-field="user_mail" data-sortable="true">MAIL</th>';
+                        echo '<th data-field="username" data-sortable="true">USERNAME</th>';
+                        echo '<th data-field="user_group_name" data-sortable="true">CONGREGAZIONE</th>';
+                        echo '<th data-field="user_role_name" data-sortable="true">TIPO</th>';
+                        echo '<th data-field="confirmcode">CONFERMATO</th>';
+                        echo '</tr>';
+                    echo '</thead>';
+                    
                     while ($row = mysql_fetch_array($result))
                     {
                         $values[0]=$row['user_name'];
