@@ -1,6 +1,6 @@
 /* BOOTSTRAP CUSTOMIZATION */
 
-.table > thead > tr > th {
+.table.dataTable > thead > tr > th {
     background-color: #333;
     color: #fff;
     border-color: #fff;
