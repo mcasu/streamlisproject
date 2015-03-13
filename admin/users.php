@@ -111,6 +111,7 @@ $(document).ready(function()
                         echo '</tr>';
                     echo '</thead>';
                     
+                    echo '<tbody>';
                     while ($row = mysql_fetch_array($result))
                     {
                         $values[0]=$row['user_name'];
@@ -132,6 +133,7 @@ $(document).ready(function()
                                     echo '<td>' . $values[6] . '</td>';
                         echo '</tr>';
                     }
+                    echo '</tbody>';
 
                 }
 
