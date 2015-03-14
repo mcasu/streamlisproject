@@ -21,7 +21,11 @@
     
 $(document).ready(function()
 {
-    $('#users_table').DataTable();
+    $('#users_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        }
+    });
     
     $("#btn_user_delete").prop('disabled', true);
     
