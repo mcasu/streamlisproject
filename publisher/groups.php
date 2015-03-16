@@ -9,16 +9,25 @@
     <title>Stream LIS - Congregazioni</title>
 	
     <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>    
     
 <script type="text/javascript">
     
 $(document).ready(function()
 {
+    $('#groups_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        },
+        "order": [[ 0, 'asc' ]]
+    });
+    
     $("#btn_group_delete").prop('disabled', true);
     
     $("input:radio").click(function(lastSelectedRow)
@@ -103,10 +112,18 @@ $(document).ready(function()
                     error_log("ERROR Publisher groups.php - ".$dbactions->GetErrorMessage());
                 }
 
-                echo '<tr class="head">';
-                    echo'<th></th><th>CONGREGAZIONE</th><th>ID</th><th>TIPO</th><th>RUOLO</th><th>PUBLISH CODE</th>';
-                echo '</tr>';
+                echo '<thead>';
+                    echo '<tr class="head">';
+                        echo'<th></th>';
+                        echo '<th>CONGREGAZIONE</th>';
+                        echo '<th>ID</th>';
+                        echo '<th>TIPO</th>';
+                        echo '<th>RUOLO</th>';
+                        echo '<th>PUBLISH CODE</th>';
+                    echo '</tr>';
+                echo '</thead>';
 
+                echo '<tbody>';
                 while ($row = mysql_fetch_array($viewers))
                 {
                     $values[0]=$row['viewer_name'];
@@ -124,6 +141,7 @@ $(document).ready(function()
                                 echo '<td>' . $values[4] . '</td>';
                     echo '</tr>';
                 }
+                echo '</tbody>';
             } 
             catch (Exception $e) 
             {

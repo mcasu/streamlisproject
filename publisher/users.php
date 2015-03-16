@@ -9,16 +9,25 @@
     <title>Stream LIS - Utenti</title>
 	
     <link rel="stylesheet" href="../style/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.dataTables.min.js"></script>
     
 <script type="text/javascript">
     
 $(document).ready(function()
 {
+    $('#users_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        },
+        "order": [[ 0, 'asc' ], [ 4, 'asc' ]]
+    });
+    
     $("#btn_user_delete").prop('disabled', true);
     
     $("input:radio").click(function(lastSelectedRow)
@@ -101,11 +110,20 @@ $(document).ready(function()
 
                 if ($result)
                 {
-                    echo '<tr class="head">';
-                    echo'<th></th><th>NOME</th><th>ID</th><th>MAIL</th>'.
-                    '<th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>CONFERMATO</th>';
-                    echo '</tr>';
+                    echo '<thead>';
+                        echo '<tr class="head">';
+                            echo'<th></th>';
+                            echo '<th>NOME</th>';
+                            echo '<th>ID</th>';
+                            echo '<th>MAIL</th>';
+                            echo '<th>USERNAME</th>';
+                            echo '<th>CONGREGAZIONE</th>';
+                            echo '<th>TIPO</th>';
+                            echo '<th>CONFERMATO</th>';
+                        echo '</tr>';
+                    echo '</thead>';
 
+                    echo '<tbody>';
                     while ($row = mysql_fetch_array($result))
                     {
                         $values[0]=$row['name'];
@@ -127,6 +145,7 @@ $(document).ready(function()
                                     echo '<td>' . $values[6] . '</td>';
                         echo '</tr>';
                     }
+                    echo '</tbody>';
                 }
                 
             }
