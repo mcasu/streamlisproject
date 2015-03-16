@@ -25,7 +25,7 @@ $(document).ready(function()
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
-        "order": [[ 0, 'asc' ], [ 1, 'asc' ]]
+        "order": [[ 0, 'asc' ]]
     });
     
     $("#btn_group_delete").prop('disabled', true);
