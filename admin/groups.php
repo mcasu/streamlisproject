@@ -19,6 +19,13 @@
     
 $(document).ready(function()
 {
+    $('#groups_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        },
+        "order": [[ 0, 'asc' ], [ 1, 'asc' ]]
+    });
+    
     $("#btn_group_delete").prop('disabled', true);
     
     $("input:radio").click(function(lastSelectedRow)
@@ -95,10 +102,18 @@ $(document).ready(function()
 		
 		if ($result)
 		{
-		    echo '<tr class="head">';
-			echo'<th></th><th>CONGREGAZIONE</th><th>ID</th><th>TIPO</th><th>RUOLO</th><th>PUBLISH CODE</th>';
-		    echo '</tr>';
-		    
+                    echo '<thead>';
+                        echo '<tr class="head">';
+                            echo'<th></th>';
+                            echo '<th>CONGREGAZIONE</th>';
+                            echo '<th>ID</th>';
+                            echo '<th>TIPO</th>';
+                            echo '<th>RUOLO</th>';
+                            echo '<th>PUBLISH CODE</th>';
+                        echo '</tr>';
+		    echo '</thead>';
+                    
+                    echo '<tbody>';
 		    while ($row = mysql_fetch_array($result))
 		    {
 			$values[0]=$row['group_name'];
@@ -116,7 +131,7 @@ $(document).ready(function()
 				    echo '<td>' . $values[4] . '</td>';
 			echo '</tr>';
 		    }
-		    
+                    echo '</tbody>';
 		}
 	    
 	    ?>
