@@ -24,9 +24,6 @@ error_log("INFO - Result-> " . $result);
 
 if ( (!$result) || ($result < 0) )
 {
-    // clean failed
-    $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
-    
     echo date("Y-m-d H:i:s") . " - FAILED - Pulito [".$result."] utenti.\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
 }
 else
