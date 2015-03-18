@@ -6,8 +6,6 @@ $dbactions = $mainactions->GetDBActionsInstance();
 
 if(!$mainactions->CheckLogin())
 {
-    error_log("INFO - CheckLogin returned FALSE.");
-    
     $utils->RedirectToURL("/login.php");
 }
 
