@@ -232,7 +232,6 @@ class DBActions
     {
 	if(!$this->DBLogin())
         {
-            $this->HandleError("Database login failed!");
             return false;
         }
 	
