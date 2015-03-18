@@ -22,7 +22,7 @@ $result = $dbactions->CleanLoginOlderThan($seconds);
 
 error_log("INFO - Result-> " . $result);
 
-if ( (!$result) || ($result < 0) )
+if ( $result == -1 || $result == false)
 {
     echo date("Y-m-d H:i:s") . " - FAILED - Pulito [".$result."] utenti.\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
 }
