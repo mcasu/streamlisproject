@@ -20,6 +20,8 @@ else
 
 $result = $dbactions->CleanLoginOlderThan($seconds);
 
+error_log("INFO - Result-> " . $result);
+
 if (!$result || $result == "-1")
 {
     // clean failed
