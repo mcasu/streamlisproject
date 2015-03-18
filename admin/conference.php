@@ -55,7 +55,7 @@
 <div class="container-fluid">
     
     <input type="hidden" class="username" id="<?= $mainactions->UserName(); ?>"/>
-    <?php echo '<input type="hidden" class="userrole" id="' . $user_role . '"/>'; ?>
+    <?php echo '<input type="hidden" class="userrole" id="' . $mainactions->GetSessionUserRole() . '"/>'; ?>
     <p>
     <div id="panelJoin" class="panel panel-default">
         
