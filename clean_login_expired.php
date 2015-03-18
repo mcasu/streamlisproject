@@ -27,11 +27,11 @@ if (!$result || $result == "-1")
     error_log("ERROR - Failed to clean login expired. " . $dbactions->GetErrorMessage());
     
     echo "1 - FAILED [". $result . "]\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
-    exit(1);
+    //exit(1);
 }
 else
 {
     //clean successful
     echo "0 - SUCCESS - Pulito [".$result."] utenti.\n";
-    exit(0);
+    //exit(0);
 }
