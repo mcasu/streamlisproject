@@ -207,6 +207,7 @@ class MainActions
 
         if(empty($_SESSION[$sessionvar]))
         {
+            error_log("INFO - CheckLogin returned FALSE because of session has not found.");
            return false;
         }
 
