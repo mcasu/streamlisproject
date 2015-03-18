@@ -45,6 +45,12 @@ function DeleteOnDemandVideoFromDisk($ondemand_app_name, $ondemand_path, $ondema
             unlink($thumbFullPath);
         }
         
+        // Delete link to thumbnail image
+        if (is_link("/usr/local/nginx/html/images/thumbnails/" . basename($thumbFullPath)))
+        {
+            unlink("/usr/local/nginx/html/images/thumbnails/" . basename($thumbFullPath));
+        }
+        
         // Delete link to flv video file
         if (is_link($videoFlvLinkFullPath))
         {
