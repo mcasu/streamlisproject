@@ -188,6 +188,7 @@ class MainActions
 
 	session_start();
 	$sessionvar = $this->GetLoginSessionVar();
+        error_log("INFO - Login sessionvar->[" . $sessionvar . "]");
 	$_SESSION[$sessionvar] = $userdata;
 	
 	// Set the user logged flag into the database.
@@ -204,7 +205,8 @@ class MainActions
         }
         
         $sessionvar = $this->GetLoginSessionVar();
-
+        error_log("INFO - CheckLogin sessionvar->[" . $sessionvar . "]");
+        
         if(empty($_SESSION[$sessionvar]))
         {
             error_log("INFO - CheckLogin returned FALSE because of session has not found.");
