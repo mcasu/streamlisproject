@@ -194,7 +194,7 @@ class MainActions
         // Set the cookie
         if (!isset($_COOKIE[$sessionName]))
         {
-            setcookie($sessionName, $sessionData, 3600);
+            setcookie($sessionName, json_encode($sessionData), 3600);
         }
 	
 	// Set the user logged flag into the database.
@@ -220,7 +220,7 @@ class MainActions
         }
 
         // Get session data from the memory or the cookie file.
-        $sessionData = empty($_SESSION[$sessionName]) ? $_COOKIE[$sessionName] : $_SESSION[$sessionName];
+        $sessionData = empty($_SESSION[$sessionName]) ? (array) json_decode($_COOKIE[$sessionName]) : $_SESSION[$sessionName];
         
         // The users' session expire after 10800 sec = 3 hours
         if (time() - $sessionData['last_update'] > 10800)
