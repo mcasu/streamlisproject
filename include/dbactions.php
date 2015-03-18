@@ -227,11 +227,12 @@ class DBActions
         }
 	
         $query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > \''.$seconds.'\'';
-        
+
         try 
         {
             $result = mysql_query($query ,$this->connection);
-
+            $affectedRows = mysql_affected_rows($this->connection);
+            
             if(!$result)
             {
                 $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n");
@@ -244,7 +245,7 @@ class DBActions
             return false;
         }
         
-        return mysql_affected_rows($result);
+        return $affectedRows;
     }
     
     function GetGroupInfoByName($group_name)
