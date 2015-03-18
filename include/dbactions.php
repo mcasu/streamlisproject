@@ -244,7 +244,7 @@ class DBActions
             return false;
         }
         
-        return mysql_affected_rows();
+        return mysql_affected_rows($this->connection);
     }
     
     function GetGroupInfoByName($group_name)
