@@ -188,7 +188,6 @@ class MainActions
 
 	session_start();
 	$sessionName = $this->GetSessionVarName();
-        error_log("INFO - Login sessionvar->[" . $sessionName . "]");
 	$_SESSION[$sessionName] = $sessionData;
         
         // Set the cookie
@@ -211,11 +210,10 @@ class MainActions
         }
         
         $sessionName = $this->GetSessionVarName();
-        error_log("INFO - CheckLogin sessionvar->[" . $sessionName . "]");
         
         if( empty($_SESSION[$sessionName]) && empty($_COOKIE[$sessionName]) )
         {
-            error_log("INFO - CheckLogin returned FALSE because of session has not found.");
+            //error_log("INFO - CheckLogin returned FALSE because of session has not found.");
             return false;
         }
 

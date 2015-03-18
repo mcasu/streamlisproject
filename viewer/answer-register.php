@@ -91,7 +91,7 @@
 	</script>
 </head>
 <body>
-<?php include("header-normal.php"); ?>
+<?php include("../include/header_viewer.php"); ?>
 <br/>
 <div class="memberinfo" id="<?= $mainactions->UserId(); ?>" align="right"><b><?= $mainactions->UserFullName(); ?></b>, Benvenuto!</div>
 
