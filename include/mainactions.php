@@ -48,30 +48,30 @@ class MainActions
 /*** MEMBERS ***/
     function UserId()
     {
-	return isset($_SESSION[$this->GetLoginSessionVar()]['user_id'])?$_SESSION[$this->GetLoginSessionVar()]['user_id']:'';
+	return isset($_SESSION[$this->GetSessionVarName()]['user_id'])?$_SESSION[$this->GetSessionVarName()]['user_id']:'';
     }
     function UserName()
     {
-	return isset($_SESSION[$this->GetLoginSessionVar()]['username'])?$_SESSION[$this->GetLoginSessionVar()]['username']:'';
+	return isset($_SESSION[$this->GetSessionVarName()]['username'])?$_SESSION[$this->GetSessionVarName()]['username']:'';
     }
     function UserFullName()
     {
-        return isset($_SESSION[$this->GetLoginSessionVar()]['user_fullname'])?$_SESSION[$this->GetLoginSessionVar()]['user_fullname']:'';
+        return isset($_SESSION[$this->GetSessionVarName()]['user_fullname'])?$_SESSION[$this->GetSessionVarName()]['user_fullname']:'';
     }
     
     function UserEmail()
     {
-        return isset($_SESSION[$this->GetLoginSessionVar()]['user_email'])?$_SESSION[$this->GetLoginSessionVar()]['user_email']:'';
+        return isset($_SESSION[$this->GetSessionVarName()]['user_email'])?$_SESSION[$this->GetSessionVarName()]['user_email']:'';
     }
     
     function UserGroupId()
     {
-        return isset($_SESSION[$this->GetLoginSessionVar()]['user_group_id'])?$_SESSION[$this->GetLoginSessionVar()]['user_group_id']:'';
+        return isset($_SESSION[$this->GetSessionVarName()]['user_group_id'])?$_SESSION[$this->GetSessionVarName()]['user_group_id']:'';
     }
     
     function UserGroupName()
     {
-        return isset($_SESSION[$this->GetLoginSessionVar()]['user_group_name'])?$_SESSION[$this->GetLoginSessionVar()]['user_group_name']:'';
+        return isset($_SESSION[$this->GetSessionVarName()]['user_group_name'])?$_SESSION[$this->GetSessionVarName()]['user_group_name']:'';
     }
 /*** FINE MEMBERS ***/
 
@@ -179,17 +179,23 @@ class MainActions
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
 	
-	$userdata = $this->dbactionsInstance->CheckLoginInDB($username,$password);
+	$sessionData = $this->dbactionsInstance->CheckLoginInDB($username,$password);
 	
-        if(!$userdata)
+        if(!$sessionData)
         {
             return false;
         }
 
 	session_start();
-	$sessionvar = $this->GetLoginSessionVar();
-        error_log("INFO - Login sessionvar->[" . $sessionvar . "]");
-	$_SESSION[$sessionvar] = $userdata;
+	$sessionName = $this->GetSessionVarName();
+        error_log("INFO - Login sessionvar->[" . $sessionName . "]");
+	$_SESSION[$sessionName] = $sessionData;
+        
+        // Set the cookie
+        if (!isset($_COOKIE[$sessionName]))
+        {
+            setcookie($sessionName, $sessionData, 3600);
+        }
 	
 	// Set the user logged flag into the database.
         $this->dbactionsInstance->UpdateUserLoginStatus($username, true, true);
@@ -204,38 +210,40 @@ class MainActions
             session_start();
         }
         
-        $sessionvar = $this->GetLoginSessionVar();
-        error_log("INFO - CheckLogin sessionvar->[" . $sessionvar . "]");
+        $sessionName = $this->GetSessionVarName();
+        error_log("INFO - CheckLogin sessionvar->[" . $sessionName . "]");
         
-        if(empty($_SESSION[$sessionvar]))
+        if( empty($_SESSION[$sessionName]) && empty($_COOKIE[$sessionName]) )
         {
             error_log("INFO - CheckLogin returned FALSE because of session has not found.");
-           return false;
+            return false;
         }
 
-        $userdata = $_SESSION[$sessionvar];
+        // Get session data from the memory or the cookie file.
+        $sessionData = empty($_SESSION[$sessionName]) ? $_COOKIE[$sessionName] : $_SESSION[$sessionName];
+        
         // The users' session expire after 10800 sec = 3 hours
-        if (time() - $userdata['last_update'] > 10800)
+        if (time() - $sessionData['last_update'] > 10800)
         {
-           $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], false);
-           $_SESSION[$sessionvar]=NULL;
-           unset($_SESSION[$sessionvar]);
+           $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], false);
+           $_SESSION[$sessionName]=NULL;
+           unset($_SESSION[$sessionName]);
            return false;
         }
 
-        $this->dbactionsInstance->UpdateUserLoginStatus($userdata['username'], true);
+        $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], true);
         return true;
     }
    
     function GetSessionUserRole()
     {
-	    if(empty($_SESSION[$this->GetLoginSessionVar()]['user_role_id']))
+	    if(empty($_SESSION[$this->GetSessionVarName()]['user_role_id']))
 	    {
 		    $this->HandleError("User role for this session not found!");
 		    return false;
 	    }
 
-	    return $_SESSION[$this->GetLoginSessionVar()]['user_role_id']; 
+	    return $_SESSION[$this->GetSessionVarName()]['user_role_id']; 
 	    
     }
 
@@ -257,7 +265,7 @@ class MainActions
     function LogOut()
     {
 	session_start();
-	$sessionvar = $this->GetLoginSessionVar();
+	$sessionvar = $this->GetSessionVarName();
 	
 	$userdata = $_SESSION[$sessionvar];
 	$username = $userdata['username'];
@@ -406,7 +414,7 @@ class MainActions
         return $from;
     } 
     
-    function GetLoginSessionVar()
+    function GetSessionVarName()
     {
         $retvar = md5($this->rand_key);
         $retvar = 'usr_'.substr($retvar,0,10);
