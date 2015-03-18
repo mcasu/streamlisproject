@@ -22,7 +22,7 @@ $result = $dbactions->CleanLoginOlderThan($seconds);
 
 error_log("INFO - Result-> " . $result);
 
-if ($result == FALSE || $result < 0)
+if ($result == FALSE)
 {
     // clean failed
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
