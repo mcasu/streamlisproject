@@ -23,24 +23,34 @@ class DBActions
 
     function DBLogin()
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        try 
+        {
+            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
-        if(!$this->connection)
+            if(!$this->connection)
+            {
+                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                return false;
+            }
+            if(!mysql_select_db($this->database, $this->connection))
+            {
+                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                return false;
+            }
+            if(!mysql_query("SET NAMES 'UTF8'",$this->connection))
+            {
+                $this->HandleDBError('Error setting utf8 encoding');
+                return false;
+            }
+            return true;
+            
+        } 
+        catch (Exception $e) 
         {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            $this->HandleDBError('ERROR - Database login failed! ' . $e->getMessage());
             return false;
         }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        if(!mysql_query("SET NAMES 'UTF8'",$this->connection))
-        {
-            $this->HandleDBError('Error setting utf8 encoding');
-            return false;
-        }
-        return true;
+        
     }
 
     function IsFieldUnique($uservars,$fieldname)
