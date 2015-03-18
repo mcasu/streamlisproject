@@ -26,7 +26,7 @@ if (!$result || $result == "-1")
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
     error_log("ERROR - Failed to clean login expired. " . $dbactions->GetErrorMessage());
     
-    echo "1 - FAILED [". $result . "]\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
+    echo "1 - FAILED - Pulito [".$result."] utenti.\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
     //exit(1);
 }
 else
