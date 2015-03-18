@@ -27,12 +27,10 @@ if ($result == FALSE)
     // clean failed
     $mainactions->HandleError("FAILED to clean the logins older than " . $seconds . " seconds.");
     
-    echo "1 - FAILED - Pulito [".$result."] utenti.\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
-    //exit(1);
+    echo date("Y-m-d H:i:s") . " - FAILED - Pulito [".$result."] utenti.\n" . $mainactions->GetErrorMessage() . "\n" . $dbactions->GetErrorMessage()."\n";
 }
 else
 {
     //clean successful
-    echo "0 - SUCCESS - Pulito [".$result."] utenti.\n";
-    //exit(0);
+    echo date("Y-m-d H:i:s") . " - SUCCESS - Pulito [".$result."] utenti.\n";
 }
