@@ -442,7 +442,7 @@ class MainActions
             $uri ."num=$pwlen&min=0&max=".($len-1)."&col=1&base=10&format=plain&rnd=new"
         );
         $indexes = explode("\n", $random);
-        array_pop(&$indexes);
+        array_pop($indexes);
 
         // We now have an array of random indexes which we will use to build our password
         $pw = '';
