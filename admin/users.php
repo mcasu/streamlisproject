@@ -29,6 +29,7 @@ $(document).ready(function()
     });
     
     $("#btn_user_delete").prop('disabled', true);
+    $("#btn_user_changepwd").prop('disabled', true);
     
     $("input:radio").click(function(lastSelectedRow)
     {
@@ -41,6 +42,7 @@ $(document).ready(function()
 	{
 	    selectedRow.addClass("active");
 	    $("#btn_user_delete").prop('disabled', false);
+            $("#btn_user_changepwd").prop('disabled', false);
 	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
 	}
 	else
@@ -82,7 +84,8 @@ $(document).ready(function()
 	{
             alert("Password cambiata!");
         }
-    };
+    });
+    
 });
 
 </script>
