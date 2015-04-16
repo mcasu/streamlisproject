@@ -73,7 +73,16 @@ $(document).ready(function()
 	}
     });
 
-    
+    $("#btn_user_changepwd").click(function()
+    {
+        var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
+	var tr_id=tr_obj.attr('id');
+        
+        if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
+	{
+            alert("Password cambiata!");
+        }
+    };
 });
 
 </script>
@@ -94,6 +103,7 @@ $(document).ready(function()
 
         <div class="panel-heading">
             <button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button>
+            <button type="button" class="btn btn-primary" id="btn_user_changepwd">Cambia password</button>
         </div>
 
         <div class="panel-body">
