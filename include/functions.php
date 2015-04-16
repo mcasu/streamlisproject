@@ -160,7 +160,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId)
         "Username:".$userData['username']."\r\n".
         "Password: $passwordNew\r\n".
         "\r\n".
-        "L'utente potrà fare login qui: ".$this->GetAbsoluteURLFolder()."/login.php\r\n".
+        "L'utente potrà fare login qui: ".$mainactions->GetAbsoluteURLFolder()."/login.php\r\n".
         "\r\n".
         "\r\n".
         "Grazie per la collaborazione,\r\n".
