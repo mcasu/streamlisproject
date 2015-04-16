@@ -30,6 +30,8 @@ $(document).ready(function()
     
     $("#btn_user_delete").prop('disabled', true);
     $("#btn_user_resetpwd").prop('disabled', true);
+    $("#resetpwd_alert_success").hide();
+    $("#resetpwd_alert_fail").hide();
     
     $("input:radio").click(function(lastSelectedRow)
     {
@@ -82,7 +84,7 @@ $(document).ready(function()
         
         if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
 	{
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id},
+            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:<?=$mainactions->UserId()?>},
 	    function(data,status)
 	    {
 		    alert("Data: " + data + "\nStatus: " + status);
@@ -114,6 +116,13 @@ $(document).ready(function()
         </div>
 
         <div class="panel-body">
+            <div id="resetpwd_alert_success" class="alert alert-success" role="alert">
+		<h4>Reset password effettuato con successo!</h4>
+            </div>
+            <div id="resetpwd_alert_fail" class="alert alert-danger" role="alert">
+		<h4>Reset password fallito!</h4>
+            </div>
+            
             <table class="table table-hover" id="users_table">
 
             <?php

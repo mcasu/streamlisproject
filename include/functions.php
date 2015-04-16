@@ -23,7 +23,8 @@ switch ($fname)
         return GetCurrentLivePlayersNumber($dbactions, $stream_name);
     case "users_resetpwd":
         $userId = filter_input(INPUT_POST, 'userId');
-        return ResetUserPassword($mainactions, $dbactions, $userId);
+        $userAdminId = filter_input(INPUT_POST, 'userAdminId');
+        return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
     default:
         break;
 }
@@ -132,7 +133,7 @@ function PlayDoneEventFound($player_events, $event)
     return $play_done_found;
 }
 
-function ResetUserPassword($mainactions, $dbactions, $userId)
+function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
 {
     // Get the user data
     $userData = array();
@@ -149,10 +150,16 @@ function ResetUserPassword($mainactions, $dbactions, $userId)
     {
         return FALSE;
     }
+    $userAdminData = array();
+    
+    if (!$dbactions->GetUserById($userAdminId, $userAdminData))
+    {
+        return FALSE;
+    }
     
     $mailTo = array();
     $mailTo[] = $mainactions->admin_email;
-    $mailTo[] = $mainactions->UserEmail();
+    $mailTo[] = $userAdminData['email'];
     
     $mailSubject = $mainactions->sitename . " - Reset password utente ". $userData['name'];
     
