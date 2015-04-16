@@ -150,17 +150,20 @@ function ResetUserPassword($mainactions, $dbactions, $userId)
         return FALSE;
     }
     
-    $mailTo = array($mainactions->admin_email, $mainactions->UserEmail());
+    $mailTo = array();
+    $mailTo[] = $mainactions->admin_email;
+    $mailTo[] = $mainactions->UserEmail();
     
     $mailSubject = $mainactions->sitename . " - Reset password utente ". $userData['name'];
     
-    $mailBody = "Ciao caro fratello ". $mainactions->UserFullName() ."\r\n\r\n".
-        "La password dell'utente ". $userData['name'] . "è stata cambiata. ".
+    $mailBody = "Ciao caro fratello, \r\n\r\n".
+        "La password dell'utente ". $userData['name'] . " è stata cambiata. ".
         "Di seguito puoi vedere le sue nuove credenziali:\r\n".
+        "\r\n".
         "Username:".$userData['username']."\r\n".
         "Password: $passwordNew\r\n".
         "\r\n".
-        "L'utente potrà fare login qui: ".$mainactions->GetAbsoluteURLFolder()."/login.php\r\n".
+        "L'utente potrà fare login qui: http://www.streamlis.it/login.php\r\n".
         "\r\n".
         "\r\n".
         "Grazie per la collaborazione,\r\n".

@@ -406,9 +406,8 @@ class MainActions
             return $this->from_address;
         }
 
-        $host = $_SERVER['SERVER_NAME'];
-
-        $from ="server@streamlis.it";
+        $from ="noreply@streamlis.it";
+        
         return $from;
     } 
     
