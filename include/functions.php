@@ -152,7 +152,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId)
     
     $mailTo = array($mainactions->admin_email, $mainactions->UserEmail());
     
-    $mailSubject = $this->sitename . " - Reset password utente ". $userData['name'];
+    $mailSubject = $mainactions->sitename . " - Reset password utente ". $userData['name'];
     
     $mailBody = "Ciao caro fratello ". $mainactions->UserFullName() ."\r\n\r\n".
         "La password dell'utente ". $userData['name'] . "è stata cambiata. ".
@@ -164,7 +164,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId)
         "\r\n".
         "\r\n".
         "Grazie per la collaborazione,\r\n".
-        $this->sitename;
+        $mainactions->sitename;
     
     if (!$mainactions->SendMail($mailTo, $mailSubject, $mailBody))
     {
