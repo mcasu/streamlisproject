@@ -84,10 +84,18 @@ $(document).ready(function()
         
         if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
 	{
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:<?=$mainactions->UserId()?>},
+            $("#resetpwd_alert_success").hide();
+            $("#resetpwd_alert_fail").hide();
+    
+            var userAdminId = $('.inputUserData').attr('id');
+            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:userAdminId},
 	    function(data,status)
 	    {
 		    alert("Data: " + data + "\nStatus: " + status);
+                    if (status === "SUCCESS")
+                    {
+                        $("#resetpwd_alert_success").show();
+                    }
 	    });
         }
     });
@@ -116,6 +124,7 @@ $(document).ready(function()
         </div>
 
         <div class="panel-body">
+            <input class="inputUserData" id="<?=$mainactions->UserId()?>" type="hidden"/>
             <div id="resetpwd_alert_success" class="alert alert-success" role="alert">
 		<h4>Reset password effettuato con successo!</h4>
             </div>
