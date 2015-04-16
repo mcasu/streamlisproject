@@ -21,6 +21,9 @@ switch ($fname)
     case "get_current_live_players_number":
         $stream_name = filter_input(INPUT_GET, 'streamName');
         return GetCurrentLivePlayersNumber($dbactions, $stream_name);
+    case "users_resetpwd":
+        $userId = filter_input(INPUT_POST, 'userId');
+        return ResetUserPassword($mainactions, $dbactions, $userId);
     default:
         break;
 }
@@ -127,4 +130,46 @@ function PlayDoneEventFound($player_events, $event)
     }
 
     return $play_done_found;
+}
+
+function ResetUserPassword($mainactions, $dbactions, $userId)
+{
+    // Get the user data
+    $userData = array();
+    if(!$dbactions->GetUserById($userId,$userData))
+    {
+        return FALSE;
+    }
+
+    // Generate new password
+    $passwordNew = $mainactions->GenerateRandomPassword(8);
+            
+    // Save the passwordi into the database
+    if (empty($passwordNew) || !$dbactions->ChangePasswordInDB($userData,$passwordNew))
+    {
+        return FALSE;
+    }
+    
+    $mailTo = array($mainactions->admin_email, $mainactions->UserEmail());
+    
+    $mailSubject = $this->sitename . " - Reset password utente ". $userData['name'];
+    
+    $mailBody = "Ciao caro fratello ". $mainactions->UserFullName() ."\r\n\r\n".
+        "La password dell'utente ". $userData['name'] . "è stata cambiata. ".
+        "Di seguito puoi vedere le sue nuove credenziali:\r\n".
+        "Username:".$userData['username']."\r\n".
+        "Password: $passwordNew\r\n".
+        "\r\n".
+        "L'utente potrà fare login qui: ".$this->GetAbsoluteURLFolder()."/login.php\r\n".
+        "\r\n".
+        "\r\n".
+        "Grazie per la collaborazione,\r\n".
+        $this->sitename;
+    
+    if (!$mainactions->SendMail($mailTo, $mailSubject, $mailBody))
+    {
+        error_log("\ERROR - functions.php SendMail() FAILED!");
+    }
+    
+    return TRUE;
 }

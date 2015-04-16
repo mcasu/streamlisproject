@@ -384,7 +384,6 @@ class MainActions
         return true;
     }
     
-    
     function GetErrorMessage()
     {
         if(empty($this->error_message))
@@ -394,6 +393,7 @@ class MainActions
         $errormsg = nl2br(htmlentities($this->error_message));
         return $errormsg;
     }    
+    
     function HandleError($err)
     {
         $this->error_message .= $err."\r\n";
@@ -417,6 +417,41 @@ class MainActions
         $retvar = md5($this->rand_key);
         $retvar = 'usr_'.substr($retvar,0,10);
         return $retvar;
+    }
+    
+    function GenerateRandomPassword($length)
+    {
+        if (empty($length))
+        {
+            return FALSE;
+        }
+        
+        // Characters to use for the password
+        $str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-+=_,!@$#*%<>[]{}";
+
+        // Desired length of the password
+        $pwlen = (int)$length;
+
+        // Length of the string to take characters from
+        $len = strlen($str);
+
+        // RANDOM.ORG - We are pulling our list of random numbers as a 
+        // single request, instead of iterating over each character individually
+        $uri = "http://www.random.org/integers/?";
+        $random = file_get_contents(
+            $uri ."num=$pwlen&min=0&max=".($len-1)."&col=1&base=10&format=plain&rnd=new"
+        );
+        $indexes = explode("\n", $random);
+        array_pop(&$indexes);
+
+        // We now have an array of random indexes which we will use to build our password
+        $pw = '';
+        foreach ($indexes as $int){
+            $pw .= substr($str, $int, 1);
+        }
+
+        // Password is stored in `$pw`
+        return $pw;
     }
     
     function ResetUserPasswordInDB($user_rec)
@@ -556,6 +591,27 @@ class MainActions
         }
         return true;
     }    
+    
+    function SendMail($mailTo, $mailSubject, $mailBody)
+    {
+        $mailer = new PHPMailer();
+        $mailer->CharSet = 'utf-8';
+
+        foreach ($mailTo as $address) 
+        {
+            $mailer->AddAddress($address);
+        }
+        
+        $mailer->Subject = $mailSubject;
+        $mailer->From = $this->GetFromAddress();
+        $mailer->Body = $mailBody;
+        
+        if(!$mailer->Send())
+        {
+            return false;
+        }
+        return true;
+    }
     
     function ValidateRegistrationSubmission()
     {
