@@ -25,7 +25,8 @@ $(document).ready(function()
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
-        "order": [[ 0, 'asc' ]]
+        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+        "order": [[ 1, 'asc' ]]
     });
     
     $("#btn_group_delete").prop('disabled', true);
@@ -129,7 +130,16 @@ $(document).ready(function()
 				    echo '<td>' . $values[0] . '</td>';
 				    echo '<td>' . $values[1] . '</td>';
 				    echo '<td>' . $values[2] . '</td>';
-				    echo '<td>' . $values[3] . '</td>';
+                                    echo '<td>';
+                                        if ($values[3] == "publisher")
+                                        {
+                                            echo '<span class="label label-warning">' . $values[3] . '</span>';
+                                        }
+                                        else
+                                        {
+                                            echo '<span class="label label-default">' . $values[3] . '</span>';
+                                        }
+                                    echo '</td>';
 				    echo '<td>' . $values[4] . '</td>';
 			echo '</tr>';
 		    }
