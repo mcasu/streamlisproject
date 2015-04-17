@@ -48,7 +48,7 @@ $(document).ready(function()
             
             var role = selectedRow.find(".userRole").attr('name');
             alert("ROLE: " + role);
-            if (role === "viewer")
+            if (role === "normal")
             {
                 $("#btn_user_resetpwd").show();
             }
