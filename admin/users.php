@@ -49,7 +49,6 @@ $(document).ready(function()
 	    $("#btn_user_delete").prop('disabled', false);
             
             var role = selectedRow.find(".userRole").attr('name');
-            alert("ROLE: " + role);
             if (role === "normal")
             {
                 $("#btn_user_resetpwd").show();
