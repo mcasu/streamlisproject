@@ -167,7 +167,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
         "La password dell'utente ". $userData['name'] . " è stata cambiata. ".
         "Di seguito puoi vedere le sue nuove credenziali:\r\n".
         "\r\n".
-        "Username:".$userData['username']."\r\n".
+        "Username: ".$userData['username']."\r\n".
         "Password: $passwordNew\r\n".
         "\r\n".
         "L'utente potrà fare login qui: http://www.streamlis.it/login.php\r\n".
