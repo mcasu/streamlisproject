@@ -598,8 +598,8 @@ class MainActions
 
         foreach ($mailTo as $address) 
         {
-            error_log("INFO SendMail() - [" . $address . "]");
-            $mailer->AddAddress($address);
+            error_log("INFO SendMail() - [" . $address['email'] . "] [" . $address['name'] . "]");
+            $mailer->AddAddress($address['email'], $address['name']);
         }
         
         $mailer->Subject = $mailSubject;

@@ -158,8 +158,8 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     }
     
     $mailTo = array();
-    $mailTo[] = $mainactions->admin_email;
-    $mailTo[] = $userAdminData['email'];
+    $mailTo[] = array("email" => $mainactions->admin_email, "name" => "admin");
+    $mailTo[] = array("email" => $userAdminData['email'], "name" => $userAdminData['name']);
     
     $mailSubject = $mainactions->sitename . " - Reset password utente ". $userData['name'];
     
