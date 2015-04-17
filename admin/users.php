@@ -129,11 +129,13 @@ $(document).ready(function()
 
         <div class="panel-body">
             <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
-            <div id="resetpwd_alert_success" class="alert alert-success" role="alert">
-		<h4>Reset password effettuato con successo!</h4>
+            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password effettuato con successo!</h3>
             </div>
-            <div id="resetpwd_alert_fail" class="alert alert-danger" role="alert">
-		<h4>Reset password fallito!</h4>
+            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password fallito!</h3>
             </div>
             
             <table class="table table-hover" id="users_table">
@@ -153,7 +155,6 @@ $(document).ready(function()
                             echo '<th>USERNAME</th>';
                             echo '<th>CONGREGAZIONE</th>';
                             echo '<th>TIPO</th>';
-                            echo '<th>CONFERMATO</th>';
                         echo '</tr>';
                     echo '</thead>';
                     
@@ -167,7 +168,6 @@ $(document).ready(function()
                         $values[3]=$row['username'];
                         $values[4]=$row['user_group_name'];
                         $values[5]=$row['user_role_name'];
-                        $values[6]=$row['confirmcode']=="y"?"SI":"NO";
 
                         echo '<tr class="users_table" id="' .$values[1].'">';
                                     echo '<td><input type="radio" name="user_selected" /></td>';
@@ -176,8 +176,20 @@ $(document).ready(function()
                                     echo '<td>' . $values[2] . '</td>';
                                     echo '<td>' . $values[3] . '</td>';
                                     echo '<td>' . $values[4] . '</td>';
-                                    echo '<td>' . $values[5] . '</td>';
-                                    echo '<td>' . $values[6] . '</td>';
+                                    echo '<td>';
+                                        if ($values[5] == "admin")
+                                        {
+                                            echo '<span class="label label-success">' . $values[5] . '</span>';
+                                        }
+                                        elseif ($values[5] == "publisher")
+                                        {
+                                            echo '<span class="label label-warning">' . $values[5] . '</span>';
+                                        }
+                                        else
+                                        {
+                                            echo '<span class="label label-default">' . $values[5] . '</span>';
+                                        }
+                                    echo '</td>';
                         echo '</tr>';
                         
                         $index++;
