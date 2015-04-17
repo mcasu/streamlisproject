@@ -183,7 +183,12 @@ $(document).ready(function()
                         $values[3]=$row['username'];
                         $values[4]=$row['group_name'];
                         $values[5]=$row['role_name'];
-
+                        
+                        if ($values[5] == "admin")
+                        {
+                            continue;
+                        }
+                        
                         echo '<tr class="users_table" id="' .$values[1].'">';
                                     echo '<td><input type="radio" name="user_selected" /></td>';
                                     echo '<td>' . $values[0] . '</td>';
