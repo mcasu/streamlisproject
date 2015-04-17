@@ -25,7 +25,8 @@ $(document).ready(function()
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
-        "order": [[ 0, 'asc' ], [ 4, 'asc' ]]
+        "order": [[ 0, 'asc' ], [ 4, 'asc' ]],
+        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }]
     });
     
     $("#btn_user_delete").prop('disabled', true);
@@ -148,7 +149,7 @@ $(document).ready(function()
                 {
                     echo '<thead>';
                         echo '<tr class="head">';
-                            echo'<th class="nosort"></th>';
+                            echo'<th></th>';
                             echo '<th>NOME</th>';
                             echo '<th>ID</th>';
                             echo '<th>MAIL</th>';
