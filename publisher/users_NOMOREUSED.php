@@ -25,19 +25,13 @@ $(document).ready(function()
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
-        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 1, 'asc' ], [ 4, 'asc' ]]
+        "order": [[ 0, 'asc' ], [ 4, 'asc' ]]
     });
     
     $("#btn_user_delete").prop('disabled', true);
-    $("#btn_user_resetpwd").hide();
-    $("#resetpwd_alert_success").hide();
-    $("#resetpwd_alert_fail").hide();
     
     $("input:radio").click(function(lastSelectedRow)
     {
-        $("#btn_user_resetpwd").hide();
-        
 	$("#users_table").find("tr").removeClass("active");
 	
 	var isChecked = $(this).prop("checked");
@@ -47,12 +41,6 @@ $(document).ready(function()
 	{
 	    selectedRow.addClass("active");
 	    $("#btn_user_delete").prop('disabled', false);
-            
-            var role = selectedRow.find(".userRole").attr('name');
-            if (role === "normal")
-            {
-                $("#btn_user_resetpwd").show();
-            }
 	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
 	}
 	else
@@ -72,7 +60,7 @@ $(document).ready(function()
 	
 	if (confirm("Vuoi davvero eliminare l'utente con ID [" + tr_id + "]?"))
 	{
-	    $.post("user_delete.php",{user_id:tr_id},
+	    $.post("user_delete.php",{user_id:tr_id,},
 	    function(data,status)
 	    {
 		    //alert("Data: " + data + "\nStatus: " + status);
@@ -85,32 +73,6 @@ $(document).ready(function()
 	}
     });
 
-    $("#btn_user_resetpwd").click(function()
-    {
-        var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
-	var tr_id=tr_obj.attr('id');
-        
-        if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
-	{
-            $("#resetpwd_alert_success").hide();
-            $("#resetpwd_alert_fail").hide();
-    
-            var userAdminId = $('.inputUserData').attr('id');
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:userAdminId},
-	    function(data,status)
-	    {
-		    //alert("Data: " + data + "\nStatus: " + status);
-                    if (status === "success")
-                    {
-                        $("#resetpwd_alert_success").show();
-                    }
-                    else
-                    {
-                        $("#resetpwd_alert_fail").show();
-                    }
-	    });
-        }
-    });
     
 });
 
@@ -135,22 +97,9 @@ $(document).ready(function()
 
         <div class="panel-heading">
             <button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button>
-            <button type="button" class="btn btn-primary" id="btn_user_resetpwd">Reset password</button>
         </div>
 
         <div class="panel-body">
-            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
-            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password effettuato con successo!</h3>
-                <h5>Le nuove credenziali sono state spedite al tuo account di posta elettronica.</h5>
-            </div>
-            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password fallito!</h3>
-                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
-            </div>
-            
             <table class="table table-hover" id="users_table">
 
             <?php
@@ -170,11 +119,11 @@ $(document).ready(function()
                             echo '<th>USERNAME</th>';
                             echo '<th>CONGREGAZIONE</th>';
                             echo '<th>TIPO</th>';
+                            echo '<th>CONFERMATO</th>';
                         echo '</tr>';
                     echo '</thead>';
-                    
+
                     echo '<tbody>';
-                    $index = 0;
                     while ($row = mysql_fetch_array($result))
                     {
                         $values[0]=$row['name'];
@@ -183,6 +132,7 @@ $(document).ready(function()
                         $values[3]=$row['username'];
                         $values[4]=$row['group_name'];
                         $values[5]=$row['role_name'];
+                        $values[6]=$row['confirmcode']=="y"?"SI":"NO";
 
                         echo '<tr class="users_table" id="' .$values[1].'">';
                                     echo '<td><input type="radio" name="user_selected" /></td>';
@@ -191,33 +141,18 @@ $(document).ready(function()
                                     echo '<td>' . $values[2] . '</td>';
                                     echo '<td>' . $values[3] . '</td>';
                                     echo '<td>' . $values[4] . '</td>';
-                                    echo '<td class="userRole" name="' . $values[5] . '">';
-                                        if ($values[5] == "admin")
-                                        {
-                                            echo '<span class="label label-success">' . $values[5] . '</span>';
-                                        }
-                                        elseif ($values[5] == "publisher")
-                                        {
-                                            echo '<span class="label label-warning">' . $values[5] . '</span>';
-                                        }
-                                        else
-                                        {
-                                            echo '<span class="label label-default">' . $values[5] . '</span>';
-                                        }
-                                    echo '</td>';
+                                    echo '<td>' . $values[5] . '</td>';
+                                    echo '<td>' . $values[6] . '</td>';
                         echo '</tr>';
-                        
-                        $index++;
                     }
                     echo '</tbody>';
-
                 }
+                
             }
             catch (Exception $e) 
             {
                 error_log('ERROR - Publisher users.php - '.$e->getMessage());
-            }                
-
+            }
             ?>
             </table>
         </div>
