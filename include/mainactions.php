@@ -598,6 +598,7 @@ class MainActions
 
         foreach ($mailTo as $address) 
         {
+            error_log("INFO SendMail() - [" . $address . "]");
             $mailer->AddAddress($address);
         }
         

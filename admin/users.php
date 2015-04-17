@@ -91,10 +91,14 @@ $(document).ready(function()
             $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:userAdminId},
 	    function(data,status)
 	    {
-		    alert("Data: " + data + "\nStatus: " + status);
+		    //alert("Data: " + data + "\nStatus: " + status);
                     if (status === "success")
                     {
                         $("#resetpwd_alert_success").show();
+                    }
+                    else
+                    {
+                        $("#resetpwd_alert_fail").show();
                     }
 	    });
         }
