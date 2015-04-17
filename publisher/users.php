@@ -49,7 +49,7 @@ $(document).ready(function()
 	    $("#btn_user_delete").prop('disabled', false);
             
             var role = selectedRow.find(".userRole").attr('name');
-            if (role === "normal")
+            if (role === "normal" || role === "viewer")
             {
                 $("#btn_user_resetpwd").show();
             }
