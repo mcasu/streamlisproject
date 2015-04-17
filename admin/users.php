@@ -36,6 +36,8 @@ $(document).ready(function()
     
     $("input:radio").click(function(lastSelectedRow)
     {
+        $("#btn_user_resetpwd").hide();
+        
 	$("#users_table").find("tr").removeClass("active");
 	
 	var isChecked = $(this).prop("checked");
