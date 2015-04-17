@@ -92,7 +92,7 @@ $(document).ready(function()
 	    function(data,status)
 	    {
 		    alert("Data: " + data + "\nStatus: " + status);
-                    if (status === "SUCCESS")
+                    if (status === "success")
                     {
                         $("#resetpwd_alert_success").show();
                     }
@@ -124,7 +124,7 @@ $(document).ready(function()
         </div>
 
         <div class="panel-body">
-            <input class="inputUserData" id="<?=$mainactions->UserId()?>" type="hidden"/>
+            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
             <div id="resetpwd_alert_success" class="alert alert-success" role="alert">
 		<h4>Reset password effettuato con successo!</h4>
             </div>
