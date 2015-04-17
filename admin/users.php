@@ -140,10 +140,12 @@ $(document).ready(function()
             <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h3>Reset password effettuato con successo!</h3>
+                <h5>Le nuove credenziali sono state spedite al tuo account di posta elettronica.</h5>
             </div>
             <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h3>Reset password fallito!</h3>
+                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
             </div>
             
             <table class="table table-hover" id="users_table">
