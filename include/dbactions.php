@@ -952,6 +952,14 @@ class DBActions
                     $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
                     return false;
                 }
+                
+                $delete_query = 'delete from users where user_group_id = \''.$group_id.'\'';
+		$result = mysql_query($delete_query ,$this->connection);
+		if(!$result)
+                {
+                    $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+                    return false;
+                }
 		
                 return $result;
         }
