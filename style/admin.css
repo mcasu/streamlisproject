@@ -23,6 +23,7 @@
 
 .table > tbody > tr.active > td {
     color: #fff;
+    font-weight: bold;
 }
 .table-hover > tbody > tr.active:hover > td {
   color: #fff;
