@@ -148,7 +148,7 @@ $(document).ready(function()
                 {
                     echo '<thead>';
                         echo '<tr class="head">';
-                            echo'<th></th>';
+                            echo'<th class="nosort"></th>';
                             echo '<th>NOME</th>';
                             echo '<th>ID</th>';
                             echo '<th>MAIL</th>';
