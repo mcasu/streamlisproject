@@ -184,7 +184,7 @@ $(document).ready(function()
                         $values[4]=$row['group_name'];
                         $values[5]=$row['role_name'];
                         
-                        if ($values[5] == "admin")
+                        if ($values[5] == "admin" || $values[5] == "publisher")
                         {
                             continue;
                         }
