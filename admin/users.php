@@ -30,7 +30,7 @@ $(document).ready(function()
     });
     
     $("#btn_user_delete").prop('disabled', true);
-    $("#btn_user_resetpwd").prop('disabled', true);
+    $("#btn_user_resetpwd").hide();
     $("#resetpwd_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
@@ -45,7 +45,13 @@ $(document).ready(function()
 	{
 	    selectedRow.addClass("active");
 	    $("#btn_user_delete").prop('disabled', false);
-            $("#btn_user_resetpwd").prop('disabled', false);
+            
+            var role = selectedRow.find(".userRole").attr('name');
+            alert("ROLE: " + role);
+            if (role === "viewer")
+            {
+                $("#btn_user_resetpwd").show();
+            }
 	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
 	}
 	else
@@ -177,7 +183,7 @@ $(document).ready(function()
                                     echo '<td>' . $values[2] . '</td>';
                                     echo '<td>' . $values[3] . '</td>';
                                     echo '<td>' . $values[4] . '</td>';
-                                    echo '<td>';
+                                    echo '<td class="userRole" name="' . $values[5] . '">';
                                         if ($values[5] == "admin")
                                         {
                                             echo '<span class="label label-success">' . $values[5] . '</span>';
