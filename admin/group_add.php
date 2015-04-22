@@ -148,9 +148,20 @@ jQuery(document).ready(function ()
         {
             $('#label_group_role_name').show();
             $('#group_role_name').show();
+            
+            $('#group_role_name').rules("add", {
+                required: true,
+                range: ["publisher", "viewer"],
+                messages: {
+                    required: "Campo obbligatorio",
+                    range: "Selezionare un ruolo valido (publisher o viewer)."
+                }
+            });
         }
         else
         {
+            $('#group_role_name').rules("remove", "required range");
+            
             $('#label_group_role_name').hide();
             $('#group_role_name').hide();        
         }
