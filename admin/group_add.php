@@ -142,31 +142,6 @@ jQuery(document).ready(function ()
     $('#group_role_name').show();
     $('#group_role_name').val('Nessuno');
     
-    $('#group_type').on('change', function() 
-    {
-        if ( $(this).val() === "Congregazione")
-        {
-            $('#label_group_role_name').show();
-            $('#group_role_name').show();
-            
-            $('#group_role_name').rules("add", {
-                required: true,
-                equals: ["publisher", "viewer"],
-                messages: {
-                    required: "Campo obbligatorio",
-                    equals: "Selezionare un ruolo valido (publisher o viewer)."
-                }
-            });
-        }
-        else
-        {
-            $('#group_role_name').rules("remove", "required range");
-            
-            $('#label_group_role_name').hide();
-            $('#group_role_name').hide();        
-        }
-    });
-    
     $('#create_group_form').validate(
     {
 	rules: {
@@ -193,6 +168,31 @@ jQuery(document).ready(function ()
         messages: {
             required: "Campo obbligatorio",
             equals: "Selezionare un ruolo valido (publisher o viewer)."
+        }
+    });    
+    
+    $('#group_type').on('change', function() 
+    {
+        if ( $(this).val() === "Congregazione")
+        {
+            $('#label_group_role_name').show();
+            $('#group_role_name').show();
+            
+            $('#group_role_name').rules("add", {
+                required: true,
+                equals: ["publisher", "viewer"],
+                messages: {
+                    required: "Campo obbligatorio",
+                    equals: "Selezionare un ruolo valido (publisher o viewer)."
+                }
+            });
+        }
+        else
+        {
+            $('#group_role_name').rules("remove", "required range");
+            
+            $('#label_group_role_name').hide();
+            $('#group_role_name').hide();        
         }
     });
 
