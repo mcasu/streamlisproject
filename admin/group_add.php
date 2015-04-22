@@ -186,6 +186,15 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
+    
+    $('#group_role_name').rules("add", {
+        required: true,
+        range: ["publisher", "viewer"],
+        messages: {
+            required: "Campo obbligatorio",
+            range: "Selezionare un ruolo valido (publisher o viewer)."
+        }
+    });
 
     if( $('.alert').is(':visible') )
     {
