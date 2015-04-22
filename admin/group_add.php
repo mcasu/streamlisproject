@@ -137,6 +137,9 @@ if(isset($_POST['submitted']))
     
 jQuery(document).ready(function ()
 {
+    $('#label_group_role_name').show();
+    $('#group_role_name').show();
+    
     $('#group_type').on('change', function() 
     {
         if ( $(this).val() === "Congregazione")
@@ -183,11 +186,7 @@ jQuery(document).ready(function ()
     }
     $('.btn_action_reload').click(function()
     {
-	var url = "group_add.php";
-        
-        $('#label_group_role_name').show();
-        $('#group_role_name').show();
-        
+	var url = "group_add.php";        
 	$(location).attr('href',url);
     });
 
