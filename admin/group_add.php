@@ -153,11 +153,11 @@ jQuery(document).ready(function ()
 	rules: {
 	    group_name: {
 		required: true,
-		minlength: 4,
-                messages: {
-                    required: "Campo obbligatorio"
-                }
-	    }
+		minlength: 4
+	    },
+            messages: {
+                required: "Campo obbligatorio"
+            }
 	},
 	
 	highlight: function(element)
