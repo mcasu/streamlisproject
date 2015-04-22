@@ -142,7 +142,16 @@ jQuery(document).ready(function ()
     
     $('#group_type').on('change', function() 
     {
-        alert("VALUE: " + $(this).val());
+        if ( $(this).val() === "Congregazione")
+        {
+            $('#label_group_role_name').show();
+            $('#group_role_name').show();
+        }
+        else
+        {
+            $('#label_group_role_name').hide();
+            $('#group_role_name').hide();        
+        }
     });
     
     $('#create_group_form').validate(
