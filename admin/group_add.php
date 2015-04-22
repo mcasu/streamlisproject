@@ -184,10 +184,11 @@ jQuery(document).ready(function ()
     $('.btn_action_reload').click(function()
     {
 	var url = "group_add.php";
-	$(location).attr('href',url);
         
         $('#label_group_role_name').show();
         $('#group_role_name').show();
+        
+	$(location).attr('href',url);
     });
 
 });
