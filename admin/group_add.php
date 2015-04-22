@@ -154,7 +154,7 @@ jQuery(document).ready(function ()
                 range: ["publisher", "viewer"],
                 messages: {
                     required: "Campo obbligatorio",
-                    range: "Selezionare un ruolo valido (publisher o viewer)."
+                    equals: "Selezionare un ruolo valido (publisher o viewer)."
                 }
             });
         }
