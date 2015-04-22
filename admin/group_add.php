@@ -138,6 +138,12 @@ if(isset($_POST['submitted']))
     
 jQuery(document).ready(function ()
 {
+    jQuery.validator.addMethod("match", function(value, element, params) {  
+            return this.optional(element) || (value === params[0] || value === params[1]);
+        } 
+        //jQuery.validator.format("Please enter the correct value for {0} + {1}")
+    );
+    
     $('#label_group_role_name').show();
     $('#group_role_name').show();
     $('#group_role_name').val('Nessuno');
@@ -164,10 +170,10 @@ jQuery(document).ready(function ()
     
     $('#group_role_name').rules("add", {
         required: true,
-        equals: ["publisher", "viewer"],
+        match: ["publisher", "viewer"],
         messages: {
             required: "Campo obbligatorio",
-            equals: "Selezionare un ruolo valido (publisher o viewer)."
+            match: "Selezionare un ruolo valido (publisher o viewer)."
         }
     });    
     
@@ -180,10 +186,10 @@ jQuery(document).ready(function ()
             
             $('#group_role_name').rules("add", {
                 required: true,
-                equals: ["publisher", "viewer"],
+                match: ["publisher", "viewer"],
                 messages: {
                     required: "Campo obbligatorio",
-                    equals: "Selezionare un ruolo valido (publisher o viewer)."
+                    match: "Selezionare un ruolo valido (publisher o viewer)."
                 }
             });
         }
