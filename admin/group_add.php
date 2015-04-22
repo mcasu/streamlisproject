@@ -200,6 +200,7 @@ jQuery(document).ready(function ()
             $('#label_group_role_name').hide();
             $('#group_role_name').hide();        
         }
+        $('label.error').hide();
     });
 
     if( $('.alert').is(':visible') )
