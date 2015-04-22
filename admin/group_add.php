@@ -140,7 +140,7 @@ jQuery(document).ready(function ()
     $('#label_group_role_name').hide();
     $('#group_role_name').hide();
     
-    $('#group_role_name').on('change', function() 
+    $('#group_type').on('change', function() 
     {
         alert("VALUE: " + $(this).val());
     });
