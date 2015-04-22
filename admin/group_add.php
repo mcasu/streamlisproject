@@ -95,7 +95,7 @@ if(isset($_POST['submitted']))
 	<br/>
 
 	<!-- CAMPO RUOLO DELLA CONGREGAZIONEs -->
-        <label for='group_roles' >Ruolo della congregazione:</label><br/>
+        <label id="label_group_role_name" for='group_roles' >Ruolo della congregazione:</label><br/>
         <select class="form-control" name="group_role_name" id="group_role_name">
 	    <?php
 		try
@@ -137,6 +137,14 @@ if(isset($_POST['submitted']))
     
 jQuery(document).ready(function ()
 {
+    $('#label_group_role_name').hide();
+    $('#group_role_name').hide();
+    
+    $('#group_role_name').on('change', function() 
+    {
+        alert("VALUE: " + $(this).val());
+    });
+    
     $('#create_group_form').validate(
     {
 	rules: {
