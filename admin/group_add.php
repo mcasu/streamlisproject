@@ -185,6 +185,9 @@ jQuery(document).ready(function ()
     {
 	var url = "group_add.php";
 	$(location).attr('href',url);
+        
+        $('#label_group_role_name').show();
+        $('#group_role_name').show();
     });
 
 });
