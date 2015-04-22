@@ -154,7 +154,7 @@ jQuery(document).ready(function ()
 	    group_name: {
 		required: true,
 		minlength: 4,
-                messages {
+                messages: {
                     required: "Campo obbligatorio"
                 }
 	    }
