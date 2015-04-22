@@ -106,7 +106,8 @@ if(isset($_POST['submitted']))
 		    {
 			    error_log("No Results");
 		    }
-	    
+                    
+                    echo '<option value="Nessuno">-- Seleziona il ruolo della congregazione --</option>';
 		    while($row = mysql_fetch_array($result))
 		    {
 			    $group_role_name=$row['group_role_name'];
@@ -139,6 +140,7 @@ jQuery(document).ready(function ()
 {
     $('#label_group_role_name').show();
     $('#group_role_name').show();
+    $('#group_role_name').val('Nessuno');
     
     $('#group_type').on('change', function() 
     {

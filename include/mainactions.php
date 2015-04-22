@@ -667,7 +667,7 @@ class MainActions
         $groupvars['group_type'] = $this->utilsInstance->Sanitize($_POST['group_type']);
         if (!isset($_POST['group_role_name']) || empty($_POST['group_role_name']))
         {
-            $groupvars['group_role_name'] = "viewer";
+            $groupvars['group_role_name'] = "Nessuno";
         }
         else
         {
