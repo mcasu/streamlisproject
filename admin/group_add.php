@@ -151,7 +151,7 @@ jQuery(document).ready(function ()
             
             $('#group_role_name').rules("add", {
                 required: true,
-                range: ["publisher", "viewer"],
+                equals: ["publisher", "viewer"],
                 messages: {
                     required: "Campo obbligatorio",
                     equals: "Selezionare un ruolo valido (publisher o viewer)."
@@ -189,10 +189,10 @@ jQuery(document).ready(function ()
     
     $('#group_role_name').rules("add", {
         required: true,
-        range: ["publisher", "viewer"],
+        equals: ["publisher", "viewer"],
         messages: {
             required: "Campo obbligatorio",
-            range: "Selezionare un ruolo valido (publisher o viewer)."
+            equals: "Selezionare un ruolo valido (publisher o viewer)."
         }
     });
 
