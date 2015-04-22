@@ -137,9 +137,6 @@ if(isset($_POST['submitted']))
     
 jQuery(document).ready(function ()
 {
-    $('#label_group_role_name').hide();
-    $('#group_role_name').hide();
-    
     $('#group_type').on('change', function() 
     {
         if ( $(this).val() === "Congregazione")
