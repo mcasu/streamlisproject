@@ -196,7 +196,6 @@ jQuery(document).ready(function ()
         $('#group_role_name').show();
     });
 
-
 });
 </script>
 
