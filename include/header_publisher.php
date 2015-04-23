@@ -39,7 +39,7 @@
                    </a>
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='groups.php'><span>Visualizza congregazioni</span></a></li>
-                      <!--<li><a href='group_add.php'><span>Aggiungi congregazione</span></a></li>-->
+                      <li><a href='group_add.php'><span>Aggiungi congregazione</span></a></li>
                    </ul>
                 </li>
 
