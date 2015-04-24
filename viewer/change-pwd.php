@@ -33,59 +33,62 @@ if(isset($_POST['submitted']))
 
 <div class="container-fluid">
     <div class="panel panel-primary">
-    <form role="form" id='changepwd' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-        <fieldset>
-    
-            <input type='hidden' name='submitted' id='submitted' value='1'/>
-            
-            <?php
+        
+    <div class="panel-body">
+        <form role="form" id='changepwd' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
+            <fieldset>
 
-                if ($PasswordChanged)
-                {
-                        echo '<br/><div class="alert alert-success" role="alert">';
-                            echo '<h4>Password cambiata con successo!</h4>';
-                            echo '<br/>';
-                            echo '<p>';
-                                echo '<a href="logout.php">Ritorna alla pagina di login.</a>';
-                            echo '</p>';
+                <input type='hidden' name='submitted' id='submitted' value='1'/>
+
+                <?php
+
+                    if ($PasswordChanged)
+                    {
+                            echo '<br/><div class="alert alert-success" role="alert">';
+                                echo '<h4>Password cambiata con successo!</h4>';
+                                echo '<br/>';
+                                echo '<p>';
+                                    echo '<a href="logout.php">Ritorna alla pagina di login.</a>';
+                                echo '</p>';
+                            echo '</div>';
+                    }
+                    elseif(isset($PasswordChanged))
+                    {
+                        echo '<br/><div class="alert alert-danger" role="alert">';
+                            echo '<h4><b>Procedura di cambio password fallita!</b></h4>';
+                            echo '<i>'.$mainactions->GetErrorMessage().'</i>';
+                            echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
+                            echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
                         echo '</div>';
-                }
-                elseif(isset($PasswordChanged))
-                {
-                    echo '<br/><div class="alert alert-danger" role="alert">';
-                        echo '<h4><b>Procedura di cambio password fallita!</b></h4>';
-                        echo '<i>'.$mainactions->GetErrorMessage().'</i>';
-                        echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
-                        echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
-                    echo '</div>';
-                }
-            ?>
- 
-            <div class="form-group">
-                <div class="control-group">
-                    <!-- CAMPO PASSWORD ATTUALE -->
-                    <label for='oldpassword' >Password attuale:</label><br/>
-                    <div class="controls">
-                        <input required autofocus type="password" class="form-control" placeholder="Password attuale" name='oldpassword' id='oldpassword' maxlength="128" /><br/>
+                    }
+                ?>
+
+                <div class="form-group">
+                    <div class="control-group">
+                        <!-- CAMPO PASSWORD ATTUALE -->
+                        <label for='oldpassword' >Password attuale:</label><br/>
+                        <div class="controls">
+                            <input required autofocus type="password" class="form-control" placeholder="Password attuale" name='oldpassword' id='oldpassword' maxlength="128" /><br/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <!-- CAMPO PASSWORD NUOVA -->
+                        <label for='newpassword' >Password nuova:</label><br/>
+                        <div class="controls">
+                            <input required type="password" class="form-control" placeholder="Password nuova" name='newpassword' id='newpassword' maxlength="128"/><br/>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <!-- CAMPO PASSWORD NUOVA -->
-                    <label for='newpassword' >Password nuova:</label><br/>
-                    <div class="controls">
-                        <input required type="password" class="form-control" placeholder="Password nuova" name='newpassword' id='newpassword' maxlength="128"/><br/>
-                    </div>
+
+                <br/><br/>
+                <div class="form-group btn_actions">
+                            <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Cambia la password</button>
+                            <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
                 </div>
-            </div>
-            
-            <br/><br/>
-            <div class="form-group btn_actions">
-                        <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Cambia la password</button>
-                        <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
-            </div>
-    
-        </fieldset>
-    </form>
+
+            </fieldset>
+        </form>
+    </div>
     
     </div>
     
