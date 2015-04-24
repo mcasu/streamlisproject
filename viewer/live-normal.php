@@ -39,10 +39,6 @@ $('.play-button').click(function (event){
 
 <body>
 <?php include("../include/header_viewer.php"); ?>
-<br/>
-
-<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
-<p><h4> La tua congregazione è <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <h2>ELENCO EVENTI LIVE:</h2>
 

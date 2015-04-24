@@ -61,10 +61,6 @@ $(document).ready(function()
 
 <body>
 <?php include("../include/header_admin.php"); ?>
-<br/>
-
-<h5 class="pull-right" style="margin-right: 3px;"><b><?= $mainactions->UserFullName(); ?></b>, bentornato! </h5>
-<p><h4 style="margin-left:4px;"> La tua congregazione e' <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 
 <h2>ELENCO EVENTI LIVE:</h2>
 
