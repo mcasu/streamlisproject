@@ -103,7 +103,7 @@ jQuery(document).ready(function ()
     {
 	minChar: 8,
 	bootstrap3: true,
-	usernameField: "#newpassword",
+	usernameField: "#username",
     };
     
     options.rules =
