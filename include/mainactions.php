@@ -236,7 +236,6 @@ class MainActions
 	    }
 
 	    return $_SESSION[$this->GetSessionVarName()]['user_role_id']; 
-	    
     }
 
     function GetFSActionsInstance() 
@@ -676,7 +675,6 @@ class MainActions
         }
     }
     
-    
     function SendUserConfirmationEmail(&$uservars)
     {
         $mailer = new PHPMailer();
@@ -717,6 +715,7 @@ class MainActions
         }
         return true;
     }
+    
     function GetAbsoluteURLFolder()
     {
         $scriptFolder = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';

@@ -71,7 +71,20 @@
 
 <h5 class="pull-right" style="margin-right: 3px;">
     <b>
-        <?php echo '<span class="label label-info">' . $mainactions->UserFullName() . '</span>'; ?>
+        <?php 
+        switch($mainactions->GetSessionUserRole())
+        {
+            case "1":
+                echo '<span class="label label-success">' . $mainactions->UserFullName() . '</span>';
+                break;
+            case "2":
+                echo '<span class="label label-default">' . $mainactions->UserFullName() . '</span>';
+                break;
+            case "3":
+                echo '<span class="label label-warning">' . $mainactions->UserFullName() . '</span>';
+                break;
+        }
+        ?>
     </b>, bentornato! 
 </h5>
 
