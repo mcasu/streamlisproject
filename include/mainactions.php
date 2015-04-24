@@ -111,12 +111,6 @@ class MainActions
 	
         $uservars['user_id'] = $this->utilsInstance->Sanitize($user_id);
 	
-//        if(!$this->SendUserConfirmationEmail($uservars))
-//        {
-//	    $this->dbactionsInstance->DeleteUser($uservars['user_id']);
-//            return false;
-//        }
-
         $this->SendAdminIntimationEmail($uservars);
         
         return true;
@@ -658,7 +652,14 @@ class MainActions
         $uservars['username'] = $this->utilsInstance->Sanitize($_POST['username']);
         $uservars['password'] = $this->utilsInstance->Sanitize($_POST['password']);
         $uservars['group_name'] = $this->utilsInstance->Sanitize($_POST['group_name']);
-        $uservars['user_role_name'] = $this->utilsInstance->Sanitize($_POST['user_role_name']);
+        if(!isset($_POST['user_role_name']) || empty($_POST['user_role_name']))
+        {
+            $uservars['user_role_name'] = "normal";
+        }
+        else
+        {
+            $uservars['user_role_name'] = $this->utilsInstance->Sanitize($_POST['user_role_name']);
+        }
     }
     
     function CollectGroupRegistrationSubmission(&$groupvars)

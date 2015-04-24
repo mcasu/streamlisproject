@@ -50,7 +50,7 @@
                    </a>
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='users.php'><span>Visualizza utenti</span></a></li>
-                      <!--<li><a href='user_add.php'><span>Aggiungi utente</span></a></li>-->
+                      <li><a href='user_add.php'><span>Aggiungi utente</span></a></li>
                    </ul>
                 </li>
 
