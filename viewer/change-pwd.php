@@ -71,7 +71,7 @@ if(isset($_POST['submitted']))
                 </div>
                 <div class="control-group">
                     <!-- CAMPO PASSWORD NUOVA -->
-                    <label for='password' >Password nuova:</label><br/>
+                    <label for='newpassword' >Password nuova:</label><br/>
                     <div class="controls">
                         <input required type="password" class="form-control" placeholder="Password nuova" name='newpassword' id='newpassword' maxlength="128"/><br/>
                     </div>
