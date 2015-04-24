@@ -128,7 +128,7 @@ jQuery(document).ready(function ()
 	
     };
     
-    $(':newpassword').pwstrength(options);
+    $('#newpassword').pwstrength(options);
     
     $('#changepwd').validate(
     {
