@@ -36,7 +36,7 @@ if(isset($_POST['submitted']))
         
     <div class="panel-body">
     <form role="form" id='changepwd' action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-        <fieldset></fieldset>
+        <fieldset>
     
             <input type='hidden' name='submitted' id='submitted' value='1'/>
             
