@@ -654,7 +654,7 @@ class MainActions
         $uservars['group_name'] = $this->utilsInstance->Sanitize($_POST['group_name']);
         if(!isset($_POST['user_role_name']) || empty($_POST['user_role_name']))
         {
-            $uservars['user_role_name'] = "normal";
+            $uservars['user_role_name'] = "viewer";
         }
         else
         {
