@@ -48,7 +48,7 @@ if(isset($_POST['submitted']))
                                 echo '<h4>Password cambiata con successo!</h4>';
                                 echo '<br/>';
                                 echo '<p>';
-                                    echo '<a href="logout.php">Ritorna alla pagina di login.</a>';
+                                    echo '<a href="../logout.php">Ritorna alla pagina di login.</a>';
                                 echo '</p>';
                             echo '</div>';
                     }
