@@ -46,7 +46,7 @@ try
     
     echo '<h4 style="margin-left:4px;">Il tuo nome stream è <b>'.
             '<span class="label label-info">' . $publishCode . '</span>';
-    echo '</b></h4>';
+    echo '</b></h4><br/>';
 
     $result = $dbactions->GetUserLoggedByLoginTime($mainactions->UserGroupId());
     if (!$result)
