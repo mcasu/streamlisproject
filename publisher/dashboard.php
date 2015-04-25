@@ -20,8 +20,8 @@
 
 <body>
 
-<?php include("../include/header_publisher.php"); ?>
-
+<?php include("../include/header_publisher.php");?>
+    
     <script type="text/javascript">
 	$(document).ready(function()
         {
@@ -42,6 +42,12 @@
 <?php
 try
 {
+    $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
+    
+    echo '<p><h4 style="margin-left:4px;">Il tuo nome stream è <b>'.
+            '<span class="label label-info">' . $publishCode . '</span>';
+    echo '</b></h4></p>';
+
     $result = $dbactions->GetUserLoggedByLoginTime($mainactions->UserGroupId());
     if (!$result)
     {
