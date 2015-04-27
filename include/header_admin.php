@@ -16,7 +16,7 @@
                 <li>
                    <a href='dashboard.php' class="active">
                          <img src="../images/dashboard.png" height="32" width="32">
-                         Dashboard <span class="caret"></span>
+                         Dashboard
                    </a>
                 </li>
 
@@ -84,28 +84,30 @@
                    </ul>
                 </li>
             </ul>
+            
+            <h5 class="pull-right" style="margin-right: 6px;">
+                <b>
+                    <?php 
+                    switch($mainactions->GetSessionUserRole())
+                    {
+                        case "1":
+                            echo '<span class="label label-success">' . $mainactions->UserFullName() . '</span>';
+                            break;
+                        case "2":
+                            echo '<span class="label label-default">' . $mainactions->UserFullName() . '</span>';
+                            break;
+                        case "3":
+                            echo '<span class="label label-warning">' . $mainactions->UserFullName() . '</span>';
+                            break;
+                    }
+                    ?>
+                </b>, bentornato! 
+            </h5>
         </div>
     </div>
 </nav>
 
-<h5 class="pull-right" style="margin-right: 3px;">
-    <b>
-        <?php 
-        switch($mainactions->GetSessionUserRole())
-        {
-            case "1":
-                echo '<span class="label label-success">' . $mainactions->UserFullName() . '</span>';
-                break;
-            case "2":
-                echo '<span class="label label-default">' . $mainactions->UserFullName() . '</span>';
-                break;
-            case "3":
-                echo '<span class="label label-warning">' . $mainactions->UserFullName() . '</span>';
-                break;
-        }
-        ?>
-    </b>, bentornato! 
-</h5>
+
 
 <p><h4 style="margin-left:4px;">La tua congregazione è <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 <br/>
