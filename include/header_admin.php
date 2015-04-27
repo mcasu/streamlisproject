@@ -16,7 +16,7 @@
                 <li>
                    <a href='dashboard.php' class="active">
                          <img src="../images/dashboard.png" height="32" width="32">
-                         Dashboard
+                         <p class="navbar-text">Dashboard</p>
                    </a>
                 </li>
 
