@@ -44,6 +44,21 @@ class MainActions
         $this->dbactionsInstance = new DBActions($host, $uname, $pwd, $database);
         $this->fsactionsInstance = new FSActions();
     }
+
+    function GetFSActionsInstance() 
+    {
+	return $this->fsactionsInstance;
+    }
+
+    function GetDBActionsInstance() 
+    {
+	return $this->dbactionsInstance;
+    }
+
+    function GetUtilsInstance() 
+    {
+	return $this->utilsInstance;
+    }
     
 /*** MEMBERS ***/
     function UserId()
@@ -72,6 +87,17 @@ class MainActions
     function UserGroupName()
     {
         return isset($_SESSION[$this->GetSessionVarName()]['user_group_name'])?$_SESSION[$this->GetSessionVarName()]['user_group_name']:'';
+    }
+    
+    function GetSessionUserRole()
+    {
+	    if(empty($_SESSION[$this->GetSessionVarName()]['user_role_id']))
+	    {
+		    $this->HandleError("User role for this session not found!");
+		    return false;
+	    }
+
+	    return $_SESSION[$this->GetSessionVarName()]['user_role_id']; 
     }
 /*** FINE MEMBERS ***/
 
@@ -111,7 +137,32 @@ class MainActions
 	
         $uservars['user_id'] = $this->utilsInstance->Sanitize($user_id);
 	
-        $this->SendAdminIntimationEmail($uservars);
+        // Sent mail 
+        $mailTo = array();
+        $mailTo[] = array("email" => $this->admin_email, "name" => "admin");
+        $mailTo[] = array("email" => $this->UserEmail(), "name" => $this->UserFullName());
+
+        $mailSubject = $this->sitename . " - Creazione nuovo utente: ".$uservars['name'];
+
+        $mailBody = "Ciao caro fratello, \r\n\r\n".
+            "Un nuovo utente è stato creato. ".
+            "Di seguito puoi vedere le sue credenziali:\r\n".
+            "\r\n".
+            "Nome completo: ".$uservars['name']."\r\n".
+            "Indirizzo email: ".$uservars['email']."\r\n\r\n".
+            "Username: ".$uservars['username']."\r\n".
+            "Password: ".$uservars['password']."\r\n".
+            "\r\n".
+            "L'utente potrà fare login qui: http://www.streamlis.it/login.php\r\n".
+            "\r\n".
+            "\r\n".
+            "Grazie per la collaborazione,\r\n".
+            $this->sitename;
+
+        if (!$this->SendMail($mailTo, $mailSubject, $mailBody))
+        {
+            error_log("\ERROR - CreateUser() SendMail() FAILED!");
+        }
         
         return true;
     }
@@ -136,26 +187,6 @@ class MainActions
         return true;
     }
 
-    function ConfirmUser()
-    {
-        if(empty($_GET['code'])||strlen($_GET['code'])<=10)
-        {
-            $this->HandleError("Please provide the confirm code");
-            return false;
-        }
-        $user_rec = array();
-        if(!$this->dbactionsInstance->UpdateDBRecForConfirmation($user_rec))
-        {
-            return false;
-        }
-        
-        $this->SendUserWelcomeEmail($user_rec);
-        
-        $this->SendAdminIntimationOnRegComplete($user_rec);
-        
-        return true;
-    }    
-    
     function Login()
     {
         if(empty($_POST['username']))
@@ -227,32 +258,6 @@ class MainActions
         return true;
     }
    
-    function GetSessionUserRole()
-    {
-	    if(empty($_SESSION[$this->GetSessionVarName()]['user_role_id']))
-	    {
-		    $this->HandleError("User role for this session not found!");
-		    return false;
-	    }
-
-	    return $_SESSION[$this->GetSessionVarName()]['user_role_id']; 
-    }
-
-    function GetFSActionsInstance() 
-    {
-	return $this->fsactionsInstance;
-    }
-
-    function GetDBActionsInstance() 
-    {
-	return $this->dbactionsInstance;
-    }
-
-    function GetUtilsInstance() 
-    {
-	return $this->utilsInstance;
-    }
-
     function LogOut()
     {
 	session_start();
@@ -457,60 +462,6 @@ class MainActions
         return $new_password;
     }
     
-    function SendUserWelcomeEmail(&$user_rec)
-    {
-        $mailer = new PHPMailer();
-        
-        $mailer->CharSet = 'utf-8';
-        
-        $mailer->AddAddress($user_rec['email'],$user_rec['name']);
-        
-        $mailer->Subject = "Benvenuto su ".$this->sitename;
-
-        $mailer->From = $this->GetFromAddress();        
-        
-        $mailer->Body ="Ciao caro fratello ".$user_rec['name']."\r\n\r\n".
-        "Benvenuto! La tua registrazione su ".$this->sitename." e' completata!.\r\n".
-        "\r\n".
-        "Saluti,\r\n".
-        "Webmaster\r\n".
-        $this->sitename;
-
-        if(!$mailer->Send())
-        {
-            $this->HandleError("Failed sending user welcome email.");
-            return false;
-        }
-        return true;
-    }
-    
-    function SendAdminIntimationOnRegComplete(&$user_rec)
-    {
-        if(empty($this->admin_email))
-        {
-            return false;
-        }
-        $mailer = new PHPMailer();
-        
-        $mailer->CharSet = 'utf-8';
-        
-        $mailer->AddAddress($this->admin_email);
-        
-        $mailer->Subject = "Registration Completed: ".$user_rec['name'];
-
-        $mailer->From = $this->GetFromAddress();         
-        
-        $mailer->Body ="A new user registered at ".$this->sitename."\r\n".
-        "Name: ".$user_rec['name']."\r\n".
-        "Email address: ".$user_rec['email']."\r\n";
-        
-        if(!$mailer->Send())
-        {
-            return false;
-        }
-        return true;
-    }
-    
     function GetResetPasswordCode($email)
     {
        return substr(md5($email.$this->sitename.$this->rand_key),0,10);
@@ -584,11 +535,12 @@ class MainActions
         return true;
     }    
     
-    function SendMail($mailTo, $mailSubject, $mailBody)
+    function SendMail($mailTo, $mailSubject, $mailBody, $isHtml = FALSE)
     {
         $mailer = new PHPMailer();
         $mailer->CharSet = 'utf-8';
-
+        $mailer->IsHTML($isHtml);
+        
         foreach ($mailTo as $address) 
         {
             if ($address['name'] == "admin")
@@ -609,38 +561,6 @@ class MainActions
         {
             return false;
         }
-        return true;
-    }
-    
-    function ValidateRegistrationSubmission()
-    {
-        //This is a hidden input field. Humans won't fill this field.
-        if(!empty($_POST[$this->utilsInstance->GetSpamTrapInputName($this->rand_key)]) )
-        {
-            //The proper error is not given intentionally
-            $this->HandleError("Automated submission prevention: case 2 failed");
-            return false;
-        }
-        
-        $validator = new FormValidator();
-        $validator->addValidation("name","req","Please fill in Name");
-        $validator->addValidation("email","email","The input for Email should be a valid email value");
-        $validator->addValidation("email","req","Please fill in Email");
-        $validator->addValidation("username","req","Please fill in UserName");
-        $validator->addValidation("password","req","Please fill in Password");
-
-        
-        if(!$validator->ValidateForm())
-        {
-            $error='';
-            $error_hash = $validator->GetErrors();
-            foreach($error_hash as $inpname => $inp_err)
-            {
-                $error .= $inpname.':'.$inp_err."\n";
-            }
-            $this->HandleError($error);
-            return false;
-        }        
         return true;
     }
     
@@ -675,82 +595,13 @@ class MainActions
         }
     }
     
-    function SendUserConfirmationEmail(&$uservars)
-    {
-        $mailer = new PHPMailer();
-        
-        $mailer->CharSet = 'utf-8';
-       	
-	$mailer->IsHTML(true);
- 
-        $mailer->AddAddress($uservars['email'],$uservars['name']);
-        
-        $mailer->Subject = "Registrazione su ".$this->sitename;
-
-        $mailer->From = $this->GetFromAddress();        
-        
-        $confirmcode = $uservars['confirmcode'];
-        
-        $confirm_url = $this->GetAbsoluteURLFolder().'/confirmreg.php?code='.$confirmcode;
-       
-	$group_name = $this->dbactionsInstance->GetGroupInfoByName($uservars['group_name']);
-	
-        $mailer->Body ="<html><body>Caro fratello <b>".$uservars['name']."</b>".
-	" della congregazione ". $uservars['group_name'].",<br/><br/>". 
-        'Grazie per la tua registrazione su '.$this->sitename."<br/><br/>".
-        'Per favore clicca sul seguente link per confermare la tua registrazione: '.
-        '<a href="'.$confirm_url.'">Conferma la tua registrazione.</a>'."<br/><br/>".
-	"Queste sono le tue credenziali di accesso:<br/>".
-	"Username:  ".$uservars['username']."<br/>".
-	"Password:  ".$uservars['password']."<br/>".
-        "<br/>".
-        "Saluti,<br/>".
-        "Webmaster<br/></body></html>".
-        $this->sitename;
-
-        if(!$mailer->Send())
-        {
-            $this->HandleError("Failed sending registration confirmation email.");
-            return false;
-        }
-        return true;
-    }
-    
     function GetAbsoluteURLFolder()
     {
         $scriptFolder = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
         $scriptFolder .= $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
         return $scriptFolder;
     }
-    
-    function SendAdminIntimationEmail(&$uservars)
-    {
-        if(empty($this->admin_email))
-        {
-            return false;
-        }
-        $mailer = new PHPMailer();
         
-        $mailer->CharSet = 'utf-8';
-        
-        $mailer->AddAddress($this->admin_email);
-        
-        $mailer->Subject = "Creazione nuovo utente: ".$uservars['name'];
-
-        $mailer->From = $this->GetFromAddress();         
-        
-        $mailer->Body ="Un nuovo utente è stato creato in ".$this->sitename."\r\n".
-        "Nome completo: ".$uservars['name']."\r\n".
-        "Indirizzo email: ".$uservars['email']."\r\n".
-        "Username: ".$uservars['username'];
-        
-        if(!$mailer->Send())
-        {
-            return false;
-        }
-        return true;
-    }
-    
     function SaveUserDataIntoDatabase(&$uservars)
     {
         if(!$this->dbactionsInstance->DBLogin())
