@@ -122,7 +122,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
             function CheckGroupStatus()
             {
                 $(".alert-danger").hide();
-                var result = CheckLiveExistsForPublishCode($('#group_publishcode').attr('id'));
+                var result = CheckLiveExistsForPublishCode($('.group_publishcode').attr('id'));
                 if (result  === "false")
                 {
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
@@ -135,7 +135,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                     $(".alert-danger").hide();
                     
                     $('#streamSelectorContainer').show();
-                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#group_publishcode').attr('id'));
+                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('.group_publishcode').attr('id'));
                     
                     $('#join').prop('disabled', false);
                 }
