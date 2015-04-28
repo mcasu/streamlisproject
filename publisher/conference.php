@@ -22,40 +22,17 @@
 
 <body>
 
-<?php include("../include/header_admin.php");
-  
-    $result = $dbactions->GetGroups();
+<?php include("../include/header_publisher.php");
 
-    if (!$result)
-    {
-        error_log("No Results");
-    }
+$publishCode = $dbactions->GetPublishCodeByGroupId();
 
-    $count=0;
-    $group_array=Array();
-    while($row = mysql_fetch_array($result))
-    {
-        $group_id=$row['group_id'];
-        $group_name=$row['group_name'];
-        $group_type=$row['group_type'];
-        $group_role_name=$row['group_role_name'];
-        $group_publish_code=$row['publish_code'];
-
-        $group_array[$group_id]=Array();
-        $group_array[$group_id]['group_id']=$row['group_id'];
-        $group_array[$group_id]['group_name']=$row['group_name'];
-        $group_array[$group_id]['group_type']=$row['group_type'];
-        $group_array[$group_id]['group_role_name']=$row['group_role_name'];
-        $group_array[$group_id]['publish_code']=$row['publish_code'];
-
-        $count++;
-    }
 ?>
     
 <div class="container-fluid">
     
     <input type="hidden" class="username" id="<?= $mainactions->UserName(); ?>"/>
     <?php echo '<input type="hidden" class="userrole" id="' . $mainactions->GetSessionUserRole() . '"/>'; ?>
+    <?php echo '<input type="hidden" class="group_publishcode" id="' . $publishCode . '"/>'; ?>
     <p>
     <div id="panelJoin" class="panel panel-default">
         
@@ -64,31 +41,10 @@
         </div>
         
         <div class="panel-body">
-            <div class="container-fluid">
-                <label for='groups' >Congregazione:</label><br/>
-                <select id="roomSelector" class="form-control" name="group_name" id="group_name">
-                <?php    
-                    foreach ($group_array AS $id => $row)
-                    {
-                        $group_id=$row['group_id'];
-                        $group_name=$row['group_name'];
-                        $group_type=$row['group_type'];
-                        $group_role_name=$row['group_role_name'];
-                        $group_publish_code=$row['publish_code'];
-
-                        if ($group_role_name=="publisher")
-                        {
-                            echo '<option value="' . $group_publish_code . '">' . $group_name . '</option>"';
-                        }
-                    }
-                ?>
-                </select>
-            </div>
-            
             <br/>
             
             <div class="alert alert-danger" role="alert">
-                <h4>La congregazione selezionata non sta trasmettendo alcuna adunanza.</h4>
+                <h4>La tua congregazione non sta trasmettendo alcuna adunanza.</h4>
             </div>
             
             <br/>
@@ -161,15 +117,12 @@
             
             CheckGroupStatus();
             
-            $('#roomSelector').on('change', function() 
-            {
-                CheckGroupStatus();
-            });
+            var auto_refresh = setInterval(CheckGroupStatus, 10000);
             
             function CheckGroupStatus()
             {
                 $(".alert-danger").hide();
-                var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
+                var result = CheckLiveExistsForPublishCode($('#group_publishcode').attr('id'));
                 if (result  === "false")
                 {
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
@@ -182,7 +135,7 @@
                     $(".alert-danger").hide();
                     
                     $('#streamSelectorContainer').show();
-                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#roomSelector').val());
+                    $('#streamSelectorContainer').load('/include/functions.php?fname=get_stream_selector_container&publishCode=' + $('#group_publishcode').attr('id'));
                     
                     $('#join').prop('disabled', false);
                 }

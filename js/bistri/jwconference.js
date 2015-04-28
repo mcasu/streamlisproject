@@ -236,7 +236,7 @@ function joinConference()
         $("#localStreamsMyVideo").hide();
         
         jwplayer("player").setup({
-                         file: "rtmp://www.jwstream.org:1935/" + appNameToView + '/' + streamNameToView,
+                         file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
                          autostart: true,
                          controls: true,
                          rtmp: {
