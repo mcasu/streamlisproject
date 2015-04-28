@@ -36,8 +36,7 @@ class MainActions
     //-----Initialization -------
     function MainActions($host, $uname, $pwd, $database)
     {
-        $this->sitename = 'YourWebsiteName.com'
-	;
+        $this->sitename = 'YourWebsiteName.com';
         $this->rand_key = '0iQx5oBk66oVZep';
 
 	$this->utilsInstance = new Utils();
