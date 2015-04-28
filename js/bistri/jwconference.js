@@ -223,7 +223,7 @@ var onBistriConferenceReady = function ()
 // when button "Join Conference Room" has been clicked
 function joinConference()
 {
-    var roomToJoin = $( "#roomSelector option:selected" ).val();
+    var roomToJoin = $('.group_publishcode').attr('id');
     //alert("Join to room: " + roomToJoin);
     
     var streamNameToView = $( "#streamSelector option:selected" ).val();
