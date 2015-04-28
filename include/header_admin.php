@@ -73,7 +73,7 @@
                    </a>
                 </li>
 
-                <li class='dropdown' style="float: right;">
+                <li class="dropdown pull-right">
                     <a href='#' class="dropdown-toggle" data-toggle="dropdown">
                     <img src="../images/profile.png" height="32" width="32">
                         <b>
