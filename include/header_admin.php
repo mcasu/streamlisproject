@@ -76,7 +76,6 @@
                 <li class='dropdown' style="float: right;">
                     <a href='#' class="dropdown-toggle" data-toggle="dropdown">
                     <img src="../images/profile.png" height="32" width="32">
-                    <h5 class="pull-right" style="margin-right: 6px;">
                         <b>
                             <?php 
                             switch($mainactions->GetSessionUserRole())
@@ -93,7 +92,6 @@
                             }
                             ?>
                         </b> 
-                    </h5> 
                     <span class="caret"></span>
                     </a>
                    <ul class="dropdown-menu" role="menu">
