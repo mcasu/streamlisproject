@@ -106,7 +106,5 @@
     </div>
 </nav>
 
-
-
 <p><h4 style="margin-left:4px;">La tua congregazione è <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 <br/>

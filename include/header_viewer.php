@@ -35,40 +35,37 @@
                      </a>
                   </li> 
 
-                  <li class='dropdown pull-right'>
-                       <a href='#' class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../images/profile.png" height="32" width="32">
-                        Profilo <span class="caret"></span>
-                       </a>
-                     <ul class="dropdown-menu" role="menu">
-                        <li><a href='change-pwd.php'><span>Cambia password</span></a></li>
-                        <li><a href='../logout.php'><span>Esci</span></a></li>
-                     </ul>
-                  </li>
+                <li class="dropdown pull-right">
+                    <a href='#' class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="../images/profile.png" height="32" width="32">
+                        <b>
+                            <?php 
+                            switch($mainactions->GetSessionUserRole())
+                            {
+                                case "1":
+                                    echo '<span class="label label-success">' . $mainactions->UserFullName() . '</span>';
+                                    break;
+                                case "2":
+                                    echo '<span class="label label-default">' . $mainactions->UserFullName() . '</span>';
+                                    break;
+                                case "3":
+                                    echo '<span class="label label-warning">' . $mainactions->UserFullName() . '</span>';
+                                    break;
+                            }
+                            ?>
+                        </b> 
+                    <span class="caret"></span>
+                    </a>
+                   <ul class="dropdown-menu" role="menu">
+                      <li><a href='change-pwd.php'><span>Cambia password</span></a></li>
+                      <li><a href='../logout.php'><span>Esci</span></a></li>
+                   </ul>
+                </li>
             </ul>
             
         </div>
     </div>
 </nav>
-
-<h5 class="pull-right" style="margin-right: 3px;">
-    <b>
-        <?php 
-        switch($mainactions->GetSessionUserRole())
-        {
-            case "1":
-                echo '<span class="label label-success">' . $mainactions->UserFullName() . '</span>';
-                break;
-            case "2":
-                echo '<span class="label label-default">' . $mainactions->UserFullName() . '</span>';
-                break;
-            case "3":
-                echo '<span class="label label-warning">' . $mainactions->UserFullName() . '</span>';
-                break;
-        }
-        ?>
-    </b>, bentornato! 
-</h5>
 
 <p><h4 style="margin-left:4px;">La tua congregazione è <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 <br/>
