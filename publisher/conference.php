@@ -24,7 +24,7 @@
 
 <?php include("../include/header_publisher.php");
 
-$publishCode = $dbactions->GetPublishCodeByGroupId();
+$publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
 
 ?>
     
