@@ -64,8 +64,6 @@ var onBistriConferenceReady = function ()
             // send data channel request to peer
             BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
         }
-        
-        $("#joined_user_number").find(".label").text((data.members.length + 1));
     });
     
     // when the local user has quitted the room
@@ -94,7 +92,6 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         //peers[ data.pid ] = data;
-        $("#joined_user_number").find(".label").text(peers.length);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
@@ -230,7 +227,6 @@ function joinConference()
     var appNameToView = $( "#streamSelector option:selected" ).attr("id");
     //alert("Stream: " + streamNameToView + " App: " + appNameToView);
     
-    // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
         $("#localStreamsMyVideo").hide();
@@ -247,7 +243,7 @@ function joinConference()
                          height: 240
                          });     
         
-        if (userrole === "2") // for the normal users we attach the local video stream.
+        if (userrole === "2") // for the viewer users we attach the local video stream.
         {
             $("#localStreamsMyVideo").show();
             
@@ -266,7 +262,6 @@ function joinConference()
         $("#quit").show();
         $("#join").hide();
         $("#panelVideo").show();
-        $("#joined_user_number").show();
     }
     else
     {
@@ -282,7 +277,6 @@ function quitConference()
     BistriConference.quitRoom( room );
     
     // Hide Quit Conference input button and show Join Conference input button
-    $("#joined_user_number").hide();
     $("#panelVideo").hide();
     $("#quit").hide();
     $("#join").show();

@@ -36,7 +36,7 @@
 <div class="container-fluid">
     
     <input type="hidden" class="username" id="<?= $mainactions->UserName(); ?>"/>
-    <?php echo '<input type="hidden" class="userrole" id="' . $user_role . '"/>'; ?>
+    <input type="hidden" class="userrole" id="<?= $mainactions->GetSessionUserRole(); ?>"/>
     <p>
     <div id="panelJoin" class="panel panel-default">
         
@@ -74,11 +74,9 @@
          
             <br/>
             <br/>
-            <input type="button" value="Join Conference Room" id="join" class="btn btn-info btn-default btn-block"></input>
-            <input type="button" value="Quit Conference Room" id="quit" class="btn btn-danger btn-default btn-block"></input>
+            <input type="button" value="START" id="join" class="btn btn-info btn-default btn-block"></input>
+            <input type="button" value="STOP" id="quit" class="btn btn-danger btn-default btn-block"></input>
             <br/>
-            
-            <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5>
             
             <div id="panelVideo">
                 <div class="container">
@@ -116,7 +114,6 @@
             $('#streamSelectorContainer').hide();
             $("#panelVideo").hide();
             $(".alert-danger").hide();
-            $("#joined_user_number").hide();
             
             CheckGroupStatus();
             
