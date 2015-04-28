@@ -151,7 +151,7 @@
         });
     </script>
     
-    <script type="text/javascript" src="/js/bistri/jwconference.js"></script>
+    <script type="text/javascript" src="/js/bistri/jwconference-viewer.js"></script>
     
 </body>
     
