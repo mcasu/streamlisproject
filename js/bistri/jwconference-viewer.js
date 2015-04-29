@@ -32,10 +32,11 @@ var onBistriConferenceReady = function ()
         userId = data.id;
         
         // test if the browser is WebRTC compatible
-        if ( !BistriConference.isCompatible() ) {
+        if ( !BistriConference.isCompatible() ) 
+        {
             // if the browser is not compatible, display an alert
-            alert( "Your browser is not WebRTC compatible!" );
-            // then stop the script execution
+            alert( "Il tuo browser non è compatibile con la tecnologia WebRTC.\n" +
+                    "Ti consigliamo di usare l'ultima versione disponibile di Chrome o Firefox.");
             return;
         }
     } );
@@ -46,7 +47,7 @@ var onBistriConferenceReady = function ()
         // set the current room name
         room = data.room;
 
-        if (userrole === "2" && data.members.length === 0)
+        if (data.members.length === 0)
         {
             alert("Non ci sono conferenze attive per l'adunanza selezionata.\nChiedi agli anziani della congregazione selezionata di attivare la conferenza.");
             quitConference();
@@ -69,9 +70,11 @@ var onBistriConferenceReady = function ()
     // when the local user has quitted the room
     BistriConference.signaling.addHandler( "onQuittedRoom", function( ) 
     {
-        room = undefined;
         // stop the local stream
         BistriConference.stopStream();
+        
+        // We stop calls with all conference room members
+        BistriConference.endCalls();
     } );
     
     // when an error occured on the server side
@@ -112,25 +115,6 @@ var onBistriConferenceReady = function ()
         // remove the stream from the page
         BistriConference.detachStream( stream );
     } );
-
-    BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
-    {
-        // display an alert message
-       console.log("Richiesta in entrata: " + data);
-       
-       BistriConference.startStream( "640x480", function( remoteStream )
-       {
-                var roomId = data.room;
-
-                // when the local stream is received we attach it to a node in the page to display it
-                BistriConference.attachStream( remoteStream, document.querySelector( "#remoteStreams" ), { autoplay: true, fullscreen: true } );
-
-                // when the local stream has been started and attached to the page
-                // we are ready join the conference room.
-                // event "onJoinedRoom" is triggered when the operation successed.
-                BistriConference.joinRoom( roomId, 3 );
-        });
-    });
 
     // when a new remote stream is received
     BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
@@ -221,6 +205,7 @@ var onBistriConferenceReady = function ()
 function joinConference()
 {
     var roomToJoin = $('#roomSelector').val();
+    $("#localStreamsMyVideo").hide();
     //alert("Join to room: " + roomToJoin);
     
     var streamNameToView = $( "#streamSelector option:selected" ).val();
@@ -229,34 +214,17 @@ function joinConference()
     
     if( roomToJoin )
     {
-        $("#localStreamsMyVideo").hide();
-        
-        jwplayer("player").setup({
-                         file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-                         autostart: true,
-                         controls: true,
-                         rtmp: {
-                             bufferlength: 0.1  
-                         },
-                         aspectratio: "4:3",
-                         width: 320,
-                         height: 240
-                         });     
-        
-        if (userrole === "2") // for the viewer users we attach the local video stream.
-        {
-            $("#localStreamsMyVideo").show();
-            
-            BistriConference.startStream("320x240", function( localStream )
-            {
-                // when the local stream is received we attach it to a node in the page to display it
-                BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-            } );
-        }                     
-        
         // we are ready join the conference room.
         // event "onJoinedRoom" is triggered when the operation successed.
-        BistriConference.joinRoom( roomToJoin, 3 );
+        BistriConference.joinRoom( roomToJoin, 4 );
+
+        $("#localStreamsMyVideo").show();
+
+        BistriConference.startStream("320x240", function( localStream )
+        {
+            // when the local stream is received we attach it to a node in the page to display it
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+        } );
         
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
