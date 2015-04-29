@@ -133,7 +133,7 @@ var onBistriConferenceReady = function ()
         if( data.pid in peers )
         {
                 delete peers[ data.pid ];
-                isAvailablePeers();
+                //isAvailablePeers();
         }
     } );
 
