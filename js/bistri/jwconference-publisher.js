@@ -46,13 +46,6 @@ var onBistriConferenceReady = function ()
         // set the current room name
         room = data.room;
 
-        if (userrole === "2" && data.members.length === 0)
-        {
-            alert("Non ci sono conferenze attive per l'adunanza selezionata.\nChiedi agli anziani della congregazione selezionata di attivare la conferenza.");
-            quitConference();
-            return;
-        }
-        
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
@@ -225,10 +218,6 @@ function joinConference()
 {
     var roomToJoin = $('.group_publishcode').attr('id');
     //alert("Join to room: " + roomToJoin);
-    
-    var streamNameToView = $( "#streamSelector option:selected" ).val();
-    var appNameToView = $( "#streamSelector option:selected" ).attr("id");
-    //alert("Stream: " + streamNameToView + " App: " + appNameToView);
     
     // if "Conference Name" field is not empty ...
     if( roomToJoin )

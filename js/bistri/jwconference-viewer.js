@@ -58,6 +58,18 @@ var onBistriConferenceReady = function ()
         {
             // when the local stream is received we attach it to a node in the page to display it
             BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+            
+            // we start a call and open a data channel with every single room members
+            for( var i = 0; i < data.members.length; i++ )
+            {
+                console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
+
+                peers[ data.members[ i ].id ] = data.members[ i ];
+                // send a call request to peer
+                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+                // send data channel request to peer
+                //BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
+            }
         } );
         
         var streamNameToView = $( "#streamSelector option:selected" ).val();
@@ -75,18 +87,6 @@ var onBistriConferenceReady = function ()
                  width: 320,
                  height: 240
                  });   
-        
-        // once user has successfully joined the room we start a call and open a data channel with every single room members
-        for( var i = 0; i < data.members.length; i++ )
-        {
-            console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
-            
-            peers[ data.members[ i ].id ] = data.members[ i ];
-            // send a call request to peer
-            BistriConference.call( data.members[ i ].id, data.room );
-            // send data channel request to peer
-            BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
-        }
     });
     
     // when the local user has quitted the room
