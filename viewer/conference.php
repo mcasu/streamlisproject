@@ -128,8 +128,10 @@
             {
                 $(".alert-danger").hide();
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
-                alert("COUNT: " + BistriConference.getRoomMembers($('#roomSelector').val()).length);
-                if (result  === "false" || BistriConference.getRoomMembers($('#roomSelector').val()).length < 1)
+                var members = BistriConference.getRoomMembers($('#roomSelector').val());
+                
+                alert("ROOM: " + $('#roomSelector').val() + " COUNT: " + members.length);
+                if (result  === "false" || members.length < 1)
                 {
                     quitConference();
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
