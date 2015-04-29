@@ -15,7 +15,7 @@
     <script type="text/javascript" src="/include/session.js"></script>
     <script type="text/javascript" src="/js/highcharts-2.2.4/highcharts.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js?v=3"></script>
+    <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
     <script type="text/javascript" src="/players/jwplayer/jwplayer.js" ></script>
     
 </head>
