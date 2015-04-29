@@ -130,8 +130,8 @@
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
                 var members = BistriConference.getRoomMembers($('#roomSelector').val());
                 
-                alert("ROOM: " + $('#roomSelector').val() + " COUNT: " + members.length);
-                if (result  === "false" || members.length < 1)
+                //alert("ROOM: " + $('#roomSelector').val() + " COUNT: " + members.length);
+                if (result  === "false")
                 {
                     quitConference();
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
