@@ -61,20 +61,10 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
             <h5 id="joined_user_number">Utenti collegati: <span class="label label-primary"></span></h5><br/>
             
             <div id="panelVideo">
-                <div class="container">
-                    <div id="localStreamsPlayer" class="panel panel-primary pull-left">
-                      <div class="panel-heading text-center">
-                          <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
-                      </div>
-                        <div class="panel-body">
-                            <div id="player"></div>
-                        </div>
-                    </div>
-                </div>
 
                <div id="panelVideoRemote" class="panel panel-primary">
                    <div class="panel-heading text-center">
-                       <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">Altri fratelli</h4>
+                       <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">COMMENTI</h4>
                    </div>
 
                    <div class="panel-body">
