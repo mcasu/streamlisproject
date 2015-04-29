@@ -54,6 +54,12 @@ var onBistriConferenceReady = function ()
             return;
         }
         
+        BistriConference.startStream("320x240", function( localStream )
+        {
+            // when the local stream is received we attach it to a node in the page to display it
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+        } );
+        
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
@@ -74,7 +80,7 @@ var onBistriConferenceReady = function ()
         BistriConference.stopStream();
         
         // We stop calls with all conference room members
-        BistriConference.endCalls();
+        BistriConference.endCalls(room);
     } );
     
     // when an error occured on the server side
@@ -114,35 +120,6 @@ var onBistriConferenceReady = function ()
     {
         // remove the stream from the page
         BistriConference.detachStream( stream );
-    } );
-
-    // when a new remote stream is received
-    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
-    {
-        if (userrole === "2")
-        {
-            return;
-        }
-        console.log("Aggiungo un nuovo stream...");
-        // when a remote stream is received we attach it to a node in the page to display it
-	var nodes = $( ".remoteStreams" );
-        console.log("Remote streams div numbers: " + nodes.length);
-        
-        for(var i=0;  i < nodes.length; i++ )
-        {    
-            //console.log("Nodo id: " + nodes[ i ].attr('id'));
-            if( !nodes[ i ].firstChild )
-            {
-                if( peers[ pid ] )
-                {
-                    peers[ pid ].name = "peer " + ( i + 1 );
-                }
-
-                //console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
-                BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
-                break;
-            }
-        }
     } );
 
     function setDataChannelsEvents( channel, pid )
@@ -219,13 +196,6 @@ function joinConference()
         BistriConference.joinRoom( roomToJoin, 4 );
 
         $("#localStreamsMyVideo").show();
-
-        BistriConference.startStream("320x240", function( localStream )
-        {
-            // when the local stream is received we attach it to a node in the page to display it
-            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-        } );
-        
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
         $("#join").hide();
