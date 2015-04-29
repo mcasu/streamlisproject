@@ -117,6 +117,8 @@
             
             CheckGroupStatus();
             
+            var auto_refresh = setInterval(CheckGroupStatus, 10000);
+            
             $('#roomSelector').on('change', function() 
             {
                 CheckGroupStatus();
@@ -128,6 +130,7 @@
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
                 if (result  === "false")
                 {
+                    quitConference();
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
                     $(".alert-danger").show();
                     $('#join').prop('disabled', true);
