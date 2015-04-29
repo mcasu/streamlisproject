@@ -83,6 +83,12 @@ var onBistriConferenceReady = function ()
         BistriConference.endCalls(room);
     } );
     
+    BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
+    {
+        // display an alert message
+       console.log("Richiesta in entrata per la room [" + data.room + "] dal pid " + data.pid);
+    });
+    
     // when an error occured on the server side
     BistriConference.signaling.addHandler( "onError", function ( error ) 
     {
