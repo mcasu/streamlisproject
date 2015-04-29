@@ -233,34 +233,9 @@ function joinConference()
     // if "Conference Name" field is not empty ...
     if( roomToJoin )
     {
-        $("#localStreamsMyVideo").hide();
-        
-        jwplayer("player").setup({
-                         file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-                         autostart: true,
-                         controls: true,
-                         rtmp: {
-                             bufferlength: 0.1  
-                         },
-                         aspectratio: "4:3",
-                         width: 320,
-                         height: 240
-                         });     
-        
-        if (userrole === "2") // for the normal users we attach the local video stream.
-        {
-            $("#localStreamsMyVideo").show();
-            
-            BistriConference.startStream("320x240", function( localStream )
-            {
-                // when the local stream is received we attach it to a node in the page to display it
-                BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-            } );
-        }                     
-        
         // we are ready join the conference room.
         // event "onJoinedRoom" is triggered when the operation successed.
-        BistriConference.joinRoom( roomToJoin, 3 );
+        BistriConference.joinRoom( roomToJoin, 4 );
         
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();

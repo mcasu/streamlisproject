@@ -60,6 +60,18 @@ var onBistriConferenceReady = function ()
             BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
         } );
         
+        jwplayer("player").setup({
+                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
+                 autostart: true,
+                 controls: true,
+                 rtmp: {
+                     bufferlength: 0.1  
+                 },
+                 aspectratio: "4:3",
+                 width: 320,
+                 height: 240
+                 });   
+        
         // once user has successfully joined the room we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
