@@ -128,6 +128,7 @@
             {
                 $(".alert-danger").hide();
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
+                alert("COUNT: " + BistriConference.getRoomMembers($('#roomSelector').val()).length);
                 if (result  === "false" || BistriConference.getRoomMembers($('#roomSelector').val()).length < 1)
                 {
                     quitConference();
