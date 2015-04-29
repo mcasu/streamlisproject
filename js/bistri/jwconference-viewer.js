@@ -60,6 +60,10 @@ var onBistriConferenceReady = function ()
             BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
         } );
         
+        var streamNameToView = $( "#streamSelector option:selected" ).val();
+        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
+        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
+        
         jwplayer("player").setup({
                  file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
                  autostart: true,
@@ -202,10 +206,6 @@ function joinConference()
     var roomToJoin = $('#roomSelector').val();
     $("#localStreamsMyVideo").hide();
     //alert("Join to room: " + roomToJoin);
-    
-    var streamNameToView = $( "#streamSelector option:selected" ).val();
-    var appNameToView = $( "#streamSelector option:selected" ).attr("id");
-    //alert("Stream: " + streamNameToView + " App: " + appNameToView);
     
     if( roomToJoin )
     {
