@@ -128,7 +128,7 @@
             {
                 $(".alert-danger").hide();
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
-                if (result  === "false")
+                if (result  === "false" || BistriConference.getRoomMembers($('#roomSelector').val()).length < 1)
                 {
                     quitConference();
                     //alert('La congregazione con code [' + $('#roomSelector').val() + '] NON sta trasmettendo.');
