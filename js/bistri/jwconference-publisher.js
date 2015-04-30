@@ -87,8 +87,9 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data )
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
-        //peers[ data.pid ] = data;
-        console.log( "Adesso i membri sono [" + data.members.length + "]");
+        
+        peers[ data.pid ] = data;
+        console.log( "Adesso i membri sono [" + peers.length + "]");
         $("#joined_user_number").find(".label").html(peers.length);
     } );
 

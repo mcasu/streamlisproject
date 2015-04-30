@@ -123,7 +123,7 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data )
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
-        //peers[ data.pid ] = data;
+        peers[ data.pid ] = data;
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
