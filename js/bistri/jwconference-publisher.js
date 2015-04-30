@@ -34,8 +34,8 @@ var onBistriConferenceReady = function ()
         // test if the browser is WebRTC compatible
         if ( !BistriConference.isCompatible() ) {
             // if the browser is not compatible, display an alert
-            alert( "Your browser is not WebRTC compatible!" );
-            // then stop the script execution
+            alert( "Il tuo browser non è compatibile con la tecnologia WebRTC.\n" +
+                    "Ti consigliamo di usare l'ultima versione disponibile di Chrome o Firefox.");
             return;
         }
     } );
@@ -98,8 +98,9 @@ var onBistriConferenceReady = function ()
         if( data.pid in peers )
         {
                 delete peers[ data.pid ];
-                isAvailablePeers();
+                //isAvailablePeers();
         }
+        $("#joined_user_number").find(".label").html(peers.length);
     } );
 
     // when a local or a remote stream has been stopped
