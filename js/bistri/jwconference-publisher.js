@@ -15,7 +15,8 @@ var onBistriConferenceReady = function ()
         appId: "435f88e5",
         appKey: "b0560d8d190b7c67629c336399406afe",
         debug: true,
-        userId: username
+        userId: username,
+        userName: username
     } );
 
     /* Set events handler */
@@ -58,7 +59,7 @@ var onBistriConferenceReady = function ()
             BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
         }
         
-        $("#joined_user_number").find(".label").text((data.members.length + 1));
+        $("#joined_user_number").find(".label").html((data.members.length + 1));
     });
     
     // when the local user has quitted the room
@@ -87,7 +88,7 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         //peers[ data.pid ] = data;
-        console.log( "Adesso i membri sono [" + peers.length + "]");
+        console.log( "Adesso i membri sono [" + data.members.length + "]");
         $("#joined_user_number").find(".label").html(peers.length);
     } );
 

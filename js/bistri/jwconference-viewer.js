@@ -15,7 +15,8 @@ var onBistriConferenceReady = function ()
         appId: "435f88e5",
         appKey: "b0560d8d190b7c67629c336399406afe",
         debug: true,
-        userId: username
+        userId: username,
+        userName: username
     } );
 
     /* Set events handler */
