@@ -70,36 +70,36 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                    <div class="panel-body">
                     <!-- Columns are always 50% wide, on mobile and desktop -->
                     <div class="row">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default col-md-3 col-xs-2">
                             <div class="panel-heading text-center">
                                 <h5></h5>
                             </div>
                             <div class="panel-body">
-                                <div id="video-1" class="col-md-3 col-xs-2 remoteStreams"></div>
+                                <div id="video-1" class="remoteStreams"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-default col-md-3 col-xs-2">
                             <div class="panel-heading text-center">
                                 <h5></h5>
                             </div>
                             <div class="panel-body">
-                                <div id="video-2" class="col-md-3 col-xs-2 remoteStreams"></div>
+                                <div id="video-2" class="remoteStreams"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-default col-md-3 col-xs-2">
                             <div class="panel-heading text-center">
                                 <h5></h5>
                             </div>
                             <div class="panel-body">
-                                <div id="video-3" class="col-md-3 col-xs-2 remoteStreams"></div>
+                                <div id="video-3" class="remoteStreams"></div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-default col-md-3 col-xs-2">
                             <div class="panel-heading text-center">
                                 <h5></h5>
                             </div>
                             <div class="panel-body">
-                                <div id="video-4" class="col-md-3 col-xs-2 remoteStreams"></div>
+                                <div id="video-4" class="remoteStreams"></div>
                             </div>
                         </div>
                     </div>
