@@ -46,8 +46,8 @@ var onBistriConferenceReady = function ()
     {
         // set the current room name
         room = data.room;
-        console.log( "PUBLISHER - Hai fatto il join con member name:", data.name );
-        $("#joined_user_number").find(".label").html("0");
+        console.log( "PUBLISHER - Hai fatto il join con member name:", data.members[0].name );
+        $("#joined_user_number").find(".label").html(data.members.length);
     });
     
     // when the local user has quitted the room
@@ -77,8 +77,9 @@ var onBistriConferenceReady = function ()
         console.log( "PUBLISHER - Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         
         peers[ data.pid ] = data;
-        console.log( "PUBLISHER - Adesso i membri sono [" + peers.length + "]");
-        $("#joined_user_number").find(".label").html(peers.length);
+        var num = $(BistriConference.getRoomMembers(data.room)).length;
+        console.log( "PUBLISHER - Adesso i membri sono [" + num + "]");
+        $("#joined_user_number").find(".label").html(num);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
