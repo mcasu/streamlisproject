@@ -64,15 +64,16 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
 
                <div id="panelVideoRemote" class="panel panel-primary">
                    <div class="panel-heading text-center">
-                       <h4 class="panel-title" style="margin-left: 4px;margin-top: 4px;">COMMENTI</h4>
+                       <h4 class="panel-title" style="margin-top: 4px;">COMMENTI</h4>
                    </div>
 
                    <div class="panel-body">
                     <!-- Columns are always 50% wide, on mobile and desktop -->
                     <div class="row">
-                        <div id="video-1" class="col-xs-6 remoteStreams"></div>
-                        <div id="video-2" class="col-xs-6 remoteStreams"></div>
-                        <div id="video-3" class="col-xs-6 remoteStreams"></div>
+                        <div id="video-1" class="col-md-3 col-xs-2 remoteStreams"></div>
+                        <div id="video-2" class="col-md-3 col-xs-2 remoteStreams"></div>
+                        <div id="video-3" class="col-md-3 col-xs-2 remoteStreams"></div>
+                        <div id="video-4" class="col-md-3 col-xs-2 remoteStreams"></div>
                     </div>
                    </div>
                </div>
