@@ -46,7 +46,8 @@ var onBistriConferenceReady = function ()
     {
         // set the current room name
         room = data.room;
-        console.log( "PUBLISHER - Hai fatto il join con member name:", data.members[0].name );
+        console.log( "PUBLISHER - Hai fatto il join con member name: " + username );
+        
         $("#joined_user_number").find(".label").html(data.members.length);
     });
     
