@@ -93,7 +93,9 @@ var onBistriConferenceReady = function ()
                 delete peers[ data.pid ];
                 //isAvailablePeers();
         }
-        $("#joined_user_number").find(".label").html(peers.length);
+        
+        var num = $(BistriConference.getRoomMembers(data.room)).length;
+        $("#joined_user_number").find(".label").html(num);
     } );
 
     // when a local or a remote stream has been stopped
@@ -144,7 +146,8 @@ var onBistriConferenceReady = function ()
                     peers[ pid ].name = "peer " + ( i + 1 );
                 }
 
-                //console.log("Insert new remote stream into div: " + nodes[ i ].attr('id'));
+                nodes[ i ].parent().find("h5").html(pid);
+                
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
             }

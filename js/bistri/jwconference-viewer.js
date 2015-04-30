@@ -73,21 +73,21 @@ var onBistriConferenceReady = function ()
             }
         } );
         
-        var streamNameToView = $( "#streamSelector option:selected" ).val();
-        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
-        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
-        
-        jwplayer("player").setup({
-                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-                 autostart: true,
-                 controls: true,
-                 rtmp: {
-                     bufferlength: 0.1  
-                 },
-                 aspectratio: "4:3",
-                 width: 320,
-                 height: 240
-                 });   
+//        var streamNameToView = $( "#streamSelector option:selected" ).val();
+//        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
+//        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
+//        
+//        jwplayer("player").setup({
+//                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
+//                 autostart: true,
+//                 controls: true,
+//                 rtmp: {
+//                     bufferlength: 0.1  
+//                 },
+//                 aspectratio: "4:3",
+//                 width: 320,
+//                 height: 240
+//                 });   
     });
     
     // when the local user has quitted the room
