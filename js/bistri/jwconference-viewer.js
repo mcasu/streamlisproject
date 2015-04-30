@@ -1,4 +1,4 @@
-var peers = {};
+var peers = new Array();
 var room;
 var userId;
 var username = q(".username").id;
