@@ -31,7 +31,7 @@
                  <li>
                      <a href='conference.php' class="active">
                            <img src="../images/register.png" height="32" width="32">
-                           Risposte
+                           Commenti
                      </a>
                   </li> 
 
