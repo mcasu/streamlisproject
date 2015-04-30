@@ -15,7 +15,7 @@ var onBistriConferenceReady = function ()
         appId: "435f88e5",
         appKey: "b0560d8d190b7c67629c336399406afe",
         debug: true,
-        userName: username
+        userId: username
     } );
 
     /* Set events handler */
@@ -29,7 +29,7 @@ var onBistriConferenceReady = function ()
     // we register an handler for "onConnected" event.
     BistriConference.signaling.addHandler( "onConnected", function( data )
     {
-        userId = data.id;
+        //userId = data.id;
         
         // test if the browser is WebRTC compatible
         if ( !BistriConference.isCompatible() ) 
@@ -68,7 +68,7 @@ var onBistriConferenceReady = function ()
                 // send a call request to peer
                 BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
                 // send data channel request to peer
-                //BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
+                BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
             }
         } );
         
@@ -152,14 +152,14 @@ var onBistriConferenceReady = function ()
                         peers[ pid ] = {};
                 }
                 peers[ pid ].channel = channel;
-                isAvailablePeers();
+                //isAvailablePeers();
         }
         channel.onClosed = function( event )
         {
                 if( pid in peers ){
                         delete peers[ pid ].channel;
                 }
-                isAvailablePeers();
+                //isAvailablePeers();
         }
         channel.onMessage = function( event )
         {
@@ -179,8 +179,8 @@ var onBistriConferenceReady = function ()
                         channelExists = true;
                 }
         }
-        input[ channelExists ? "removeAttribute" : "setAttribute" ]( "readonly", true );
-        panel.style.backgroundColor = channelExists ? "#fff" : "#f5f5f5";
+        //input[ channelExists ? "removeAttribute" : "setAttribute" ]( "readonly", true );
+        //panel.style.backgroundColor = channelExists ? "#fff" : "#f5f5f5";
     }
 
     window.displayMessage = function( message )
