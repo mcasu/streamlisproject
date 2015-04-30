@@ -46,20 +46,8 @@ var onBistriConferenceReady = function ()
     {
         // set the current room name
         room = data.room;
-
-        // once user has successfully joined the room we start a call and open a data channel with every single room members
-        for( var i = 0; i < data.members.length; i++ )
-        {
-            console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
-            
-            peers[ data.members[ i ].id ] = data.members[ i ];
-            // send a call request to peer
-            BistriConference.call( data.members[ i ].id, data.room );
-            // send data channel request to peer
-            BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
-        }
-        
-        $("#joined_user_number").find(".label").html((data.members.length + 1));
+        console.log( "PUBLISHER - Hai fatto il join con member name:", data.name );
+        $("#joined_user_number").find(".label").html("0");
     });
     
     // when the local user has quitted the room
@@ -86,17 +74,17 @@ var onBistriConferenceReady = function ()
     // we register an handler for "onPeerJoinedRoom" event, triggered when a remote user join a room
     BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data )
     {
-        console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
+        console.log( "PUBLISHER - Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         
         peers[ data.pid ] = data;
-        console.log( "Adesso i membri sono [" + peers.length + "]");
+        console.log( "PUBLISHER - Adesso i membri sono [" + peers.length + "]");
         $("#joined_user_number").find(".label").html(peers.length);
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
     BistriConference.signaling.addHandler( "onPeerQuittedRoom", function( data )
     {
-        console.log( "Un membro è uscito dalla room: " + data.pid );
+        console.log( "PUBLISHER - Un membro è uscito dalla room: " + data.pid );
         
         if( data.pid in peers )
         {
@@ -116,7 +104,7 @@ var onBistriConferenceReady = function ()
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
     {
         // display an alert message
-       console.log("Richiesta in entrata: " + data);
+       console.log("PUBLISHER - Richiesta in entrata: " + data);
        
        BistriConference.startStream( "640x480", function( remoteStream )
        {
@@ -139,10 +127,10 @@ var onBistriConferenceReady = function ()
         {
             return;
         }
-        console.log("Aggiungo un nuovo stream...");
+        console.log("PUBLISHER - Aggiungo un nuovo stream...");
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = $( ".remoteStreams" );
-        console.log("Remote streams div numbers: " + nodes.length);
+        console.log("PUBLISHER - Remote streams div numbers: " + nodes.length);
         
         for(var i=0;  i < nodes.length; i++ )
         {    
