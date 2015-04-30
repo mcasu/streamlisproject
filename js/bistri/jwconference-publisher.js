@@ -146,7 +146,7 @@ var onBistriConferenceReady = function ()
                     peers[ pid ].name = "peer " + ( i + 1 );
                 }
 
-                nodes[ i ].parent().find("h5").html(pid);
+                $(nodes[ i ]).parent().find("h5").html(pid);
                 
                 BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
                 break;
