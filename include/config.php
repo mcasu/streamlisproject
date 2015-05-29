@@ -43,4 +43,3 @@ $mainactions->SetAdminEmail('marco.casu@gmail.com');
 // and put it here
 $mainactions->SetRandomKey('ykroeSaT1Ma53hP');
 
-?>

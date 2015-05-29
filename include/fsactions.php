@@ -139,5 +139,22 @@ function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_p
         }
 }
 
+
+function DeleteAllVideosLive($liveFolderArray)
+{
+    foreach ($liveFolderArray as $folder) 
+    {
+        $files = glob( $folder . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+        
+        foreach( $files as $file )
+        {
+            if (is_file($file))
+            {
+                unlink( $file );      
+            }
+        }
+    }
+}
+
 }
 
