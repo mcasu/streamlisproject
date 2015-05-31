@@ -205,7 +205,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
             $found += mysql_num_rows($result);
         }
 
-        if ($found == -1)
+        if ($found === -1)
         {
             return "1";
         }

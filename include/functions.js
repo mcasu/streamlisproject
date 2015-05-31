@@ -147,6 +147,7 @@ MarkOndemandVideoToJoin = function(ondemandIdList)
         success: function(res)
         {
             result = res;
+            alert ("RESULT: " + result);
         }
     });
     
