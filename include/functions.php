@@ -216,7 +216,11 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
+            error_log("ERROR - MarkOndemandVideoToJoin() FAILED! " . $dbactions->GetErrorMessage());
             echo "1";
         }
-    echo "0";
+        else
+        {
+            echo "0";
+        }
 }
