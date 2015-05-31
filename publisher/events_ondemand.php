@@ -460,7 +460,7 @@ try
         echo '<div class="panel-footer">';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
-                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';

@@ -155,8 +155,6 @@ MarkOndemandVideoToJoin = function(ondemandIdList)
                 //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
             }
             result = res;
-            
-            alert ("RESULT: " + res);
         }
     });
     
