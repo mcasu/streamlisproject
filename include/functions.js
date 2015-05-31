@@ -148,11 +148,11 @@ MarkOndemandVideoToJoin = function(ondemandIdList)
         {
             if(res === "true")
             {
-                //alert('La congregazione con code [' + publishCode + '] sta trasmettendo - ' + res);
+                alert('RISULTATO: ' + res);
             }
             else
             {
-                //alert('La congregazione con code [' + publishCode + '] NON sta trasmettendo - ' + res);
+                alert('RISULTATO: ' + res);
             }
             result = res;
         }
