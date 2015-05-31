@@ -205,18 +205,18 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
     
     if ($found == -1)
     {
-        return 1;
+        return "1";
     }
     
     if ($found > 0)
     {
-        return 2;
+        return "2";
     }
         
     if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
     {
-        return 1;
+        return "1";
     }
     
-    return 0;
+    return "0";
 }

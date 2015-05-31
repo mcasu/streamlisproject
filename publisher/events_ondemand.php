@@ -174,15 +174,15 @@ $(document).ready(function()
 	{    
             var result = MarkOndemandVideoToJoin(ondemandIdList);
             
-            if (result === 2)
+            if (result === "2")
             {
                 alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
             }
-            else if (result === 1)
+            else if (result === "1")
             {
                 alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
             }
-            else if (result === 0)
+            else if (result === "0")
             {
                 alert("OPERAZIONE RIUSCITA!\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.");
             }
