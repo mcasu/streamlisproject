@@ -217,14 +217,14 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
-            return 1;
+            return FALSE;
         }
     } 
     catch (Exception $e) 
     {
         error_log("ERROR - functions.php - MarkOndemandVideoToJoin() " . $e->getMessage());
-        return 1;
+        return FALSE;
     }
     
-    return 0;
+    return TRUE;
 }
