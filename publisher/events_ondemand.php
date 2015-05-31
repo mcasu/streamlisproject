@@ -174,6 +174,7 @@ $(document).ready(function()
 	{    
             var result = MarkOndemandVideoToJoin(ondemandIdList);
             
+            alert(result);
             if (result === "2")
             {
                 alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
