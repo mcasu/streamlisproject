@@ -1381,6 +1381,33 @@ class DBActions
             return $result;
     }
 
+    function CheckIfOndemandVideoIsMarked($ondemandId)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $query_select = 'SELECT * FROM ondemand WHERE ondemand_id = ' . $ondemandId . ' and ondemand_join_id is not NULL';
+        
+        $result = mysql_query($query_select ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$query_select");
+            return false;
+        }
+        
+        return $result;
+    }
+    
     function MarkOndemandVideoToJoin($ondemandIdList)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -1401,13 +1428,23 @@ class DBActions
         
         $query_total = 'UPDATE ondemand SET ondemand_join_id = "'. $ondemandJoinId . '" WHERE ondemand_id in ('. $ondemandIdList . ')';
         
-        $result = mysql_query($query_total ,$this->connection);
-        if(!$result)
+        $result_update = mysql_query($query_total ,$this->connection);
+        if(!$result_update)
         {
             $this->HandleDBError("Error updating data from the table\nquery:$query_total");
             return false;
         }
-        return $result;
+        
+        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list) VALUES (' . $ondemandJoinId . ',' . $ondemandIdList . ')';
+        
+        $result_insert = mysql_query($query_total ,$this->connection);
+        if(!$result_insert)
+        {
+            $this->HandleDBError("Error inserting data from the table\nquery:$query_total");
+            return false;
+        }
+        
+        return $result_insert;
     }
     
     function CreateUsersTable()

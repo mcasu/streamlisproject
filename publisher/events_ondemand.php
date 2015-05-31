@@ -173,11 +173,16 @@ $(document).ready(function()
         if (confirm("Vuoi davvero unire i video selezionati? [" + ondemandIdList + "]"))
 	{    
             var result = MarkOndemandVideoToJoin(ondemandIdList);
-            if (result === "false")
+            
+            if (result === "2")
+            {
+                alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
+            }
+            else if (result === "1")
             {
                 alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
             }
-            else
+            else if (result === "0")
             {
                 alert("OPERAZIONE RIUSCITA!\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.");
             }

@@ -189,10 +189,34 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
 
 function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 {
-    if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
+    $ondemandListArray = explode(",",$ondemandIdList);
+    $found = 0;
+    foreach ($ondemandListArray as $ondemandId) 
     {
-        return FALSE;
+        $result = $dbactions->CheckIfOndemandVideoIsMarked($ondemandId);
+        if (!$result)
+        {
+            $found = -1;
+            break;
+        }
+        
+        $found += mysql_num_rows($result);
     }
     
-    return TRUE;
+    if ($found == -1)
+    {
+        return 1;
+    }
+    
+    if ($found > 0)
+    {
+        return 2;
+    }
+        
+    if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
+    {
+        return 1;
+    }
+    
+    return 0;
 }
