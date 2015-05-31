@@ -216,9 +216,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
-            return FALSE;
+            echo FALSE;
         }
-        error_log("INFO - eseguito MARK su [ " . $ondemandIdList . " ]");
-        
-    return TRUE;
+    echo TRUE;
 }
