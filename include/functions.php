@@ -218,6 +218,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
         {
             return FALSE;
         }
-    
+        error_log("INFO - eseguito MARK su [ " . $ondemandIdList . " ]");
+        
     return TRUE;
 }
