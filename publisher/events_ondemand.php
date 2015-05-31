@@ -162,12 +162,11 @@ $(document).ready(function()
     $(".btn_video_join").click(function()
     {
         
-        var checkedItems = {}, counter = 0;
+        var checkedItems = {};
         $(".checked-list-box li.active").each(function(idx, li) {
 
             var ondemand_id=$(this).attr('id');
-            checkedItems[counter] = ondemand_id;
-            counter++;
+            checkedItems.push(ondemand_id);
         });
             
         var ondemandIdList = checkedItems.toString();
