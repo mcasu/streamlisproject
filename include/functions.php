@@ -216,7 +216,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
-            echo FALSE;
+            echo "1";
         }
-    echo TRUE;
+    echo "0";
 }

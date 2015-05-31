@@ -148,11 +148,11 @@ MarkOndemandVideoToJoin = function(ondemandIdList)
         {
             if(res === "true")
             {
-                alert('RISULTATO: ' + res);
+                //alert('RISULTATO: ' + res);
             }
             else
             {
-                alert('RISULTATO: ' + res);
+                //alert('RISULTATO: ' + res);
             }
             result = res;
         }

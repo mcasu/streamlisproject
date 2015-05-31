@@ -174,7 +174,7 @@ $(document).ready(function()
 	{    
             var result = MarkOndemandVideoToJoin(ondemandIdList);
             
-            alert(result);
+            alert("RISULTATO: " + result);
             
             if (result === "2")
             {
