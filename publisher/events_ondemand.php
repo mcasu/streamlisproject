@@ -161,19 +161,20 @@ $(document).ready(function()
     
     $(".btn_video_join").click(function()
     {
-        if (confirm("Vuoi davvero unire i video selezionati?"))
-	{
-            var checkedItems = {}, counter = 0;
-            $(".checked-list-box li.active").each(function(idx, li) {
+        
+        var checkedItems = {}, counter = 0;
+        $(".checked-list-box li.active").each(function(idx, li) {
 
-                var ondemand_id=$(this).attr('id');
-                checkedItems[counter] = ondemand_id;
-                counter++;
-            });
+            var ondemand_id=$(this).attr('id');
+            checkedItems[counter] = ondemand_id;
+            counter++;
+        });
             
-            var $ondemandIdList = checkedItems.toString();
-            var result = MarkOndemandVideoToJoin($ondemandIdList);
-            
+        var ondemandIdList = checkedItems.toString();
+        
+        if (confirm("Vuoi davvero unire i video selezionati? [" + ondemandIdList + "]"))
+	{    
+            var result = MarkOndemandVideoToJoin(ondemandIdList);
             if (result === "false")
             {
                 alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
