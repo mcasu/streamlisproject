@@ -77,6 +77,11 @@ $(document).ready(function()
         if (counter !== 0)
         {
             $(".btn_actions").find(".btn").attr('disabled',false);
+            
+            if (counter < 2)
+            {
+                $(".btn_video_join").attr('disabled',true);
+            }
         }
         else
         {
@@ -116,6 +121,11 @@ $(document).ready(function()
         if (counter !== 0)
         {
             $(".btn_actions").find(".btn").attr('disabled',false);
+            
+            if (counter < 2)
+            {
+                $(".btn_video_join").attr('disabled',true);
+            }
         }
         else
         {
@@ -146,12 +156,19 @@ $(document).ready(function()
                     li_video_obj.fadeOut(1000);
 		});
             });
-        
         }
-            
     });
     
-    $('.play-button').click(function (event){
+    $(".btn_video_join").click(function()
+    {
+        if (confirm("Vuoi davvero unire i video selezionati?"))
+	{
+        }
+    });
+        
+    
+    $('.play-button').click(function (event)
+    {
      
 	var url = $(this).attr("href");
 	var windowName = "Player";//$(this).attr("name");
@@ -202,7 +219,7 @@ try
             //echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
-                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
@@ -419,7 +436,7 @@ try
         echo '<div class="panel-footer">';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
-                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
+                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
