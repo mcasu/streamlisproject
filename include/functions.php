@@ -217,7 +217,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
-            return 1;
+            return FALSE;
         }
     } 
     catch (Exception $e) 
@@ -226,5 +226,5 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
         return 1;
     }
     
-    return 0;
+    return TRUE;
 }
