@@ -162,7 +162,7 @@ $(document).ready(function()
     $(".btn_video_join").click(function()
     {
         
-        var checkedItems = {};
+        var checkedItems[];
         $(".checked-list-box li.active").each(function(idx, li) {
 
             var ondemand_id=$(this).attr('id');
