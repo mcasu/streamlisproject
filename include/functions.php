@@ -189,8 +189,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
 
 function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 {
-    try 
-    {
+
 //        $ondemandListArray = explode(",",$ondemandIdList);
 //        $found = 0;
 //        foreach ($ondemandListArray as $ondemandId) 
@@ -219,12 +218,6 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
         {
             return FALSE;
         }
-    } 
-    catch (Exception $e) 
-    {
-        error_log("ERROR - functions.php - MarkOndemandVideoToJoin() " . $e->getMessage());
-        return 1;
-    }
     
     return TRUE;
 }
