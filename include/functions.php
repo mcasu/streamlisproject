@@ -191,8 +191,8 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 {
     try 
     {
-        $ondemandListArray = explode(",",$ondemandIdList);
-        $found = 0;
+//        $ondemandListArray = explode(",",$ondemandIdList);
+//        $found = 0;
 //        foreach ($ondemandListArray as $ondemandId) 
 //        {
 //            $result = $dbactions->CheckIfOndemandVideoIsMarked($ondemandId);
@@ -205,26 +205,26 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
 //            $found += mysql_num_rows($result);
 //        }
 
-        if ($found < 0)
-        {
-            return "1";
-        }
-
-        if ($found > 0)
-        {
-            return "2";
-        }
+//        if ($found < 0)
+//        {
+//            return "1";
+//        }
+//
+//        if ($found > 0)
+//        {
+//            return "2";
+//        }
 
         if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
         {
-            return FALSE;
+            return 1;
         }
     } 
     catch (Exception $e) 
     {
         error_log("ERROR - functions.php - MarkOndemandVideoToJoin() " . $e->getMessage());
-        return FALSE;
+        return 1;
     }
     
-    return TRUE;
+    return 0;
 }

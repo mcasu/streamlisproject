@@ -1435,16 +1435,16 @@ class DBActions
             return false;
         }
         
-        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list) VALUES (' . $ondemandJoinId . ',"' . $ondemandIdList . '")';
+//        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list) VALUES (' . $ondemandJoinId . ',"' . $ondemandIdList . '")';
+//        
+//        $result_insert = mysql_query($query_total ,$this->connection);
+//        if(!$result_insert)
+//        {
+//            $this->HandleDBError("Error inserting data from the table\nquery:$query_total");
+//            return false;
+//        }
         
-        $result_insert = mysql_query($query_total ,$this->connection);
-        if(!$result_insert)
-        {
-            $this->HandleDBError("Error inserting data from the table\nquery:$query_total");
-            return false;
-        }
-        
-        return $result_insert;
+        return $result_update;
     }
     
     function CreateUsersTable()
