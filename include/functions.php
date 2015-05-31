@@ -193,19 +193,19 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
     {
         $ondemandListArray = explode(",",$ondemandIdList);
         $found = 0;
-        foreach ($ondemandListArray as $ondemandId) 
-        {
-            $result = $dbactions->CheckIfOndemandVideoIsMarked($ondemandId);
-            if (!$result)
-            {
-                $found = -1;
-                break;
-            }
+//        foreach ($ondemandListArray as $ondemandId) 
+//        {
+//            $result = $dbactions->CheckIfOndemandVideoIsMarked($ondemandId);
+//            if (!$result)
+//            {
+//                $found = -1;
+//                break;
+//            }
+//
+//            $found += mysql_num_rows($result);
+//        }
 
-            $found += mysql_num_rows($result);
-        }
-
-        if ($found === -1)
+        if ($found < 0)
         {
             return "1";
         }
