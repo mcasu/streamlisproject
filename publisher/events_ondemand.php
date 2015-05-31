@@ -171,7 +171,7 @@ $(document).ready(function()
                 counter++;
             });
             
-            var $ondemandIdList = checkedItems.join();
+            var $ondemandIdList = checkedItems.toString();
             var result = MarkOndemandVideoToJoin($ondemandIdList);
             
             if (result === "false")
