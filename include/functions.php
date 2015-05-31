@@ -25,6 +25,9 @@ switch ($fname)
         $userId = filter_input(INPUT_POST, 'userId');
         $userAdminId = filter_input(INPUT_POST, 'userAdminId');
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
+    case "mark_ondemand_video_to_join":
+        $ondemandIdList = filter_input(INPUT_POST, '$ondemandIdList');
+        return MarkOndemandVideoToJoin($dbactions, $ondemandIdList);
     default:
         break;
 }
@@ -179,6 +182,16 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     if (!$mainactions->SendMail($mailTo, $mailSubject, $mailBody))
     {
         error_log("\ERROR - functions.php SendMail() FAILED!");
+    }
+    
+    return TRUE;
+}
+
+function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
+{
+    if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
+    {
+        return FALSE;
     }
     
     return TRUE;

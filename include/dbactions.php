@@ -1381,6 +1381,35 @@ class DBActions
             return $result;
     }
 
+    function MarkOndemandVideoToJoin($ondemandIdList)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+       
+        // Genero un id univoco di 12 caratteri
+        $ondemandJoinId = substr(uniqid("join_"), 0, 12);
+        
+        $query_total = 'UPDATE ondemand SET ondemand_join_id = "'. $ondemandJoinId . '" WHERE ondemand_id in ('. $ondemandIdList . ')';
+        
+        $result = mysql_query($query_total ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$query_total");
+            return false;
+        }
+        return $result;
+    }
+    
     function CreateUsersTable()
     {
         $qry = "Create Table users (".
