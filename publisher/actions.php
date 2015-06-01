@@ -59,7 +59,16 @@ $(document).ready(function()
         "order": [[ 2, 'asc' ]],
         "processing": true,
         "serverSide": true,
-        "ajax": "/include/functions.php?fname=get_datatable_ondemand_actions_join"
+        "ajax": {
+            "url": "/include/functions.php?fname=get_datatable_ondemand_actions_join",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "ID OPERAZIONE" },
+            { "data": "ONDEMAND VIDEO DA UNIRE" },
+            { "data": "STATO OPERAZIONE" }
+        ]
+    } );
     });
         
 });

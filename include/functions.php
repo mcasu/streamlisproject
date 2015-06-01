@@ -260,9 +260,9 @@ $primaryKey = 'ondemand_actions_join_id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'ondemand_actions_join_id', 'dt' => 0 ),
-    array( 'db' => 'ondemand_actions_join_list',  'dt' => 1 ),
-    array( 'db' => 'ondemand_actions_join_status',   'dt' => 2 )
+    array( 'db' => 'ondemand_actions_join_id', 'dt' => "ID OPERAZIONE" ),
+    array( 'db' => 'ondemand_actions_join_list',  'dt' => "ONDEMAND VIDEO DA UNIRE" ),
+    array( 'db' => 'ondemand_actions_join_status',   'dt' => "STATO OPERAZIONE" )
 );
  
 // SQL server connection information
