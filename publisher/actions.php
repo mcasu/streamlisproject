@@ -26,8 +26,8 @@ $(document).ready(function()
     $('#ondemand_actions_join_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
-        }
-        //"aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+        },
+        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
         //"order": [[ 1, 'asc' ]]
     });
     
@@ -48,7 +48,15 @@ $(document).ready(function()
 
         <div class="panel-body">
             <table class="table table-hover" id="ondemand_actions_join_table">
-
+                <thead>
+                    <tr class="head">
+                        <th></th>
+                        <th>ID OPERAZIONE</th>
+                        <th>ONDEMAND VIDEO DA UNIRE</th>
+                        <th>STATO OPERAZIONE</th>
+                    </tr>
+                </thead>
+                
             </table>
         </div>
     </div>
