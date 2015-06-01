@@ -1490,6 +1490,7 @@ class DBActions
         }
         
         $count = 0;
+        $joinIdsToString = null;
         foreach ($joinIds as $id) 
         {
             $joinIdsToString += '"' . $id . '"';
@@ -1529,6 +1530,7 @@ class DBActions
         }
 
         $count = 0;
+        $joinIdsToString = null;
         foreach ($joinIds as $id) 
         {
             $joinIdsToString += '"' . $id . '"';
@@ -1540,7 +1542,7 @@ class DBActions
             }
         }
         
-        $query_update = 'UPDATE ondemand SET ondemand_join_id = NULL WHERE ondemand_id in ('. $joinIdsToString . ')';
+        $query_update = 'UPDATE ondemand SET ondemand_join_id = NULL WHERE ondemand_join_id in ('. $joinIdsToString . ')';
         
         $result_update = mysql_query($query_update ,$this->connection);
         if(!$result_update)
