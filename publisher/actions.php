@@ -56,7 +56,10 @@ $(document).ready(function()
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 2, 'asc' ]]
+        "order": [[ 2, 'asc' ]],
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/include/functions.php?fname=get_datatable_ondemand_actions_join"
     });
         
 });
