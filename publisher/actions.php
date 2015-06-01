@@ -82,6 +82,17 @@ $(document).ready(function()
     $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () 
     {
         $(this).toggleClass('selected');
+        
+        var joinTableRowSelected = joinTable.rows('.selected').data().length;
+        
+        if (joinTableRowSelected > 0)
+        {
+            $(".btn_actions").find(".btn").attr('disabled',false);
+        }
+        else
+        {
+            $(".btn_actions").find(".btn").attr('disabled',true);
+        }
     });
     
 });
