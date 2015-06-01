@@ -300,5 +300,11 @@ function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
         return FALSE;
     }
     
+    if (!$dbactions->ResetOndemandVideoActionsJoin($joinIdsArray))
+    {
+        error_log("ERROR - functions.php ResetOndemandVideoActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
     return TRUE;
 }

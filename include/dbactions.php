@@ -1489,7 +1489,6 @@ class DBActions
             return false;
         }
         
-        
         $query_select = 'DELETE FROM ondemand_actions_join WHERE ondemand_actions_join_id in (' . $joinIds . ')';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -1500,6 +1499,33 @@ class DBActions
         }
         
         return $result_select;
+    }
+    
+    function ResetOndemandVideoActionsJoin($joinIds)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $query_update = 'UPDATE ondemand SET ondemand_join_id = NULL WHERE ondemand_id in ('. $joinIds . ')';
+        
+        $result_update = mysql_query($query_update ,$this->connection);
+        if(!$result_update)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$query_update");
+            return false;
+        }
+        
+        return $result_update;        
     }
     
     function CreateUsersTable()
