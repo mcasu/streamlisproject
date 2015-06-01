@@ -99,7 +99,7 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            joinTable.rows('.selected').column(0).data().every(function()
+            joinTable.rows('.selected').column(0).data().each(function()
             {
                 alert("DATA: " + this);
             });
