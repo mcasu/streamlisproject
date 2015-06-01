@@ -99,7 +99,7 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            var allData = joinTable.rows('.selected').column(0).data().toJQuery();
+            var allData = joinTable.rows('.selected').data().column(0).toJQuery();
             
             var joinSelectedIds = [];
             allData.each(function()
@@ -112,8 +112,12 @@ $(document).ready(function()
             $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds.toString()},
             function(data,status)
             {
-                alert("Data: " + data + "\nStatus: " + status);
-                joinTable.$('.selected').remove();
+                //alert("Data: " + data + "\nStatus: " + status);
+                
+                if (status === "success")
+                {
+                    joinTable.$('.selected').remove();
+                }
             });            
             
         }
