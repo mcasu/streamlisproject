@@ -99,12 +99,11 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            joinTable.rows('.selected').remove().draw(true);
-//            joinTable.rows('.selected').every(function()
-//            {
-//                var data = this.data();
-//                alert("DATA: " + data.ondemand_actions_join_id);
-//            });
+            joinTable.rows('.selected').every(function()
+            {
+                var data = this.data();
+                alert("DATA: " + data);
+            });
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
 //    
