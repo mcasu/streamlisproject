@@ -28,7 +28,7 @@ $(document).ready(function()
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 1, 'asc' ]]
+        "order": [[ 2, 'asc' ]]
     });
     
 });

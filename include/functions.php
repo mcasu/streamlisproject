@@ -240,6 +240,7 @@ function GetOndemandActionsJoin($dbactions)
             error_log("ERROR - Publisher functions.php GetOndemandActionsJoin() - ".$dbactions->GetErrorMessage());
         }
 
+        echo '<tbody>';
         while ($row = mysql_fetch_array($actionsJoin))
         {
             $values[0]=$row['ondemand_actions_join_id'];
@@ -266,6 +267,7 @@ function GetOndemandActionsJoin($dbactions)
                 echo '</td>';                                
             echo '</tr>';
         }
+        echo '</tbody>';
     } 
     catch (Exception $e) 
     {
