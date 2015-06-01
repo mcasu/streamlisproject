@@ -101,8 +101,11 @@ $(document).ready(function()
 	{
             joinTable.rows('.selected').column(0).every(function()
             {
-                var data = this.data();
-                alert("DATA: " + data);
+                this.data().every(function()
+                {
+                    alert("DATA: " + this);
+                });
+                
             });
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
