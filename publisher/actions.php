@@ -21,14 +21,14 @@
     
 $(document).ready(function()
 {
-    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+    $('#ondemand_actions_join_table_body').load("/include/functions.php?fname=get_ondemand_actions_join");
     
     $('#ondemand_actions_join_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        //"order": [[ 1, 'asc' ]]
+        "order": [[ 1, 'asc' ]]
     });
     
 });
@@ -57,6 +57,7 @@ $(document).ready(function()
                     </tr>
                 </thead>
                 
+                <tbody id="ondemand_actions_join_table_body"></tbody>
             </table>
         </div>
     </div>
