@@ -102,7 +102,7 @@ $(document).ready(function()
             joinTable.rows('.selected').every(function()
             {
                 var data = this.data();
-                alert("DATA: " + data);
+                alert("DATA: " + data.column(0));
             });
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
