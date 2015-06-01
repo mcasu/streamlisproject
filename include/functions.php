@@ -257,8 +257,7 @@ $primaryKey = 'ondemand_actions_join_id';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
-// parameter represents the DataTables column identifier. In this case simple
-// indexes
+// parameter represents the DataTables column identifier.
 $columns = array(
     array( 'db' => 'ondemand_actions_join_id', 'dt' => "ID OPERAZIONE" ),
     array( 'db' => 'ondemand_actions_join_list',  'dt' => "ONDEMAND VIDEO DA UNIRE" ),

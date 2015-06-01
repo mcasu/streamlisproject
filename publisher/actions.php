@@ -24,12 +24,13 @@
 
 <div class="container-fluid">
     <div class="panel panel-default">
-        <div class="panel-heading">	<h4>Ondemand Join</h4></div>
+        <div class="panel-heading"><h4>Ondemand Join</h4></div>
 
         <div class="panel-body" id="ondemand_actions_join_panelbody">
             <table class="table table-hover" id="ondemand_actions_join_table">
                 <thead>
                     <tr class="head">
+                        <th></th>
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
