@@ -28,16 +28,14 @@
 
         <div class="panel-body" id="ondemand_actions_join_panelbody">
             <table class="table table-hover" id="ondemand_actions_join_table">
-<!--                <thead>
+                <thead>
                     <tr class="head">
-                        <th></th>
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
                     </tr>
                 </thead>
                 
-                <tbody></tbody>-->
             </table>
         </div>
     </div>
