@@ -28,6 +28,8 @@ switch ($fname)
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         return MarkOndemandVideoToJoin($dbactions, $ondemandIdList);
+    case "get_ondemand_actions_join":
+        return GetOndemandActionsJoin($dbactions);
     default:
         break;
 }
@@ -197,6 +199,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
             if (!$result)
             {
                 $found = -1;
+                error_log("ERROR - CheckIfOndemandVideoIsMarked() FAILED! " . $dbactions->GetErrorMessage());
                 break;
             }
 
@@ -224,4 +227,59 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
         {
             echo "0";
         }
+}
+
+function GetOndemandActionsJoin($dbactions)
+{
+    try
+    {
+        $actionsJoin = $dbactions->GetAllOnDemandActionsJoin();
+
+        if (!$actionsJoin)
+        {
+            error_log("ERROR - Publisher functions.php GetOndemandActionsJoin() - ".$dbactions->GetErrorMessage());
+        }
+
+        echo '<thead>';
+            echo '<tr class="head">';
+                echo'<th></th>';
+                echo '<th>ID OPERAZIONE</th>';
+                echo '<th>ONDEMAND VIDEO DA UNIRE</th>';
+                echo '<th>STATO OPERAZIONE</th>';
+            echo '</tr>';
+        echo '</thead>';
+
+        echo '<tbody>';
+        while ($row = mysql_fetch_array($actionsJoin))
+        {
+            $values[0]=$row['ondemand_actions_join_id'];
+            $values[1]=$row['ondemand_actions_join_list'];
+            $values[2]=$row['ondemand_actions_join_status'];
+
+            echo '<tr class="actions_join_table" id="' .$values[1].'">';
+                echo '<td><input type="radio" name="actions_join_selected" /></td>';
+                echo '<td>' . $values[0] . '</td>';
+                echo '<td>' . $values[1] . '</td>';
+                echo '<td>';
+                    if ($values[2] == 0)
+                    {
+                        echo '<span class="label label-warning">Schedulata</span>';
+                    }
+                    elseif ($values[2] == 1)
+                    {
+                        echo '<span class="label label-info">In corso</span>';
+                    }
+                    else if ($values[2] == 2)
+                    {
+                        echo '<span class="label label-success">Terminata</span>';
+                    }
+                echo '</td>';                                
+            echo '</tr>';
+        }
+        echo '</tbody>';
+    } 
+    catch (Exception $e) 
+    {
+        error_log('ERROR - Publisher functions.php GetOndemandActionsJoin() - '.$e->getMessage());
+    }
 }

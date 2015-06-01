@@ -53,7 +53,18 @@
                       <li><a href='user_add.php'><span>Aggiungi utente</span></a></li>
                    </ul>
                 </li>
+                
+                <li class='dropdown'>
+                   <a href='#' class="dropdown-toggle" data-toggle="dropdown">
+                      <img src="../images/monitor.png" height="32" width="32">
+                      Monitor <span class="caret"></span>
 
+                   </a>
+                   <ul class="dropdown-menu" role="menu">
+                      <li><a href='actions.php'>Operazioni</a></li>
+                   </ul>
+                </li>
+                
                 <li class="dropdown pull-right">
                     <a href='#' class="dropdown-toggle" data-toggle="dropdown">
                     <img src="../images/profile.png" height="32" width="32">
