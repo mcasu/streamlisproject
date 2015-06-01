@@ -99,13 +99,9 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            //var allData = [];
             var allData = joinTable.rows('.selected').column(0).data().toJQuery();
             
-            allData.each(function()
-            {
-                console.log("Data lenght: " + this);
-            });
+            console.log("Data lenght: " + allData.toString());
             
             
             
