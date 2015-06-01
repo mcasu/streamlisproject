@@ -260,7 +260,7 @@ $primaryKey = 'ondemand_actions_join_id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'ondemand_actions_join', 'dt' => 0 ),
+    array( 'db' => 'ondemand_actions_join_id', 'dt' => 0 ),
     array( 'db' => 'ondemand_actions_join_list',  'dt' => 1 ),
     array( 'db' => 'ondemand_actions_join_status',   'dt' => 2 )
 );
