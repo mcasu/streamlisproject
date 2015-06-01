@@ -240,6 +240,15 @@ function GetOndemandActionsJoin($dbactions)
             error_log("ERROR - Publisher functions.php GetOndemandActionsJoin() - ".$dbactions->GetErrorMessage());
         }
 
+        echo '<thead>';
+            echo '<tr class="head">';
+                echo '<th></th>';
+                echo '<th>ID OPERAZIONE</th>';
+                echo '<th>ONDEMAND VIDEO DA UNIRE</th>';
+                echo '<th>STATO OPERAZIONE</th>';
+            echo '</tr>'; 
+        echo '</thead>';
+        
         echo '<tbody>';
         while ($row = mysql_fetch_array($actionsJoin))
         {
