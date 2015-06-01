@@ -30,7 +30,6 @@
             <table class="table table-hover" id="ondemand_actions_join_table">
                 <thead>
                     <tr class="head">
-                        <th></th>
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
@@ -68,6 +67,16 @@ $(document).ready(function()
             { "data": "STATO OPERAZIONE" }
         ]
     });
+    
+    $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
     
 });
 
