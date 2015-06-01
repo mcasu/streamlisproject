@@ -48,20 +48,29 @@
     
 $(document).ready(function()
 {
-    $('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
-});
-
+    
 (function($){
     
-    $('#ondemand_actions_join_table').DataTable({
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
-        },
-        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 2, 'asc' ]]
-    });
+    LoadDataTable = function()
+    {
+        $('#ondemand_actions_join_table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+            },
+            "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+            "order": [[ 2, 'asc' ]]
+        });
+    };
+    
     
 })(jQuery);
+
+    $('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
+    
+    LoadDataTable();
+});
+
+
 
 </script>
 
