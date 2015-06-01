@@ -99,10 +99,7 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            var anSelected = fnGetSelected( joinTable );
-            $(anSelected).remove();
-            
-            //joinTable.rows('.selected').remove().draw();
+            joinTable.$('.selected').remove();
         }
     });
     
