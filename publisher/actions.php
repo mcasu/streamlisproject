@@ -19,10 +19,10 @@
     
 <script type="text/javascript">
     
-//$(document).ready(function()
-//{
-//    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
-//    
+$(document).ready(function()
+{
+    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+    
 //    $('#ondemand_actions_join_table').DataTable({
 //        "language": {
 //            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
@@ -30,8 +30,8 @@
 //        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
 //        "order": [[ 2, 'asc' ]]
 //    });
-//    
-//});
+    
+});
 
 </script>
     
@@ -67,7 +67,7 @@
     
 $(document).ready(function()
 {
-    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+    //$('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
     
     $('#ondemand_actions_join_table').DataTable({
         "language": {
