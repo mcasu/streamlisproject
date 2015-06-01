@@ -101,7 +101,7 @@ $(document).ready(function()
 	{
             joinTable.rows('.selected').each(function ()
             {
-                $(this).remove().draw();
+                this.remove().draw();
             });
             
             //joinTable.$('.selected').remove();
