@@ -101,7 +101,7 @@ $(document).ready(function()
 	{
             joinTable.rows('.selected').every(function()
             {
-                console.log("DATA: " + this.data());
+                console.log("DATA: " + $(this).data());
             });
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
