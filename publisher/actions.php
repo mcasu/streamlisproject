@@ -105,7 +105,7 @@ $(document).ready(function()
             allData.each(function()
             {
                 var rowArray = [];
-                rowArray = this.toArray();
+                rowArray = $(this).toArray();
                 joinSelectedIds.push(rowArray[0]);
             });
             
