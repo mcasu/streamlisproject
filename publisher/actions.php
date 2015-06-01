@@ -101,7 +101,7 @@ $(document).ready(function()
 	{
             var ids = joinTable.rows('.selected').column( 0 ).data();
             
-            alert("DATA: " + ids.toString());
+            alert("DATA: " + ids);
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
 //    
