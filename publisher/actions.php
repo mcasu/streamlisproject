@@ -68,12 +68,9 @@ $(document).ready(function()
             { "data": "ONDEMAND VIDEO DA UNIRE" },
             { "data": "STATO OPERAZIONE" }
         ]
-    } );
     });
-        
+    
 });
-
-
 
 </script>
 
