@@ -1424,7 +1424,7 @@ class DBActions
         }
        
         // Genero un id univoco di 12 caratteri
-        $ondemandJoinId = substr(uniqid("join_"), 0, 12);
+        $ondemandJoinId = substr(uniqid("join_"), 0, 15);
         
         $query_total = 'UPDATE ondemand SET ondemand_join_id = "'. $ondemandJoinId . '" WHERE ondemand_id in ('. $ondemandIdList . ')';
         
