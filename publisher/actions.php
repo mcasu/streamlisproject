@@ -99,7 +99,12 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            joinTable.$('.selected').remove();
+            joinTable.rows('.selected').each(function ()
+            {
+                $(this).remove().draw();
+            });
+            
+            //joinTable.$('.selected').remove();
         }
     });
     
