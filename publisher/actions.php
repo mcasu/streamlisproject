@@ -24,7 +24,13 @@
 
 <div class="container-fluid">
     <div class="panel panel-default">
-        <div class="panel-heading"><h4>Ondemand Join</h4></div>
+        <div class="panel-heading">
+            <h4>Ondemand Join</h4>
+            <div class="pull-right btn_actions">
+                <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
 
         <div class="panel-body" id="ondemand_actions_join_panelbody">
             <table class="table table-hover" id="ondemand_actions_join_table">
