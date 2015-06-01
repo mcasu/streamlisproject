@@ -99,12 +99,18 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            joinTable.rows('.selected').each(function ()
-            {
-                this.remove().draw();
-            });
+            var ids = joinTable.rows('.selected').column().data();
             
-            //joinTable.$('.selected').remove();
+            alert("DATA: " + ids.toString());
+            
+//            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
+//    
+//            function(data,status)
+//            {
+//                //alert("Data: " + data + "\nStatus: " + status);
+//                joinTable.$('.selected').remove();
+//            });            
+            
         }
     });
     
