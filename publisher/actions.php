@@ -95,6 +95,14 @@ $(document).ready(function()
         }
     });
     
+    $(".btn_actions_delete").click(function()
+    {
+        if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
+	{
+            joinTable.rows('.selected').remove().draw( false );
+        }
+    });
+    
 });
 
 </script>

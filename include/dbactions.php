@@ -1435,7 +1435,8 @@ class DBActions
             return false;
         }
         
-        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list) VALUES ("' . $ondemandJoinId . '","' . $ondemandIdList . '")';
+        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list, ondemand_actions_join_date) '.
+                'VALUES ("' . $ondemandJoinId . '","' . $ondemandIdList . '",CURRENT_TIMESTAMP)';
         
         $result_insert = mysql_query($query_total ,$this->connection);
         if(!$result_insert)
@@ -1461,7 +1462,7 @@ class DBActions
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
-        $query_select = 'SELECT * FROM ondemand_actions_join';
+        $query_select = 'SELECT * FROM ondemand_actions_join ORDER BY ondemand_actions_join_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
         if(!$result_select)
