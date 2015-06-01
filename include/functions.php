@@ -292,15 +292,15 @@ echo json_encode(
 
 function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
 {
-    //$joinIdsArray = explode(",",$joinSelectedIds);
+    $joinIdsArray = explode(",",$joinSelectedIds);
     
-    if (!$dbactions->DeleteOnDemandActionsJoin($joinSelectedIds))
+    if (!$dbactions->DeleteOnDemandActionsJoin($joinIdsArray))
     {
         error_log("ERROR - functions.php DeleteOndemandActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
         return FALSE;
     }
     
-    if (!$dbactions->ResetOndemandVideoActionsJoin($joinSelectedIds))
+    if (!$dbactions->ResetOndemandVideoActionsJoin($joinIdsArray))
     {
         error_log("ERROR - functions.php ResetOndemandVideoActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
         return FALSE;

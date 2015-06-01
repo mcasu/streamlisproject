@@ -1489,7 +1489,19 @@ class DBActions
             return false;
         }
         
-        $query_select = 'DELETE FROM ondemand_actions_join WHERE ondemand_actions_join_id in (' . $joinIds . ')';
+        $count = 0;
+        foreach ($joinIds as $id) 
+        {
+            $joinIdsToString += '"' . $id . '"';
+            $count++;
+            
+            if (isset($joinIds[$count]))
+            {
+                $joinIdsToString += ',';
+            }
+        }
+        
+        $query_select = 'DELETE FROM ondemand_actions_join WHERE ondemand_actions_join_id in (' . $joinIdsToString . ')';
         
         $result_select = mysql_query($query_select ,$this->connection);
         if(!$result_select)
@@ -1515,8 +1527,20 @@ class DBActions
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
+
+        $count = 0;
+        foreach ($joinIds as $id) 
+        {
+            $joinIdsToString += '"' . $id . '"';
+            $count++;
+            
+            if (isset($joinIds[$count]))
+            {
+                $joinIdsToString += ',';
+            }
+        }
         
-        $query_update = 'UPDATE ondemand SET ondemand_join_id = NULL WHERE ondemand_id in ('. $joinIds . ')';
+        $query_update = 'UPDATE ondemand SET ondemand_join_id = NULL WHERE ondemand_id in ('. $joinIdsToString . ')';
         
         $result_update = mysql_query($query_update ,$this->connection);
         if(!$result_update)
