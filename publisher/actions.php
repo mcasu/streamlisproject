@@ -26,19 +26,19 @@
     <div class="panel panel-default">
         <div class="panel-heading">	<h4>Ondemand Join</h4></div>
 
-        <div class="panel-body">
-            <table class="table table-hover" id="ondemand_actions_join_table">
-<!--                <thead>
+        <div class="panel-body" id="ondemand_actions_join_panelbody">
+<!--            <table class="table table-hover" id="ondemand_actions_join_table">
+                <thead>
                     <tr class="head">
                         <th></th>
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
                     </tr>
-                </thead>-->
+                </thead>
                 
-                <!--<tbody></tbody>-->
-            </table>
+                <tbody></tbody>
+            </table>-->
         </div>
     </div>
 </div>
@@ -48,7 +48,7 @@
     
 $(document).ready(function()
 {
-    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+    $('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
     
     $('#ondemand_actions_join_table').DataTable({
         "language": {

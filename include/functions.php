@@ -240,6 +240,7 @@ function GetOndemandActionsJoin($dbactions)
             error_log("ERROR - Publisher functions.php GetOndemandActionsJoin() - ".$dbactions->GetErrorMessage());
         }
 
+        echo '<table class="table table-hover" id="ondemand_actions_join_table">';
         echo '<thead>';
             echo '<tr class="head">';
                 echo '<th></th>';
@@ -277,6 +278,7 @@ function GetOndemandActionsJoin($dbactions)
             echo '</tr>';
         }
         echo '</tbody>';
+        echo '</table>';
     } 
     catch (Exception $e) 
     {
