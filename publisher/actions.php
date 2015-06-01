@@ -109,13 +109,12 @@ $(document).ready(function()
             
             console.log("Data lenght: " + joinSelectedIds.toString());
             
-//            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
-//    
-//            function(data,status)
-//            {
-//                //alert("Data: " + data + "\nStatus: " + status);
-//                joinTable.$('.selected').remove();
-//            });            
+            $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds.toString()},
+            function(data,status)
+            {
+                alert("Data: " + data + "\nStatus: " + status);
+                joinTable.$('.selected').remove();
+            });            
             
         }
     });

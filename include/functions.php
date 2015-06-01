@@ -30,6 +30,9 @@ switch ($fname)
         return MarkOndemandVideoToJoin($dbactions, $ondemandIdList);
     case "get_datatable_ondemand_actions_join":
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database);
+    case "delete_ondemand_actions_join":
+        $joinSelectedIds = filter_input(INPUT_POST, 'joinSelectedIds');
+        return DeleteOndemandActionsJoin($dbactions, $joinSelectedIds);
     default:
         break;
 }
@@ -285,4 +288,17 @@ require( 'ssp.class.php' );
 echo json_encode(
     SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
 );
+}
+
+function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
+{
+    $joinIdsArray = explode(",",$joinSelectedIds);
+    
+    if (!$dbactions->DeleteOnDemandActionsJoin($joinIdsArray))
+    {
+        error_log("ERROR - functions.php DeleteOndemandActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    return TRUE;
 }

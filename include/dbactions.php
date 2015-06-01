@@ -1473,6 +1473,34 @@ class DBActions
         
         return $result_select;
     }
+
+    function DeleteOnDemandActionsJoin($joinIds)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        
+        $query_select = 'DELETE FROM ondemand_actions_join WHERE ondemand_actions_join_id in (' . $joinIds . ')';
+        
+        $result_select = mysql_query($query_select ,$this->connection);
+        if(!$result_select)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$query_select");
+            return false;
+        }
+        
+        return $result_select;
+    }
     
     function CreateUsersTable()
     {
