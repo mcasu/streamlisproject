@@ -25,7 +25,6 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>Ondemand Join</h4>
             <div class="pull-right btn_actions">
                 <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
             </div>
@@ -43,6 +42,13 @@
                 </thead>
                 
             </table>
+        </div>
+        
+        <div class="panel-footer">
+            <div class="pull-right btn_actions">
+                <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
