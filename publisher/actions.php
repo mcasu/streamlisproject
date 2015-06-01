@@ -104,7 +104,7 @@ $(document).ready(function()
             var joinSelectedIds = [];
             allData.each(function()
             {
-                joinSelectedIds.push(this);
+                joinSelectedIds.push($(this)[0]);
             });
             
             console.log("Data lenght: " + joinSelectedIds.toString());
