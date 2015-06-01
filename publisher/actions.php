@@ -49,7 +49,7 @@ $(document).ready(function()
     
     //$('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
     
-    $('#ondemand_actions_join_table').DataTable({
+    var joinTable = $('#ondemand_actions_join_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
@@ -73,7 +73,7 @@ $(document).ready(function()
             $(this).removeClass('selected');
         }
         else {
-            table.$('tr.selected').removeClass('selected');
+            joinTable.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     } );
