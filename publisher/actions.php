@@ -101,9 +101,13 @@ $(document).ready(function()
 	{
             var allData = joinTable.rows('.selected').column(0).data().toJQuery();
             
-            console.log("Data lenght: " + allData.toString());
+            var joinSelectedIds = [];
+            allData.each(function()
+            {
+                joinSelectedIds.push(this);
+            });
             
-            
+            console.log("Data lenght: " + joinSelectedIds.toString());
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
 //    
