@@ -49,6 +49,9 @@
 $(document).ready(function()
 {
     $('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
+});
+
+(function($){
     
     $('#ondemand_actions_join_table').DataTable({
         "language": {
@@ -58,9 +61,10 @@ $(document).ready(function()
         "order": [[ 2, 'asc' ]]
     });
     
-});
+})(jQuery);
 
 </script>
+
     
 </body>
 </html>
