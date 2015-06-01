@@ -21,7 +21,7 @@
     
 $(document).ready(function()
 {
-    //$('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
     
     $('#ondemand_actions_join_table').DataTable({
         "language": {
@@ -57,7 +57,7 @@ $(document).ready(function()
                     </tr>
                 </thead>
                 
-                <tbody></tbody>
+                <!--<tbody></tbody>-->
             </table>
         </div>
     </div>
@@ -67,7 +67,7 @@ $(document).ready(function()
     
 $(document).ready(function()
 {
-    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
+//    $('#ondemand_actions_join_table').load("/include/functions.php?fname=get_ondemand_actions_join");
     
 //    $('#ondemand_actions_join_table').DataTable({
 //        "language": {
