@@ -27,7 +27,7 @@
         <div class="panel-heading">	<h4>Ondemand Join</h4></div>
 
         <div class="panel-body" id="ondemand_actions_join_panelbody">
-<!--            <table class="table table-hover" id="ondemand_actions_join_table">
+            <table class="table table-hover" id="ondemand_actions_join_table">
                 <thead>
                     <tr class="head">
                         <th></th>
@@ -38,7 +38,7 @@
                 </thead>
                 
                 <tbody></tbody>
-            </table>-->
+            </table>
         </div>
     </div>
 </div>
@@ -49,25 +49,16 @@
 $(document).ready(function()
 {
     
-(function($){
+    //$('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
     
-    LoadDataTable = function()
-    {
-        $('#ondemand_actions_join_table').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
-            },
-            "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-            "order": [[ 2, 'asc' ]]
-        });
-    };
-    
-    
-})(jQuery);
-
-    $('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
-    
-    LoadDataTable();
+    $('#ondemand_actions_join_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        },
+        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+        "order": [[ 2, 'asc' ]]
+    });
+        
 });
 
 
