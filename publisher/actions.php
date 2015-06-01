@@ -68,15 +68,10 @@ $(document).ready(function()
         ]
     });
     
-    $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () {
-        if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-        }
-        else {
-            joinTable.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    } );
+    $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () 
+    {
+        $(this).toggleClass('selected');
+    });
     
 });
 
