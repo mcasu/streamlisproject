@@ -101,7 +101,7 @@ $(document).ready(function()
 	{
             joinTable.rows('.selected').every(function()
             {
-                console.log("DATA: " + this.cell(0).data());
+                console.log("DATA: " + this.cell().data());
                 
             });
             
