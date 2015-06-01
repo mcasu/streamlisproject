@@ -58,8 +58,7 @@
     
 $(document).ready(function()
 {
-    
-    //$('#ondemand_actions_join_panelbody').load("/include/functions.php?fname=get_ondemand_actions_join");
+    $(".btn_actions").find(".btn").attr('disabled',true);
     
     var joinTable = $('#ondemand_actions_join_table').DataTable({
         "language": {
