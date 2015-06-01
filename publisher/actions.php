@@ -99,9 +99,9 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            joinTable.rows('.selected').column(0).each(function(row)
+            joinTable.rows('.selected').data().each(function(row)
             {
-               alert("DATA: " + row.data());
+               alert("DATA: " + row.ondemand_actions_join_id);
             });
             
 //            $.post("/include/functions.php",{fname:"ondemand",event_id:ondemand_id},
