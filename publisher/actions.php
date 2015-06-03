@@ -38,7 +38,7 @@
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
-                        <th>DATA OPERAZIONE</th>
+                        <th>DATA INSERIMENTO</th>
                     </tr>
                 </thead>
                 
@@ -115,19 +115,16 @@ $(document).ready(function()
     {
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
-        //var joinSelectedIds = [];
         var joinSelectedIds = $.map(joinTable.rows('.selected').data(), function (row) 
         {
             return row[0];
-            
-            //joinSelectedIds.push(value);
         } );
         
-        console.log("Data: " + joinSelectedIds);
+        console.log("Join id selezionati: " + joinSelectedIds);
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds.toString()},
+            $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds},
             function(data,status)
             {
                 //alert("Data: " + data + "\nStatus: " + status);
