@@ -105,9 +105,9 @@ $(document).ready(function()
         {
 //            var row = joinTable.row( index );
 //            var data = row.data();
-            var row = this.row().data();
+            var row = this.data();
             var rowArray = [];
-            rowArray = this.toArray();
+            rowArray = row.toArray();
             
             console.log( 'Counter: ' + counter + ' Data: ' + row.ondemand_actions_join_id + ' Value: ' + rowArray[0]);
             counter++;
