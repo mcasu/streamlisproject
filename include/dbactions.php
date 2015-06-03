@@ -1502,6 +1502,8 @@ class DBActions
             }
         }
         
+        error_log("INFO - join ids for db: " . $joinIdsToString);
+        
         $query_select = 'DELETE FROM ondemand_actions_join WHERE ondemand_actions_join_id in (' . $joinIdsToString . ')';
         
         $result_select = mysql_query($query_select ,$this->connection);
