@@ -103,8 +103,8 @@ $(document).ready(function()
         var joinSelectedIds = [];
         allDataSelected.each( function ( index ) 
         {
-            var row = joinTable.row( index ).data();
-            var data = row.column(0).data();
+            var row = joinTable.row( index );
+            var data = row.data();
             
             console.log( 'Index: ' + index + ' Data: ' + data);
 
