@@ -99,14 +99,14 @@ $(document).ready(function()
     {
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            var allData = joinTable.rows('.selected').data().toJQuery();
+            var allData = joinTable.rows('.selected').column(0).data().toJQuery();
             
             var joinSelectedIds = [];
             allData.each(function()
             {
-                var rowArray = [];
-                rowArray = $(this).toArray();
-                joinSelectedIds.push(rowArray[0]);
+//                var rowArray = [];
+//                rowArray = $(this).toArray();
+                joinSelectedIds.push(this);
             });
             
             console.log("Data lenght: " + joinSelectedIds.toString());
