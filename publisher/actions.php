@@ -97,14 +97,13 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
+        var allDataSelected = joinTable.rows('.selected').data();
+        console.log("Numero record selezionati: " + allDataSelected.length);
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            var allDataSelected = (joinTable.rows('.selected').data()).column(0).data().toJQuery();
-            
             var joinSelectedIds = [];
-            allDataSelected.each(function()
+            allDataSelected.column(0).toJQuery().each(function()
             {
 //                var rowArray = [];
 //                rowArray = $(this).toArray();
