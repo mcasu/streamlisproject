@@ -103,7 +103,7 @@ $(document).ready(function()
         var counter = 0;
         joinTable.rows().every( function ( ) 
         {
-            var row = this.toJQuery();
+            var row = this.toArray();
 
             console.log( 'Counter: ' + counter + ' Data: ' + row + ' - ' + row.join() + ' - ' + row[0].join());
             counter++;
