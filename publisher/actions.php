@@ -97,7 +97,7 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        var allDataSelected = joinTable.rows('.selected').column([0, '.selected']).data();
+        var allDataSelected = joinTable.column([0, '.selected']).data();
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
