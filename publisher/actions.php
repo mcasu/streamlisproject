@@ -97,7 +97,7 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        var allDataSelected = joinTable.rows('.selected').data();
+        var allDataSelected = joinTable.rows('.selected');
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
