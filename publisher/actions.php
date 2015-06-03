@@ -101,7 +101,7 @@ $(document).ready(function()
         
         var joinSelectedIds = [];
         var counter = 0;
-        joinTable.rows('.selected').every( function ( ) 
+        joinTable.rows('.selected').data().every( function ( ) 
         {
 //            var row = joinTable.row( index );
 //            var data = row.data();
