@@ -105,7 +105,7 @@ $(document).ready(function()
         {
             var data = this.data();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + data.toArray().toString());
+            console.log( 'Counter: ' + counter + ' Data: ' + this.toArray().toString());
             counter++;
             
             //joinSelectedIds.push(value);
