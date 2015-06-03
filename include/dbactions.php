@@ -1535,12 +1535,12 @@ class DBActions
         $joinIdsToString = null;
         foreach ($joinIds as $id) 
         {
-            $joinIdsToString += '"' . $id . '"';
+            $joinIdsToString .= '"' . $id . '"';
             $count++;
             
             if (isset($joinIds[$count]))
             {
-                $joinIdsToString += ',';
+                $joinIdsToString .= ',';
             }
         }
         
