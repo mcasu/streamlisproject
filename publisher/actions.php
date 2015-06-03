@@ -106,7 +106,7 @@ $(document).ready(function()
             var column = allDataSelected.column( index );
             var data = column.data();
             //console.log( 'Data in index: '+index+' is: '+value );
-            console.log( 'Data: ' + data);
+            console.log( 'Index: ' + index + ' Data: ' + data);
 
             //joinSelectedIds.push(value);
         } );
