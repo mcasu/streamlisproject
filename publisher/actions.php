@@ -101,11 +101,11 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        allDataSelected.toJQuery().each(function()
+        allDataSelected.each( function ( value, index ) 
         {
-            console.log("Valore: " + this);
+            console.log( 'Data in index: '+index+' is: '+value );
             joinSelectedIds.push(this);
-        });
+        } );
         
         console.log("Data: " + joinSelectedIds.toString());
         
