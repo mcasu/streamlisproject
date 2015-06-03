@@ -104,7 +104,7 @@ $(document).ready(function()
         {
             var data = api.column(0).data();
             
-            console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data);
+            console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data[0]);
             
             //joinSelectedIds.push(value);
         } );
