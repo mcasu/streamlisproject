@@ -269,11 +269,13 @@ $columns = array(
             switch ($d) 
             {
                 case 0:
-                    return '<span class="label label-warning">Default</span>';
+                    return '<span class="label label-warning">SCHEDULATA</span>';
                 case 1:
-                    return '<span class="label label-info">Default</span>';
+                    return '<span class="label label-info">IN CORSO...</span>';
                 case 2:
-                    return '<span class="label label-success">Default</span>';
+                    return '<span class="label label-success">TERMINATA CON SUCCESSO</span>';
+                case -1:
+                    return '<span class="label label-danger">TERMINATA CON ERRORI</span>';
             }
         }),
     array(
