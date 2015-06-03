@@ -103,9 +103,14 @@ $(document).ready(function()
         var counter = 0;
         joinTable.rows().every( function ( ) 
         {
-            var data = this.data().toJQuery();
+            var row = this.toJQuery();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + data);
+            row.each(function( index ) 
+            {
+                console.log( index + ": " + $( this ).text() );
+            });
+            
+            console.log( 'Counter: ' + counter + ' Data: ' + row);
             counter++;
             
             //joinSelectedIds.push(value);
