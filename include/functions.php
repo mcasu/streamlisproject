@@ -269,7 +269,7 @@ $columns = array(
         'db'        => 'ondemand_actions_join_date',
         'dt'        => 3,
         'formatter' => function( $d, $row ) {
-            return date( 'j F Y H:i:s', strtotime($d));
+            return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
         }
     ),
     array(
