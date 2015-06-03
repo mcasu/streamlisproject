@@ -107,7 +107,7 @@ $(document).ready(function()
 //            var data = row.data();
             var data = this.data();
             var rowArray = [];
-            rowArray = data.toArray();
+            rowArray = this.toArray();
             
             console.log( 'Counter: ' + counter + ' Data: ' + data + ' Value: ' + rowArray[0]);
             counter++;
