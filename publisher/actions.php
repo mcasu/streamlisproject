@@ -97,11 +97,11 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        var allDataSelected = joinTable.rows('.selected').column([0, '.selected']).data();
+        var allDataSelected = joinTable.rows('.selected').data();
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        allDataSelected.each( function ( value, index ) 
+        allDataSelected.column(0).each( function ( value, index ) 
         {
             console.log( 'Data in index: '+index+' is: '+value );
             joinSelectedIds.push(value);
