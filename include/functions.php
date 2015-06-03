@@ -209,8 +209,6 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
             $found += mysql_num_rows($result);
         }
 
-        error_log("INFO - CheckIfOndemandVideoIsMarked() Trovati -> [" . $found . "]");
-        
         if ($found < 0)
         {
             echo "1";
