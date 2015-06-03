@@ -264,14 +264,24 @@ $primaryKey = 'ondemand_actions_join_id';
 $columns = array(
     array( 'db' => 'ondemand_actions_join_id', 'dt' => 0 ),
     array( 'db' => 'ondemand_actions_join_list', 'dt' => 1 ),
-    array( 'db' => 'ondemand_actions_join_status', 'dt' => 2 ),
+    array( 'db' => 'ondemand_actions_join_status', 'dt' => 2,
+        'formatter' => function( $d, $row ) {
+            switch ($d) 
+            {
+                case 0:
+                    return '<span class="label label-warning">Default</span>';
+                case 1:
+                    return '<span class="label label-info">Default</span>';
+                case 2:
+                    return '<span class="label label-success">Default</span>';
+            }
+        }),
     array(
         'db'        => 'ondemand_actions_join_date',
         'dt'        => 3,
         'formatter' => function( $d, $row ) {
             return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
-        }
-    ),
+        }),
     array(
         'db' => 'id',
         'dt' => 'DT_RowId',
