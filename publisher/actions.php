@@ -109,7 +109,7 @@ $(document).ready(function()
             var rowArray = [];
             rowArray = this.toArray();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + row + ' Value: ' + rowArray[2].toString());
+            console.log( 'Counter: ' + counter + ' Data: ' + row + ' Value: ' + rowArray.toString());
             counter++;
             
             //joinSelectedIds.push(value);
