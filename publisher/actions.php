@@ -105,7 +105,7 @@ $(document).ready(function()
         {
             var data = api.column(0).data();
             
-            console.log( 'Counter: ' + index + ' Data: ' + value + ' - ' + data);
+            console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data);
             counter++;
             
             //joinSelectedIds.push(value);
