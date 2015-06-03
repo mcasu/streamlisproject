@@ -100,14 +100,14 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
         var joinSelectedIds = [];
-        $.map(joinTable.rows('.selected').data(), function (row) 
+        var joinSelectedIds = $.map(joinTable.rows('.selected').data(), function (row) 
         {
-            console.log( ' Data: ' + row[0]);
+            return row[0];
             
             //joinSelectedIds.push(value);
         } );
         
-        //console.log("Data: " + joinSelectedIds.toString());
+        console.log("Data: " + joinSelectedIds.toString());
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
