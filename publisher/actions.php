@@ -101,7 +101,7 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        allDataSelected.column(0).each( function ( value, index ) 
+        allDataSelected.column(0).data().each( function ( value, index ) 
         {
             console.log( 'Data in index: '+index+' is: '+value );
             joinSelectedIds.push(value);
