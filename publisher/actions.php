@@ -99,7 +99,7 @@ $(document).ready(function()
     {
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
-        var joinSelectedIds = [];
+        //var joinSelectedIds = [];
         var joinSelectedIds = $.map(joinTable.rows('.selected').data(), function (row) 
         {
             return row[0];
@@ -107,7 +107,7 @@ $(document).ready(function()
             //joinSelectedIds.push(value);
         } );
         
-        console.log("Data: " + joinSelectedIds.toString());
+        console.log("Data: " + joinSelectedIds);
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
