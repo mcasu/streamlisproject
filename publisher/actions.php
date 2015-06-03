@@ -61,6 +61,7 @@ $(document).ready(function()
 {
     $(".btn_actions").find(".btn").attr('disabled',true);
     
+    var selected = [];
     var joinTable = $('#ondemand_actions_join_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
