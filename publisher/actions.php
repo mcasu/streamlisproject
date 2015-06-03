@@ -124,7 +124,7 @@ $(document).ready(function()
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds},
+            $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds.toString()},
             function(data,status)
             {
                 //alert("Data: " + data + "\nStatus: " + status);
