@@ -100,7 +100,7 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
         var joinSelectedIds = [];
-        joinTable.row('.selected').column(0).data().each( function (value, index ) 
+        joinTable.row('.selected').data().column(0).data().each( function (value, index ) 
         {
             console.log( 'Counter: ' + index + ' Data: ' + value);
             
