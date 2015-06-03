@@ -101,12 +101,13 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        allDataSelected.column().eq(0).each( function ( index ) 
+        allDataSelected.each( function ( index ) 
         {
-            var column = allDataSelected.column( index );
-            var data = column.data();
-            //console.log( 'Data in index: '+index+' is: '+value );
-            console.log( 'Index: ' + index + ' Data: ' + data);
+            var row = allDataSelected.row( index );
+            var data = row.data();
+            var value = data.column(0).data();
+            
+            console.log( 'Index: ' + index + ' Data: ' + data + ' Value: ' + value);
 
             //joinSelectedIds.push(value);
         } );
