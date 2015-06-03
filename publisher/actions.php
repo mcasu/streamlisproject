@@ -107,7 +107,7 @@ $(document).ready(function()
 //            var data = row.data();
             var data = this.data();
             var rowArray = [];
-            rowArray = $(this).toArray();
+            rowArray = this.toArray();
             
             console.log( 'Counter: ' + counter + ' Data: ' + data.ondemand_actions_join_id + ' Value: ' + rowArray['ondemand_actions_join_id']);
             counter++;
