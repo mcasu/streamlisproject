@@ -103,7 +103,7 @@ $(document).ready(function()
         var joinSelectedIds = [];
         allDataSelected.toJQuery().each(function()
         {
-            console.log("Valore: " this);
+            console.log("Valore: " + this);
             joinSelectedIds.push(this);
         });
         
