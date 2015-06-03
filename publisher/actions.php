@@ -102,9 +102,9 @@ $(document).ready(function()
         var joinSelectedIds = [];
         joinTable.rows().data().each( function (value, index, api ) 
         {
-            var data = api.data();
+            var data = api.column(0).data();
             
-            console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data[0]);
+            console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data);
             
             //joinSelectedIds.push(value);
         } );
