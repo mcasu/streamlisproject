@@ -77,7 +77,7 @@ $(document).ready(function()
             if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
                 $(row).addClass('selected');
             }
-        }
+        },
         "columns": [
             { "data": "ID OPERAZIONE" },
             { "data": "ONDEMAND VIDEO DA UNIRE" },
