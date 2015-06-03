@@ -101,11 +101,11 @@ $(document).ready(function()
         
         var joinSelectedIds = [];
         var counter = 0;
-        joinTable.rows().each( function (value, index ) 
+        joinTable.rows().data().each( function (value, index, api ) 
         {
-            var row = value.column(0).data();
-
-            console.log( 'Counter: ' + index + ' Data: ' + value + ' - ' + row);
+            var data = api.column(0).data();
+            
+            console.log( 'Counter: ' + index + ' Data: ' + value + ' - ' + data);
             counter++;
             
             //joinSelectedIds.push(value);
