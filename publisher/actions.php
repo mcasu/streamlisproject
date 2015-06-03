@@ -103,7 +103,7 @@ $(document).ready(function()
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
             var joinSelectedIds = [];
-            allDataSelected.column(0).toJQuery().each(function()
+            allDataSelected.column([0, '.selected']).data().toJQuery().each(function()
             {
 //                var rowArray = [];
 //                rowArray = $(this).toArray();
