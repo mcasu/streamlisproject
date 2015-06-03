@@ -1493,6 +1493,8 @@ class DBActions
         $joinIdsToString = null;
         foreach ($joinIds as $id) 
         {
+            error_log("INFO - join ids array[" .$count."]-> " . $id);
+            
             $joinIdsToString += '"' . $id . '"';
             $count++;
             
