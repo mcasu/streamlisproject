@@ -100,13 +100,11 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
         var joinSelectedIds = [];
-        var counter = 0;
         joinTable.rows().data().each( function (value, index, api ) 
         {
-            var data = api.column(0).data();
+            var data = api.data();
             
             console.log( 'Counter: ' + index + ' Data: ' + value[0] + ' - ' + data[0]);
-            counter++;
             
             //joinSelectedIds.push(value);
         } );
