@@ -105,7 +105,7 @@ $(document).ready(function()
         {
 //            var row = joinTable.row( index );
 //            var data = row.data();
-            var row = this.data()[0];
+            var row = this.row().data();
             var rowArray = [];
             rowArray = this.toArray();
             
