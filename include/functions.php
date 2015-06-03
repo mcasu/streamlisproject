@@ -276,7 +276,14 @@ $columns = array(
     ),
     array( 'db' => 'ondemand_actions_join_id', 'dt' => "ID OPERAZIONE" ),
     array( 'db' => 'ondemand_actions_join_list',  'dt' => "ONDEMAND VIDEO DA UNIRE" ),
-    array( 'db' => 'ondemand_actions_join_status',   'dt' => "STATO OPERAZIONE" )
+    array( 'db' => 'ondemand_actions_join_status',   'dt' => "STATO OPERAZIONE" ),
+    array(
+        'db'        => 'ondemand_actions_join_date',
+        'dt'        => 'DATA OPERAZIONE',
+        'formatter' => function( $d, $row ) {
+            return date( 'jS M y', strtotime($d));
+        }
+    )
 );
  
 // SQL server connection information

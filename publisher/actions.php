@@ -38,6 +38,7 @@
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA UNIRE</th>
                         <th>STATO OPERAZIONE</th>
+                        <th>DATA OPERAZIONE</th>
                     </tr>
                 </thead>
                 
