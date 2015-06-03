@@ -103,7 +103,7 @@ $(document).ready(function()
         joinTable.rows('.selected').column(0).data().each( function (value, index, api ) 
         {
             var data = value;
-            console.log( 'Counter: ' + index + ' Data: ' + data[0]);
+            console.log( 'Counter: ' + index + ' Data: ' + data);
             
             //joinSelectedIds.push(value);
         } );
