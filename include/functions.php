@@ -264,6 +264,16 @@ $primaryKey = 'ondemand_actions_join_id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier.
 $columns = array(
+    array(
+        'db' => 'id',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+            // Technically a DOM id cannot start with an integer, so we prefix
+            // a string. This can also be useful if you have multiple tables
+            // to ensure that the id is unique with a different prefix
+            return 'row_'.$d;
+        }
+    ),
     array( 'db' => 'ondemand_actions_join_id', 'dt' => "ID OPERAZIONE" ),
     array( 'db' => 'ondemand_actions_join_list',  'dt' => "ONDEMAND VIDEO DA UNIRE" ),
     array( 'db' => 'ondemand_actions_join_status',   'dt' => "STATO OPERAZIONE" )

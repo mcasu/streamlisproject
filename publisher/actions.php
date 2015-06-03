@@ -72,6 +72,12 @@ $(document).ready(function()
             "url": "/include/functions.php?fname=get_datatable_ondemand_actions_join",
             "type": "POST"
         },
+        "rowCallback": function( row, data ) 
+        {
+            if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                $(row).addClass('selected');
+            }
+        }
         "columns": [
             { "data": "ID OPERAZIONE" },
             { "data": "ONDEMAND VIDEO DA UNIRE" },
@@ -81,6 +87,18 @@ $(document).ready(function()
     
     $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () 
     {
+        var id = this.id;
+        var index = $.inArray(id, selected);
+ 
+        if ( index === -1 ) 
+        {
+            selected.push( id );
+        } 
+        else 
+        {
+            selected.splice( index, 1 );
+        }
+        
         $(this).toggleClass('selected');
         
         var joinTableRowSelected = joinTable.rows('.selected').data().length;
