@@ -79,6 +79,7 @@ $(document).ready(function()
             }
         },
         "columns": [
+            { "data": "DT_RowId" },
             { "data": "ID OPERAZIONE" },
             { "data": "ONDEMAND VIDEO DA UNIRE" },
             { "data": "STATO OPERAZIONE" }
