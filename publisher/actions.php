@@ -102,8 +102,8 @@ $(document).ready(function()
         var joinSelectedIds = [];
         joinTable.rows('.selected').data().each( function (value, index, api ) 
         {
-            var data = api.column(0).data();
-            console.log( 'Counter: ' + index + ' Data: ' + data[0]);
+            var data = value.column(0).data();
+            console.log( 'Counter: ' + index + ' Data: ' + data);
             
             //joinSelectedIds.push(value);
         } );
