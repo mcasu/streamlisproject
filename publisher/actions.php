@@ -105,11 +105,11 @@ $(document).ready(function()
         {
 //            var row = joinTable.row( index );
 //            var data = row.data();
-            var data = this.data();
+            var row = this.row().data();
             var rowArray = [];
             rowArray = this.toArray();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + data.ondemand_actions_join_id + ' Value: ' + rowArray['ondemand_actions_join_id']);
+            console.log( 'Counter: ' + counter + ' Data: ' + row.ondemand_actions_join_id + ' Value: ' + rowArray[0]);
             counter++;
             
             //joinSelectedIds.push(value);
