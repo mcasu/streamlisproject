@@ -100,13 +100,18 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
         var joinSelectedIds = [];
-        joinTable.rows('.selected').each( function ( index ) 
+        var counter = 0;
+        joinTable.rows('.selected').every( function ( ) 
         {
-            var row = joinTable.row( index );
-            var data = row.data();
+//            var row = joinTable.row( index );
+//            var data = row.data();
+            var data = this.data();
+            var rowArray = [];
+            rowArray = data.toArray();
             
-            console.log( 'Index: ' + index + ' Data: ' + data);
-
+            console.log( 'Counter: ' + counter + ' Data: ' + data + ' Value: ' + rowArray[0]);
+            counter++;
+            
             //joinSelectedIds.push(value);
         } );
         
