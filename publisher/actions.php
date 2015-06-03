@@ -77,14 +77,7 @@ $(document).ready(function()
             if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
                 $(row).addClass('selected');
             }
-        },
-        "columns": [
-            { "data": "DT_RowId" },
-            { "data": "ID OPERAZIONE" },
-            { "data": "ONDEMAND VIDEO DA UNIRE" },
-            { "data": "STATO OPERAZIONE" }
-        ]
-    });
+        });
     
     $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () 
     {
