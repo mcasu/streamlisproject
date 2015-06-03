@@ -101,10 +101,12 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        allDataSelected.column(0).each( function ( index ) 
+        allDataSelected.columns.eq(0).each( function ( index) 
         {
             var column = joinTable.column( index );
-            console.log( 'Data: ' + column.data());
+            var data = column.data();
+            //console.log( 'Data in index: '+index+' is: '+value );
+            console.log( 'Data: ' + data);
 
             //joinSelectedIds.push(value);
         } );
