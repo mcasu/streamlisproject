@@ -311,6 +311,8 @@ function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
 {
     $joinIdsArray = explode(",",$joinSelectedIds);
     
+    error_log("INFO - join ids: " . $joinSelectedIds);
+    
     if (!$dbactions->DeleteOnDemandActionsJoin($joinIdsArray))
     {
         error_log("ERROR - functions.php DeleteOndemandActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
