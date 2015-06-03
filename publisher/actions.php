@@ -103,9 +103,9 @@ $(document).ready(function()
         var counter = 0;
         joinTable.rows().every( function ( ) 
         {
-            var data = this.data()[0];
+            var data = this.data();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + data);
+            console.log( 'Counter: ' + counter + ' Data: ' + data.cell(0));
             counter++;
             
             //joinSelectedIds.push(value);
