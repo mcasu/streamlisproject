@@ -101,7 +101,7 @@ $(document).ready(function()
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
-        joinTable.columns.eq(0).each( function ( index) 
+        allDataSelected.columns().eq(0).each( function ( index) 
         {
             var column = joinTable.column( index );
             var data = column.data();
