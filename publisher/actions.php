@@ -107,9 +107,9 @@ $(document).ready(function()
 //            var data = row.data();
             var row = this.data()[0];
             var rowArray = [];
-            rowArray = row.toArray();
+            rowArray = this.toArray();
             
-            console.log( 'Counter: ' + counter + ' Data: ' + row.ondemand_actions_join_id + ' Value: ' + rowArray[0]);
+            console.log( 'Counter: ' + counter + ' Data: ' + row.ondemand_actions_join_id + ' Value: ' + rowArray[0][0]);
             counter++;
             
             //joinSelectedIds.push(value);
