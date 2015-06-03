@@ -104,8 +104,7 @@ $(document).ready(function()
         allDataSelected.each( function ( index ) 
         {
             var row = joinTable.row( index );
-            var data = row.data();
-            var value = row.column(0).data();
+            var data = row.data().ondemand_actions_join_id;
             
             console.log( 'Index: ' + index + ' Data: ' + data + ' Value: ' + value);
 
