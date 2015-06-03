@@ -103,7 +103,7 @@ $(document).ready(function()
         var counter = 0;
         joinTable.rows().each( function (value, index ) 
         {
-            var row = this.data();
+            var row = value.column(0).data();
 
             console.log( 'Counter: ' + index + ' Data: ' + value + ' - ' + row);
             counter++;
