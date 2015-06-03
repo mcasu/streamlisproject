@@ -97,21 +97,20 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        var allDataSelected = joinTable.rows('.selected').data().column([0, '.selected']).data();
+        var allDataSelected = joinTable.rows('.selected').data().columns(0).data();
         console.log("Numero record selezionati: " + allDataSelected.length);
+        
+        var joinSelectedIds = [];
+        allDataSelected.toJQuery().each(function()
+        {
+            console.log("Valore: " this);
+            joinSelectedIds.push(this);
+        });
+        
+        console.log("Data: " + joinSelectedIds.toString());
         
         if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
 	{
-            var joinSelectedIds = [];
-            allDataSelected.toJQuery().each(function()
-            {
-//                var rowArray = [];
-//                rowArray = $(this).toArray();
-                joinSelectedIds.push(this);
-            });
-            
-            console.log("Data lenght: " + joinSelectedIds.toString());
-            
             $.post("/include/functions.php",{fname:"delete_ondemand_actions_join",joinSelectedIds:joinSelectedIds.toString()},
             function(data,status)
             {
