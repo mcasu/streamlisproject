@@ -264,12 +264,12 @@ $primaryKey = 'ondemand_actions_join_id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier.
 $columns = array(
-    array( 'db' => 'ondemand_actions_join_id', 'dt' => "ID OPERAZIONE" ),
-    array( 'db' => 'ondemand_actions_join_list',  'dt' => "ONDEMAND VIDEO DA UNIRE" ),
-    array( 'db' => 'ondemand_actions_join_status',   'dt' => "STATO OPERAZIONE" ),
+    array( 'db' => 'ondemand_actions_join_id', 'dt' => 0 ),
+    array( 'db' => 'ondemand_actions_join_list', 'dt' => 1 ),
+    array( 'db' => 'ondemand_actions_join_status', 'dt' => 2 ),
     array(
         'db'        => 'ondemand_actions_join_date',
-        'dt'        => 'DATA OPERAZIONE',
+        'dt'        => 3,
         'formatter' => function( $d, $row ) {
             return date( 'jS M y', strtotime($d));
         }
