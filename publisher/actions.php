@@ -97,14 +97,14 @@ $(document).ready(function()
     
     $(".btn_actions_delete").click(function()
     {
-        var allDataSelected = joinTable.rows('.selected').columns(0).data();
+        var allDataSelected = joinTable.rows('.selected').column(0).data();
         console.log("Numero record selezionati: " + allDataSelected.length);
         
         var joinSelectedIds = [];
         allDataSelected.each( function ( value, index ) 
         {
             console.log( 'Data in index: '+index+' is: '+value );
-            joinSelectedIds.push(this);
+            joinSelectedIds.push(value);
         } );
         
         console.log("Data: " + joinSelectedIds.toString());
