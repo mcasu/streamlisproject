@@ -46,23 +46,43 @@ while($row = mysql_fetch_array($actionsJoin))
         error_log("ERROR - ondemand_join_video.php GetOndemandEventsByIds() ACTION->[" . $row['ondemand_actions_join_id'] ."] FAILED! - " . $dbactions->GetErrorMessage());
         continue;
     }
-    
-    $videoToJoinNumber = mysql_num_rows($ondemandVideoInfos);
 
-    
-    echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n";
-    
-    
-    if (!file_exists($ondemand_actions_path))
+    try
     {
-        mkdir($ondemand_actions_path, 0755, true);
+        $videoToJoinNumber = mysql_num_rows($ondemandVideoInfos);
+
+        $docRoot = getenv("DOCUMENT_ROOT");
+        $ondemandActionFilename = $docRoot . "/scripts/" . "action-" . $row['ondemand_actions_join_id'] . ".bash";
+        $bashInitHead = '#!/bin/bash';
+
+        file_put_contents($ondemandActionFilename, $bashInitHead, LOCK_EX);
+
+        $mkfifoCommandLine = "\n\n";
+        for ($i = 1; $i <= $videoToJoinNumber ; $i++) 
+        {
+            $mkfifoCommandLine .= "/usr/bin/mkfifo " . $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $i .".v\n";
+        }
+        $mkfifoCommandLine .= "/usr/bin/mkfifo " . $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-all.v\n";
+
+        file_put_contents($ondemandActionFilename, $mkfifoCommandLine, FILE_APPEND | LOCK_EX);
+
+        $avconvCommandLine = '';
+
+
+        if (!file_exists($ondemand_actions_path))
+        {
+            mkdir($ondemand_actions_path, 0755, true);
+        }
+        
+        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n";
+    
+    } 
+    catch (Exception $e) 
+    {
+        error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - " . $e->getMessage());
+        continue;
     }
-    
-    $ondemandActionFilename = $ondemand_actions_path . "action-" . $row['ondemand_actions_join_id'] . ".bash";
-    $bashInitHead = '#!/bin/bash';
-    
-    file_put_contents($ondemandActionFilename, $bashInitHead, LOCK_EX);
-    
+
     
 }
 
