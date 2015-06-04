@@ -185,8 +185,8 @@ $(document).ready(function()
                 $(".alert-warning").show();
                 $(".alert-success").hide();
                 $(".alert-danger").hide();
-                $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert">'.
-                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'.
+                $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
                                     '<h4 style="margin-top: 2px;"><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>');
                 
             }
@@ -195,8 +195,8 @@ $(document).ready(function()
                 $(".alert-danger").show();    
                 $(".alert-warning").hide();
                 $(".alert-success").hide();
-                $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert">'.
-                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'.
+                $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert">' +
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
                             '<h4 style="margin-top: 2px;"><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>');
                 
             }
@@ -205,8 +205,8 @@ $(document).ready(function()
                 $(".alert-success").show();
                 $(".alert-danger").hide();    
                 $(".alert-warning").hide();
-                $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">'.
-                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'.
+                $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">' +
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
                             '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>');                
                 
             }
