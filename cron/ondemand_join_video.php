@@ -47,6 +47,22 @@ while($row = mysql_fetch_array($actionsJoin))
         continue;
     }
     
-    echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . "\n";
+    $videoToJoinNumber = mysql_num_rows($ondemandVideoInfos);
+
+    
+    echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n";
+    
+    
+    if (!file_exists($ondemand_actions_path))
+    {
+        mkdir($ondemand_actions_path, 0755, true);
+    }
+    
+    $ondemandActionFilename = $ondemand_actions_path . "action-" . $row['ondemand_actions_join_id'] . ".bash";
+    $bashInitHead = '#!/bin/bash';
+    
+    file_put_contents($ondemandActionFilename, $bashInitHead, FILE_APPEND | LOCK_EX);
+    
+    
 }
 
