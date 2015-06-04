@@ -185,27 +185,30 @@ $(document).ready(function()
                 $(".alert-warning").show();
                 $(".alert-success").hide();
                 $(".alert-danger").hide();
-                $(".alert-warning").html("<h4><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>");
+                $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
+                                    '</span><span class="sr-only">Close</span></button>'.
+                                    '<h4><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>');
                 
-                //alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
             }
             else if (result === "1")
             {
                 $(".alert-danger").show();    
                 $(".alert-warning").hide();
                 $(".alert-success").hide();
-                $(".alert-danger").html("<h4><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>");
+                $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
+                                    '</span><span class="sr-only">Close</span></button>'.
+                                    '<h4><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>');
                 
-                //alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
             }
             else if (result === "0")
             {
                 $(".alert-success").show();
                 $(".alert-danger").hide();    
                 $(".alert-warning").hide();
-                $(".alert-success").html("<h4><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>");                
+                $(".alert-success").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
+                                    '</span><span class="sr-only">Close</span></button>'.
+                                    '<h4><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>');                
                 
-                //alert("OPERAZIONE RIUSCITA!\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.");
             }
         }
     });
