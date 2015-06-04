@@ -230,9 +230,6 @@ $(document).ready(function()
 <body>
 <?php include("../include/header_publisher.php"); ?>
 
-<h2>ELENCO EVENTI ONDEMAND:</h2>
-<br/>
-
 <?php 
 
 try
@@ -241,7 +238,7 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            echo '<div style="float: left;"><h3><b>Elenco eventi On-demand</b></h3></div>';
+            echo '<div style="float: left;"><h4><b>Elenco eventi On-demand</b></h4></div>';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';

@@ -25,7 +25,7 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div style="float: left;"><h3><b>Ondemand video join</b></h3></div>
+            <div style="float: left;"><h4><b>Ondemand video join</b></h4></div>
             <div class="pull-right btn_actions">
                 <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
             </div>
