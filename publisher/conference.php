@@ -37,7 +37,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
     <div id="panelJoin" class="panel panel-default">
         
         <div class="panel-heading">
-            <!--<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>Inizia una conferenza con la tua congregazione</b></h2>-->
+            <div style="float: left;"><h3><b>Commenti</b></h3></div>
         </div>
         
         <div class="panel-body">

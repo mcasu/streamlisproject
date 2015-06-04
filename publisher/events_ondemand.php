@@ -241,7 +241,7 @@ try
     echo '<div class="panel panel-default">';
 
         echo '<div class="panel-heading">';
-            //echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
+            echo '<div style="float: left;"><h3><b>Elenco eventi On-demand</b></h3></div>';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
