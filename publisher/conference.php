@@ -37,7 +37,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
     <div id="panelJoin" class="panel panel-default">
         
         <div class="panel-heading">
-            <div><h3><b>Commenti</b></h3></div>
+            <div><h4><b>Commenti</b></h4></div>
         </div>
         
         <div class="panel-body">
