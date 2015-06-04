@@ -159,6 +159,10 @@ $(document).ready(function()
         }
     });
     
+    $(".alert-warning").hide();
+    $(".alert-success").hide();
+    $(".alert-danger").hide();
+                
     $(".btn_video_join").click(function()
     {
         var checkedItems = [];
@@ -178,15 +182,30 @@ $(document).ready(function()
             
             if (result === "2")
             {
-                alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
+                $(".alert-warning").show();
+                $(".alert-success").hide();
+                $(".alert-danger").hide();
+                $(".alert-warning").html("<h4><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>");
+                
+                //alert("OPERAZIONE NON PERMESSA!\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.");
             }
             else if (result === "1")
             {
-                alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
+                $(".alert-danger").show();    
+                $(".alert-warning").hide();
+                $(".alert-success").hide();
+                $(".alert-danger").html("<h4><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>");
+                
+                //alert("OPERAZIONE FALLITA!\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.");
             }
             else if (result === "0")
             {
-                alert("OPERAZIONE RIUSCITA!\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.");
+                $(".alert-success").show();
+                $(".alert-danger").hide();    
+                $(".alert-warning").hide();
+                $(".alert-success").html("<h4><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>");                
+                
+                //alert("OPERAZIONE RIUSCITA!\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.");
             }
         }
     });
@@ -248,6 +267,10 @@ try
         
         echo '<div class="panel-body">';
         
+            echo '<div class="alert alert-success alert-dismissible" role="alert">';
+            echo '<div class="alert alert-warning alert-dismissible" role="alert">';
+            echo '<div class="alert alert-danger alert-dismissible" role="alert">';
+            
             echo '<div class="panel-group" id="accordionMain">';
 
             $publish_code = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
