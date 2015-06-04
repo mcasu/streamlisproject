@@ -61,7 +61,7 @@ while($row = mysql_fetch_array($actionsJoin))
     $ondemandActionFilename = $ondemand_actions_path . "action-" . $row['ondemand_actions_join_id'] . ".bash";
     $bashInitHead = '#!/bin/bash';
     
-    file_put_contents($ondemandActionFilename, $bashInitHead, FILE_APPEND | LOCK_EX);
+    file_put_contents($ondemandActionFilename, $bashInitHead, LOCK_EX);
     
     
 }
