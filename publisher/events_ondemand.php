@@ -267,9 +267,9 @@ try
         
         echo '<div class="panel-body">';
         
-            echo '<div class="alert alert-success alert-dismissible" role="alert"></div>';
-            echo '<div class="alert alert-warning alert-dismissible" role="alert"></div>';
-            echo '<div class="alert alert-danger alert-dismissible" role="alert"></div>';
+            echo '<div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
+            echo '<div class="alert alert-warning alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
+            echo '<div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
             
             echo '<div class="panel-group" id="accordionMain">';
 
