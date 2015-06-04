@@ -187,7 +187,7 @@ $(document).ready(function()
                 $(".alert-danger").hide();
                 $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
                                     '</span><span class="sr-only">Close</span></button>'.
-                                    '<h4><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>');
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>');
                 
             }
             else if (result === "1")
@@ -197,7 +197,7 @@ $(document).ready(function()
                 $(".alert-success").hide();
                 $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
                                     '</span><span class="sr-only">Close</span></button>'.
-                                    '<h4><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>');
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>');
                 
             }
             else if (result === "0")
@@ -207,7 +207,7 @@ $(document).ready(function()
                 $(".alert-warning").hide();
                 $(".alert-success").html('<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;'.
                                     '</span><span class="sr-only">Close</span></button>'.
-                                    '<h4><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>');                
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>');                
                 
             }
         }
@@ -270,9 +270,9 @@ try
         
         echo '<div class="panel-body">';
         
-            echo '<div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
-            echo '<div class="alert alert-warning alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
-            echo '<div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 2px;"></div>';
+            echo '<div class="alert alert-success alert-dismissible" role="alert"></div>';
+            echo '<div class="alert alert-warning alert-dismissible" role="alert"></div>';
+            echo '<div class="alert alert-danger alert-dismissible" role="alert"></div>';
             
             echo '<div class="panel-group" id="accordionMain">';
 
