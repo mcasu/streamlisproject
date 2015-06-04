@@ -73,6 +73,16 @@ while($row = mysql_fetch_array($actionsJoin))
         
         file_put_contents($ondemandActionFilename, $mkfifoCommandLine, FILE_APPEND | LOCK_EX);
         file_put_contents($ondemandActionFilename, "\n\n", FILE_APPEND | LOCK_EX);
+
+        // PRIMA DI ESEGUIRE CREO LA CARTELLA DI LAVORO SE NON ESISTE; IN CASO CONTRARIO LA SVUOTO.
+        if (!file_exists($ondemand_actions_path))
+        {
+            mkdir($ondemand_actions_path, 0755, true);
+        }
+        else 
+        {
+            $fsactions->deleteAll($ondemand_actions_path);
+        }
         
         $count = 1;
         $avconvCommandLineInit = '';
@@ -110,15 +120,7 @@ while($row = mysql_fetch_array($actionsJoin))
         file_put_contents($ondemandActionFilename, $avconvCommandLine, FILE_APPEND | LOCK_EX);
         
         
-        // PRIMA DI ESEGUIRE CREO LA CARTELLA DI LAVORO SE NON ESISTE; IN CASO CONTRARIO LA SVUOTO.
-        if (!file_exists($ondemand_actions_path))
-        {
-            mkdir($ondemand_actions_path, 0755, true);
-        }
-        else 
-        {
-            $fsactions->deleteAll($ondemand_actions_path);
-        }
+        
         
         // PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
         array_map('unlink', glob("/var/log/nginx/join_*.log"));
