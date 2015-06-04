@@ -56,14 +56,14 @@ while($row = mysql_fetch_array($actionsJoin))
         $bashInitHead = '#!/bin/bash';
 
         file_put_contents($ondemandActionFilename, $bashInitHead, LOCK_EX);
-
+       
         $mkfifoCommandLine = "\n\n";
         $catCommandLine = "cat ";
         for ($i = 1; $i <= $videoToJoinNumber ; $i++) 
         {
-            $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $i .".v\n";
+            $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $i .".v";
             
-            $mkfifoCommandLine .= "/usr/bin/mkfifo " . $fifoFilename;
+            $mkfifoCommandLine .= "/usr/bin/mkfifo " . $fifoFilename . "\n";
             $catCommandLine .= $fifoFilename . " ";
         }
         $mkfifoCommandLine .= "/usr/bin/mkfifo " . $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-all.v\n";
@@ -75,6 +75,7 @@ while($row = mysql_fetch_array($actionsJoin))
         file_put_contents($ondemandActionFilename, "\n\n", FILE_APPEND | LOCK_EX);
         
         $count = 1;
+        $avconvCommandLineInit = '';
         while($ondemandVideo = mysql_fetch_array($ondemandVideoInfos))
         {
             $videoFilenameSrc = $ondemandVideo['ondemand_path'] . $ondemandVideo['ondemand_filename'];
@@ -95,7 +96,7 @@ while($row = mysql_fetch_array($actionsJoin))
             $count++;
         }
         
-        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v main -y ' . $row['ondemand_actions_join_id'] . '-all.flv';
+        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v main -y ' . $ondemand_actions_path . $row['ondemand_actions_join_id'] . '-all.flv';
         
         $avconvCommandLine = $avconvCommandLineInit . $catCommandLine . $avconvCommandLineFin . " > /var/log/nginx/" . $row['ondemand_actions_join_id'] . ".log 2>&1";
         
@@ -108,15 +109,27 @@ while($row = mysql_fetch_array($actionsJoin))
         
         file_put_contents($ondemandActionFilename, $avconvCommandLine, FILE_APPEND | LOCK_EX);
         
+        
+        // PRIMA DI ESEGUIRE CREO LA CARTELLA DI LAVORO SE NON ESISTE; IN CASO CONTRARIO LA SVUOTO.
         if (!file_exists($ondemand_actions_path))
         {
             mkdir($ondemand_actions_path, 0755, true);
         }
+        else 
+        {
+            $fsactions->deleteAll($ondemand_actions_path);
+        }
         
-        // PRIMA DI ESEGUIRE RIMUOVERE I VECCHI FILE DI LOG join_*.log
-        
-        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n";
+        // PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
+        array_map('unlink', glob("/var/log/nginx/join_*.log"));
     
+        //ESEGUO AVCONV PER UNIRE I VIDEO
+        $output = shell_exec($ondemandActionFilename);
+        
+        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n" . $output . "\n";
+        
+        //ESEGUO YAMDI PER AGGIUNGERE L'INDICE
+        
     } 
     catch (Exception $e) 
     {
