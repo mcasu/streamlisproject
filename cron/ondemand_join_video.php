@@ -29,3 +29,24 @@ $fsactions = $mainactions->GetFSActionsInstance();
 
 $actionsJoin = $dbactions->GetAllOnDemandActionsJoin();
 
+if (!$actionsJoin)
+{
+    error_log("ERROR - ondemand_join_video.php GetAllOnDemandActionsJoin() FAILED! - " . $dbactions->GetErrorMessage());
+    exit(1);
+}
+
+while($row = mysql_fetch_array($actionsJoin))
+{
+    $ondemandVideoList = explode(",", $row['ondemand_actions_join_list']);
+    
+    $ondemandVideoInfos = $dbactions->GetOndemandEventsByIds($ondemandVideoList);
+    
+    if (!$ondemandVideoInfos)
+    {
+        error_log("ERROR - ondemand_join_video.php GetOndemandEventsByIds() ACTION->[" . $row['ondemand_actions_join_id'] ."] FAILED! - " . $dbactions->GetErrorMessage());
+        continue;
+    }
+    
+    echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . "\n";
+}
+

@@ -1315,7 +1315,7 @@ class DBActions
             return $result;
     }
 
-    function GetOndemandEventsById($eventId)
+    function GetOndemandEventById($eventId)
     {
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
@@ -1331,6 +1331,33 @@ class DBActions
             }
 
             $select_query = 'select * from ondemand where ondemand_id = \''.$eventId.'\';';
+
+            $result = mysql_query($select_query ,$this->connection);
+            if(!$result)
+            {
+                $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                return false;
+            }
+            return $result;
+    }
+    
+    function GetOndemandEventsByIds($eventIdArray)
+    {
+            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+            if(!$this->connection)
+            {
+                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                return false;
+            }
+            if(!mysql_select_db($this->database, $this->connection))
+            {
+                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                return false;
+            }
+
+            $ondemandIdsToString = join(",", $eventIdArray);
+            $select_query = 'SELECT * FROM ondemand WHERE ondemand_id in ( '.$ondemandIdsToString.' ) ORDER BY ondemand_date, ondemand_time';
 
             $result = mysql_query($select_query ,$this->connection);
             if(!$result)
@@ -1462,7 +1489,7 @@ class DBActions
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
-        $query_select = 'SELECT * FROM ondemand_actions_join ORDER BY ondemand_actions_join_date';
+        $query_select = 'SELECT * FROM ondemand_actions_join WHERE ondemand_actions_join_status = 0 ORDER BY ondemand_actions_join_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
         if(!$result_select)

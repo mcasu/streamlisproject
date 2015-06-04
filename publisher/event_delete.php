@@ -12,11 +12,11 @@ $event_id = $_POST['event_id'];
 
 try
 {
-    $result = $dbactions->GetOndemandEventsById($event_id);
+    $result = $dbactions->GetOndemandEventById($event_id);
         
     if (!$result)
     {
-        error_log("ERROR - GetOndemandEventsById ID ".$event_id." FAILED\r\n".$dbactions->GetErrorMessage());
+        error_log("ERROR - GetOndemandEventById ID ".$event_id." FAILED\r\n".$dbactions->GetErrorMessage());
         return;
     }
 
