@@ -139,7 +139,6 @@ function SaveOnDemandVideoToDisk($nginx_id,$ondemand_path,$client_addr,$record_p
         }
 }
 
-
 function DeleteAllVideosLive($liveFolderArray)
 {
     try 

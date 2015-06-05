@@ -89,7 +89,7 @@ while($row = mysql_fetch_array($actionsJoin))
         
         $count = 1;
         $avconvCommandLineInit = '';
-        $videoFileNameArray = array();
+        $ondemandVideoFileInfosArray = array();
         while($ondemandVideo = mysql_fetch_array($ondemandVideoInfos))
         {
             $videoFilenameSrc = $ondemandVideo['ondemand_path'] . $ondemandVideo['ondemand_filename'];
@@ -103,7 +103,9 @@ while($row = mysql_fetch_array($actionsJoin))
             $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $count .".v";
             
             // Memorizzo i nomi dei files da unire.
-            $videoFileNameArray[] = $ondemandVideo['ondemand_filename'];
+            $ondemandVideoFileInfosArray[][0] = $ondemandVideo['ondemand_id'];
+            $ondemandVideoFileInfosArray[][1] = $ondemandVideo['ondemand_path'];
+            $ondemandVideoFileInfosArray[][2] = $ondemandVideo['ondemand_filename'];
             
             if ($count == 1)
             {
@@ -139,9 +141,9 @@ while($row = mysql_fetch_array($actionsJoin))
         }
         
         // CANCELLO I FILE ORIGINALI CHE SONO STATI UNITI
-        foreach ($videoFileNameArray as $filename) 
+        foreach ($ondemandVideoFileInfosArray as $videoFileInfo) 
         {
-            $videoFilenameToDelete = $ondemand_actions_path . $filename;
+            $videoFilenameToDelete = $ondemand_actions_path . $videoFileInfo[2];
             
             if (file_exists($videoFilenameToDelete))
             {
@@ -150,20 +152,75 @@ while($row = mysql_fetch_array($actionsJoin))
         }
         
         //ESEGUO YAMDI PER AGGIUNGERE L'INDICE AL VIDEO UNITO FINALE E LO SALVO CON IL NOME DEL PRIMO VIDEO.
-        $yamdiCommandLine='/usr/bin/yamdi -i ' . $videoFilenameAll . ' -o ' . $ondemand_actions_path . $videoFileNameArray[0];
+        $yamdiCommandLine='/usr/bin/yamdi -i ' . $videoFilenameAll . ' -o ' . $ondemand_actions_path . $ondemandVideoFileInfosArray[0][2];
         system($yamdiCommandLine, $retval);
         
-        if (!file_exists($ondemand_actions_path . $videoFileNameArray[0]))
+        if (!file_exists($ondemand_actions_path . $ondemandVideoFileInfosArray[0][2]))
         {
-            error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $ondemand_actions_path . $videoFileNameArray[0] . "] non esiste!");
-            continue;
+            throw new Exception("Il file [" . $ondemand_actions_path . $ondemandVideoFileInfosArray[0][2] . "] non esiste!");
         }
         
         // CANCELLO IL VIDEO FINALE SENZA INDICE
         if (file_exists($videoFilenameAll))
         {
             unlink($videoFilenameAll);
-        }        
+        }       
+        
+        // MODIFICO IL DATABASE 
+        $count = 0;
+        foreach ($ondemandVideoFileInfosArray as $videoFileInfo) 
+        {
+            // FACCIO IL BACKUP DEI FILE VIDEO ORIGINALI
+            $videoFilenameSrc = $videoFileInfo[1] . $videoFileInfo[2];
+            $videoFilenameDst = $ondemand_backup_path . $videoFileInfo[2];
+            if (!copy($videoFilenameSrc, $videoFilenameDst))
+            {
+                throw new Exception("COPIA BACKUP FALLITA FILE-> [" . $videoFilenameSrc . "]");
+            }
+            
+            if ($count == 0)
+            {
+                // FACCIO L'UPDATE DEL RECORD
+                
+            }
+            else 
+            {
+                // CANCELLO IL RECORD
+                $result = $dbactions->DeleteEventOnDemand($videoFileInfo[0]);
+                if (!$result)
+                {
+                    throw new Exception("Impossibile cancellare ondemand id->[" . $videoFileInfo[0] . "]");
+                }
+                
+                // CANCELLO IL FILE VIDEO ORIGINALE
+                if (file_exists($videoFilenameSrc))
+                {
+                    unlink($videoFilenameSrc);
+                }
+                
+                $basename = basename($videoFileInfo[2], ".flv");
+                
+                // CANCELLO IMMAGINE THUMBNAIL
+                $thumbFilename = $videoFileInfo[1] . $basename . ".jpg";
+                if (file_exists($thumbFilename))
+                {
+                    unlink($thumbFilename);
+                }
+                if (is_link("/usr/local/nginx/html/images/thumbnails/" . basename($thumbFilename)))
+                {
+                    unlink("/usr/local/nginx/html/images/thumbnails/" . basename($thumbFilename));
+                }
+                
+            }
+            
+            $count++;
+        }
+        
+        // SOSTITUISCO I FILE ORIGINALI CON IL FILE VIDEO FINALE UNITO
+        
+        
+        // SE TUTTO VA BENE CANCELLO IL BACKUP DEI FILE ORIGINALI
+        
         
     } 
     catch (Exception $e) 
