@@ -42,7 +42,7 @@ if (!file_exists($ondemand_actions_path))
 }
 else
 {
-    $fsactions->deleteAll($ondemand_actions_path);
+    $fsactions->deleteAll($ondemand_actions_path, true);
 }
 
 while($row = mysql_fetch_array($actionsJoin))
