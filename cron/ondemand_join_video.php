@@ -64,6 +64,12 @@ while($row = mysql_fetch_array($actionsJoin))
     {
         $videoToJoinNumber = mysql_num_rows($ondemandVideoInfos);
 
+        if ($videoToJoinNumber < 1)
+        {
+            error_log("WARNING - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - I video selezionati sono stati cancellati.");
+            continue;
+        }
+        
         $docRoot = getenv("DOCUMENT_ROOT");
         $ondemandActionFilename = $docRoot . "/scripts/" . "action-" . $row['ondemand_actions_join_id'] . ".bash";
         $bashInitHead = '#!/bin/bash';
