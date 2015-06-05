@@ -103,9 +103,9 @@ while($row = mysql_fetch_array($actionsJoin))
             $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $count .".v";
             
             // Memorizzo i nomi dei files da unire.
-            $ondemandVideoFileInfosArray[][0] = $ondemandVideo['ondemand_id'];
-            $ondemandVideoFileInfosArray[][1] = $ondemandVideo['ondemand_path'];
-            $ondemandVideoFileInfosArray[][2] = $ondemandVideo['ondemand_filename'];
+            $ondemandVideoFileInfosArray[$count-1][0] = $ondemandVideo['ondemand_id'];
+            $ondemandVideoFileInfosArray[$count-1][1] = $ondemandVideo['ondemand_path'];
+            $ondemandVideoFileInfosArray[$count-1][2] = $ondemandVideo['ondemand_filename'];
             
             if ($count == 1)
             {
