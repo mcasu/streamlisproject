@@ -119,6 +119,9 @@ while($row = mysql_fetch_array($actionsJoin))
         
         file_put_contents($ondemandActionFilename, $avconvCommandLine, FILE_APPEND | LOCK_EX);
        
+        // IMPOSTO I PERMESSI DI ESECUZIONE 
+        chmod($ondemandActionFilename, 0755);
+        
         //ESEGUO AVCONV PER UNIRE I VIDEO
         $output = shell_exec($ondemandActionFilename);
         
