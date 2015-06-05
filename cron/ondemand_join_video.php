@@ -91,7 +91,7 @@ while($row = mysql_fetch_array($actionsJoin))
             $videoFilenameSrc = $ondemandVideo['ondemand_path'] . $ondemandVideo['ondemand_filename'];
             $videoFilenameDst = $ondemand_actions_path . $ondemandVideo['ondemand_filename'];
             
-            if (!copy($videoFilenameSrc, $ondemand_actions_path))
+            if (!copy($videoFilenameSrc, $videoFilenameDst))
             {
                 error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - SRC-> [" . $videoFilenameSrc . "] DST-> [" . $videoFilenameDst . "]");
             }
