@@ -153,6 +153,17 @@ while($row = mysql_fetch_array($actionsJoin))
         $yamdiCommandLine='/usr/bin/yamdi -i ' . $videoFilenameAll . ' -o ' . $ondemand_actions_path . $videoFileNameArray[0];
         system($yamdiCommandLine, $retval);
         
+        if (!file_exists($ondemand_actions_path . $videoFileNameArray[0]))
+        {
+            error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $ondemand_actions_path . $videoFileNameArray[0] . "] non esiste!");
+            continue;
+        }
+        
+        // CANCELLO IL VIDEO FINALE SENZA INDICE
+        if (file_exists($videoFilenameAll))
+        {
+            unlink($videoFilenameAll);
+        }        
         
     } 
     catch (Exception $e) 
