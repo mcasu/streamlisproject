@@ -89,6 +89,7 @@ while($row = mysql_fetch_array($actionsJoin))
         
         $count = 1;
         $avconvCommandLineInit = '';
+        $videoFileNameArray = array();
         while($ondemandVideo = mysql_fetch_array($ondemandVideoInfos))
         {
             $videoFilenameSrc = $ondemandVideo['ondemand_path'] . $ondemandVideo['ondemand_filename'];
@@ -100,6 +101,9 @@ while($row = mysql_fetch_array($actionsJoin))
             }
             
             $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $count .".v";
+            
+            // Memorizzo i nomi dei files da unire.
+            $videoFileNameArray[] = $ondemandVideo['ondemand_filename'];
             
             if ($count == 1)
             {
@@ -113,7 +117,8 @@ while($row = mysql_fetch_array($actionsJoin))
             $count++;
         }
         
-        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v main -y ' . $ondemand_actions_path . $row['ondemand_actions_join_id'] . '-all.flv';
+        $videoFilenameAll = $ondemand_actions_path . $row['ondemand_actions_join_id'] . '-all.flv';
+        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v main -y ' . $videoFilenameAll;
         
         $avconvCommandLine = $avconvCommandLineInit . $catCommandLine . $avconvCommandLineFin . " > /var/log/nginx/" . $row['ondemand_actions_join_id'] . ".log 2>&1";
         
@@ -127,7 +132,27 @@ while($row = mysql_fetch_array($actionsJoin))
         
         echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - EXEC-> " . $ondemandActionFilename ."\n" . $output . "\n";
         
-        //ESEGUO YAMDI PER AGGIUNGERE L'INDICE
+        if (!file_exists($videoFilenameAll))
+        {
+            error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $videoFilenameAll . "] non esiste!");
+            continue;
+        }
+        
+        // CANCELLO I FILE ORIGINALI CHE SONO STATI UNITI
+        foreach ($videoFileNameArray as $filename) 
+        {
+            $videoFilenameToDelete = $ondemand_actions_path . $filename;
+            
+            if (file_exists($videoFilenameToDelete))
+            {
+                unlink($videoFilenameToDelete);
+            }
+        }
+        
+        //ESEGUO YAMDI PER AGGIUNGERE L'INDICE AL VIDEO UNITO FINALE E LO SALVO CON IL NOME DEL PRIMO VIDEO.
+        $yamdiCommandLine='/usr/bin/yamdi -i ' . $videoFilenameAll . ' -o ' . $ondemand_actions_path . $videoFileNameArray[0];
+        system($yamdiCommandLine, $retval);
+        
         
     } 
     catch (Exception $e) 
