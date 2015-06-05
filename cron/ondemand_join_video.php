@@ -129,7 +129,7 @@ while($row = mysql_fetch_array($actionsJoin))
         //ESEGUO AVCONV PER UNIRE I VIDEO
         $output = shell_exec($ondemandActionFilename);
         
-        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - COUNT-> " . $videoToJoinNumber ."\n" . $output . "\n";
+        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - EXEC-> " . $ondemandActionFilename ."\n" . $output . "\n";
         
         //ESEGUO YAMDI PER AGGIUNGERE L'INDICE
         
