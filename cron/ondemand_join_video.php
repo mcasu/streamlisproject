@@ -45,6 +45,9 @@ else
     $fsactions->deleteAll($ondemand_actions_path, true);
 }
 
+// PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
+array_map('unlink', glob("/var/log/nginx/join_*.log"));
+
 while($row = mysql_fetch_array($actionsJoin))
 {
     $ondemandVideoList = explode(",", $row['ondemand_actions_join_list']);
@@ -114,18 +117,8 @@ while($row = mysql_fetch_array($actionsJoin))
         
         $avconvCommandLine = $avconvCommandLineInit . $catCommandLine . $avconvCommandLineFin . " > /var/log/nginx/" . $row['ondemand_actions_join_id'] . ".log 2>&1";
         
-//        $avconvCommandLine = 'avconv -i video01.flv -an -f yuv4mpegpipe - > temp01.v < /dev/null & '.
-//                '{ avconv -i video02.flv -an -f yuv4mpegpipe - < /dev/null | tail -n +2 > temp02.v ; } & '.
-//                '{ avconv -i video03.flv -an -f yuv4mpegpipe - < /dev/null | tail -n +2 > temp03.v ; } & '.
-//                'cat temp01.v temp02.v temp03.v > all.v & '.
-//                'avconv -f yuv4mpegpipe -i all.v -vcodec libx264 -profile:v main -y output.flv';
-        
-        
         file_put_contents($ondemandActionFilename, $avconvCommandLine, FILE_APPEND | LOCK_EX);
-        
-        // PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
-        array_map('unlink', glob("/var/log/nginx/join_*.log"));
-    
+       
         //ESEGUO AVCONV PER UNIRE I VIDEO
         $output = shell_exec($ondemandActionFilename);
         
