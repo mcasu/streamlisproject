@@ -135,13 +135,19 @@ while($row = mysql_fetch_array($actionsJoin))
         // IMPOSTO I PERMESSI DI ESECUZIONE 
         chmod($ondemandActionFilename, 0755);
         
-        //ESEGUO AVCONV PER UNIRE I VIDEO
+        //ESEGUO LO SCRIPT AVCONV PER UNIRE I VIDEO
         $output = shell_exec($ondemandActionFilename);
         
         if (!file_exists($videoFilenameAll))
         {
             error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $videoFilenameAll . "] non esiste!");
             continue;
+        }
+        
+        // CANCELLO LO SCRIPT AVCONV
+        if (file_exists($ondemandActionFilename))
+        {
+            unlink($ondemandActionFilename);
         }
         
         // CANCELLO I FILE ORIGINALI CHE SONO STATI UNITI
@@ -189,7 +195,7 @@ while($row = mysql_fetch_array($actionsJoin))
             
             if ($count == 0)
             {
-                // FACCIO L'UPDATE DEL RECORD
+                // TODO: FACCIO L'UPDATE DEL RECORD
                 
                 // SOSTITUISCO IL PRIMO FILE ORIGINALE CON IL FILE VIDEO UNITO FINALE.
                 rename($ondemand_actions_path.$videoFileInfo[2], $videoFilenameSrc);
@@ -211,6 +217,9 @@ while($row = mysql_fetch_array($actionsJoin))
                 
                 $basename = basename($videoFileInfo[2], ".flv");
                 
+                // TODO: CANCELLO IL LINK AL FILE ORIGINALE
+                
+                
                 // CANCELLO IMMAGINE THUMBNAIL
                 $thumbFilename = $videoFileInfo[1] . $basename . ".jpg";
                 if (file_exists($thumbFilename))
@@ -221,13 +230,18 @@ while($row = mysql_fetch_array($actionsJoin))
                 {
                     unlink("/usr/local/nginx/html/images/thumbnails/" . basename($thumbFilename));
                 }
-                
+            }
+            
+            // SE TUTTO VA BENE CANCELLO IL BACKUP DEL FILE ORIGINALE
+            if (file_exists($videoFilenameDst))
+            {
+                unlink($videoFilenameDst);
             }
             
             $count++;
         }
         
-        // SE TUTTO VA BENE CANCELLO IL BACKUP DEI FILE ORIGINALI
+        
         
         
     } 
