@@ -165,6 +165,11 @@ while($row = mysql_fetch_array($actionsJoin))
         {
             unlink($videoFilenameAll);
         }       
+
+        if (!file_exists($ondemand_backup_path))
+        {
+            mkdir($ondemand_backup_path, 0755, true);
+        }
         
         // MODIFICO IL DATABASE 
         $count = 0;
