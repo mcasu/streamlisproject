@@ -90,7 +90,11 @@ while($row = mysql_fetch_array($actionsJoin))
         {
             $videoFilenameSrc = $ondemandVideo['ondemand_path'] . $ondemandVideo['ondemand_filename'];
             $videoFilenameDst = $ondemand_actions_path . $ondemandVideo['ondemand_filename'];
-            copy($videoFilenameSrc, $videoFilenameDst);
+            
+            if (!copy($videoFilenameSrc, $videoFilenameDst))
+            {
+                error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - SRC-> [" . $videoFilenameSrc . "] DST-> [" . $videoFilenameDst . "]");
+            }
             
             $fifoFilename = $ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "-" . $count .".v";
             
