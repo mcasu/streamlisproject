@@ -132,8 +132,6 @@ while($row = mysql_fetch_array($actionsJoin))
         //ESEGUO AVCONV PER UNIRE I VIDEO
         $output = shell_exec($ondemandActionFilename);
         
-        echo "\nINFO - ACTION-> " . $row['ondemand_actions_join_id'] . " - EXEC-> " . $ondemandActionFilename ."\n" . $output . "\n";
-        
         if (!file_exists($videoFilenameAll))
         {
             error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $videoFilenameAll . "] non esiste!");
@@ -187,6 +185,8 @@ while($row = mysql_fetch_array($actionsJoin))
             {
                 // FACCIO L'UPDATE DEL RECORD
                 
+                // SOSTITUISCO IL PRIMO FILE ORIGINALE CON IL FILE VIDEO UNITO FINALE.
+                rename($ondemand_actions_path.$videoFileInfo[2], $videoFilenameSrc);
             }
             else 
             {
@@ -220,9 +220,6 @@ while($row = mysql_fetch_array($actionsJoin))
             
             $count++;
         }
-        
-        // SOSTITUISCO I FILE ORIGINALI CON IL FILE VIDEO FINALE UNITO
-        
         
         // SE TUTTO VA BENE CANCELLO IL BACKUP DEI FILE ORIGINALI
         
