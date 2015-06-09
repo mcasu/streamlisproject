@@ -652,9 +652,17 @@ class DBActions
         
         $query_update = 'UPDATE ondemand SET ';
         
+        $count = 0;
         foreach ($ondemandEventInfos as $eventInfo) 
         {
             $query_update .= $eventInfo[0] . ' = \'' . $eventInfo[1] . '\' ';
+            
+            $count++;
+            
+            if (isset($ondemandEventInfos[$count]))
+            {
+                $query_update .= ',';
+            }
         }
         
         $query_where = 'WHERE ondemand_id = ' . $ondemandId . ' ';
