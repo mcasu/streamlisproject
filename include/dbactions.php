@@ -205,7 +205,6 @@ class DBActions
         return true;
     }
     
-
     function UpdateUserLoginStatus($username, $status, $islogin = false)
     {
 	if(!$this->DBLogin())
@@ -359,7 +358,7 @@ class DBActions
         return true;
     }
 
-   function InsertIntoDB(&$uservars)
+    function InsertIntoDB(&$uservars)
     {
 
         //$confirmcode = $this->MakeConfirmationMd5($uservars['email'],$rand_key);
@@ -507,7 +506,6 @@ class DBActions
             }
             return true;
     }
-
 
     function SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url,$username = null)
     {

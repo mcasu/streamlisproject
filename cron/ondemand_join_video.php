@@ -112,6 +112,7 @@ while($row = mysql_fetch_array($actionsJoin))
             $ondemandVideoFileInfosArray[$count-1][0] = $ondemandVideo['ondemand_id'];
             $ondemandVideoFileInfosArray[$count-1][1] = $ondemandVideo['ondemand_path'];
             $ondemandVideoFileInfosArray[$count-1][2] = $ondemandVideo['ondemand_filename'];
+            $ondemandVideoFileInfosArray[$count-1][3] = $ondemandVideo['ondemand_app_name'];
             
             if ($count == 1)
             {
@@ -209,7 +210,7 @@ while($row = mysql_fetch_array($actionsJoin))
                     throw new Exception("Impossibile cancellare ondemand id->[" . $videoFileInfo[0] . "]");
                 }
                 
-                // CANCELLO IL FILE VIDEO ORIGINALE
+                // CANCELLO IL FILE VIDEO ORIGINALE FLASH
                 if (file_exists($videoFilenameSrc))
                 {
                     unlink($videoFilenameSrc);
@@ -217,8 +218,27 @@ while($row = mysql_fetch_array($actionsJoin))
                 
                 $basename = basename($videoFileInfo[2], ".flv");
                 
-                // TODO: CANCELLO IL LINK AL FILE ORIGINALE
+                // CANCELLO IL LINK AL FILE ORIGINALE FLASH
+                $linkFlashFilename = $ondemand_flash_record_filepath . $videoFileInfo[2];
+                if (is_link($linkFlashFilename))
+                {
+                    unlink($linkFlashFilename);
+                }
                 
+                // CANCELLO IL FILE VIDEO ORIGINALE MP4
+                $ondemand_mp4_path = str_replace($videoFileInfo[3], "mp4", $videoFileInfo[1]);
+                $videoMp4Filename = $ondemand_mp4_path . $basename . ".mp4";
+                if (file_exists($videoMp4Filename))
+                {
+                    unlink($videoMp4Filename);
+                }                                
+                
+                // CANCELLO IL LINK AL FILE ORIGINALE MP4
+                $linkMp4Filename = $ondemand_mp4_record_filepath . $basename . ".mp4";
+                if (is_link($linkMp4Filename))
+                {
+                    unlink($linkMp4Filename);
+                }
                 
                 // CANCELLO IMMAGINE THUMBNAIL
                 $thumbFilename = $videoFileInfo[1] . $basename . ".jpg";
@@ -240,10 +260,6 @@ while($row = mysql_fetch_array($actionsJoin))
             
             $count++;
         }
-        
-        
-        
-        
     } 
     catch (Exception $e) 
     {
