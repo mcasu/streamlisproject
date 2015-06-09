@@ -205,8 +205,18 @@ while($row = mysql_fetch_array($actionsJoin))
                 $video_duration=$movie->getDuration();
                 $video_bitrate=$movie->getVideoBitRate();
                 
-                // TODO: FACCIO L'UPDATE DEL RECORD
+                // FACCIO L'UPDATE DEL RECORD
+                $videoInfos = array();
+                $videoInfos[0][0] = 'ondemand_movie_duration';
+                $videoInfos[0][1] = $video_duration;
                 
+                $videoInfos[1][0] = 'ondemand_movie_bitrate';
+                $videoInfos[1][1] = $video_bitrate;
+                
+                if (!$dbactions->UpdateOndemandEvent($videoFileInfo[0], $videoInfos))
+                {
+                    error_log("WARNING - ondemand_join_video.php UpdateOndemandEvent() ACTIONS-> " . $row['ondemand_actions_join_id'] . " - " . $dbactions->GetErrorMessage());
+                }
                 
                 // SOSTITUISCO IL PRIMO FILE ORIGINALE CON IL FILE VIDEO UNITO FINALE.
                 rename($ondemand_actions_path.$videoFileInfo[2], $videoFilenameSrc);

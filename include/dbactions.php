@@ -624,6 +624,51 @@ class DBActions
             return true;
     }
 
+    function UpdateOndemandEvent($ondemandId, $ondemandEventInfos)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        if (!isset($ondemandId))
+        {
+            $this->HandleDBError("UpdateOndemandEvent() - Parametro \$ondemandId non valido!");
+            return false;            
+        }
+        
+        if (!isset($ondemandEventInfos) || !is_array($ondemandEventInfos))
+        {
+            $this->HandleDBError("UpdateOndemandEvent() - Parametro \$ondemandEventInfos non valido!");
+            return false;             
+        }
+        
+        $query_update = 'UPDATE ondemand SET ';
+        
+        foreach ($ondemandEventInfos as $eventInfo) 
+        {
+            $query_update .= $eventInfo[0] . ' = \'' . $eventInfo[1] . '\' ';
+        }
+        
+        $query_where = 'WHERE ondemand_id = ' . $ondemandId . ' ';
+
+        $query_total = $query_update . $query_where;
+        
+        if(!mysql_query($query_total ,$this->connection))
+        {
+            $this->HandleDBError("Error inserting data to the table\nquery:$query_total");
+            return false;
+        }
+        return true;
+    }
+    
     function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie, $mysqldate = null)
     {
 
