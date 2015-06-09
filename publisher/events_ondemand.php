@@ -236,9 +236,6 @@ $(document).ready(function()
     
     $(".btn_actions").find(".btn").attr('disabled',true);
     
-    //$("#btn_video_delete").prop('disabled', true);
-    //$("#btn_video_archive").prop('disabled', true);
-    
     var auto_refresh = setInterval(OndemandMp4Loading, 10000);
 
 

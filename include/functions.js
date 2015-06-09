@@ -12,7 +12,7 @@ OndemandMp4Loading = function()
 
       if ( panelobj.hasClass("collapse in") )
       {
-          ulleft = panelobj.find('ul.left');
+          ulleft = panelobj.find('ul.checked-list-box');
           var ulleft_id = ulleft.attr('id');
           //alert("Oggetto ulleft: " + ulleft_id);
 

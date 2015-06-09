@@ -194,12 +194,33 @@ while($row = mysql_fetch_array($actionsJoin))
                 throw new Exception("COPIA BACKUP FALLITA FILE-> [" . $videoFilenameSrc . "]");
             }
             
+            $basename = basename($videoFileInfo[2], ".flv");
+            $ondemand_mp4_path = str_replace($videoFileInfo[3], "mp4", $videoFileInfo[1]);
+            $videoMp4Filename = $ondemand_mp4_path . $basename . ".mp4";
+            $linkMp4Filename = $ondemand_mp4_record_filepath . $basename . ".mp4";
+            
             if ($count == 0)
             {
+                $movie = new ffmpeg_movie($ondemand_actions_path.$videoFileInfo[2], false);
+                $video_duration=$movie->getDuration();
+                $video_bitrate=$movie->getVideoBitRate();
+                
                 // TODO: FACCIO L'UPDATE DEL RECORD
+                
                 
                 // SOSTITUISCO IL PRIMO FILE ORIGINALE CON IL FILE VIDEO UNITO FINALE.
                 rename($ondemand_actions_path.$videoFileInfo[2], $videoFilenameSrc);
+                
+                // CANCELLO IL PRIMO FILE VIDEO ORIGINALE MP4
+                if (file_exists($videoMp4Filename))
+                {
+                    unlink($videoMp4Filename);
+                }                 
+                // CANCELLO IL LINK AL PRIMO FILE ORIGINALE MP4
+                if (is_link($linkMp4Filename))
+                {
+                    unlink($linkMp4Filename);
+                }
             }
             else 
             {
@@ -216,8 +237,6 @@ while($row = mysql_fetch_array($actionsJoin))
                     unlink($videoFilenameSrc);
                 }
                 
-                $basename = basename($videoFileInfo[2], ".flv");
-                
                 // CANCELLO IL LINK AL FILE ORIGINALE FLASH
                 $linkFlashFilename = $ondemand_flash_record_filepath . $videoFileInfo[2];
                 if (is_link($linkFlashFilename))
@@ -226,15 +245,12 @@ while($row = mysql_fetch_array($actionsJoin))
                 }
                 
                 // CANCELLO IL FILE VIDEO ORIGINALE MP4
-                $ondemand_mp4_path = str_replace($videoFileInfo[3], "mp4", $videoFileInfo[1]);
-                $videoMp4Filename = $ondemand_mp4_path . $basename . ".mp4";
                 if (file_exists($videoMp4Filename))
                 {
                     unlink($videoMp4Filename);
                 }                                
                 
                 // CANCELLO IL LINK AL FILE ORIGINALE MP4
-                $linkMp4Filename = $ondemand_mp4_record_filepath . $basename . ".mp4";
                 if (is_link($linkMp4Filename))
                 {
                     unlink($linkMp4Filename);
