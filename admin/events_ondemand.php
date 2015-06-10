@@ -77,6 +77,11 @@ $(document).ready(function()
         if (counter !== 0)
         {
             $(".btn_actions").find(".btn").attr('disabled',false);
+            
+            if (counter < 2)
+            {
+                $(".btn_video_join").attr('disabled',true);
+            }            
         }
         else
         {
@@ -116,6 +121,11 @@ $(document).ready(function()
         if (counter !== 0)
         {
             $(".btn_actions").find(".btn").attr('disabled',false);
+            
+            if (counter < 2)
+            {
+                $(".btn_video_join").attr('disabled',true);
+            }            
         }
         else
         {
@@ -150,6 +160,61 @@ $(document).ready(function()
         }
             
     });
+    
+    $(".alert-warning").hide();
+    $(".alert-success").hide();
+    $(".alert-danger").hide();
+    
+    $(".btn_video_join").click(function()
+    {
+        var checkedItems = [];
+        $(".checked-list-box li.active").each(function(idx, li) {
+
+            var ondemand_id=$(this).attr('id');
+            checkedItems.push(ondemand_id);
+        });
+            
+        var ondemandIdList = checkedItems.toString();
+        var userId = $('.userid').attr('id');
+        
+        if (confirm("Vuoi davvero unire i video selezionati? [" + ondemandIdList + "]"))
+	{   
+            var result = MarkOndemandVideoToJoin(ondemandIdList, userId);
+            
+            //alert("RISULTATO: " + result);
+            
+            if (result === "2")
+            {
+                $(".alert-warning").show();
+                $(".alert-success").hide();
+                $(".alert-danger").hide();
+                $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video sono già stati selezionati per fare il join.</h4>');
+                
+            }
+            else if (result === "1")
+            {
+                $(".alert-danger").show();    
+                $(".alert-warning").hide();
+                $(".alert-success").hide();
+                $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert">' +
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                            '<h4 style="margin-top: 2px;"><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per unire i video selezionati.</h4>');
+                
+            }
+            else if (result === "0")
+            {
+                $(".alert-success").show();
+                $(".alert-danger").hide();    
+                $(".alert-warning").hide();
+                $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">' +
+                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                            '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno uniti questa notte e potrai vedere il risultato domani.</h4>');                
+                
+            }
+        }
+    });    
     
     $('.play-button').click(function (event){
      
@@ -190,9 +255,10 @@ $(document).ready(function()
 
 <?php 
 
-
 try
 {
+        echo '<input type="hidden" class="userid" id="' . $mainactions->UserId() .'"/>';
+        
         $result = $dbactions->GetGroups();
 
         if (!$result)
@@ -228,13 +294,17 @@ try
             //echo '<h3 style="display:inline; vertical-align:middle; margin-right:20px">ELENCO EVENTI ON-DEMAND</h3>';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
-                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
         
         echo '<div class="panel-body">';
         
+            echo '<div class="alert alert-success alert-dismissible" role="alert"></div>';
+            echo '<div class="alert alert-warning alert-dismissible" role="alert"></div>';
+            echo '<div class="alert alert-danger alert-dismissible" role="alert"></div>';
+            
             echo '<div class="panel-group" id="accordionMain">';
 
                 foreach ($group_array AS $id => $row)
@@ -454,7 +524,7 @@ try
         echo '<div class="panel-footer">';
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
-                echo '<button type="button" class="btn btn-primary" style="margin-right:4px;" id="btn_video_archive">Archivia video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
@@ -464,7 +534,7 @@ try
     }
     catch(Exception $e)
     {
-        echo 'No Results';
+        error_log('ERROR - Admin events_ondemand.php - '.$e->getMessage());
     }
 
 ?>
