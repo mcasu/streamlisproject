@@ -295,8 +295,8 @@ while($row = mysql_fetch_array($actionsJoin))
         
         // RIMUOVO I VECCHI FILE DI LOG join_*.log
         array_map('unlink', glob("/var/log/nginx/" . $row['ondemand_actions_join_id'] . "*.log"));
-        // RIMUOVO I VECCHI FILE FIFO fifo-join_*.log
-        array_map('unlink', glob($ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "*.log"));
+        // RIMUOVO I VECCHI FILE FIFO fifo-join_*.v
+        array_map('unlink', glob($ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "*.v"));
     } 
     catch (Exception $e) 
     {
