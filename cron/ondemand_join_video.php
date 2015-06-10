@@ -40,13 +40,6 @@ if (!file_exists($ondemand_actions_path))
 {
     mkdir($ondemand_actions_path, 0755, true);
 }
-else
-{
-    //$fsactions->deleteAll($ondemand_actions_path, true);
-}
-
-// PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
-//array_map('unlink', glob("/var/log/nginx/join_*.log"));
 
 while($row = mysql_fetch_array($actionsJoin))
 {
@@ -296,8 +289,14 @@ while($row = mysql_fetch_array($actionsJoin))
             $count++;
         }
         
+        
         // IMPOSTO LO STATO DELL'OPERAZIONE A 2 - TERMINATA CON SUCCESSO
         $dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 2);
+        
+        // RIMUOVO I VECCHI FILE DI LOG join_*.log
+        array_map('unlink', glob("/var/log/nginx/" . $row['ondemand_actions_join_id'] . "*.log"));
+        // RIMUOVO I VECCHI FILE FIFO fifo-join_*.log
+        array_map('unlink', glob($ondemand_actions_path . "fifo-" . $row['ondemand_actions_join_id'] . "*.log"));
     } 
     catch (Exception $e) 
     {
