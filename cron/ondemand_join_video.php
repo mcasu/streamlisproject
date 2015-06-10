@@ -51,8 +51,9 @@ else
 while($row = mysql_fetch_array($actionsJoin))
 {
     // CONTROLLO LO SATO DELL'OPERAZIONE - SE E' DIVERSO DA 0 ALLORA LA IGNORO
-    if ($row['ondemand_actions_join_status'] !== 0)
+    if ($row['ondemand_actions_join_status'] != 0)
     {
+        error_log("WARNING - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Operazione gia' in corso.");
         continue;
     }
     
