@@ -1486,7 +1486,7 @@ class DBActions
         return $result;
     }
     
-    function MarkOndemandVideoToJoin($ondemandIdList)
+    function MarkOndemandVideoToJoin($ondemandIdList, $userId)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
@@ -1513,8 +1513,8 @@ class DBActions
             return false;
         }
         
-        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list, ondemand_actions_join_date) '.
-                'VALUES ("' . $ondemandJoinId . '","' . $ondemandIdList . '",CURRENT_TIMESTAMP)';
+        $query_total = 'INSERT INTO ondemand_actions_join(ondemand_actions_join_id, ondemand_actions_join_list, ondemand_actions_join_date,ondemand_actions_user_id) '.
+                'VALUES ("' . $ondemandJoinId . '","' . $ondemandIdList . '",CURRENT_TIMESTAMP,' . $userId . ')';
         
         $result_insert = mysql_query($query_total ,$this->connection);
         if(!$result_insert)

@@ -22,6 +22,8 @@
 <?php include("../include/header_publisher.php"); ?>
 
 
+<input type="hidden" class="userid" id="<?=$mainactions->UserId();?>"/>;
+
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -62,6 +64,7 @@ $(document).ready(function()
 {
     $(".btn_actions").find(".btn").attr('disabled',true);
     
+    var userId = $('.userid').attr('id');
     var selected = [];
     var joinTable = $('#ondemand_actions_join_table').DataTable({
         "language": {
@@ -72,8 +75,9 @@ $(document).ready(function()
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "/include/functions.php?fname=get_datatable_ondemand_actions_join",
-            "type": "POST"
+            "url": "/include/functions.php",
+            "type": "POST",
+            "data": { fname : "get_datatable_ondemand_actions_join", userId : userId }
         },
         "rowCallback": function( row, data ) 
         {

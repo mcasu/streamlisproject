@@ -173,10 +173,11 @@ $(document).ready(function()
         });
             
         var ondemandIdList = checkedItems.toString();
+        var userId = $('.userid').attr('id');
         
         if (confirm("Vuoi davvero unire i video selezionati? [" + ondemandIdList + "]"))
-	{    
-            var result = MarkOndemandVideoToJoin(ondemandIdList);
+	{   
+            var result = MarkOndemandVideoToJoin(ondemandIdList, userId);
             
             //alert("RISULTATO: " + result);
             
@@ -253,6 +254,8 @@ $(document).ready(function()
 
 try
 {
+    echo '<input type="hidden" class="userid" id="' . $mainactions->UserId() .'"/>';
+    
     echo '<div class="container-fluid">';
     echo '<div class="panel panel-default">';
 

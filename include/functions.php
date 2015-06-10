@@ -27,9 +27,11 @@ switch ($fname)
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
-        return MarkOndemandVideoToJoin($dbactions, $ondemandIdList);
+        $userId = filter_input(INPUT_POST, 'userId');
+        return MarkOndemandVideoToJoin($dbactions, $ondemandIdList, $userId);
     case "get_datatable_ondemand_actions_join":
-        return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database);
+        $userId = filter_input(INPUT_POST, 'userId');
+        return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
     case "delete_ondemand_actions_join":
         $joinSelectedIds = filter_input(INPUT_POST, 'joinSelectedIds');
         return DeleteOndemandActionsJoin($dbactions, $joinSelectedIds);
@@ -192,7 +194,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     return TRUE;
 }
 
-function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
+function MarkOndemandVideoToJoin($dbactions, $ondemandIdList, $userId)
 {
         $ondemandListArray = explode(",",$ondemandIdList);
         $found = 0;
@@ -221,7 +223,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
             return;
         }
 
-        if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList))
+        if (!$dbactions->MarkOndemandVideoToJoin($ondemandIdList, $userId))
         {
             error_log("ERROR - MarkOndemandVideoToJoin() FAILED! " . $dbactions->GetErrorMessage());
             echo "1";
@@ -232,7 +234,7 @@ function MarkOndemandVideoToJoin($dbactions, $ondemandIdList)
         }
 }
 
-function GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database)
+function GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId = NULL)
 {
     /*
  * DataTables example server-side processing script.
@@ -244,6 +246,7 @@ function GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database)
  *
  * See http://datatables.net/usage/server-side for full details on the server-
  * side processing requirements of DataTables.
+*  https://github.com/DataTables/DataTables/blob/master/examples/server_side/scripts/ssp.class.php
  *
  * @license MIT - http://datatables.net/license_mit
  */
@@ -304,6 +307,7 @@ $sql_details = array(
     'host' => $host
 );
  
+$where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
  
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
@@ -313,7 +317,7 @@ $sql_details = array(
 require( 'ssp.class.php' );
  
 echo json_encode(
-    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
 );
 }
 

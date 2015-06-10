@@ -134,9 +134,9 @@ CheckLiveExistsForPublishCode = function(publishCode)
     return result;
 };
 
-MarkOndemandVideoToJoin = function(ondemandIdList) 
+MarkOndemandVideoToJoin = function(ondemandIdList, userId) 
 {
-    var params = 'fname=mark_ondemand_video_to_join&ondemandIdList=' + ondemandIdList;
+    var params = 'fname=mark_ondemand_video_to_join&ondemandIdList=' + ondemandIdList + '&userId=' + userId;
     var result;
     jQuery.ajax({
         type: "POST",
