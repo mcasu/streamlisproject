@@ -288,6 +288,10 @@ $columns = array(
             return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
         }),
     array(
+        'db'        => 'ondemand_actions_user_id',
+        'dt'        => 4
+        ),                
+    array(
         'db' => 'id',
         'dt' => 'DT_RowId',
         'formatter' => function( $d, $row ) {

@@ -41,6 +41,7 @@
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='stats.php'>Statistiche Nginx</a></li>
                       <li><a href='graphs.php'>Grafici</a></li>
+                      <li><a href='actions.php'>Operazioni (Beta)</a></li>
                    </ul>
                 </li>
 
