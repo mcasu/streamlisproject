@@ -1541,7 +1541,7 @@ class DBActions
             return false;
         }
         
-        $query_update = 'UPDATE ondemand_actions_join SET ondemand_actions_join_status = ' . $actionsJoinStatus . ' WHERE ondemand_actions_join_id = '. $actionsJoinId;
+        $query_update = 'UPDATE ondemand_actions_join SET ondemand_actions_join_status = ' . $actionsJoinStatus . ' WHERE ondemand_actions_join_id = "'. $actionsJoinId . '"';
         
         $result_update = mysql_query($query_update ,$this->connection);
         if(!$result_update)
