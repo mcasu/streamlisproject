@@ -42,32 +42,42 @@ if (!file_exists($ondemand_actions_path))
 }
 else
 {
-    $fsactions->deleteAll($ondemand_actions_path, true);
+    //$fsactions->deleteAll($ondemand_actions_path, true);
 }
 
 // PRIMA DI ESEGUIRE RIMUOVO I VECCHI FILE DI LOG join_*.log
-array_map('unlink', glob("/var/log/nginx/join_*.log"));
+//array_map('unlink', glob("/var/log/nginx/join_*.log"));
 
 while($row = mysql_fetch_array($actionsJoin))
 {
-    $ondemandVideoList = explode(",", $row['ondemand_actions_join_list']);
-    
-    $ondemandVideoInfos = $dbactions->GetOndemandEventsByIds($ondemandVideoList);
-    
-    if (!$ondemandVideoInfos)
+    // CONTROLLO LO SATO DELL'OPERAZIONE - SE E' DIVERSO DA 0 ALLORA LA IGNORO
+    if ($row['ondemand_actions_join_status'] !== 0)
     {
-        error_log("ERROR - ondemand_join_video.php GetOndemandEventsByIds() ACTION->[" . $row['ondemand_actions_join_id'] ."] FAILED! - " . $dbactions->GetErrorMessage());
         continue;
     }
-
+    
+    // TODO: IMPOSTO LO SATO DELL'OPERAZIONE A 1 - IN CORSO
+    if (!$dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 1))
+    {
+        throw new Exception("SetOndemandActionsJoinStatus() FAILED! - " . $dbactions->GetErrorMessage());
+    }
+    
+    $ondemandVideoList = explode(",", $row['ondemand_actions_join_list']);
+    
     try
     {
+        $ondemandVideoInfos = $dbactions->GetOndemandEventsByIds($ondemandVideoList);
+
+        if (!$ondemandVideoInfos)
+        {
+            throw new Exception("GetOndemandEventsByIds() FAILED! - " . $dbactions->GetErrorMessage());
+        }
+
         $videoToJoinNumber = mysql_num_rows($ondemandVideoInfos);
 
         if ($videoToJoinNumber < 1)
         {
-            error_log("WARNING - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - I video selezionati sono stati cancellati.");
-            continue;
+            throw new Exception("GetOndemandEventsByIds() ritorna 0 record (forse i video selezionati sono stati cancellati??)");
         }
         
         $docRoot = getenv("DOCUMENT_ROOT");
@@ -141,8 +151,7 @@ while($row = mysql_fetch_array($actionsJoin))
         
         if (!file_exists($videoFilenameAll))
         {
-            error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - Il file [" . $videoFilenameAll . "] non esiste!");
-            continue;
+            throw new Exception("Il file [" . $videoFilenameAll . "] non esiste!");
         }
         
         // CANCELLO LO SCRIPT AVCONV
@@ -182,7 +191,6 @@ while($row = mysql_fetch_array($actionsJoin))
             mkdir($ondemand_backup_path, 0755, true);
         }
         
-        // MODIFICO IL DATABASE 
         $count = 0;
         foreach ($ondemandVideoFileInfosArray as $videoFileInfo) 
         {
@@ -191,7 +199,7 @@ while($row = mysql_fetch_array($actionsJoin))
             $videoFilenameDst = $ondemand_backup_path . $videoFileInfo[2];
             if (!copy($videoFilenameSrc, $videoFilenameDst))
             {
-                throw new Exception("COPIA BACKUP FALLITA FILE-> [" . $videoFilenameSrc . "]");
+                throw new Exception("Copia di backup fallita - FILE-> [" . $videoFilenameSrc . "]");
             }
             
             $basename = basename($videoFileInfo[2], ".flv");
@@ -238,7 +246,7 @@ while($row = mysql_fetch_array($actionsJoin))
                 $result = $dbactions->DeleteEventOnDemand($videoFileInfo[0]);
                 if (!$result)
                 {
-                    throw new Exception("Impossibile cancellare ondemand id->[" . $videoFileInfo[0] . "]");
+                    throw new Exception("DeleteEventOnDemand() FAILED! - Impossibile cancellare ondemand id->[" . $videoFileInfo[0] . "]");
                 }
                 
                 // CANCELLO IL FILE VIDEO ORIGINALE FLASH
@@ -286,10 +294,16 @@ while($row = mysql_fetch_array($actionsJoin))
             
             $count++;
         }
+        
+        // IMPOSTO LO STATO DELL'OPERAZIONE A 2 - TERMINATA CON SUCCESSO
+        $dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 2);
     } 
     catch (Exception $e) 
     {
         error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - " . $e->getMessage());
+        // IMPOSTO LO STATO DELL'OPERAZIONE A 0 - SCHEDULATA
+        $dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 0);
+        
         continue;
     }
 }

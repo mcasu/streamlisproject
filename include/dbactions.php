@@ -1526,6 +1526,33 @@ class DBActions
         return $result_insert;
     }
     
+    function SetOndemandActionsJoinStatus($actionsJoinId, $actionsJoinStatus = 0)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $query_update = 'UPDATE ondemand_actions_join SET ondemand_actions_join_status = ' . $actionsJoinStatus . ' WHERE ondemand_actions_join_id = '. $actionsJoinId;
+        
+        $result_update = mysql_query($query_update ,$this->connection);
+        if(!$result_update)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$query_update");
+            return false;
+        }
+        
+        return $result_update; 
+    }
+    
     function GetAllOnDemandActionsJoin()
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -1540,6 +1567,7 @@ class DBActions
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
+        
         $query_select = 'SELECT * FROM ondemand_actions_join WHERE ondemand_actions_join_status = 0 ORDER BY ondemand_actions_join_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -1625,7 +1653,7 @@ class DBActions
         $result_update = mysql_query($query_update ,$this->connection);
         if(!$result_update)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$query_update");
+            $this->HandleDBError("Error updating data from the table\nquery:$query_update");
             return false;
         }
         
