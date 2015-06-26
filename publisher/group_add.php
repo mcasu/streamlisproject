@@ -26,7 +26,7 @@ include("../include/header_publisher.php");
 
 if(isset($_POST['submitted']))
 {
-   $GroupHasCreated=$mainactions->CreateGroup();
+   $GroupHasCreated=$mainactions->CreateGroup(TRUE);
 }
 
 ?>

@@ -256,7 +256,7 @@ class DBActions
         return $affectedRows;
     }
     
-    function GetGroupInfoByName($group_name)
+    function GetGroupIdByName($group_name)
     {
 	if(!$this->DBLogin())
         {

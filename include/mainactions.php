@@ -166,7 +166,7 @@ class MainActions
         return true;
     }
 
-    function CreateGroup()
+    function CreateGroup($createPublisherLink = FALSE)
     {
         if(!isset($_POST['submitted']))
         {
@@ -178,8 +178,20 @@ class MainActions
         $this->CollectGroupRegistrationSubmission($groupvars);
 
         if(!$this->SaveGroupToDatabase($groupvars))
-
         {
+            return false;
+        }
+        
+        if (!$createPublisherLink)
+        {
+            return true;
+        }
+        
+        $viewerList = array();
+        $viewerList[] = $this->dbactionsInstance->GetGroupIdByName($groupvars['group_name']);
+        if(!$this->dbactionsInstance->AddViewersLink($viewerList, $this->UserGroupId()))
+        {
+            $this->HandleError("Associazione tra gruppo e congregazione fallita. Contattare l'amministratore per risolvere il problema.");
             return false;
         }
 
@@ -632,7 +644,7 @@ class MainActions
         }
         if(!$this->dbactionsInstance->IsGroupFieldUnique($groupvars,'group_name'))
         {
-            $this->HandleError("This group name is already used. Please try another group name");
+            $this->HandleError("This group name is already used. Please try another group name.");
             return false;
         }        
         if(!$this->dbactionsInstance->InsertGroupIntoDB($groupvars))
