@@ -187,11 +187,7 @@ class MainActions
             return true;
         }
         
-        error_log("INFO - gruppo creato. Procedo con l'associazione...");
         $viewerList = $this->dbactionsInstance->GetGroupIdByName($groupvars['group_name']);
-        
-        error_log("INFO - group id->[" . $this->UserGroupId() . "]  viewer id->[" . $viewerList . "]");
-        
         if(!$this->dbactionsInstance->AddViewersLink($viewerList, $this->UserGroupId()))
         {
             $this->HandleError("Associazione tra gruppo e congregazione fallita. Contattare l'amministratore per risolvere il problema.");
