@@ -188,10 +188,9 @@ class MainActions
         }
         
         error_log("INFO - gruppo creato. Procedo con l'associazione...");
-        $viewerList = array();
-        $viewerList[] = $this->dbactionsInstance->GetGroupIdByName($groupvars['group_name']);
+        $viewerList = $this->dbactionsInstance->GetGroupIdByName($groupvars['group_name']);
         
-        error_log("INFO - group id->[" . $this->UserGroupId() . "]  viewer id->[" . $viewerList[0] . "]");
+        error_log("INFO - group id->[" . $this->UserGroupId() . "]  viewer id->[" . $viewerList . "]");
         
         if(!$this->dbactionsInstance->AddViewersLink($viewerList, $this->UserGroupId()))
         {
