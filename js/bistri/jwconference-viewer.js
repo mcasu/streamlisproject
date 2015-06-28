@@ -41,34 +41,14 @@ var onBistriConferenceReady = function ()
             return;
         }
         
-        MediaStreamTrack.getSources(function(sourceInfos) 
-        {
-            var audioSource = null;
-            var videoSource = null;
+        getInputDevices(function (devices) {
+    for (var device in devices) {
+        device = devices[device];
 
-            for (var i = 0; i !== sourceInfos.length; ++i) 
-            {
-                var sourceInfo = sourceInfos[i];
-                if (sourceInfo.kind === 'audio') 
-                {
-                  console.log(sourceInfo.id, sourceInfo.label || 'microphone');
-
-                  audioSource = sourceInfo.id;
-                } 
-                else if (sourceInfo.kind === 'video') 
-                {
-                  console.log(sourceInfo.id, sourceInfo.label || 'camera');
-
-                  videoSource = sourceInfo.id;
-                } 
-                else 
-                {
-                  console.log('Some other kind of source: ', sourceInfo);
-                }
-            }
-
-            sourceSelected(audioSource, videoSource);
-        });
+        // device.kind == 'audio' || 'video'
+        console.log(device.id, device.label);
+    }
+});
         
     } );
     
@@ -231,20 +211,69 @@ var onBistriConferenceReady = function ()
     BistriConference.connect();
 };
 
+function getInputDevices(callback) {
+    // This method is useful only for Chrome!
 
-function sourceSelected(audioSource, videoSource) 
-{
-    var constraints = {
-      audio: {
-        optional: [{sourceId: audioSource}]
-      },
-      video: {
-        optional: [{sourceId: videoSource}]
-      }
-    };
+    var devicesFetched = {};
 
-    navigator.getUserMedia(constraints, successCallback, errorCallback);
+    // 1st step: verify "MediaStreamTrack" support.
+    if (!window.MediaStreamTrack && !navigator.getMediaDevices) {
+        return callback(devicesFetched);
+    }
+
+    if (!window.MediaStreamTrack && navigator.getMediaDevices) {
+        window.MediaStreamTrack = {};
+    }
+
+    // 2nd step: verify "getSources" supported which is planned to be removed soon!
+    // "getSources" will be replaced with "getMediaDevices"
+    if (!MediaStreamTrack.getSources) {
+        MediaStreamTrack.getSources = MediaStreamTrack.getMediaDevices;
+    }
+
+    // todo: need to verify if this trick works
+    // via: https://code.google.com/p/chromium/issues/detail?id=338511
+    if (!MediaStreamTrack.getSources && navigator.getMediaDevices) {
+        MediaStreamTrack.getSources = navigator.getMediaDevices.bind(navigator);
+    }
+
+    // if still no "getSources"; it MUST be firefox!
+    // or otherwise, it will be older chrome
+    if (!MediaStreamTrack.getSources) {
+        return callback(devicesFetched);
+    }
+
+    // loop over all audio/video input/output devices
+    MediaStreamTrack.getSources(function (media_sources) {
+        var sources = [];
+        for (var i = 0; i < media_sources.length; i++) {
+            sources.push(media_sources[i]);
+        }
+
+        getAllUserMedias(sources);
+
+        if (callback) callback(devicesFetched);
+    });
+
+    var index = 0;
+
+    function getAllUserMedias(media_sources) {
+        var media_source = media_sources[index];
+        if (!media_source) return;
+
+        // to prevent duplicated devices to be fetched.
+        if (devicesFetched[media_source.id]) {
+            index++;
+            return getAllUserMedias(media_sources);
+        }
+      
+        devicesFetched[media_source.id] = media_source;
+
+        index++;
+        getAllUserMedias(media_sources);
+    }
 }
+
         
 // when button "Join Conference Room" has been clicked
 function joinConference()
