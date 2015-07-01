@@ -25,11 +25,13 @@
 <input type="hidden" class="userid" id="<?=$mainactions->UserId();?>"/>;
 
 <div class="container-fluid">
+    
+    <!--Ondemand video join panel-->
     <div class="panel panel-default">
         <div class="panel-heading">
             <div style="float: left;"><h4><b>Ondemand video join</b></h4></div>
-            <div class="pull-right btn_actions">
-                <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
+            <div class="pull-right btn_actions_join">
+                <button type="button" class="btn btn-danger btn_actions_join_delete" style="margin-right:4px;" id="btn_actions_join_delete">Elimina operazione</button>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -50,12 +52,46 @@
         </div>
         
         <div class="panel-footer">
-            <div class="pull-right btn_actions">
-                <button type="button" class="btn btn-danger btn_actions_delete" style="margin-right:4px;" id="btn_actions_delete">Elimina operazione</button>
+            <div class="pull-right btn_actions_join">
+                <button type="button" class="btn btn-danger btn_actions_join_delete" style="margin-right:4px;" id="btn_actions_join_delete">Elimina operazione</button>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
+    
+    <!--Ondemand video convert panel-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div style="float: left;"><h4><b>Ondemand video convert</b></h4></div>
+            <div class="pull-right btn_actions_convert">
+                <button type="button" class="btn btn-danger btn_actions_convert_delete" style="margin-right:4px;" id="btn_actions_convert_delete">Elimina operazione</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="panel-body" id="ondemand_actions_convert_panelbody">
+            <table class="table table-hover" id="ondemand_actions_convert_table">
+                <thead>
+                    <tr class="head">
+                        <th>ID OPERAZIONE</th>
+                        <th>ONDEMAND VIDEO DA CONVERTIRE</th>
+                        <th>STATO OPERAZIONE</th>
+                        <th>DATA INSERIMENTO</th>
+                        <th>ID UTENTE</th>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
+        
+        <div class="panel-footer">
+            <div class="pull-right btn_actions_convert">
+                <button type="button" class="btn btn-danger btn_actions_convert_delete" style="margin-right:4px;" id="btn_actions_convert_delete">Elimina operazione</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    
 </div>
 
 <script src="../js/jquery.dataTables.min.js"></script> 
@@ -63,10 +99,10 @@
     
 $(document).ready(function()
 {
-    $(".btn_actions").find(".btn").attr('disabled',true);
+    $(".btn_actions_join").find(".btn").attr('disabled',true);
+    $(".btn_actions_convert").find(".btn").attr('disabled',true);
     
-    //var userId = $('.userid').attr('id');
-    var selected = [];
+    var selectedJoin = [];
     var joinTable = $('#ondemand_actions_join_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
@@ -82,7 +118,30 @@ $(document).ready(function()
         },
         "rowCallback": function( row, data ) 
         {
-            if ( $.inArray(data.DT_RowId, selected) !== -1 ) 
+            if ( $.inArray(data.DT_RowId, selectedJoin) !== -1 ) 
+            {
+                $(row).addClass('selected');
+            }
+        }
+    });
+    
+    var selectedConvert = [];
+    var convertTable = $('#ondemand_actions_convert_table').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
+        },
+        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
+        "order": [[ 2, 'asc' ]],
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/include/functions.php",
+            "type": "POST",
+            "data": { fname : "get_datatable_ondemand_actions_convert" }
+        },
+        "rowCallback": function( row, data ) 
+        {
+            if ( $.inArray(data.DT_RowId, selectedConvert) !== -1 ) 
             {
                 $(row).addClass('selected');
             }
@@ -92,15 +151,15 @@ $(document).ready(function()
     $('#ondemand_actions_join_table tbody').on( 'click', 'tr', function () 
     {
         var id = this.id;
-        var index = $.inArray(id, selected);
+        var index = $.inArray(id, selectedJoin);
  
         if ( index === -1 ) 
         {
-            selected.push( id );
+            selectedJoin.push( id );
         } 
         else 
         {
-            selected.splice( index, 1 );
+            selectedJoin.splice( index, 1 );
         }
         
         $(this).toggleClass('selected');
@@ -109,15 +168,43 @@ $(document).ready(function()
         
         if (joinTableRowSelected > 0)
         {
-            $(".btn_actions").find(".btn").attr('disabled',false);
+            $(".btn_actions_join").find(".btn").attr('disabled',false);
         }
         else
         {
-            $(".btn_actions").find(".btn").attr('disabled',true);
+            $(".btn_actions_join").find(".btn").attr('disabled',true);
         }
     });
     
-    $(".btn_actions_delete").click(function()
+    $('#ondemand_actions_convert_table tbody').on( 'click', 'tr', function () 
+    {
+        var id = this.id;
+        var index = $.inArray(id, selectedConvert);
+ 
+        if ( index === -1 ) 
+        {
+            selectedConvert.push( id );
+        } 
+        else 
+        {
+            selectedConvert.splice( index, 1 );
+        }
+        
+        $(this).toggleClass('selected');
+        
+        var convertTableRowSelected = convertTable.rows('.selected').data().length;
+        
+        if (convertTableRowSelected > 0)
+        {
+            $(".btn_actions_convert").find(".btn").attr('disabled',false);
+        }
+        else
+        {
+            $(".btn_actions_convert").find(".btn").attr('disabled',true);
+        }
+    });
+    
+    $(".btn_actions_join_delete").click(function()
     {
         console.log("Numero record selezionati: " + joinTable.rows('.selected').data().length);
         
@@ -144,6 +231,32 @@ $(document).ready(function()
         }
     });
     
+    $(".btn_actions_convert_delete").click(function()
+    {
+        console.log("Numero record selezionati: " + convertTable.rows('.selected').data().length);
+        
+        var convertSelectedIds = $.map(convertTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        console.log("Convert id selezionati: " + convertSelectedIds);
+        
+        if (confirm("Vuoi davvero eliminare le operazioni selezionate?"))
+	{
+            $.post("/include/functions.php",{fname:"delete_ondemand_actions_convert",convertSelectedIds:convertSelectedIds.toString()},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+                
+                if (status === "success")
+                {
+                    convertTable.$('.selected').remove();
+                }
+            });            
+            
+        }
+    });
 });
 
 </script>

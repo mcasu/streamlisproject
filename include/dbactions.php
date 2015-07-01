@@ -77,16 +77,6 @@ class DBActions
         return true;
     }
 
-    function EnsureUsersTable()
-    {
-        $result = mysql_query("SHOW COLUMNS FROM users");
-        if(!$result || mysql_num_rows($result) <= 0)
-        {
-            return $this->CreateUsersTable();
-        }
-        return true;
-    }
-
     function CheckLoginInDB($username,$password)
     {
         if(!$this->DBLogin())
@@ -723,7 +713,7 @@ class DBActions
                 $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
                 return false;
             }
-            return true;
+            return mysql_insert_id();
     }
 
     function GetGroups()
@@ -1526,6 +1516,46 @@ class DBActions
         return $result_insert;
     }
     
+    function MarkOndemandVideoToConvert($ondemandIdList, $userId)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+       
+        // Genero un id univoco di 12 caratteri
+        $ondemandConvertId = substr(uniqid("conv_"), 0, 15);
+        
+        $query_total = 'UPDATE ondemand SET ondemand_convert_id = "'. $ondemandConvertId . '" WHERE ondemand_id in ('. $ondemandIdList . ')';
+        
+        $result_update = mysql_query($query_total ,$this->connection);
+        if(!$result_update)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$query_total");
+            return false;
+        }
+        
+        $query_total = 'INSERT INTO ondemand_actions_convert(ondemand_actions_convert_id, ondemand_actions_convert_list, ondemand_actions_convert_date,ondemand_actions_user_id) '.
+                'VALUES ("' . $ondemandConvertId . '","' . $ondemandIdList . '",CURRENT_TIMESTAMP,' . $userId . ')';
+        
+        $result_insert = mysql_query($query_total ,$this->connection);
+        if(!$result_insert)
+        {
+            $this->HandleDBError("Error inserting data from the table\nquery:$query_total");
+            return false;
+        }
+        
+        return $result_insert;
+    }
+    
     function SetOndemandActionsJoinStatus($actionsJoinId, $actionsJoinStatus = 0)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -1620,6 +1650,46 @@ class DBActions
         return $result_select;
     }
     
+    function DeleteOnDemandActionsConvert($convertIds)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $count = 0;
+        $convertIdsToString = null;
+        foreach ($convertIds as $id) 
+        {
+            $convertIdsToString .= '"' . $id . '"';
+            $count++;
+            
+            if (isset($convertIds[$count]))
+            {
+                $convertIdsToString .= ',';
+            }
+        }
+        
+        $query_select = 'DELETE FROM ondemand_actions_convert WHERE ondemand_actions_convert_id in (' . $convertIdsToString . ')';
+        
+        $result_select = mysql_query($query_select ,$this->connection);
+        if(!$result_select)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$query_select");
+            return false;
+        }
+        
+        return $result_select;
+    }
+    
     function ResetOndemandVideoActionsJoin($joinIds)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -1660,29 +1730,46 @@ class DBActions
         return $result_update;        
     }
     
-    function CreateUsersTable()
+    function ResetOndemandVideoActionsConvert($convertIds)
     {
-        $qry = "Create Table users (".
-                "id_user INT NOT NULL AUTO_INCREMENT ,".
-                "name VARCHAR( 128 ) NOT NULL ,".
-                "email VARCHAR( 64 ) NOT NULL ,".
-                "phone_number VARCHAR( 16 ) NOT NULL ,".
-                "username VARCHAR( 16 ) NOT NULL ,".
-                "password VARCHAR( 32 ) NOT NULL ,".
-                "user_group_id INT ( 11 ) NOT NULL,".
-                "confirmcode VARCHAR(32) ,".
-                "user_role_id INT ( 11 ) NOT NULL,".
-                "PRIMARY KEY ( id_user )".
-                ")";
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
-        if(!mysql_query($qry,$this->connection))
+        if(!$this->connection)
         {
-            $this->HandleDBError("Error creating the table \nquery was\n $qry");
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
             return false;
         }
-        return true;
-    }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
 
+        $count = 0;
+        $convertIdsToString = null;
+        foreach ($convertIds as $id) 
+        {
+            $convertIdsToString .= '"' . $id . '"';
+            $count++;
+            
+            if (isset($convertIds[$count]))
+            {
+                $convertIdsToString .= ',';
+            }
+        }
+        
+        $query_update = 'UPDATE ondemand SET ondemand_convert_id = NULL WHERE ondemand_convert_id in ('. $convertIdsToString . ')';
+        
+        $result_update = mysql_query($query_update ,$this->connection);
+        if(!$result_update)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$query_update");
+            return false;
+        }
+        
+        return $result_update;        
+    }
+    
     function SanitizeForSQL($str)
     {
         if( function_exists( "mysql_real_escape_string" ) )

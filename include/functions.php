@@ -32,9 +32,15 @@ switch ($fname)
     case "get_datatable_ondemand_actions_join":
         $userId = filter_input(INPUT_POST, 'userId');
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
+    case "get_datatable_ondemand_actions_convert":
+        $userId = filter_input(INPUT_POST, 'userId');
+        return GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId);        
     case "delete_ondemand_actions_join":
         $joinSelectedIds = filter_input(INPUT_POST, 'joinSelectedIds');
         return DeleteOndemandActionsJoin($dbactions, $joinSelectedIds);
+    case "delete_ondemand_actions_convert":
+        $convertSelectedIds = filter_input(INPUT_POST, 'convertSelectedIds');
+        return DeleteOndemandActionsConvert($dbactions, $convertSelectedIds);        
     default:
         break;
 }
@@ -325,11 +331,102 @@ echo json_encode(
 );
 }
 
+function GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId = NULL)
+{
+    /*
+ * DataTables example server-side processing script.
+ *
+ * Please note that this script is intentionally extremely simply to show how
+ * server-side processing can be implemented, and probably shouldn't be used as
+ * the basis for a large complex system. It is suitable for simple use cases as
+ * for learning.
+ *
+ * See http://datatables.net/usage/server-side for full details on the server-
+ * side processing requirements of DataTables.
+*  https://github.com/DataTables/DataTables/blob/master/examples/server_side/scripts/ssp.class.php
+ *
+ * @license MIT - http://datatables.net/license_mit
+ */
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Easy set variables
+ */
+ 
+// DB table to use
+$table = 'ondemand_actions_convert';
+ 
+// Table's primary key
+$primaryKey = 'ondemand_actions_convert_id';
+ 
+// Array of database columns which should be read and sent back to DataTables.
+// The `db` parameter represents the column name in the database, while the `dt`
+// parameter represents the DataTables column identifier.
+$columns = array(
+    array( 'db' => 'ondemand_actions_convert_id', 'dt' => 0 ),
+    array( 'db' => 'ondemand_actions_convert_list', 'dt' => 1 ),
+    array( 'db' => 'ondemand_actions_convert_status', 'dt' => 2,
+        'formatter' => function( $d, $row ) {
+            switch ($d) 
+            {
+                case 0:
+                    return '<span class="label label-warning">SCHEDULATA</span>';
+                case 1:
+                    return '<span class="label label-info">IN CORSO...</span>';
+                case 2:
+                    return '<span class="label label-success">TERMINATA CON SUCCESSO</span>';
+                case -1:
+                    return '<span class="label label-danger">TERMINATA CON ERRORI</span>';
+            }
+        }),
+    array(
+        'db'        => 'ondemand_actions_convert_date',
+        'dt'        => 3,
+        'formatter' => function( $d, $row ) {
+            return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
+        }),
+    array(
+        'db'        => 'ondemand_actions_user_id',
+        'dt'        => 4
+        ),                
+    array(
+        'db' => 'id',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+            // Technically a DOM id cannot start with an integer, so we prefix
+            // a string. This can also be useful if you have multiple tables
+            // to ensure that the id is unique with a different prefix
+            return 'row_'.$d;
+        }
+    )
+);
+ 
+// SQL server connection information
+$sql_details = array(
+    'user' => $uname,
+    'pass' => $pwd,
+    'db'   => $database,
+    'host' => $host
+);
+ 
+$where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
+ 
+require( 'ssp.class.php' );
+ 
+echo json_encode(
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
+);
+}
+
 function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
 {
     $joinIdsArray = explode(",",$joinSelectedIds);
     
-    error_log("INFO - join ids: " . $joinSelectedIds);
+    //error_log("INFO - join ids: " . $joinSelectedIds);
     
     if (!$dbactions->DeleteOnDemandActionsJoin($joinIdsArray))
     {
@@ -340,6 +437,27 @@ function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
     if (!$dbactions->ResetOndemandVideoActionsJoin($joinIdsArray))
     {
         error_log("ERROR - functions.php ResetOndemandVideoActionsJoin() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    return TRUE;
+}
+
+function DeleteOndemandActionsConvert($dbactions, $convertSelectedIds)
+{
+    $convertIdsArray = explode(",",$convertSelectedIds);
+    
+    //error_log("INFO - convert ids: " . $convertSelectedIds);
+    
+    if (!$dbactions->DeleteOnDemandActionsConvert($convertIdsArray))
+    {
+        error_log("ERROR - functions.php DeleteOndemandActionsConvert() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    if (!$dbactions->ResetOndemandVideoActionsConvert($convertIdsArray))
+    {
+        error_log("ERROR - functions.php ResetOndemandVideoActionsConvert() FAILED! " . $dbactions->GetErrorMessage());
         return FALSE;
     }
     
