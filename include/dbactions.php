@@ -1516,7 +1516,7 @@ class DBActions
         return $result_insert;
     }
     
-    function MarkOndemandVideoToConvert($ondemandIdList, $userId)
+    function MarkOndemandVideoToConvert($ondemandIdList, $userId = -1)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
 
