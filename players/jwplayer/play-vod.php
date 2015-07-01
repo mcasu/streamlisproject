@@ -10,10 +10,16 @@ if(!$mainactions->CheckLogin())
     exit;
 }
 
+$filename = filter_input(INPUT_GET, 'filename');
 
-if(isset($_GET['filename'])) 
+if(!isset($filename) || empty($filename)) 
 {
-	$filename=$_GET['filename'];
+    // Access forbidden:
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Url non valida.</h1><br/>Contattare l'amministratore di sistema.";
+    exit; 
 }
 
 if(isset($_GET['stream_name'])) 
