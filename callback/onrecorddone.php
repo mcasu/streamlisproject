@@ -120,7 +120,7 @@ else
 
 
 // AGGIUNGO OPERAZIONE PER CONVERTIRE IN MP4 IL VIDEO //
-if (!$dbactions->MarkOndemandVideoToConvert($ondemandId, NULL))
+if (!$dbactions->MarkOndemandVideoToConvert($ondemandId))
 {
     error_log("ERROR - onrecorddone.php MarkOndemandVideoToConvert() FAILED! " . $dbactions->GetErrorMessage());
 }
