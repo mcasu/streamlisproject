@@ -11,15 +11,28 @@ if(!$mainactions->CheckLogin())
     exit;
 }
 
+$app_name = filter_input(INPUT_GET, 'app_name');
 
-if(isset($_GET['app_name'])) 
+if(!isset($app_name) || empty($app_name)) 
 {
-	$app_name=$_GET['app_name'];
+    // Access forbidden:
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
+    exit; 
 }
 
-if(isset($_GET['stream_name'])) 
+$stream_name = filter_input(INPUT_GET, 'stream_name');
+
+if(!isset($stream_name) || empty($stream_name)) 
 {
-	$stream_name=$_GET['stream_name'];
+    // Access forbidden:
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
+    exit; 
 }
 
 if ($myhostname == "lnxstreamserver-dev")
