@@ -79,45 +79,64 @@ $videorate = $movie->getFrameRate();
 //Get video frame number
 $framecount = $movie->getFrameCount();
 
-// Get video thumbnail from 1000sec frame.
-$frame = $movie->getFrame($videorate * 1000);
+
+// Provo a recuperare la thumbnail dai frame tra 1000-1050 secondi.
+for($i = 1000; $i <=1050; $i++)
+{
+    $frame = $movie->getFrame($videorate * (int)$i);    
+    
+    if ($frame)
+    {
+        break;
+    }
+}
 
 if (!$frame)
 {
-	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000 second frame.");
+	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000-1050 second frame.");
 	
-	// Get video thumbnail from 5sec frame.
-	$frame = $movie->getFrame($videorate * 5);
-	
-	if (!$frame)
-	{
-		error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5 second frame.");
-		exit(0);
-	}
+        // Provo a recuperare la thumbnail dai frame tra 5-10 secondi.
+        for($i = 5; $i <=10; $i++)
+        {
+            $frame = $movie->getFrame($videorate * (int)$i);    
+
+            if ($frame)
+            {
+                break;
+            }
+        }
+        
+        if (!$frame)
+        {
+            error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5-10 second frame.");
+        }
 }
 
-//$frame->resize(320, 240);
-$image = $frame->toGDImage();
-// Save the image to disk
 $img_filename = $ondemand_path.strtolower($stream_name)."/".$ondemand_filename.'.jpg';
-
-if (imagejpeg($image, $img_filename, 100))
+    
+try
 {
+    $image = $frame->toGDImage();
+    
+    // Save the image to disk
+    imagejpeg($image, $img_filename, 100);
+            
+    // Creo la directory generale per le immagini thumbnail
     if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) 
     {
         mkdir("/usr/local/nginx/html/images/thumbnails/", 0755, true);
     }
-    
+
+    // Creo il link all'immagine
     if (!symlink($img_filename, "/usr/local/nginx/html/images/thumbnails/".$ondemand_filename.'.jpg'))
     {
             error_log("ERROR - Creating thumbnail symbolic link FAILED. Phisical file: ".$img_filename);
     }
-}
-else
+} 
+catch (Exception $ex) 
 {
-	error_log("ERROR - Unable to create video thumbnail ".$img_filename);
+    error_log("ERROR - Unable to create video thumbnail ".$img_filename);
 }
-
 
 // AGGIUNGO OPERAZIONE PER CONVERTIRE IN MP4 IL VIDEO //
 if (!$dbactions->MarkOndemandVideoToConvert($ondemandId))
