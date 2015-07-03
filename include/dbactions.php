@@ -1656,7 +1656,7 @@ class DBActions
             
             $status = $sthSelect->fetchColumn();
             
-            if ($status == 0)
+            if ($status == "0")
             {
                 $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = 1 WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
                 $sthUpdate = $this->pdoConn->prepare($queryUpdate);
@@ -1664,12 +1664,12 @@ class DBActions
                 
                 $this->pdoConn->commit();
                 error_log("INFO - status == 0");
-                return 0;
+                return "0";
             }
             
             $this->pdoConn->commit();
             error_log("INFO - status == 1");
-            return 1;
+            return "1";
         } 
         catch (Exception $e) 
         {
