@@ -29,6 +29,7 @@ class DBActions
         } 
         catch (PDOException $pe) 
         {
+            error_log($pe->getMessage());
             die($pe->getMessage());
         }
         
