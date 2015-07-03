@@ -20,12 +20,11 @@ class DBActions
         // open database connection
         $connectionString = sprintf("mysql:host=%s;dbname=%s",$this->db_host,$this->database);
         
+        error_log("INFO - Init DBActions...");
+
         try 
         {
-            $this->connection = new PDO($connectionString,
-            $this->username,
-            $this->pwd);
-
+            $this->connection = new PDO($connectionString,$this->username,$this->pwd);
         } 
         catch (PDOException $pe) 
         {
