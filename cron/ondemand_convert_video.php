@@ -40,7 +40,7 @@ while($row = mysql_fetch_array($actionsConvert))
     // CONTROLLO LO SATO DELL'OPERAZIONE - SE E' DIVERSO DA 0 ALLORA LA IGNORO
     $result = $dbactions->CheckAndUpdateActionsConvertStatus($row['ondemand_actions_convert_id']);
     
-    if (!$result)
+    if ($result == FALSE)
     {
         error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - CheckAndUpdateActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
         continue;
