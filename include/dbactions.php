@@ -1652,7 +1652,7 @@ class DBActions
                     'FOR UPDATE';
             
             $sthSelect = $this->pdoConn->prepare($querySelect);
-            $sthSelect->exec();
+            $sthSelect->execute();
             
             $status = $sthSelect->fetchColumn();
             
@@ -1660,7 +1660,7 @@ class DBActions
             {
                 $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = 1 WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
                 $sthUpdate = $this->pdoConn->prepare($queryUpdate);
-                $sthUpdate->exec();
+                $sthUpdate->execute();
                 
                 $this->pdoConn->commit();
                 return 0;
