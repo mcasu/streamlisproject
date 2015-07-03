@@ -26,9 +26,9 @@ class DBActions
         {
             $this->connection = new PDO($connectionString,$this->username,$this->pwd);
         } 
-        catch (PDOException $pe) 
+        catch (Exception $pe) 
         {
-            error_log($pe->getMessage());
+            error_log("ERROR - " . $pe->getMessage());
             die($pe->getMessage());
         }
         
