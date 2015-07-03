@@ -50,10 +50,11 @@ while($row = mysql_fetch_array($actionsJoin))
         continue;
     }
     
-    // TODO: IMPOSTO LO SATO DELL'OPERAZIONE A 1 - IN CORSO
+    // IMPOSTO LO SATO DELL'OPERAZIONE A 1 - IN CORSO
     if (!$dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 1))
     {
-        throw new Exception("SetOndemandActionsJoinStatus() FAILED! - " . $dbactions->GetErrorMessage());
+        error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - SetOndemandActionsJoinStatus() FAILED! - " . $dbactions->GetErrorMessage());
+        continue;        
     }
     
     $ondemandVideoList = explode(",", $row['ondemand_actions_join_list']);

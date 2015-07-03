@@ -17,18 +17,105 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-/*** CONVERT VIDEO TO .MP4 AND SAVE TO DISK ***/
-if (!file_exists($ondemand_mp4_record_filepath.strtolower($stream_name)))
+if ( session_status() == PHP_SESSION_NONE ) 
 {
-	mkdir($ondemand_mp4_record_filepath.strtolower($stream_name), 0755, true);
-	error_log("WARNING - OnRecordDone.php - Created folder ".$ondemand_mp4_record_filepath.strtolower($stream_name));
+    session_start();
 }
 
-$output = shell_exec($_SERVER['DOCUMENT_ROOT'].'/scripts/convert_video.bash '.$ondemand_path.strtolower($stream_name)."/".$ondemand_basename.' '.$ondemand_mp4_record_filepath.strtolower($stream_name).'/'.$ondemand_filename.'.mp4 '.$ondemand_basename);
+require_once("../include/config.php");
 
-$ondemand_mp4_fullpath = $ondemand_mp4_record_filepath.strtolower($stream_name)."/";
-if (!symlink($ondemand_mp4_fullpath.$ondemand_filename.".mp4", $ondemand_mp4_record_filepath.$ondemand_filename.".mp4"))
+$dbactions = $mainactions->GetDBActionsInstance();
+$fsactions = $mainactions->GetFSActionsInstance();
+
+$actionsConvert = $dbactions->GetAllOnDemandActionsConvert();
+
+if (!$actionsConvert)
 {
-	error_log('ERROR - Creazione del link simbolico ['.$ondemand_mp4_record_filepath.$ondemand_filename.'.mp4] fallita!');
+    error_log("ERROR - ondemand_convert_video.php GetAllOnDemandActionsConvert() FAILED! - " . $dbactions->GetErrorMessage());
+    exit(1);
 }
+
+while($row = mysql_fetch_array($actionsConvert))
+{
+    // CONTROLLO LO SATO DELL'OPERAZIONE - SE E' DIVERSO DA 0 ALLORA LA IGNORO
+    $result = $dbactions->CheckAndUpdateActionsConvertStatus($row['ondemand_actions_convert_id']);
+    
+    if (!$result)
+    {
+        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - SetOndemandActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
+        continue;
+    }
+    
+    if ($result == 1)
+    {
+        error_log("WARNING - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - Operazione gia' in corso.");
+        continue;
+    }
+    
+    try
+    {
+        // RECUPERO LA LISTA DI VIDEO ONDEMAND DA CONVERTIRE
+        $ondemandVideoList = explode(",", $row['ondemand_actions_convert_list']);
+        
+        $ondemandVideoInfos = $dbactions->GetOndemandEventsByIds($ondemandVideoList);
+
+        if (!$ondemandVideoInfos)
+        {
+            throw new Exception("GetOndemandEventsByIds() FAILED! - " . $dbactions->GetErrorMessage());
+        }        
+        
+        $videoToConvertNumber = mysql_num_rows($ondemandVideoInfos);
+
+        if ($videoToConvertNumber < 1)
+        {
+            throw new Exception("GetOndemandEventsByIds() ritorna 0 record (forse i video selezionati sono stati cancellati??)");
+        }
+        
+        while($ondemandVideo = mysql_fetch_array($ondemandVideoInfos))
+        {
+            $streamName = $ondemandVideo['ondemand_publish_code'];
+            $videoBasename = basename($ondemandVideo['ondemand_filename'], '.flv');
+            $videoFlvFilename = $ondemandVideo['ondemand_filename'];
+            $videoMp4Filename = $videoBasename . ".mp4";
+            $videoMp4Dir = $ondemand_mp4_record_filepath.strtolower($streamName);
+            $videoFlvDir = $ondemand_flash_record_filepath.strtolower($streamName);
+
+            // SE LA CARTELLA DEL VIDEO ONDEMAND MP4 NON ESISTE, LA CREO
+            if (!file_exists($videoMp4Dir))
+            {
+                mkdir($videoMp4Dir, 0755, true);
+                error_log("WARNING - ondemand_convert_video.php Created folder [".$videoMp4Dir."]");
+            }
+
+            $docRoot = getenv("DOCUMENT_ROOT");
+            
+            // ESEGUO LA CONVERSIONE DAL .FLV A .MP4 TRAMITE LO SCRIPT BASH
+            $output = shell_exec($docRoot.'/scripts/convert_video.bash '.$videoFlvDir."/".$videoFlvFilename.' '.$videoMp4Dir.'/'.$videoMp4Filename.' '.$videoFlvFilename);
+
+            // CREO IL LINK SIMBOLICO AL FILE MP4
+            if (!symlink($videoMp4Dir."/".$videoMp4Filename, $ondemand_mp4_record_filepath.$videoMp4Filename))
+            {
+                throw new Exception('Creazione del link simbolico ['. $ondemand_mp4_record_filepath.$videoMp4Filename .'] fallita!');
+            }
+        }
+        
+        // IMPOSTO LO STATO DELL'OPERAZIONE A 2 - TERMINATA CON SUCCESSO
+        $dbactions->SetOndemandActionsConvertStatus($row['ondemand_actions_convert_id'], 2);        
+    
+    } 
+    catch (Exception $e) 
+    {
+        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - " . $e->getMessage());
+        // IMPOSTO LO STATO DELL'OPERAZIONE A 0 - SCHEDULATA
+        $dbactions->SetOndemandActionsConvertStatus($row['ondemand_actions_convert_id'], 0);
+        
+        continue;
+    }
+    
+}
+
+
+
+
+
+

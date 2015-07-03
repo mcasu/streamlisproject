@@ -4,21 +4,34 @@ class DBActions
 {
     var $error_message;
 
-    /* Database variables*/
     var $connection;
+    var $db_host;
+    var $username;
+    var $pwd;
     var $database;
 
     function DBActions($host, $uname, $pwd, $database)
     {
-            $this->InitDB($host, $uname, $pwd, $database);
-    }
-
-    function InitDB($host,$uname,$pwd,$database)
-    {
         $this->db_host  = $host;
+        $this->database  = $database;
         $this->username = $uname;
         $this->pwd  = $pwd;
-        $this->database  = $database;
+    
+        // open database connection
+        $connectionString = sprintf("mysql:host=%s;dbname=%s",$this->db_host,$this->database);
+        
+        try 
+        {
+            $this->connection = new PDO($connectionString,
+            $this->username,
+            $this->pwd);
+
+        } 
+        catch (PDOException $pe) 
+        {
+            die($pe->getMessage());
+        }
+        
     }
 
     function DBLogin()
@@ -1583,6 +1596,25 @@ class DBActions
         return $result_update; 
     }
     
+    function SetOndemandActionsConvertStatus($actionsConvertId, $actionsConvertStatus = 0)
+    {
+        try
+        {
+            $this->connection->beginTransaction();
+            
+            $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = ' . $actionsConvertStatus . ' WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
+            $this->connection->exec($queryUpdate);
+            $this->connection->commit();
+            return TRUE;
+        } 
+        catch (Exception $e) 
+        {
+            $this->HandleDBError("ERROR  - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
+            $this->connection->rollBack();
+            return FALSE;
+        }        
+    }
+    
     function GetAllOnDemandActionsJoin()
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -1610,6 +1642,67 @@ class DBActions
         return $result_select;
     }
 
+    function CheckAndUpdateActionsConvertStatus($actionsConvertId)
+    {
+        try
+        {
+            $this->connection->beginTransaction();
+            
+            $querySelect = 'SELECT ondemand_actions_convert_status FROM ondemand_actions_convert '.
+                    'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
+                    'FOR UPDATE';
+            
+            $this->connection->exec($querySelect);
+            
+            $status = $this->connection->fetchColumn();
+            
+            if ($status == 0)
+            {
+                $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = 1 WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
+                $this->connection->exec($queryUpdate);
+                
+                $this->connection->commit();
+                return 0;
+            }
+            
+            $this->connection->commit();
+            return 1;
+        } 
+        catch (Exception $e) 
+        {
+            $this->HandleDBError("ERROR  - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
+            $this->connection->rollBack();
+            return FALSE;
+        }
+    }
+    
+    function GetAllOnDemandActionsConvert()
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $query_select = 'SELECT * FROM ondemand_actions_convert WHERE ondemand_actions_convert_status = 0 ORDER BY ondemand_actions_convert_date';
+        
+        $result_select = mysql_query($query_select ,$this->connection);
+        if(!$result_select)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$query_select");
+            return false;
+        }
+        
+        return $result_select;
+    }    
+    
     function DeleteOnDemandActionsJoin($joinIds)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

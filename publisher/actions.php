@@ -137,6 +137,7 @@ $(document).ready(function()
                 if (status === "success")
                 {
                     joinTable.$('.selected').remove();
+                    $(".btn_actions").find(".btn").attr('disabled',true);
                 }
             });            
             

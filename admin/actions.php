@@ -59,6 +59,8 @@
         </div>
     </div>
     
+    <br/>
+    
     <!--Ondemand video convert panel-->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -225,6 +227,7 @@ $(document).ready(function()
                 if (status === "success")
                 {
                     joinTable.$('.selected').remove();
+                    $(".btn_actions_join").find(".btn").attr('disabled',true);
                 }
             });            
             
@@ -252,6 +255,7 @@ $(document).ready(function()
                 if (status === "success")
                 {
                     convertTable.$('.selected').remove();
+                    $(".btn_actions_convert").find(".btn").attr('disabled',true);
                 }
             });            
             

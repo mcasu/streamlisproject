@@ -4,7 +4,7 @@ SOURCE=$1
 DEST=$2
 BASENAME=$3
 
-LOGFILE="/var/log/nginx/avconv-$BASENAME.log"
+LOGFILE="/var/log/nginx/avconv-convert-$BASENAME.log"
 
 TODAY=$(/bin/date +"%Y%m%d-%H:%M:%S")
 echo "$TODAY - *** Start conversion ***" > $LOGFILE
