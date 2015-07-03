@@ -1651,14 +1651,16 @@ class DBActions
                     'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
                     'FOR UPDATE';
             
-            $this->pdoConn->exec($querySelect);
+            $sthSelect = $this->pdoConn->prepare($querySelect);
+            $sthSelect->exec();
             
-            $status = $this->pdoConn->fetchColumn();
+            $status = $sthSelect->fetchColumn();
             
             if ($status == 0)
             {
                 $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = 1 WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
-                $this->pdoConn->exec($queryUpdate);
+                $sthUpdate = $this->pdoConn->prepare($queryUpdate);
+                $sthUpdate->exec();
                 
                 $this->pdoConn->commit();
                 return 0;
