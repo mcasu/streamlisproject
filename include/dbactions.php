@@ -5,6 +5,7 @@ class DBActions
     var $error_message;
 
     var $connection;
+    var $pdoConn;
     var $db_host;
     var $username;
     var $pwd;
@@ -20,13 +21,11 @@ class DBActions
         // open database connection
         $connectionString = sprintf("mysql:host=%s;dbname=%s",$this->db_host,$this->database);
         
-        error_log("INFO - Init DBActions...");
-
         try 
         {
-            $this->connection = new PDO($connectionString,$this->username,$this->pwd);
+            $this->pdoConn = new PDO($connectionString,$this->username,$this->pwd);
         } 
-        catch (Exception $pe) 
+        catch (PDOException $pe) 
         {
             error_log("ERROR - " . $pe->getMessage());
             die($pe->getMessage());
@@ -1600,17 +1599,17 @@ class DBActions
     {
         try
         {
-            $this->connection->beginTransaction();
+            $this->pdoConn->beginTransaction();
             
             $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = ' . $actionsConvertStatus . ' WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
-            $this->connection->exec($queryUpdate);
-            $this->connection->commit();
+            $this->pdoConn->exec($queryUpdate);
+            $this->pdoConn->commit();
             return TRUE;
         } 
         catch (Exception $e) 
         {
             $this->HandleDBError("ERROR  - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
-            $this->connection->rollBack();
+            $this->pdoConn->rollBack();
             return FALSE;
         }        
     }
@@ -1646,32 +1645,32 @@ class DBActions
     {
         try
         {
-            $this->connection->beginTransaction();
+            $this->pdoConn->beginTransaction();
             
             $querySelect = 'SELECT ondemand_actions_convert_status FROM ondemand_actions_convert '.
                     'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
                     'FOR UPDATE';
             
-            $this->connection->exec($querySelect);
+            $this->pdoConn->exec($querySelect);
             
-            $status = $this->connection->fetchColumn();
+            $status = $this->pdoConn->fetchColumn();
             
             if ($status == 0)
             {
                 $queryUpdate = 'UPDATE ondemand_actions_convert SET ondemand_actions_convert_status = 1 WHERE ondemand_actions_convert_id = "'. $actionsConvertId . '"';
-                $this->connection->exec($queryUpdate);
+                $this->pdoConn->exec($queryUpdate);
                 
-                $this->connection->commit();
+                $this->pdoConn->commit();
                 return 0;
             }
             
-            $this->connection->commit();
+            $this->pdoConn->commit();
             return 1;
         } 
         catch (Exception $e) 
         {
             $this->HandleDBError("ERROR  - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
-            $this->connection->rollBack();
+            $this->pdoConn->rollBack();
             return FALSE;
         }
     }
