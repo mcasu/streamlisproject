@@ -89,10 +89,20 @@ while($row = mysql_fetch_array($actionsConvert))
 
             $docRoot = getenv("DOCUMENT_ROOT");
             
+            if (file_exists($videoMp4Dir.'/'.$videoMp4Filename))
+            {
+                error_log("WARNING - ondemand_convert_video.php Il file [".$ondemand_mp4_record_filepath.$videoMp4Filename."] esiste gia'.");
+            }
+            
             // ESEGUO LA CONVERSIONE DAL .FLV A .MP4 TRAMITE LO SCRIPT BASH
             $output = shell_exec($docRoot.'/scripts/convert_video.bash '.$videoFlvDir."/".$videoFlvFilename.' '.$videoMp4Dir.'/'.$videoMp4Filename.' '.$videoFlvFilename);
 
             // CREO IL LINK SIMBOLICO AL FILE MP4
+            if (is_link($ondemand_mp4_record_filepath.$videoMp4Filename))
+            {
+                error_log("WARNING - ondemand_convert_video.php Il link [".$ondemand_mp4_record_filepath.$videoMp4Filename."] esiste gia'.");
+                unlink($ondemand_mp4_record_filepath.$videoMp4Filename);
+            }
             if (!symlink($videoMp4Dir."/".$videoMp4Filename, $ondemand_mp4_record_filepath.$videoMp4Filename))
             {
                 throw new Exception('Creazione del link simbolico ['. $ondemand_mp4_record_filepath.$videoMp4Filename .'] fallita!');
