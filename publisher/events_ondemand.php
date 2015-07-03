@@ -171,7 +171,13 @@ $(document).ready(function()
             var ondemand_id=$(this).attr('id');
             checkedItems.push(ondemand_id);
         });
-            
+        
+        if (checkedItems.length > 5)
+        {
+            alert("Mi dispiace. Non puoi unire più di 5 video in una singola operazione.");
+            return;
+        }
+        
         var ondemandIdList = checkedItems.toString();
         var userId = $('.userid').attr('id');
         
