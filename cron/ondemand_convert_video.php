@@ -42,7 +42,7 @@ while($row = mysql_fetch_array($actionsConvert))
     
     if (!$result)
     {
-        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - SetOndemandActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
+        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - CheckAndUpdateActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
         continue;
     }
     
