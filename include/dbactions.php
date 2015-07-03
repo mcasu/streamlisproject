@@ -1663,19 +1663,16 @@ class DBActions
                 $sthUpdate->execute();
                 
                 $this->pdoConn->commit();
-                error_log("INFO - status == 0");
                 return 0;
             }
             
             $this->pdoConn->commit();
-            error_log("INFO - status == 1");
             return 1;
         } 
         catch (Exception $e) 
         {
             $this->HandleDBError("ERROR - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
             $this->pdoConn->rollBack();
-            error_log("INFO - status == FALSE");
             return 2;
         }
     }
