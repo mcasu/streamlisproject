@@ -107,7 +107,7 @@ while($row = mysql_fetch_array($actionsConvert))
     {
         error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - " . $e->getMessage());
         // IMPOSTO LO STATO DELL'OPERAZIONE A 0 - SCHEDULATA
-        $dbactions->SetOndemandActionsConvertStatus($row['ondemand_actions_convert_id'], 0);
+        $dbactions->SetOndemandActionsConvertStatus($row['ondemand_actions_convert_id'], -1);
         
         continue;
     }

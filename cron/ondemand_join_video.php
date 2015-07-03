@@ -303,7 +303,7 @@ while($row = mysql_fetch_array($actionsJoin))
     {
         error_log("ERROR - ondemand_join_video.php - ACTIONS-> " . $row['ondemand_actions_join_id'] . " - " . $e->getMessage());
         // IMPOSTO LO STATO DELL'OPERAZIONE A 0 - SCHEDULATA
-        $dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], 0);
+        $dbactions->SetOndemandActionsJoinStatus($row['ondemand_actions_join_id'], -1);
         
         continue;
     }
