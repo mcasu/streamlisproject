@@ -1647,6 +1647,8 @@ class DBActions
         {
             $this->pdoConn->beginTransaction();
             
+            $this->pdoConn->exec('LOCK TABLES ondemand_actions_convert');
+            
             $querySelect = 'SELECT ondemand_actions_convert_status FROM ondemand_actions_convert '.
                     'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
                     'FOR UPDATE';
@@ -1663,16 +1665,19 @@ class DBActions
                 $sthUpdate->execute();
                 
                 $this->pdoConn->commit();
+                $this->pdoConn->exec('UNLOCK TABLES');
                 return 0;
             }
             
             $this->pdoConn->commit();
+            $this->pdoConn->exec('UNLOCK TABLES');
             return 1;
         } 
         catch (Exception $e) 
         {
             $this->HandleDBError("ERROR - Rollback transaction in CheckAndUpdateActionsConvertStatus() - " . $e->getMessage());
             $this->pdoConn->rollBack();
+            $this->pdoConn->exec('UNLOCK TABLES');
             return 2;
         }
     }
