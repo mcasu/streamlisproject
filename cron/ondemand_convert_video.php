@@ -94,6 +94,7 @@ while($row = mysql_fetch_array($actionsConvert))
             if (file_exists($videoMp4Dir.'/'.$videoMp4Filename))
             {
                 error_log("WARNING - ondemand_convert_video.php Il file [".$ondemand_mp4_record_filepath.$videoMp4Filename."] esiste gia'.");
+                continue;
             }
             
             // ESEGUO LA CONVERSIONE DAL .FLV A .MP4 TRAMITE LO SCRIPT BASH
