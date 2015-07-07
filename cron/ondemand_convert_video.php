@@ -42,15 +42,17 @@ while($row = mysql_fetch_array($actionsConvert))
     
     if ($result == 2)
     {
-        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - CheckAndUpdateActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
+        error_log("ERROR - ondemand_convert_video.php ACTION-> " . $row['ondemand_actions_convert_id'] . " - CheckAndUpdateActionsConvertStatus() FAILED! - " . $dbactions->GetErrorMessage());
         continue;
     }
     
     if ($result == 1)
     {
-        error_log("WARNING - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - Operazione gia' in corso.");
+        error_log("WARNING - ondemand_convert_video.php ACTION-> " . $row['ondemand_actions_convert_id'] . " - Operazione gia' in corso.");
         continue;
     }
+    
+    error_log("INFO - ondemand_convert_video.php ACTION->[" . $row['ondemand_actions_convert_id'] . "] - GO!!!");
     
     try
     {
@@ -115,7 +117,7 @@ while($row = mysql_fetch_array($actionsConvert))
     } 
     catch (Exception $e) 
     {
-        error_log("ERROR - ondemand_convert_video.php - ACTIONS-> " . $row['ondemand_actions_convert_id'] . " - " . $e->getMessage());
+        error_log("ERROR - ondemand_convert_video.php ACTION-> " . $row['ondemand_actions_convert_id'] . " - " . $e->getMessage());
         // IMPOSTO LO STATO DELL'OPERAZIONE A 0 - SCHEDULATA
         $dbactions->SetOndemandActionsConvertStatus($row['ondemand_actions_convert_id'], -1);
         
