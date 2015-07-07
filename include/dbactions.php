@@ -1647,7 +1647,7 @@ class DBActions
         {
             $this->pdoConn->beginTransaction();
             
-            $this->pdoConn->exec('LOCK TABLES ondemand_actions_convert');
+            $this->pdoConn->exec('LOCK TABLES ondemand_actions_convert WRITE');
             
             $querySelect = 'SELECT ondemand_actions_convert_status FROM ondemand_actions_convert '.
                     'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
