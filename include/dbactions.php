@@ -1650,8 +1650,7 @@ class DBActions
             $this->pdoConn->exec('LOCK TABLES ondemand_actions_convert WRITE');
             
             $querySelect = 'SELECT ondemand_actions_convert_status FROM ondemand_actions_convert '.
-                    'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" '.
-                    'FOR UPDATE';
+                    'WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "'. $actionsConvertId . '" ';
             
             $sthSelect = $this->pdoConn->prepare($querySelect);
             $sthSelect->execute();
