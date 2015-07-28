@@ -19,7 +19,7 @@
 <?php include("../include/header_admin.php"); ?>
 
 
-<iframe height="700" width="100%" src="/monitorix"></iframe>
+<iframe height="100%" width="100%" src="/zabbix"></iframe>
 
 </body>
 </html>
