@@ -1,7 +1,7 @@
 <?php include("../check_login.php"); ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US" style="margin: 0px; height: 100%;">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
