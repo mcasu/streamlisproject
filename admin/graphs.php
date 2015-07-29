@@ -1,6 +1,6 @@
 <?php include("../check_login.php"); ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
@@ -15,11 +15,11 @@
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="margin: 0px; padding:0px; height: 100%; overflow:hidden;">
 <?php include("../include/header_admin.php"); ?>
 
 
-<iframe height="900" width="100%" src="/zabbix"></iframe>
+<iframe height="100%" width="100%" src="/zabbix"></iframe>
 
 </body>
 </html>
