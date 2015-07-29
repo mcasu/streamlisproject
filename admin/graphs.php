@@ -15,7 +15,7 @@
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </head>
-<body style="margin: 0px; padding:0px; height: 100%; overflow:hidden;">
+<body style="margin: 0px; padding:0px; height: 100%;">
 <?php include("../include/header_admin.php"); ?>
 
 
