@@ -116,7 +116,9 @@ class DBActions
 	{
 		// Se un utente ha "abbandonato" la sessione chiudendo il browser per più di 5m = 300sec
 		// allora distruggo la sessione e faccio logout
-		if ($session_alive_time <= 300)
+                error_log("INFO - User [" . $row['username'] . "] session alive time -> [" . $session_alive_time . "]");
+                
+		if ($session_alive_time <= 120)
 		{
 			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
 			return false;

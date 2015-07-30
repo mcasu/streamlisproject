@@ -21,7 +21,7 @@ else
 if($userIsLogged)
 {      
      $user_role = $mainactions->GetSessionUserRole();
-     error_log("INFO - Login.php User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
+     //error_log("INFO - Login.php User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
      if (!empty($user_role))
      {
          switch ($user_role) 

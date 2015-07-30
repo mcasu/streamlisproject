@@ -216,8 +216,6 @@ class MainActions
             return false;
         }
 
-        error_log("INFO - Login for user->[" . $username . "]");
-        
 	$_SESSION["userdata"] = $sessionData;
         session_regenerate_id();
         
@@ -237,7 +235,7 @@ class MainActions
     {        
         if( empty($_SESSION["userdata"]) && empty($_COOKIE["userdata"]) )
         {
-            error_log("INFO - CheckLogin returned FALSE because of session has not found.");
+            //error_log("INFO - CheckLogin returned FALSE because of session has not found.");
             return false;
         }
 
