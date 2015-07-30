@@ -22,11 +22,21 @@ $user_role = $mainactions->GetSessionUserRole();
 // Se il ruolo NON è Admin
 if (empty($user_role) || $user_role != "1")
 {
-    // Access forbidden:
-    header('HTTP/1.1 403 Forbidden');
-    // Set our response code
-    http_response_code(403);
-    echo "<h1>403 Forbidden - Url non valida.</h1><br/>";
-    exit;
+    switch ($user_role) 
+    {
+        case "2": // viewer
+            $utils->RedirectToURL("/viewer/live-normal.php");
+            break;
+        case "3": // publisher
+            $utils->RedirectToURL("/publisher/dashboard.php");
+            break;
+        default:
+            // Access forbidden:
+            header('HTTP/1.1 403 Forbidden');
+            // Set our response code
+            http_response_code(403);
+            echo "<h1>403 Forbidden - Url non valida.</h1><br/>";
+            exit;
+    }
 }
 
