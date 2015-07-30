@@ -19,13 +19,13 @@ else
          switch ($user_role) 
          {
              case "1": // admin
-                 $utils->RedirectToURL("admin/dashboard.php");
+                 $utils->RedirectToURL("/admin/dashboard.php");
                  break;
              case "2": // normal
-                 $utils->RedirectToURL("viewer/live-normal.php");
+                 $utils->RedirectToURL("/viewer/live-normal.php");
                  break;
              case "3": // publisher
-                 $utils->RedirectToURL("publisher/dashboard.php");
+                 $utils->RedirectToURL("/publisher/dashboard.php");
                  break;
              default:
                  break;
