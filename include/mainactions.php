@@ -62,41 +62,41 @@ class MainActions
 /*** MEMBERS ***/
     function UserId()
     {
-	return isset($_SESSION[$this->GetSessionVarName()]['user_id'])?$_SESSION[$this->GetSessionVarName()]['user_id']:'';
+	return isset($_SESSION["userdata"]['user_id'])?$_SESSION["userdata"]['user_id']:'';
     }
     function UserName()
     {
-	return isset($_SESSION[$this->GetSessionVarName()]['username'])?$_SESSION[$this->GetSessionVarName()]['username']:'';
+	return isset($_SESSION["userdata"]['username'])?$_SESSION["userdata"]['username']:'';
     }
     function UserFullName()
     {
-        return isset($_SESSION[$this->GetSessionVarName()]['user_fullname'])?$_SESSION[$this->GetSessionVarName()]['user_fullname']:'';
+        return isset($_SESSION["userdata"]['user_fullname'])?$_SESSION["userdata"]['user_fullname']:'';
     }
     
     function UserEmail()
     {
-        return isset($_SESSION[$this->GetSessionVarName()]['user_email'])?$_SESSION[$this->GetSessionVarName()]['user_email']:'';
+        return isset($_SESSION["userdata"]['user_email'])?$_SESSION["userdata"]['user_email']:'';
     }
     
     function UserGroupId()
     {
-        return isset($_SESSION[$this->GetSessionVarName()]['user_group_id'])?$_SESSION[$this->GetSessionVarName()]['user_group_id']:'';
+        return isset($_SESSION["userdata"]['user_group_id'])?$_SESSION["userdata"]['user_group_id']:'';
     }
     
     function UserGroupName()
     {
-        return isset($_SESSION[$this->GetSessionVarName()]['user_group_name'])?$_SESSION[$this->GetSessionVarName()]['user_group_name']:'';
+        return isset($_SESSION["userdata"]['user_group_name'])?$_SESSION["userdata"]['user_group_name']:'';
     }
     
     function GetSessionUserRole()
     {
-	    if(empty($_SESSION[$this->GetSessionVarName()]['user_role_id']))
+	    if(empty($_SESSION["userdata"]['user_role_id']))
 	    {
 		    $this->HandleError("User role for this session not found!");
 		    return false;
 	    }
 
-	    return $_SESSION[$this->GetSessionVarName()]['user_role_id']; 
+	    return $_SESSION["userdata"]['user_role_id']; 
     }
 /*** FINE MEMBERS ***/
 
