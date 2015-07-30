@@ -245,7 +245,7 @@ class MainActions
         
         if( empty($_SESSION[$sessionName]) && empty($_COOKIE[$sessionName]) )
         {
-            //error_log("INFO - CheckLogin returned FALSE because of session has not found.");
+            error_log("INFO - CheckLogin returned FALSE because of session [" . $sessionName . "] has not found.");
             return false;
         }
 
@@ -419,7 +419,7 @@ class MainActions
     function GetSessionVarName()
     {
         //$retvar = md5($this->rand_key);
-        return substr($this->randomKey,0,12);
+        return substr($this->randomKey,0,15);
     }
     
     function GenerateRandomPassword($length)

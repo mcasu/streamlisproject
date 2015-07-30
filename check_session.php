@@ -14,5 +14,3 @@ else
     //session expired
     echo "1";
 }
-
-?>
