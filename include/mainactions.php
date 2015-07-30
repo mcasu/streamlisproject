@@ -216,16 +216,15 @@ class MainActions
             return false;
         }
 
-	session_start();
-	$sessionName = $this->GetSessionVarName();
-        error_log("INFO - User->[" . $username . "] SESSION->[" . $sessionName . "]");
+        error_log("INFO - Login for user->[" . $username . "]");
         
-	$_SESSION[$sessionName] = $sessionData;
+	$_SESSION["userdata"] = $sessionData;
+        session_regenerate_id();
         
         // Set the cookie
-        if (!isset($_COOKIE[$sessionName]))
+        if (!isset($_COOKIE["userdata"]))
         {
-            setcookie($sessionName, json_encode($sessionData), 3600);
+            setcookie("userdata", json_encode($sessionData), 3600);
         }
 	
 	// Set the user logged flag into the database.
@@ -235,29 +234,22 @@ class MainActions
     }
     
     function CheckLogin()
-    {
-        if ( session_status() == PHP_SESSION_NONE ) 
+    {        
+        if( empty($_SESSION["userdata"]) && empty($_COOKIE["userdata"]) )
         {
-            session_start();
-        }
-        
-        $sessionName = $this->GetSessionVarName();
-        
-        if( empty($_SESSION[$sessionName]) && empty($_COOKIE[$sessionName]) )
-        {
-            error_log("INFO - CheckLogin returned FALSE because of session [" . $sessionName . "] has not found.");
+            error_log("INFO - CheckLogin returned FALSE because of session has not found.");
             return false;
         }
 
         // Get session data from the memory or the cookie file.
-        $sessionData = empty($_SESSION[$sessionName]) ? (array) json_decode($_COOKIE[$sessionName]) : $_SESSION[$sessionName];
+        $sessionData = empty($_SESSION["userdata"]) ? (array) json_decode($_COOKIE["userdata"]) : $_SESSION["userdata"];
         
         // The users' session expire after 10800 sec = 3 hours
         if (time() - $sessionData['last_update'] > 10800)
         {
            $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], false);
-           $_SESSION[$sessionName]=NULL;
-           unset($_SESSION[$sessionName]);
+           $_SESSION["userdata"]=NULL;
+           unset($_SESSION["userdata"]);
            return false;
         }
 
@@ -267,7 +259,6 @@ class MainActions
    
     function LogOut()
     {
-	session_start();
 	$sessionvar = $this->GetSessionVarName();
 	
 	$userdata = $_SESSION[$sessionvar];

@@ -10,5 +10,3 @@ $mainactions->LogOut();
 $utils = $mainactions->GetUtilsInstance();
 $utils->RedirectToURL("/login.php");
 exit;
-
-?>

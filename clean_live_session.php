@@ -17,11 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if ( session_status() == PHP_SESSION_NONE ) 
-{
-    session_start();
-}
-
 require_once("./include/config.php");
 
 $dbactions = $mainactions->GetDBActionsInstance();
