@@ -362,11 +362,6 @@ class DBActions
 
     function InsertIntoDB(&$uservars)
     {
-
-        //$confirmcode = $this->MakeConfirmationMd5($uservars['email'],$rand_key);
-
-        //$uservars['confirmcode'] = $confirmcode;
-
         $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
 
         $result = mysql_query($select_query_group ,$this->connection);

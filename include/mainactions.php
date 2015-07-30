@@ -423,9 +423,10 @@ class MainActions
     
     function GetSessionVarName()
     {
-        $retvar = md5($this->rand_key);
-        $retvar = 'usr_'.substr($retvar,0,10);
-        return $retvar;
+        //$retvar = md5($this->rand_key);
+        
+        $uniqueId = uniqid("usr_");
+        return substr($uniqueId,0,12);
     }
     
     function GenerateRandomPassword($length)
