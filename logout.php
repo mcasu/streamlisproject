@@ -3,6 +3,7 @@
       
 </html>
 <?PHP
+session_start();
 require_once("./include/config.php");
 
 $mainactions->LogOut();

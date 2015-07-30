@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+session_start();
 require_once("./include/config.php");
 
 $dbactions = $mainactions->GetDBActionsInstance();

@@ -248,7 +248,7 @@ class MainActions
         if (time() - $sessionData['last_update'] > 10800)
         {
            $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], false);
-           $_SESSION["userdata"]=NULL;
+           $_SESSION["userdata"] = NULL;
            unset($_SESSION["userdata"]);
            return false;
         }
@@ -259,15 +259,13 @@ class MainActions
    
     function LogOut()
     {
-	$sessionvar = $this->GetSessionVarName();
-	
-	$userdata = $_SESSION[$sessionvar];
+	$userdata = $_SESSION["userdata"];
 	$username = $userdata['username'];
 	
 	$this->dbactionsInstance->UpdateUserLoginStatus($username, false);
         
-        $_SESSION[$sessionvar]=NULL;
-        unset($_SESSION[$sessionvar]);
+        $_SESSION["userdata"] = NULL;
+        unset($_SESSION["userdata"]);
     }
     
     function EmailResetPasswordLink()

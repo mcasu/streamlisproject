@@ -1,5 +1,5 @@
 <?PHP
-
+session_start();
 require_once("./include/config.php");
 
 $dbactions = $mainactions->GetDBActionsInstance();
