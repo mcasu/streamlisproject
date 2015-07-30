@@ -11,33 +11,33 @@ if(isset($_POST['submitted']))
 {
     $is_submit = TRUE;
     $userIsLogged = $mainactions->Login();
-    
-    if($userIsLogged)
-    {      
-         $user_role = $mainactions->GetSessionUserRole();
-         error_log("INFO - User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
-         if (!empty($user_role))
-         {
-             switch ($user_role) 
-             {
-                 case "1": // admin
-                     $utils->RedirectToURL("/admin/dashboard.php");
-                     break;
-                 case "2": // normal
-                     $utils->RedirectToURL("/viewer/live-normal.php");
-                     break;
-                 case "3": // publisher
-                     $utils->RedirectToURL("/publisher/dashboard.php");
-                     break;
-                 default:
-                     break;
-             }
-         }
-    }
 }
 else
 {
     $userIsLogged = $mainactions->CheckLogin();
+}
+
+if($userIsLogged)
+{      
+     $user_role = $mainactions->GetSessionUserRole();
+     error_log("INFO - User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
+     if (!empty($user_role))
+     {
+         switch ($user_role) 
+         {
+             case "1": // admin
+                 $utils->RedirectToURL("/admin/dashboard.php");
+                 break;
+             case "2": // viewer
+                 $utils->RedirectToURL("/viewer/live-normal.php");
+                 break;
+             case "3": // publisher
+                 $utils->RedirectToURL("/publisher/dashboard.php");
+                 break;
+             default:
+                 break;
+         }
+     }
 }
 
 ?>

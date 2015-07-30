@@ -1,4 +1,7 @@
-<?php include("../check_login.php"); ?>
+<?php 
+include("../check_login.php"); 
+include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
+?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US" style="margin: 0px; height: 100%;">

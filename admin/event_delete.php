@@ -1,6 +1,6 @@
-<?php include("../check_login.php"); 
-
-require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
+<?php 
+include("../check_login.php"); 
+include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
