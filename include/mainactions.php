@@ -26,7 +26,7 @@ class MainActions
     
     var $username;
     var $pwd;
-    var $rand_key;
+    var $randomKey;
     var $utilsInstance;
     var $dbactionsInstance;
     var $fsactionsInstance;
@@ -37,7 +37,7 @@ class MainActions
     function MainActions($host, $uname, $pwd, $database)
     {
         $this->sitename = 'YourWebsiteName.com';
-        $this->rand_key = '0iQx5oBk66oVZep';
+        $this->randomKey = uniqid("usr_");
 
 	$this->utilsInstance = new Utils();
         $this->dbactionsInstance = new DBActions($host, $uname, $pwd, $database);
@@ -108,11 +108,6 @@ class MainActions
     function SetWebsiteName($sitename)
     {
         $this->sitename = $sitename;
-    }
-    
-    function SetRandomKey($key)
-    {
-        $this->rand_key = $key;
     }
     
     //-------Main Operations ----------------------
@@ -424,9 +419,7 @@ class MainActions
     function GetSessionVarName()
     {
         //$retvar = md5($this->rand_key);
-        
-        $uniqueId = uniqid("usr_");
-        return substr($uniqueId,0,12);
+        return substr($this->randomKey,0,12);
     }
     
     function GenerateRandomPassword($length)
@@ -477,7 +470,7 @@ class MainActions
     
     function GetResetPasswordCode($email)
     {
-       return substr(md5($email.$this->sitename.$this->rand_key),0,10);
+       return substr(md5($email.$this->sitename.$this->randomKey),0,10);
     }
     
     function SendResetPasswordLink($user_rec)

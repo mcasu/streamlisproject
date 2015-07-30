@@ -41,7 +41,3 @@ $mainactions->SetWebsiteName('Stream LIS');
 //Provide the email address where you want to get notifications
 $mainactions->SetAdminEmail('marco.casu@gmail.com');
 
-//For better security. Get a random string from this link: http://tinyurl.com/randstr
-// and put it here
-$mainactions->SetRandomKey('ykroeSaT1Ma53hP');
-

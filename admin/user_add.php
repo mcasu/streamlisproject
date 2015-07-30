@@ -75,7 +75,7 @@ if(isset($_POST['submitted']))
 	?>
 	    
 	<input type='hidden' name='submitted' id='submitted' value='1'/>
-	<input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->rand_key); ?>' />
+	<input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->randomKey); ?>' />
 	
 	<div class="form-group">
 	    <div class="control-group">
