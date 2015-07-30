@@ -9,7 +9,7 @@ function CheckForSession() {
 				success: function(res){
 					if(res == "1")
                                         {
-                                            alert('Your session has been expired!');
+                                            alert('La tua sessione è scaduta!\nInserisci ancora utente e password per entrare.');
                                             location.reload();
 					}
                                         else
