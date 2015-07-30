@@ -1,43 +1,43 @@
 <?PHP
-require_once("./include/config.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/include/config.php");
 
 $utils = $mainactions->GetUtilsInstance();
 $dbactions = $mainactions->GetDBActionsInstance();
 
-$user_logged = FALSE;
+$userIsLogged = FALSE;
 $is_submit = FALSE;
 
 if(isset($_POST['submitted']))
 {
     $is_submit = TRUE;
-    $user_logged = $mainactions->Login();
+    $userIsLogged = $mainactions->Login();
+    
+    if($userIsLogged)
+    {      
+         $user_role = $mainactions->GetSessionUserRole();
+         error_log("INFO - User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
+         if (!empty($user_role))
+         {
+             switch ($user_role) 
+             {
+                 case "1": // admin
+                     $utils->RedirectToURL("admin/dashboard.php");
+                     break;
+                 case "2": // normal
+                     $utils->RedirectToURL("viewer/live-normal.php");
+                     break;
+                 case "3": // publisher
+                     $utils->RedirectToURL("publisher/dashboard.php");
+                     break;
+                 default:
+                     break;
+             }
+         }
+    }
 }
 else
 {
-    $user_logged = $mainactions->CheckLogin();
-}
-
-if($user_logged)
-{      
-     $user_role = $mainactions->GetSessionUserRole();
-     error_log("INFO - User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
-     if (!empty($user_role))
-     {
-         switch ($user_role) 
-         {
-             case "1": // admin
-                 $utils->RedirectToURL("admin/dashboard.php");
-                 break;
-             case "2": // normal
-                 $utils->RedirectToURL("viewer/live-normal.php");
-                 break;
-             case "3": // publisher
-                 $utils->RedirectToURL("publisher/dashboard.php");
-                 break;
-             default:
-                 break;
-         }
-     }
+    $userIsLogged = $mainactions->CheckLogin();
 }
 
 ?>
@@ -75,7 +75,7 @@ if($user_logged)
 		   <br/>
 		   
 		   <?php
-		      if ($is_submit == TRUE && isset($user_logged) && $user_logged == false)
+		      if ($is_submit == TRUE && isset($userIsLogged) && $userIsLogged == false)
 		      {
 			 echo '<div class="alert alert-danger alert-dismissible" role="alert">';
 			    echo '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;';

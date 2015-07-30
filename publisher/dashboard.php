@@ -102,11 +102,11 @@ echo '<div class="container-fluid">';
 				    $confirmcode=$row['confirmcode']=="y"?"SI":"NO";
 				    $user_group_name=$row['group_name'];
 				    $user_role_name=$row['role_name'];
-				    $user_logged=$row['user_logged'];
+				    $userIsLogged=$row['user_logged'];
 				    $user_last_login=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_login']));
 				    $user_last_update=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_update']));
 		
-				    if ($user_logged == '0')
+				    if ($userIsLogged == '0')
 				    {
 					continue;
 				    }
