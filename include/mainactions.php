@@ -223,6 +223,8 @@ class MainActions
 
 	session_start();
 	$sessionName = $this->GetSessionVarName();
+        error_log("INFO - User->[" . $username . "] SESSION->[" . $sessionName . "]");
+        
 	$_SESSION[$sessionName] = $sessionData;
         
         // Set the cookie

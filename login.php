@@ -19,7 +19,8 @@ else
 
 if($user_logged)
 {      
-     $user_role = $mainactions->GetSessionUserRole();	
+     $user_role = $mainactions->GetSessionUserRole();
+     error_log("INFO - User logged->[" . $mainactions->UserName() . "] ROLE->[" . $user_role . "]");
      if (!empty($user_role))
      {
          switch ($user_role) 
