@@ -243,7 +243,7 @@ class MainActions
         $sessionData = empty($_SESSION["userdata"]) ? (array) json_decode($_COOKIE["userdata"]) : $_SESSION["userdata"];
         
         // The users' session expire after 10800 sec = 3 hours
-        if (time() - $sessionData['last_update'] > 10800)
+        if (time() - $sessionData['last_update'] > 120)
         {
            $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], false);
            $_SESSION["userdata"] = NULL;
