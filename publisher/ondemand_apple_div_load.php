@@ -1,6 +1,6 @@
-<?php include("../check_login.php"); ?>
-
-<?PHP
+<?php 
+include("../check_login.php"); 
+include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 
 $url = $_GET['url'];
 
