@@ -84,7 +84,7 @@ echo '<div class="container-fluid">';
 			}
 			else
 			{
-                            echo '<div class="well" style="float: left; width: 100%; max-width:300px; margin-top: 6p;">';
+                            echo '<div class="well" style="float: left; width: 100%; max-width:300px; margin-top: 8px;">';
                                 echo '<h5><b>Utenti registrati: <b/></h5>';
                                 echo '<h5><b>Utenti loggati: <b/></h5>';
                                 echo '<br/>';
