@@ -98,7 +98,7 @@ class DBActions
         }
         $username = $this->SanitizeForSQL($username);
         $pwdmd5 = md5($password);
-        $qry = "Select * from users where username='$username' and password='$pwdmd5' and confirmcode='y'";
+        $qry = "select * from users where username='$username' and password='$pwdmd5'";
 
         $result = mysql_query($qry,$this->connection);
 
@@ -156,35 +156,6 @@ class DBActions
 	$userdata['user_group_name'] = $row_group['group_name'];
 
         return $userdata;
-    }
-
-    function UpdateDBRecForConfirmation(&$user_rec)
-    {
-        if(!$this->DBLogin())
-        {
-            $this->HandleError("Database login failed!");
-            return false;
-        }
-        $confirmcode = $this->SanitizeForSQL($_GET['code']);
-
-        $result = mysql_query("Select name, email from users where confirmcode='$confirmcode'",$this->connection);
-        if(!$result || mysql_num_rows($result) <= 0)
-        {
-            $this->HandleError("Wrong confirm code.");
-            return false;
-        }
-        $row = mysql_fetch_assoc($result);
-        $user_rec['name'] = $row['name'];
-        $user_rec['email']= $row['email'];
-
-        $qry = "Update users Set confirmcode='y' Where  confirmcode='$confirmcode'";
-
-        if(!mysql_query( $qry ,$this->connection))
-        {
-            $this->HandleDBError("Error inserting data to the table\nquery:$qry");
-            return false;
-        }
-        return true;
     }
 
     function ChangePasswordInDB($user_rec, $newpwd)
@@ -389,7 +360,6 @@ class DBActions
                 username,
                 password,
                 user_group_id,
-                confirmcode,
                 user_role_id
                 )
                 values
@@ -399,7 +369,6 @@ class DBActions
                 "' . $this->SanitizeForSQL($uservars['username']) . '",
                 "' . md5($uservars['password']) . '",
                 "' . $this->SanitizeForSQL($row_group['group_id']) . '",
-                "y",
                 "' . $this->SanitizeForSQL($row_role['role_id']) . '"
                 )';
         if(!mysql_query( $insert_query ,$this->connection))
@@ -769,7 +738,6 @@ class DBActions
                             'users.name, '.
                             'users.email, '.
                             'users.username, '.
-                            'users.confirmcode, '.
                             'groups.group_name, '.
                             'user_roles.role_name as role_name, '.
                             'users.last_login, '.
@@ -822,7 +790,6 @@ class DBActions
                             'users.name, '.
                             'users.email, '.
                             'users.username, '.
-                            'users.confirmcode, '.
                             'groups.group_name, '.
                             'user_roles.role_name as role_name, '.
                             'users.last_login, '.
@@ -1450,7 +1417,7 @@ class DBActions
                 return false;
             }
 
-            $query_select = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,confirmcode,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
+            $query_select = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
 
             $query_where = '';
             if ($onlyLogged)

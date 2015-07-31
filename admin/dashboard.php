@@ -87,7 +87,7 @@ echo '<div class="container-fluid">';
 			else
 			{
                             echo '<div class="well" style="width: 100%; max-width:300px; margin-top: 20px;">';
-                                echo '<h5><b>Utenti registrati: <b/></h5><span id="badgeUserTotalNumber" class="badge"></span>';
+                                echo '<h5><b>Utenti registrati: <b/><span id="badgeUserTotalNumber" class="badge"></span></h5>';
                                 echo '<h5><b>Utenti loggati: <b/></h5>';
                                 echo '<br/>';
                                 echo '<h5><b>Congregazioni: <b/></h5>';
@@ -110,7 +110,6 @@ echo '<div class="container-fluid">';
 				    $user_name=$row['user_name'];
 				    $user_mail=$row['user_mail'];
 				    $username=$row['username'];
-				    $confirmcode=$row['confirmcode']=="y"?"SI":"NO";
 				    $user_group_name=$row['user_group_name'];
 				    $user_role_name=$row['user_role_name'];
 				    $userIsLogged=$row['user_logged'];

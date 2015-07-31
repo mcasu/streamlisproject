@@ -102,7 +102,6 @@ echo '<div class="container-fluid">';
 				    $user_name=$row['name'];
 				    $user_mail=$row['email'];
 				    $username=$row['username'];
-				    $confirmcode=$row['confirmcode']=="y"?"SI":"NO";
 				    $user_group_name=$row['group_name'];
 				    $user_role_name=$row['role_name'];
 				    $userIsLogged=$row['user_logged'];
