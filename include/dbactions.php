@@ -229,8 +229,6 @@ class DBActions
             return false;
         }
         
-        $_SESSION["userdata"]["last_update"] = time();
-        
         return true;
     }
     

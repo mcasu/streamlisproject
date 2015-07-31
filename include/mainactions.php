@@ -252,6 +252,7 @@ class MainActions
         }
 
         $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], true);
+        $_SESSION["userdata"]["last_update"] = time();
         return true;
     }
    
