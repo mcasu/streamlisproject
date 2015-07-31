@@ -84,7 +84,7 @@ echo '<div class="container-fluid">';
 			}
 			else
 			{
-                            echo '<div class="well" style="float: left; width: 100%; max-width:300px; margin-top: 12px;">';
+                            echo '<div class="well" style="float: left; width: 100%; max-width:300px; margin-top: 20px;">';
                                 echo '<h5><b>Utenti registrati: <b/></h5>';
                                 echo '<h5><b>Utenti loggati: <b/></h5>';
                                 echo '<br/>';
@@ -93,7 +93,7 @@ echo '<div class="container-fluid">';
                             echo '</div>';
                             echo '<br/>';
                             
-			    echo '<div id="dashboard_user_charts" class="container-fluid" style="overflow:auto"></div>';
+			    echo '<div id="dashboard_user_charts" style="overflow:auto"></div>';
 			    echo '<br/>';
 			    
                             //echo '<div class="container-fluid" style="overflow:auto">';
