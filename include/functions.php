@@ -40,7 +40,9 @@ switch ($fname)
         return DeleteOndemandActionsJoin($dbactions, $joinSelectedIds);
     case "delete_ondemand_actions_convert":
         $convertSelectedIds = filter_input(INPUT_POST, 'convertSelectedIds');
-        return DeleteOndemandActionsConvert($dbactions, $convertSelectedIds);        
+        return DeleteOndemandActionsConvert($dbactions, $convertSelectedIds); 
+    case "get_user_total_number":
+        return GetUserTotalNumber($dbactions); 
     default:
         break;
 }
@@ -462,4 +464,18 @@ function DeleteOndemandActionsConvert($dbactions, $convertSelectedIds)
     }
     
     return TRUE;
+}
+
+function GetUserTotalNumber($dbactions)
+{
+    $num = $dbactions->GetUserTotalNumber();    
+    
+    if (!$num)
+    {
+        echo "Non disponibile";
+    }
+    else
+    {
+        echo $num;
+    }
 }

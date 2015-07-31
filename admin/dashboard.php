@@ -28,17 +28,19 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <script type="text/javascript">
 	$(document).ready(function()
         {
-	    function AutoRefresh()
-	    {
-		location.reload(); 
-	    }
-					    
-	    var auto_refresh = setInterval(AutoRefresh, 60000);
+//	    function AutoRefresh()
+//	    {
+//		location.reload(); 
+//	    }
+//					    
+//	    var auto_refresh = setInterval(AutoRefresh, 60000);
 	    
 	    
 	    $('#dashboard_user_charts').load('/charts/loadcharts_user.php');
 	    
 	    $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
+            
+            $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
 	    
 	});
     </script>
@@ -85,7 +87,7 @@ echo '<div class="container-fluid">';
 			else
 			{
                             echo '<div class="well" style="width: 100%; max-width:300px; margin-top: 20px;">';
-                                echo '<h5><b>Utenti registrati: <b/></h5>';
+                                echo '<h5><b>Utenti registrati: <b/></h5><span id="badgeUserTotalNumber" class="badge"></span>';
                                 echo '<h5><b>Utenti loggati: <b/></h5>';
                                 echo '<br/>';
                                 echo '<h5><b>Congregazioni: <b/></h5>';
@@ -93,7 +95,7 @@ echo '<div class="container-fluid">';
                             echo '</div>';
                             echo '<br/>';
                             
-			    echo '<div id="dashboard_user_charts" style="min-width: 1024px; overflow:auto"></div>';
+			    echo '<div id="dashboard_user_charts" style="min-width: 1020px; overflow:auto"></div>';
 			    echo '<br/>';
 			    
                             //echo '<div class="container-fluid" style="overflow:auto">';

@@ -1417,6 +1417,24 @@ class DBActions
             return $result;
     }
 
+    function GetUserTotalNumber()
+    {
+        $this->DBLogin();
+        
+        $queryCount = 'select count(*) as user_total from users';
+        
+        $result = mysql_query($queryCount, $this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error deleting data from the table\nquery: $queryCount");
+            return false;
+        }
+        
+        $row = mysql_fetch_array($result)
+                
+        return $row['user_total'];
+    }
+    
     function GetUsers($onlyLogged = false)
     {
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
