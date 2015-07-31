@@ -34,7 +34,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                 $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
 
                 $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
-                $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_logged_number');
+                $('#badgeUserLoggedNumber').load('/include/functions.php?fname=get_user_logged_number');
 	    }
 					    
 	    var auto_refresh = setInterval(AutoRefresh, 60000);
@@ -44,7 +44,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 	    $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
             
             $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
-            $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_logged_number');
+            $('#badgeUserLoggedNumber').load('/include/functions.php?fname=get_user_logged_number');
 	    
 	});
     </script>
