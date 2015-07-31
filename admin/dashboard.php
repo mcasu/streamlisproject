@@ -84,7 +84,7 @@ echo '<div class="container-fluid">';
 	    echo '<div id="accordionUsers" class="panel-collapse collapse in">';
 		echo '<div class="panel-body">';
 
-                    echo '<div class="well" style="width: 100%; max-width:300px; margin-top: 20px;">';
+                    echo '<div class="well" style="width: 100%; max-width:300px;">';
                         echo '<h5><b>Utenti registrati: <b/><span id="badgeUserTotalNumber" class="badge"></span></h5>';
                         echo '<h5><b>Utenti loggati: <b/><span id="badgeUserLoggedNumber" class="badge"></span></h5>';
                         echo '<br/>';
