@@ -68,7 +68,7 @@ echo '<div class="container-fluid">';
 		    '<h3 class="panel-title">'.
 			'<span class="glyphicon glyphicon-chevron-left pull-left"></span>'.
 			'<span><img src="../images/user.png" height="34" width="32"></span>'.
-			'<span> <b>UTENTI</b> </span>  '.
+			'<span> <b>UTENTI E GRUPPI</b> </span>  '.
 			'<span class="badge">'. $users_logged_number .'</span>'.
 			'<span class="glyphicon glyphicon-chevron-right pull-right"></span>'.
 		    '</h3>'.
@@ -84,6 +84,14 @@ echo '<div class="container-fluid">';
 			}
 			else
 			{
+                            echo '<div class="well" style="width: 100%; max-width:400px;">';
+                                echo '<h4>Utenti registrati: </h4><br/>';
+                                echo '<h4>Utenti loggati: </h4><br/>';
+                                echo '<br/>';
+                                echo '<h4>Congregazioni: </h4><br/>';
+                                echo '<h4>Gruppi: </h4><br/>';
+                            echo '</div>';
+                            
 			    echo '<div id="dashboard_user_charts" class="container-fluid" style="overflow:auto"></div>';
 			    echo '<br/>';
 			    
