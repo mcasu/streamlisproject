@@ -1430,7 +1430,7 @@ class DBActions
             return false;
         }
         
-        $row = mysql_fetch_array($result)
+        $row = mysql_fetch_array($result);
                 
         return $row['user_total'];
     }
