@@ -118,11 +118,11 @@ class DBActions
 //		// allora distruggo la sessione e faccio logout
 //                error_log("INFO - User [" . $row['username'] . "] session alive time -> [" . $session_alive_time . "]");
 //                
-//		if ($session_alive_time <= 120)
-//		{
-//			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
-//			return false;
-//		}
+////		if ($session_alive_time <= 120)
+////		{
+////			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
+////			return false;
+////		}
 //		
 //		$this->UpdateUserLoginStatus($row['username'], false);
 //		//session_destroy();
