@@ -84,15 +84,16 @@ echo '<div class="container-fluid">';
 			}
 			else
 			{
-                            echo '<div class="well" style="width: 100%; max-width:400px;">';
-                                echo '<h4>Utenti registrati: </h4><br/>';
-                                echo '<h4>Utenti loggati: </h4><br/>';
+                            echo '<div class="well" style="float: left; width: 100%; max-width:400px;">';
+                                echo '<h5><b>Utenti registrati: <b/></h5>';
+                                echo '<h5><b>Utenti loggati: <b/></h5>';
                                 echo '<br/>';
-                                echo '<h4>Congregazioni: </h4><br/>';
-                                echo '<h4>Gruppi: </h4><br/>';
+                                echo '<h5><b>Congregazioni: <b/></h5>';
+                                echo '<h5><b>Gruppi: <b/></h5>';
                             echo '</div>';
+                            echo '<br/>';
                             
-			    echo '<div id="dashboard_user_charts" class="container-fluid" style="overflow:auto"></div>';
+			    echo '<div id="dashboard_user_charts" class="container-fluid" style="float: left; overflow:auto"></div>';
 			    echo '<br/>';
 			    
                             //echo '<div class="container-fluid" style="overflow:auto">';
