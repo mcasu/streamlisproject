@@ -110,7 +110,7 @@
     
 <?PHP
 
-echo '<div id="graph_user_numberbyrole" style="margin:4px;max-width:400px""></div>';
+echo '<div id="graph_user_numberbyrole" style="float: left; margin:4px;max-width:400px""></div>';
 
 echo '<div id="graph_user_logged_bylogintime" style="margin:4px"></div>';
 
