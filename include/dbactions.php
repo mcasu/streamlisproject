@@ -1402,6 +1402,24 @@ class DBActions
         return $row['user_total'];
     }
     
+    function GetUserLoggedNumber()
+    {
+        $this->DBLogin();
+        
+        $queryCount = 'select count(*) as user_logged from users where users.user_logged = \'1\'';
+        
+        $result = mysql_query($queryCount, $this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error deleting data from the table\nquery: $queryCount");
+            return false;
+        }
+        
+        $row = mysql_fetch_array($result);
+                
+        return $row['user_logged'];
+    }
+    
     function GetUsers($onlyLogged = false)
     {
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

@@ -42,7 +42,9 @@ switch ($fname)
         $convertSelectedIds = filter_input(INPUT_POST, 'convertSelectedIds');
         return DeleteOndemandActionsConvert($dbactions, $convertSelectedIds); 
     case "get_user_total_number":
-        return GetUserTotalNumber($dbactions); 
+        return GetUserTotalNumber($dbactions);
+    case "get_user_logged_number":
+        return GetUserLoggedNumber($dbactions);
     default:
         break;
 }
@@ -478,4 +480,18 @@ function GetUserTotalNumber($dbactions)
     {
         echo $num;
     }
+}
+
+function GetUserLoggedNumber($dbactions)
+{
+    $num = $dbactions->GetUserLoggedNumber();    
+    
+    if (!$num)
+    {
+        echo "Non disponibile";
+    }
+    else
+    {
+        echo $num;
+    }    
 }
