@@ -110,23 +110,23 @@ class DBActions
 
         $row = mysql_fetch_assoc($result);
 	
-	$session_alive_time = time() - strtotime($row['last_update']);
-	
-	if ($row['user_logged'] == '1')
-	{
-		// Se un utente ha "abbandonato" la sessione chiudendo il browser per più di 5m = 300sec
-		// allora distruggo la sessione e faccio logout
-                error_log("INFO - User [" . $row['username'] . "] session alive time -> [" . $session_alive_time . "]");
-                
-		if ($session_alive_time <= 120)
-		{
-			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
-			return false;
-		}
-		
-		$this->UpdateUserLoginStatus($row['username'], false);
-		//session_destroy();
-	}
+//	$session_alive_time = time() - strtotime($row['last_update']);
+//	
+//	if ($row['user_logged'] == '1')
+//	{
+//		// Se un utente ha "abbandonato" la sessione chiudendo il browser per più di 5m = 300sec
+//		// allora distruggo la sessione e faccio logout
+//                error_log("INFO - User [" . $row['username'] . "] session alive time -> [" . $session_alive_time . "]");
+//                
+//		if ($session_alive_time <= 120)
+//		{
+//			$this->HandleError("ERRORE LOGIN - L'utente inserito ha già effettuato login. \nUsare un nome utente diverso.");
+//			return false;
+//		}
+//		
+//		$this->UpdateUserLoginStatus($row['username'], false);
+//		//session_destroy();
+//	}
 	
 	$userdata = array();
 	
@@ -222,12 +222,15 @@ class DBActions
 	{
 		$query = 'update users set user_logged = "'.$status.'", last_login = now(), last_update = now() where username = "'.$username.'"';	
 	}
-
+        
         if(!mysql_query( $query ,$this->connection))
         {
             $this->HandleDBError("Error updating the user login status \nquery:$query");
             return false;
         }
+        
+        $_SESSION["userdata"]["last_update"] = time();
+        
         return true;
     }
     
