@@ -155,8 +155,6 @@ class DBActions
         
 	$userdata['user_group_name'] = $row_group['group_name'];
 
-	$userdata['last_update'] = time();
-	
         return $userdata;
     }
 
@@ -209,7 +207,7 @@ class DBActions
         return true;
     }
     
-    function UpdateUserLoginStatus($username, $status, $islogin = false)
+    function UpdateUserLoginStatus($username, $status, $mysqlTime = NULL, $islogin = false)
     {
 	if(!$this->DBLogin())
         {
@@ -217,10 +215,10 @@ class DBActions
             return false;
         }
 
-	$query = 'update users set user_logged = "'.$status.'", last_update = now() where username = "'.$username.'"';
+	$query = 'update users set user_logged = "'.$status.'", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';
 	if ($islogin)
 	{
-		$query = 'update users set user_logged = "'.$status.'", last_login = now(), last_update = now() where username = "'.$username.'"';	
+		$query = 'update users set user_logged = "'.$status.'", last_login = "' . $mysqlTime . '", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';	
 	}
         
         if(!mysql_query( $query ,$this->connection))

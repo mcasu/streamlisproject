@@ -225,9 +225,12 @@ class MainActions
             setcookie("userdata", json_encode($sessionData), 3600);
         }
 	
-	// Set the user logged flag into the database.
-        $this->dbactionsInstance->UpdateUserLoginStatus($username, true, true);
-      
+	// Set the user logged flag and update last_update timestamp into the database.
+        $_SESSION["userdata"]["last_update"] = time();
+        $mysqlTime = date('Y-m-d H:i:s', $_SESSION["userdata"]["last_update"]);
+        
+        $this->dbactionsInstance->UpdateUserLoginStatus($username, true, $mysqlTime, true);
+        
         return true;
     }
     
@@ -251,8 +254,10 @@ class MainActions
            return false;
         }
 
-        $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], true);
         $_SESSION["userdata"]["last_update"] = time();
+        $mysqlTime = date('Y-m-d H:i:s', $_SESSION["userdata"]["last_update"]);
+        $this->dbactionsInstance->UpdateUserLoginStatus($sessionData['username'], true, $mysqlTime);
+        
         return true;
     }
    
