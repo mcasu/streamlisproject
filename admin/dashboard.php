@@ -28,16 +28,18 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <script type="text/javascript">
 	$(document).ready(function()
         {
-//	    function AutoRefresh()
-//	    {
-//		location.reload(); 
-//	    }
-//					    
-//	    var auto_refresh = setInterval(AutoRefresh, 60000);
+	    function AutoRefresh()
+	    {
+                $('#dashboard_user_charts').load('/charts/loadcharts_user.php');
+                $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
+
+                $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
+	    }
+					    
+	    var auto_refresh = setInterval(AutoRefresh, 60000);
 	    
 	    
 	    $('#dashboard_user_charts').load('/charts/loadcharts_user.php');
-	    
 	    $('#dashboard_event_charts').load('/charts/loadcharts_event.php');
             
             $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
@@ -71,7 +73,6 @@ echo '<div class="container-fluid">';
 			'<span class="glyphicon glyphicon-chevron-left pull-left"></span>'.
 			'<span><img src="../images/user.png" height="34" width="32"></span>'.
 			'<span> <b>UTENTI E GRUPPI</b> </span>  '.
-			'<span class="badge">'. $users_logged_number .'</span>'.
 			'<span class="glyphicon glyphicon-chevron-right pull-right"></span>'.
 		    '</h3>'.
 		'</a>'.
@@ -80,60 +81,55 @@ echo '<div class="container-fluid">';
 	    
 	    echo '<div id="accordionUsers" class="panel-collapse collapse in">';
 		echo '<div class="panel-body">';
-			if ($users_logged_number<1)
-			{
-			    echo '<div style="margin: 0 0 0 10px">Nessun utente loggato.</div>';
-			}
-			else
-			{
-                            echo '<div class="well" style="width: 100%; max-width:300px; margin-top: 20px;">';
-                                echo '<h5><b>Utenti registrati: <b/><span id="badgeUserTotalNumber" class="badge"></span></h5>';
-                                echo '<h5><b>Utenti loggati: <b/></h5>';
-                                echo '<br/>';
-                                echo '<h5><b>Congregazioni: <b/></h5>';
-                                echo '<h5><b>Gruppi: <b/></h5>';
-                            echo '</div>';
-                            echo '<br/>';
-                            
-			    echo '<div id="dashboard_user_charts" style="min-width: 1020px; overflow:auto"></div>';
-			    echo '<br/>';
-			    
-                            //echo '<div class="container-fluid" style="overflow:auto">';
-			    echo '<table class="table table-condensed">';
-				echo '<tr class="head">';
-				echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
-				echo '</tr>';
-			    
-				while($row = mysql_fetch_array($result))
-				{
-				    $user_id=$row['user_id'];
-				    $user_name=$row['user_name'];
-				    $user_mail=$row['user_mail'];
-				    $username=$row['username'];
-				    $user_group_name=$row['user_group_name'];
-				    $user_role_name=$row['user_role_name'];
-				    $userIsLogged=$row['user_logged'];
-				    $user_last_login=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_login']));
-				    $user_last_update=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_update']));
-		
-				    if ($userIsLogged == '0')
-				    {
-					continue;
-				    }
-			    
-					echo '<tr>';
-						echo "<td>" . $user_name . "</td>";
-						echo "<td>" . $user_mail . "</td>";
-						echo "<td>" . $username . "</td>";
-						echo "<td>" . $user_group_name . "</td>";
-						echo "<td>" . $user_role_name . "</td>";
-						echo "<td>" . $user_last_login . "</td>";
-					echo '</tr>';
-				}    
-			    echo '</table>';
-                            
-			    //echo '</div>';
-			}
+
+                    echo '<div class="well" style="width: 100%; max-width:300px; margin-top: 20px;">';
+                        echo '<h5><b>Utenti registrati: <b/><span id="badgeUserTotalNumber" class="badge"></span></h5>';
+                        echo '<h5><b>Utenti loggati: <b/></h5>';
+                        echo '<br/>';
+                        echo '<h5><b>Congregazioni: <b/></h5>';
+                        echo '<h5><b>Gruppi: <b/></h5>';
+                    echo '</div>';
+                    echo '<br/>';
+
+                    echo '<div id="dashboard_user_charts" style="min-width: 1020px; overflow:auto"></div>';
+                    echo '<br/>';
+
+                    //echo '<div class="container-fluid" style="overflow:auto">';
+                    echo '<table class="table table-condensed">';
+                        echo '<tr class="head">';
+                        echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
+                        echo '</tr>';
+
+                        while($row = mysql_fetch_array($result))
+                        {
+                            $user_id=$row['user_id'];
+                            $user_name=$row['user_name'];
+                            $user_mail=$row['user_mail'];
+                            $username=$row['username'];
+                            $user_group_name=$row['user_group_name'];
+                            $user_role_name=$row['user_role_name'];
+                            $userIsLogged=$row['user_logged'];
+                            $user_last_login=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_login']));
+                            $user_last_update=strftime("%A %d %B %Y %H:%M:%S", strtotime($row['last_update']));
+
+                            if ($userIsLogged == '0')
+                            {
+                                continue;
+                            }
+
+                                echo '<tr>';
+                                        echo "<td>" . $user_name . "</td>";
+                                        echo "<td>" . $user_mail . "</td>";
+                                        echo "<td>" . $username . "</td>";
+                                        echo "<td>" . $user_group_name . "</td>";
+                                        echo "<td>" . $user_role_name . "</td>";
+                                        echo "<td>" . $user_last_login . "</td>";
+                                echo '</tr>';
+                        }    
+                    echo '</table>';
+
+                    //echo '</div>';
+			
 		echo '</div>';
 	    echo '</div>';
 	echo '</div>';
