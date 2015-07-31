@@ -88,7 +88,7 @@ echo '<div class="container-fluid">';
 			    echo '<br/>';
 			    
                             //echo '<div class="container-fluid" style="overflow:auto">';
-			    echo '<table class="table table-condensed" style="width: 50%;">';
+			    echo '<table class="table table-condensed">';
 				echo '<tr class="head">';
 				echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
 				echo '</tr>';
