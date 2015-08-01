@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?PHP
-require_once("../../include/config.php");
+include(getenv("DOCUMENT_ROOT") . "/check_login.php");
 include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
 
 $utils = $mainactions->GetUtilsInstance();
