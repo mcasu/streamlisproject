@@ -1,15 +1,15 @@
 <?PHP
 include(getenv("DOCUMENT_ROOT") . "/check_login.php");
-include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
-
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../../login.php");
-    exit;
-}
+//include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
+//
+//$utils = $mainactions->GetUtilsInstance();
+//$dbactions = $mainactions->GetDBActionsInstance();
+//
+//if(!$mainactions->CheckLogin())
+//{
+//    $utils->RedirectToURL("../../login.php");
+//    exit;
+//}
 
 
 if(isset($_GET['filename'])) 
