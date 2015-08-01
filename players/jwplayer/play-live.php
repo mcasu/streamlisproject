@@ -1,15 +1,15 @@
 <?PHP
 include(getenv("DOCUMENT_ROOT") . "/check_login.php");
-include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
+//include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
 
-$utils = $mainactions->GetUtilsInstance();
-$dbactions = $mainactions->GetDBActionsInstance();
-
-if(!$mainactions->CheckLogin())
-{
-    $utils->RedirectToURL("../../login.php");
-    exit;
-}
+//$utils = $mainactions->GetUtilsInstance();
+//$dbactions = $mainactions->GetDBActionsInstance();
+//
+//if(!$mainactions->CheckLogin())
+//{
+//    $utils->RedirectToURL("../../login.php");
+//    exit;
+//}
 
 $app_name = filter_input(INPUT_GET, 'app_name');
 
