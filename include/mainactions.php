@@ -314,15 +314,15 @@ class MainActions
         $user_id = trim($_GET['user_id']);
         $code = trim($_GET['code']);
         
-        if($this->GetResetPasswordCode($email) != $code)
-        {
-            $this->HandleError("Bad reset code!");
-            return false;
-        }
-        
         $user_rec = array();
         if(!$this->dbactionsInstance->GetUserById($user_id,$user_rec))
         {
+            return false;
+        }
+        
+        if($this->GetResetPasswordCode($email, $user_rec['username']) != $code)
+        {
+            $this->HandleError("Bad reset code!");
             return false;
         }
         
@@ -461,9 +461,9 @@ class MainActions
         return $new_password;
     }
     
-    function GetResetPasswordCode($email)
+    function GetResetPasswordCode($email, $username)
     {
-        $code = substr(md5($email."vz749yEAm7"),0,10);
+        $code = substr(md5($email.$username."vz749yEAm7"),0,10);
         error_log("INFO - RESET PASSWORD CODE->[" . $code . "]");
         return $code;
     }
@@ -486,7 +486,7 @@ class MainActions
         $link = $this->GetAbsoluteURLFolder().
                 'resetpwd.php?user_id='. urlencode($user_id).
                 '&email='. urlencode($email).
-                '&code='. urlencode($this->GetResetPasswordCode($email));
+                '&code='. $this->GetResetPasswordCode($email,$user_rec['username']);
 
         $mailer->Body ="Caro fratello ".$user_rec['name']."\r\n\r\n".
         "Abbiamo ricevuto la tua richiesta per reimpostare la tua password in ".$this->sitename."\r\n\r\n".
