@@ -463,7 +463,7 @@ class MainActions
     
     function GetResetPasswordCode($email)
     {
-       return substr(md5($email.$this->sitename.$this->randomKey),0,10);
+       return substr(md5($email.$this->randomKey),0,10);
     }
     
     function SendResetPasswordLink($user_rec)
@@ -477,21 +477,19 @@ class MainActions
         
         $mailer->AddAddress($email,$user_rec['name']);
         
-        $mailer->Subject = "Your reset password request at ".$this->sitename;
+        $mailer->Subject = "Reimposta la tua password in ".$this->sitename;
 
         $mailer->From = $this->GetFromAddress();
         
         $link = $this->GetAbsoluteURLFolder().
-                '/resetpwd.php?user_id='.
-                urlencode($user_id).'&email='.
-		urlencode($email).'&code='.
-                urlencode($this->GetResetPasswordCode($email));
+                'resetpwd.php?user_id='. urlencode($user_id).
+                '&email='. urlencode($email).
+                '&code='. urlencode($this->GetResetPasswordCode($email));
 
-        $mailer->Body ="Hello ".$user_rec['name']."\r\n\r\n".
-        "There was a request to reset your password at ".$this->sitename."\r\n".
-        "Please click the link below to complete the request: \r\n".$link."\r\n".
-        "Regards,\r\n".
-        "Webmaster\r\n".
+        $mailer->Body ="Caro fratello ".$user_rec['name']."\r\n\r\n".
+        "Abbiamo ricevuto la tua richiesta per reimpostare la tua password in ".$this->sitename."\r\n\r\n".
+        "Per favore clicca sul link qui sotto per completare la richiesta: \r\n".$link."\r\n\r\n".
+        "Un abbraccio fraterno,\r\n".
         $this->sitename;
         
         if(!$mailer->Send())

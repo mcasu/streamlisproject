@@ -44,7 +44,7 @@ if(isset($_POST['submitted']))
 
                 <?php
 
-                    if ($PasswordChanged)
+                    if (isset($PasswordChanged) && $PasswordChanged)
                     {
                             echo '<br/><div class="alert alert-success" role="alert">';
                                 echo '<h4>Password cambiata con successo!</h4>';
