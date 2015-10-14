@@ -68,7 +68,7 @@ try
 
     if (!$publishers)
     {
-	    error_log("No Results");
+	    error_log("ERROR - ondemand-normal.php GetPublishersByViewer() - " . $dbactions->GetErrorMessage());
     }
 
     while($row = mysql_fetch_array($publishers))

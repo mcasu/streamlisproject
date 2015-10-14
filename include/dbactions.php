@@ -1191,7 +1191,7 @@ class DBActions
                             'from group_links '.
                             'INNER JOIN groups ON group_links.publisher_id = groups.group_id '.
                             'where group_links.viewer_id = \''.$viewer_id.'\' '.
-                            'UNION'. 
+                            'UNION '. 
                             'select groups.group_id as publisher_id, groups.group_name as publisher_name, groups.publish_code as publisher_code '.
                             'from groups '.
                             'where groups.group_type = \'Congregazione\' and groups.group_id = \''.$viewer_id.'\';';
