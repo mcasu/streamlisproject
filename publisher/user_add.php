@@ -216,6 +216,14 @@ jQuery(document).ready(function ()
 	    }
 	},
 	
+        messages: {
+            password: {
+                required: "Per creare un utente devi inserire una password valida.",
+                pwcheck: "Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
+                minlength: "La password deve essere di almeno 8 caratteri." 
+                }
+        },        
+        
 	highlight: function(element)
 	{
 	    $(element).closest('.control-group').removeClass('success').removeClass('has-success').addClass('error');
