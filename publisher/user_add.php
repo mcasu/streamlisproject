@@ -186,6 +186,13 @@ jQuery(document).ready(function ()
     };
     
     $(':password').pwstrength(options);
+
+    $.validator.addMethod("pwcheck", function(value, element) 
+    {
+        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
+        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
+        return pattern.test(value);
+    });        
     
     $('#create_user_form').validate(
     {
@@ -204,6 +211,7 @@ jQuery(document).ready(function ()
 	    },
 	    password: {
 		required: true,
+                pwcheck: true,
 		minlength: 8
 	    }
 	},

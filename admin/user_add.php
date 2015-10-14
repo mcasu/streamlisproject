@@ -212,12 +212,20 @@ jQuery(document).ready(function ()
 	    wordSimilarToUsername: "La password non può contenere il tuo username",
 	    wordTwoCharacterClasses: "Use different character classes",
 	    wordRepetitions: "Troppi caratteri ripetuti",
-	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')"  
-	},
+	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')",
+            pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero."
+	}
 	
     };
     
     $(':password').pwstrength(options);
+
+    $.validator.addMethod("pwcheck", function(value, element) 
+    {
+        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
+        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
+        return pattern.test(value);
+    });
     
     $('#create_user_form').validate(
     {
@@ -236,6 +244,7 @@ jQuery(document).ready(function ()
 	    },
 	    password: {
 		required: true,
+                pwcheck: true,
 		minlength: 8
 	    }
 	},
@@ -250,6 +259,8 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
+
+
 
     if( $('.alert').is(':visible') )
     {

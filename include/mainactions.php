@@ -464,7 +464,7 @@ class MainActions
     function GetResetPasswordCode($email, $username)
     {
         $code = substr(md5($email.$username."vz749yEAm7"),0,10);
-        error_log("INFO - RESET PASSWORD CODE->[" . $code . "]");
+        //error_log("INFO - RESET PASSWORD CODE->[" . $code . "]");
         return $code;
     }
     
