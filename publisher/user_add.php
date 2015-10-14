@@ -160,6 +160,13 @@ jQuery(document).ready(function ()
 	usernameField: "#username"
     };
     
+    $.validator.addMethod("pwcheck", function(value, element) 
+    {
+        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
+        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
+        return pattern.test(value);
+    });      
+    
     options.rules =
     {
 	activated: {
@@ -167,6 +174,7 @@ jQuery(document).ready(function ()
 	    wordRepetitions: true,
 	    wordSimilarToUsername: true,
 	    wordOneSpecialChar: true,
+            pwcheck: true
 	}
     };
     
@@ -180,19 +188,13 @@ jQuery(document).ready(function ()
 	    wordSimilarToUsername: "La password non può contenere il tuo username",
 	    wordTwoCharacterClasses: "Use different character classes",
 	    wordRepetitions: "Troppi caratteri ripetuti",
-	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')"  
+	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')",
+            pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero."
 	}
 	
     };
     
     $(':password').pwstrength(options);
-
-    $.validator.addMethod("pwcheck", function(value, element) 
-    {
-        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
-        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
-        return pattern.test(value);
-    });        
     
     $('#create_user_form').validate(
     {
@@ -219,7 +221,7 @@ jQuery(document).ready(function ()
         messages: {
             password: {
                 required: "Per creare un utente devi inserire una password valida.",
-                pwcheck: "Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
+                pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
                 minlength: "La password deve essere di almeno 8 caratteri." 
                 }
         },        

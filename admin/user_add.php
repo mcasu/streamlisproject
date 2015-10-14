@@ -191,6 +191,13 @@ jQuery(document).ready(function ()
 	bootstrap3: true,
 	usernameField: "#username",
     };
+
+    $.validator.addMethod("pwcheck", function(value, element) 
+    {
+        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
+        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
+        return pattern.test(value);
+    });
     
     options.rules =
     {
@@ -199,6 +206,7 @@ jQuery(document).ready(function ()
 	    wordRepetitions: true,
 	    wordSimilarToUsername: true,
 	    wordOneSpecialChar: true,
+            pwcheck: true
 	}
     };
     
@@ -219,13 +227,6 @@ jQuery(document).ready(function ()
     };
     
     $(':password').pwstrength(options);
-
-    $.validator.addMethod("pwcheck", function(value, element) 
-    {
-        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
-        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
-        return pattern.test(value);
-    });
     
     $('#create_user_form').validate(
     {
@@ -252,7 +253,7 @@ jQuery(document).ready(function ()
         messages: {
             password: {
                 required: "Per creare un utente devi inserire una password valida.",
-                pwcheck: "Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
+                pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
                 minlength: "La password deve essere di almeno 8 caratteri." 
                 }
         },
