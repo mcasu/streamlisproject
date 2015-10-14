@@ -194,7 +194,7 @@ try
 				
 				    // TD VIEWER ASSOCIATI
 				    echo '<td>';
-				    echo '<select multiple class="form-control group_linked" id="gl_'.$group_id.'">';
+				    echo '<select multiple class="form-control group_linked" id="gl_'.$group_id.'" style="min-height: 140px;">';
 				    while($row = mysql_fetch_array($viewers))
 				    {
 					    $viewer_id=$row['viewer_id'];
@@ -219,7 +219,7 @@ try
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
-					echo '<select multiple class="form-control group_unlinked" id="gul_'.$group_id.'">';
+					echo '<select multiple class="form-control group_unlinked" id="gul_'.$group_id.'" style="min-height: 140px;">';
 					while($row = mysql_fetch_array($viewers_available))
 					{
 						
