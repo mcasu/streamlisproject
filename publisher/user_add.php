@@ -263,6 +263,11 @@ jQuery(document).ready(function ()
 	$(location).attr('href',url);
     });
     
+    $('.btn_action_reset').click(function()
+    {
+        $('select').attr('disabled',true);
+    });
+    
     $('#checkboxSelectGroup').change(function()
     {
         if( $(this).prop("checked") == true )
