@@ -35,11 +35,11 @@
                 <li class='dropdown'>
                    <a href='groups.php' class="dropdown-toggle" data-toggle="dropdown">
                       <img src="../images/group.png" height="32" width="32">
-                      Congregazioni <span class="caret"></span>
+                      Gruppi <span class="caret"></span>
                    </a>
                    <ul class="dropdown-menu" role="menu">
-                      <li><a href='groups.php'><span>Visualizza congregazioni</span></a></li>
-                      <li><a href='group_add.php'><span>Aggiungi congregazione</span></a></li>
+                      <li><a href='groups.php'><span>Vedi gruppi</span></a></li>
+                      <li><a href='group_add.php'><span>Aggiungi gruppo</span></a></li>
                    </ul>
                 </li>
 

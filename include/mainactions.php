@@ -172,8 +172,17 @@ class MainActions
 
         $this->CollectGroupRegistrationSubmission($groupvars);
 
-        if(!$this->SaveGroupToDatabase($groupvars))
+        // Controllo se il gruppo esiste gia'
+        if(!$this->dbactionsInstance->IsGroupFieldUnique($groupvars,'group_name'))
         {
+            $this->HandleError("Il gruppo inserito esiste già. Per favore prova un altro nome.");
+            return false;
+        }            
+        
+        // Se il gruppo non esiste gia' lo creo nel database.
+        if(!$this->dbactionsInstance->InsertGroupIntoDB($groupvars))
+        {
+            $this->HandleError("Creazione del gruppo nel database fallita!");
             return false;
         }
         
@@ -182,6 +191,7 @@ class MainActions
             return true;
         }
         
+        // Recupero il group id e se richiesto creo l'associazione con la congregazione dell'utente che esegue la richiesta.
         $viewerList = $this->dbactionsInstance->GetGroupIdByName($groupvars['group_name']);
         if(!$this->dbactionsInstance->AddViewersLink($viewerList, $this->UserGroupId()))
         {
@@ -584,7 +594,18 @@ class MainActions
     function CollectGroupRegistrationSubmission(&$groupvars)
     {
         $groupvars['group_name'] = $this->utilsInstance->Sanitize($_POST['group_name']);
-        $groupvars['group_type'] = $this->utilsInstance->Sanitize($_POST['group_type']);
+        
+        // Salvo la variabile del POST 'group_type'
+        if (!isset($_POST['group_type']) || empty($_POST['group_type']))
+        {
+            $groupvars['group_type'] = "Gruppo";
+        }
+        else
+        {
+            $groupvars['group_type'] = $this->utilsInstance->Sanitize($_POST['group_type']);
+        }
+        
+        // Salvo la variabile del POST 'group_role_name'
         if (!isset($_POST['group_role_name']) || empty($_POST['group_role_name']) || $_POST['group_role_name'] == "Nessuno")
         {
             $groupvars['group_role_name'] = "viewer";
@@ -624,24 +645,4 @@ class MainActions
         return $user_id;
     }
     
-    function SaveGroupToDatabase(&$groupvars)
-    {
-        if(!$this->dbactionsInstance->DBLogin())
-        {
-            $this->HandleError("Database login failed!");
-            return false;
-        }
-        if(!$this->dbactionsInstance->IsGroupFieldUnique($groupvars,'group_name'))
-        {
-            $this->HandleError("This group name is already used. Please try another group name.");
-            return false;
-        }        
-        if(!$this->dbactionsInstance->InsertGroupIntoDB($groupvars))
-        {
-            $this->HandleError("Inserting to Database failed!");
-            return false;
-        }
-        return true;
-    }
-	
 }

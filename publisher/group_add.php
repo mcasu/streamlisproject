@@ -29,7 +29,7 @@ include("../include/header_publisher.php");
 
 if(isset($_POST['submitted']))
 {
-   $GroupHasCreated=$mainactions->CreateGroup(TRUE);
+   $GroupHasCreated = $mainactions->CreateGroup(TRUE);
 }
 
 ?>
@@ -38,7 +38,7 @@ if(isset($_POST['submitted']))
     <div class="panel panel-primary">
       
       <div class="panel-heading">
-	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>NUOVA CONGREGAZIONE</b></h2>
+	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>NUOVO GRUPPO</b></h2>
       </div>
       
       <div class="panel-body">
@@ -46,7 +46,7 @@ if(isset($_POST['submitted']))
 	<fieldset >
 	
 	<div class="form-group btn_actions">
-	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea congregazione</button>
+	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea gruppo</button>
 	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
 	</div>
 	</br>
@@ -55,16 +55,16 @@ if(isset($_POST['submitted']))
 	    if (isset($GroupHasCreated) && $GroupHasCreated)
 	    {
 		    echo '<br/><div class="alert alert-success" role="alert">';
-			echo '<h4>Congregazione creata con successo!</h4>';
+			echo '<h4>Gruppo creato con successo!</h4>';
 			    echo '<br/>';
 			    echo '<br/>';
-			    echo '<button type="button" class="btn btn-success btn_action_reload">Crea un\'altra congregazione</button>';
+			    echo '<button type="button" class="btn btn-success btn_action_reload">Crea un altro gruppo</button>';
 		    echo '</div>';
 	    }
 	    elseif(isset($GroupHasCreated))
 	    {
 		echo '<br/><div class="alert alert-danger" role="alert">';
-		    echo '<h4><b>Creazione della congregazione fallita!</b></h4>';
+		    echo '<h4><b>Creazione del gruppo fallita!</b></h4>';
 		    echo '<i>'.$mainactions->GetErrorMessage().'</i>';
 		    echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
 		    echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
@@ -77,26 +77,26 @@ if(isset($_POST['submitted']))
 	
 	<div class="form-group">
 	    <div class="control-group">
-		<!-- CAMPO NOME CONGREGAZIONE -->
-		<label for='group_name' >Nome congregazione:</label><br/>
+		<!-- CAMPO NOME GRUPPO -->
+		<label for='group_name' >Nome gruppo:</label><br/>
 		<div class="controls">
-		    <input type="text" class="form-control" placeholder="Nome congregazione" name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="128" /><br/>
+		    <input type="text" class="form-control" placeholder="Nome gruppo" name='group_name' id='group_name' value='<?php echo $utils->SafeDisplay('group_name') ?>' maxlength="128" /><br/>
 		</div>
 	    </div>
 	</div>
 	
-	<div class="form-group">
-	    <!-- CAMPO TIPO CONGREGAZIONE -->
+<!--	<div class="form-group">
+	     CAMPO TIPO CONGREGAZIONE 
 	    <label for='group_type' >Tipo di gruppo:</label><br/>
 	    <select class="form-control" name="group_type" id="group_type">
 		<option value="Congregazione">Congregazione</option>
 		<option value="Gruppo">Gruppo</option>	
-	    </select>
+	    </select>-->
 	<br/>
 	<br/>
 	<br/>
 	<div class="form-group btn_actions">
-	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea congregazione</button>
+	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea gruppo</button>
 	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
 	</div>
     

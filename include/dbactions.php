@@ -79,6 +79,12 @@ class DBActions
     
     function IsGroupFieldUnique($groupvars,$fieldname)
     {
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+        
         $field_val = $this->SanitizeForSQL($groupvars[$fieldname]);
         $qry = "select group_name from groups where $fieldname='".$field_val."'";
         $result = mysql_query($qry,$this->connection);
@@ -381,38 +387,44 @@ class DBActions
 
     function InsertGroupIntoDB(&$groupvars)
     {
-            $select_query_role = 'select * from group_roles where role_name =\'' . $groupvars['group_role_name'] . '\'';
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+        
+        $select_query_role = 'select * from group_roles where role_name =\'' . $groupvars['group_role_name'] . '\'';
 
-            $result = mysql_query($select_query_role ,$this->connection);
-            if(!$result)
-            {
-                $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role");
-                return false;
-            }
-            $row_role = mysql_fetch_assoc($result);
+        $result = mysql_query($select_query_role ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role");
+            return false;
+        }
+        $row_role = mysql_fetch_assoc($result);
 
-            $publish_code = $this->ParseGroupName($groupvars['group_name']);
+        $publish_code = $this->ParseGroupName($groupvars['group_name']);
 
-            $insert_query = 'insert into groups (
-            group_name,
-            group_type,
-            group_role,
-            publish_code
-            )
-            values
-            (
-            "' . $this->SanitizeForSQL($groupvars['group_name']) . '",
-            "' . $this->SanitizeForSQL($groupvars['group_type']) . '",
-            "' . $this->SanitizeForSQL($row_role['role_id']) . '",
-            "' . $this->SanitizeForSQL(strtolower($publish_code)) . '"
-            )';
+        $insert_query = 'insert into groups (
+        group_name,
+        group_type,
+        group_role,
+        publish_code
+        )
+        values
+        (
+        "' . $this->SanitizeForSQL($groupvars['group_name']) . '",
+        "' . $this->SanitizeForSQL($groupvars['group_type']) . '",
+        "' . $this->SanitizeForSQL($row_role['role_id']) . '",
+        "' . $this->SanitizeForSQL(strtolower($publish_code)) . '"
+        )';
 
-            if(!mysql_query( $insert_query ,$this->connection))
-            {
-                $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
-                return false;
-            }
-            return true;
+        if(!mysql_query( $insert_query ,$this->connection))
+        {
+            $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
+            return false;
+        }
+        return true;
     }
 
     function ParseGroupName($publish_code)
