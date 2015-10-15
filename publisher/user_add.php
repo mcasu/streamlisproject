@@ -118,7 +118,7 @@ if(isset($_POST['submitted']))
             </div>
             <br/>
 	    <!-- CAMPO CONGREGAZIONE -->
-	    <label for='groups' >Seleziona il gruppo dell'utente:</label><br/>
+	    <label for='groups' class="pull-left">Seleziona il gruppo dell'utente:</label><br/>
 	    <select class="form-control" name="group_name" id="group_name">
                 <?php
                     try
