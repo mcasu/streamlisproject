@@ -267,11 +267,11 @@ jQuery(document).ready(function ()
     {
         if( $(this).prop("checked") == true )
         {
-            $('#group_name').attr('disabled',true);
+            $('#group_name').attr('disabled',false);
         }
         else
         {
-            $('#group_name').attr('disabled',false);
+            $('#group_name').attr('disabled',true);
         }
     });
 
