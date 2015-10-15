@@ -85,14 +85,6 @@ if(isset($_POST['submitted']))
 	    </div>
 	</div>
 	
-<!--	<div class="form-group">
-	     CAMPO TIPO CONGREGAZIONE 
-	    <label for='group_type' >Tipo di gruppo:</label><br/>
-	    <select class="form-control" name="group_type" id="group_type">
-		<option value="Congregazione">Congregazione</option>
-		<option value="Gruppo">Gruppo</option>	
-	    </select>-->
-	<br/>
 	<br/>
 	<br/>
 	<div class="form-group btn_actions">

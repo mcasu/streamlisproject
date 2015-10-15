@@ -110,31 +110,39 @@ if(isset($_POST['submitted']))
 	</div>
 	
 	<div class="form-group">
+            <div class="checkbox pull-left">
+                <label>
+                    <input id="checkboxSelectGroup" type="checkbox" class="checkBox" value="" />
+                    Seleziona se l'utente NON fa parte della tua congregazione.
+                </label>
+            </div>
 	    <!-- CAMPO CONGREGAZIONE -->
-	    <label for='groups' >Congregazione:</label><br/>
+	    <label for='groups' >Seleziona il gruppo dell'utente:</label><br/>
 	    <select class="form-control" name="group_name" id="group_name">
-	<?php
-	    try
-	    {
-		$viewers = $dbactions->GetViewersByPublisher($mainactions->UserGroupId());
-	
-		if (!$viewers)
-		{
-			error_log("No Results");
-		}
-	
-		while($row = mysql_fetch_array($viewers))
-		{
-			$group = $row['viewer_name'];
-			echo '<option value="' . $group . '">' . $group . '</option>"';
-		}
-	    }
-	    catch(Exception $e)
-	    {
-		error_log('ERROR - Publisher user_add.php - '.$e->getMessage());
-	    }
-	?>
-	</select>
+                <?php
+                    try
+                    {
+                        $viewers = $dbactions->GetViewersByPublisher($mainactions->UserGroupId());
+
+                        if (!$viewers)
+                        {
+                                error_log("No Results");
+                        }
+
+                        while($row = mysql_fetch_array($viewers))
+                        {
+                                $group = $row['viewer_name'];
+                                echo '<option value="' . $group . '">' . $group . '</option>"';
+                        }
+                    }
+                    catch(Exception $e)
+                    {
+                        error_log('ERROR - Publisher user_add.php - '.$e->getMessage());
+                    }
+                ?>
+            </select>
+        </div>
+        
 	<br/>
 	<br/>
 	<br/>
@@ -237,6 +245,9 @@ jQuery(document).ready(function ()
 	}
     });
 
+    // Di default disabilito il dropdown con la lista di gruppi.
+    $('select').attr('disabled',true);
+
     if( $('.alert').is(':visible') )
     {
 	$('.btn_action_reset').attr('disabled', "disabled");
@@ -251,6 +262,18 @@ jQuery(document).ready(function ()
     {
 	var url = "user_add.php";
 	$(location).attr('href',url);
+    });
+    
+    $('#checkboxSelectGroup').onchange(function()
+    {
+        if( $(this).prop("checked") == true )
+        {
+            $('.group_name')attr('disabled',false);
+        }
+        else
+        {
+            $('.group_name')attr('disabled',true);
+        }
     });
 
 });
