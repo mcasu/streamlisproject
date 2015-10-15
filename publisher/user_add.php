@@ -119,7 +119,7 @@ if(isset($_POST['submitted']))
             <div class="well">
                 <!-- CAMPO CONGREGAZIONE -->
                 <label for='groups' class="pull-left">Seleziona il gruppo dell'utente:</label><br/>
-                <select class="form-control" name="group_name" id="group_name">
+                <select class="form-control" name="group_name" id="group_name" disabled>
                     <?php
                         try
                         {
@@ -246,9 +246,6 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
-
-    // Di default disabilito il dropdown con la lista di gruppi.
-    $('select').attr('disabled',true);
 
     if( $('.alert').is(':visible') )
     {
