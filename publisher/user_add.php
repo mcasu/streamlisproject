@@ -266,7 +266,7 @@ jQuery(document).ready(function ()
 	$(location).attr('href',url);
     });
     
-    $('#checkboxSelectGroup').onchange(function()
+    $('#checkboxSelectGroup').click(function()
     {
         if( $(this).prop("checked") == true )
         {
