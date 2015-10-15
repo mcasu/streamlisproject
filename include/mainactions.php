@@ -580,7 +580,16 @@ class MainActions
         $uservars['email'] = $this->utilsInstance->Sanitize($_POST['email']);
         $uservars['username'] = $this->utilsInstance->Sanitize($_POST['username']);
         $uservars['password'] = $this->utilsInstance->Sanitize($_POST['password']);
-        $uservars['group_name'] = $this->utilsInstance->Sanitize($_POST['group_name']);
+        
+        if(!isset($_POST['group_name']) || empty($_POST['group_name']))
+        {
+            $uservars['group_name'] = $this->UserGroupName();
+        }
+        else
+        {
+            $uservars['group_name'] = $this->utilsInstance->Sanitize($_POST['group_name']);
+        }
+        
         if(!isset($_POST['user_role_name']) || empty($_POST['user_role_name']))
         {
             $uservars['user_role_name'] = "viewer";
