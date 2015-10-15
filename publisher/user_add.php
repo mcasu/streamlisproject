@@ -110,38 +110,39 @@ if(isset($_POST['submitted']))
 	</div>
 	
 	<div class="form-group">
-            <div class="checkbox pull-left">
+            <div class="checkbox">
                 <label>
                     <input id="checkboxSelectGroup" type="checkbox" class="checkBox" value="" />
                     Seleziona se l'utente NON fa parte della tua congregazione.
                 </label>
             </div>
-            <br/>
-	    <!-- CAMPO CONGREGAZIONE -->
-	    <label for='groups' class="pull-left">Seleziona il gruppo dell'utente:</label><br/>
-	    <select class="form-control" name="group_name" id="group_name">
-                <?php
-                    try
-                    {
-                        $viewers = $dbactions->GetViewersByPublisher($mainactions->UserGroupId());
-
-                        if (!$viewers)
+            <div class="well">
+                <!-- CAMPO CONGREGAZIONE -->
+                <label for='groups' class="pull-left">Seleziona il gruppo dell'utente:</label><br/>
+                <select class="form-control" name="group_name" id="group_name">
+                    <?php
+                        try
                         {
-                                error_log("No Results");
-                        }
+                            $viewers = $dbactions->GetViewersByPublisher($mainactions->UserGroupId());
 
-                        while($row = mysql_fetch_array($viewers))
-                        {
-                                $group = $row['viewer_name'];
-                                echo '<option value="' . $group . '">' . $group . '</option>"';
+                            if (!$viewers)
+                            {
+                                    error_log("No Results");
+                            }
+
+                            while($row = mysql_fetch_array($viewers))
+                            {
+                                    $group = $row['viewer_name'];
+                                    echo '<option value="' . $group . '">' . $group . '</option>"';
+                            }
                         }
-                    }
-                    catch(Exception $e)
-                    {
-                        error_log('ERROR - Publisher user_add.php - '.$e->getMessage());
-                    }
-                ?>
-            </select>
+                        catch(Exception $e)
+                        {
+                            error_log('ERROR - Publisher user_add.php - '.$e->getMessage());
+                        }
+                    ?>
+                </select>
+            </div>
         </div>
         
 	<br/>
