@@ -263,15 +263,15 @@ jQuery(document).ready(function ()
 	$(location).attr('href',url);
     });
     
-    $('#checkboxSelectGroup').click(function()
+    $('#checkboxSelectGroup').change(function()
     {
         if( $(this).prop("checked") == true )
         {
-            $('#group_name').attr('disabled',false);
+            $('#group_name').attr('disabled',true);
         }
         else
         {
-            $('#group_name').attr('disabled',true);
+            $('#group_name').attr('disabled',false);
         }
     });
 
