@@ -116,6 +116,7 @@ if(isset($_POST['submitted']))
                     Seleziona se l'utente NON fa parte della tua congregazione.
                 </label>
             </div>
+            <br/>
 	    <!-- CAMPO CONGREGAZIONE -->
 	    <label for='groups' >Seleziona il gruppo dell'utente:</label><br/>
 	    <select class="form-control" name="group_name" id="group_name">
@@ -268,11 +269,11 @@ jQuery(document).ready(function ()
     {
         if( $(this).prop("checked") == true )
         {
-            $('.group_name')attr('disabled',false);
+            $('.group_name').attr('disabled',false);
         }
         else
         {
-            $('.group_name')attr('disabled',true);
+            $('.group_name').attr('disabled',true);
         }
     });
 
