@@ -34,12 +34,14 @@ $(document).ready(function()
     
     $("#btn_user_delete").prop('disabled', true);
     $("#btn_user_resetpwd").hide();
+    $("#btn_user_edit").hide();
     $("#resetpwd_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
     $("input:radio").click(function(lastSelectedRow)
     {
         $("#btn_user_resetpwd").hide();
+        $("#btn_user_edit").hide();
         
 	$("#users_table").find("tr").removeClass("active");
 	
@@ -55,6 +57,7 @@ $(document).ready(function()
             if (role === "normal" || role === "viewer" || role === "publisher")
             {
                 $("#btn_user_resetpwd").show();
+                $("#btn_user_edit").show();
             }
 	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
 	}
@@ -133,8 +136,9 @@ $(document).ready(function()
         <br/>
         
         <div class="panel-heading">
-            <button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button>
-            <button type="button" class="btn btn-primary" id="btn_user_resetpwd">Reset password</button>
+            <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
+            <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
+            <button type="button" class="btn btn-primary" id="btn_user_edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</button>
         </div>
 
         <div class="panel-body">
