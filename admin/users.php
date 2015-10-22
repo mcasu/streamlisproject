@@ -11,15 +11,66 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Stream LIS - Utenti</title>
 	
-    <link rel="stylesheet" href="../style/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="../style/jquery-ui.min.css"/>
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.dataTables.min.js"></script>
     
+</head>
+
+
+<body>
+<?php include("../include/header_admin.php"); ?>
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+
+        <h3>ELENCO UTENTI ASSOCIATI:</h3>
+        <br/>
+        
+        <div class="panel-heading">
+            <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
+            <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
+            <button type="button" class="btn btn-primary" id="btn_user_edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</button>
+        </div>
+
+        <div class="panel-body">
+            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
+            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password effettuato con successo!</h3>
+                <h5>Le nuove credenziali sono state spedite via mail all'indirizzo <?= $mainactions->UserEmail(); ?></h5>
+            </div>
+            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password fallito!</h3>
+                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
+            </div>
+            
+            <table class="table table-hover" id="users_table">
+                <thead>
+                    <tr class="head">
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>MAIL</th>
+                        <th>USERNAME</th>
+                        <th>CONGREGAZIONE</th>
+                        <th>TIPO</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+    <div id="divUserEdit"></div>
+</div>
+
 <script type="text/javascript">
     
 $(document).ready(function()
@@ -166,57 +217,25 @@ $(document).ready(function()
         }
     });
     
+    var userEditDlg = $('#divUserEdit').load('user_edit.php').dialog({
+         title: 'Modifica utente',
+         resizable: true,
+         autoOpen:false,
+         modal: true,
+         hide: 'fade',
+         width:350,
+         height:275
+    });
+        
+    $("#btn_user_edit").click(function()
+    {
+        e.preventDefault();
+        userEditDlg.dialog('open');
+        
+    });
 });
 
 </script>
     
-</head>
-
-
-<body>
-<?php include("../include/header_admin.php"); ?>
-
-
-<div class="container-fluid">
-    <div class="panel panel-default">
-
-        <h3>ELENCO UTENTI ASSOCIATI:</h3>
-        <br/>
-        
-        <div class="panel-heading">
-            <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
-            <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
-            <button type="button" class="btn btn-primary" id="btn_user_edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</button>
-        </div>
-
-        <div class="panel-body">
-            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
-            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password effettuato con successo!</h3>
-                <h5>Le nuove credenziali sono state spedite al tuo account di posta elettronica.</h5>
-            </div>
-            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password fallito!</h3>
-                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
-            </div>
-            
-            <table class="table table-hover" id="users_table">
-                <thead>
-                    <tr class="head">
-                        <th>ID</th>
-                        <th>NOME</th>
-                        <th>MAIL</th>
-                        <th>USERNAME</th>
-                        <th>CONGREGAZIONE</th>
-                        <th>TIPO</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-</div>
-
 </body>
 </html>

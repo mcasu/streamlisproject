@@ -12,7 +12,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <div class="panel panel-primary">
       
       <div class="panel-heading">
-	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>NUOVO UTENTE</b></h2>
+	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>MODIFICA UTENTE</b></h2>
       </div>
       
       <div class="panel-body">
