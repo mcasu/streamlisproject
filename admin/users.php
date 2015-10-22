@@ -144,7 +144,7 @@ $(document).ready(function()
             return row[1];
         } );
         
-        if (confirm("Vuoi davvero cambiare la password dell'utente " + userSelectedName + " con ID [" + userSelectedId + "]?"))
+        if (confirm("Vuoi davvero cambiare la password dell'utente " + userSelectedName + " (ID #" + userSelectedId + ") ?"))
 	{
             $("#resetpwd_alert_success").hide();
             $("#resetpwd_alert_fail").hide();
