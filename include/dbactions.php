@@ -987,6 +987,8 @@ class DBActions
             $this->HandleDBError("Error updating data from the table\nquery:$query");
             return false;
         }
+        
+        error_log("QUERY: " . $query);
         return $result;
     }
 
