@@ -330,8 +330,8 @@ $where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
  * server-side, there is no need to edit below this line.
  */
  
-//require( 'ssp.class.php' );
-require( 'ssp.php' );
+require( 'ssp.class.php' );
+//require( 'ssp.php' );
  
 echo json_encode(
     SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
@@ -532,7 +532,8 @@ $join = "FROM `{$table}` AS `u` INNER JOIN `groups` AS `g` ON (`u`.`user_group_i
  * server-side, there is no need to edit below this line.
  */
  
-require( 'ssp.class.php' );
+//require( 'ssp.class.php' );
+require( 'ssp.php' );
  
 echo json_encode(
     SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $join)
