@@ -228,7 +228,7 @@ $(document).ready(function()
          height:275
     });
         
-    $("#btn_user_edit").click(function()
+    $("#btn_user_edit").click(function(e)
     {
         e.preventDefault();
         userEditDlg.dialog('open');
