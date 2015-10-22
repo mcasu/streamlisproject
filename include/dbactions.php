@@ -988,7 +988,6 @@ class DBActions
             return false;
         }
         
-        error_log("QUERY: " . $query);
         return $result;
     }
 
