@@ -17,13 +17,13 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
       
       <div class="panel-body">
 	<form role="form" id="create_user_form" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-	<fieldset >
+	<fieldset>
 	
 	<div class="form-group btn_actions">
 	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
 	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
 	</div>
-	</br>
+	<br/>
 	<?php
 
 	    if (isset($UserHasCreated) && $UserHasCreated)
