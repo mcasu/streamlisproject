@@ -219,20 +219,51 @@ $(document).ready(function()
     });
     
     var userEditDlg = $('#divUserEdit').load('user_edit.php').dialog({
-         title: 'Modifica utente',
-         resizable: true,
-         autoOpen:false,
-         modal: true,
-         hide: 'fade',
-         width:640,
-         height:480
+        title: 'Modifica utente',
+        resizable: true,
+        autoOpen:false,
+        modal: true,
+        hide: 'fade',
+        width:640,
+        height:500,
+        buttons: [
+           {
+                text: "Salva",
+                click: function() {
+                alert("Hai cliccato su Salva");
+                // Recupero i dati del form e salvo nel database
+//                    $.post("/include/functions.php",{fname:"users_delete",userIds:userSelectedIds.toString()},
+//                    function(data,status)
+//                    {
+//                        //alert("Data: " + data + "\nStatus: " + status);
+//
+//                        if (status === "success")
+//                        {
+//                            usersTable.$('.selected').remove();
+//                            $("#btn_user_delete").prop('disabled', true);
+//                        }
+//                    });  
+               }
+           },
+           {
+               text: "Chiudi",
+               click: function() {
+                   $( this ).dialog( "close" );
+               }
+           }
+        ]
     });
         
     $("#btn_user_edit").click(function(e)
     {
         e.preventDefault();
-        userEditDlg.dialog('open');
         
+        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        userEditDlg.data('userId',userSelectedId).dialog('open');
     });
 });
 
