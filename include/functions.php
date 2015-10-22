@@ -25,6 +25,9 @@ switch ($fname)
         $userId = filter_input(INPUT_POST, 'userId');
         $userAdminId = filter_input(INPUT_POST, 'userAdminId');
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
+    case "users_delete":
+        $userIds = filter_input(INPUT_POST, 'userIds');
+        return DeleteUsers($mainactions, $dbactions, $userIds);
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
@@ -584,4 +587,19 @@ function GetUserLoggedNumber($dbactions)
     {
         echo $num;
     }    
+}
+
+function DeleteUsers($dbactions, $userIds)
+{
+    //$userIdsArray = explode(",",$userIds);
+    
+    //error_log("INFO - join ids: " . $joinSelectedIds);
+    
+    if (!$dbactions->DeleteUsers($userIds))
+    {
+        error_log("ERROR - functions.php DeleteUsers() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    return TRUE;
 }

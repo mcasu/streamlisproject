@@ -83,8 +83,6 @@ $(document).ready(function()
                     return jQuery(row[5]).text();
                 } );
                 
-                alert("RUOLO: " + userSelectedRole);
-                
                 if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
                 {
                     $("#btn_user_resetpwd").show();
@@ -108,38 +106,51 @@ $(document).ready(function()
 
     $("#btn_user_delete").click(function()
     {
-	var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
-	
-	var tr_id=tr_obj.attr('id');
-	//alert("Vuoi cancellare id: " + tr_id);
-	
-	if (confirm("Vuoi davvero eliminare l'utente con ID [" + tr_id + "]?"))
+        console.log("Numero utenti selezionati: " + usersTable.rows('.selected').data().length);
+        
+        var userSelectedIds = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        console.log("User id selezionati: " + userSelectedIds);
+        
+        if (confirm("Vuoi davvero eliminare gli utenti selezionati?"))
 	{
-	    $.post("user_delete.php",{user_id:tr_id},
-	    function(data,status)
-	    {
-		    //alert("Data: " + data + "\nStatus: " + status);
-		    tr_obj.fadeOut(1000, function() 
-		    {
-			    tr_obj.remove();
-			    $("#btn_user_delete").prop('disabled', true);
-		    });
-	    });
-	}
+            $.post("/include/functions.php",{fname:"users_delete",userSelectedIds:userSelectedIds.toString()},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+                
+                if (status === "success")
+                {
+                    usersTable.$('.selected').remove();
+                    $("#btn_user_delete").prop('disabled', true);
+                }
+            });            
+            
+        }
     });
 
     $("#btn_user_resetpwd").click(function()
     {
-        var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
-	var tr_id=tr_obj.attr('id');
+        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
         
-        if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
+        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[1];
+        } );
+        
+        if (confirm("Vuoi davvero cambiare la password dell'utente " + userSelectedName + " con ID [" + userSelectedId + "]?"))
 	{
             $("#resetpwd_alert_success").hide();
             $("#resetpwd_alert_fail").hide();
     
             var userAdminId = $('.inputUserData').attr('id');
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:userAdminId},
+            $.post("../include/functions.php",{fname:"users_resetpwd", userId:userSelectedId, userAdminId:userAdminId},
 	    function(data,status)
 	    {
 		    //alert("Data: " + data + "\nStatus: " + status);
