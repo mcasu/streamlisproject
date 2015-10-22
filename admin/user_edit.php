@@ -13,7 +13,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
         <div class="panel-body">
             <form role="form" id="formChangeUser" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
                 <fieldset>
-                <br/>
                 <div class="form-group">
                     <div class="control-group">
                         <!-- CAMPO NOME COMPLETO -->
@@ -65,9 +64,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                             }
                         ?>
                 </select>
-                </div>
                 <br/>
-
                 <!-- CAMPO TIPO UTENTE -->
                 <label for='roles' >Tipo di utente:</label><br/>
                 <select class="form-control" name="user_role_name" id="user_role_name">
@@ -94,8 +91,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                     }
                 ?>
                 </select>
-
-                <br/>
+                </div>
                 <br/>
                 </fieldset>
             </form>
