@@ -267,11 +267,11 @@ $(document).ready(function()
     
                         if (status === "success")
                         {
-                            usersTable.ajax.reload();
-                            $('#users_table tbody tr').removeClass('selected');
                             $('#divUserEdit').dialog("close");
-                            $("#user_updated_alert_success h3").val("Utente con id #" +  userId + " modificato con successo!");
+                            usersTable.ajax.reload();
+                            $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
                             $("#user_updated_alert_success").show();
+                            $('#users_table tbody tr').removeClass('selected');
                         }
                     });  
                    }
