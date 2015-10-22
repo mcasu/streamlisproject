@@ -75,13 +75,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 		    <input type="text" class="form-control" placeholder="Username" name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
 		</div>
 	    </div>
-	    <div class="control-group">
-		<!-- CAMPO PASSWORD -->
-		<label for='password' >Password:</label><br/>
-		<div class="controls">
-		    <input type="password" class="form-control" placeholder="Password" name='password' id='password' maxlength="128"/><br/>
-		</div>
-	    </div>
 	</div>
 	
 	<div class="form-group">
@@ -145,7 +138,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 	<br/>
 	<br/>
 	<div class="form-group btn_actions">
-	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Crea utente</button>
+	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
 	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
 	</div>
     
@@ -163,16 +156,9 @@ jQuery(document).ready(function ()
     {
 	minChar: 8,
 	bootstrap3: true,
-	usernameField: "#username",
+	usernameField: "#username"
     };
 
-    $.validator.addMethod("pwcheck", function(value, element) 
-    {
-        //var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/;
-        var pattern = /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/;
-        return pattern.test(value);
-    });
-    
     options.rules =
     {
 	activated: {
@@ -180,7 +166,6 @@ jQuery(document).ready(function ()
 	    wordRepetitions: true,
 	    wordSimilarToUsername: true,
 	    wordOneSpecialChar: true,
-            pwcheck: true
 	}
     };
     
@@ -195,12 +180,9 @@ jQuery(document).ready(function ()
 	    wordTwoCharacterClasses: "Use different character classes",
 	    wordRepetitions: "Troppi caratteri ripetuti",
 	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')",
-            pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero."
 	}
 	
     };
-    
-    $(':password').pwstrength(options);
     
     $('#create_user_form').validate(
     {
@@ -216,21 +198,8 @@ jQuery(document).ready(function ()
 	    username: {
 		required: true,
 		minlength: 6
-	    },
-	    password: {
-		required: true,
-                pwcheck: true,
-		minlength: 8
 	    }
 	},
-        
-        messages: {
-            password: {
-                required: "Per creare un utente devi inserire una password valida.",
-                pwcheck: "Password non valida. Ricorda di inserire almeno un carattere minuscolo, uno maiuscolo e un numero.",
-                minlength: "La password deve essere di almeno 8 caratteri." 
-                }
-        },
 	
 	highlight: function(element)
 	{
