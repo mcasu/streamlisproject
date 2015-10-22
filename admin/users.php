@@ -267,7 +267,8 @@ $(document).ready(function()
     
                         if (status === "success")
                         {
-                            //usersTable.ajax.reload();
+                            usersTable.ajax.reload();
+                            $('#users_table tbody tr').removeClass('selected');
                             $('#divUserEdit').dialog("close");
                             $("#user_updated_alert_success").show();
                         }
