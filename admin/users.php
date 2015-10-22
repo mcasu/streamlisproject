@@ -226,62 +226,62 @@ $(document).ready(function()
         }
     });
     
-    var userEditDlg = $('#divUserEdit').dialog({
-        title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
-        resizable: true,
-        autoOpen:false,
-        modal: true,
-        hide: 'fade',
-        width:600,
-        height:620,
-        buttons: [
-           {
-                text: "Salva",
-                click: function() {
-                
-                $("#user_updated_alert_success").hide();
-                
-                var userId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
-                var fullName = $('#name').val();
-                var email = $('#email').val();
-                var username = $('#username').val();
-                var groupName = $('#group_name').val();
-                var roleName = $('#user_role_name').val();
-                
-                // Recupero i dati del form e salvo nel database
-//                $.post("/include/functions.php",{
-//                    fname:"user_update",
-//                    userId:userId,
-//                    fullName:fullName,
-//                    email:email,
-//                    username:username,
-//                    groupName:groupName,
-//                    roleName:roleName},
-//                function(data,status)
-//                {
-//                    //alert("Data: " + data + "\nStatus: " + status);
-//
-//                    if (status === "success")
-//                    {
-//                        usersTable.ajax.reload();
-//                        $(this).dialog("close");
-//                        $("#user_updated_alert_success").show();
-//                    }
-//                });  
-               }
-           },
-           {
-               text: "Chiudi",
-               click: function() {
-                   $(this).dialog("close");
-               }
-           }
-        ]
-    });
-        
     $("#btn_user_edit").click(function(e)
     {
         e.preventDefault();
+        
+        var userEditDlg = $('#divUserEdit').dialog({
+            title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
+            resizable: true,
+            autoOpen:false,
+            modal: true,
+            hide: 'fade',
+            width:600,
+            height:620,
+            buttons: [
+               {
+                    text: "Salva",
+                    click: function() {
+
+                    $("#user_updated_alert_success").hide();
+
+                    var userId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
+                    var fullName = $('#name').val();
+                    var email = $('#email').val();
+                    var username = $('#username').val();
+                    var groupName = $('#group_name').val();
+                    var roleName = $('#user_role_name').val();
+
+                    // Recupero i dati del form e salvo nel database
+//                    $.post("/include/functions.php",{
+//                        fname:"user_update",
+//                        userId:userId,
+//                        fullName:fullName,
+//                        email:email,
+//                        username:username,
+//                        groupName:groupName,
+//                        roleName:roleName},
+//                    function(data,status)
+//                    {
+//                        //alert("Data: " + data + "\nStatus: " + status);
+//    
+//                        if (status === "success")
+//                        {
+//                            usersTable.ajax.reload();
+//                            $(this).dialog("close");
+//                            $("#user_updated_alert_success").show();
+//                        }
+//                    });  
+                   }
+               },
+               {
+                   text: "Chiudi",
+                   click: function() {
+                       $(this).dialog("close");
+                   }
+               }
+            ]
+        });        
         
         var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row){return row[1];});
         var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
