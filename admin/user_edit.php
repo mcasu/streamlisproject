@@ -106,7 +106,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     
 jQuery(document).ready(function ()
 {
-    alert("Nome: " + $("#name").val());
+    $("#name").val($('#divUserEdit').data('name'));
     
     var options = {};
     options.common =

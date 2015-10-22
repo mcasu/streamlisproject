@@ -218,7 +218,7 @@ $(document).ready(function()
         }
     });
     
-    var userEditDlg = $('#divUserEdit').load('user_edit.php').dialog({
+    var userEditDlg = $('#divUserEdit').dialog({
         title: 'Modifica utente id #' + $('.inputUserData').attr('id'),
         resizable: true,
         autoOpen:false,
@@ -263,7 +263,7 @@ $(document).ready(function()
             return row[1];
         } );
         
-        userEditDlg.data('name',userSelectedName).dialog('open');
+        userEditDlg.load('user_edit.php').data('name',userSelectedName).dialog('open');
     });
 });
 
