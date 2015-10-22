@@ -80,7 +80,7 @@ $(document).ready(function()
             {
                 var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
                 {
-                    return row[6];
+                    return row[5];
                 } );
                 
                 if (userSelectedRole === 2 || userSelectedRole === 3)
