@@ -85,7 +85,7 @@ $(document).ready(function()
                 
                 alert("RUOLO: " + userSelectedRole);
                 
-                if (userSelectedRole.indexOf("Viewer") >= 0 || userSelectedRole.indexOf("Publisher") >= 0)
+                if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
                 {
                     $("#btn_user_resetpwd").show();
                 }
