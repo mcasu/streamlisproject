@@ -10,77 +10,67 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <div class="container-fluid">
     <div class="panel panel-primary">
-      
-      <div class="panel-heading">
-	<h2 class="panel-title" style="margin-top:10px;margin-left:6px;"><b>MODIFICA UTENTE</b></h2>
-      </div>
-      
-      <div class="panel-body">
-	<form role="form" id="create_user_form" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
-	<fieldset>
-	
-	<div class="form-group btn_actions">
-	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
-	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
-	</div>
-	<br/>
-	<?php
+        <form role="form" id="create_user_form" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
+        <fieldset>
 
-	    if (isset($UserHasCreated) && $UserHasCreated)
-	    {
-		    echo '<br/><div class="alert alert-success" role="alert">';
-			echo '<h4>Utente creato con successo!</h4>';
-//			    echo 'Una mail di conferma verrà spedita all\'account di posta indicato.<br/>';
-//			    echo 'Per completare la registrazione l\'utente deve cliccare sul link all\'interno della mail.';
-			    echo '<br/>';
-			    echo '<button type="button" class="btn btn-success btn_action_reload">Crea un altro utente</button>';
-		    echo '</div>';
-	    }
-	    elseif(isset($UserHasCreated))
-	    {
-		echo '<br/><div class="alert alert-danger" role="alert">';
-		    echo '<h4><b>Creazione utente fallita!</b></h4>';
-		    echo '<i>'.$mainactions->GetErrorMessage().'</i>';
-		    echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
-		    echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
-		echo '</div>';
-	    }
-	?>
-	    
-	<input type='hidden' name='submitted' id='submitted' value='1'/>
-	<input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->randomKey); ?>' />
-	
-	<div class="form-group">
-	    <div class="control-group">
-		<!-- CAMPO NOME COMPLETO -->
-		<label for='name' >Nome utente completo:</label><br/>
-		<div class="controls">
-		    <input type="text" class="form-control" placeholder="Nome utente completo" name='name' id='name' value='<?php echo $utils->SafeDisplay('name') ?>' maxlength="128" /><br/>
-		</div>
-	    </div>
-	    <div class="control-group">
-		<!-- CAMPO INDIRIZZO EMAIL -->
-		<label for='email' >Indirizzo email:</label><br/>
-		<div class="controls">
-		    <input type="email" class="form-control" placeholder="Indirizzo Email" name='email' id='email' value='<?php echo $utils->SafeDisplay('email') ?>' maxlength="128" /><br/>
-		</div>
-	    </div>
-	</div>
-	
-	<div class="form-group">
-	    <div class="control-group">
-		<!-- CAMPO USERNAME -->
-		<label for='username' >Username:</label><br/>
-		<div class="controls">
-		    <input type="text" class="form-control" placeholder="Username" name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
-		</div>
-	    </div>
-	</div>
-	
-	<div class="form-group">
-	    <!-- CAMPO CONGREGAZIONE -->
-	    <label for='groups' >Congregazione:</label><br/>
-	    <select class="form-control" name="group_name" id="group_name">
+        <div class="form-group btn_actions">
+            <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
+        </div>
+        <br/>
+        <?php
+
+            if (isset($UserHasCreated) && $UserHasCreated)
+            {
+                    echo '<br/><div class="alert alert-success" role="alert">';
+                        echo '<h4>Utente creato con successo!</h4>';
+    //			    echo 'Una mail di conferma verrà spedita all\'account di posta indicato.<br/>';
+    //			    echo 'Per completare la registrazione l\'utente deve cliccare sul link all\'interno della mail.';
+                            echo '<br/>';
+                            echo '<button type="button" class="btn btn-success btn_action_reload">Crea un altro utente</button>';
+                    echo '</div>';
+            }
+            elseif(isset($UserHasCreated))
+            {
+                echo '<br/><div class="alert alert-danger" role="alert">';
+                    echo '<h4><b>Creazione utente fallita!</b></h4>';
+                    echo '<i>'.$mainactions->GetErrorMessage().'</i>';
+                    echo '<h5>Modifica i dati inseriti oppure clicca sul pulsante qui sotto per azzerare i campi.</h5>';
+                    echo '<button type="button" class="btn btn-danger btn_action_reload">Azzera</button>';
+                echo '</div>';
+            }
+        ?>
+
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
+        <input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->randomKey); ?>' />
+
+        <div class="form-group">
+            <div class="control-group">
+                <!-- CAMPO NOME COMPLETO -->
+                <label for='name' >Nome utente completo:</label><br/>
+                <div class="controls">
+                    <input type="text" class="form-control" placeholder="Nome utente completo" name='name' id='name' value='<?php echo $utils->SafeDisplay('name') ?>' maxlength="128" /><br/>
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- CAMPO INDIRIZZO EMAIL -->
+                <label for='email' >Indirizzo email:</label><br/>
+                <div class="controls">
+                    <input type="email" class="form-control" placeholder="Indirizzo Email" name='email' id='email' value='<?php echo $utils->SafeDisplay('email') ?>' maxlength="128" /><br/>
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- CAMPO USERNAME -->
+                <label for='username' >Username:</label><br/>
+                <div class="controls">
+                    <input type="text" class="form-control" placeholder="Username" name='username' id='username' value='<?php echo $utils->SafeDisplay('username') ?>' maxlength="128" /><br/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- CAMPO CONGREGAZIONE -->
+            <label for='groups' >Congregazione:</label><br/>
+            <select class="form-control" name="group_name" id="group_name">
                 <?php
                     try
                     {
@@ -103,48 +93,46 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                         echo 'No Results';
                     }
                 ?>
-	</select>
+        </select>
         </div>
-	<br/>
+        <br/>
 
-	<!-- CAMPO TIPO UTENTE -->
+        <!-- CAMPO TIPO UTENTE -->
         <label for='roles' >Tipo di utente:</label><br/>
         <select class="form-control" name="user_role_name" id="user_role_name">
-	<?php
-	    try
-	    {
-		/*** query the database ***/
-		$result = $dbactions->GetUserRoles();
-	
-		if (!$result)
-		{
-			error_log("No Results");
-		}
-	
-		while($row = mysql_fetch_array($result))
-		{
-			$user_role_name=$row['user_role_name'];
-			echo '<option value="' . $user_role_name . '">' . $user_role_name . '</option>"';
-		}
-	    }
-	    catch(PDOException $e)
-	    {
-		echo 'No Results';
-	    }
-	?>
-	</select>
-	
-	<br/>
-	<br/>
-	<br/>
-	<div class="form-group btn_actions">
-	    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
-	    <button type="reset" class="btn btn-default btn-lg btn_action_reset">Cancella tutti i campi</button>
-	</div>
-    
-	</fieldset>
-	</form>
-    </div>
+        <?php
+            try
+            {
+                /*** query the database ***/
+                $result = $dbactions->GetUserRoles();
+
+                if (!$result)
+                {
+                        error_log("No Results");
+                }
+
+                while($row = mysql_fetch_array($result))
+                {
+                        $user_role_name=$row['user_role_name'];
+                        echo '<option value="' . $user_role_name . '">' . $user_role_name . '</option>"';
+                }
+            }
+            catch(PDOException $e)
+            {
+                echo 'No Results';
+            }
+        ?>
+        </select>
+
+        <br/>
+        <br/>
+        <br/>
+        <div class="form-group btn_actions">
+            <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
+        </div>
+
+        </fieldset>
+        </form>
 </div>
 
 <script type='text/javascript'>
@@ -165,7 +153,7 @@ jQuery(document).ready(function ()
 	    wordTwoCharacterClasses: true,
 	    wordRepetitions: true,
 	    wordSimilarToUsername: true,
-	    wordOneSpecialChar: true,
+	    wordOneSpecialChar: true
 	}
     };
     
@@ -179,7 +167,7 @@ jQuery(document).ready(function ()
 	    wordSimilarToUsername: "La password non può contenere il tuo username",
 	    wordTwoCharacterClasses: "Use different character classes",
 	    wordRepetitions: "Troppi caratteri ripetuti",
-	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')",
+	    wordSequences: "Non puoi usare 3 caratteri successivi. (Es. 'abc' o '123')"
 	}
 	
     };

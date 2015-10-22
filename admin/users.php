@@ -224,8 +224,8 @@ $(document).ready(function()
          autoOpen:false,
          modal: true,
          hide: 'fade',
-         width:350,
-         height:275
+         width:640,
+         height:480
     });
         
     $("#btn_user_edit").click(function(e)
