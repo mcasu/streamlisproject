@@ -80,7 +80,7 @@ $(document).ready(function()
             {
                 var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
                 {
-                    return row[5];
+                    return jQuery(row[5]).text();
                 } );
                 
                 alert("RUOLO: " + userSelectedRole);
