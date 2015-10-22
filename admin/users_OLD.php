@@ -25,7 +25,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 $(document).ready(function()
 {
     var selectedUser = [];
-    var usersTable = $('#users_table').DataTable({
+    $('#users_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
@@ -53,81 +53,36 @@ $(document).ready(function()
     $("#resetpwd_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
-    
-    $('#users_table tbody').on( 'click', 'tr', function () 
+    $("input:radio").click(function(lastSelectedRow)
     {
-        var id = this.id;
-        var index = $.inArray(id, selectedUser);
- 
-        if ( index === -1 ) 
-        {
-            selectedUser.push( id );
-        } 
-        else 
-        {
-            selectedUser.splice( index, 1 );
-        }
+        $("#btn_user_resetpwd").hide();
+        $("#btn_user_edit").hide();
         
-        $(this).toggleClass('selected');
-        
-        var usersTableRowSelected = usersTable.rows('.selected').data().length;
-        
-        if (usersTableRowSelected > 0)
-        {
-            $("#btn_user_delete").prop('disabled', false);
+	$("#users_table").find("tr").removeClass("active");
+	
+	var isChecked = $(this).prop("checked");
+	var selectedRow = $(this).parent("td").parent("tr");
+    
+	if (isChecked)
+	{
+	    selectedRow.addClass("active");
+	    $("#btn_user_delete").prop('disabled', false);
             
-            if (usersTableRowSelected === 1)
+            var role = selectedRow.find(".userRole").attr('name');
+            if (role === "normal" || role === "viewer" || role === "publisher")
             {
-                var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
-                {
-                    return row[6];
-                } );
-                
-                if (userSelectedRole === 2 || userSelectedRole === 3)
-                {
-                    $("#btn_user_resetpwd").show();
-                }
-                
+                $("#btn_user_resetpwd").show();
                 $("#btn_user_edit").show();
             }
-            else
-            {
-                $("#btn_user_resetpwd").hide();
-                $("#btn_user_edit").hide();
-            }
-        }
-    });    
-    
-//    $("input:radio").click(function(lastSelectedRow)
-//    {
-//        $("#btn_user_resetpwd").hide();
-//        $("#btn_user_edit").hide();
-//        
-//	$("#users_table").find("tr").removeClass("active");
-//	
-//	var isChecked = $(this).prop("checked");
-//	var selectedRow = $(this).parent("td").parent("tr");
-//    
-//	if (isChecked)
-//	{
-//	    selectedRow.addClass("active");
-//	    $("#btn_user_delete").prop('disabled', false);
-//            
-//            var role = selectedRow.find(".userRole").attr('name');
-//            if (role === "normal" || role === "viewer" || role === "publisher")
-//            {
-//                $("#btn_user_resetpwd").show();
-//                $("#btn_user_edit").show();
-//            }
-//	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
-//	}
-//	else
-//	{
-//	    selectedRow.removeClass("active");
-//	    //selectedRow.css({ "background-color": '', "color": "black" });
-//	}
-//	
-//    });
+	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
+	}
+	else
+	{
+	    selectedRow.removeClass("active");
+	    //selectedRow.css({ "background-color": '', "color": "black" });
+	}
+	
+    });
 
     $("#btn_user_delete").click(function()
     {
@@ -215,16 +170,66 @@ $(document).ready(function()
             </div>
             
             <table class="table table-hover" id="users_table">
-                <thead>
-                    <tr class="head">
-                        <th>NOME</th>
-                        <th>ID</th>
-                        <th>MAIL</th>
-                        <th>USERNAME</th>
-                        <th>CONGREGAZIONE</th>
-                        <th>TIPO</th>
-                    </tr>
-                </thead>
+
+            <?php
+
+                $result = $dbactions->GetUsers();
+
+                if ($result)
+                {
+                    echo '<thead>';
+                        echo '<tr class="head">';
+                            echo'<th></th>';
+                            echo '<th>NOME</th>';
+                            echo '<th>ID</th>';
+                            echo '<th>MAIL</th>';
+                            echo '<th>USERNAME</th>';
+                            echo '<th>CONGREGAZIONE</th>';
+                            echo '<th>TIPO</th>';
+                        echo '</tr>';
+                    echo '</thead>';
+                    
+                    echo '<tbody>';
+                    $index = 0;
+                    while ($row = mysql_fetch_array($result))
+                    {
+                        $values[0]=$row['user_name'];
+                        $values[1]=$row['user_id'];
+                        $values[2]=$row['user_mail'];
+                        $values[3]=$row['username'];
+                        $values[4]=$row['user_group_name'];
+                        $values[5]=$row['user_role_name'];
+
+                        echo '<tr class="users_table" id="' .$values[1].'">';
+                                    echo '<td><input type="radio" name="user_selected" /></td>';
+                                    echo '<td>' . $values[0] . '</td>';
+                                    echo '<td>' . $values[1] . '</td>';
+                                    echo '<td>' . $values[2] . '</td>';
+                                    echo '<td>' . $values[3] . '</td>';
+                                    echo '<td>' . $values[4] . '</td>';
+                                    echo '<td class="userRole" name="' . $values[5] . '">';
+                                        if ($values[5] == "admin")
+                                        {
+                                            echo '<span class="label label-success">' . $values[5] . '</span>';
+                                        }
+                                        elseif ($values[5] == "publisher")
+                                        {
+                                            echo '<span class="label label-warning">' . $values[5] . '</span>';
+                                        }
+                                        else
+                                        {
+                                            echo '<span class="label label-default">' . $values[5] . '</span>';
+                                        }
+                                    echo '</td>';
+                        echo '</tr>';
+                        
+                        $index++;
+                    }
+                    echo '</tbody>';
+
+                }
+
+            ?>
             </table>
         </div>
     </div>

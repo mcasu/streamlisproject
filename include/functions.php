@@ -34,7 +34,9 @@ switch ($fname)
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
     case "get_datatable_ondemand_actions_convert":
         $userId = filter_input(INPUT_POST, 'userId');
-        return GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId);        
+        return GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId);      
+    case "get_datatable_users":
+        return GetDataTableUsers($host, $uname, $pwd, $database);        
     case "delete_ondemand_actions_join":
         $joinSelectedIds = filter_input(INPUT_POST, 'joinSelectedIds');
         return DeleteOndemandActionsJoin($dbactions, $joinSelectedIds);
@@ -328,7 +330,8 @@ $where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
  * server-side, there is no need to edit below this line.
  */
  
-require( 'ssp.class.php' );
+//require( 'ssp.class.php' );
+require( 'ssp.php' );
  
 echo json_encode(
     SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $where)
@@ -445,6 +448,95 @@ function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
     }
     
     return TRUE;
+}
+
+function GetDataTableUsers($host, $uname, $pwd, $database)
+{
+    /*
+ * DataTables example server-side processing script.
+ *
+ * Please note that this script is intentionally extremely simply to show how
+ * server-side processing can be implemented, and probably shouldn't be used as
+ * the basis for a large complex system. It is suitable for simple use cases as
+ * for learning.
+ *
+ * See http://datatables.net/usage/server-side for full details on the server-
+ * side processing requirements of DataTables.
+*  https://github.com/DataTables/DataTables/blob/master/examples/server_side/scripts/ssp.class.php
+ *
+ * @license MIT - http://datatables.net/license_mit
+ */
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Easy set variables
+ */
+ 
+// DB table to use
+$table = 'users';
+ 
+// Table's primary key
+$primaryKey = 'id_user';
+ 
+// Array of database columns which should be read and sent back to DataTables.
+// The `db` parameter represents the column name in the database, while the `dt`
+// parameter represents the DataTables column identifier.
+$columns = array(
+    array( 'db' => '`u`.id_user', 'dt' => 0 ,
+        'formatter' => function( $d, $row ) {
+            return '#' . $d;
+        }, 'field' => 'id_user'),
+    array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
+    array( 'db' => '`u`.email', 'dt' => 2 , 'field' => 'email'),
+    array( 'db' => '`u`.phone_number', 'dt' => 3 , 'field' => 'phone_number'),
+    array( 'db' => '`u`.username', 'dt' => 4 , 'field' => 'username'),                
+    array( 'db' => '`g`.group_name', 'dt' => 5 , 'field' => 'group_name'),   
+    array( 'db' => '`u`.user_role_id', 'dt' => 6 ,
+            'formatter' => function( $d, $row ) {
+            switch ($d) 
+            {
+                case 1:
+                    return '<span class="label label-success">Amministratore</span>';
+                case 2:
+                    return '<span class="label label-default">Viewer</span>';
+                case 3:
+                    return '<span class="label label-warning">Publisher</span>';
+            }
+        }, 'field' => 'user_role_id'),
+    array( 'db' => 'user_logged', 'dt' => 7 , 'field' => 'user_logged'),
+    array(
+        'db' => 'id',
+        'dt' => 'DT_RowId',
+        'formatter' => function( $d, $row ) {
+            // Technically a DOM id cannot start with an integer, so we prefix
+            // a string. This can also be useful if you have multiple tables
+            // to ensure that the id is unique with a different prefix
+            return 'row_'.$d;
+        },
+        'field' => 'DT_RowId'                
+    )
+);
+ 
+// SQL server connection information
+$sql_details = array(
+    'user' => $uname,
+    'pass' => $pwd,
+    'db'   => $database,
+    'host' => $host
+);
+ 
+$join = "FROM `{$table}` AS `u` INNER JOIN `groups` AS `g` ON (`u`.`user_group_id` = `g`.`group_id`)";
+//$where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
+ 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
+ 
+require( 'ssp.class.php' );
+ 
+echo json_encode(
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $join)
+);
 }
 
 function DeleteOndemandActionsConvert($dbactions, $convertSelectedIds)
