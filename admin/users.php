@@ -85,7 +85,7 @@ $(document).ready(function()
                 
                 alert("RUOLO: " + userSelectedRole);
                 
-                if (userSelectedRole.indexOf("Viewer") > -1 || userSelectedRole.indexOf("Publisher") > -1)
+                if (userSelectedRole.indexOf("Viewer") >= 0 || userSelectedRole.indexOf("Publisher") >= 0)
                 {
                     $("#btn_user_resetpwd").show();
                 }
@@ -97,6 +97,12 @@ $(document).ready(function()
                 $("#btn_user_resetpwd").hide();
                 $("#btn_user_edit").hide();
             }
+        }
+        else
+        {
+            $("#btn_user_resetpwd").hide();
+            $("#btn_user_edit").hide();
+            $("#btn_user_delete").prop('disabled', true);
         }
     });    
 
