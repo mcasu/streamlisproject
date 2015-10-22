@@ -228,12 +228,12 @@ $(document).ready(function()
         modal: true,
         hide: 'fade',
         width:640,
-        height:500,
+        height:600,
         buttons: [
            {
                 text: "Salva",
                 click: function() {
-                alert("Hai cliccato su Salva");
+                alert("Il nuovo nome utente è: " + $('#username').val());
                 // Recupero i dati del form e salvo nel database
 //                    $.post("/include/functions.php",{fname:"users_delete",userIds:userSelectedIds.toString()},
 //                    function(data,status)
