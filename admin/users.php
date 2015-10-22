@@ -219,7 +219,7 @@ $(document).ready(function()
     });
     
     var userEditDlg = $('#divUserEdit').load('user_edit.php').dialog({
-        title: 'Modifica utente',
+        title: 'Modifica utente id #' + $('.inputUserData').attr('id'),
         resizable: true,
         autoOpen:false,
         modal: true,
@@ -258,12 +258,12 @@ $(document).ready(function()
     {
         e.preventDefault();
         
-        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
+        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row) 
         {
-            return row[0];
+            return row[1];
         } );
         
-        userEditDlg.data('userId',userSelectedId).dialog('open');
+        userEditDlg.data('name',userSelectedName).dialog('open');
     });
 });
 

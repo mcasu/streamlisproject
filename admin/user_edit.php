@@ -10,36 +10,10 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <div class="container-fluid">
     <div class="panel panel-primary">
-        
-        <div class="panel-heading">
-            <h4 class="panel-title" style="margin-top:10px;margin-left:6px;"></h4>
-        </div>
-        
         <div class="panel-body">
             <form role="form" id="formChangeUser" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
                 <fieldset>
                 <br/>
-                <?php
-
-                    if (isset($UserHasCreated) && $UserHasCreated)
-                    {
-                            echo '<br/><div class="alert alert-success" role="alert">';
-                                echo '<h4>Utente modificato con successo!</h4>';
-                            echo '</div>';
-                    }
-                    elseif(isset($UserHasCreated))
-                    {
-                        echo '<br/><div class="alert alert-danger" role="alert">';
-                            echo '<h4><b>Modifica utente fallita!</b></h4>';
-                            echo '<i>'.$mainactions->GetErrorMessage().'</i>';
-                            echo '<h5>Modifica i dati inseriti oppure chiudi la finestra.</h5>';
-                        echo '</div>';
-                    }
-                ?>
-
-                <input type='hidden' name='submitted' id='submitted' value='1'/>
-                <input type='text' class='spmhidip' name='<?php echo $utils->GetSpamTrapInputName($mainactions->randomKey); ?>' />
-
                 <div class="form-group">
                     <div class="control-group">
                         <!-- CAMPO NOME COMPLETO -->
@@ -123,11 +97,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
                 <br/>
                 <br/>
-                <br/>
-                <div class="form-group btn_actions">
-                    <button type="submit" class="btn btn-primary btn-lg btn_action_create" style="margin-left:10px;margin-right:4px;">Salva</button>
-                </div>
-
                 </fieldset>
             </form>
         </div>
@@ -137,7 +106,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     
 jQuery(document).ready(function ()
 {
-    $('h4.panel-title').val("UTENTE ID #" + $('#divUserEdit').data('userId'));
+    alert("Nome: " + $("#name").val());
     
     var options = {};
     options.common =
@@ -199,18 +168,6 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
-
-
-    if( $('.alert').is(':visible') )
-    {
-	$('.btn_action_reset').attr('disabled', "disabled");
-    }
-    if( $('.alert-success').is(':visible') )
-    {
-	$('.btn_actions').hide();
-	$('input').attr('disabled',true);
-	$('select').attr('disabled',true);
-    }
 });
 
 </script>
