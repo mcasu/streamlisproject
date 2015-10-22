@@ -262,7 +262,7 @@ $(document).ready(function()
         var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
         var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
         var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
-        var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return row[5];});
+        var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
         
         userEditDlg.load('user_edit.php');
         
