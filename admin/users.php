@@ -217,8 +217,8 @@ $(document).ready(function()
             <table class="table table-hover" id="users_table">
                 <thead>
                     <tr class="head">
-                        <th>NOME</th>
                         <th>ID</th>
+                        <th>NOME</th>
                         <th>MAIL</th>
                         <th>USERNAME</th>
                         <th>CONGREGAZIONE</th>

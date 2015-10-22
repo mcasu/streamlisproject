@@ -487,10 +487,9 @@ $columns = array(
         }, 'field' => 'id_user'),
     array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
     array( 'db' => '`u`.email', 'dt' => 2 , 'field' => 'email'),
-    array( 'db' => '`u`.phone_number', 'dt' => 3 , 'field' => 'phone_number'),
-    array( 'db' => '`u`.username', 'dt' => 4 , 'field' => 'username'),                
-    array( 'db' => '`g`.group_name', 'dt' => 5 , 'field' => 'group_name'),   
-    array( 'db' => '`u`.user_role_id', 'dt' => 6 ,
+    array( 'db' => '`u`.username', 'dt' => 3 , 'field' => 'username'),                
+    array( 'db' => '`g`.group_name', 'dt' => 4 , 'field' => 'group_name'),   
+    array( 'db' => '`u`.user_role_id', 'dt' => 5 ,
             'formatter' => function( $d, $row ) {
             switch ($d) 
             {
@@ -502,7 +501,7 @@ $columns = array(
                     return '<span class="label label-warning">Publisher</span>';
             }
         }, 'field' => 'user_role_id'),
-    array( 'db' => 'user_logged', 'dt' => 7 , 'field' => 'user_logged'),
+    array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
     array(
         'db' => 'id',
         'dt' => 'DT_RowId',
