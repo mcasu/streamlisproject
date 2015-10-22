@@ -536,7 +536,7 @@ $join = "FROM `{$table}` AS `u` INNER JOIN `groups` AS `g` ON (`u`.`user_group_i
 require( 'ssp.php' );
  
 echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, $join)
+    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns, $join)
 );
 }
 
