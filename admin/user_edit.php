@@ -111,7 +111,7 @@ jQuery(document).ready(function ()
     $("#username").val($('#divUserEdit').data('username'));
     
     $('#group_name option[value="' + $('#divUserEdit').data('group') + '"]').prop('selected', true);
-    $('#user_role_name option[value="' + $('#divUserEdit').data('role').toLowerCase() + '"]').prop('selected', true);
+    $('#user_role_name option[value="' + $('#divUserEdit').data('role').toString().toLowerCase() + '"]').prop('selected', true);
     
     var options = {};
     options.common =
