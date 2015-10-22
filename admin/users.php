@@ -268,6 +268,7 @@ $(document).ready(function()
                         if (status === "success")
                         {
                             $('#divUserEdit').dialog("close");
+                            usersTable.ajax.reload();
                             $('#users_table tbody tr').removeClass('selected');
                             //usersTable.fnUpdate( [userId, fullName, email, username, groupName], 1 ); // Row
                             $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
