@@ -83,6 +83,8 @@ $(document).ready(function()
                     return row[5];
                 } );
                 
+                alert("RUOLO: " + userSelectedRole);
+                
                 if (userSelectedRole === 2 || userSelectedRole === 3)
                 {
                     $("#btn_user_resetpwd").show();
