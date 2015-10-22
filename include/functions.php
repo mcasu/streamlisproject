@@ -484,10 +484,7 @@ $primaryKey = 'id_user';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier.
 $columns = array(
-    array( 'db' => '`u`.id_user', 'dt' => 0 ,
-        'formatter' => function( $d, $row ) {
-            return '#' . $d;
-        }, 'field' => 'id_user'),
+    array( 'db' => '`u`.id_user', 'dt' => 0 , 'field' => 'id_user'),
     array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
     array( 'db' => '`u`.email', 'dt' => 2 , 'field' => 'email'),
     array( 'db' => '`u`.username', 'dt' => 3 , 'field' => 'username'),                
