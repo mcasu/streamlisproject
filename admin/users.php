@@ -245,7 +245,7 @@ $(document).ready(function()
 
                     $("#user_updated_alert_success").hide();
 
-                    var userId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
+                    var userId = $('#divUserEdit').data('userId',userSelectedName);
                     var fullName = $('#name').val();
                     var email = $('#email').val();
                     var username = $('#username').val();
@@ -283,6 +283,7 @@ $(document).ready(function()
             ]
         });        
         
+        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
         var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row){return row[1];});
         var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
         var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
@@ -291,6 +292,7 @@ $(document).ready(function()
         
         userEditDlg.load('user_edit.php');
         
+        userEditDlg.data('userId',userSelectedId);
         userEditDlg.data('name',userSelectedName);
         userEditDlg.data('email',userSelectedEmail);
         userEditDlg.data('username',userSelectedUsername);
