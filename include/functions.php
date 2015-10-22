@@ -494,7 +494,7 @@ $columns = array(
             switch ($d) 
             {
                 case 1:
-                    return '<span class="label label-success">Amministratore</span>';
+                    return '<span class="label label-success">Admin</span>';
                 case 2:
                     return '<span class="label label-default">Viewer</span>';
                 case 3:

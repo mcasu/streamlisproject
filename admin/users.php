@@ -258,12 +258,21 @@ $(document).ready(function()
     {
         e.preventDefault();
         
-        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row) 
-        {
-            return row[1];
-        } );
+        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row){return row[1];});
+        var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
+        var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
+        var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
+        var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return row[5];});
         
-        userEditDlg.load('user_edit.php').data('name',userSelectedName).dialog('open');
+        userEditDlg.load('user_edit.php');
+        
+        userEditDlg.data('name',userSelectedName);
+        userEditDlg.data('email',userSelectedEmail);
+        userEditDlg.data('username',userSelectedUsername);
+        userEditDlg.data('group',userSelectedGroup);
+        userEditDlg.data('role',userSelectedRole);
+        
+        userEditDlg.dialog('open');
     });
 });
 

@@ -107,6 +107,11 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 jQuery(document).ready(function ()
 {
     $("#name").val($('#divUserEdit').data('name'));
+    $("#email").val($('#divUserEdit').data('email'));
+    $("#username").val($('#divUserEdit').data('username'));
+    
+    $('#group_name option[value="' + $('#divUserEdit').data('group') + '"]').prop('selected', true);
+    $('#user_role_name option[value="' + $('#divUserEdit').data('role').toLowerCase() + '"]').prop('selected', true);
     
     var options = {};
     options.common =
