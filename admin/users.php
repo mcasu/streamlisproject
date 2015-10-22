@@ -245,7 +245,7 @@ $(document).ready(function()
 
                     $("#user_updated_alert_success").hide();
 
-                    var userId = $('#divUserEdit').data('userId',userSelectedName);
+                    var userId = $('#userId').val();
                     var fullName = $('#name').val();
                     var email = $('#email').val();
                     var username = $('#username').val();

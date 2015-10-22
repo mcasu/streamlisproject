@@ -11,6 +11,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 <div class="container-fluid">
     <div class="panel panel-primary">
         <div class="panel-body">
+            <input type="hidden" id="userId" name="userId"/>
             <form role="form" id="formChangeUser" action='<?php echo $utils->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
                 <fieldset>
                 <div class="form-group">
@@ -102,6 +103,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     
 jQuery(document).ready(function ()
 {
+    $("#userId").val($('#divUserEdit').data('userId'));
     $("#name").val($('#divUserEdit').data('name'));
     $("#email").val($('#divUserEdit').data('email'));
     $("#username").val($('#divUserEdit').data('username'));
