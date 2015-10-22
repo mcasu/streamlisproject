@@ -94,7 +94,7 @@ $(document).ready(function()
             "type": "POST",
             "data": { fname : "get_datatable_users" }
         },
-        "rowCallback": function( row, data ) 
+        "rowCallback": function( row, data )
         {
             if ( $.inArray(data.DT_RowId, selectedUser) !== -1 ) 
             {
