@@ -117,7 +117,7 @@ $(document).ready(function()
         
         if (confirm("Vuoi davvero eliminare gli utenti selezionati?"))
 	{
-            $.post("/include/functions.php",{fname:"users_delete",userSelectedIds:userSelectedIds.toString()},
+            $.post("/include/functions.php",{fname:"users_delete",userIds:userSelectedIds.toString()},
             function(data,status)
             {
                 //alert("Data: " + data + "\nStatus: " + status);
