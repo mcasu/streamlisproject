@@ -27,7 +27,7 @@ switch ($fname)
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
     case "users_delete":
         $userIds = filter_input(INPUT_POST, 'userIds');
-        return DeleteUsers($mainactions, $dbactions, $userIds);
+        return DeleteUsers($dbactions, $userIds);
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
