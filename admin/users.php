@@ -83,7 +83,7 @@ $(document).ready(function()
                     return row[5];
                 } );
                 
-                //alert("RUOLO: " + userSelectedRole);
+                alert("RUOLO: " + userSelectedRole);
                 
                 if (userSelectedRole.indexOf("Viewer") > -1 || userSelectedRole.indexOf("Publisher") > -1)
                 {
