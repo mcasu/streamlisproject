@@ -512,7 +512,7 @@ $columns = array(
             // to ensure that the id is unique with a different prefix
             return 'row_'.$d;
         },
-        'field' => 'DT_RowId'                
+        'field' => 'id'                
     )
 );
  
