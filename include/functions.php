@@ -28,6 +28,14 @@ switch ($fname)
     case "users_delete":
         $userIds = filter_input(INPUT_POST, 'userIds');
         return DeleteUsers($dbactions, $userIds);
+    case "user_update":
+        $userId = filter_input(INPUT_POST, 'userId');
+        $fullName = filter_input(INPUT_POST, 'fullName');
+        $email = filter_input(INPUT_POST, 'email');
+        $username = filter_input(INPUT_POST, 'username');
+        $groupName = filter_input(INPUT_POST, 'groupName');
+        $roleName = filter_input(INPUT_POST, 'roleName');
+        return UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName);        
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
@@ -588,13 +596,20 @@ function GetUserLoggedNumber($dbactions)
 
 function DeleteUsers($dbactions, $userIds)
 {
-    //$userIdsArray = explode(",",$userIds);
-    
-    //error_log("INFO - join ids: " . $joinSelectedIds);
-    
     if (!$dbactions->DeleteUsers($userIds))
     {
         error_log("ERROR - functions.php DeleteUsers() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    return TRUE;
+}
+
+function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName)
+{
+    if (!$dbactions->UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName))
+    {
+        error_log("ERROR - functions.php UpdateUser() FAILED! " . $dbactions->GetErrorMessage());
         return FALSE;
     }
     

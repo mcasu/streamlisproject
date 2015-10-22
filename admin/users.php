@@ -53,6 +53,10 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 		<h3>Reset password fallito!</h3>
                 <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
             </div>
+            <div id="user_updated_alert_success" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Utente modificato con successo!</h3>
+            </div>
             
             <table class="table table-hover" id="users_table">
                 <thead>
@@ -103,6 +107,7 @@ $(document).ready(function()
     $("#btn_user_resetpwd").hide();
     $("#btn_user_edit").hide();
     $("#resetpwd_alert_success").hide();
+    $("#user_updated_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
     
@@ -222,36 +227,53 @@ $(document).ready(function()
     });
     
     var userEditDlg = $('#divUserEdit').dialog({
-        title: 'Modifica utente id #' + $('.inputUserData').attr('id'),
+        title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
         resizable: true,
         autoOpen:false,
         modal: true,
         hide: 'fade',
-        width:640,
-        height:600,
+        width:600,
+        height:620,
         buttons: [
            {
                 text: "Salva",
                 click: function() {
-                alert("Il nuovo nome utente è: " + $('#username').val());
+                
+                $("#user_updated_alert_success").hide();
+                
+                var userId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
+                var fullName = $('#name').val();
+                var email = $('#email').val();
+                var username = $('#username').val();
+                var groupName = $('#group_name').val();
+                var roleName = $('#user_role_name').val();
+                
                 // Recupero i dati del form e salvo nel database
-//                    $.post("/include/functions.php",{fname:"users_delete",userIds:userSelectedIds.toString()},
-//                    function(data,status)
-//                    {
-//                        //alert("Data: " + data + "\nStatus: " + status);
-//
-//                        if (status === "success")
-//                        {
-//                            usersTable.$('.selected').remove();
-//                            $("#btn_user_delete").prop('disabled', true);
-//                        }
-//                    });  
+                $.post("/include/functions.php",{
+                    fname:"user_update",
+                    userId:userId,
+                    fullName:fullName,
+                    email:email,
+                    username:username,
+                    groupName:groupName,
+                    roleName:roleName},
+                function(data,status)
+                {
+                    //alert("Data: " + data + "\nStatus: " + status);
+
+                    if (status === "success")
+                    {
+                        usersTable.ajax.reload();
+                        $(this).dialog("close");
+                        $("#user_updated_alert_success").show();
+                    }
+                });  
                }
            },
            {
                text: "Chiudi",
                click: function() {
-                   $( this ).dialog( "close" );
+                   $(this).dialog("close");
                }
            }
         ]
