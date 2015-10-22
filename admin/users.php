@@ -253,31 +253,31 @@ $(document).ready(function()
                     var roleName = $('#user_role_name').val();
 
                     // Recupero i dati del form e salvo nel database
-//                    $.post("/include/functions.php",{
-//                        fname:"user_update",
-//                        userId:userId,
-//                        fullName:fullName,
-//                        email:email,
-//                        username:username,
-//                        groupName:groupName,
-//                        roleName:roleName},
-//                    function(data,status)
-//                    {
-//                        //alert("Data: " + data + "\nStatus: " + status);
-//    
-//                        if (status === "success")
-//                        {
-//                            usersTable.ajax.reload();
-//                            $(this).dialog("close");
-//                            $("#user_updated_alert_success").show();
-//                        }
-//                    });  
+                    $.post("/include/functions.php",{
+                        fname:"user_update",
+                        userId:userId,
+                        fullName:fullName,
+                        email:email,
+                        username:username,
+                        groupName:groupName,
+                        roleName:roleName},
+                    function(data,status)
+                    {
+                        //alert("Data: " + data + "\nStatus: " + status);
+    
+                        if (status === "success")
+                        {
+                            usersTable.ajax.reload();
+                            $('#divUserEdit').dialog("close");
+                            $("#user_updated_alert_success").show();
+                        }
+                    });  
                    }
                },
                {
                    text: "Chiudi",
                    click: function() {
-                       $(this).dialog("close");
+                       $('#divUserEdit').dialog("close");
                    }
                }
             ]
