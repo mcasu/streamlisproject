@@ -126,15 +126,18 @@ $(document).ready(function()
         
         if (usersTableRowSelected > 0)
         {
-            $("#btn_user_delete").prop('disabled', false);
+            var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
+            {
+                return jQuery(row[5]).text();
+            } );
+                
+            if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
+            {
+                $("#btn_user_delete").prop('disabled', false);
+            }
             
             if (usersTableRowSelected === 1)
             {
-                var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
-                {
-                    return jQuery(row[5]).text();
-                } );
-                
                 if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
                 {
                     $("#btn_user_resetpwd").show();
