@@ -269,15 +269,16 @@ $(document).ready(function()
                             if (status === "success")
                             {
                                 $('#divUserEdit').dialog("close");
+                                usersTable.ajax.reload( function ( json ) {
+                                    //$('#users_table tbody tr').removeClass('selected');
+                                    //lastRowSelected.addClass('selected');
+                                }, false);
                                 $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
                                 $("#user_updated_alert_success").show();
                             }
                         }); 
 
-                        usersTable.ajax.reload( function ( json ) {
-                            $('#users_table tbody tr').removeClass('selected');
-                            lastRowSelected.addClass('selected');
-                        }, false);
+
                    }
                },
                {

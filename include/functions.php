@@ -518,7 +518,7 @@ $columns = array(
             // a string. This can also be useful if you have multiple tables
             // to ensure that the id is unique with a different prefix
             return 'row_'.$d;
-        }, 'field' => 'id')
+        }, 'field' => '`u`.id')
 );
  
 // SQL server connection information
