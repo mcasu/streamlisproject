@@ -230,7 +230,7 @@ $(document).ready(function()
     $("#btn_user_edit").click(function(e)
     {
         e.preventDefault();
-        var lastRowSelected = $.map(usersTable.rows('.selected'));
+        var lastRowSelected = $(usersTable.rows('.selected'));
         
         var userEditDlg = $('#divUserEdit').dialog({
             title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
