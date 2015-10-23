@@ -229,9 +229,7 @@ $(document).ready(function()
     
     $("#btn_user_edit").click(function(e)
     {
-        e.preventDefault();
-        
-        var lastRowSelected = usersTable.rows('.selected');
+        //e.preventDefault();
         
         var userEditDlg = $('#divUserEdit').dialog({
             title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
@@ -274,7 +272,6 @@ $(document).ready(function()
                             usersTable.ajax.reload( function ( json ) {
                                 //$('#users_table tbody tr').removeClass('selected');
                             }, false);
-                            //usersTable.fnUpdate( [userId, fullName, email, username, groupName], 1 ); // Row
                             $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
                             $("#user_updated_alert_success").show();
                             
