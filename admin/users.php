@@ -100,7 +100,8 @@ $(document).ready(function()
             {
                 $(row).addClass('selected');
             }
-        }        
+        },
+        rowId: 'extn'
     });
     
     $("#btn_user_delete").prop('disabled', true);
@@ -271,8 +272,7 @@ $(document).ready(function()
                         {
                             $('#divUserEdit').dialog("close");
                             usersTable.ajax.reload( function ( json ) {
-                                $('#users_table tbody tr').removeClass('selected');
-                                lastRowSelected.select();
+                                //$('#users_table tbody tr').removeClass('selected');
                             }, false);
                             //usersTable.fnUpdate( [userId, fullName, email, username, groupName], 1 ); // Row
                             $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
