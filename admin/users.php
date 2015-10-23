@@ -229,7 +229,7 @@ $(document).ready(function()
     
     $("#btn_user_edit").click(function(e)
     {
-        //e.preventDefault();
+        e.preventDefault();
         
         var userEditDlg = $('#divUserEdit').dialog({
             title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
@@ -244,39 +244,39 @@ $(document).ready(function()
                     text: "Salva",
                     click: function() {
 
-                    $("#user_updated_alert_success").hide();
+                        $("#user_updated_alert_success").hide();
 
-                    var userId = $('#userId').val();
-                    var fullName = $('#name').val();
-                    var email = $('#email').val();
-                    var username = $('#username').val();
-                    var groupName = $('#group_name').val();
-                    var roleName = $('#user_role_name').val();
+                        var userId = $('#userId').val();
+                        var fullName = $('#name').val();
+                        var email = $('#email').val();
+                        var username = $('#username').val();
+                        var groupName = $('#group_name').val();
+                        var roleName = $('#user_role_name').val();
 
-                    // Recupero i dati del form e salvo nel database
-                    $.post("/include/functions.php",{
-                        fname:"user_update",
-                        userId:userId,
-                        fullName:fullName,
-                        email:email,
-                        username:username,
-                        groupName:groupName,
-                        roleName:roleName},
-                    function(data,status)
-                    {
-                        //alert("Data: " + data + "\nStatus: " + status);
-    
-                        if (status === "success")
+                        // Recupero i dati del form e salvo nel database
+                        $.post("/include/functions.php",{
+                            fname:"user_update",
+                            userId:userId,
+                            fullName:fullName,
+                            email:email,
+                            username:username,
+                            groupName:groupName,
+                            roleName:roleName},
+                        function(data,status)
                         {
-                            $('#divUserEdit').dialog("close");
-                            usersTable.ajax.reload( function ( json ) {
-                                //$('#users_table tbody tr').removeClass('selected');
-                            }, false);
-                            $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
-                            $("#user_updated_alert_success").show();
-                            
-                        }
-                    });  
+                            //alert("Data: " + data + "\nStatus: " + status);
+
+                            if (status === "success")
+                            {
+                                $('#divUserEdit').dialog("close");
+                                $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
+                                $("#user_updated_alert_success").show();
+                            }
+                        }); 
+
+                        usersTable.ajax.reload( function ( json ) {
+                            //$('#users_table tbody tr').removeClass('selected');
+                        }, false);
                    }
                },
                {
