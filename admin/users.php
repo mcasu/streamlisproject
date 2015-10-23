@@ -101,7 +101,7 @@ $(document).ready(function()
                 $(row).addClass('selected');
             }
         },
-        rowId: 'extn'
+        rowId: 'id'
     });
     
     $("#btn_user_delete").prop('disabled', true);
