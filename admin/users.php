@@ -230,6 +230,7 @@ $(document).ready(function()
     $("#btn_user_edit").click(function(e)
     {
         e.preventDefault();
+        var lastRowSelected = $.map(usersTable.rows('.selected'));
         
         var userEditDlg = $('#divUserEdit').dialog({
             title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
@@ -275,7 +276,8 @@ $(document).ready(function()
                         }); 
 
                         usersTable.ajax.reload( function ( json ) {
-                            //$('#users_table tbody tr').removeClass('selected');
+                            $('#users_table tbody tr').removeClass('selected');
+                            lastRowSelected.addClass('selected');
                         }, false);
                    }
                },
