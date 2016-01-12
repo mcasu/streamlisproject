@@ -50,7 +50,15 @@ class SSP {
 
                 // Is there a formatter?
                 if ( isset( $column['formatter'] ) ) {
-                    $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+                    if ($column['dt'] == 'DT_RowId')
+                    {
+                        $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i][ $primaryKey ] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i][ $primaryKey ] );
+                    }
+                    else
+                    {
+                        $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
+                    }
+                    
                     error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i]) . " [" . $data[$i][ $primaryKey ] . "]");
                 }
                 else {
