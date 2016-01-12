@@ -52,14 +52,14 @@ class SSP {
                 if ( isset( $column['formatter'] ) ) {
                     if ($column['dt'] == 'DT_RowId')
                     {
-                        $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i][ $primaryKey ] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i][ $primaryKey ] );
+                        $row[ $column['dt'] ] = $data[$i][ $primaryKey ];
                     }
                     else
                     {
                         $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
                     }
                     
-                    error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i]) . " [" . $data[$i][ $primaryKey ] . "]");
+                    error_log("INFO - DT->" . $row[ $column['dt'] ]);
                 }
                 else {
                     $row[ $column['dt'] ] = htmlentities( ($isJoin) ? $data[$i][ $columns[$j]['field'] ] : $data[$i][ $columns[$j]['db'] ] );
