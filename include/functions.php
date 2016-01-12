@@ -512,7 +512,7 @@ $columns = array(
     array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
     array(
         'db' => '`u`.id',
-        'dt' => 'DT_RowId',
+        'dt' => '`u`.DT_RowId',
         'formatter' => function( $d, $row ) {
             // Technically a DOM id cannot start with an integer, so we prefix
             // a string. This can also be useful if you have multiple tables

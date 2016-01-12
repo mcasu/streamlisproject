@@ -51,7 +51,7 @@ class SSP {
                 // Is there a formatter?
                 if ( isset( $column['formatter'] ) ) {
                     $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
-                    error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) . " DT->" . $row[ $column['dt'] ]);
+                    error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) . " DB->" . $column['formatter']( $data[$i][ $column['db'] ], $data[$i] ));
                 }
                 else {
                     $row[ $column['dt'] ] = htmlentities( ($isJoin) ? $data[$i][ $columns[$j]['field'] ] : $data[$i][ $columns[$j]['db'] ] );
