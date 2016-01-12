@@ -38,7 +38,7 @@ class SSP {
      * @return array Formatted data in a row based format
      */
 
-    static function data_output ( $columns, $data, $isJoin = false )
+    static function data_output ( $columns, $data, $primaryKey, $isJoin = false )
     {
         $out = array();
 
@@ -51,7 +51,7 @@ class SSP {
                 // Is there a formatter?
                 if ( isset( $column['formatter'] ) ) {
                     $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
-                    error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i]) . " COLUMN->" . $data[$i][ $column['field'] ]);
+                    error_log("INFO - FIELD->" . $column['formatter']( $data[$i][ $column['field'] ], $data[$i]) . " [" . $data[$i][ $column[$primaryKey] ] . "]");
                 }
                 else {
                     $row[ $column['dt'] ] = htmlentities( ($isJoin) ? $data[$i][ $columns[$j]['field'] ] : $data[$i][ $columns[$j]['db'] ] );
@@ -283,7 +283,7 @@ class SSP {
             "draw"            => intval( $request['draw'] ),
             "recordsTotal"    => intval( $recordsTotal ),
             "recordsFiltered" => intval( $recordsFiltered ),
-            "data"            => SSP::data_output( $columns, $data, $joinQuery )
+            "data"            => SSP::data_output( $columns, $data, $primaryKey, $joinQuery )
         );
     }
 

@@ -511,7 +511,7 @@ $columns = array(
         }, 'field' => 'user_role_id'),
     array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
     array(
-        'db' => 'id',
+        'db' => '`u`.id',
         'dt' => 'DT_RowId',
         'formatter' => function( $d, $row ) {
             // Technically a DOM id cannot start with an integer, so we prefix
