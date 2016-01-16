@@ -212,7 +212,10 @@ $(document).ready(function()
             var userAdminId = $('.inputUserData').attr('id');
             var userId = userSelectedId;
             //alert("USER ID -> " + userSelectedId);
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:userId, userAdminId:userAdminId},
+            $.post("../include/functions.php",{
+                fname:"users_resetpwd",
+                userToResetId:userId, 
+                userAdminId:userAdminId},
 	    function(data,status)
 	    {
 		    //alert("Data: " + data + "\nStatus: " + status);

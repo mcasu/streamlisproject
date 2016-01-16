@@ -22,7 +22,7 @@ switch ($fname)
         $stream_name = filter_input(INPUT_GET, 'streamName');
         return GetCurrentLivePlayersNumber($dbactions, $stream_name);
     case "users_resetpwd":
-        $userId = filter_input(INPUT_POST, 'userId');
+        $userId = filter_input(INPUT_POST, 'userToResetId');
         $userAdminId = filter_input(INPUT_POST, 'userAdminId');
         error_log("INFO - USER->" .$userId);
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
