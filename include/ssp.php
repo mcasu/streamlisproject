@@ -59,7 +59,6 @@ class SSP {
                         $row[ $column['dt'] ] = ($isJoin) ? $column['formatter']( $data[$i][ $column['field'] ], $data[$i] ) : $column['formatter']( $data[$i][ $column['db'] ], $data[$i] );
                     }
                     
-                    error_log("INFO - DT->" . $row[ $column['dt'] ]);
                 }
                 else {
                     $row[ $column['dt'] ] = htmlentities( ($isJoin) ? $data[$i][ $columns[$j]['field'] ] : $data[$i][ $columns[$j]['db'] ] );
