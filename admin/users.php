@@ -211,7 +211,6 @@ $(document).ready(function()
     
             var userAdminId = $('.inputUserData').attr('id');
             var userId = userSelectedId[0];
-            //alert("USER ID -> " + userSelectedId);
             $.post("../include/functions.php",{
                 fname:"users_resetpwd",
                 userToResetId:userId, 

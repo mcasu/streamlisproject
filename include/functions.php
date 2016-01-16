@@ -23,9 +23,7 @@ switch ($fname)
         return GetCurrentLivePlayersNumber($dbactions, $stream_name);
     case "users_resetpwd":
         $userAdminId = filter_input(INPUT_POST, 'userAdminId');
-        //$userId = filter_input(INPUT_POST, 'userToResetId');
-        $userId = $_POST['userToResetId'];
-        error_log("INFO - USER->" .$userId);
+        $userId = filter_input(INPUT_POST, 'userToResetId');
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
     case "users_delete":
         $userIds = filter_input(INPUT_POST, 'userIds');
@@ -170,8 +168,6 @@ function PlayDoneEventFound($player_events, $event)
 
 function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
 {
-    error_log("\INFO 01 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
-    
     // Get the user data
     $userData = array();
     if(!$dbactions->GetUserById($userId,$userData))
