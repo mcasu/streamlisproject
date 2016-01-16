@@ -175,8 +175,6 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
         return FALSE;
     }
 
-    error_log("\INFO 02 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
-    
     // Generate new password
     $passwordNew = $mainactions->GenerateRandomPassword(8);
             
@@ -187,14 +185,10 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     }
     $userAdminData = array();
     
-    error_log("\INFO 03 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
-    
     if (!$dbactions->GetUserById($userAdminId, $userAdminData))
     {
         return FALSE;
     }
-    
-    error_log("\INFO 04 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
     
     $mailTo = array();
     $mailTo[] = array("email" => $mainactions->admin_email, "name" => "admin");
