@@ -24,6 +24,7 @@ switch ($fname)
     case "users_resetpwd":
         $userId = filter_input(INPUT_POST, 'userId');
         $userAdminId = filter_input(INPUT_POST, 'userAdminId');
+        error_log("INFO - USER->" .$userId);
         return ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId);
     case "users_delete":
         $userIds = filter_input(INPUT_POST, 'userIds');
