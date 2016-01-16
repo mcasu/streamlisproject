@@ -168,6 +168,8 @@ function PlayDoneEventFound($player_events, $event)
 
 function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
 {
+    error_log("\INFO 01 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
+    
     // Get the user data
     $userData = array();
     if(!$dbactions->GetUserById($userId,$userData))
@@ -175,6 +177,8 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
         return FALSE;
     }
 
+    error_log("\INFO 02 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
+    
     // Generate new password
     $passwordNew = $mainactions->GenerateRandomPassword(8);
             
@@ -185,10 +189,14 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     }
     $userAdminData = array();
     
+    error_log("\INFO 03 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
+    
     if (!$dbactions->GetUserById($userAdminId, $userAdminData))
     {
         return FALSE;
     }
+    
+    error_log("\INFO 04 - functions.php ResetUserPassword() USER->" .$userId . " ADMIN->" .$userAdminId);
     
     $mailTo = array();
     $mailTo[] = array("email" => $mainactions->admin_email, "name" => "admin");
@@ -211,7 +219,7 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     
     if (!$mainactions->SendMail($mailTo, $mailSubject, $mailBody))
     {
-        error_log("\ERROR - functions.php SendMail() FAILED!");
+        error_log("\ERROR - functions.php ResetUserPassword() - SendMail() FAILED!");
     }
     
     return TRUE;
