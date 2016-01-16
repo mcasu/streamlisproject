@@ -210,6 +210,7 @@ $(document).ready(function()
             $("#resetpwd_alert_fail").hide();
     
             var userAdminId = $('.inputUserData').attr('id');
+            alert("USER ID -> " + userSelectedId);
             $.post("../include/functions.php",{fname:"users_resetpwd", userId:userSelectedId, userAdminId:userAdminId},
 	    function(data,status)
 	    {
