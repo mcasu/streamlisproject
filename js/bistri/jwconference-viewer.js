@@ -65,20 +65,10 @@ var onBistriConferenceReady = function ()
             return;
         }
         
-        console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
+        console.log( "VIEWER - Hai fatto il join con member name: " + username );
+        //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
-        // we start a call and open a data channel with every single room members
-        for( var i = 0; i < data.members.length; i++ )
-        {
-            console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
-
-//            peers[ data.members[ i ].id ] = data.members[ i ];
-//            // send a call request to peer
-//            BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-//            // send data channel request to peer
-//            BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
-        }
-            
+           
         BistriConference.startStream("320x240", function( localStream )
         {
             // when the local stream is received we attach it to a node in the page to display it
