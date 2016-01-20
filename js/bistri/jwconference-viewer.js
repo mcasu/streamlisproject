@@ -294,6 +294,7 @@ function joinConference()
     
     if( roomToJoin )
     {
+        console.log("VIEWER - Faccio il join alla room [" + roomToJoin + "]");
         // we are ready join the conference room.
         // event "onJoinedRoom" is triggered when the operation successed.
         BistriConference.joinRoom( roomToJoin, 4 );
