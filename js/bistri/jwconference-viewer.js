@@ -134,6 +134,24 @@ var onBistriConferenceReady = function ()
     {
         console.log( "Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         peers[ data.pid ] = data;
+        
+        BistriConference.startStream("320x240", function( localStream )
+        {
+            // when the local stream is received we attach it to a node in the page to display it
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+            
+//            // we start a call and open a data channel with every single room members
+//            for( var i = 0; i < data.members.length; i++ )
+//            {
+//                console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
+//
+//                peers[ data.members[ i ].id ] = data.members[ i ];
+//                // send a call request to peer
+//                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+//                // send data channel request to peer
+//                BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
+//            }
+        } );
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
