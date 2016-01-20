@@ -41,14 +41,14 @@ var onBistriConferenceReady = function ()
             return;
         }
         
-        getInputDevices(function (devices) {
-    for (var device in devices) {
-        device = devices[device];
-
-        // device.kind == 'audio' || 'video'
-        console.log(device.id, device.label);
-    }
-});
+//        getInputDevices(function (devices) {
+//            for (var device in devices) {
+//                device = devices[device];
+//
+//                // device.kind == 'audio' || 'video'
+//                console.log(device.id, device.label);
+//            }
+//        });
         
     } );
     
