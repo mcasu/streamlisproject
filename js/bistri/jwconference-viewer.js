@@ -65,6 +65,8 @@ var onBistriConferenceReady = function ()
             return;
         }
         
+        console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
+        
         // we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
         {
