@@ -131,7 +131,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
             {
                 $(".alert-danger").hide();
                 var result = CheckLiveExistsForPublishCode($('#roomSelector').val());
-                var members = BistriConference.getRoomMembers($('#roomSelector').val());
+                //var members = BistriConference.getRoomMembers($('#roomSelector').val());
                 
                 //alert("ROOM: " + $('#roomSelector').val() + " COUNT: " + members.length);
                 if (result  === "false")
