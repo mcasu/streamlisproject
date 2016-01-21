@@ -99,10 +99,11 @@ var onBistriConferenceReady = function ()
     } );
 
     // when a local or a remote stream has been stopped
-    BistriConference.streams.addHandler( "onStreamClosed", function ( stream ) 
+    BistriConference.streams.addHandler( "onStreamClosed", function ( remoteStream ) 
     {
+        console.log("PUBLISHER - Rimuovo lo stream di [" + remoteStream.name + "]");
         // remove the stream from the page
-        BistriConference.detachStream( stream );
+        BistriConference.detachStream( remoteStream );
     } );
 
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
@@ -110,18 +111,18 @@ var onBistriConferenceReady = function ()
         // display an alert message
        console.log("PUBLISHER - Richiesta in entrata: " + data);
        
-       BistriConference.startStream( "640x480", function( remoteStream )
-       {
-                var roomId = data.room;
-
-                // when the local stream is received we attach it to a node in the page to display it
-                BistriConference.attachStream( remoteStream, document.querySelector( "#remoteStreams" ), { autoplay: true, fullscreen: true } );
-
-                // when the local stream has been started and attached to the page
-                // we are ready join the conference room.
-                // event "onJoinedRoom" is triggered when the operation successed.
-                BistriConference.joinRoom( roomId, 4 );
-        });
+//       BistriConference.startStream( "640x480", function( remoteStream )
+//       {
+//                var roomId = data.room;
+//
+//                // when the local stream is received we attach it to a node in the page to display it
+//                BistriConference.attachStream( remoteStream, document.querySelector( "#remoteStreams" ), { autoplay: true, fullscreen: true } );
+//
+//                // when the local stream has been started and attached to the page
+//                // we are ready join the conference room.
+//                // event "onJoinedRoom" is triggered when the operation successed.
+//                BistriConference.joinRoom( roomId, 4 );
+//        });
     });
 
     // when a new remote stream is received
@@ -131,7 +132,7 @@ var onBistriConferenceReady = function ()
         {
             return;
         }
-        console.log("PUBLISHER - Aggiungo un nuovo stream...");
+        console.log("PUBLISHER - Aggiungo lo stream di [" + pid + "]");
         // when a remote stream is received we attach it to a node in the page to display it
 	var nodes = $( ".remoteStreams" );
         console.log("PUBLISHER - Remote streams div numbers: " + nodes.length);
@@ -148,7 +149,7 @@ var onBistriConferenceReady = function ()
 
                 $(nodes[ i ]).parent().parent().find("h5").html(pid);
                 
-                BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: true } );
+                BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: false } );
                 break;
             }
         }

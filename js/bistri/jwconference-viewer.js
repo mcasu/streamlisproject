@@ -80,22 +80,23 @@ var onBistriConferenceReady = function ()
         
         //console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
         
+        var streamNameToView = $( "#streamSelector option:selected" ).val();
+        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
+        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
         
-//        var streamNameToView = $( "#streamSelector option:selected" ).val();
-//        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
-//        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
-//        
-//        jwplayer("player").setup({
-//                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-//                 autostart: true,
-//                 controls: true,
-//                 rtmp: {
-//                     bufferlength: 0.1  
-//                 },
-//                 aspectratio: "4:3",
-//                 width: 320,
-//                 height: 240
-//                 });   
+        $("#localStreamsPlayer").show();
+        
+        jwplayer("player").setup({
+                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
+                 autostart: true,
+                 controls: true,
+                 rtmp: {
+                     bufferlength: 0.1  
+                 },
+                 aspectratio: "4:3",
+                 width: 320,
+                 height: 240
+                 });   
     });
     
     // when the local user has quitted the room
@@ -222,76 +223,13 @@ var onBistriConferenceReady = function ()
     // open a new session on the server
     BistriConference.connect();
 };
-
-function getInputDevices(callback) {
-    // This method is useful only for Chrome!
-
-    var devicesFetched = {};
-
-    // 1st step: verify "MediaStreamTrack" support.
-    if (!window.MediaStreamTrack && !navigator.getMediaDevices) {
-        return callback(devicesFetched);
-    }
-
-    if (!window.MediaStreamTrack && navigator.getMediaDevices) {
-        window.MediaStreamTrack = {};
-    }
-
-    // 2nd step: verify "getSources" supported which is planned to be removed soon!
-    // "getSources" will be replaced with "getMediaDevices"
-    if (!MediaStreamTrack.getSources) {
-        MediaStreamTrack.getSources = MediaStreamTrack.getMediaDevices;
-    }
-
-    // todo: need to verify if this trick works
-    // via: https://code.google.com/p/chromium/issues/detail?id=338511
-    if (!MediaStreamTrack.getSources && navigator.getMediaDevices) {
-        MediaStreamTrack.getSources = navigator.getMediaDevices.bind(navigator);
-    }
-
-    // if still no "getSources"; it MUST be firefox!
-    // or otherwise, it will be older chrome
-    if (!MediaStreamTrack.getSources) {
-        return callback(devicesFetched);
-    }
-
-    // loop over all audio/video input/output devices
-    MediaStreamTrack.getSources(function (media_sources) {
-        var sources = [];
-        for (var i = 0; i < media_sources.length; i++) {
-            sources.push(media_sources[i]);
-        }
-
-        getAllUserMedias(sources);
-
-        if (callback) callback(devicesFetched);
-    });
-
-    var index = 0;
-
-    function getAllUserMedias(media_sources) {
-        var media_source = media_sources[index];
-        if (!media_source) return;
-
-        // to prevent duplicated devices to be fetched.
-        if (devicesFetched[media_source.id]) {
-            index++;
-            return getAllUserMedias(media_sources);
-        }
-      
-        devicesFetched[media_source.id] = media_source;
-
-        index++;
-        getAllUserMedias(media_sources);
-    }
-}
-
         
 // when button "Join Conference Room" has been clicked
 function joinConference()
 {
     var roomToJoin = $('#roomSelector').val();
     $("#localStreamsMyVideo").hide();
+    $("#localStreamsPlayer").hide();
     //alert("Join to room: " + roomToJoin);
     
     if( roomToJoin )
@@ -300,7 +238,6 @@ function joinConference()
         // we are ready join the conference room.
         // event "onJoinedRoom" is triggered when the operation successed.
         BistriConference.joinRoom( roomToJoin, 4 );
-
         
         // Show Quit Conference input button and hide Join Conference input button
         $("#quit").show();
@@ -310,7 +247,7 @@ function joinConference()
     else
     {
         // otherwise, display an alert
-        alert( "You must enter a room name!" );
+        alert( "La room selezionata non è valida!" );
     }
 }
 
