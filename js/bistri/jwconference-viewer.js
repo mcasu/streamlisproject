@@ -67,7 +67,7 @@ var onBistriConferenceReady = function ()
             BistriConference.attachStream( stream01, document.querySelector( "#myvideo01" ), { autoplay: true } );
         } );
         
-        console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
+        //console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
         
         
 //        var streamNameToView = $( "#streamSelector option:selected" ).val();
@@ -109,7 +109,32 @@ var onBistriConferenceReady = function ()
         // display an alert message
         alert( error.text + " (" + error.code + ")" );
     } );
-        
+    
+    BistriConference.streams.addHandler( "onStreamError", function ( error ) 
+    {
+        switch( error.name ){
+            case "PermissionDeniedError":
+                alert( "Webcam access has not been allowed" );
+                BistriConference.quitRoom( room );
+                break
+            case "DevicesNotFoundError":
+                if( confirm( "No webcam/mic found on this machine. Process call anyway ?" ) )
+                {
+//                    // show pane with id "pane_2"
+//                    showPanel( "pane_2" );
+//                    for ( var i=0, max=members.length; i<max; i++ ) {
+//                        // ... request a call
+//                        BistriConference.call( members[ i ].id, room );
+//                    }
+                }
+                else
+                {
+                    BistriConference.quitRoom( room );  
+                }
+                break
+        }
+    });
+    
     // when an error occurred while trying to join a room
     BistriConference.signaling.addHandler( "onJoinRoomError", function ( error ) {
         // display an alert message
