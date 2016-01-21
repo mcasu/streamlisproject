@@ -127,11 +127,14 @@ var onBistriConferenceReady = function ()
         switch( error.name )
         {
             case "PermissionDeniedError":
-                alert( "Webcam access has not been allowed" );
+                alert( "Webcam access has not been allowed");
                 break
             case "DevicesNotFoundError":
                 alert( "No webcam/mic found on this machine. Process call anyway ?" );
                 break
+            default:
+                alert(error.name);
+                break;
         }
         quitConference();
     });
