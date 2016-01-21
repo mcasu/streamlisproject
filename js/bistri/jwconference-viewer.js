@@ -68,6 +68,11 @@ var onBistriConferenceReady = function ()
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
+        // if the local stream (webcam) is ready 
+        if (!window.localStream) 
+        {
+            alert("Non trovo la tua Webcam! :( ");
+        }  
            
         BistriConference.startStream("320x240", function( localStream )
         {
