@@ -101,7 +101,7 @@ var onBistriConferenceReady = function ()
     // when a local or a remote stream has been stopped
     BistriConference.streams.addHandler( "onStreamClosed", function ( remoteStream ) 
     {
-        console.log("PUBLISHER - Rimuovo lo stream di [" + remoteStream.name + "]");
+        console.log("PUBLISHER - Rimuovo lo stream...");
         // remove the stream from the page
         BistriConference.detachStream( remoteStream );
     } );
