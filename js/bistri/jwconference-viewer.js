@@ -60,14 +60,14 @@ var onBistriConferenceReady = function ()
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
+        BistriConference.startStream( "320x240", function( stream01 ){
+            // display stream into the page
+            BistriConference.attachStream( stream01, document.querySelector( "#myvideo01" ), { autoplay: true } );
+        } );
+
         console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
         
         localStreams = BistriConference.getLocalStreams();
-        
- 
-        // when the local stream is received we attach it to a node in the page to display it
-        BistriConference.attachStream( localStreams[0], document.querySelector( "#myvideo01" ), { autoplay: true } );
-        
         
         if (localStreams[1])
         { 
