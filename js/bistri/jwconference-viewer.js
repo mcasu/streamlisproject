@@ -72,6 +72,7 @@ var onBistriConferenceReady = function ()
         if (!window.localStream) 
         {
             alert("Non trovo la tua Webcam! :( ");
+            return;
         }  
            
         BistriConference.startStream("320x240", function( localStream )
