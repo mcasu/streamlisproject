@@ -41,14 +41,7 @@ var onBistriConferenceReady = function ()
             return;
         }
         
-//        getInputDevices(function (devices) {
-//            for (var device in devices) {
-//                device = devices[device];
-//
-//                // device.kind == 'audio' || 'video'
-//                console.log(device.id, device.label);
-//            }
-//        });
+        BistriConference.getMediaSources( function( sources ){ console.log( "Sources:", sources ); } ); 
         
     } );
     
@@ -68,12 +61,6 @@ var onBistriConferenceReady = function ()
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
-        // if the local stream (webcam) is ready 
-        if (!window.localStream) 
-        {
-            alert("Non trovo la tua Webcam! :( ");
-            return;
-        }  
            
         BistriConference.startStream("320x240", function( localStream )
         {
