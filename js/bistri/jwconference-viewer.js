@@ -60,11 +60,22 @@ var onBistriConferenceReady = function ()
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
-        BistriConference.startStream("webcamSD", function( stream01 ){
+        BistriConference.startStream("webcamSD", function( localStream ){
             
             $("#localStreamsMyVideo").show();
             // display stream into the page
-            BistriConference.attachStream( stream01, document.querySelector( "#myvideo01" ), { autoplay: true } );
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+            
+            // we start a call and open a data channel with every single room members
+            for( var i = 0; i < data.members.length; i++ )
+            {
+                peers[ data.members[ i ].id ] = data.members[ i ];
+                // send a call request to peer
+                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+                
+                // send data channel request to peer
+                //BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
+            }
         } );
         
         //console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
@@ -112,27 +123,16 @@ var onBistriConferenceReady = function ()
     
     BistriConference.streams.addHandler( "onStreamError", function ( error ) 
     {
-        switch( error.name ){
+        switch( error.name )
+        {
             case "PermissionDeniedError":
                 alert( "Webcam access has not been allowed" );
-                BistriConference.quitRoom( room );
                 break
             case "DevicesNotFoundError":
-                if( confirm( "No webcam/mic found on this machine. Process call anyway ?" ) )
-                {
-//                    // show pane with id "pane_2"
-//                    showPanel( "pane_2" );
-//                    for ( var i=0, max=members.length; i<max; i++ ) {
-//                        // ... request a call
-//                        BistriConference.call( members[ i ].id, room );
-//                    }
-                }
-                else
-                {
-                    BistriConference.quitRoom( room );  
-                }
+                alert( "No webcam/mic found on this machine. Process call anyway ?" );
                 break
         }
+        quitConference();
     });
     
     // when an error occurred while trying to join a room
@@ -146,24 +146,6 @@ var onBistriConferenceReady = function ()
     {
         console.log( "VIEWER - Il membro " + data.name + " è entrato nella room [" + data.room + "] con pid " + data.pid );
         peers[ data.pid ] = data;
-        
-//        BistriConference.startStream("320x240", function( localStream )
-//        {
-//            // when the local stream is received we attach it to a node in the page to display it
-//            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-//            
-////            // we start a call and open a data channel with every single room members
-////            for( var i = 0; i < data.members.length; i++ )
-////            {
-////                console.log( "Hai fatto il join con member id: ", data.members[ i ].id, "member display name:", data.members[ i ].name );
-////
-////                peers[ data.members[ i ].id ] = data.members[ i ];
-////                // send a call request to peer
-////                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-////                // send data channel request to peer
-////                BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
-////            }
-//        } );
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
