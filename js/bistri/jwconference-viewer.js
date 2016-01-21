@@ -70,6 +70,11 @@ var onBistriConferenceReady = function ()
             BistriConference.attachStream( stream02, document.querySelector( "#myvideo02" ), { autoplay: true } );
         } );
 
+        BistriConference.startStream( "320x240", function( stream03 ){
+            // display stream into the page
+            BistriConference.attachStream( stream03, document.querySelector( "#myvideo01" ), { autoplay: true } );
+        } );
+        
         console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
         
         
