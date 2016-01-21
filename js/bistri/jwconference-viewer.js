@@ -64,15 +64,14 @@ var onBistriConferenceReady = function ()
             // display stream into the page
             BistriConference.attachStream( stream01, document.querySelector( "#myvideo01" ), { autoplay: true } );
         } );
+        
+        BistriConference.startStream( "320x240", function( stream02 ){
+            // display stream into the page
+            BistriConference.attachStream( stream02, document.querySelector( "#myvideo02" ), { autoplay: true } );
+        } );
 
         console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
         
-        localStreams = BistriConference.getLocalStreams();
-        
-        if (localStreams[1])
-        { 
-            BistriConference.attachStream( localStreams[1], document.querySelector( "#myvideo02" ), { autoplay: true } );
-        }
         
 //        var streamNameToView = $( "#streamSelector option:selected" ).val();
 //        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
