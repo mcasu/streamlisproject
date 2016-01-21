@@ -69,11 +69,11 @@ var onBistriConferenceReady = function ()
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
            
-//        BistriConference.startStream("320x240", function( localStream )
-//        {
-//            // when the local stream is received we attach it to a node in the page to display it
-//            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-//        } );
+        BistriConference.startStream("320x240", function( localStream )
+        {
+            // when the local stream is received we attach it to a node in the page to display it
+            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+        } );
         
 //        var streamNameToView = $( "#streamSelector option:selected" ).val();
 //        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
@@ -292,11 +292,9 @@ function joinConference()
     $("#localStreamsMyVideo").hide();
     //alert("Join to room: " + roomToJoin);
     
-    console.log("VIEWER - Faccio il join alla room [" + roomToJoin + "]");
-    
     if( roomToJoin )
     {
-        
+        console.log("VIEWER - Faccio il join alla room [" + roomToJoin + "]");
         // we are ready join the conference room.
         // event "onJoinedRoom" is triggered when the operation successed.
         BistriConference.joinRoom( roomToJoin, 4 );
