@@ -3,6 +3,7 @@ var room;
 var userId;
 var username = q(".username").id;
 var userrole = q(".userrole").id;
+var localStreams = new Array();
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
@@ -41,8 +42,6 @@ var onBistriConferenceReady = function ()
             return;
         }
         
-        BistriConference.getMediaSources( function( sources ){ console.log( "Sources:", sources ); } ); 
-        
     } );
     
     // when the user has joined a room
@@ -61,12 +60,18 @@ var onBistriConferenceReady = function ()
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
-           
-        BistriConference.startStream("320x240", function( localStream )
-        {
+        localStreams = BistriConference.getLocalStreams();
+        
+        if (localStreams[0])
+        { 
             // when the local stream is received we attach it to a node in the page to display it
-            BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
-        } );
+            BistriConference.attachStream( localStreams[0], document.querySelector( "#myvideo01" ), { autoplay: true } );
+        }
+        
+        if (localStreams[1])
+        { 
+            BistriConference.attachStream( localStreams[1], document.querySelector( "#myvideo02" ), { autoplay: true } );
+        }
         
 //        var streamNameToView = $( "#streamSelector option:selected" ).val();
 //        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
