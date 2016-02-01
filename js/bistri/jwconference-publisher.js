@@ -86,6 +86,22 @@ var onBistriConferenceReady = function ()
        alert( error.text + " (" + error.code + ")" );
     } );
 
+    BistriConference.streams.addHandler( "onStreamError", function ( error ) 
+    {
+        switch( error.name )
+        {
+            case "PermissionDeniedError":
+                alert( "Webcam access has not been allowed");
+                break
+            case "DevicesNotFoundError":
+                alert( "No webcam/mic found on this machine. Process call anyway ?" );
+                break
+            default:
+                alert(error.name);
+                break;
+        }
+        quitConference();
+    });
     // we register an handler for "onPeerJoinedRoom" event, triggered when a remote user join a room
     BistriConference.signaling.addHandler( "onPeerJoinedRoom", function( data )
     {
