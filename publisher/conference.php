@@ -70,7 +70,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                         <h4 class="panel-title" style="margin-top: 4px;">ADUNANZA</h4>
                     </div>
                     <div class="panel-body">
-                        <div id="myvideo" class="localStreams" style="max-width: 320px; max-height: 240px;"></div>
+                        <div id="myvideo" class="localStreams"></div>
                     </div>
                 </div>
                 
