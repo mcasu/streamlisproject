@@ -86,17 +86,17 @@ var onBistriConferenceReady = function ()
         
         $("#localStreamsPlayer").show();
         
-        jwplayer("player").setup({
-                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-                 autostart: true,
-                 controls: true,
-                 rtmp: {
-                     bufferlength: 0.1  
-                 },
-                 aspectratio: "4:3",
-                 width: 320,
-                 height: 240
-                 });   
+//        jwplayer("player").setup({
+//                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
+//                 autostart: true,
+//                 controls: true,
+//                 rtmp: {
+//                     bufferlength: 0.1  
+//                 },
+//                 aspectratio: "4:3",
+//                 width: 320,
+//                 height: 240
+//                 });   
     });
     
     // when the local user has quitted the room

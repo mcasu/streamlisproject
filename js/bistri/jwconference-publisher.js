@@ -49,6 +49,20 @@ var onBistriConferenceReady = function ()
         console.log( "PUBLISHER - Hai fatto il join con member name: " + username );
         
         $("#joined_user_number").find(".label").html(data.members.length);
+        
+        BistriConference.startStream("webcamSD", function( localStream ){
+
+        // display stream into the page
+        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+
+        // we start a call and open a data channel with every single room members
+        for( var i = 0; i < data.members.length; i++ )
+        {
+            peers[ data.members[ i ].id ] = data.members[ i ];
+            // send a call request to peer
+            BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+        }
+    } );
     });
     
     // when the local user has quitted the room
