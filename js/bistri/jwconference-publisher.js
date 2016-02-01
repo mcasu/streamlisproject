@@ -53,7 +53,8 @@ var onBistriConferenceReady = function ()
         BistriConference.startStream("webcam-hd", function( localStream ){
 
         // display stream into the page
-        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
+        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
+        { autoplay: true, fullscreen: true, controls: true } );
 
         // we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
