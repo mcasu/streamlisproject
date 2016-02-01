@@ -50,7 +50,7 @@ var onBistriConferenceReady = function ()
         
         $("#joined_user_number").find(".label").html(data.members.length);
         
-        BistriConference.startStream("webcamSD", function( localStream ){
+        BistriConference.startStream("webcam-hd", function( localStream ){
 
         // display stream into the page
         BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), { autoplay: true } );
