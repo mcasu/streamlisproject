@@ -63,7 +63,7 @@
 
         var p = navigator.mediaDevices.getUserMedia({ 
             audio: true, 
-            video: { frameRate: { ideal: 25, max: 30 }, width: 576, height: 720 } });
+            video: { frameRate: { ideal: 25, max: 30 }, width: 576, height: 720, aspectRatio: 1.33 } });
 
         p.then(function(mediaStream) {
           var video = document.querySelector('video');
