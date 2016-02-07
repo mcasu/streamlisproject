@@ -4,6 +4,10 @@ var userId;
 var username = q(".username").id;
 var userrole = q(".userrole").id;
 
+var videoElement = document.querySelector('myvideo');
+var videoSelect = document.querySelector('select#videoSource');
+var selectors = [videoSelect];
+
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
 var onBistriConferenceReady = function () 
@@ -41,6 +45,77 @@ var onBistriConferenceReady = function ()
         }
     } );
     
+    
+    function gotDevices(deviceInfos) 
+    {
+        // Handles being called several times to update labels. Preserve values.
+        var values = selectors.map(function(select) 
+        {
+          return select.value;
+        });
+        
+        selectors.forEach(function(select) 
+        {
+          while (select.firstChild) 
+          {
+            select.removeChild(select.firstChild);
+          }
+        });
+        
+        for (var i = 0; i !== deviceInfos.length; ++i) 
+        {
+            var deviceInfo = deviceInfos[i];
+            var option = document.createElement('option');
+            option.value = deviceInfo.deviceId;
+
+            if (deviceInfo.kind === 'videoinput') {
+              option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
+              videoSelect.appendChild(option);
+            } 
+            else 
+            {
+              console.log('Some other kind of source/device: ', deviceInfo);
+            }
+        }
+        
+        selectors.forEach(function(select, selectorIndex) 
+        {
+          if (Array.prototype.slice.call(select.childNodes).some(function(n) {
+                return n.value === values[selectorIndex];
+              })) 
+          {
+            select.value = values[selectorIndex];
+          }
+        });
+      }
+    
+    function errorCallback(error) {
+        console.log('navigator.getUserMedia error: ', error);
+      }
+      
+    function start() {
+      if (window.stream) {
+        window.stream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+      }
+      //var audioSource = audioInputSelect.value;
+      var videoSource = videoSelect.value;
+      var constraints = {
+        audio: false,
+        video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+      };
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(stream) {
+        window.stream = stream; // make stream available to console
+        videoElement.srcObject = stream;
+        // Refresh button list in case labels have become available
+        return navigator.mediaDevices.enumerateDevices();
+      })
+      .then(gotDevices)
+      .catch(errorCallback);
+    }      
+      
     // when the user has joined a room
     BistriConference.signaling.addHandler( "onJoinedRoom", function ( data ) 
     {
@@ -50,20 +125,29 @@ var onBistriConferenceReady = function ()
         
         $("#joined_user_number").find(".label").html(data.members.length);
         
-        BistriConference.startStream("720x576:25", function( localStream ){
+        
+        navigator.mediaDevices.enumerateDevices()
+        .then(gotDevices)
+        .catch(errorCallback);
+        
+        videoSelect.onchange = start;
 
-        // display stream into the page
-        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
-        { autoplay: true, fullscreen: true, controls: true } );
-
-        // we start a call and open a data channel with every single room members
-        for( var i = 0; i < data.members.length; i++ )
-        {
-            peers[ data.members[ i ].id ] = data.members[ i ];
-            // send a call request to peer
-            BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-        }
-    } );
+        start();
+        
+//        BistriConference.startStream("720x576:25", function( localStream ){
+//
+//        // display stream into the page
+//        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
+//        { autoplay: true, fullscreen: true, controls: true } );
+//
+//        // we start a call and open a data channel with every single room members
+//        for( var i = 0; i < data.members.length; i++ )
+//        {
+//            peers[ data.members[ i ].id ] = data.members[ i ];
+//            // send a call request to peer
+//            BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+//        }
+//    } );
     });
     
     // when the local user has quitted the room

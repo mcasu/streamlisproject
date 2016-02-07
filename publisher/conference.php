@@ -70,7 +70,11 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                         <h4 class="panel-title" style="margin-top: 4px;">ADUNANZA</h4>
                     </div>
                     <div class="panel-body">
-                        <div id="myvideo" class="localStreams"></div>
+                            <div class="select">
+                                <label for="videoSource">Seleziona la webcam: </label><select id="videoSource"></select>
+                            </div>
+                            <video id="myvideo" autoplay></video>
+                            <!--<div id="myvideo" class="localStreams"></div>-->
                     </div>
                 </div>
                 
