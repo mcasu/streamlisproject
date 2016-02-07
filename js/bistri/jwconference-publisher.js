@@ -10,6 +10,9 @@ var videoElement = document.querySelector('myvideo');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 var getUserMedia = null;
+var webrtcDetectedBrowser = null;
+var webrtcDetectedVersion = null;
+var webrtcMinimumVersion = null;
 
 // Returns the result of getUserMedia as a Promise.
 function requestUserMedia(constraints) {
@@ -185,14 +188,14 @@ var onBistriConferenceReady = function ()
                 return c;
               };
               if (webrtcDetectedVersion < 38) {
-                webrtcUtils.log('spec: ' + JSON.stringify(constraints));
+                console.log('spec: ' + JSON.stringify(constraints));
                 if (constraints.audio) {
                   constraints.audio = constraintsToFF37(constraints.audio);
                 }
                 if (constraints.video) {
                   constraints.video = constraintsToFF37(constraints.video);
                 }
-                webrtcUtils.log('ff37: ' + JSON.stringify(constraints));
+                console.log('ff37: ' + JSON.stringify(constraints));
               }
               return navigator.mozGetUserMedia(constraints, onSuccess, onError);
             };
@@ -280,7 +283,7 @@ var onBistriConferenceReady = function ()
               if (constraints.video) {
                 constraints.video = constraintsToChrome(constraints.video);
               }
-              webrtcUtils.log('chrome: ' + JSON.stringify(constraints));
+              console.log('chrome: ' + JSON.stringify(constraints));
               return navigator.webkitGetUserMedia(constraints, onSuccess, onError);
             };
             navigator.getUserMedia = getUserMedia;
@@ -315,10 +318,10 @@ var onBistriConferenceReady = function ()
               var origGetUserMedia = navigator.mediaDevices.getUserMedia.
                   bind(navigator.mediaDevices);
               navigator.mediaDevices.getUserMedia = function(c) {
-                webrtcUtils.log('spec:   ' + JSON.stringify(c)); // whitespace for alignment
+                console.log('spec:   ' + JSON.stringify(c)); // whitespace for alignment
                 c.audio = constraintsToChrome(c.audio);
                 c.video = constraintsToChrome(c.video);
-                webrtcUtils.log('chrome: ' + JSON.stringify(c));
+                console.log('chrome: ' + JSON.stringify(c));
                 return origGetUserMedia(c);
               };
             }
