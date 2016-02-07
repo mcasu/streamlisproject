@@ -42,23 +42,36 @@
     </div>
 
     <script>
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      var constraints = {audio: false, video: true};
-      var video = document.querySelector("video");
-      function successCallback(stream) {
-        // stream available to console so you could inspect it and see what this object looks like
-        window.stream = stream;
-        if (window.URL) {
-          video.src = window.URL.createObjectURL(stream);
-        } else {
-          video.src = stream;
-        }
-        video.play();
-      }
-      function errorCallback(error) {
-        console.log("navigator.getUserMedia error: ", error);
-      }
-      navigator.getUserMedia(constraints, successCallback, errorCallback);
+//      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+//      
+//    var constraints = {audio: false, video: true};
+//      var video = document.querySelector("video");
+//      function successCallback(stream) {
+//        // stream available to console so you could inspect it and see what this object looks like
+//        window.stream = stream;
+//        if (window.URL) {
+//          video.src = window.URL.createObjectURL(stream);
+//        } else {
+//          video.src = stream;
+//        }
+//        video.play();
+//      }
+//      function errorCallback(error) {
+//        console.log("navigator.getUserMedia error: ", error);
+//      }
+//      navigator.getUserMedia(constraints, successCallback, errorCallback);
+
+        var p = navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+
+        p.then(function(mediaStream) {
+          var video = document.querySelector('video');
+          video.src = window.URL.createObjectURL(mediaStream);
+          video.onloadedmetadata = function(e) {
+            // Do something with the video here.
+          };
+        });
+
+        p.catch(function(err) { console.log(err.name); }); // always check for errors at the end.
     </script>
 
 </body>
