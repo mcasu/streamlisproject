@@ -116,6 +116,21 @@ var onBistriConferenceReady = function ()
        console.log(" VIEWER - Richiesta in entrata per la room [" + data.room + "] dal pid " + data.pid);
     });
     
+    // when a new remote stream is received
+    BistriConference.streams.addHandler( "onStreamAdded", function ( remoteStream, pid )
+    {
+        if (userrole !== "2")
+        {
+            return;
+        }
+        
+        console.log("VIEWER - Aggiungo lo stream di [" + pid + "]");
+        // when a remote stream is received we attach it to a node in the page to display it
+        
+        BistriConference.attachStream( remoteStream, document.querySelector( "#remotevideo" ), { autoplay: true, fullscreen: false } );
+    } );    
+    
+    
     // when an error occured on the server side
     BistriConference.signaling.addHandler( "onError", function ( error ) 
     {

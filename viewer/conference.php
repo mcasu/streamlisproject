@@ -96,7 +96,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
                       </div>
                         <div class="panel-body">
-                            <div id="player"></div>
+                            <div id="remotevideo"></div>
                         </div>
                     </div>
                 </div>
