@@ -54,7 +54,7 @@ var onBistriConferenceReady = function ()
 
         // display stream into the page
         BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
-        { autoplay: true, fullscreen: true, controls: true, mirror: true } );
+        { autoplay: true, fullscreen: true, controls: true } );
 
         // we start a call and open a data channel with every single room members
         for( var i = 0; i < data.members.length; i++ )
