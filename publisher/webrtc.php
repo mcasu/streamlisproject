@@ -62,7 +62,7 @@
 //      navigator.getUserMedia(constraints, successCallback, errorCallback);
 
         var p = navigator.mediaDevices.getUserMedia({ 
-            audio: true, 
+            audio: false, 
             video: { mandatory:
                         {
                             frameRate: 25, width: 576, height: 720, aspectRatio: 1.33 
