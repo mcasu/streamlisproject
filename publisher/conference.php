@@ -173,7 +173,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
     </script>
     
     <script type="text/javascript" src="/js/bistri/jwconference-publisher.js"></script>
-    <script src="/js/adapter.js"></script>
+    <!--<script src="/js/adapter.js"></script>-->
     <script src="/js/common.js"></script>
     
 </body>

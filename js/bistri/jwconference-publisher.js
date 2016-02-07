@@ -9,6 +9,8 @@ var userrole = q(".userrole").id;
 var videoElement = document.querySelector('myvideo');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
+var getUserMedia = null;
+
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
@@ -127,6 +129,195 @@ var onBistriConferenceReady = function ()
         
         $("#joined_user_number").find(".label").html(data.members.length);
         
+        if (navigator.mozGetUserMedia) 
+        {
+            console.log('This appears to be Firefox');
+            
+            // getUserMedia constraints shim.
+            getUserMedia = function(constraints, onSuccess, onError) {
+              var constraintsToFF37 = function(c) {
+                if (typeof c !== 'object' || c.require) {
+                  return c;
+                }
+                var require = [];
+                Object.keys(c).forEach(function(key) {
+                  if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
+                    return;
+                  }
+                  var r = c[key] = (typeof c[key] === 'object') ?
+                      c[key] : {ideal: c[key]};
+                  if (r.min !== undefined ||
+                      r.max !== undefined || r.exact !== undefined) {
+                    require.push(key);
+                  }
+                  if (r.exact !== undefined) {
+                    if (typeof r.exact === 'number') {
+                      r.min = r.max = r.exact;
+                    } else {
+                      c[key] = r.exact;
+                    }
+                    delete r.exact;
+                  }
+                  if (r.ideal !== undefined) {
+                    c.advanced = c.advanced || [];
+                    var oc = {};
+                    if (typeof r.ideal === 'number') {
+                      oc[key] = {min: r.ideal, max: r.ideal};
+                    } else {
+                      oc[key] = r.ideal;
+                    }
+                    c.advanced.push(oc);
+                    delete r.ideal;
+                    if (!Object.keys(r).length) {
+                      delete c[key];
+                    }
+                  }
+                });
+                if (require.length) {
+                  c.require = require;
+                }
+                return c;
+              };
+              if (webrtcDetectedVersion < 38) {
+                webrtcUtils.log('spec: ' + JSON.stringify(constraints));
+                if (constraints.audio) {
+                  constraints.audio = constraintsToFF37(constraints.audio);
+                }
+                if (constraints.video) {
+                  constraints.video = constraintsToFF37(constraints.video);
+                }
+                webrtcUtils.log('ff37: ' + JSON.stringify(constraints));
+              }
+              return navigator.mozGetUserMedia(constraints, onSuccess, onError);
+            };
+
+            navigator.getUserMedia = getUserMedia;
+
+            // Shim for mediaDevices on older versions.
+            if (!navigator.mediaDevices) {
+              navigator.mediaDevices = {getUserMedia: requestUserMedia,
+                addEventListener: function() { },
+                removeEventListener: function() { }
+              };
+            }
+            navigator.mediaDevices.enumerateDevices =
+                navigator.mediaDevices.enumerateDevices || function() {
+              return new Promise(function(resolve) {
+                var infos = [
+                  {kind: 'audioinput', deviceId: 'default', label: '', groupId: ''},
+                  {kind: 'videoinput', deviceId: 'default', label: '', groupId: ''}
+                ];
+                resolve(infos);
+              });
+            };
+        }
+        else if (navigator.webkitGetUserMedia && window.webkitRTCPeerConnection) 
+        {
+            console.log('This appears to be Chrome');
+            
+            // getUserMedia constraints shim.
+            var constraintsToChrome = function(c) {
+              if (typeof c !== 'object' || c.mandatory || c.optional) {
+                return c;
+              }
+              var cc = {};
+              Object.keys(c).forEach(function(key) {
+                if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
+                  return;
+                }
+                var r = (typeof c[key] === 'object') ? c[key] : {ideal: c[key]};
+                if (r.exact !== undefined && typeof r.exact === 'number') {
+                  r.min = r.max = r.exact;
+                }
+                var oldname = function(prefix, name) {
+                  if (prefix) {
+                    return prefix + name.charAt(0).toUpperCase() + name.slice(1);
+                  }
+                  return (name === 'deviceId') ? 'sourceId' : name;
+                };
+                if (r.ideal !== undefined) {
+                  cc.optional = cc.optional || [];
+                  var oc = {};
+                  if (typeof r.ideal === 'number') {
+                    oc[oldname('min', key)] = r.ideal;
+                    cc.optional.push(oc);
+                    oc = {};
+                    oc[oldname('max', key)] = r.ideal;
+                    cc.optional.push(oc);
+                  } else {
+                    oc[oldname('', key)] = r.ideal;
+                    cc.optional.push(oc);
+                  }
+                }
+                if (r.exact !== undefined && typeof r.exact !== 'number') {
+                  cc.mandatory = cc.mandatory || {};
+                  cc.mandatory[oldname('', key)] = r.exact;
+                } else {
+                  ['min', 'max'].forEach(function(mix) {
+                    if (r[mix] !== undefined) {
+                      cc.mandatory = cc.mandatory || {};
+                      cc.mandatory[oldname(mix, key)] = r[mix];
+                    }
+                  });
+                }
+              });
+              if (c.advanced) {
+                cc.optional = (cc.optional || []).concat(c.advanced);
+              }
+              return cc;
+            };
+
+            getUserMedia = function(constraints, onSuccess, onError) {
+              if (constraints.audio) {
+                constraints.audio = constraintsToChrome(constraints.audio);
+              }
+              if (constraints.video) {
+                constraints.video = constraintsToChrome(constraints.video);
+              }
+              webrtcUtils.log('chrome: ' + JSON.stringify(constraints));
+              return navigator.webkitGetUserMedia(constraints, onSuccess, onError);
+            };
+            navigator.getUserMedia = getUserMedia;
+
+            if (!navigator.mediaDevices) {
+              navigator.mediaDevices = {getUserMedia: requestUserMedia,
+                                        enumerateDevices: function() {
+                return new Promise(function(resolve) {
+                  var kinds = {audio: 'audioinput', video: 'videoinput'};
+                  return MediaStreamTrack.getSources(function(devices) {
+                    resolve(devices.map(function(device) {
+                      return {label: device.label,
+                              kind: kinds[device.kind],
+                              deviceId: device.id,
+                              groupId: ''};
+                    }));
+                  });
+                });
+              }};
+            }
+
+            // A shim for getUserMedia method on the mediaDevices object.
+            // TODO(KaptenJansson) remove once implemented in Chrome stable.
+            if (!navigator.mediaDevices.getUserMedia) {
+              navigator.mediaDevices.getUserMedia = function(constraints) {
+                return requestUserMedia(constraints);
+              };
+            } else {
+              // Even though Chrome 45 has navigator.mediaDevices and a getUserMedia
+              // function which returns a Promise, it does not accept spec-style
+              // constraints.
+              var origGetUserMedia = navigator.mediaDevices.getUserMedia.
+                  bind(navigator.mediaDevices);
+              navigator.mediaDevices.getUserMedia = function(c) {
+                webrtcUtils.log('spec:   ' + JSON.stringify(c)); // whitespace for alignment
+                c.audio = constraintsToChrome(c.audio);
+                c.video = constraintsToChrome(c.video);
+                webrtcUtils.log('chrome: ' + JSON.stringify(c));
+                return origGetUserMedia(c);
+              };
+            }
+            
+        }
         
         navigator.mediaDevices.enumerateDevices()
         .then(gotDevices)
