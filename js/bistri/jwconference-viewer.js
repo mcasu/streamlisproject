@@ -127,7 +127,10 @@ var onBistriConferenceReady = function ()
         console.log("VIEWER - Aggiungo lo stream di [" + pid + "]");
         // when a remote stream is received we attach it to a node in the page to display it
         
-        BistriConference.attachStream( remoteStream, document.querySelector( "#remotevideo" ), { autoplay: true, fullscreen: false } );
+        if (!peers[pid])
+        { 
+            BistriConference.attachStream( remoteStream, document.querySelector( "#remotevideo" ), { autoplay: true, fullscreen: false } );
+        }
     } );    
     
     
