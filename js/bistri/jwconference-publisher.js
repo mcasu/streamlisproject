@@ -10,6 +10,8 @@ var videoElement = document.querySelector('#myvideo');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 var getUserMedia = null;
+var attachMediaStream = null;
+var reattachMediaStream = null;
 var webrtcDetectedBrowser = null;
 var webrtcDetectedVersion = null;
 var webrtcMinimumVersion = null;
@@ -138,6 +140,42 @@ var onBistriConferenceReady = function ()
         
         $("#joined_user_number").find(".label").html(data.members.length);
         
+        if (typeof window === 'object') 
+        {
+            if (window.HTMLMediaElement &&
+              !('srcObject' in window.HTMLMediaElement.prototype)) {
+              // Shim the srcObject property, once, when HTMLMediaElement is found.
+              Object.defineProperty(window.HTMLMediaElement.prototype, 'srcObject', {
+                get: function() {
+                  // If prefixed srcObject property exists, return it.
+                  // Otherwise use the shimmed property, _srcObject
+                  return 'mozSrcObject' in this ? this.mozSrcObject : this._srcObject;
+                },
+                set: function(stream) {
+                  if ('mozSrcObject' in this) {
+                    this.mozSrcObject = stream;
+                  } else {
+                    // Use _srcObject as a private property for this shim
+                    this._srcObject = stream;
+                    // TODO: revokeObjectUrl(this.src) when !stream to release resources?
+                    this.src = URL.createObjectURL(stream);
+                  }
+                }
+              });
+            }
+            // Proxy existing globals
+            getUserMedia = window.navigator && window.navigator.getUserMedia;
+          }
+
+        // Attach a media stream to an element.
+        attachMediaStream = function(element, stream) {
+          element.srcObject = stream;
+        };
+
+        reattachMediaStream = function(to, from) {
+          to.srcObject = from.srcObject;
+        };
+
         if (navigator.mozGetUserMedia) 
         {
             console.log('This appears to be Firefox');
