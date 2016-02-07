@@ -11,6 +11,12 @@ var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 var getUserMedia = null;
 
+// Returns the result of getUserMedia as a Promise.
+function requestUserMedia(constraints) {
+  return new Promise(function(resolve, reject) {
+    getUserMedia(constraints, resolve, reject);
+  });
+}
 
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
