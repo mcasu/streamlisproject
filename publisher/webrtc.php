@@ -61,7 +61,9 @@
 //      }
 //      navigator.getUserMedia(constraints, successCallback, errorCallback);
 
-        var p = navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+        var p = navigator.mediaDevices.getUserMedia({ 
+            audio: true, 
+            video: { frameRate: { ideal: 25, max: 30 }, width: 576, height: 720 } });
 
         p.then(function(mediaStream) {
           var video = document.querySelector('video');
