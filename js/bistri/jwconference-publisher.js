@@ -1,3 +1,5 @@
+'use strict';
+
 var peers = new Array();
 var room;
 var userId;
