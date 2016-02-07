@@ -6,7 +6,7 @@ var userId;
 var username = q(".username").id;
 var userrole = q(".userrole").id;
 
-var videoElement = document.querySelector('myvideo');
+var videoElement = document.querySelector('#myvideo');
 var videoSelect = document.querySelector('select#videoSource');
 var selectors = [videoSelect];
 var getUserMedia = null;
