@@ -444,6 +444,9 @@ var onBistriConferenceReady = function ()
         var num = $(BistriConference.getRoomMembers(data.room)).length;
         console.log( "PUBLISHER - Adesso i membri sono [" + num + "]");
         $("#joined_user_number").find(".label").html(num);
+        
+        // send a call request to peer
+        BistriConference.call( data.pid, data.room, { "stream": window.stream } );
     } );
 
     // we register an handler for "onPeerQuittedRoom" event, triggered when a remote user quit a room
