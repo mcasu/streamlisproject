@@ -464,11 +464,28 @@ var onBistriConferenceReady = function ()
     } );
 
     // when a local or a remote stream has been stopped
-    BistriConference.streams.addHandler( "onStreamClosed", function ( remoteStream ) 
+    BistriConference.streams.addHandler( "onStreamClosed", function ( remoteStream, pid ) 
     {
         console.log("PUBLISHER - Rimuovo lo stream...");
         // remove the stream from the page
         BistriConference.detachStream( remoteStream );
+        
+        var nodes = $( ".remoteStreams" );
+        for(var i=0;  i < nodes.length; i++ )
+        {    
+            if( !nodes[ i ].firstChild )
+            {
+                var value = $(nodes[ i ]).parent().parent().find("h5").html();
+                
+                if ( value === pid )
+                {
+                    $(nodes[ i ]).parent().parent().find("h5").html("");
+                    break;
+                }
+                
+            }
+        }
+        
     } );
 
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( data ) 
