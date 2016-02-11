@@ -90,7 +90,7 @@ var onBistriConferenceReady = function ()
             } 
             else 
             {
-              console.log('Some other kind of source/device: ', deviceInfo);
+              //console.log('Some other kind of source/device: ', deviceInfo);
             }
         }
         
@@ -119,7 +119,16 @@ var onBistriConferenceReady = function ()
       var videoSource = videoSelect.value;
       var constraints = {
         audio: false,
-        video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+        video: { 
+            "width": {
+            "min": "300",
+            "max": "640"
+                },
+            "height": {
+                "min": "200",
+                "max": "480"
+            },
+            deviceId: videoSource ? {exact: videoSource} : undefined}
       };
       navigator.mediaDevices.getUserMedia(constraints)
       .then(function(stream) {
@@ -490,19 +499,6 @@ var onBistriConferenceReady = function ()
     {
         // display an alert message
        console.log("PUBLISHER - Richiesta in entrata: " + data);
-       
-//       BistriConference.startStream( "640x480", function( remoteStream )
-//       {
-//                var roomId = data.room;
-//
-//                // when the local stream is received we attach it to a node in the page to display it
-//                BistriConference.attachStream( remoteStream, document.querySelector( "#remoteStreams" ), { autoplay: true, fullscreen: true } );
-//
-//                // when the local stream has been started and attached to the page
-//                // we are ready join the conference room.
-//                // event "onJoinedRoom" is triggered when the operation successed.
-//                BistriConference.joinRoom( roomId, 4 );
-//        });
     });
 
     // when a new remote stream is received

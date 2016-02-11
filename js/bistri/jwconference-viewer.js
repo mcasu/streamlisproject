@@ -59,12 +59,16 @@ var onBistriConferenceReady = function ()
         
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
         
-        BistriConference.startStream("webcamSD", function( localStream ){
+        BistriConference.startStream("webcam-hd", function( localStream ){
             
             $("#localStreamsMyVideo").show();
             // display stream into the page
             BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
-            { autoplay: true, fullscreen: true, controls: true } );
+            { 
+                autoplay: true, 
+                fullscreen: true, 
+                controls: true 
+            } );
             
         } );
         
@@ -112,7 +116,7 @@ var onBistriConferenceReady = function ()
         
         BistriConference.attachStream( remoteStream, document.querySelector( "#remotevideo" ), { 
             autoplay: true, 
-            fullscreen: false,
+            fullscreen: true,
             controls: true
         } );
     } );    

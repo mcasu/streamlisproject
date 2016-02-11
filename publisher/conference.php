@@ -74,7 +74,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                                 <label for="videoSource">Seleziona la webcam:  </label> <select id="videoSource"></select>
                             </div>
                             <br/>
-                            <video id="myvideo" autoplay></video>
+                            <video id="myvideo" autoplay controls></video>
                     </div>
                 </div>
                 
