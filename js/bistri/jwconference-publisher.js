@@ -5,6 +5,7 @@ var room;
 var userId;
 var username = q(".username").id;
 var userrole = q(".userrole").id;
+var localStreams = new Array();
 
 var videoElement = document.querySelector('#myvideo');
 var videoSelect = document.querySelector('select#videoSource');
@@ -381,29 +382,23 @@ var onBistriConferenceReady = function ()
             // send a call request to peer
             BistriConference.call( data.members[ i ].id, data.room, { "stream": window.stream } );
         }
-        
-//        BistriConference.startStream("720x576:25", function( localStream ){
-//
-//        // display stream into the page
-//        BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
-//        { autoplay: true, fullscreen: true, controls: true } );
-//
-//        // we start a call and open a data channel with every single room members
-//        for( var i = 0; i < data.members.length; i++ )
-//        {
-//            peers[ data.members[ i ].id ] = data.members[ i ];
-//            // send a call request to peer
-//            BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-//        }
-//    } );
     });
     
     // when the local user has quitted the room
     BistriConference.signaling.addHandler( "onQuittedRoom", function( ) 
     {
         room = undefined;
+        
         // stop the local stream
-        BistriConference.stopStream();
+        localStreams = BistriConference.getLocalStreams();
+        
+        for( var i = 0; i < localStreams.length; i++ )
+        {
+            // stop and detach the local stream
+            BistriConference.stopStream( localStreams[i], function(){
+                BistriConference.detachStream(localStreams[i]);
+            });
+        }
     } );
     
     // when an error occured on the server side

@@ -58,7 +58,6 @@ var onBistriConferenceReady = function ()
         }
         
         console.log( "VIEWER - Hai fatto il join con member name: " + username );
-        //console.log( "VIEWER - Hai fatto il join con member id: ", data.members[ 0 ].id, "member display name:", data.members[ 0 ].name );
         
         BistriConference.startStream("webcamSD", function( localStream ){
             
@@ -67,42 +66,29 @@ var onBistriConferenceReady = function ()
             BistriConference.attachStream( localStream, document.querySelector( "#myvideo" ), 
             { autoplay: true, fullscreen: true, controls: true } );
             
-            // we start a call and open a data channel with every single room members
-//            for( var i = 0; i < data.members.length; i++ )
-//            {
-//                peers[ data.members[ i ].id ] = data.members[ i ];
-//                // send a call request to peer
-//                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-//            }
         } );
         
-        //console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
-        
-        var streamNameToView = $( "#streamSelector option:selected" ).val();
-        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
-        //alert("Stream: " + streamNameToView + " App: " + appNameToView);
+//        var streamNameToView = $( "#streamSelector option:selected" ).val();
+//        var appNameToView = $( "#streamSelector option:selected" ).attr("id");
         
         $("#localStreamsPlayer").show();
-        
-//        jwplayer("player").setup({
-//                 file: "rtmp://www.streamlis.it:1935/" + appNameToView + '/' + streamNameToView,
-//                 autostart: true,
-//                 controls: true,
-//                 rtmp: {
-//                     bufferlength: 0.1  
-//                 },
-//                 aspectratio: "4:3",
-//                 width: 320,
-//                 height: 240
-//                 });   
     });
     
     // when the local user has quitted the room
     BistriConference.signaling.addHandler( "onQuittedRoom", function( ) 
     {
-        // stop the local stream
-        BistriConference.stopStream();
+        room = undefined;
         
+        localStreams = BistriConference.getLocalStreams();
+        
+        for( var i = 0; i < localStreams.length; i++ )
+        {
+            // stop and detach the local stream
+            BistriConference.stopStream( localStreams[i], function(){
+                BistriConference.detachStream(localStreams[i]);
+            });
+        }
+    
         // We stop calls with all conference room members
         BistriConference.endCalls(room);
     } );
@@ -246,7 +232,6 @@ function joinConference()
     var roomToJoin = $('#roomSelector').val();
     $("#localStreamsMyVideo").hide();
     $("#localStreamsPlayer").hide();
-    //alert("Join to room: " + roomToJoin);
     
     if( roomToJoin )
     {
