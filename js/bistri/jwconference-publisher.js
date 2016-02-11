@@ -525,7 +525,11 @@ var onBistriConferenceReady = function ()
 
                 $(nodes[ i ]).parent().parent().find("h5").html(pid);
                 
-                BistriConference.attachStream( remoteStream, nodes[ i ], { autoplay: true, fullscreen: false } );
+                BistriConference.attachStream( remoteStream, nodes[ i ], { 
+                    autoplay: true, 
+                    fullscreen: true,
+                    controls: true
+                } );
                 break;
             }
         }
