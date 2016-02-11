@@ -387,8 +387,6 @@ var onBistriConferenceReady = function ()
     // when the local user has quitted the room
     BistriConference.signaling.addHandler( "onQuittedRoom", function( ) 
     {
-        room = undefined;
-        
         // stop the local stream
         localStreams = BistriConference.getLocalStreams();
         
@@ -399,6 +397,11 @@ var onBistriConferenceReady = function ()
                 BistriConference.detachStream(localStreams[i]);
             });
         }
+        
+        // We stop calls with all conference room members
+        BistriConference.endCalls(room);
+        
+        room = undefined;
     } );
     
     // when an error occured on the server side
