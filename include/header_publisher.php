@@ -28,7 +28,7 @@
                    <ul class="dropdown-menu" role="menu">
                       <li><a href='events_live.php'>Live</a></li>
                       <li><a href='events_ondemand.php'>OnDemand</a></li>
-                      <li><a href='conference.php'>Commenti (Beta)</a></li>
+                      <li><a href='conference.php'>Commenti</a></li>
                    </ul>
                 </li>
 
