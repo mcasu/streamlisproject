@@ -68,15 +68,12 @@ var onBistriConferenceReady = function ()
             { autoplay: true, fullscreen: true, controls: true } );
             
             // we start a call and open a data channel with every single room members
-            for( var i = 0; i < data.members.length; i++ )
-            {
-                peers[ data.members[ i ].id ] = data.members[ i ];
-                // send a call request to peer
-                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
-                
-                // send data channel request to peer
-                //BistriConference.openDataChannel( data.members[ i ].id, "myChannel", data.room, { reliable: true } );
-            }
+//            for( var i = 0; i < data.members.length; i++ )
+//            {
+//                peers[ data.members[ i ].id ] = data.members[ i ];
+//                // send a call request to peer
+//                BistriConference.call( data.members[ i ].id, data.room, { "stream": localStream } );
+//            }
         } );
         
         //console.log("ELENCO LOCAL STREAMS: \n" + BistriConference.getLocalStreams());
