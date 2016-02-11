@@ -88,7 +88,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Video di <b><?= $mainactions->UserFullName(); ?></b></h4>
                       </div>
                         <div class="panel-body">
-                            <div id="myvideo"></div>
+                            <div id="myvideo" style="width: 100%;"></div>
                         </div>
                     </div>
                     <div id="localStreamsPlayer" class="panel panel-primary pull-left col-md-2 col-xs-3">
@@ -96,7 +96,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
                           <h4 class="panel-title" style="margin-left: 4px; margin-top: 4px;">Adunanza in corso</b></h4>
                       </div>
                         <div class="panel-body">
-                            <div id="remotevideo"></div>
+                            <div id="remotevideo" style="width: 100%;"></div>
                         </div>
                     </div>
                 </div>
