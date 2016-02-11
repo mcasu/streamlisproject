@@ -466,7 +466,7 @@ div.table_container {
 /*** CONFERENCE PAGE CSS ***/
 /***************************/
 
-#myvideo, #remotevideo {
+#myvideo video, #remotevideo video {
     width: 100%;
     height: auto;
 }
