@@ -75,7 +75,6 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
                             </div>
                             <br/>
                             <video id="myvideo" autoplay></video>
-                            <!--<div id="myvideo" class="localStreams"></div>-->
                     </div>
                 </div>
                 

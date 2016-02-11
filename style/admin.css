@@ -460,3 +460,13 @@ div.table_container {
     color: rgb(255, 255, 255);
     background-color: rgb(66, 139, 202);
 }
+
+
+/***************************/
+/*** CONFERENCE PAGE CSS ***/
+/***************************/
+
+#myvideo, #remotevideo {
+    width: 100%;
+    height: auto;
+}
