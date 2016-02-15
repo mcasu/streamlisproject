@@ -44,7 +44,7 @@ else
 <body>
     
     <div class="container-fluid">
-        <h1 class="pull-center">On-demand Video Streaming</h1>
+        <h1 class="center">On-demand Video Streaming</h1>
         
         <center>
             <div id="player" style="text-align:center; width: 100%; height: auto;"></div>
@@ -61,11 +61,23 @@ else
                 rtmp: {
                     bufferlength: 0.1  
                 },
-                aspectratio: "4:3",
-                width: 640,
-                height: 480,
+                aspectratio: "4:3"
                 });'.
                 '</script>';
+            
+//        echo '<script type="text/javascript">'.
+//                'jwplayer("player").setup({
+//                file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
+//                autostart: true,
+//                controls: true,
+//                rtmp: {
+//                    bufferlength: 0.1  
+//                },
+//                aspectratio: "4:3",
+//                width: 640,
+//                height: 480,
+//                });'.
+//                '</script>';
 
     ?>
 </body>
