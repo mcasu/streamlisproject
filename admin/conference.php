@@ -1,6 +1,6 @@
 <?php 
 include("../check_login.php"); 
-include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
+include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -25,7 +25,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <body>
 
-<?php include("../include/header_admin.php");
+<?php include("../include/header_publisher.php");
 
 $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
 

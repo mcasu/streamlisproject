@@ -1,15 +1,5 @@
 <?PHP
 include(getenv("DOCUMENT_ROOT") . "/check_login.php");
-//include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
-//
-//$utils = $mainactions->GetUtilsInstance();
-//$dbactions = $mainactions->GetDBActionsInstance();
-//
-//if(!$mainactions->CheckLogin())
-//{
-//    $utils->RedirectToURL("../../login.php");
-//    exit;
-//}
 
 $stream_name = filter_input(INPUT_GET, 'stream_name');
 
@@ -52,29 +42,31 @@ else
 	<script type="text/javascript" src="jwplayer.js" ></script>
 </head>
 <body>
-        <div class="span-18" align="center">
-            <h1>On-demand Video Streaming</h1>
-        </div>
-		<center>
-		<div id="player" style="text-align:center"></div>
-		
-		<?php
-		
-		echo '<script type="text/javascript">'.
-			'jwplayer("player").setup({
-                        file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
-                        autostart: true,
-                        controls: true,
-			rtmp: {
-			    bufferlength: 0.1  
-			},
-                        aspectratio: "4:3",
-                        width: 640,
-                        height: 480,
-                        });'.
-			'</script>';
+    
+    <div class="container-fluid">
+        <h1 class="pull-center">On-demand Video Streaming</h1>
+        
+        <center>
+            <div id="player" style="text-align:center; width: 100%; height: auto;"></div>
+        </center>
+    </div>
+    
+    <?php
 
-		?>
-		</center>
+        echo '<script type="text/javascript">'.
+                'jwplayer("player").setup({
+                file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
+                autostart: true,
+                controls: true,
+                rtmp: {
+                    bufferlength: 0.1  
+                },
+                aspectratio: "4:3",
+                width: 640,
+                height: 480,
+                });'.
+                '</script>';
+
+    ?>
 </body>
 </html>
