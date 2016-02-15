@@ -43,7 +43,7 @@ OndemandMp4Loading = function()
                *** Controllo se esiste il file .mp4 nella cartella della congregazione
                ***********************************************************************/
               var uri =  iphone_href.substr(4);
-              var fullurl = 'http://' + document.location.hostname + '/mp4/' + ulleft_id + uri;
+              var fullurl = 'https://' + document.location.hostname + '/mp4/' + ulleft_id + uri;
 
               $.ajax({
                   url: fullurl,
@@ -75,7 +75,7 @@ OndemandMp4Loading = function()
               /**************************************************************************
                *** Controllo se la richiesta http al link .mp4 risponde correttamente ***
                *************************************************************************/
-              link_url = "http://" + document.location.hostname + iphone_href;
+              link_url = "https://" + document.location.hostname + iphone_href;
               //alert("CONTROLLO WEB URL:\nUrl [ " + link_url + " ]");
 
               $.ajax({

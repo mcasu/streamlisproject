@@ -44,7 +44,7 @@ else
 <body>
     <center>
     <?php
-	echo '<video controls src="http://www.streamlis.it/hls/'.$stream_name.'/index.m3u8"  height="240" width="320" >';
+	echo '<video controls src="https://www.streamlis.it/hls/'.$stream_name.'/index.m3u8"  height="240" width="320" >';
 	echo '</video>';
     ?>
     </center>
