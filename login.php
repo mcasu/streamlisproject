@@ -49,11 +49,11 @@ if($userIsLogged)
    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
    <meta name="viewport" content="width=device-width, initial-scale=1"/>
    <title>Stream LIS - Login</title>
-   <link rel="stylesheet" href="https://www.streamlis.it/style/bootstrap.min.css">
-   <link rel='stylesheet' type='text/css' href='https://www.streamlis.it/style/admin.css' />
-   <script type="text/javascript" src="https://www.streamlis.it/js/jquery-1.11.0.min.js"></script>
-   <script type='text/javascript' src='https://www.streamlis.it/js/jquery.validate.js'></script>
-   <script src="https://www.streamlis.it/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="//www.streamlis.it/style/bootstrap.min.css">
+   <link rel='stylesheet' type='text/css' href='//www.streamlis.it/style/admin.css' />
+   <script type="text/javascript" src="//www.streamlis.it/js/jquery-1.11.0.min.js"></script>
+   <script type='text/javascript' src='//www.streamlis.it/js/jquery.validate.js'></script>
+   <script src="//www.streamlis.it/js/bootstrap.min.js"></script>
 </head>
 
 <body>
