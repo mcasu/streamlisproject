@@ -28,7 +28,7 @@ $(document).ready(function()
      
 	var url = $(this).attr("href");
 	var windowName = "Player";//$(this).attr("name");
-	var windowSpecs = 'width=640,height=480, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
+	var windowSpecs = 'width=600,height=400, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
 	
 	window.open(url, windowName, windowSpecs);
 	

@@ -52,32 +52,19 @@ else
     
     <?php
 
-        echo '<script type="text/javascript">'.
-                'jwplayer("player").setup({
-                file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
-                autostart: true,
-                controls: true,
-                rtmp: {
-                    bufferlength: 0.1  
-                },
-                aspectratio: "16:9",
-                width: "86%"
-                });'.
-                '</script>';
+    echo '<script type="text/javascript">'.
+            'jwplayer("player").setup({
+            file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
+            autostart: true,
+            controls: true,
+            rtmp: {
+                bufferlength: 0.1  
+            },
+            aspectratio: "16:9",
+            width: "86%"
+            });'.
+            '</script>';
             
-//        echo '<script type="text/javascript">'.
-//                'jwplayer("player").setup({
-//                file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
-//                autostart: true,
-//                controls: true,
-//                rtmp: {
-//                    bufferlength: 0.1  
-//                },
-//                aspectratio: "4:3",
-//                width: 640,
-//                height: 480,
-//                });'.
-//                '</script>';
 
     ?>
 </body>

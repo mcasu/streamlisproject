@@ -52,30 +52,29 @@ else
 	<script type="text/javascript" src="jwplayer.js" ></script>
 </head>
 <body>
-		<!-- HEADER -->
-        <div class="span-18" align="center">
+    
+    <div class="container-fluid">
+        <center>
             <h1>Live Video Streaming</h1>
-        </div>
-		<center>
-		<div id="player" style="text-align:center"></div>
+        </center>
+        <video id="player"/>
+    </div>
 		
-		<?php
-		 
-		echo '<script type="text/javascript">'.
-			'jwplayer("player").setup({
-                        file: "rtmp://www.streamlis.it:1935/'.$app_name.'/'.$stream_name.'",
-                        autostart: true,
-                        controls: true,
-			rtmp: {
-			    bufferlength: 0.1  
-			},
-                        aspectratio: "4:3",
-                        width: 640,
-                        height: 480
-                        });'.
-			'</script>';
+    <?php
 
-		?>
-		</center>
+    echo '<script type="text/javascript">'.
+            'jwplayer("player").setup({
+            file: "rtmp://www.streamlis.it:1935/'.$app_name.'/'.$stream_name.'",
+            autostart: true,
+            controls: true,
+            rtmp: {
+                bufferlength: 0.1  
+            },
+            aspectratio: "16:9",
+            width: "86%"
+            });'.
+            '</script>';
+
+    ?>
 </body>
 </html>
