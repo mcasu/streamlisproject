@@ -46,8 +46,8 @@ else
     <div class="container-fluid">
         <center>
             <h1>On-demand Video Streaming</h1>
-            <video id="player" style="text-align:center; width: 100%; height: auto;"/>
         </center>
+        <video id="player" style="text-align:center; width: 100%; height: auto;"/>
     </div>
     
     <?php
