@@ -46,9 +46,8 @@ else
     <div class="container-fluid">
         <center>
             <h1>On-demand Video Streaming</h1>
-            <video id="player"/>
         </center>
-        
+        <video id="player"/>
     </div>
     
     <?php
@@ -61,7 +60,7 @@ else
                 rtmp: {
                     bufferlength: 0.1  
                 },
-                aspectratio: "4:3",
+                aspectratio: "16:9",
                 width: "80%"
                 });'.
                 '</script>';
