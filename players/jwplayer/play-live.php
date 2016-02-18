@@ -56,7 +56,7 @@ else
     <div class="container-fluid">
         <center>
             <h1>Live Video Streaming</h1>
-            <div id="player"/>
+            <div id="player" style="text-align:center; vertical-align:middle;"/>
         </center>
         
     </div>
