@@ -71,8 +71,7 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            aspectratio: "16:9",
-            width: "600"
+            aspectratio: "16:9"
             });'.
             '</script>';
 
