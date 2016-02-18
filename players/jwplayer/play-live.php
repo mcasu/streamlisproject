@@ -58,7 +58,7 @@ else
             <h1>Live Video Streaming</h1>
         </center>
         <div style="text-align: center;">
-            <video id="player"/>
+            <video id="player" style="display: inline-flex;"/>
         </div>
     </div>
 		
