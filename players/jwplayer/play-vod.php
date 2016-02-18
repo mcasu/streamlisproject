@@ -44,10 +44,9 @@ else
 <body>
     
     <div class="container-fluid">
-        <h1 class="center">On-demand Video Streaming</h1>
-        
         <center>
-            <div id="player" style="text-align:center; width: 100%; height: auto;"></div>
+            <h1>On-demand Video Streaming</h1>
+            <video id="player" style="text-align:center; width: 100%; height: auto;"/>
         </center>
     </div>
     

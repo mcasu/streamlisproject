@@ -126,6 +126,9 @@ if($userIsLogged)
    </div> <!-- FINE DIV PANEL -->
 </div> <!-- FINE DIV CONTAINER-FLUID -->
    
+<!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
+<script language="javascript" type="text/javascript" src="//smarticon.geotrust.com/si.js"></script>
+<!-- end  GeoTrust Smart Icon tag -->
 
 <script type='text/javascript'>
 
