@@ -98,7 +98,3 @@
 
 <p><h4 style="margin-left:4px;">La tua congregazione è <b><?= $mainactions->UserGroupName(); ?></b></h4></p>
 <br/>
-
-<!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
-<script language="javascript" type="text/javascript" src="//smarticon.geotrust.com/si.js"></script>
-<!-- end  GeoTrust Smart Icon tag -->
