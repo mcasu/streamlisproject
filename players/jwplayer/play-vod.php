@@ -60,7 +60,9 @@ else
                 rtmp: {
                     bufferlength: 0.1  
                 },
-                aspectratio: "4:3"
+                aspectratio: "4:3",
+                width: auto,
+                height: auto
                 });'.
                 '</script>';
             
