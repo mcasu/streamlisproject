@@ -56,10 +56,9 @@ else
     <div class="container-fluid">
         <center>
             <h1>Live Video Streaming</h1>
+            <div id="player"/>
         </center>
-        <div style="text-align: center;">
-            <video id="player" style="display: inline-flex;"/>
-        </div>
+        
     </div>
 		
     <?php
@@ -73,7 +72,7 @@ else
                 bufferlength: 0.1  
             },
             aspectratio: "16:9",
-            width: "86%"
+            width: "380"
             });'.
             '</script>';
 
