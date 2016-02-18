@@ -47,7 +47,7 @@ else
         <center>
             <h1>On-demand Video Streaming</h1>
         </center>
-        <video id="player" style="text-align:center; width: 100%; height: auto;"/>
+        <video id="player"/>
     </div>
     
     <?php
@@ -61,7 +61,7 @@ else
                     bufferlength: 0.1  
                 },
                 aspectratio: "4:3",
-                width: "100%"
+                width: "80%"
                 });'.
                 '</script>';
             
