@@ -77,7 +77,7 @@ echo '<script>';
 	'live: true,'.
 	'rtmp: "rtmp://'.$ip_actual.':1935/'.$app_name.'/'.$stream_name.'",'.
 	'ratio: 9/16,'.
-	'width: 380px,'.
+	'width: 360px,'.
 	'swf: "flowplayer.swf"'.
 	 '};';
 
