@@ -57,7 +57,7 @@ else
         <center>
             <h1>Live Video Streaming</h1>
         </center>
-        <div class="container" style="margin-left: 20px;">
+        <div class="container" style="margin-left: 30px;">
             <div id="player"/>
         </div>
     </div>
