@@ -59,9 +59,8 @@ echo '<script>';
     'flowplayer.conf = {'.
 	'live: true,'.
 	'rtmp: "rtmp://'.$ip_actual.':1935/vod/'.$filename.'",'.
-	'ratio: 3/4,'.
+	'ratio: 9/16,'.
 	'width: 480px,'.
-	'height: 640px,'.
 	'swf: "flowplayer.swf"'.
 	 '};';
 
