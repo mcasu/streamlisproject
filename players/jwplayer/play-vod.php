@@ -61,7 +61,7 @@ else
                     bufferlength: 0.1  
                 },
                 aspectratio: "16:9",
-                width: "90%"
+                width: "88%"
                 });'.
                 '</script>';
             
