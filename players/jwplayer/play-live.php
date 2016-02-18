@@ -57,7 +57,9 @@ else
         <center>
             <h1>Live Video Streaming</h1>
         </center>
-        <video id="player"/>
+        <div style="text-align: center;">
+            <video id="player"/>
+        </div>
     </div>
 		
     <?php
