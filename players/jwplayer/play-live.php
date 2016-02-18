@@ -57,7 +57,7 @@ else
         <center>
             <h1>Live Video Streaming</h1>
         </center>
-        <div id="player" style="text-align:center; vertical-align:middle; width: 100%; height: 90%"/>
+        <div id="player" style="margin-left: 10px;"/>
         
     </div>
 		
@@ -72,7 +72,7 @@ else
                 bufferlength: 0.1  
             },
             aspectratio: "16:9",
-            width: "90%"
+            width: "88%"
             });'.
             '</script>';
 
