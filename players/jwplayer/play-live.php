@@ -56,8 +56,8 @@ else
     <div class="container-fluid">
         <center>
             <h1>Live Video Streaming</h1>
-            <div id="player" style="text-align:center; vertical-align:middle; width: 100%; height: 90%"/>
         </center>
+        <div id="player" style="text-align:center; vertical-align:middle; width: 100%; height: 90%"/>
         
     </div>
 		
@@ -71,7 +71,8 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            aspectratio: "16:9"
+            aspectratio: "16:9",
+            width: "50%"
             });'.
             '</script>';
 
