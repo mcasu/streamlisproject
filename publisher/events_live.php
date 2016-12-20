@@ -56,6 +56,39 @@ $(document).ready(function()
         $(this).prop("disabled", false);
 
     });
+    
+    $(".btn_live_view_link").click(function(e)
+    {
+        e.preventDefault();
+        
+        var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
+            title: 'Live link',
+            resizable: true,
+            autoOpen:false,
+            modal: true,
+            hide: 'fade',
+            width:600,
+            height:320,
+            buttons: [
+               {
+                    text: "Copia",
+                    click: function() {
+
+                   }
+               },
+               {
+                   text: "Chiudi",
+                   click: function() {
+                       $('#divEventsLiveViewLink').dialog("close");
+                   }
+               }
+            ]
+        });        
+        
+        //liveViewLinkDlg.load('user_edit.php');
+        liveViewLinkDlg.dialog('open');
+    });    
+    
 });
 
 </script>
@@ -159,7 +192,7 @@ try
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>PC Desktop</label>";
                                         echo '<br/>';
-                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
+                                        echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                                 echo '</li>';
 
@@ -170,7 +203,7 @@ try
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>device Android</label>";
                                         echo '<br/>';
-                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
+                                        echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                                 echo '</li>';
 
@@ -181,7 +214,7 @@ try
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>device Apple</label>";
                                         echo '<br/>';
-                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
+                                        echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                             echo '</li>';
                         echo '</ul>';	
@@ -204,7 +237,8 @@ echo '</div>';
 		
         
 	
-echo '</div>';
+    echo '</div>';
+    echo '<div id="divEventsLiveViewLink"></div>';
 echo '</div>';
 
 }
