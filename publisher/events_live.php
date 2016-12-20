@@ -158,6 +158,8 @@ try
                                         '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>PC Desktop</label>";
+                                        echo '<br/>';
+                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                                 echo '</li>';
 
@@ -167,6 +169,8 @@ try
                                         '<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>device Android</label>";
+                                        echo '<br/>';
+                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                                 echo '</li>';
 
@@ -176,6 +180,8 @@ try
                                         '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>device Apple</label>";
+                                        echo '<br/>';
+                                        echo '<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
                             echo '</li>';
                         echo '</ul>';	
