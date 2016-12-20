@@ -92,7 +92,7 @@ try
                     }
                 echo '</div>';
 
-                echo '<div class="row video_list_element id=' . $live_id . '>';
+                echo '<div class="row video_list_element" id=' . $live_id . '>';
 
                     // VIDEO THUMBNAIL + INFO + BUTTONS
                     echo '<div class="col-md-10 div-video-align">';
@@ -253,7 +253,7 @@ $(document).ready(function()
                }
             ]
         });        
-        var eventsLiveId = $(this).parent().parent().parent().parent().attr('id');
+        var eventsLiveId = $(this).parent().parent().parent().parent().parent().parent().attr('id');
         alert("ID: " + eventsLiveId);
 
         $("#divEventsLiveViewLink div.alert-success").hide();
