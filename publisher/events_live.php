@@ -243,9 +243,11 @@ echo '</div>';
         
 	
     echo '</div>';
-    echo '<div id="divEventsLiveViewLink"></div>';
+    echo '<div id="divEventsLiveViewLink">';
         echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
-        echo '<p><input class="form-control" type="text" readonly></p>';
+        echo '<p><input class="form-control" type="text" readonly/></p>';
+    echo '</div>';
+        
 echo '</div>';
 
 }
