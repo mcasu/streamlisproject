@@ -92,7 +92,7 @@ try
                     }
                 echo '</div>';
 
-                echo '<div class="row video_list_element">';
+                echo '<div class="row video_list_element id=' . $live_id . '>';
 
                     // VIDEO THUMBNAIL + INFO + BUTTONS
                     echo '<div class="col-md-10 div-video-align">';
@@ -171,6 +171,7 @@ echo '</div>';
         echo '<div class="container-fluid">';
             echo '<br/>';
             echo '<input class="form-control" type="text" readonly/>';
+            echo '<br/>';
             echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
         echo '</div>';
     echo '</div>';
@@ -231,7 +232,6 @@ $(document).ready(function()
     {
         e.preventDefault();
         
-        $("#divEventsLiveViewLink div.alert-success").hide();
         var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
             title: 'Live link',
             resizable: true,
@@ -239,7 +239,6 @@ $(document).ready(function()
             modal: true,
             hide: 'fade',
             width:700,
-            //height:240,
             buttons: [
                {
                     text: "Copia",
@@ -256,8 +255,24 @@ $(document).ready(function()
                }
             ]
         });        
+        var eventsLiveId = $(this).parent().parent().parent().attr('id');
+        alert("ID: " + eventsLiveId);
+
+        $("#divEventsLiveViewLink div.alert-success").hide();
         
-        liveViewLinkDlg.dialog('open');
+        // Load the link
+        $.post("/include/functions.php",{
+                fname:"events_live_view_link",
+                eventsLiveId:eventsLiveId},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+
+                if (status === "success")
+                {
+                    liveViewLinkDlg.dialog('open');
+                }
+            });
     });    
     
 });
