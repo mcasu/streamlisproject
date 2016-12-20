@@ -227,7 +227,7 @@ $(document).ready(function()
     {
         e.preventDefault();
         
-        $("#divEventsLiveViewLink.alert-success").hide();
+        $("#divEventsLiveViewLink div.alert-success").hide();
         var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
             title: 'Live link',
             resizable: true,
@@ -240,20 +240,19 @@ $(document).ready(function()
                {
                     text: "Copia",
                     click: function() {
-                        $("#divEventsLiveViewLink.alert-success").show();
+                        $("#divEventsLiveViewLink div.alert-success").show();
                    }
                },
                {
                    text: "Chiudi",
                    click: function() {
-                       $("#divEventsLiveViewLink.alert-success").hide();
+                       $("#divEventsLiveViewLink div.alert-success").hide();
                        $('#divEventsLiveViewLink').dialog("close");
                    }
                }
             ]
         });        
         
-        //liveViewLinkDlg.load('user_edit.php');
         liveViewLinkDlg.dialog('open');
     });    
     
