@@ -594,7 +594,7 @@ class DBActions
         }
 
         $insert_query = 'INSERT INTO live (live_token) '
-                . 'values("' . $this->SanitizeForSQL($token) . '")'
+                . 'values("' . $token . '") '
                 . 'WHERE live_id = ' . $eventsLiveId;
 
         if(!mysql_query($insert_query ,$this->connection))
