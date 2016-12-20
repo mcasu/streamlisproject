@@ -20,83 +20,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../include/session.js"></script>
 
-
-<script type="text/javascript">
-$(document).ready(function()
-{
-
-    $('.play-button').click(function (event)
-    {
-
-        var url = $(this).attr("href");
-        var windowName = "Player";//$(this).attr("name");
-        var windowSpecs = 'width=600,height=440, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
-
-        window.open(url, windowName, windowSpecs);
-
-        event.preventDefault();
-
-    });
-
-    $(".panel-collapse").on('show.bs.collapse', function()
-    {
-        var stream_name = $(this).find("ul.video_element").attr('id');
-        
-        $(".players_counter_info").attr('id', stream_name);
-        
-        var players_counter_obj = $(this).find("span.players_counter");
-        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
-    });
-    
-    $(".players_counter_refresh").click(function()
-    {
-        $(this).prop("disabled", true);
-        
-        var players_counter_obj = $(this).parent().find("span.players_counter");
-        //alert("CLASS: " + players_counter_obj.attr('class'));
-        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
-        
-        $(this).prop("disabled", false);
-
-    });
-    
-    $("#divEventsLiveViewLink.alert-success").hide();
-    $(".btn_live_view_link").click(function(e)
-    {
-        e.preventDefault();
-        
-        var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
-            title: 'Live link',
-            resizable: true,
-            autoOpen:false,
-            modal: true,
-            hide: 'fade',
-            width:630,
-            height:180,
-            buttons: [
-               {
-                    text: "Copia",
-                    click: function() {
-                        $("#divEventsLiveViewLink.alert-success").show();
-                   }
-               },
-               {
-                   text: "Chiudi",
-                   click: function() {
-                       $("#divEventsLiveViewLink.alert-success").hide();
-                       $('#divEventsLiveViewLink').dialog("close");
-                   }
-               }
-            ]
-        });        
-        
-        //liveViewLinkDlg.load('user_edit.php');
-        liveViewLinkDlg.dialog('open');
-    });    
-    
-});
-
-</script>
 </head>
 
 
@@ -245,7 +168,8 @@ echo '</div>';
     echo '</div>';
     echo '<div id="divEventsLiveViewLink">';
         echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
-        echo '<p><input class="form-control" type="text" readonly/></p>';
+        echo '<br/>';
+        echo '<input class="form-control" type="text" readonly/>';
     echo '</div>';
         
 echo '</div>';
@@ -259,4 +183,82 @@ catch(Exception $e)
 ?>
 
 </body>
+    
+<script type="text/javascript">
+$(document).ready(function()
+{
+
+    $('.play-button').click(function (event)
+    {
+
+        var url = $(this).attr("href");
+        var windowName = "Player";//$(this).attr("name");
+        var windowSpecs = 'width=600,height=440, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
+
+        window.open(url, windowName, windowSpecs);
+
+        event.preventDefault();
+
+    });
+
+    $(".panel-collapse").on('show.bs.collapse', function()
+    {
+        var stream_name = $(this).find("ul.video_element").attr('id');
+        
+        $(".players_counter_info").attr('id', stream_name);
+        
+        var players_counter_obj = $(this).find("span.players_counter");
+        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
+    });
+    
+    $(".players_counter_refresh").click(function()
+    {
+        $(this).prop("disabled", true);
+        
+        var players_counter_obj = $(this).parent().find("span.players_counter");
+        //alert("CLASS: " + players_counter_obj.attr('class'));
+        players_counter_obj.load('/include/functions.php?fname=get_current_live_players_number&streamName=' + $(".players_counter_info").attr('id'));
+        
+        $(this).prop("disabled", false);
+
+    });
+    
+    $("#divEventsLiveViewLink").hide();
+    $(".btn_live_view_link").click(function(e)
+    {
+        e.preventDefault();
+        
+        var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
+            title: 'Live link',
+            resizable: true,
+            autoOpen:false,
+            modal: true,
+            hide: 'fade',
+            width:640,
+            height:200,
+            buttons: [
+               {
+                    text: "Copia",
+                    click: function() {
+                        $("#divEventsLiveViewLink.alert-success").show();
+                   }
+               },
+               {
+                   text: "Chiudi",
+                   click: function() {
+                       $("#divEventsLiveViewLink.alert-success").hide();
+                       $('#divEventsLiveViewLink').dialog("close");
+                   }
+               }
+            ]
+        });        
+        
+        //liveViewLinkDlg.load('user_edit.php');
+        liveViewLinkDlg.dialog('open');
+    });    
+    
+});
+
+</script>
+    
 </html>
