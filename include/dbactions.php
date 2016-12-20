@@ -578,6 +578,33 @@ class DBActions
                 return true;
         }
 
+    function InsertEventsLiveToken($eventsLiveId, $token)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+
+        $insert_query = 'INSERT INTO live (live_token) '
+                . 'values("' . $this->SanitizeForSQL($token) . '")'
+                . 'WHERE live_id = ' . $eventsLiveId;
+
+        if(!mysql_query($insert_query ,$this->connection))
+        {
+            $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
+            return false;
+        }
+        return true;
+    }
+                
     function OnPublishDone($nginx_id,$app_name,$stream_name,$client_addr)
     {
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

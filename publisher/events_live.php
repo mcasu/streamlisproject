@@ -169,7 +169,7 @@ echo '</div>';
     
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
-            echo '<input class="form-control" type="text" readonly/>';
+            echo '<input id="inputEventsLiveViewLink" class="form-control" type="text" readonly/>';
             echo '<br/>';
             echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
     echo '</div>';
@@ -254,20 +254,23 @@ $(document).ready(function()
             ]
         });        
         var eventsLiveId = $(this).parent().parent().parent().parent().parent().attr('id');
-        alert("ID: " + eventsLiveId);
+        var eventsLivePlayerType = $(this).parent().parent().attr('class');
+        alert("type: " + eventsLivePlayerType);
 
         $("#divEventsLiveViewLink div.alert-success").hide();
         
         // Load the link
         $.post("/include/functions.php",{
                 fname:"events_live_view_link",
-                eventsLiveId:eventsLiveId},
+                eventsLiveId:eventsLiveId,
+                eventsLivePlayerType:eventsLivePlayerType},
             function(data,status)
             {
-                //alert("Data: " + data + "\nStatus: " + status);
+                alert("Data: " + data + "\nStatus: " + status);
 
                 if (status === "success")
                 {
+                    $('#inputEventsLiveViewLink').val(data);
                     liveViewLinkDlg.dialog('open');
                 }
             });

@@ -58,6 +58,10 @@ switch ($fname)
         return GetUserTotalNumber($dbactions);
     case "get_user_logged_number":
         return GetUserLoggedNumber($dbactions);
+    case "events_live_view_link":
+        $eventsLiveId = filter_input(INPUT_POST, 'eventsLiveId');
+        $eventsLivePlayerType = filter_input(INPUT_POST, 'eventsLivePlayerType');
+        return InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType);
     default:
         break;
 }
@@ -614,4 +618,33 @@ function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupNam
     }
     
     return TRUE;
+}
+
+function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType)
+{
+    $token = md5(uniqid());
+    
+    if (!$dbactions->InsertEventsLiveToken($eventsLiveId, $token))
+    {
+        error_log("ERROR - functions.php InsertEventsLiveToken() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    $link = "https://" . filter_input(INPUT_SERVER, 'SERVER_NAME');
+    switch (strtolower($eventsLivePlayerType))
+    {
+        case "player_desktop":
+            $link .= "/players/jwplayer/";
+            break;
+        case "player_smartphone":
+            $link .= "/players/flowplayer/";
+            break;
+        case "player_iphone":
+            $link .= "/players/html5/";
+            break;
+    }
+    
+    $link .= "watch?t=" . $token;
+    
+    return $link;
 }
