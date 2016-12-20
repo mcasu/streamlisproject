@@ -227,14 +227,15 @@ $(document).ready(function()
     {
         e.preventDefault();
         
+        $("#divEventsLiveViewLink.alert-success").hide();
         var liveViewLinkDlg = $('#divEventsLiveViewLink').dialog({
             title: 'Live link',
             resizable: true,
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:680,
-            height:220,
+            width:700,
+            height:240,
             buttons: [
                {
                     text: "Copia",
