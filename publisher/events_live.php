@@ -60,6 +60,7 @@ $(document).ready(function()
 
     });
     
+    $("#divEventsLiveViewLink.alert-success").hide();
     $(".btn_live_view_link").click(function(e)
     {
         e.preventDefault();
@@ -70,18 +71,19 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:620,
-            height:200,
+            width:630,
+            height:180,
             buttons: [
                {
                     text: "Copia",
                     click: function() {
-
+                        $("#divEventsLiveViewLink.alert-success").show();
                    }
                },
                {
                    text: "Chiudi",
                    click: function() {
+                       $("#divEventsLiveViewLink.alert-success").hide();
                        $('#divEventsLiveViewLink').dialog("close");
                    }
                }
@@ -242,6 +244,8 @@ echo '</div>';
 	
     echo '</div>';
     echo '<div id="divEventsLiveViewLink"></div>';
+        echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
+        echo '<p><input class="form-control" type="text" readonly></p>';
 echo '</div>';
 
 }
