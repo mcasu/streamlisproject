@@ -593,12 +593,12 @@ class DBActions
             return false;
         }
 
-        $insert_query = 'INSERT INTO live (live_token) values(' . $token . ') '
+        $update_query = 'UPDATE `live` SET `live_token`="' . $token . '" '
                 . 'WHERE live_id = ' . $eventsLiveId;
-
-        if(!mysql_query($insert_query ,$this->connection))
+        
+        if(!mysql_query($update_query ,$this->connection))
         {
-            $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
+            $this->HandleDBError("Error inserting data to the table\nquery:$update_query");
             return false;
         }
         return true;
