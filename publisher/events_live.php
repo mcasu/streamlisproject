@@ -11,8 +11,8 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Stream LIS - Eventi live</title>
-    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
 <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
@@ -69,8 +69,8 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:600,
-            height:320,
+            width:620,
+            height:200,
             buttons: [
                {
                     text: "Copia",
