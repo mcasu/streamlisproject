@@ -253,7 +253,7 @@ $(document).ready(function()
                }
             ]
         });        
-        var eventsLiveId = $(this).parent().parent().parent().parent().parent().parent().attr('id');
+        var eventsLiveId = $(this).parent().parent().parent().parent().parent().attr('id');
         alert("ID: " + eventsLiveId);
 
         $("#divEventsLiveViewLink div.alert-success").hide();
