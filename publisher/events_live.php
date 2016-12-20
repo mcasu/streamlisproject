@@ -168,12 +168,10 @@ echo '</div>';
     echo '</div>';
     
     echo '<div id="divEventsLiveViewLink">';
-        echo '<div class="container-fluid">';
             echo '<br/>';
             echo '<input class="form-control" type="text" readonly/>';
             echo '<br/>';
             echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
-        echo '</div>';
     echo '</div>';
         
 echo '</div>';
@@ -255,7 +253,7 @@ $(document).ready(function()
                }
             ]
         });        
-        var eventsLiveId = $(this).parent().parent().parent().attr('id');
+        var eventsLiveId = $(this).parent().parent().parent().parent().parent().attr('id');
         alert("ID: " + eventsLiveId);
 
         $("#divEventsLiveViewLink div.alert-success").hide();
