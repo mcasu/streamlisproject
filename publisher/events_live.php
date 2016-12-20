@@ -168,7 +168,6 @@ echo '</div>';
     echo '</div>';
     echo '<div id="divEventsLiveViewLink">';
         echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
-        echo '<br/>';
         echo '<input class="form-control" type="text" readonly/>';
     echo '</div>';
         
@@ -234,8 +233,8 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:640,
-            height:200,
+            width:680,
+            height:220,
             buttons: [
                {
                     text: "Copia",
