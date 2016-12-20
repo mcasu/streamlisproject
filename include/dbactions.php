@@ -593,8 +593,7 @@ class DBActions
             return false;
         }
 
-        $insert_query = 'INSERT INTO live (live_token) '
-                . 'values("' . $token . '") '
+        $insert_query = 'INSERT INTO live (live_token) values(' . $token . ') '
                 . 'WHERE live_id = ' . $eventsLiveId;
 
         if(!mysql_query($insert_query ,$this->connection))
