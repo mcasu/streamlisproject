@@ -627,7 +627,8 @@ function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePl
     if (!$dbactions->InsertEventsLiveToken($eventsLiveId, $token))
     {
         error_log("ERROR - functions.php InsertEventsLiveToken() FAILED! " . $dbactions->GetErrorMessage());
-        return FALSE;
+        echo "false";
+        return false;
     }
     
     $link = "https://" . filter_input(INPUT_SERVER, 'SERVER_NAME');
@@ -646,5 +647,6 @@ function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePl
     
     $link .= "watch?t=" . $token;
     
-    return $link;
+    echo $link;
+    return true;
 }
