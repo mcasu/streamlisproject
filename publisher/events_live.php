@@ -169,7 +169,7 @@ echo '</div>';
     
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
-            echo '<input id="inputEventsLiveViewLink" class="form-control" type="text" readonly/>';
+            echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" type="text" readonly/>';
             echo '<br/>';
             echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
     echo '</div>';
@@ -266,7 +266,7 @@ $(document).ready(function()
                 eventsLivePlayerType:eventsLivePlayerType},
             function(data,status)
             {
-                alert("Data: " + data + "\nStatus: " + status);
+                //alert("Data: " + data + "\nStatus: " + status);
 
                 if (status === "success")
                 {

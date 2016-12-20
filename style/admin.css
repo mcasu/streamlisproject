@@ -470,3 +470,10 @@ div.table_container {
     width: 100%;
     height: auto;
 }
+
+
+
+
+input[readonly].default-cursor {
+    cursor: default;
+}
