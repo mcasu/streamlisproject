@@ -172,7 +172,7 @@ echo '</div>';
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
             echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" readonly>';
-            echo '<button type="button" class="btn" data-clipboard-target="#inputEventsLiveViewLink">';
+            echo '<button type="button" class="btn btn-primary" data-clipboard-target="#inputEventsLiveViewLink">';
                 echo '<span class="glyphicon glyphicon-copy"></span>';
             echo '</button>';
             //echo '<br/>';
@@ -241,7 +241,7 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:720,
+            //width:720,
             buttons: [
 //               {
 //                    text: "Copia",
