@@ -16,10 +16,11 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
     <link rel='stylesheet' type='text/css' href='../style/admin.css' />
 
 <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../include/session.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+
 
 </head>
 
