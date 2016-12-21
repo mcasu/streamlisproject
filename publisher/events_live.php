@@ -194,6 +194,7 @@ catch(Exception $e)
 <script type="text/javascript">
 $(document).ready(function()
 {
+    new Clipboard('.btn');
 
     $('.play-button').click(function (event)
     {
@@ -241,7 +242,7 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            //width:720,
+            width:740,
             buttons: [
 //               {
 //                    text: "Copia",
