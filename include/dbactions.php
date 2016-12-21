@@ -621,7 +621,7 @@ class DBActions
             return false;
         }        
         
-        $selectQuery = 'SELECT * FROM `live` WHERE token = "' . $token . '"';
+        $selectQuery = 'SELECT * FROM `live` WHERE live_token = "' . $token . '"';
         
         $result = mysql_query($selectQuery ,$this->connection);
         
