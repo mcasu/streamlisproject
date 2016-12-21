@@ -19,6 +19,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../include/session.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
 
 </head>
 
@@ -170,8 +171,11 @@ echo '</div>';
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
             echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" type="text" readonly/>';
-            echo '<br/>';
-            echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
+            echo '<button class="btn" data-clipboard-target="#inputEventsLiveViewLink">';
+                echo '<span class="glyphicon glyphicon-copy"></span>';
+            echo '</button>';
+            //echo '<br/>';
+            //echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
     echo '</div>';
         
 echo '</div>';
@@ -238,16 +242,16 @@ $(document).ready(function()
             hide: 'fade',
             width:720,
             buttons: [
-               {
-                    text: "Copia",
-                    click: function() {
-                        $("#divEventsLiveViewLink div.alert-success").show();
-                   }
-               },
+//               {
+//                    text: "Copia",
+//                    click: function() {
+//                        $("#divEventsLiveViewLink div.alert-success").show();
+//                   }
+//               },
                {
                    text: "Chiudi",
                    click: function() {
-                       $("#divEventsLiveViewLink div.alert-success").hide();
+                       //$("#divEventsLiveViewLink div.alert-success").hide();
                        $('#divEventsLiveViewLink').dialog("close");
                    }
                }
