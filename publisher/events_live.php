@@ -172,9 +172,9 @@ echo '</div>';
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
             echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" readonly>';
-            echo '<button class="btn" data-clipboard-target="#inputEventsLiveViewLink">';
-                echo '<span class="glyphicon glyphicon-copy"></span>';
-            echo '</button>';
+//            echo '<button class="btn" data-clipboard-target="#inputEventsLiveViewLink">';
+//                echo '<span class="glyphicon glyphicon-copy"></span>';
+//            echo '</button>';
             //echo '<br/>';
             //echo '<div class="alert alert-success" role="alert">LINK COPIATO!</div>';
     echo '</div>';
@@ -194,7 +194,7 @@ catch(Exception $e)
 <script type="text/javascript">
 $(document).ready(function()
 {
-    new Clipboard('.btn');
+    //new Clipboard('.btn');
 
     $('.play-button').click(function (event)
     {
@@ -242,7 +242,7 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:740,
+            width:750,
             buttons: [
 //               {
 //                    text: "Copia",
