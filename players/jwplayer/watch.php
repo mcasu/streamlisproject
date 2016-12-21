@@ -25,7 +25,7 @@ else
 
 $data = $dbactions->GetEventsLiveData($token);
 
-if (!$data || empty($data))
+if (!$data)
 {
     // Access forbidden:
     header('HTTP/1.1 401 Unauthorized');
