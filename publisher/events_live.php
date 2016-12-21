@@ -170,7 +170,7 @@ echo '</div>';
     
     echo '<div id="divEventsLiveViewLink">';
             echo '<br/>';
-            echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" type="text" readonly/>';
+            echo '<input id="inputEventsLiveViewLink" class="form-control default-cursor" type="text" readonly>';
             echo '<button class="btn" data-clipboard-target="#inputEventsLiveViewLink">';
                 echo '<span class="glyphicon glyphicon-copy"></span>';
             echo '</button>';
