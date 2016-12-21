@@ -645,7 +645,7 @@ function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePl
             break;
     }
     
-    $link .= "watch?t=" . $token;
+    $link .= "watch.php?t=" . $token;
     
     echo $link;
     return true;

@@ -603,6 +603,33 @@ class DBActions
         }
         return true;
     }
+    
+    function GetEventsLiveData($token)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }        
+        
+        $selectQuery = 'SELECT * FROM `live` WHERE token = "' . $token . '"';
+        
+        $result = mysql_query($selectQuery ,$this->connection);
+        
+        if(!$result)
+        {
+            $this->HandleDBError("Error inserting data to the table\nquery:$selectQuery");
+            return false;
+        }
+        return $result;
+    }
                 
     function OnPublishDone($nginx_id,$app_name,$stream_name,$client_addr)
     {

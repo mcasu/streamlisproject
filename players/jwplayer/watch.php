@@ -1,9 +1,8 @@
+<!DOCTYPE html>
 <?PHP
-include(getenv("DOCUMENT_ROOT") . "/check_login.php");
+$token = filter_input(INPUT_GET, 't');
 
-$app_name = filter_input(INPUT_GET, 'app_name');
-
-if(!isset($app_name) || empty($app_name)) 
+if(!isset($token) || empty($token)) 
 {
     // Access forbidden:
     header('HTTP/1.1 403 Forbidden');
@@ -12,18 +11,8 @@ if(!isset($app_name) || empty($app_name))
     echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
     exit; 
 }
-
-$stream_name = filter_input(INPUT_GET, 'stream_name');
-
-if(!isset($stream_name) || empty($stream_name)) 
-{
-    // Access forbidden:
-    header('HTTP/1.1 403 Forbidden');
-    // Set our response code
-    http_response_code(403);
-    echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
-    exit; 
-}
+require_once(getenv("DOCUMENT_ROOT") . "/include/config.php");
+$dbactions = $mainactions->GetDBActionsInstance();
 
 if ($myhostname == "lnxstreamserver-dev")
 {
@@ -33,6 +22,22 @@ else
 {
     $ip_actual = $ip_public;
 }
+
+$data = $dbactions->GetEventsLiveData($token);
+
+if (!$data || empty($data))
+{
+    // Access forbidden:
+    header('HTTP/1.1 401 Unauthorized');
+    // Set our response code
+    http_response_code(401);
+    echo "<h1>401 Unauthorized - Access denied.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
+    exit; 
+}
+
+$row = mysql_fetch_array($data);
+$app_name = $row['app_name'];
+$stream_name = $row['stream_name'];
 
 ?>
 <html lang="en">

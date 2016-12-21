@@ -236,7 +236,7 @@ $(document).ready(function()
             autoOpen:false,
             modal: true,
             hide: 'fade',
-            width:700,
+            width:720,
             buttons: [
                {
                     text: "Copia",
