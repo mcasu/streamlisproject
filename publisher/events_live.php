@@ -255,7 +255,6 @@ $(document).ready(function()
         });        
         var eventsLiveId = $(this).parent().parent().parent().parent().parent().attr('id');
         var eventsLivePlayerType = $(this).parent().attr('class');
-        alert("type: " + eventsLivePlayerType);
 
         $("#divEventsLiveViewLink div.alert-success").hide();
         
