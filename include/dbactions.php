@@ -558,7 +558,8 @@ class DBActions
                 app_name,
                 stream_name,
                 client_addr,
-                publish_code)
+                publish_code,
+                live_token)
                 values
                 (
                 "' . $this->SanitizeForSQL($nginx_id) . '",
@@ -567,7 +568,8 @@ class DBActions
                 "' . $this->SanitizeForSQL($app_name) . '",
                 "' . $this->SanitizeForSQL($stream_name) . '",
                 "' . $this->SanitizeForSQL($client_addr) . '",
-                "' . $this->SanitizeForSQL($publish_code) . '"
+                "' . $this->SanitizeForSQL($publish_code) . '",
+                "' . md5(uniqid()) . '"
                 )';
 
                 if(!mysql_query( $insert_query ,$this->connection))
@@ -1338,6 +1340,32 @@ class DBActions
             return $result;
     }
 
+    function GetLiveEventsById($eventsLiveId)
+    {	
+            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+            if(!$this->connection)
+            {
+                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+                return false;
+            }
+            if(!mysql_select_db($this->database, $this->connection))
+            {
+                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+                return false;
+            }
+
+            $select_query = 'select * from live where live_id = '.$eventsLiveId;
+
+            $result = mysql_query($select_query ,$this->connection);
+            if(!$result)
+            {
+                $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+                return false;
+            }
+            return $result;
+    }    
+    
     function GetLiveEventsByPublisher($publish_code)
     {	
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

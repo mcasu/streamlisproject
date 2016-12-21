@@ -61,7 +61,7 @@ switch ($fname)
     case "events_live_view_link":
         $eventsLiveId = filter_input(INPUT_POST, 'eventsLiveId');
         $eventsLivePlayerType = filter_input(INPUT_POST, 'eventsLivePlayerType');
-        return InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType);
+        return GetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType);
     default:
         break;
 }
@@ -620,16 +620,16 @@ function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupNam
     return TRUE;
 }
 
-function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType)
+function GetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType)
 {
-    $token = md5(uniqid());
-    
-    if (!$dbactions->InsertEventsLiveToken($eventsLiveId, $token))
+    $result = $dbactions->GetLiveEventsById($eventsLiveId);
+    if (!$result)
     {
-        error_log("ERROR - functions.php InsertEventsLiveToken() FAILED! " . $dbactions->GetErrorMessage());
+        error_log("ERROR - functions.php GetLiveEventsById() FAILED! " . $dbactions->GetErrorMessage());
         echo "false";
         return false;
     }
+    $row = mysql_fetch_array($result);
     
     $link = "https://" . filter_input(INPUT_SERVER, 'SERVER_NAME');
     switch (strtolower($eventsLivePlayerType))
@@ -645,7 +645,7 @@ function InsertAndGetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePl
             break;
     }
     
-    $link .= "watch.php?t=" . $token;
+    $link .= "watch.php?t=" . $row['live_token'];
     
     echo $link;
     return true;
