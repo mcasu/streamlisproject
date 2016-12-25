@@ -201,7 +201,7 @@ try
 					    $viewer_name=$row['viewer_name'];
                                             $groupType = $row['role_id'] == 1 ? "[C] - " : "[G] - ";
 
-					    echo '<option id="'.$viewer_id.'"><b>'.$groupType.'</b>'.$viewer_name.'</option>';
+					    echo '<option id="'.$viewer_id.'"><span class="label label-default">'.$groupType.'</span>'.$viewer_name.'</option>';
 				    }
 				    echo '</select>';
 				    echo '</td>';
@@ -224,7 +224,7 @@ try
 					while($row = mysql_fetch_array($groups_available))
 					{
 						$groupType = $row['group_role'] == 1 ? "[C] - " : "[G] - ";
-						echo '<option id="'.$row['group_id'].'"><b>'.$groupType.'</b>'.$row['group_name'].'</option>';
+						echo '<option id="'.$row['group_id'].'"><span class="label label-default">'.$groupType.'</span>'.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
