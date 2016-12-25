@@ -230,7 +230,7 @@ try
 					while($row = mysql_fetch_array($groups_available))
 					{
 						$groupType = $row['group_role'] == 1 ? "[C]" : "[G]";
-						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-default\'>'.$groupType.'</span> - '.$row['group_name'].'"> - '.$row['group_name'].'</option>';
+						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-default\'>'.$groupType.'</span> - '.$row['group_name'].'">'.$groupType.' - '.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
