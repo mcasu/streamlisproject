@@ -228,8 +228,8 @@ try
 					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-style="btn-primary" data-selected-text-format="count > 2" title="Seleziona i gruppi da associare..." style="min-height: 140px;">';
 					while($row = mysql_fetch_array($groups_available))
 					{
-						$groupType = $row['group_role'] == 1 ? "[C] " : "[G] ";
-						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-default\'>'.$groupType.'</span>  '.$row['group_name'].'"> '.$row['group_name'].'</option>';
+						$groupType = $row['group_role'] == 1 ? "[C]" : "[G]";
+						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-default\'>'.$groupType.'</span> - '.$row['group_name'].'"> - '.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
