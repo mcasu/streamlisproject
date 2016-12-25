@@ -59,6 +59,8 @@ $("button.viewer_add").click(function()
 		    $(this).remove();
 		});
 	    });
+            
+            $('.selectpicker').selectpicker('refresh');
 	}	    
     });
 
@@ -99,6 +101,8 @@ $("button.viewer_del").click(function()
 		    $(this).remove();
 		});
 	    });
+            
+            $('.selectpicker').selectpicker('refresh');
 	}	    
     });
     
