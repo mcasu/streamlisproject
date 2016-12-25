@@ -11,11 +11,13 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Stream LIS - Gestisci relazioni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
 
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -194,14 +196,14 @@ try
 				
 				    // TD VIEWER ASSOCIATI
 				    echo '<td>';
-				    echo '<select multiple class="form-control group_linked" id="gl_'.$group_id.'" style="min-height: 140px;">';
+				    echo '<select multiple class="selectpicker form-control group_linked" id="gl_'.$group_id.'" style="min-height: 140px;">';
 				    while($row = mysql_fetch_array($viewers))
 				    {
 					    $viewer_id=$row['viewer_id'];
 					    $viewer_name=$row['viewer_name'];
                                             $groupType = $row['role_id'] == 1 ? "[C] - " : "[G] - ";
 
-					    echo '<option id="'.$viewer_id.'"><span class="label label-default">'.$groupType.'</span>'.$viewer_name.'</option>';
+					    echo '<option id="'.$viewer_id.'" data-content="<span class=\'label label-success\'>>'.$groupType.'</span>">>'.$viewer_name.'</option>';
 				    }
 				    echo '</select>';
 				    echo '</td>';
@@ -220,11 +222,11 @@ try
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
-					echo '<select multiple class="form-control group_unlinked" id="gul_'.$group_id.'" style="min-height: 140px;">';
+					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-selected-text-format="count > 3" style="min-height: 140px;">';
 					while($row = mysql_fetch_array($groups_available))
 					{
 						$groupType = $row['group_role'] == 1 ? "[C] - " : "[G] - ";
-						echo '<option id="'.$row['group_id'].'"><span class="label label-default">'.$groupType.'</span>'.$row['group_name'].'</option>';
+						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-success\'>'.$groupType.'</span>">>'.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
