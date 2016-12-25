@@ -215,7 +215,7 @@ try
 					echo '</p>';
 				    echo '</td>';
 
-				    $groups_available=$dbactions->GetViewersAvailable($group_id);
+				    $groups_available=$dbactions->GetGroupsToLinkAvailable($group_id);
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
