@@ -196,14 +196,14 @@ try
 				
 				    // TD VIEWER ASSOCIATI
 				    echo '<td>';
-				    echo '<select multiple class="selectpicker form-control group_linked" id="gl_'.$group_id.'" style="min-height: 140px;">';
+				    echo '<select multiple class="form-control group_linked" id="gl_'.$group_id.'" style="min-height: 140px;">';
 				    while($row = mysql_fetch_array($viewers))
 				    {
 					    $viewer_id=$row['viewer_id'];
 					    $viewer_name=$row['viewer_name'];
                                             $groupType = $row['role_id'] == 1 ? "[C] - " : "[G] - ";
 
-					    echo '<option id="'.$viewer_id.'" data-content="<span class=\'label label-success\'>>'.$groupType.'</span>">>'.$viewer_name.'</option>';
+					    echo '<option id="'.$viewer_id.'">'.$groupType.$viewer_name.'</option>';
 				    }
 				    echo '</select>';
 				    echo '</td>';
@@ -222,11 +222,11 @@ try
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
-					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-selected-text-format="count > 3" style="min-height: 140px;">';
+					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-style="btn-primary" data-selected-text-format="count > 3" style="min-height: 140px;">';
 					while($row = mysql_fetch_array($groups_available))
 					{
 						$groupType = $row['group_role'] == 1 ? "[C] - " : "[G] - ";
-						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-success\'>'.$groupType.'</span>">>'.$row['group_name'].'</option>';
+						echo '<option id="'.$row['group_id'].'" data-content="<span class=\'label label-success\'>'.$groupType.'</span>">'.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
