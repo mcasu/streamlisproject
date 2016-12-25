@@ -215,15 +215,15 @@ try
 					echo '</p>';
 				    echo '</td>';
 
-				    $viewers_available=$dbactions->GetViewersAvailable($group_id);
+				    $groups_available=$dbactions->GetViewersAvailable($group_id);
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
 					echo '<select multiple class="form-control group_unlinked" id="gul_'.$group_id.'" style="min-height: 140px;">';
-					while($row = mysql_fetch_array($viewers_available))
+					while($row = mysql_fetch_array($groups_available))
 					{
-						
-						echo '<option id="'.$row['group_id'].'">'.$row['group_name'].'</option>';
+						$groupType = $row['group_role'] == 1 ? "[C] - " : "[G] - ";
+						echo '<option id="'.$row['group_id'].'"><b>'.$groupType.'</b>'.$row['group_name'].'</option>';
 					}
 					echo '</select>';
 				    echo '</td>';
