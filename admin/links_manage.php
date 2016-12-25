@@ -199,8 +199,9 @@ try
 				    {
 					    $viewer_id=$row['viewer_id'];
 					    $viewer_name=$row['viewer_name'];
+                                            $groupType = $row['role_id'] == 1 ? "[C] - " : "[G] - ";
 
-					    echo '<option id="'.$viewer_id.'">'.$viewer_name.'</option>';
+					    echo '<option id="'.$viewer_id.'"><b>'.$groupType.'</b>'.$viewer_name.'</option>';
 				    }
 				    echo '</select>';
 				    echo '</td>';

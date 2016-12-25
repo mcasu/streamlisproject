@@ -1234,6 +1234,7 @@ class DBActions
             $select_query = 'SELECT group_links.viewer_id, '.
                     'groups.group_name as viewer_name, '.
                     'groups.group_type, '.
+                    'group_roles.role_id, '.
                     'group_roles.role_name, '.
                     'groups.publish_code '.
                     'FROM group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id '.
@@ -1269,7 +1270,7 @@ class DBActions
                 return false;
             }
 
-            $select_query = 'select groups.group_name,groups.group_id,groups.group_role from groups where group_id not in (select viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where publisher_id = \''.$publisher_id.'\') order by group_name;';
+            $select_query = 'select groups.group_name,groups.group_id,groups.group_role from groups where group_id not in (select viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where publisher_id = \''.$publisher_id.'\') AND group_id != ' .$publisher_id. ' order by group_name;';
 
             $result = mysql_query($select_query ,$this->connection);
             if(!$result)
