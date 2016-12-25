@@ -212,10 +212,10 @@ try
 				    echo '<td>';
                                         echo '<br/>';
 					echo '<p class="text-center">';
-					    echo '<button class="btn btn-primary viewer_add" type="submit" style="width:150px"><span class="glyphicon glyphicon-arrow-left"></span> Aggiungi il viewer</button>';
+					    echo '<button class="btn btn-primary viewer_add" type="submit" style="width:150px"><span class="glyphicon glyphicon-arrow-left"></span> Aggiungi il gruppo</button>';
 					    echo '<br/>';
 					    echo '<br/>';
-					    echo '<button class="btn btn-primary viewer_del" type="submit" style="width:150px">Elimina il viewer <span class="glyphicon glyphicon-arrow-right"></button>';
+					    echo '<button class="btn btn-primary viewer_del" type="submit" style="width:150px">Elimina il gruppo <span class="glyphicon glyphicon-arrow-right"></button>';
 					echo '</p>';
 				    echo '</td>';
 
@@ -223,6 +223,7 @@ try
 				
 				    // TD VIEWER NON ASSOCIATI
 				    echo '<td>';
+                                        echo '<br/>';
                                         echo '<br/>';
                                         echo '<br/>';
 					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-style="btn-primary" data-selected-text-format="count > 2" title="Seleziona i gruppi da associare..." style="min-height: 140px;">';
