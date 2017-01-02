@@ -54,7 +54,6 @@ $("button.viewer_add").click(function()
 				
 		viewertoadd += $(this).text() + "|";
 		
-                alert("OPTION ID: " + viewer_id);
                 $(this).remove();
 	    });
             
@@ -91,6 +90,11 @@ $("button.viewer_del").click(function()
 	    {
 		viewer_id = $(this).attr('id');
 //		$("#" + group_unlinked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
+
+                var groupType = $(this).text().split(' - ')[0];
+                var groupName = $(this).text().split(' - ')[1];
+                alert("TYPE: " + groupType + " NAME: " + groupName);
+                $("#" + group_unlinked_id).append('<option id="'+ viewer_id +'" data-content="<span class=\'label label-default\'>'+ groupType +'</span> - '+ groupName +'">'+ $(this).text() +'</option>');
 				
 		viewertodel += $(this).text() + "|";
 		
