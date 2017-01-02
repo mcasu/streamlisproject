@@ -38,8 +38,7 @@ $("button.viewer_add").click(function()
 	viewer_id = $(this).attr('id');
 	viewertoadd += viewer_id + "|";
     });
-    alert(viewertoadd);
-    
+    //alert(viewertoadd);
 
     $.post("link_add.php",{viewerlist:viewertoadd,publisher_id:group_id}, function(data,status) {
 	//alert("Data: " + data + "\nStatus: " + status);
@@ -58,6 +57,7 @@ $("button.viewer_add").click(function()
 	    });
             
             $('.selectpicker').selectpicker('refresh');
+            sortSelect("#" + group_linked_id, 'text', 'asc');
 	}	    
     });
 
