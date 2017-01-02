@@ -89,11 +89,9 @@ $("button.viewer_del").click(function()
 	    $( "#" + group_linked_id + " option:selected" ).each(function()
 	    {
 		viewer_id = $(this).attr('id');
-//		$("#" + group_unlinked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
 
                 var groupType = $(this).text().split(' - ')[0];
                 var groupName = $(this).text().split(' - ')[1];
-                alert("TYPE: " + groupType + " NAME: " + groupName);
                 $("#" + group_unlinked_id).append('<option id="'+ viewer_id +'" data-content="<span class=\'label label-default\'>'+ groupType +'</span> - '+ groupName +'">'+ $(this).text() +'</option>');
 				
 		viewertodel += $(this).text() + "|";
@@ -104,11 +102,32 @@ $("button.viewer_del").click(function()
 		});
 	    });
             
+            sortSelect("#" + group_unlinked_id, 'text', 'asc');
             $('.selectpicker').selectpicker('refresh');
 	}	    
     });
     
-});    
+});
+
+var sortSelect = function (select, attr, order) {
+    if(attr === 'text'){
+        if(order === 'asc'){
+            $(select).html($(select).children('option').sort(function (x, y) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            e.preventDefault();
+        }// end asc
+        if(order === 'desc'){
+            $(select).html($(select).children('option').sort(function (y, x) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            e.preventDefault();
+        }// end desc
+    }
+
+};
 
 });
 
