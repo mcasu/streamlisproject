@@ -38,7 +38,7 @@ $("button.viewer_add").click(function()
 	viewer_id = $(this).attr('id');
 	viewertoadd += viewer_id + "|";
     });
-    //alert(viewertoadd);
+    alert(viewertoadd);
     
 
     $.post("link_add.php",{viewerlist:viewertoadd,publisher_id:group_id}, function(data,status) {
@@ -54,10 +54,8 @@ $("button.viewer_add").click(function()
 				
 		viewertoadd += $(this).text() + "|";
 		
-		$(this).fadeOut(1000, function()
-		{
-		    $(this).remove();
-		});
+                alert("OPTION ID: " + viewer_id);
+                $(this).remove();
 	    });
             
             $('.selectpicker').selectpicker('refresh');
@@ -92,7 +90,7 @@ $("button.viewer_del").click(function()
 	    $( "#" + group_linked_id + " option:selected" ).each(function()
 	    {
 		viewer_id = $(this).attr('id');
-		$("#" + group_unlinked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
+//		$("#" + group_unlinked_id).append('<option id="' + viewer_id + '">' + $(this).text() + '</option>');
 				
 		viewertodel += $(this).text() + "|";
 		
