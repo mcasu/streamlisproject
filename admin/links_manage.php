@@ -116,14 +116,14 @@ var sortSelect = function (select, attr, order) {
                 return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
             }));
             $(select).get(0).selectedIndex = 0;
-            e.preventDefault();
+            //e.preventDefault();
         }// end asc
         if(order === 'desc'){
             $(select).html($(select).children('option').sort(function (y, x) {
                 return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
             }));
             $(select).get(0).selectedIndex = 0;
-            e.preventDefault();
+            //e.preventDefault();
         }// end desc
     }
 
