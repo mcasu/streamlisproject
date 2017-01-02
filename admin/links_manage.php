@@ -230,7 +230,7 @@ try
                                         echo '<br/>';
                                         echo '<br/>';
                                         echo '<br/>';
-					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-style="btn-primary" data-selected-text-format="count > 2" title="Seleziona i gruppi da associare..." data-width="auto">';
+					echo '<select multiple class="selectpicker form-control group_unlinked" id="gul_'.$group_id.'" data-style="btn-primary" data-selected-text-format="count > 2" title="Seleziona i gruppi da associare..." data-width="100%">';
 					while($row = mysql_fetch_array($groups_available))
 					{
 						$groupType = $row['group_role'] == 1 ? "[C]" : "[G]";
