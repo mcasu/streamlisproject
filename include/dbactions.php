@@ -243,7 +243,7 @@ class DBActions
             $this->HandleError("Database login failed!");
             return false;
         }
-	$select_query = 'select * from groups where group_id =' . $groupId;
+	$select_query = 'select * from groups where group_id = ' . $groupId;
 
         $result = mysql_query($select_query ,$this->connection);
         if(!$result)
