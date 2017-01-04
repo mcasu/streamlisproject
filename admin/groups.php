@@ -166,6 +166,8 @@ $(document).ready(function()
             return row[0];
         } );
         
+        console.log("Group id selezionato: " + groupSelectedId);
+        
         $("#divGroupsGetLiveLink div.alert-success").hide();
         
         // Load live link for Desktop
