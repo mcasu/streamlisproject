@@ -694,6 +694,17 @@ function DeleteUsers($dbactions, $userIds)
     return TRUE;
 }
 
+function DeleteGroups($dbactions, $groupIds)
+{
+    if (!$dbactions->DeleteGroups($groupIds))
+    {
+        error_log("ERROR - functions.php DeleteGroups() FAILED! " . $dbactions->GetErrorMessage());
+        return FALSE;
+    }
+    
+    return TRUE;
+}
+
 function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName)
 {
     if (!$dbactions->UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName))
