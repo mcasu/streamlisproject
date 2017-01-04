@@ -409,14 +409,16 @@ class DBActions
         group_name,
         group_type,
         group_role,
-        publish_code
+        publish_code,
+        group_token
         )
         values
         (
         "' . $this->SanitizeForSQL($groupvars['group_name']) . '",
         "' . $this->SanitizeForSQL($groupvars['group_type']) . '",
         "' . $this->SanitizeForSQL($row_role['role_id']) . '",
-        "' . $this->SanitizeForSQL(strtolower($publish_code)) . '"
+        "' . $this->SanitizeForSQL(strtolower($publish_code)) . '",
+        "' . md5(uniqid()) . '"
         )';
 
         if(!mysql_query( $insert_query ,$this->connection))
