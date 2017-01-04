@@ -25,7 +25,7 @@ else
 
 $groupData = $dbactions->GetGroupByToken($token);
 
-if ($groupData)
+if ($groupData && !empty($groupData['publish_code']))
 {
     $data = $dbactions->GetLiveEventsByPublisher($groupData['publish_code']);
 }
@@ -34,7 +34,7 @@ else
     $data = $dbactions->GetEventsLiveData($token);
 }
 
-if (!$data || empty($data))
+if (!$data || empty($data) || mysql_num_rows($data) !== 1)
 {
     // Access forbidden:
     header('HTTP/1.1 401 Unauthorized');

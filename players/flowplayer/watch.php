@@ -34,7 +34,7 @@ else
     $data = $dbactions->GetEventsLiveData($token);
 }
 
-if (!$data || empty($data))
+if (!$data || empty($data) || mysql_num_rows($data) !== 1)
 {
     // Access forbidden:
     header('HTTP/1.1 401 Unauthorized');
