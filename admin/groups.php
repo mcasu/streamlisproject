@@ -174,7 +174,7 @@ $(document).ready(function()
         var liveLinkType = "desktop";
         $.post("/include/functions.php",{
                 fname:"groups_get_live_link",
-                groupId:groupSelectedId,
+                groupId:groupSelectedId.toString(),
                 liveLinkType:liveLinkType},
             function(data,status)
             {
@@ -190,7 +190,7 @@ $(document).ready(function()
         var liveLinkType = "smartphone";
         $.post("/include/functions.php",{
                 fname:"groups_get_live_link",
-                groupId:groupSelectedId,
+                groupId:groupSelectedId.toString(),
                 liveLinkType:liveLinkType},
             function(data,status)
             {
@@ -206,7 +206,7 @@ $(document).ready(function()
         var liveLinkType = "iphone";
         $.post("/include/functions.php",{
                 fname:"groups_get_live_link",
-                groupId:groupSelectedId,
+                groupId:groupSelectedId.toString(),
                 liveLinkType:liveLinkType},
             function(data,status)
             {
