@@ -582,10 +582,10 @@ $primaryKey = 'group_id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier.
 $columns = array(
-    array( 'db' => '`g`.group_id', 'dt' => 0 , 'field' => 'group_id'),
-    array( 'db' => '`g`.group_name', 'dt' => 1 , 'field' => 'group_name'),
-    array( 'db' => '`g`.group_type', 'dt' => 2 , 'field' => 'group_type'),
-    array( 'db' => '`g`.group_role', 'dt' => 3 ,
+    array( 'db' => 'group_id', 'dt' => 0 , 'field' => 'group_id'),
+    array( 'db' => 'group_name', 'dt' => 1 , 'field' => 'group_name'),
+    array( 'db' => 'group_type', 'dt' => 2 , 'field' => 'group_type'),
+    array( 'db' => 'group_role', 'dt' => 3 ,
             'formatter' => function( $d, $row ) {
             switch ($d) 
             {
@@ -595,9 +595,9 @@ $columns = array(
                     return '<span class="label label-default">Viewer</span>';
             }
         }, 'field' => 'group_role'),
-    array( 'db' => '`g`.publish_code', 'dt' => 4 , 'field' => 'publish_code'),                   
+    array( 'db' => 'publish_code', 'dt' => 4 , 'field' => 'publish_code'),                   
     array(
-        'db' => '`g`.id',
+        'db' => 'id',
         'dt' => 'DT_RowId',
         'formatter' => function( $d, $row ) {
             // Technically a DOM id cannot start with an integer, so we prefix
