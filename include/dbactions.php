@@ -1091,6 +1091,26 @@ class DBActions
             return $result;
     }
 
+    function DeleteGroups($groupIds)
+    {
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+
+        $delete_query = 'delete from groups where group_id in ('.$groupIds.')';
+
+        $result = mysql_query($delete_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+            return false;
+        }
+        return $result;
+    }     
+    
+    
     function DeleteEventOnDemand($ondemand_id)
     {
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

@@ -100,50 +100,56 @@ $(document).ready(function()
             $("#btn_group_getlivelink").prop('disabled', true);
         }
     }); 
-    
-        
-//    $("input:radio").click(function(lastSelectedRow)
-//    {
-//	$("#groups_table").find("tr").removeClass("active");
-//	
-//	var isChecked = $(this).prop("checked");
-//	var selectedRow = $(this).parent("td").parent("tr");
-//    
-//	if (isChecked)
-//	{
-//	    selectedRow.addClass("active");
-//	    $("#btn_group_delete").prop('disabled', false);
-//	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
-//	}
-//	else
-//	{
-//	    selectedRow.removeClass("active");
-//	    //selectedRow.css({ "background-color": '', "color": "black" });
-//	}
-//	
-//    });
 
     $("#btn_group_delete").click(function()
     {
-	var tr_obj = $('input[name=group_selected]:checked').parent("td").parent("tr");
-	
-	var tr_id=tr_obj.attr('id');
-	//alert("Vuoi cancellare id: " + tr_id);
-	
-	if (confirm("Vuoi davvero eliminare la congregazione con ID [" + tr_id + "]?"))
+        console.log("Numero gruppi selezionati: " + groupsTable.rows('.selected').data().length);
+        
+        var groupSelectedIds = $.map(groupsTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        console.log("Group id selezionati: " + groupSelectedIds);
+        
+        if (confirm("Vuoi davvero eliminare i gruppi selezionati?"))
 	{
-	    $.post("group_delete.php",{group_id:tr_id,},
-	    function(data,status)
-	    {
-		    //alert("Data: " + data + "\nStatus: " + status);
-		    tr_obj.fadeOut(1000, function() 
-		    {
-			    tr_obj.remove();
-			    $("#btn_group_delete").prop('disabled', true);
-		    });
-	    });
-	}
-    });
+            $.post("/include/functions.php",{fname:"groups_delete",groupIds:groupSelectedIds.toString()},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+                
+                if (status === "success")
+                {
+                    groupsTable.$('.selected').remove();
+                    $("#btn_group_delete").prop('disabled', true);
+                }
+            });            
+            
+        }
+    });        
+    
+//    $("#btn_group_delete").click(function()
+//    {
+//	var tr_obj = $('input[name=group_selected]:checked').parent("td").parent("tr");
+//	
+//	var tr_id=tr_obj.attr('id');
+//	//alert("Vuoi cancellare id: " + tr_id);
+//	
+//	if (confirm("Vuoi davvero eliminare la congregazione con ID [" + tr_id + "]?"))
+//	{
+//	    $.post("group_delete.php",{group_id:tr_id,},
+//	    function(data,status)
+//	    {
+//		    //alert("Data: " + data + "\nStatus: " + status);
+//		    tr_obj.fadeOut(1000, function() 
+//		    {
+//			    tr_obj.remove();
+//			    $("#btn_group_delete").prop('disabled', true);
+//		    });
+//	    });
+//	}
+//    });
 
     
 });

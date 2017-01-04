@@ -28,6 +28,9 @@ switch ($fname)
     case "users_delete":
         $userIds = filter_input(INPUT_POST, 'userIds');
         return DeleteUsers($dbactions, $userIds);
+    case "groups_delete":
+        $groupIds = filter_input(INPUT_POST, 'groupIds');
+        return DeleteGroups($dbactions, $groupIds);        
     case "user_update":
         $userId = filter_input(INPUT_POST, 'userId');
         $fullName = filter_input(INPUT_POST, 'fullName');
