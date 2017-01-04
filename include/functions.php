@@ -590,7 +590,7 @@ $columns = array(
             switch ($d) 
             {
                 case 1:
-                    return '<span class="label label-success">Publisher</span>';
+                    return '<span class="label label-warning">Publisher</span>';
                 case 2:
                     return '<span class="label label-default">Viewer</span>';
             }
