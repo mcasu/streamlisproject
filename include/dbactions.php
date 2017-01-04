@@ -255,6 +255,26 @@ class DBActions
 
 	return $row;
     }
+
+    function GetGroupByToken($groupToken)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+	$select_query = 'select * from groups where group_token = \'' . $groupToken . '\'';
+
+        $result = mysql_query($select_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+	return $row;
+    }    
     
     function GetGroupIdByName($group_name)
     {

@@ -137,7 +137,7 @@ $(document).ready(function()
         e.preventDefault();
         
         var groupGetLiveLinkDlg = $('#divGroupsGetLiveLink').dialog({
-            title: 'Live unique link',
+            title: 'Live link unico',
             resizable: true,
             autoOpen:false,
             modal: true,

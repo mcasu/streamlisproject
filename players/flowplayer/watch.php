@@ -23,7 +23,16 @@ else
     $ip_actual = $ip_public;
 }
 
-$data = $dbactions->GetEventsLiveData($token);
+$groupData = $dbactions->GetGroupByToken($token);
+
+if ($groupData)
+{
+    $data = $dbactions->GetLiveEventsByPublisher($groupData['publish_code']);
+}
+else
+{
+    $data = $dbactions->GetEventsLiveData($token);
+}
 
 if (!$data || empty($data))
 {
