@@ -236,6 +236,26 @@ class DBActions
         return $affectedRows;
     }
     
+    function GetGroupById($groupId)
+    {
+	if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+	$select_query = 'select * from groups where group_id =\'' . $groupId . '\'';
+
+        $result = mysql_query($select_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            return false;
+        }
+        $row = mysql_fetch_array($result);
+
+	return $row;
+    }
+    
     function GetGroupIdByName($group_name)
     {
 	if(!$this->DBLogin())
@@ -254,6 +274,26 @@ class DBActions
         $row = mysql_fetch_array($result);
 
 	return $row['group_id'];
+    }
+    
+    function UpdateGroupLiveToken($groupId)
+    {
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+        $token = md5(uniqid());
+	$updateQuery = 'UPDATE `groups` SET `group_token`=\''. $token .'\' WHERE group_id =\''. $groupId .'\'';
+
+        $result = mysql_query($updateQuery ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$updateQuery");
+            return false;
+        }
+
+	return $result;
     }
     
     function GetPublishCodeByGroupId($group_id)

@@ -129,27 +129,93 @@ $(document).ready(function()
         }
     });        
     
-//    $("#btn_group_delete").click(function()
-//    {
-//	var tr_obj = $('input[name=group_selected]:checked').parent("td").parent("tr");
-//	
-//	var tr_id=tr_obj.attr('id');
-//	//alert("Vuoi cancellare id: " + tr_id);
-//	
-//	if (confirm("Vuoi davvero eliminare la congregazione con ID [" + tr_id + "]?"))
-//	{
-//	    $.post("group_delete.php",{group_id:tr_id,},
-//	    function(data,status)
-//	    {
-//		    //alert("Data: " + data + "\nStatus: " + status);
-//		    tr_obj.fadeOut(1000, function() 
-//		    {
-//			    tr_obj.remove();
-//			    $("#btn_group_delete").prop('disabled', true);
-//		    });
-//	    });
-//	}
-//    });
+    $("#divGroupsGetLiveLink").hide();
+    $("#btn_group_getlivelink").click(function(e)
+    {
+        e.preventDefault();
+        
+        var groupGetLiveLinkDlg = $('#divGroupsGetLiveLink').dialog({
+            title: 'Live unique link',
+            resizable: true,
+            autoOpen:false,
+            modal: true,
+            hide: 'fade',
+            width:750,
+            buttons: [
+//               {
+//                    text: "Copia",
+//                    click: function() {
+//                        $("#divEventsLiveViewLink div.alert-success").show();
+//                   }
+//               },
+               {
+                   text: "Chiudi",
+                   click: function() {
+                       //$("#divEventsLiveViewLink div.alert-success").hide();
+                       $('#divGroupsGetLiveLink').dialog("close");
+                   }
+               }
+            ]
+        });        
+        
+        // Questa funzione è eseguibile solo quando è selezionato un singolo gruppo quindi il group_id sarà sempre 1
+        var groupSelectedId = $.map(groupsTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        $("#divGroupsGetLiveLink div.alert-success").hide();
+        
+        // Load live link for Desktop
+        var liveLinkType = "desktop";
+        $.post("/include/functions.php",{
+                fname:"groups_get_live_link",
+                groupId:groupSelectedId,
+                liveLinkType:liveLinkType},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+
+                if (status === "success")
+                {
+                    $('#inputGroupsGetLiveLinkDesktop').val(data);
+                }
+        });
+        
+        // Load live link for Smartphone
+        var liveLinkType = "smartphone";
+        $.post("/include/functions.php",{
+                fname:"groups_get_live_link",
+                groupId:groupSelectedId,
+                liveLinkType:liveLinkType},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+
+                if (status === "success")
+                {
+                    $('#inputGroupsGetLiveLinkSmartphone').val(data);
+                }
+        });        
+        
+        // Load live link for Iphone
+        var liveLinkType = "iphone";
+        $.post("/include/functions.php",{
+                fname:"groups_get_live_link",
+                groupId:groupSelectedId,
+                liveLinkType:liveLinkType},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+
+                if (status === "success")
+                {
+                    $('#inputGroupsGetLiveLinkIphone').val(data);
+                }
+        });         
+        
+        groupGetLiveLinkDlg.dialog('open');
+    });  
 
     
 });
@@ -188,6 +254,14 @@ $(document).ready(function()
 	    </table>
 	</div>
     </div>
+    
+    echo '<div id="divGroupsGetLiveLink">';
+            echo '<br/>';
+            echo '<input id="inputGroupsGetLiveLinkDesktop" class="form-control default-cursor" type="text" readonly>';
+            echo '<input id="inputGroupsGetLiveLinkSmartphone" class="form-control default-cursor" type="text" readonly>';
+            echo '<input id="inputGroupsGetLiveLinkIphone" class="form-control default-cursor" type="text" readonly>';
+
+    echo '</div>';
 </div>
 
 </body>

@@ -67,6 +67,10 @@ switch ($fname)
         $eventsLiveId = filter_input(INPUT_POST, 'eventsLiveId');
         $eventsLivePlayerType = filter_input(INPUT_POST, 'eventsLivePlayerType');
         return GetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType);
+    case "groups_get_live_link":
+        $groupId = filter_input(INPUT_POST, 'groupId');
+        $liveLinkType = filter_input(INPUT_POST, 'liveLinkType');
+        return GetGroupLiveLink($dbactions, $groupId, $liveLinkType);
     default:
         break;
 }
@@ -742,6 +746,54 @@ function GetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType)
     }
     
     $link .= "watch.php?t=" . $row['live_token'];
+    
+    echo $link;
+    return true;
+}
+
+function GetGroupLiveLink($dbactions, $groupId, $liveLinkType)
+{
+    $row = $dbactions->GetGroupById($groupId);
+    if (!$row)
+    {
+        error_log("ERROR - functions.php GetGroupById() FAILED! " . $dbactions->GetErrorMessage());
+        echo "false";
+        return false;
+    }
+    
+    // Se il token non esiste, lo creo
+    $groupToken = $row['group_token'];
+    if (!$groupToken || empty($groupToken))
+    {
+        $dbactions->UpdateGroupLiveToken($groupId);
+        $row = $dbactions->GetGroupById($groupId);
+        if ($row)
+        {
+            $groupToken = $row['group_token'];
+        }
+    }
+    
+    if (!$groupToken)
+    {
+        echo "false";
+        return false;
+    }
+    
+    $link = "https://" . filter_input(INPUT_SERVER, 'SERVER_NAME');
+    switch (strtolower($liveLinkType))
+    {
+        case "desktop":
+            $link .= "/players/jwplayer/";
+            break;
+        case "smartphone":
+            $link .= "/players/flowplayer/";
+            break;
+        case "iphone":
+            $link .= "/players/html5/";
+            break;
+    }
+    
+    $link .= "watch.php?t=" . $groupToken;
     
     echo $link;
     return true;
