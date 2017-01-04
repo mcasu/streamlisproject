@@ -259,13 +259,12 @@ $(document).ready(function()
 	</div>
     </div>
     
-    echo '<div id="divGroupsGetLiveLink">';
-            echo '<br/>';
-            echo '<input id="inputGroupsGetLiveLinkDesktop" class="form-control default-cursor" type="text" readonly>';
-            echo '<input id="inputGroupsGetLiveLinkSmartphone" class="form-control default-cursor" type="text" readonly>';
-            echo '<input id="inputGroupsGetLiveLinkIphone" class="form-control default-cursor" type="text" readonly>';
-
-    echo '</div>';
+    <div id="divGroupsGetLiveLink">
+        <br/>
+        <input id="inputGroupsGetLiveLinkDesktop" class="form-control default-cursor" type="text" readonly>
+        <input id="inputGroupsGetLiveLinkSmartphone" class="form-control default-cursor" type="text" readonly>
+        <input id="inputGroupsGetLiveLinkIphone" class="form-control default-cursor" type="text" readonly>
+    </div>
 </div>
 
 </body>
