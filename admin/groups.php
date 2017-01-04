@@ -11,14 +11,16 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Stream LIS - Congregazioni</title>
 	
-    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery-ui.min.css"/>        
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     
 <script type="text/javascript">
     
