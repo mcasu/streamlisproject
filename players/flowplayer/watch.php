@@ -25,7 +25,7 @@ else
 
 $groupData = $dbactions->GetGroupByToken($token);
 
-if ($groupData)
+if ($groupData && !empty($groupData['publish_code']))
 {
     $data = $dbactions->GetLiveEventsByPublisher($groupData['publish_code']);
 }
