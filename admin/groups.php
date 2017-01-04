@@ -48,14 +48,6 @@ $(document).ready(function()
         }
     });    
     
-//    $('#groups_table').DataTable({
-//        "language": {
-//            "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
-//        },
-//        "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-//        "order": [[ 1, 'asc' ]]
-//    });
-    
     $("#btn_group_delete").prop('disabled', true);
     $("#btn_group_getlivelink").prop('disabled', true);
     
@@ -96,6 +88,10 @@ $(document).ready(function()
                 {
                     $("#btn_group_getlivelink").prop('disabled', false);
                 }
+            }
+            else
+            {
+                $("#btn_group_getlivelink").prop('disabled', true);
             }
         }
         else
@@ -183,54 +179,6 @@ $(document).ready(function()
                     </tr>
                 </thead>
                 
-	    <?php
-	    
-//		$result = $dbactions->GetGroups();
-//		
-//		if ($result)
-//		{
-//                    echo '<thead>';
-//                        echo '<tr class="head">';
-//                            echo'<th></th>';
-//                            echo '<th>CONGREGAZIONE</th>';
-//                            echo '<th>ID</th>';
-//                            echo '<th>TIPO</th>';
-//                            echo '<th>RUOLO</th>';
-//                            echo '<th>PUBLISH CODE</th>';
-//                        echo '</tr>';
-//		    echo '</thead>';
-//                    
-//                    echo '<tbody>';
-//		    while ($row = mysql_fetch_array($result))
-//		    {
-//			$values[0]=$row['group_name'];
-//			$values[1]=$row['group_id'];
-//			$values[2]=$row['group_type'];
-//			$values[3]=$row['group_role_name'];
-//			$values[4]=$row['publish_code'];
-//			
-//			echo '<tr class="groups_table" id="' .$values[1].'">';
-//				    echo '<td><input type="radio" name="group_selected" /></td>';
-//				    echo '<td>' . $values[0] . '</td>';
-//				    echo '<td>' . $values[1] . '</td>';
-//				    echo '<td>' . $values[2] . '</td>';
-//                                    echo '<td>';
-//                                        if ($values[3] == "publisher")
-//                                        {
-//                                            echo '<span class="label label-warning">' . $values[3] . '</span>';
-//                                        }
-//                                        else
-//                                        {
-//                                            echo '<span class="label label-default">' . $values[3] . '</span>';
-//                                        }
-//                                    echo '</td>';
-//				    echo '<td>' . $values[4] . '</td>';
-//			echo '</tr>';
-//		    }
-//                    echo '</tbody>';
-//		}
-	    
-	    ?>
 	    </table>
 	</div>
     </div>
