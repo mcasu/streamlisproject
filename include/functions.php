@@ -467,7 +467,7 @@ function DeleteOndemandActionsJoin($dbactions, $joinSelectedIds)
     return TRUE;
 }
 
-function GetDataTableGroups($host, $uname, $pwd, $database)
+function GetDataTableUsers($host, $uname, $pwd, $database)
 {
     /*
  * DataTables example server-side processing script.
@@ -551,7 +551,7 @@ echo json_encode(
 );
 }
 
-function GetDataTableUsers($host, $uname, $pwd, $database)
+function GetDataTableGroups($host, $uname, $pwd, $database)
 {
     /*
  * DataTables example server-side processing script.
