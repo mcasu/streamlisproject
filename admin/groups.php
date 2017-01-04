@@ -261,9 +261,15 @@ $(document).ready(function()
     
     <div id="divGroupsGetLiveLink">
         <br/>
+        <img class="video_imgdevice" src="../images/desktop.png"/>
         <input id="inputGroupsGetLiveLinkDesktop" class="form-control default-cursor" type="text" readonly>
+        <br/>
+        <img class="video_imgdevice" src="../images/os_android_old.png"/>
         <input id="inputGroupsGetLiveLinkSmartphone" class="form-control default-cursor" type="text" readonly>
+        <br/>
+        <img class="video_imgdevice" src="../images/os_apple_old.png"/>
         <input id="inputGroupsGetLiveLinkIphone" class="form-control default-cursor" type="text" readonly>
+        <br/>
     </div>
 </div>
 
