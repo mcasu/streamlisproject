@@ -1,3 +1,4 @@
+<!doctype html>
 <?PHP
 include(getenv("DOCUMENT_ROOT") . "/check_login.php");
 
