@@ -28,27 +28,58 @@ else
 ?>
 
 
-<html> 
-<head> 
-    <title>HTTP MPEG-DASH Live Streaming</title> 
-    <!--<script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>-->
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Baseline DASH-MPEG Player</title>
+    <meta name="description" content="" />
+
+    <!-- Minified Dash & Libraries -->
     <script src="dash.all.js"></script>
+
+    <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        function startVideo() {
+            var vars = getUrlVars(),
+                url = "https://www.streamlis.it/dash/salerno_lis.mpd",
+                video,
+                context,
+                player;
+
+            if (vars && vars.hasOwnProperty("url")) {
+                url = vars.url;
+            }
+
+            video = document.querySelector(".dash-video-player video");
+            context = new Dash.di.DashContext();
+            player = new MediaPlayer(context);
+
+            player.startup();
+
+            player.attachView(video);
+            player.setAutoPlay(false);
+
+            player.attachSource(url);
+        }
+    </script>
 
     <style>
         video {
-        width: 640px;
-        height: 360px;
+            width: 640px;
+            height: 480px;
         }
     </style>
-</head> 
 
-<body>
-    <center>
-    <div>
-        <?php
-            echo '<video data-dashjs-player autoplay src="https://www.streamlis.it/dash/'.$stream_name.'.mpd" controls></video>';
-        ?>
-    </div>
-    </center>
-</body> 
+    <body onload="startVideo()">
+        <div class="dash-video-player">
+            <video controls="true"></video>
+        </div>
+    </body>
 </html>
