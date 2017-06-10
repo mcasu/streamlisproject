@@ -31,7 +31,7 @@ else
 <html> 
 <head> 
     <title>HTTP MPEG-DASH Live Streaming</title> 
-    <script src="http://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
 
     <style>
         video {
