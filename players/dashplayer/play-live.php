@@ -34,6 +34,14 @@ else
     <title>Baseline DASH-MPEG Player</title>
     <meta name="description" content="" />
 
+    <!-- Libraries -->
+    <script src="app/lib/q.js"></script>
+    <script src="app/lib/dijon.js"></script>
+    <script src="app/lib/xml2json.js"></script>
+    <script src="app/lib/objectiron.js"></script>
+    <script src="app/lib/long.js"></script>
+    <script src="app/lib/Math.js"></script>
+    
     <!-- Minified Dash & Libraries -->
     <script src="dash.all.js"></script>
 
