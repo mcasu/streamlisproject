@@ -45,7 +45,7 @@ else
     <center>
     <div>
         <?php
-            echo '<video data-dashjs-player autoplay src="https://www.streamlis.it/dash/'.$stream_name.'/manifest.mpd" controls></video>';
+            echo '<video data-dashjs-player autoplay src="https://www.streamlis.it/dash/'.$stream_name.'.mpd" controls></video>';
         ?>
     </div>
     </center>
