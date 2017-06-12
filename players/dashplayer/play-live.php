@@ -34,7 +34,9 @@ else
     <title>Baseline DASH-MPEG Player</title>
     <meta name="description" content="" />
 
-    <!-- Libraries -->
+    <script type="text/javascript" src="https://bitmovin-a.akamaihd.net/bitmovin-player/stable/7.1/bitmovinplayer.js"></script>
+    
+<!--    
     <script src="app/lib/q.js"></script>
     <script src="app/lib/dijon.js"></script>
     <script src="app/lib/xml2json.js"></script>
@@ -42,9 +44,9 @@ else
     <script src="app/lib/long.js"></script>
     <script src="app/lib/Math.js"></script>
     
-    <!-- Minified Dash & Libraries -->
     <script src="dash.all.js"></script>
-
+ -->
+<!--
     <script>
         function getUrlVars() {
             var vars = {};
@@ -56,7 +58,7 @@ else
 
         function startVideo() {
             var vars = getUrlVars(),
-                url = "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
+                url = "https://www.streamlis.it/dash/index.mpd",
                 video,
                 context,
                 player;
@@ -77,7 +79,7 @@ else
             player.attachSource(url);
         }
     </script>
-
+-->
     <style>
         video {
             width: 640px;
@@ -85,9 +87,31 @@ else
         }
     </style>
 
-    <body onload="startVideo()">
-        <div class="dash-video-player">
+    <body>
+        
+<!--        <div class="dash-video-player">
             <video controls="true"></video>
         </div>
+ -->   
+        
+    <div id="player"></div>
+<script type="text/javascript">
+    var conf = {
+        key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
+        source: {
+          dash:        "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
+        }
+    };
+    var player = bitmovin.player("player");
+    player.setup(conf).then(function(value) {
+        // Success
+        console.log("Successfully created bitmovin player instance");
+    }, function(reason) {
+        // Error!
+        console.log("Error while creating bitmovin player instance");
+    });
+</script>
+
+        
     </body>
 </html>
