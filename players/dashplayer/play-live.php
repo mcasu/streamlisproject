@@ -56,7 +56,7 @@ else
 
         function startVideo() {
             var vars = getUrlVars(),
-                url = "https://www.streamlis.it/dash/salerno_lis.mpd",
+                url = "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
                 video,
                 context,
                 player;
@@ -72,7 +72,7 @@ else
             player.startup();
 
             player.attachView(video);
-            player.setAutoPlay(false);
+            player.setAutoPlay(true);
 
             player.attachSource(url);
         }
