@@ -58,7 +58,9 @@ else
     <script>
         const player = jwplayer('player').setup({
         playlist:[{
-            sources:"https://www.streamlis.it/dash/<?php echo $stream_name;?>/index.mpd",
+            sources: [{
+                "file": "https://www.streamlis.it/dash/<?php echo $stream_name;?>/index.mpd"
+                ]},
             title:"DASH-MPEG Player",
             description:'This is a DASH stream!',
             type:'dash'
