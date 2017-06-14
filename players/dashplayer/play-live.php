@@ -99,22 +99,22 @@ else
     var conf = {
         key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
         source: {
-          //dash:        "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
-          hls:        "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8",
-          labeling: {
-            hls: {
-                qualities: function(quality) {
-                    return quality.height + 'p';
-                }
-            },
-            dash: {
-                qualities: function(quality) {
-                    return quality.height + 'p';
-                }
-            }
-        }
-        }
-        tweaks : {
+            //dash:        "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
+            hls:        "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8",
+            labeling: {
+              hls: {
+                  qualities: function(quality) {
+                      return quality.height + 'p';
+                  }
+              },
+              dash: {
+                  qualities: function(quality) {
+                      return quality.height + 'p';
+                  }
+              }
+          }
+        },
+        tweaks: {
             autoqualityswitching : true,
             max_buffer_level     : 2
         }
