@@ -35,11 +35,11 @@ else
 }
 
 ?>
-<html lang="en">
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-        <script type="text/javascript" src="jwplayer-7.11.3/jwplayer.js" ></script>
+        <script type="text/javascript" src="jwplayer-7.11.3/jwplayer.js"></script>
         <script>jwplayer.key="UUfnO2lEZWsYYjNDJs/j4GbGBTQcA93zo6s0tw==";</script>
                 
 </head>
@@ -54,20 +54,19 @@ else
         </div>
     </div>
 		
-    <?php
 
-    echo '<script type="text/javascript">'.
-        'jwplayer("player").setup({
+    <script>
+        const player = jwplayer('player').setup({
         playlist:[{
-            file:"https://www.streamlis.it/dash/'.$stream_name.'/index.mpd",
-            title:"DASH-MPEG Player",
-            description:"This is a DASH stream!",
-            type:"dash"
+            file:'https://www.streamlis.it/dash/<?php echo $stream_name;?>/index.mpd',
+            title:'DASH-MPEG Player',
+            description:'This is a DASH stream!',
+            type:'dash'
         }],
         dash: "shaka",
         autostart: true
-    });';
+    });
+    </script>
 
-    ?>
 </body>
 </html>
