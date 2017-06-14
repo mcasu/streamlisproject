@@ -104,7 +104,7 @@ else
         },
         tweaks: {
             autoqualityswitching : true,
-            max_buffer_level     : 5
+            max_buffer_level     : 2
         }
     };
     var player = bitmovin.player("player");
