@@ -39,7 +39,9 @@ else
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-	<script type="text/javascript" src="jwplayer.js" ></script>
+        <script type="text/javascript" src="jwplayer-7.11.3/jwplayer.js" ></script>
+        <script>jwplayer.key="UUfnO2lEZWsYYjNDJs/j4GbGBTQcA93zo6s0tw==";</script>
+                
 </head>
 <body>
     
