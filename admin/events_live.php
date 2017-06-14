@@ -197,15 +197,6 @@ try
                                                     echo '</li>';
 
                                                     echo '<li>';    
-                                                        echo '<div class="player_smartphone">';
-                                                            echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
-                                                            echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>device Android</label>";
-                                                        echo '</div>';
-                                                    echo '</li>';
-
-                                                    echo '<li>';    
                                                         echo '<div class="player_iphone">';
                                                             echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
                                                             '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
