@@ -31,7 +31,7 @@ else
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>HLS Player</title>
+    <title>DASH-MPEG Player</title>
     <meta name="description" content="" />
 
     <script type="text/javascript" src="https://bitmovin-a.akamaihd.net/bitmovin-player/stable/7.1/bitmovinplayer.js"></script>
@@ -82,8 +82,8 @@ else
 -->
     <style>
         video {
-            width: 640px;
-            height: 480px;
+            width: 480px;
+            height: 360px;
         }
     </style>
 
@@ -99,12 +99,12 @@ else
     var conf = {
         key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
         source: {
-            dash:   "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
-            hls:    "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8"
+            dash:   "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd"
+            //hls:    "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8"
         },
         tweaks: {
             autoqualityswitching : true,
-            max_buffer_level     : 20
+            max_buffer_level     : 10
         }
     };
     var player = bitmovin.player("player");
