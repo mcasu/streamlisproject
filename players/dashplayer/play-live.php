@@ -100,23 +100,11 @@ else
         key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
         source: {
             //dash:        "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
-            hls:        "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8",
-            labeling: {
-                hls: {
-                    qualities: function(quality) {
-                        return quality.height + 'p';
-                    }
-                },
-                dash: {
-                    qualities: function(quality) {
-                        return quality.height + 'p';
-                    }
-                }
-            }
+            hls:        "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8"
         },
         tweaks: {
-            autoqualityswitching : false,
-            max_buffer_level     : 10
+            autoqualityswitching : true,
+            max_buffer_level     : 20
         }
     };
     var player = bitmovin.player("player");
