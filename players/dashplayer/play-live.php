@@ -116,7 +116,7 @@ else
             }
         },
         tweaks: {
-            autoqualityswitching : true,
+            autoqualityswitching : false,
             max_buffer_level     : 2
         }
     };
