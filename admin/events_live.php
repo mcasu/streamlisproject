@@ -190,18 +190,18 @@ try
                                                 echo '<li>';
                                                         echo '<div class="player_desktop">';
                                                             echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
+                                                            '<img class="video_imgdevice" src="../images/adobe-flash-player-logo.png"/></a>';
                                                             echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>PC Desktop</label>";
+                                                            echo "<label>Guarda il video con <br/>device o PC Windows</label>";
                                                         echo '</div>';
                                                     echo '</li>';
 
                                                     echo '<li>';    
                                                         echo '<div class="player_iphone">';
                                                             echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                                            '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
+                                                            '<img class="video_imgdevice" src="../images/HTML5-logo-512.png"/></a>';
                                                             echo '<br/>';
-                                                            echo "<label>Guarda il video con <br/>device Apple</label>";
+                                                            echo "<label>Guarda il video con <br/>device Android o Apple iOS</label>";
                                                         echo '</div>';
                                                 echo '</li>';
                                             echo '</ul>';	

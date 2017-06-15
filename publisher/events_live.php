@@ -117,20 +117,9 @@ try
                             echo '<li>';
                                     echo '<div class="player_desktop">';
                                         echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                        '<img class="video_imgdevice" src="../images/desktop.png"/></a>';
+                                        '<img class="video_imgdevice" src="../images/adobe-flash-player-logo.png"/></a>';
                                         echo '<br/>';
-                                        echo "<label>Guarda il video con <br/>PC Desktop</label>";
-                                        echo '<br/>';
-                                        echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
-                                    echo '</div>';
-                                echo '</li>';
-
-                                echo '<li>';    
-                                    echo '<div class="player_smartphone">';
-                                        echo '<a class="play-button" href="../players/flowplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                        '<img class="video_imgdevice" src="../images/os_android_old.png"/></a>';
-                                        echo '<br/>';
-                                        echo "<label>Guarda il video con <br/>device Android</label>";
+                                        echo "<label>Guarda il video con <br/>device o PC Windows</label>";
                                         echo '<br/>';
                                         echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
@@ -138,10 +127,10 @@ try
 
                                 echo '<li>';    
                                     echo '<div class="player_iphone">';
-                                        echo '<a class="play-button" href="../players/html5/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                        '<img class="video_imgdevice" src="../images/os_apple_old.png"/></a>';
+                                        echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
+                                        '<img class="video_imgdevice" src="../images/HTML5-logo-512.png"/></a>';
                                         echo '<br/>';
-                                        echo "<label>Guarda il video con <br/>device Apple</label>";
+                                        echo "<label>Guarda il video con <br/>device Android o Apple iOS</label>";
                                         echo '<br/>';
                                         echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
