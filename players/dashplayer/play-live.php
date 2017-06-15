@@ -34,9 +34,9 @@ else
     <title>DASH-MPEG Player</title>
     <meta name="description" content="" />
 
-    <script type="text/javascript" src="https://bitmovin-a.akamaihd.net/bitmovin-player/stable/7.1/bitmovinplayer.js"></script>
+<!--    <script type="text/javascript" src="https://bitmovin-a.akamaihd.net/bitmovin-player/stable/7.1/bitmovinplayer.js"></script>-->
     
-<!--    
+    
     <script src="app/lib/q.js"></script>
     <script src="app/lib/dijon.js"></script>
     <script src="app/lib/xml2json.js"></script>
@@ -45,8 +45,8 @@ else
     <script src="app/lib/Math.js"></script>
     
     <script src="dash.all.js"></script>
- -->
-<!--
+ 
+
     <script>
         function getUrlVars() {
             var vars = {};
@@ -58,7 +58,7 @@ else
 
         function startVideo() {
             var vars = getUrlVars(),
-                url = "https://www.streamlis.it/dash/index.mpd",
+                url = "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd",
                 video,
                 context,
                 player;
@@ -79,28 +79,28 @@ else
             player.attachSource(url);
         }
     </script>
--->
-    <style>
+
+<!--    <style>
         video {
             width: 480px;
             height: 360px;
         }
     </style>
 
-    <body>
+    <body>-->
         
-<!--        <div class="dash-video-player">
+        <div class="dash-video-player">
             <video controls="true"></video>
         </div>
- -->   
+    
         
-    <div id="player"></div>
+<!--    <div id="player"></div>
 <script type="text/javascript">
     var conf = {
         key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
         source: {
-            dash:   "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd"
-            //hls:    "https://www.streamlis.it/hls/<?php echo $stream_name; ?>.m3u8"
+            dash:   "https://www.streamlis.it/dash/.../index.mpd"
+            //hls:    "https://www.streamlis.it/hls/...m3u8"
         },
         tweaks: {
             autoqualityswitching : true,
@@ -115,7 +115,7 @@ else
         // Error!
         console.log("Error while creating bitmovin player instance");
     });
-</script>
+</script>-->
 
         
     </body>
