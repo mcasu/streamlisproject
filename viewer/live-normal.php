@@ -146,7 +146,12 @@ try
 			    echo '<li>';    
 				echo '<div class="player_iphone">';
 				    echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-				    '<img class="video_imgdevice" src="../images/HTML5-logo-512.png"/></a>';
+				    '<div id="img_container">'.
+                                        '<img class="video_imgdevice" src="../images/HTML5-logo-512.png"/>'.
+                                        '<div id="playbutton_overlay"></div>'.
+                                    '</div>'.
+                                    '</a>';
+                                            
 				    echo '<br/>';
 				    echo "<label>Guarda il video con <br/>device Android o Apple iOS</label>";
 				echo '</div>';

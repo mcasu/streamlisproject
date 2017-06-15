@@ -350,6 +350,26 @@ a.play-button img.video_imgdevice:hover
   opacity: 0.5;
 }
 
+#img_container {
+    position: relative;
+    display: inline-block;
+    border: 1px solid green;
+}
+#live_player_html5_img {
+    z-index: 9;
+    border: 1px solid blue;
+}
+#playbutton_overlay {
+    background: url('images/playbutton.png') center center no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin: -35px 0 0 -35px;
+    z-index: 10;
+}
+
 /******************************/
 /* *** VIDEO LOADING CSS3 *** */
 /******************************/
