@@ -353,14 +353,14 @@ a.play-button img.video_imgdevice:hover
 #img_container {
     position: relative;
     display: inline-block;
-    border: 1px solid green;
+    border: none;
 }
 #live_player_html5_img {
     z-index: 9;
-    border: 1px solid blue;
+    border: none;
 }
 #playbutton_overlay {
-    background: url('images/playbutton.png') center center no-repeat;
+    background: url('../images/playbutton.png') center center no-repeat;
     position: absolute;
     top: 50%;
     left: 50%;
