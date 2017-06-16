@@ -18,6 +18,7 @@ require_once("class.phpmailer.php");
 require_once("utils.php");
 require_once("dbactions.php");
 require_once("fsactions.php");
+require_once("ffmpeg-php-master/FFmpegAutoloader.php");
 
 class MainActions
 {
