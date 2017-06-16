@@ -347,7 +347,7 @@ div.player_iphone img.video_imgos
 
 a.play-button img.video_imgdevice:hover
 {
-  /*opacity: 0.4;*/
+  opacity: 0.2;
   background: url('../images/playbutton.png') center center no-repeat;
 }
 
