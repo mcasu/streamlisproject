@@ -347,11 +347,11 @@ div.player_iphone img.video_imgos
 
 a.play-button img.video_imgdevice:hover
 {
-  opacity: 0.4;
+  /*opacity: 0.4;*/
   background: url('../images/playbutton.png') center center no-repeat;
 }
 
-#img_container {
+/*#img_container {
     position: relative;
     display: inline-block;
     border: none;
@@ -374,7 +374,7 @@ a.play-button img.video_imgdevice:hover
     opacity: 0.2;
     margin: -4px 0 0 -6px;
     z-index: 10;
-}
+}*/
 
 /******************************/
 /* *** VIDEO LOADING CSS3 *** */
