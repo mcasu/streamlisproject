@@ -211,6 +211,7 @@ ul.video_element
   list-style: none;
   display: inline-block;
   margin-right: 10px;
+  padding-left: 10px;
   width: 100%;
 }
 
@@ -261,7 +262,7 @@ ul.video_element li
   font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   overflow: auto;
   padding-bottom: 4px;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 ul.video_element img
