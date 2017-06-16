@@ -338,13 +338,13 @@ a.play-button img.video_imgdevice, div.video_loading img.video_imgdevice
   margin: 2px;
 }
 
-/*div.player_desktop img.video_imgos,
+div.player_desktop img.video_imgos,
 div.player_iphone img.video_imgos
 {
   width: 42px;
   height: 42px;
   margin: 4px;
-}*/
+}
 
 .img_play_container {
   position: relative;

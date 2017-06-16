@@ -195,7 +195,6 @@ try
                                                                 '<div class="playbutton_overlay"></div>'.
                                                             '</div>'.
                                                             '</a>';
-                                                            
                                                             echo '<br/>';
                                                             echo "<label>Guarda il video con <br/>device o PC Windows</label>";
                                                         echo '</div>';

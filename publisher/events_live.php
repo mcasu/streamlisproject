@@ -117,9 +117,13 @@ try
                             echo '<li>';
                                     echo '<div class="player_desktop">';
                                         echo '<a class="play-button" href="../players/jwplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                        '<img class="video_imgdevice" src="../images/adobe-flash-player-logo.png"/></a>';
+                                        '<div class="img_play_container">'.
+                                            '<img id="live_player_flash_img" class="video_imgdevice" src="../images/adobe-flash-player-logo.png"/>'.
+                                            '<div class="playbutton_overlay"></div>'.
+                                        '</div>'.
+                                        '</a>';
                                         echo '<br/>';
-                                        echo "<label>Guarda il video con <br/>device o PC Windows</label>";
+                                        echo "<label>Guarda il video con <br/>device o PC Windows</label>";                         
                                         echo '<br/>';
                                         echo '<button type="button" class="btn btn-primary btn_live_view_link"><span class="glyphicon glyphicon-link"></span> Link</button>';
                                     echo '</div>';
@@ -128,7 +132,11 @@ try
                                 echo '<li>';    
                                     echo '<div class="player_iphone">';
                                         echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
-                                        '<img class="video_imgdevice" src="../images/HTML5-logo-512.png"/></a>';
+                                        '<div class="img_play_container">'.
+                                            '<img id="live_player_html5_img" class="video_imgdevice" src="../images/HTML5-logo-512.png"/>'.
+                                            '<div class="playbutton_overlay"></div>'.
+                                        '</div>'.
+                                        '</a>';
                                         echo '<br/>';
                                         echo "<label>Guarda il video con <br/>device Android o Apple iOS</label>";
                                         echo '<br/>';
