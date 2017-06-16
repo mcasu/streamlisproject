@@ -353,10 +353,10 @@ div.player_iphone img.video_imgos
 
 #img_container {
   position: relative;
-  width: 50%;
+/*  width: 50%;*/
 }
 
-#playbutton_overlay {
+.playbutton_overlay {
     background: url('../images/playbutton.png') center center no-repeat;
 /*    position: absolute;
     top: 6%;
