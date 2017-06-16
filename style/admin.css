@@ -358,6 +358,8 @@ a.play-button img.video_imgdevice:hover
 #img_container img.video_imgdevice:hover
 {
   opacity: 0.5;
+  width: 45px;
+  height: 45px;
 }
 #live_player_html5_img {
     z-index: 9;
@@ -368,8 +370,8 @@ a.play-button img.video_imgdevice:hover
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
     margin: -15px 0 0 -15px;
     z-index: 10;
 }
