@@ -201,7 +201,7 @@ try
                                                             echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'" target="_blank">'.
                                                             '<div id="img_container">'.
                                                                 '<img id="live_player_html5_img" class="video_imgdevice" src="../images/HTML5-logo-512.png"/>'.
-                                                                '<div id="playbutton_overlay"></div>'.
+                                                                '<div class="playbutton_overlay"></div>'.
                                                             '</div>'.
                                                             '</a>';
                                                             
