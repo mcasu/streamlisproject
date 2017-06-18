@@ -69,10 +69,10 @@ try
     // Get video bitrate in Kbps
     $video_bitrate = $movie->getVideoBitRate()/1024;
     $video_codec = $movie->getVideoCodec();
-    $videorate = $movie->getFrameRate();
+    $videorate = (float)$movie->getFrameRate();
     $framecount = $movie->getFrameCount();
     
-    error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . $movie->getFrameRate() ."]");
+    error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . (float)$movie->getFrameRate() ."]");
 }
 catch (Exception $ex) 
 {
