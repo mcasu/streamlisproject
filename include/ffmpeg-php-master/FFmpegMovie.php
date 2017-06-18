@@ -280,10 +280,16 @@ class FFmpegMovie implements Serializable {
     * @return float 
     */
     public function getFrameRate() {
-        if ($this->frameRate === null) {
+        if ($this->frameRate === null) {            
             $match = array();
             preg_match(self::$REGEX_FRAME_RATE, $this->output, $match);
             $this->frameRate = (float) ((array_key_exists(1, $match)) ? $match[1] : 0.0);
+            
+            if ($this->frameRate === null || $this->frameRate ==  0.0)
+            {
+                $avconvCmdVideoRate = "avconv -i " . $this->movieFile . " 2>&1 | grep Stream | grep fps | awk -F ',' '{print $5;}' | awk -F ' ' '{print $1;}' | sed -e 's/^[ \t]*//'";
+                $this->frameRate = (float) shell_exec($avconvCmdVideoRate);
+            }
         }
         
         return $this->frameRate;

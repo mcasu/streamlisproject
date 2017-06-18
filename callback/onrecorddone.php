@@ -111,7 +111,7 @@ for($i = 1000; $i <=1050; $i++)
     }
 }
 
-if ($frame == null)
+if ($frame === null)
 {
 	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $videoFrameCount."] : unable to create the thumbnail from 1000-1050 second frame.");
 	
@@ -126,7 +126,7 @@ if ($frame == null)
             }
         }
         
-        if ($frame == null)
+        if ($frame === null)
         {
             error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $videoFrameCount."] : failed to create also the thumbnail from 5-10 second frame.");
         }
