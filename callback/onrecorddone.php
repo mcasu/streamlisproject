@@ -63,7 +63,8 @@ try
 
     // Get video infos
     $video_duration = $movie->getDuration();
-    $video_bitrate = $movie->getVideoBitRate();
+    // Get video bitrate in Kbps
+    $video_bitrate = $movie->getVideoBitRate()/1024;
     $video_codec = $movie->getVideoCodec();
     $videorate = $movie->getFrameRate();
     $framecount = $movie->getFrameCount();
@@ -98,13 +99,13 @@ for($i = 1000; $i <=1050; $i++)
 {
     $frame = $movie->getFrame($videorate * (int)$i);    
     
-    if ($frame)
+    if ($frame != null)
     {
         break;
     }
 }
 
-if (!$frame)
+if ($frame == null)
 {
 	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000-1050 second frame.");
 	
@@ -113,15 +114,15 @@ if (!$frame)
         {
             $frame = $movie->getFrame($videorate * (int)$i);    
 
-            if ($frame)
+            if ($frame != null)
             {
                 break;
             }
         }
         
-        if (!$frame)
+        if ($frame == null)
         {
-            error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create the thumbnail from 5-10 second frame.");
+            error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create also the thumbnail from 5-10 second frame.");
         }
 }
 
@@ -129,10 +130,10 @@ $img_filename = $ondemand_path.strtolower($stream_name)."/".$ondemand_filename.'
     
 try
 {
-    $image = $frame->toGDImage();
+    //$image = $frame->toGDImage();
     
     // Save the image to disk
-    imagejpeg($image, $img_filename, 100);
+    imagejpeg($frame, $img_filename, 100);
             
     // Creo la directory generale per le immagini thumbnail
     if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) 
