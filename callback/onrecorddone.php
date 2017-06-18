@@ -57,6 +57,9 @@ if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,
 	exit;	
 }
 
+$movie = null;
+$framecount = null;
+$videorate = null;
 try
 {
     $movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
