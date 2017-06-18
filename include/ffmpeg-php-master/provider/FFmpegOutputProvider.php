@@ -55,7 +55,6 @@ class FFmpegOutputProvider extends AbstractOutputProvider {
             self::$persistentBuffer[get_class($this).$this->binary.$this->movieFile] = $output;            
         }   
 
-        error_log("DEBUG - output->[" . print_r($output, true) . "]");
         return $output;
     }
 }

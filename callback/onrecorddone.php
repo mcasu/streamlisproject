@@ -57,9 +57,6 @@ if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,
 	exit;	
 }
 
-$movie = null;
-$framecount = null;
-$videorate = null;
 try
 {
     $movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
@@ -69,10 +66,6 @@ try
     // Get video bitrate in Kbps
     $video_bitrate = $movie->getVideoBitRate()/1024;
     $video_codec = $movie->getVideoCodec();
-    $videorate = (float)$movie->getFrameRate();
-    $framecount = $movie->getFrameCount();
-    
-    error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . (float)$movie->getFrameRate() ."]");
 }
 catch (Exception $ex) 
 {
@@ -98,13 +91,19 @@ if (!$ondemandId)
 }
 
 
+$avconvCmdVideoRate = "avconv -i " . $ondemand_path.strtolower($stream_name)."/".$ondemand_basename . " 2>&1 | grep Stream | grep fps | awk -F ',' '{print $5;}' | awk -F ' ' '{print $1;}' | sed -e 's/^[ \t]*//'";
+$avconvCmdVideoDuration = "avconv -i " . $ondemand_path.strtolower($stream_name)."/".$ondemand_basename . " 2>&1 | grep Duration | awk -F ',' '{print$1;}' | awk -F ' ' '{print $2;}' | awk -F '.' '{print $1;}' | sed -e 's/^[ \t]*//'";
+
+$videoFrameRate = (float)shell_exec($avconvCmdVideoRate);
+$videoFrameCount = (int)$video_duration * $videoFrameRate;
+error_log("DEBUG - framecount: [" . $videoFrameCount . "] - framerate: [" . $videoFrameRate ."]");
 
 /*** CREATE VIDEO THUMBNAIL ***/
 
 // Provo a recuperare la thumbnail dai frame tra 1000-1050 secondi.
 for($i = 1000; $i <=1050; $i++)
 {
-    $frame = $movie->getFrame($videorate * (int)$i);    
+    $frame = $movie->getFrame($videoFrameRate * (int)$i);    
     
     if ($frame != null)
     {
@@ -114,12 +113,12 @@ for($i = 1000; $i <=1050; $i++)
 
 if ($frame == null)
 {
-	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : unable to create the thumbnail from 1000-1050 second frame.");
+	error_log("WARNING - OnRecordDone.php - Stream [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $videoFrameCount."] : unable to create the thumbnail from 1000-1050 second frame.");
 	
         // Provo a recuperare la thumbnail dai frame tra 5-10 secondi.
         for($i = 5; $i <=10; $i++)
         {
-            $frame = $movie->getFrame($videorate * (int)$i);    
+            $frame = $movie->getFrame($videoFrameRate * (int)$i);    
 
             if ($frame != null)
             {
@@ -129,7 +128,7 @@ if ($frame == null)
         
         if ($frame == null)
         {
-            error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $framecount."] : failed to create also the thumbnail from 5-10 second frame.");
+            error_log("ERROR - OnRecordDone.php - Stream  [". strtolower($stream_name) ."/". $ondemand_filename ."] - Total frame [". $videoFrameCount."] : failed to create also the thumbnail from 5-10 second frame.");
         }
 }
 

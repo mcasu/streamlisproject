@@ -284,7 +284,6 @@ class FFmpegMovie implements Serializable {
             $match = array();
             preg_match(self::$REGEX_FRAME_RATE, $this->output, $match);
             $this->frameRate = (float) ((array_key_exists(1, $match)) ? $match[1] : 0.0);
-            error_log("DEBUG - info->[" . print_r($match, true) . "]");
         }
         
         return $this->frameRate;
