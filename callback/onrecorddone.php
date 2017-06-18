@@ -71,6 +71,8 @@ try
     $video_codec = $movie->getVideoCodec();
     $videorate = $movie->getFrameRate();
     $framecount = $movie->getFrameCount();
+    
+    error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . $movie->getFrameRate() ."]");
 }
 catch (Exception $ex) 
 {
@@ -95,7 +97,7 @@ if (!$ondemandId)
 	exit;
 }
 
-error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . $movie->getFrameRate() ."]");
+
 
 /*** CREATE VIDEO THUMBNAIL ***/
 
