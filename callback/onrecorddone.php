@@ -95,6 +95,8 @@ if (!$ondemandId)
 	exit;
 }
 
+error_log("DEBUG - framecount: [" . $movie->getFrameCount() . "] - framerate: [" . $movie->getFrameRate() ."]");
+
 /*** CREATE VIDEO THUMBNAIL ***/
 
 // Provo a recuperare la thumbnail dai frame tra 1000-1050 secondi.
