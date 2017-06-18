@@ -773,7 +773,15 @@ class DBActions
         return true;
     }
     
-    function OnRecordDone($app_name,$stream_name,$ondemand_path,$ondemand_filename,$movie, $mysqldate = null)
+    function OnRecordDone(
+            $app_name,
+            $stream_name,
+            $ondemand_path,
+            $ondemand_filename,
+            $video_duration, 
+            $video_bitrate,
+            $video_codec,
+            $mysqldate = null)
     {
 
             $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
@@ -788,10 +796,6 @@ class DBActions
                 $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
                 return false;
             }
-
-            $video_duration=$movie->getDuration();
-            $video_bitrate=$movie->getVideoBitRate();
-            $video_codec=$movie->getVideoCodec();
 
             $insert_query = 'insert into ondemand (
             ondemand_publish_code,

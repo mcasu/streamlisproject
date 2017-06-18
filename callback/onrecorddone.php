@@ -57,15 +57,33 @@ if (!$fsactions->SaveOnDemandVideoToDisk($nginx_id,
 	exit;	
 }
 
-$movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
+try
+{
+    $movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
+
+    // Get video infos
+    $video_duration = $movie->getDuration();
+    $video_bitrate = $movie->getVideoBitRate();
+    $video_codec = $movie->getVideoCodec();
+    $videorate = $movie->getFrameRate();
+    $framecount = $movie->getFrameCount();
+}
+catch (Exception $ex) 
+{
+    error_log("ERROR - OnRecordDone() Unable to get infos from video [".$ondemand_basename."] \n". $ex->getMessage());
+    exit;
+}
 
 /*** SAVE VIDEO INFO INTO DATABASE ***/
-$ondemandId = $dbactions->OnRecordDone($app_name,
-                            strtolower($stream_name),
-                            $ondemand_path.strtolower($stream_name)."/",
-                            $ondemand_basename,
-                            $movie,
-                            $date_temp);
+$ondemandId = $dbactions->OnRecordDone(
+        $app_name,
+        strtolower($stream_name),
+        $ondemand_path.strtolower($stream_name)."/",
+        $ondemand_basename,
+        $video_duration,
+        $video_bitrate,
+        $video_codec,   
+        $date_temp);
 
 if (!$ondemandId)
 {
@@ -74,11 +92,6 @@ if (!$ondemandId)
 }
 
 /*** CREATE VIDEO THUMBNAIL ***/
-//Get video frame rate
-$videorate = $movie->getFrameRate();
-//Get video frame number
-$framecount = $movie->getFrameCount();
-
 
 // Provo a recuperare la thumbnail dai frame tra 1000-1050 secondi.
 for($i = 1000; $i <=1050; $i++)
