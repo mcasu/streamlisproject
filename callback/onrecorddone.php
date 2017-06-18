@@ -86,7 +86,7 @@ $ondemandId = $dbactions->OnRecordDone(
 
 if (!$ondemandId)
 {
-	error_log("ERROR - OnRecordDone() Recording the stream ".strtolower($stream_name)." FAILED! - ".$dbactions->GetErrorMessage());
+	error_log("ERROR - OnRecordDone.php Recording the stream ".strtolower($stream_name)." FAILED! - ".$dbactions->GetErrorMessage());
 	exit;
 }
 
@@ -96,7 +96,6 @@ $avconvCmdVideoDuration = "avconv -i " . $ondemand_path.strtolower($stream_name)
 
 $videoFrameRate = (float)shell_exec($avconvCmdVideoRate);
 $videoFrameCount = (int)$video_duration * $videoFrameRate;
-error_log("DEBUG - framecount: [" . $videoFrameCount . "] - framerate: [" . $videoFrameRate ."]");
 
 /*** CREATE VIDEO THUMBNAIL ***/
 
@@ -122,6 +121,7 @@ if ($frame === null)
 
             if ($frame != null)
             {
+                error_log("INFO - OnRecordDone.php - Video frame [" . $videoFrameRate * (int)$i . "] found at " . $i . "sec.");
                 break;
             }
         }
@@ -139,7 +139,7 @@ try
     //$image = $frame->toGDImage();
     
     // Save the image to disk
-    imagejpeg($frame, $img_filename, 100);
+    imagejpeg($frame->toGDImage(), $img_filename, 100);
             
     // Creo la directory generale per le immagini thumbnail
     if (!file_exists("/usr/local/nginx/html/images/thumbnails/")) 
