@@ -127,7 +127,7 @@ while($row = mysql_fetch_array($actionsJoin))
         }
         
         $videoFilenameAll = $ondemand_actions_path . $row['ondemand_actions_join_id'] . '-all.flv';
-        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v main -y ' . $videoFilenameAll;
+        $avconvCommandLineFin = '/usr/bin/avconv -f yuv4mpegpipe -i ' . $fifoFilenameAll . ' -vcodec libx264 -profile:v baseline -y ' . $videoFilenameAll;
         
         $avconvCommandLine = $avconvCommandLineInit . $catCommandLine . $avconvCommandLineFin . " > /var/log/nginx/" . $row['ondemand_actions_join_id'] . ".log 2>&1";
         

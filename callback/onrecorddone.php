@@ -90,7 +90,6 @@ if (!$ondemandId)
 	exit;
 }
 
-
 $avconvCmdVideoRate = "avconv -i " . $ondemand_path.strtolower($stream_name)."/".$ondemand_basename . " 2>&1 | grep Stream | grep fps | awk -F ',' '{print $5;}' | awk -F ' ' '{print $1;}' | sed -e 's/^[ \t]*//'";
 $avconvCmdVideoDuration = "avconv -i " . $ondemand_path.strtolower($stream_name)."/".$ondemand_basename . " 2>&1 | grep Duration | awk -F ',' '{print$1;}' | awk -F ' ' '{print $2;}' | awk -F '.' '{print $1;}' | sed -e 's/^[ \t]*//'";
 
@@ -136,8 +135,6 @@ $img_filename = $ondemand_path.strtolower($stream_name)."/".$ondemand_filename.'
     
 try
 {
-    //$image = $frame->toGDImage();
-    
     // Save the image to disk
     imagejpeg($frame->toGDImage(), $img_filename, 100);
             
