@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?PHP
 $token = filter_input(INPUT_GET, 't');
+$stream_type = filter_input(INPUT_GET, 'stream_type');
 
-if(!isset($token) || empty($token)) 
+if(!isset($token) || empty($token) || !isset($stream_type)) 
 {
     // Access forbidden:
     header('HTTP/1.1 403 Forbidden');
@@ -73,7 +74,10 @@ $stream_name = $row['stream_name'];
             var conf = {
                 key:       "87f64fdd-b06e-4ce6-8bcc-2ccdf6249f9a",
                 source: {
-                    dash:   "https://www.streamlis.it/dash/<?php echo $stream_name; ?>/index.mpd"
+                    <?php 
+                    if ($stream_type == "dash") { echo 'dash:   "https://www.streamlis.it/dash/'.$stream_name.'/index.mpd"'; }
+                    if ($stream_type == "hls") { echo 'hls:   "https://www.streamlis.it/hls/'.$stream_name.'/index.m3u8"'; }
+                    ?>
                 },
                 playback: {
                     autoplay: true

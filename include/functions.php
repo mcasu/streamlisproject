@@ -783,17 +783,15 @@ function GetGroupLiveLink($dbactions, $groupId, $liveLinkType)
     switch (strtolower($liveLinkType))
     {
         case "desktop":
-            $link .= "/players/jwplayer/";
+            $link .= "/players/jwplayer/watch.php?t=" . $groupToken;
             break;
         case "smartphone":
-            $link .= "/players/flowplayer/";
+            $link .= "/players/dashplayer/watch.php?stream_type=dash&t=" . $groupToken;
             break;
         case "iphone":
-            $link .= "/players/html5/";
+            $link .= "/players/dashplayer/watch.php?stream_type=hls&t=" . $groupToken;
             break;
     }
-    
-    $link .= "watch.php?t=" . $groupToken;
     
     echo $link;
     return true;
