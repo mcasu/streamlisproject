@@ -53,7 +53,7 @@ else
                 source: {
                     <?php 
                     if ($stream_type == "dash") { echo 'dash:   "https://www.streamlis.it/dash/'.$stream_name.'/index.mpd"'; }
-                    if ($stream_type == "hls") { echo 'hls:   "https://www.streamlis.it/hls/'.$stream_name.'/index.m3u8"'; }
+                    if ($stream_type == "hls") { echo 'hls:   "https://www.streamlis.it/hls/'.$stream_name.'.m3u8"'; }
                     ?>
                 },
                 playback: {

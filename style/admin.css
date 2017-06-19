@@ -339,7 +339,8 @@ a.play-button img.video_imgdevice, div.video_loading img.video_imgdevice
 }
 
 div.player_desktop img.video_imgos,
-div.player_iphone img.video_imgos
+div.player_iphone img.video_imgos,
+div.player_smartphone img.video_imgos
 {
   width: 32px;
   height: 32px;
