@@ -129,35 +129,35 @@ try
                                     echo '</div>';
                                 echo '</li>';
 
+//                            echo '<li>';    
+//                                echo '<div class="player_smartphone">';
+//                                    echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'&stream_type=dash" target="_blank">'.
+//                                    '<div class="img_play_container">'.
+//                                        '<img class="video_imgdevice" src="../images/smartphone.png"/>'.
+//                                        '<div class="playbutton_overlay"></div>'.
+//                                    '</div>'.
+//                                    '</a>';
+//                                    echo '<br/>';
+//                                    echo "<label>Guarda il video con <br/>device Android</label>";
+//                                    echo '<br/>';
+//                                    echo '<img class="video_imgos" src="../images/HTML5-Logo-512.png"/> <img class="video_imgos" src="../images/os_android.png"/>';                                
+//                                echo '</div>';
+//                            echo '</li>';
+
                             echo '<li>';    
                                 echo '<div class="player_smartphone">';
-                                    echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'&stream_type=dash" target="_blank">'.
+                                    echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'&stream_type=hls" target="_blank">'.
                                     '<div class="img_play_container">'.
                                         '<img class="video_imgdevice" src="../images/smartphone.png"/>'.
                                         '<div class="playbutton_overlay"></div>'.
                                     '</div>'.
                                     '</a>';
                                     echo '<br/>';
-                                    echo "<label>Guarda il video con <br/>device Android</label>";
+                                    echo "<label>Guarda il video con device <br/>Android o Apple iOS</label>";
                                     echo '<br/>';
-                                    echo '<img class="video_imgos" src="../images/HTML5-Logo-512.png"/> <img class="video_imgos" src="../images/os_android.png"/>';                                
+                                    echo '<img class="video_imgos" src="../images/HTML5-Logo-512.png"/> <img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
                                 echo '</div>';
                             echo '</li>';
-
-                            echo '<li>';    
-                                echo '<div class="player_iphone">';
-                                    echo '<a class="play-button" href="../players/dashplayer/play-live.php?app_name='.$app_name.'&stream_name='.$stream_name.'&stream_type=hls" target="_blank">'.
-                                    '<div class="img_play_container">'.
-                                        '<img class="video_imgdevice" src="../images/iphone.png"/>'.
-                                        '<div class="playbutton_overlay"></div>'.
-                                    '</div>'.
-                                    '</a>';
-                                    echo '<br/>';
-                                    echo "<label>Guarda il video con <br/>device Apple iOS</label>";
-                                    echo '<br/>';
-                                    echo '<img class="video_imgos" src="../images/HTML5-Logo-512.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
-                                echo '</div>';
-                        echo '</li>';
                         echo '</ul>';	
                     echo '</div>';
 

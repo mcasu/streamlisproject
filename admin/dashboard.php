@@ -99,7 +99,7 @@ echo '<div class="container-fluid">';
                     //echo '<div class="container-fluid" style="overflow:auto">';
                     echo '<table class="table table-condensed">';
                         echo '<tr class="head">';
-                        echo '<th>NOME</th><th>MAIL</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
+                        echo '<th>NOME</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
                         echo '</tr>';
 
                         while($row = mysql_fetch_array($result))
@@ -121,7 +121,6 @@ echo '<div class="container-fluid">';
 
                                 echo '<tr>';
                                         echo "<td>" . $user_name . "</td>";
-                                        echo "<td>" . $user_mail . "</td>";
                                         echo "<td>" . $username . "</td>";
                                         echo "<td>" . $user_group_name . "</td>";
                                         echo "<td>" . $user_role_name . "</td>";
