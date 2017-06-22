@@ -198,7 +198,7 @@ try
                                                             echo '<br/>';
                                                             echo "<label>Guarda il video con <br/>device o PC Windows</label>";
                                                             echo '<br/>';
-                                                            echo '<img class="video_imgos" src="../images/adobe-flash-player-logo.png"/> <img class="video_imgos" src="../images/os_windows.png"/>';
+                                                            echo '<img class="video_imgos" src="../images/os_linux.png"/> <img class="video_imgos" src="../images/os_windows.png"/>';
                                                         echo '</div>';
                                                     echo '</li>';
 
@@ -228,7 +228,7 @@ try
                                                         echo '<br/>';
                                                         echo "<label>Guarda il video con device <br/>Android o Apple iOS</label>";
                                                         echo '<br/>';
-                                                        echo '<img class="video_imgos" src="../images/HTML5-Logo-512.png"/> <img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
+                                                        echo '<img class="video_imgos" src="../images/os_android.png"/> <img class="video_imgos" src="../images/os_apple.png"/>';
                                                     echo '</div>';
                                             echo '</li>';
                                             echo '</ul>';	

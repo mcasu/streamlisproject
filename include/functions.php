@@ -735,17 +735,12 @@ function GetEventsLiveViewLink($dbactions, $eventsLiveId, $eventsLivePlayerType)
     switch (strtolower($eventsLivePlayerType))
     {
         case "player_desktop":
-            $link .= "/players/jwplayer/";
+            $link .= "/players/jwplayer/watch.php?t=" . $row['live_token'];
             break;
         case "player_smartphone":
-            $link .= "/players/flowplayer/";
-            break;
-        case "player_iphone":
-            $link .= "/players/html5/";
+            $link .= "/players/dashplayer/watch.php?stream_type=hls&t=" . $row['live_token'];
             break;
     }
-    
-    $link .= "watch.php?t=" . $row['live_token'];
     
     echo $link;
     return true;
@@ -786,9 +781,6 @@ function GetGroupLiveLink($dbactions, $groupId, $liveLinkType)
             $link .= "/players/jwplayer/watch.php?t=" . $groupToken;
             break;
         case "smartphone":
-            $link .= "/players/dashplayer/watch.php?stream_type=dash&t=" . $groupToken;
-            break;
-        case "iphone":
             $link .= "/players/dashplayer/watch.php?stream_type=hls&t=" . $groupToken;
             break;
     }

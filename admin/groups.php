@@ -202,21 +202,21 @@ $(document).ready(function()
                 }
         });        
         
-        // Load live link for Iphone
-        var liveLinkType = "iphone";
-        $.post("/include/functions.php",{
-                fname:"groups_get_live_link",
-                groupId:groupSelectedId.toString(),
-                liveLinkType:liveLinkType},
-            function(data,status)
-            {
-                //alert("Data: " + data + "\nStatus: " + status);
-
-                if (status === "success")
-                {
-                    $('#inputGroupsGetLiveLinkIphone').val(data);
-                }
-        });         
+//        // Load live link for Iphone
+//        var liveLinkType = "iphone";
+//        $.post("/include/functions.php",{
+//                fname:"groups_get_live_link",
+//                groupId:groupSelectedId.toString(),
+//                liveLinkType:liveLinkType},
+//            function(data,status)
+//            {
+//                //alert("Data: " + data + "\nStatus: " + status);
+//
+//                if (status === "success")
+//                {
+//                    $('#inputGroupsGetLiveLinkIphone').val(data);
+//                }
+//        });         
         
         groupGetLiveLinkDlg.dialog('open');
     });  
@@ -265,11 +265,12 @@ $(document).ready(function()
         <input id="inputGroupsGetLiveLinkDesktop" class="form-control default-cursor" type="text" readonly>
         <br/>
         <img class="video_imgdevice" src="../images/os_android_old.png" style="width: 40px; height: 40px; margin-bottom: 2px;"/>
+        <img class="video_imgdevice" src="../images/os_apple_old.png" style="width: 40px; height: 40px; margin-bottom: 2px;"/>
         <input id="inputGroupsGetLiveLinkSmartphone" class="form-control default-cursor" type="text" readonly>
         <br/>
-        <img class="video_imgdevice" src="../images/os_apple_old.png" style="width: 40px; height: 40px; margin-bottom: 2px;"/>
+<!--        <img class="video_imgdevice" src="../images/os_apple_old.png" style="width: 40px; height: 40px; margin-bottom: 2px;"/>
         <input id="inputGroupsGetLiveLinkIphone" class="form-control default-cursor" type="text" readonly>
-        <br/>
+        <br/>-->
     </div>
 </div>
 
