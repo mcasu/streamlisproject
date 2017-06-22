@@ -299,7 +299,7 @@ li div.player_smartphone,
 li div.player_iphone, 
 li div.video_loading
 {
-  margin-top: 6px;
+  margin-top: 2px;
   max-width: 200px;
   font-size: 0.8em;
   text-align: center;
@@ -321,7 +321,7 @@ div.player_iphone label,
 div.video_loading label, 
 div.video_download label
 {
-  margin-top: 8px;
+  margin-top: 4px;
   font-weight: bold;
 }
 
