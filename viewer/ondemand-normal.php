@@ -59,8 +59,6 @@ $(document).ready(function()
 
 <?php 
 
-echo '<div class="container-fluid">';
-echo '<div class="panel-group" id="accordionMain">';
 
 try
 {
@@ -70,6 +68,9 @@ try
     {
 	    error_log("ERROR - ondemand-normal.php GetPublishersByViewer() - " . $dbactions->GetErrorMessage());
     }
+
+    echo '<div class="container-fluid">';
+    echo '<div class="panel-group" id="accordionMain">';
 
     while($row = mysql_fetch_array($publishers))
     {

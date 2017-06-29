@@ -54,7 +54,7 @@ try
 
     if (!$result)
     {
-	    error_log("No Results");
+	    error_log("ERROR - live-normal.php GetPublishersByViewer() - " . $dbactions->GetErrorMessage());
     }
 
     echo '<div class="container-fluid">';
