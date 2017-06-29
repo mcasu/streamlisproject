@@ -63,6 +63,10 @@ switch ($fname)
         return GetUserTotalNumber($dbactions);
     case "get_user_logged_number":
         return GetUserLoggedNumber($dbactions);
+    case "get_congregation_total_number":
+        return GetCongregationTotalNumber($dbactions);        
+    case "get_group_total_number":
+        return GetGroupTotalNumber($dbactions);          
     case "events_live_view_link":
         $eventsLiveId = filter_input(INPUT_POST, 'eventsLiveId');
         $eventsLivePlayerType = filter_input(INPUT_POST, 'eventsLivePlayerType');
@@ -685,6 +689,34 @@ function GetUserLoggedNumber($dbactions)
     {
         echo $num;
     }    
+}
+
+function GetCongregationTotalNumber($dbactions)
+{
+    $num = $dbactions->GetCongregationTotalNumber();    
+    
+    if (!$num)
+    {
+        echo "Non disponibile";
+    }
+    else
+    {
+        echo $num;
+    }
+}
+
+function GetGroupTotalNumber($dbactions)
+{
+    $num = $dbactions->GetGroupTotalNumber();    
+    
+    if (!$num)
+    {
+        echo "Non disponibile";
+    }
+    else
+    {
+        echo $num;
+    }
 }
 
 function DeleteUsers($dbactions, $userIds)

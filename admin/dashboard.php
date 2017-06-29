@@ -35,6 +35,10 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
                 $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
                 $('#badgeUserLoggedNumber').load('/include/functions.php?fname=get_user_logged_number');
+                
+                $('#badgeUserCongregationTotalNumber').load('/include/functions.php?fname=get_congregation_total_number');
+                $('#badgeUserGroupTotalNumber').load('/include/functions.php?fname=get_group_total_number');
+                
 	    }
 					    
 	    var auto_refresh = setInterval(AutoRefresh, 60000);
@@ -45,6 +49,9 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
             
             $('#badgeUserTotalNumber').load('/include/functions.php?fname=get_user_total_number');
             $('#badgeUserLoggedNumber').load('/include/functions.php?fname=get_user_logged_number');
+            
+            $('#badgeUserCongregationTotalNumber').load('/include/functions.php?fname=get_congregation_total_number');
+            $('#badgeUserGroupTotalNumber').load('/include/functions.php?fname=get_group_total_number');
 	    
 	});
     </script>
@@ -88,8 +95,8 @@ echo '<div class="container-fluid">';
                         echo '<h5><b>Utenti registrati: <b/><span id="badgeUserTotalNumber" class="badge"></span></h5>';
                         echo '<h5><b>Utenti loggati: <b/><span id="badgeUserLoggedNumber" class="badge"></span></h5>';
                         echo '<br/>';
-                        echo '<h5><b>Congregazioni: <b/></h5>';
-                        echo '<h5><b>Gruppi: <b/></h5>';
+                        echo '<h5><b>Congregazioni: <b/><span id="badgeUserCongregationTotalNumber" class="badge"></span></h5>';
+                        echo '<h5><b>Gruppi: <b/><span id="badgeUserGroupTotalNumber" class="badge"></span></h5>';
                     echo '</div>';
                     echo '<br/>';
 

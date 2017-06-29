@@ -1645,7 +1645,7 @@ class DBActions
         $result = mysql_query($queryCount, $this->connection);
         if(!$result)
         {
-            $this->HandleDBError("Error deleting data from the table\nquery: $queryCount");
+            $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
@@ -1663,7 +1663,7 @@ class DBActions
         $result = mysql_query($queryCount, $this->connection);
         if(!$result)
         {
-            $this->HandleDBError("Error deleting data from the table\nquery: $queryCount");
+            $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
@@ -1671,6 +1671,42 @@ class DBActions
                 
         return $row['user_logged'];
     }
+    
+    function GetCongregationTotalNumber()
+    {
+        $this->DBLogin();
+        
+        $queryCount = 'select count(*) as congregation_total from groups where group_type = \'Congregazione\'';
+        
+        $result = mysql_query($queryCount, $this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
+            return false;
+        }
+        
+        $row = mysql_fetch_array($result);
+                
+        return $row['congregation_total'];
+    }    
+    
+    function GetGroupTotalNumber()
+    {
+        $this->DBLogin();
+        
+        $queryCount = 'select count(*) as group_total from groups where group_type = \'Gruppo\'';
+        
+        $result = mysql_query($queryCount, $this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
+            return false;
+        }
+        
+        $row = mysql_fetch_array($result);
+                
+        return $row['group_total'];
+    }     
     
     function GetUsers($onlyLogged = false)
     {
