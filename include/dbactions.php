@@ -1416,7 +1416,7 @@ class DBActions
                             'UNION '. 
                             'select groups.group_id as publisher_id, groups.group_name as publisher_name, groups.publish_code as publisher_code '.
                             'from groups '.
-                            'where groups.group_type = \'Congregazione\' and groups.group_id = \''.$viewer_id.'\';';
+                            'where groups.group_type = \'Congregazione\' and groups.group_id = \''.$viewer_id.'\' ORDER BY publisher_name;';
 
             $result = mysql_query($select_query ,$this->connection);
             if(!$result)
