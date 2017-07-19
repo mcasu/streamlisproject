@@ -369,6 +369,25 @@ div.player_smartphone img.video_imgos
   opacity: 1;
 }
 
+.progress {
+    position: relative;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+/*.progress-bar {
+  text-align: left;
+  transition-duration: 3s;
+}*/
+
+.progress bar-text {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    font: normal 12px "Open Sans Web";
+    text-transform: uppercase;
+}
+
 
 /******************************/
 /* *** VIDEO LOADING CSS3 *** */
