@@ -193,6 +193,26 @@ StreamVideoSizeUpdate = function()
                     progressBarObj.css('width', percent+'%').attr('aria-valuenow', res);
                     console.log("ProgressBar - updated aria-valuenow to [" + res + "]");
                     progressBarObj.text(res + ' MB (MAX 1GB)');
+                    
+                    if (res <= 500)
+                    {
+                        progressBarObj.removeClass('progress-bar-danger');
+                        progressBarObj.removeClass('progress-bar-warning');  
+                        progressBarObj.addClass('progress-bar-info');
+                    }
+                    else if (res > 500)
+                    {
+                        progressBarObj.removeClass('progress-bar-info');
+                        progressBarObj.removeClass('progress-bar-danger');
+                        progressBarObj.addClass('progress-bar-warning');
+                    }
+                    else if (res > 900)
+                    {
+                        progressBarObj.removeClass('progress-bar-info');
+                        progressBarObj.removeClass('progress-bar-warning');
+                        progressBarObj.addClass('progress-bar-danger');
+                        
+                    }
                 }
             });
 
