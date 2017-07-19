@@ -161,7 +161,7 @@ MarkOndemandVideoToJoin = function(ondemandIdList, userId)
     return result;
 };
    
-StreamVideoSizeUpdate = function(streamName) 
+StreamVideoSizeUpdate = function() 
 {
     var root = $("div.panel-group");
     root.children().each(function( index )
@@ -192,6 +192,7 @@ StreamVideoSizeUpdate = function(streamName)
                     var percent = 100 * res / 1024;
                     progressBarObj.css('width', percent+'%').attr('aria-valuenow', res);
                     console.log("ProgressBar - updated aria-valuenow to [" + res + "]");
+                    progressBarObj.find('span').text(res + ' MB');
                 }
             });
 

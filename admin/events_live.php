@@ -38,6 +38,8 @@ $(document).ready(function()
 
     $(".panel-collapse").on('show.bs.collapse', function()
     {
+        StreamVideoSizeUpdate();
+        
         var stream_name = $(this).find("ul.video_element").attr('id');
         
         $(".players_counter_info").attr('id', stream_name);
@@ -179,7 +181,7 @@ try
                                                     echo '<div class="video_info">';
                                                         echo '<div class="progress">';
                                                             echo '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1024" >';
-                                                                echo '<span><b>1024 MB</b></span>';
+                                                                echo '<span><b>1 GB</b></span>';
                                                             echo '</div>';
                                                         echo '</div>';
                                                         echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
