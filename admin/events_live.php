@@ -181,7 +181,7 @@ try
                                                     echo '<div class="video_info">';
                                                         echo '<div class="progress">';
                                                             echo '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1024" >';
-                                                                echo '<span class="bar-text" style="text-align: right;">1024 MB</span>';
+                                                                echo '<span class="bar-text">1024 MB</span>';
                                                             echo '</div>';
                                                         echo '</div>';
                                                         echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
