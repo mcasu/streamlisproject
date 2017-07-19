@@ -34,7 +34,7 @@ if(isset($_POST['pageurl']))
 	$page_url = $_POST['pageurl'];
 }
 
-sleep(5);
+sleep(2); // Non cambiare! Serve per avere lo stesso orario nel nome del file e sul db.
 
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s");
