@@ -19,6 +19,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../include/session.js"></script>
+<script type="text/javascript" src="../include/functions.js"></script>
 
 
 </head>
@@ -112,16 +113,14 @@ try
                                 // VIDEO THUMBNAIL + INFO + BUTTONS
                                 echo '<div class="col-md-10 div-video-align">';
                                     echo '<ul class="video_element" id='.$stream_name.'>';   
-                                        echo '<li>';
-                                            echo '<div class="video_thumb">';
-                                                echo '<img src="'.$thumbnail_img.'"/>';
-                                            echo '</div>';
-                                        echo '</li>';
 
                                         echo '<li>';
                                             echo '<div class="video_info">';
-                                                echo '<b>Path: </b>'.$app_name.'/'.$stream_name;
-                                                echo '<br/>';
+                                                echo '<div class="progress">';
+                                                    echo '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1024" >';
+                                                        echo '<span><b>1 GB</b></span>';
+                                                    echo '</div>';
+                                                echo '</div>';
                                                 echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';
                                                 echo '<br/>';
                                                 echo '<b>Pubblicato da: </b>'.$client_addr;
@@ -221,6 +220,8 @@ $(document).ready(function()
 
     $(".panel-collapse").on('show.bs.collapse', function()
     {
+        StreamVideoSizeUpdate();
+        
         var stream_name = $(this).find("ul.video_element").attr('id');
         
         $(".players_counter_info").attr('id', stream_name);
@@ -291,6 +292,7 @@ $(document).ready(function()
             });
     });    
     
+    var auto_refresh = setInterval(StreamVideoSizeUpdate, 10000);
 });
 
 </script>
