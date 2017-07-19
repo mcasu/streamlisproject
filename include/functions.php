@@ -837,8 +837,17 @@ function GetLiveVideoInfoFileSize($dbactions, $liveTmpFlashPath, $streamName)
     
     $date = date_create($row['live_date'] . " " . $row['live_time']);
     $filename = $row['stream_name'] . '_' . date_format($date, 'Ymd_H-i-s') . '.flv';
-    $filesize = round(filesize($liveTmpFlashPath.$filename)/1024/1024, 0);
     
-    echo $filesize;
-    return true;
+    if (!file_exists($liveTmpFlashPath.$filename))
+    {
+        echo 0;
+        return false;
+    }
+    else
+    {
+        $filesize = round(filesize($liveTmpFlashPath.$filename)/1024/1024, 0);
+    
+        echo $filesize;
+        return true;
+    }
 }
