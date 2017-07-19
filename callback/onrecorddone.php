@@ -84,7 +84,7 @@ $ondemandId = $dbactions->OnRecordDone(
         strtolower($stream_name),
         $ondemand_path.strtolower($stream_name)."/",
         $ondemand_basename,
-        $ondemandFileSize,
+        $videoFileSize,
         $video_duration,
         $video_bitrate,
         $videoFrameRate,
