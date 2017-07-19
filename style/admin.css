@@ -382,6 +382,8 @@ div.player_smartphone img.video_imgos
 
 .progress span {
     position: absolute;
+    display: block;
+    margin-right: 2px;
     width: 100%;
     text-align: right;
 //    font: normal 12px "Open Sans Web";
