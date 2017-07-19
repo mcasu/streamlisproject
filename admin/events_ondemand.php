@@ -364,7 +364,7 @@ try
                                                         $ondemand_movie_duration = $duration_time['h'] . " ore " . $duration_time['m'] . " minuti " . $duration_time['s'] . " secondi" ;
                                                         $ondemand_movie_bitrate = number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
                                                         $ondemand_movie_framerate = $row['ondemand_movie_framerate'] ? $row['ondemand_movie_framerate']." fps" : "N/A";
-                                                        $ondemand_movie_res = $row['ondemand_movie_res'];
+                                                        $ondemand_movie_res = $row['ondemand_movie_res'] ? $row['ondemand_movie_res'] : "N/A";
                                                         $ondemand_movie_codec = $row['ondemand_movie_codec'];
 
                                                         // Check if the database contains a correct date
