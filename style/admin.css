@@ -375,10 +375,10 @@ div.player_smartphone img.video_imgos
     margin-bottom: 10px;
 }
 
-/*.progress-bar {
+.progress-bar {
   text-align: left;
   transition-duration: 3s;
-}*/
+}
 
 .progress span {
     position: absolute;
@@ -390,6 +390,7 @@ div.player_smartphone img.video_imgos
     line-height: 30px;
 //    font: normal 12px "Open Sans Web";
     text-transform: uppercase;
+    color: black;
 }
 
 
