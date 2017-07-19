@@ -189,7 +189,7 @@ StreamVideoSizeUpdate = function(streamName)
                 cache: false,
                 success: function(res)
                 {
-                    progressBarObj.css('width', res);
+                    progressBarObj.css('width', res).attr('aria-valuenow', res);
                     console.log("ProgressBar - updated aria-valuenow to [" + res + "]");
                 }
             });
