@@ -376,7 +376,8 @@ div.player_smartphone img.video_imgos
 }
 
 .progress-bar {
-  text-align: left;
+  text-align: center;
+  line-height: 30px;
   transition-duration: 2s;
 }
 
