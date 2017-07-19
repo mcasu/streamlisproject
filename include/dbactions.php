@@ -818,7 +818,7 @@ class DBActions
             "' . $this->SanitizeForSQL($ondemand_path) . '",
             "' . $this->SanitizeForSQL($app_name) . '",
             "' . $this->SanitizeForSQL($ondemand_filename) . '",
-            "' . $this->SanitizeForSQL($ondemandFileSize) . '",                
+            "' . $ondemandFileSize . '",                
             "' . $this->SanitizeForSQL($video_duration) . '",
             "' . $this->SanitizeForSQL($video_bitrate) . '",
             "' . $this->SanitizeForSQL($videoFrameRate) . '",

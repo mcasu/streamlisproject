@@ -64,7 +64,7 @@ try
     
     // Get video infos
     // video size in Megabytes
-    $videoFileSize = (float)number_format(filesize($ondemand_path.strtolower($stream_name)."/".$ondemand_basename)/1024/1024, 4, '.','');
+    $videoFileSize = number_format(filesize($ondemand_path.strtolower($stream_name)."/".$ondemand_basename)/1024/1024, 4, '.','');
     $video_duration = $movie->getDuration();
     // Get video bitrate in Kbps
     $video_bitrate = $movie->getVideoBitRate()/1024;
