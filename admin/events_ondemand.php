@@ -359,7 +359,7 @@ try
                                                         $ondemand_publish_code = $row['ondemand_publish_code'];
                                                         $ondemand_app_name = $row['ondemand_app_name'];
                                                         $ondemand_filename = $row['ondemand_filename'];
-                                                        $ondemand_filesize = $row['ondemand_filesize'] ? round($row['ondemand_filesize'],2)." MB" : "N/A";
+                                                        $ondemand_filesize = $row['ondemand_filesize'] ? round((float)$row['ondemand_filesize'], 2)." MB" : "N/A";
                                                         $duration_time = $utils->SecondsToTime($row['ondemand_movie_duration'],true);
                                                         $ondemand_movie_duration = $duration_time['h'] . " ore " . $duration_time['m'] . " minuti " . $duration_time['s'] . " secondi" ;
                                                         $ondemand_movie_bitrate = number_format($row['ondemand_movie_bitrate'],0,',','.') . " Kbps";
