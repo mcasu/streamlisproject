@@ -75,6 +75,9 @@ switch ($fname)
         $groupId = filter_input(INPUT_POST, 'groupId');
         $liveLinkType = filter_input(INPUT_POST, 'liveLinkType');
         return GetGroupLiveLink($dbactions, $groupId, $liveLinkType);
+    case "get_live_videoinfo_filesize":
+        $streamName = filter_input(INPUT_POST, 'streamName');
+        return GetLiveVideoInfoFileSize($dbactions, $live_tmp_flash_path, $streamName);
     default:
         break;
 }
@@ -818,5 +821,24 @@ function GetGroupLiveLink($dbactions, $groupId, $liveLinkType)
     }
     
     echo $link;
+    return true;
+}
+
+function GetLiveVideoInfoFileSize($dbactions, $liveTmpFlashPath, $streamName)
+{
+    $result = $dbactions->GetLiveVideoFileName($streamName);
+    if (!$result)
+    {
+        error_log("ERROR - functions.php GetLiveVideoInfoFileSize() FAILED! " . $dbactions->GetErrorMessage());
+        echo "false";
+        return false;
+    }
+    $row = mysql_fetch_array($result);
+    
+    $date = date_create($row['live_date'] . " " . $row['live_time']);
+    $filename = $row['stream_name'] . '_' . date_format($date, 'Ymd_H-i-s') . '.flv';
+    $filesize = round((float)filesize($liveTmpFlashPath.strtolower($streamName)."/".$filename)/1024/1024, 2);
+    
+    echo $filesize;
     return true;
 }

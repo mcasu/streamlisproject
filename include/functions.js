@@ -161,27 +161,38 @@ MarkOndemandVideoToJoin = function(ondemandIdList, userId)
     return result;
 };
    
-StreamVideoSizeUpdate = function() 
+StreamVideoSizeUpdate = function(streamName) 
 {
-    //var root = $("div.panel-group").find('div.panel-collapse');
     var root = $("div.panel-group");
-    //alert("Ciao pippo");
     root.children().each(function( index )
     {
         var panelobj = $(this).find('div.panel-collapse');
-        console.log( index + " Pannello con GroupId: " + panelobj.attr('id'));
+        //console.log( index + " Pannello con GroupId: " + panelobj.attr('id'));
 
         if ( panelobj.hasClass("collapse in") )
         {
             ulVideoElement = panelobj.find('ul.video_element:last');
             var ulVideoElementId = ulVideoElement.attr('id');
-            console.log("Oggetto ulVideoElement: " + ulVideoElementId);
+            console.log("StreamName: " + ulVideoElementId);
 
             var videoInfoObj = panelobj.find('div.video_info');
 
             var progressBarObj = videoInfoObj.find(".progress-bar");
-            console.log(" - AriaNow: " + progressBarObj.attr('aria-valuenow') + " AriaMax: " + progressBarObj.attr('aria-valuemax'));
+            console.log("ProgressBar - AriaNow: " + progressBarObj.attr('aria-valuenow') + " AriaMax: " + progressBarObj.attr('aria-valuemax'));
 
+            var params = "fname=get_live_videoinfo_filesize&streamName=" + ulVideoElementId;
+            jQuery.ajax({
+                type: "POST",
+                url: "/include/functions.php",
+                data: params,
+                async: false,
+                cache: false,
+                success: function(res)
+                {
+                    progressBarObj.css('width', res).attr('aria-valuenow', res);
+                    console.log("ProgressBar - updated aria-valuenow to [" + res + "]");
+                }
+            });
 
         }
     });

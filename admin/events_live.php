@@ -58,7 +58,7 @@ $(document).ready(function()
 
     });
     
-    var auto_refresh = setInterval(StreamVideoSizeUpdate, 10000);
+    var auto_refresh = setInterval(StreamVideoSizeUpdate()), 10000);
 });
 
 </script>
