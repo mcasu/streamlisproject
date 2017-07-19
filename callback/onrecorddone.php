@@ -61,10 +61,15 @@ try
 {
     $movie = new ffmpeg_movie($ondemand_path.strtolower($stream_name)."/".$ondemand_basename, false);
 
+    
     // Get video infos
+    // video size in Megabytes
+    $videoFileSize = filesize($ondemand_path.strtolower($stream_name)."/".$ondemand_basename)/1024/1024;
     $video_duration = $movie->getDuration();
     // Get video bitrate in Kbps
     $video_bitrate = $movie->getVideoBitRate()/1024;
+    $videoFrameRate = $movie->getFrameRate();
+    $videoRes = $movie->getFrameWidth() . "x" . $movie->getFrameHeight();
     $video_codec = $movie->getVideoCodec();
 }
 catch (Exception $ex) 
@@ -79,8 +84,11 @@ $ondemandId = $dbactions->OnRecordDone(
         strtolower($stream_name),
         $ondemand_path.strtolower($stream_name)."/",
         $ondemand_basename,
+        $ondemandFileSize,
         $video_duration,
         $video_bitrate,
+        $videoFrameRate,
+        $videoRes,
         $video_codec,   
         $date_temp);
 

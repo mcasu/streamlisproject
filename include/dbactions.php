@@ -778,8 +778,11 @@ class DBActions
             $stream_name,
             $ondemand_path,
             $ondemand_filename,
+            $ondemandFileSize,
             $video_duration, 
             $video_bitrate,
+            $videoFrameRate,
+            $videoRes,
             $video_codec,
             $mysqldate = null)
     {
@@ -802,8 +805,11 @@ class DBActions
             ondemand_path,
             ondemand_app_name,
             ondemand_filename,
+            ondemand_filesize,
             ondemand_movie_duration,
             ondemand_movie_bitrate,
+            ondemand_movie_framerate,
+            ondemand_movie_res,
             ondemand_movie_codec,
             ondemand_date)
             values
@@ -812,8 +818,11 @@ class DBActions
             "' . $this->SanitizeForSQL($ondemand_path) . '",
             "' . $this->SanitizeForSQL($app_name) . '",
             "' . $this->SanitizeForSQL($ondemand_filename) . '",
+            "' . $this->SanitizeForSQL($ondemandFileSize) . '",                
             "' . $this->SanitizeForSQL($video_duration) . '",
             "' . $this->SanitizeForSQL($video_bitrate) . '",
+            "' . $this->SanitizeForSQL($videoFrameRate) . '",
+            "' . $this->SanitizeForSQL($videoRes) . '",
             "' . $this->SanitizeForSQL($video_codec) . '",
             "' . $this->SanitizeForSQL($mysqldate) . '"
             )';
