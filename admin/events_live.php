@@ -16,6 +16,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../include/session.js"></script>
+<script type="text/javascript" src="../include/functions.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -56,6 +57,8 @@ $(document).ready(function()
         $(this).prop("disabled", false);
 
     });
+    
+    var auto_refresh = setInterval(StreamVideoSizeUpdate, 10000);
 });
 
 </script>
@@ -170,18 +173,13 @@ try
                                     
                                         // VIDEO THUMBNAIL + INFO + BUTTONS
                                         echo '<div class="col-md-10 div-video-align">';
-                                            echo '<ul class="video_element" id='.$stream_name.'>';   
-                                                echo '<li>';
-                                                    echo '<div class="video_thumb">';
-                                                        echo '<img src="'.$thumbnail_img.'"/>';
-                                                    echo '</div>';
-                                                echo '</li>';
+                                            echo '<ul class="video_element" id='.$stream_name.'>'; 
 
                                                 echo '<li>';
                                                     echo '<div class="video_info">';
                                                         echo '<div class="progress">';
                                                             echo '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1024" >';
-                                                                echo '<span>1024 MB</span>';
+                                                                echo '<span><b>1024 MB</b></span>';
                                                             echo '</div>';
                                                         echo '</div>';
                                                         echo '<b>Data di pubblicazione: </b>'.$live_date.' ore <b>'.$live_time.'</b>';

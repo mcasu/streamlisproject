@@ -161,4 +161,31 @@ MarkOndemandVideoToJoin = function(ondemandIdList, userId)
     return result;
 };
    
+StreamVideoSizeUpdate = function() 
+{
+    //var root = $("div.panel-group").find('div.panel-collapse');
+    var root = $("div.panel-group");
+    //alert("Ciao pippo");
+    root.children().each(function( index )
+    {
+        var panelobj = $(this).find('div.panel-collapse');
+        console.log( index + " Pannello con GroupId: " + panelobj.attr('id'));
+
+        if ( panelobj.hasClass("collapse in") )
+        {
+            ulVideoElement = panelobj.find('ul.video_element:last');
+            var ulVideoElementId = ulVideoElement.attr('id');
+            console.log("Oggetto ulVideoElement: " + ulVideoElementId);
+
+            var videoInfoObj = panelobj.find('div.video_info');
+
+            var progressBarObj = videoInfoObj.find(".progress-bar");
+            console.log(" - AriaNow: " + progressBarObj.attr('aria-valuenow') + " AriaMax: " + progressBarObj.attr('aria-valuemax'));
+
+
+        }
+    });
+
+};
+   
 })(jQuery);
