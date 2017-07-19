@@ -388,7 +388,8 @@ div.player_smartphone img.video_imgos
     margin-right: 2px;
     padding-right: 4px;
     width: 100%;
-    text-align: right;
+    text-align: center;
+    font-weight: bold;
     line-height: 30px;
 //    font: normal 12px "Open Sans Web";
     text-transform: uppercase;
