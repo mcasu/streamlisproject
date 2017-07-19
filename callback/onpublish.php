@@ -58,15 +58,3 @@ if (!$dbactions->SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_n
 	error_log("Saving PUBLISH event to the database ".strtolower($stream_name)." FAILED! ".$dbactions->GetErrorMessage());
 	exit;
 }
-
-/*** Exec live transcode to HLS  ***/
-/*
-$stream_name_base = basename($stream_name,".flv");
-///$cmd = 'nohup nice -n 10 /usr/bin/avconv -loglevel info -i "rtmp://localhost/'.$app_name.'/'.$stream_name_base.'" -vcodec libx264 -f flv "rtmp://localhost/hls/'.$stream_name_base.'" >/var/log/nginx/avconv-'.$app_name.'-'.$stream_name_base.'.log 2>&1';
-$cmd = 'nohup /usr/bin/avconv -loglevel info -i "rtmp://localhost/'.$app_name.'/'.$stream_name_base.'" -vcodec libx264 -f flv "rtmp://localhost/hls/'.$stream_name_base.'" >/var/log/nginx/avconv-'.$app_name.'-'.$stream_name_base.'.log 2>&1';
-$output = shell_exec($cmd);
-
-$cmd_verify = 'nohup echo "Sono passato oltre..." > /var/log/nginx/async.log';
-$output = shell_exec($cmd_verify);
-*/
-?>

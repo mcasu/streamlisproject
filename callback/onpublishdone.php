@@ -34,6 +34,8 @@ if(isset($_POST['pageurl']))
 	$page_url = $_POST['pageurl'];
 }
 
+sleep(5);
+
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s");
 
