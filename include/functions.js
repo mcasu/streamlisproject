@@ -194,7 +194,7 @@ StreamVideoSizeUpdate = function()
                         var percent = 100 * res / 1024;
                         progressBarObj.css('width', percent+'%').attr('aria-valuenow', res);
                         console.log("ProgressBar - updated aria-valuenow to [" + res + "]");
-                        progressBarObj.text(res + ' MB (MAX 1GB)');
+                        progressBarObj.find('span').text(res + ' MB (MAX 1GB)');
 
                         if (res <= 500)
                         {
