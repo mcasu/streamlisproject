@@ -2179,7 +2179,7 @@ class DBActions
             return false;
         }
         
-        $query_select = 'SELECT * FROM live WHERE stream_name = '.$streamName.' ORDER BY live_date,live_id DESC LIMIT 1';
+        $query_select = 'SELECT * FROM live WHERE stream_name = \''.$streamName.'\' ORDER BY live_date,live_id DESC LIMIT 1';
         
         $result_select = mysql_query($query_select ,$this->connection);
         if(!$result_select)
