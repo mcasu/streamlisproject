@@ -16,6 +16,7 @@ RESULT=$?
 TODAY=$(/bin/date +"%Y%m%d-%H:%M:%S")
 if [ $RESULT -ne 0 ]; then
     echo "$TODAY - ERROR - File $DEST conversion FAILED!" >> $LOGFILE
+    echo "Conversione del file $SOURCE nel formato MP4 fallita! In allegato il file di log." | mail -s "AVCONV ERROR - [$BASENAME] CONVERSIONE FALLITA!" -r "StreamLIS<noreply@streamlis.it>" -a $LOGFILE info@streamlis.it
 else
     echo "$TODAY - File $DEST conversion SUCCESS!" >> $LOGFILE
 fi
