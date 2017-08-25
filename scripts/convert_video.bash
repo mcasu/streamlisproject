@@ -9,7 +9,7 @@ LOGFILE="/var/log/nginx/avconv-convert-$BASENAME.log"
 TODAY=$(/bin/date +"%Y%m%d-%H:%M:%S")
 echo "$TODAY - *** Start conversion ***" > $LOGFILE
 echo "$TODAY - Convert file $SOURCE to $DEST" >> $LOGFILE
-/usr/bin/avconv -y -i $SOURCE -vcodec libx264 -c:a copy -flags +global_header -strict experimental $DEST >>$LOGFILE 2>&1
+/usr/bin/avconv -y -i $SOURCE -vcodec libx264 -flags +global_header -c:a copy -strict experimental $DEST >>$LOGFILE 2>&1
 
 RESULT=$?
 
