@@ -36,7 +36,7 @@ if(!isset($filetype) || empty($filetype))
     echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
     exit; 
 }
-if($filetype != "flv" || $filetype != "mp4") 
+if($filetype != "flv" && $filetype != "mp4") 
 {
     // Access forbidden:
     header('HTTP/1.1 403 Forbidden');
