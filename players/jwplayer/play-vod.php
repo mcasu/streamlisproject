@@ -63,7 +63,7 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            stretching: "fill",
+            stretching: "uniform",
             width: "100%",
             aspectratio: "16:9"
             });'.
