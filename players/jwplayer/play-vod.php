@@ -58,7 +58,7 @@ else
             file: "https://www.streamlis.it/flash/'.$filename.'",
             autostart: true,
             controls: true,
-            primary: html5,
+            primary: "html5",
             playbackRateControls: true,
             rtmp: {
                 bufferlength: 0.1  
