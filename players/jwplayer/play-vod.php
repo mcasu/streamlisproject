@@ -48,11 +48,7 @@ else
 <body>
     
     <div class="container">
-        <!-- 16:9 aspect ratio -->
-        <div class="embed-responsive embed-responsive-16by9">
-          <video class="embed-responsive-item" id="player"/>
-        </div>        
-        
+          <video id="player"/>
     </div>
     
     <?php
