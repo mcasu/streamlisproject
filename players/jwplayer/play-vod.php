@@ -25,6 +25,27 @@ if(!isset($filename) || empty($filename))
     exit; 
 }
 
+$filetype = filter_input(INPUT_GET, 'filetype');
+
+if(!isset($filetype) || empty($filetype)) 
+{
+    // Access forbidden:
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
+    exit; 
+}
+if($filetype != "flv" || $filetype != "mp4") 
+{
+    // Access forbidden:
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Url non valida.</h1><br/><h3>Contattare l'amministratore di sistema.</h3>";
+    exit; 
+}
+
 if ($myhostname == "lnxstreamserver-dev")
 {
     $ip_actual = $ip_private;
@@ -53,22 +74,43 @@ else
     
     <?php
 
-    echo '<script type="text/javascript">'.
-            'jwplayer("player").setup({
-            file: "https://www.streamlis.it/flash/'.$filename.'",
-            autostart: true,
-            controls: true,
-            primary: "html5",
-            playbackRateControls: true,
-            rtmp: {
-                bufferlength: 0.1  
-            },
-            stretching: "fill",
-            width: "100%",
-            aspectratio: "16:9"
-            });'.
-            '</script>';
-            
+    if ($filetype == "flv")
+    {
+        echo '<script type="text/javascript">'.
+                'jwplayer("player").setup({
+                file: "https://www.streamlis.it/flash/'.$filename.'",
+                autostart: true,
+                controls: true,
+                primary: "html5",
+                playbackRateControls: true,
+                rtmp: {
+                    bufferlength: 0.1  
+                },
+                stretching: "fill",
+                width: "100%",
+                aspectratio: "16:9"
+                });'.
+                '</script>';
+    }       
+    
+    if ($filetype == "mp4")
+    {
+        echo '<script type="text/javascript">'.
+                'jwplayer("player").setup({
+                file: "https://www.streamlis.it/mp4/'.$filename.'",
+                autostart: true,
+                controls: true,
+                primary: "html5",
+                playbackRateControls: true,
+                rtmp: {
+                    bufferlength: 0.1  
+                },
+                stretching: "fill",
+                width: "100%",
+                aspectratio: "16:9"
+                });'.
+                '</script>';        
+    }
 
     ?>
 </body>
