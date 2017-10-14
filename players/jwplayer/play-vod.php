@@ -40,10 +40,10 @@ else
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../../style/bootstrap.min.css">
 	
-    <script type="text/javascript" src="jwplayer-7.12.0/jwplayer.js"></script>
-    <script>jwplayer.key="UUfnO2lEZWsYYjNDJs/j4GbGBTQcA93zo6s0tw==";</script>
     <script type="text/javascript" src="../../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jwplayer-7.12.0/jwplayer.js"></script>
+    <script>jwplayer.key="UUfnO2lEZWsYYjNDJs/j4GbGBTQcA93zo6s0tw==";</script>
 </head>
 <body>
     
@@ -51,7 +51,11 @@ else
         <center>
             <h1>On-demand Video Streaming</h1>
         </center>
-        <video id="player"/>
+    <!-- 16:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-16by9">
+      <video class="embed-responsive-item" id="player"/>
+    </div>        
+        
     </div>
     
     <?php
