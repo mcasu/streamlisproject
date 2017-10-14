@@ -66,6 +66,7 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
+            stretching: "uniform",
             aspectratio: "16:9"
             });'.
             '</script>';
