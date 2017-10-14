@@ -63,7 +63,8 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            stretching: "fill"
+            stretching: "fill",
+            width: 100%
             });'.
             '</script>';
             
