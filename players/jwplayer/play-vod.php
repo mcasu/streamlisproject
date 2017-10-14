@@ -51,10 +51,10 @@ else
         <center>
             <h1>On-demand Video Streaming</h1>
         </center>
-    <!-- 16:9 aspect ratio -->
-    <div class="embed-responsive embed-responsive-16by9">
-      <video class="embed-responsive-item" id="player"/>
-    </div>        
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <video class="embed-responsive-item" id="player"/>
+        </div>        
         
     </div>
     
@@ -70,8 +70,7 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            stretching: "uniform",
-            aspectratio: "16:9"
+            stretching: "uniform"
             });'.
             '</script>';
             
