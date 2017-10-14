@@ -47,10 +47,7 @@ else
 </head>
 <body>
     
-    <div class="container-fluid">
-        <center>
-            <h1>On-demand Video Streaming</h1>
-        </center>
+    <div class="container">
         <!-- 16:9 aspect ratio -->
         <div class="embed-responsive embed-responsive-16by9">
           <video class="embed-responsive-item" id="player"/>
