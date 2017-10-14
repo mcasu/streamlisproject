@@ -47,7 +47,7 @@ else
 </head>
 <body>
     
-    <div class="container">
+    <div class="container-fluid">
           <video id="player"/>
     </div>
     
