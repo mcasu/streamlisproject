@@ -480,7 +480,7 @@ try
                                                                                 echo '</div>';
                                                                             echo '</div>';
 
-                                                                            echo '<div class="player_iphone" id="'.basename($ondemand_filename,".mp4").'">';
+                                                                            echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
                                                                                 echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'&filetype=mp4" target="_blank">'.
                                                                                     '<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
                                                                                 

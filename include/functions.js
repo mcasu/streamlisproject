@@ -43,7 +43,7 @@ OndemandMp4Loading = function()
                *** Controllo se esiste il file .mp4 nella cartella della congregazione
                ***********************************************************************/
               var uri =  iphone_href.substr(4);
-              var fullurl = 'https://' + document.location.hostname + '/mp4/' + ulleft_id + '/' + iphone_id;
+              var fullurl = 'https://' + document.location.hostname + '/mp4/' + ulleft_id + '/' + iphone_id + ".mp4";
               console.log("Check [" + fullurl + "]");
 
               $.ajax({
