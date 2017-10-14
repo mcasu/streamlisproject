@@ -55,14 +55,15 @@ else
 
     echo '<script type="text/javascript">'.
             'jwplayer("player").setup({
-            file: "rtmp://www.streamlis.it:1935/vod-flash/'.$filename.'",
+            file: "https://www.streamlis.it/flash/'.$filename.'",
             autostart: true,
             controls: true,
+            primary: html5,
+            playbackRateControls: true,
             rtmp: {
                 bufferlength: 0.1  
             },
-            aspectratio: "16:9",
-            width: "86%"
+            aspectratio: "16:9"
             });'.
             '</script>';
             
