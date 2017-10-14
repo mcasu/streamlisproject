@@ -74,11 +74,13 @@ else
     
     <?php
 
+    $filenameWithoutExt = basename($filename, ".flv");
+    
     if ($filetype == "flv")
     {
         echo '<script type="text/javascript">'.
                 'jwplayer("player").setup({
-                file: "https://www.streamlis.it/flash/'.$filename.'",
+                file: "https://www.streamlis.it/flash/'.$filenameWithoutExt.'.flv",
                 autostart: true,
                 controls: true,
                 primary: "html5",
@@ -97,7 +99,7 @@ else
     {
         echo '<script type="text/javascript">'.
                 'jwplayer("player").setup({
-                file: "https://www.streamlis.it/mp4/'.$filename.'",
+                file: "https://www.streamlis.it/mp4/'.$filenameWithoutExt.'.mp4",
                 autostart: true,
                 controls: true,
                 primary: "html5",
