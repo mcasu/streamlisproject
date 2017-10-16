@@ -1864,6 +1864,42 @@ class DBActions
         return $result_insert;
     }
     
+        function UnMarkOndemandVideoToConvert($ondemandIdList)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+       
+        $query_total = 'UPDATE ondemand SET ondemand_convert_id = null WHERE ondemand_id in ('. $ondemandIdList . ')';
+        
+        $result_update = mysql_query($query_total ,$this->connection);
+        if(!$result_update)
+        {
+            $this->HandleDBError("Error updating data from the table\nquery:$query_total");
+            return false;
+        }
+        
+        $query_total = 'DELETE ondemand_actions_convert WHERE ondemand_actions_convert_list in ('. $ondemandIdList . ')';
+        
+        $result_insert = mysql_query($query_total ,$this->connection);
+        if(!$result_insert)
+        {
+            $this->HandleDBError("Error deleting data from the table\nquery:$query_total");
+            return false;
+        }
+        
+        return $result_insert;
+    }
+    
     function SetOndemandActionsJoinStatus($actionsJoinId, $actionsJoinStatus = 0)
     {
         $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);

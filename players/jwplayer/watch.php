@@ -51,19 +51,15 @@ $stream_name = $row['stream_name'];
 ?>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-	<script type="text/javascript" src="jwplayer.js" ></script>
+    <script src="jwplayer-7.12.0/jwplayer.js"></script>
+    <script>jwplayer.key="UUfnO2lEZWsYYjNDJs/j4GbGBTQcA93zo6s0tw==";</script>
 </head>
 <body>
     
     <div class="container-fluid">
-        <center>
-            <h1>Live Video Streaming</h1>
-        </center>
-        <div class="container" style="margin-left: 30px;">
-            <div id="player"></div>
-        </div>
+          <video id="player"/>
     </div>
 		
     <?php
@@ -73,11 +69,14 @@ $stream_name = $row['stream_name'];
             file: "rtmp://www.streamlis.it:1935/'.$app_name.'/'.$stream_name.'",
             autostart: true,
             controls: true,
+            primary: "html5",
+            playbackRateControls: true,            
             rtmp: {
                 bufferlength: 0.1  
             },
-            aspectratio: "16:9",
-            width: "86%"
+            stretching: "fill",
+            width: "100%",
+            aspectratio: "16:9"
             });'.
             '</script>';
 

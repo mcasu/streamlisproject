@@ -25,6 +25,8 @@ if(!isset($stream_name) || empty($stream_name))
     exit; 
 }
 
+$stream_type = filter_input(INPUT_GET, 'stream_type');
+
 if ($myhostname == "lnxstreamserver-dev")
 {
     $ip_actual = $ip_private;
@@ -46,12 +48,7 @@ else
 <body>
     
     <div class="container-fluid">
-        <center>
-            <h1>Live Video Streaming</h1>
-        </center>
-        <div class="container" style="margin-left: 30px;">
-            <div id="player"></div>
-        </div>
+          <video id="player"/>
     </div>
 		
     <?php
@@ -64,8 +61,9 @@ else
             rtmp: {
                 bufferlength: 0.1  
             },
-            aspectratio: "16:9",
-            width: "86%"
+            stretching: "fill",
+            width: "100%",
+            aspectratio: "16:9"
             });'.
             '</script>';
 

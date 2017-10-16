@@ -28,7 +28,7 @@ $(document).ready(function()
      
 	var url = $(this).attr("href");
 	var windowName = "Player";//$(this).attr("name");
-	var windowSpecs = 'width=600,height=400, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
+	var windowSpecs = 'width=640, height=360, scrollbars=yes, resizable=yes, status=no, toolbar=no, menubar=no, location=no';
 	
 	window.open(url, windowName, windowSpecs);
 	
@@ -211,7 +211,7 @@ try
 					    
 					    echo '<li>';
 						echo '<div class="player_desktop">';
-						    echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
+						    echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'&filetype=flv" target="_blank">'.
 							'<img class="video_imgdevice" src="../images/desktop.png"/></a>';
 						    echo '<br/>';
 						    echo "<label>Guarda il video con <br/>PC Desktop</label>";
@@ -219,16 +219,6 @@ try
 						    echo '<img class="video_imgos" src="../images/os_windows.png"/> <img class="video_imgos" src="../images/os_linux.png"/>';
 						echo '</div>';
 					    echo '</li>';
-					    /*
-					    echo '<li>';    
-						echo '<div class="player_smartphone">';
-						    echo '<a class="play-button" href="../players/flowplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'" target="_blank">'.
-						    '<img src="../images/os_android.png"/></a>';
-						    echo '<br/>';
-						    echo "<label>Guarda il video con Smartphone Android</label>";
-						echo '</div>';
-					    echo '</li>';
-					    */
 					    echo '<li>';
 						echo '<div class="video_loading" id="'.basename($ondemand_filename,".flv").'">';
 						    echo '<img class="video_imgdevice" src="../images/smartphone.png"/>';
@@ -243,8 +233,8 @@ try
 						echo '</div>';
 						
 						echo '<div class="player_iphone" id="'.basename($ondemand_filename,".flv").'">';
-						    echo '<a class="play-button" href="/mp4/'.$ondemand_mp4_filename.'" target="_blank">'.
-						    '<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
+                                                    echo '<a class="play-button" href="../players/jwplayer/play-vod.php?stream_name='.$ondemand_publish_code.'&filename='.$ondemand_filename.'&filetype=mp4" target="_blank">'.
+                                                        '<img class="video_imgdevice" src="../images/smartphone.png"/></a>';
 						    echo '<br/>';
 						    echo "<label>Guarda il video con <br/>Tablet o Smartphone</label>";
 						    echo '<br/>';

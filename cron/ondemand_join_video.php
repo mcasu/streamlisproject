@@ -184,7 +184,7 @@ while($row = mysql_fetch_array($actionsJoin))
         $count = 0;
         foreach ($ondemandVideoFileInfosArray as $videoFileInfo) 
         {
-            // FACCIO IL BACKUP DEI FILE VIDEO ORIGINALI
+            // FACCIO IL BACKUP DEL FILE VIDEO ORIGINALE
             $videoFilenameSrc = $videoFileInfo[1] . $videoFileInfo[2];
             $videoFilenameDst = $ondemand_backup_path . $videoFileInfo[2];
             if (!copy($videoFilenameSrc, $videoFilenameDst))
@@ -232,6 +232,13 @@ while($row = mysql_fetch_array($actionsJoin))
             }
             else 
             {
+                // RIMUOVO IL VIDEO TRA QUELLI DA CONVERTIRE SE PRESENTE NEL DB
+                $result = UnMarkOndemandVideoToConvert($videoFileInfo[0]);
+                if (!$result)
+                {
+                    throw new Exception("UnMarkOndemandVideoToConvert() FAILED! - Impossibile rimuovere il video tra quelli da convertire - ondemand id->[" . $videoFileInfo[0] . "]");
+                }
+                
                 // CANCELLO IL RECORD
                 $result = $dbactions->DeleteEventOnDemand($videoFileInfo[0]);
                 if (!$result)
