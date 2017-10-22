@@ -48,7 +48,7 @@ switch ($fname)
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
     case "get_datatable_ondemand_actions_convert":
         $userId = filter_input(INPUT_POST, 'userId');
-        return GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId);      
+        return GetDataTableOndemandActionsConvert($dbactions, $host, $uname, $pwd, $database, $userId);      
     case "get_datatable_users":
         return GetDataTableUsers($host, $uname, $pwd, $database);        
     case "get_datatable_groups":
@@ -369,7 +369,7 @@ echo json_encode(
 );
 }
 
-function GetDataTableOndemandActionsConvert($host, $uname, $pwd, $database, $userId = NULL)
+function GetDataTableOndemandActionsConvert($dbactions, $host, $uname, $pwd, $database, $userId = NULL)
 {
     /*
  * DataTables example server-side processing script.
@@ -402,7 +402,15 @@ $primaryKey = 'ondemand_actions_convert_id';
 $columns = array(
     array( 'db' => 'ondemand_actions_convert_id', 'dt' => 0 ),
     array( 'db' => 'ondemand_actions_convert_list', 'dt' => 1 ),
-    array( 'db' => 'ondemand_actions_convert_status', 'dt' => 2,
+    array(
+        'db'        => 'ondemand_actions_user_id',
+        'dt'        => 2,
+        'formatter' => function( $d, $row ) use ($dbactions) {
+            $userData = array(); 
+            $dbactions->GetUserById($d,&$userData);
+            return $d != -1 ? $userData['username'] : "StreamLIS";
+        }),  
+    array( 'db' => 'ondemand_actions_convert_status', 'dt' => 3,
         'formatter' => function( $d, $row ) {
             switch ($d) 
             {
@@ -418,14 +426,10 @@ $columns = array(
         }),
     array(
         'db'        => 'ondemand_actions_convert_date',
-        'dt'        => 3,
+        'dt'        => 4,
         'formatter' => function( $d, $row ) {
             return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
-        }),
-    array(
-        'db'        => 'ondemand_actions_user_id',
-        'dt'        => 4
-        ),                
+        }),              
     array(
         'db' => 'id',
         'dt' => 'DT_RowId',

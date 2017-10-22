@@ -80,9 +80,11 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                     <tr class="head">
                         <th>ID OPERAZIONE</th>
                         <th>ONDEMAND VIDEO DA CONVERTIRE</th>
+                        <th>UTENTE</th>
+                        <th>CONGREGAZIONE</th>
                         <th>STATO OPERAZIONE</th>
                         <th>DATA INSERIMENTO</th>
-                        <th>ID UTENTE</th>
+                        
                     </tr>
                 </thead>
                 
