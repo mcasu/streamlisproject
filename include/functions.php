@@ -408,9 +408,20 @@ $columns = array(
         'formatter' => function( $d, $row ) use ($dbactions) {
             $userData = array(); 
             $dbactions->GetUserById($d, $userData);
+            
             return $d != -1 ? $userData['username'] : "StreamLIS";
-        }),  
-    array( 'db' => 'ondemand_actions_convert_status', 'dt' => 3,
+        }),
+    array(
+        'db'        => 'ondemand_actions_user_id',
+        'dt'        => 3,
+        'formatter' => function( $d, $row ) use ($dbactions) {
+            $userData = array(); 
+            $dbactions->GetUserById($d, $userData);
+            $groupData = $dbactions->GetGroupById($userData['user_group_id']);
+            
+            return $d != -1 ? $groupData['group_name'] : "N/A";
+        }), 
+    array( 'db' => 'ondemand_actions_convert_status', 'dt' => 4,
         'formatter' => function( $d, $row ) {
             switch ($d) 
             {
@@ -426,7 +437,7 @@ $columns = array(
         }),
     array(
         'db'        => 'ondemand_actions_convert_date',
-        'dt'        => 4,
+        'dt'        => 5,
         'formatter' => function( $d, $row ) {
             return strftime('%e %B %Y ore %H:%M:%S', strtotime($d));
         }),              
