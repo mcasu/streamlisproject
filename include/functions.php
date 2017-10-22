@@ -407,7 +407,7 @@ $columns = array(
         'dt'        => 2,
         'formatter' => function( $d, $row ) use ($dbactions) {
             $userData = array(); 
-            $dbactions->GetUserById($d,&$userData);
+            $dbactions->GetUserById($d, $userData);
             return $d != -1 ? $userData['username'] : "StreamLIS";
         }),  
     array( 'db' => 'ondemand_actions_convert_status', 'dt' => 3,
