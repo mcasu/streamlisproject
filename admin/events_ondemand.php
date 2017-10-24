@@ -184,6 +184,7 @@ $(document).ready(function()
         var userId = $('.userid').attr('id');
         
         $( "#ondemand-convert-dialog-confirm" ).dialog({
+            autoOpen: false,
             resizable: false,
             height: "auto",
             width: 400,
