@@ -170,7 +170,7 @@ $(document).ready(function()
     $(".alert-warning").hide();
     $(".alert-success").hide();
     $(".alert-danger").hide();
-    $( "#ondemand-convert-dialog-confirm" ).dialog("close");
+    $( "#ondemand-convert-dialog-confirm" ).hide();
     
     $(".btn_video_convert").click(function()
     {
