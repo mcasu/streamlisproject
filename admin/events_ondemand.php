@@ -170,6 +170,7 @@ $(document).ready(function()
     $(".alert-warning").hide();
     $(".alert-success").hide();
     $(".alert-danger").hide();
+    $( "#ondemand-convert-dialog-confirm" ).dialog("close");
     
     $(".btn_video_convert").click(function()
     {
@@ -184,7 +185,6 @@ $(document).ready(function()
         var userId = $('.userid').attr('id');
         
         $( "#ondemand-convert-dialog-confirm" ).dialog({
-            autoOpen: false,
             resizable: false,
             height: "auto",
             width: 400,
