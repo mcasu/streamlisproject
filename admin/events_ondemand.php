@@ -168,6 +168,70 @@ $(document).ready(function()
     $(".alert-success").hide();
     $(".alert-danger").hide();
     
+    $(".btn_video_convert").click(function()
+    {
+        var checkedItems = [];
+        $(".checked-list-box li.active").each(function(idx, li) {
+
+            var ondemand_id=$(this).attr('id');
+            checkedItems.push(ondemand_id);
+        });
+            
+        var ondemandIdList = checkedItems.toString();
+        var userId = $('.userid').attr('id');
+        
+        $( "#ondemand-convert-dialog-confirm" ).dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Converti subito": function() {
+                  $( this ).dialog( "close" );
+                },
+                "Converti la prossima notte": function() 
+                {
+                    var result = MarkOndemandVideoToConvert(ondemandIdList, userId);
+
+                    //alert("RISULTATO: " + result);
+
+                    if (result === "2")
+                    {
+                        $(".alert-warning").show();
+                        $(".alert-success").hide();
+                        $(".alert-danger").hide();
+                        $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert">' +
+                                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                            '<h4 style="margin-top: 2px;"><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video selezionati sono già schedulati per la conversione.</h4>');
+
+                    }
+                    else if (result === "1")
+                    {
+                        $(".alert-danger").show();    
+                        $(".alert-warning").hide();
+                        $(".alert-success").hide();
+                        $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per convertire i video selezionati.</h4>');
+
+                    }
+                    else if (result === "0")
+                    {
+                        $(".alert-success").show();
+                        $(".alert-danger").hide();    
+                        $(".alert-warning").hide();
+                        $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nI video selezionati saranno convertiti questa notte e potrai vedere il risultato domani.</h4>');                
+
+                    }
+                    
+                $( this ).dialog( "close" );
+                }
+            }
+        });
+    });     
+    
     $(".btn_video_join").click(function()
     {
         var checkedItems = [];
@@ -299,6 +363,7 @@ try
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_convert" style="margin-right:4px;" id="btn_video_convert">Converti video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
@@ -532,6 +597,7 @@ try
             echo '<div class="pull-right btn_actions">';
                 echo '<button type="button" class="btn btn-danger btn_video_delete" style="margin-right:4px;" id="btn_video_delete">Elimina video</button>';
                 echo '<button type="button" class="btn btn-primary btn_video_join" style="margin-right:4px;" id="btn_video_join">Unisci video</button>';
+                echo '<button type="button" class="btn btn-primary btn_video_convert" style="margin-right:4px;" id="btn_video_convert">Converti video</button>';
             echo '</div>';
             echo '<div class="clearfix"></div>';
         echo '</div>';
@@ -546,5 +612,9 @@ try
 
 ?>
 
+<div id="ondemand-convert-dialog-confirm" title="Come vuoi convertire i video selezionati?">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Vuoi convertire subito i video o schedulare l'operazione la prossima notte?</p>
+</div>
+    
 </body>
 </html>

@@ -655,4 +655,81 @@ class MainActions
         return $user_id;
     }
     
+    function ConvertOnDemandVideo($streamName, $onDemandFlvFilename, $onDemandMp4RecordFilepath, $onDemandFlvRecordFilepath)
+    {
+        $videoBasename = basename($onDemandFlvFilename, '.flv');
+        $videoMp4Filename = $videoBasename . ".mp4";
+        $videoMp4Dir = $onDemandMp4RecordFilepath.strtolower($streamName);
+        $videoFlvDir = $onDemandFlvRecordFilepath.strtolower($streamName);
+
+        // SE LA CARTELLA DEL VIDEO ONDEMAND MP4 NON ESISTE, LA CREO
+        if (!file_exists($videoMp4Dir))
+        {
+            mkdir($videoMp4Dir, 0755, true);
+            error_log("INFO - ConvertOnDemandVideo() Created folder [".$videoMp4Dir."]");
+        }
+
+        $docRoot = getenv("DOCUMENT_ROOT");
+
+        if (file_exists($videoMp4Dir.'/'.$videoMp4Filename))
+        {
+            error_log("WARNING - ConvertOnDemandVideo() Il file [".$onDemandMp4RecordFilepath.$videoMp4Filename."] esiste gia'.");
+        }
+        else
+        {
+            // ESEGUO LA CONVERSIONE DAL .FLV A .MP4 TRAMITE LO SCRIPT BASH
+            $output = shell_exec($docRoot.'/scripts/convert_video.bash '.$videoFlvDir."/".$onDemandFlvFilename.' '.$videoMp4Dir.'/'.$videoMp4Filename.' '.$onDemandFlvFilename);   
+        }
+
+        // CREO IL LINK SIMBOLICO AL FILE MP4
+        if (is_link($onDemandMp4RecordFilepath.$videoMp4Filename))
+        {
+            unlink($onDemandMp4RecordFilepath.$videoMp4Filename);
+        }
+        if (!symlink($videoMp4Dir."/".$videoMp4Filename, $onDemandMp4RecordFilepath.$videoMp4Filename))
+        {
+            error_log("ERROR - ConvertOnDemandVideo() Creazione del link simbolico [".$onDemandMp4RecordFilepath.$videoMp4Filename."] fallita!");
+            return 1;
+        }
+        
+        error_log("INFO - ConvertOnDemandVideo() Creazione del link simbolico [".$onDemandMp4RecordFilepath.$videoMp4Filename."] riuscita!");
+        
+        return 0;
+    }
+    
+    function ConvertOnDemandVideos($ondemandVideoList, $onDemandMp4RecordFilepath, $onDemandFlvRecordFilepath)
+    {
+        $ondemandVideoInfos = $this->dbactionsInstance->GetOndemandEventsByIds($ondemandVideoList);
+
+        if (!$ondemandVideoInfos)
+        {
+            throw new Exception("GetOndemandEventsByIds() FAILED! - " . $this->dbactionsInstance->GetErrorMessage());
+        }        
+        
+        $videoToConvertNumber = mysql_num_rows($ondemandVideoInfos);
+
+        if ($videoToConvertNumber < 1)
+        {
+            throw new Exception("GetOndemandEventsByIds() ritorna 0 record (forse i video selezionati sono stati cancellati??)");
+        }
+        
+        $errorsCount = 0;
+        while($ondemandVideo = mysql_fetch_array($ondemandVideoInfos))
+        {
+            $result = $this->ConvertOnDemandVideo($ondemandVideo['ondemand_publish_code'], $ondemandVideo['ondemand_filename'], $onDemandMp4RecordFilepath, $onDemandFlvRecordFilepath);
+            
+            if ($result !== 0)
+            {
+                error_log("Conversione del video [". $ondemandVideo['ondemand_filename'] ."] in mp4 fallita! :( ");
+            }
+            else
+            {
+                error_log("Conversione del video [". $ondemandVideo['ondemand_filename'] ."] in mp4 riuscita! :) ");
+                ++$errorsCount;
+            }
+        }
+        
+        return $errorsCount;
+    }
+    
 }

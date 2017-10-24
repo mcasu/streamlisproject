@@ -43,6 +43,10 @@ switch ($fname)
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
         return MarkOndemandVideoToJoin($dbactions, $ondemandIdList, $userId);
+    case "mark_ondemand_video_to_convert":
+        $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
+        $userId = filter_input(INPUT_POST, 'userId');
+        return MarkOndemandVideoToConvert($dbactions, $ondemandIdList, $userId);        
     case "get_datatable_ondemand_actions_join":
         $userId = filter_input(INPUT_POST, 'userId');
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
@@ -237,17 +241,57 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     return TRUE;
 }
 
+function MarkOndemandVideoToConvert($dbactions, $ondemandIdList, $userId)
+{
+        $ondemandListArray = explode(",",$ondemandIdList);
+        $found = 0;
+        foreach ($ondemandListArray as $ondemandId) 
+        {
+            $result = $dbactions->CheckIfOndemandVideoIsMarkedToConvert($ondemandId);
+            if (!$result)
+            {
+                $found = -1;
+                error_log("ERROR - CheckIfOndemandVideoIsMarkedToConvert() FAILED! " . $dbactions->GetErrorMessage());
+                break;
+            }
+
+            $found += mysql_num_rows($result);
+        }
+
+        if ($found < 0)
+        {
+            echo "1";
+            return;
+        }
+
+        if ($found > 0)
+        {
+            echo "2";
+            return;
+        }
+
+        if (!$dbactions->MarkOndemandVideoToConvert($ondemandIdList, $userId))
+        {
+            error_log("ERROR - MarkOndemandVideoToConvert() FAILED! " . $dbactions->GetErrorMessage());
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
+}
+
 function MarkOndemandVideoToJoin($dbactions, $ondemandIdList, $userId)
 {
         $ondemandListArray = explode(",",$ondemandIdList);
         $found = 0;
         foreach ($ondemandListArray as $ondemandId) 
         {
-            $result = $dbactions->CheckIfOndemandVideoIsMarked($ondemandId);
+            $result = $dbactions->CheckIfOndemandVideoIsMarkedToJoin($ondemandId);
             if (!$result)
             {
                 $found = -1;
-                error_log("ERROR - CheckIfOndemandVideoIsMarked() FAILED! " . $dbactions->GetErrorMessage());
+                error_log("ERROR - CheckIfOndemandVideoIsMarkedToJoin() FAILED! " . $dbactions->GetErrorMessage());
                 break;
             }
 
