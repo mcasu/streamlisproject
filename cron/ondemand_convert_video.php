@@ -33,6 +33,7 @@ if(!isset($actionsConvertId) || empty($actionsConvertId))
         error_log("ERROR - ondemand_convert_video.php GetAllOnDemandActionsConvert() FAILED! - " . $dbactions->GetErrorMessage());
         exit(1);
     }
+}
 else
 {
     $actionsConvert = $dbactions->GetOnDemandActionsConvertById($actionsConvertId);
