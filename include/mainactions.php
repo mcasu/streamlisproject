@@ -721,11 +721,12 @@ class MainActions
             if ($result !== 0)
             {
                 error_log("Conversione del video [". $ondemandVideo['ondemand_filename'] ."] in mp4 fallita! :( ");
+                ++$errorsCount;
             }
             else
             {
                 error_log("Conversione del video [". $ondemandVideo['ondemand_filename'] ."] in mp4 riuscita! :) ");
-                ++$errorsCount;
+                
             }
         }
         
