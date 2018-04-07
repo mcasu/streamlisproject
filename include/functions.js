@@ -136,6 +136,44 @@ CheckLiveExistsForPublishCode = function(publishCode)
     return result;
 };
 
+ExecActionsVideoConversion = function(acid) 
+{
+    var params = 'acid=' + acid;
+    var result;
+    jQuery.ajax({
+        type: "POST",
+        url: "/cron/ondemand_convert_video.php",
+        data: params,
+        async: false,
+        cache: false,
+        success: function(res)
+        {
+            result = res;
+        }
+    });
+    
+    return result;
+};
+
+GetActionsConvertIdByOndemandId = function(ondemandId) 
+{
+    var params = 'fname=get_actions_convertid_by_ondemandid&ondemandId=' + ondemandId;
+    var result;
+    jQuery.ajax({
+        type: "POST",
+        url: "/include/functions.php",
+        data: params,
+        async: false,
+        cache: false,
+        success: function(res)
+        {
+            result = res;
+        }
+    });
+    
+    return result;
+};
+
 MarkOndemandVideoToConvert = function(ondemandIdList, userId) 
 {
     var params = 'fname=mark_ondemand_video_to_convert&ondemandIdList=' + ondemandIdList + '&userId=' + userId;

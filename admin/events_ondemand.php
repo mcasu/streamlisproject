@@ -191,6 +191,45 @@ $(document).ready(function()
             modal: true,
             buttons: {
                 "Converti subito": function() {
+                    
+                    var result = MarkOndemandVideoToConvert(ondemandIdList, userId);
+
+                    if (result === "2")
+                    {
+                        $(".alert-warning").show();
+                        $(".alert-success").hide();
+                        $(".alert-danger").hide();
+                        $(".alert-warning").html('<button type="button" class="close" data-dismiss="alert">' +
+                                            '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                            '<h4 style="margin-top: 2px;"><b>OPERAZIONE NON PERMESSA!</b>\nMi dispiace. Uno o più video selezionati sono già schedulati per la conversione.</h4>');
+
+                    }
+                    else if (result === "1")
+                    {
+                        $(".alert-danger").show();    
+                        $(".alert-warning").hide();
+                        $(".alert-success").hide();
+                        $(".alert-danger").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE FALLITA!</b>\nMi dispiace. Non sono riuscito a memorizzare le informazioni per convertire i video selezionati.</h4>');
+
+                    }
+                    else if (result === "0")
+                    {
+                        var acid = GetActionsConvertIdByOndemandId(ondemandIdList);
+                        
+                        // Lancio la conversione
+                        ExecActionsVideoConversion(acid);
+                        
+                        $(".alert-success").show();
+                        $(".alert-danger").hide();    
+                        $(".alert-warning").hide();
+                        $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">' +
+                                    '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nConversione in corso. Per maggiori dettagli vedi la pagina delle operazioni.</h4>');                
+
+                    }
+                    
                   $( this ).dialog( "close" );
                 },
                 "Converti la prossima notte": function() 

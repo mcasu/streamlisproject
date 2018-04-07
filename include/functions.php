@@ -46,7 +46,10 @@ switch ($fname)
     case "mark_ondemand_video_to_convert":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
-        return MarkOndemandVideoToConvert($dbactions, $ondemandIdList, $userId);        
+        return MarkOndemandVideoToConvert($dbactions, $ondemandIdList, $userId);      
+    case "get_actions_convertid_by_ondemandid":
+        $ondemandId = filter_input(INPUT_POST, 'ondemandId');
+        return GetActionsConvertIdByOndemandId($dbactions, $ondemandId);
     case "get_datatable_ondemand_actions_join":
         $userId = filter_input(INPUT_POST, 'userId');
         return GetDataTableOndemandActionsJoin($host, $uname, $pwd, $database, $userId);
@@ -239,6 +242,14 @@ function ResetUserPassword($mainactions, $dbactions, $userId, $userAdminId)
     }
     
     return TRUE;
+}
+
+function GetActionsConvertIdByOndemandId($dbactions, $ondemandId)
+{
+    $result = $dbactions->GetActionsConvertIdByOnDemandId($ondemandId);
+    $actionsConvertId = mysql_fetch_array($result);
+    
+    return $actionsConvertId;
 }
 
 function MarkOndemandVideoToConvert($dbactions, $ondemandIdList, $userId)
