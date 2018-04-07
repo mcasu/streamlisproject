@@ -54,7 +54,7 @@ while($row = mysql_fetch_array($actionsConvert))
         // RECUPERO LA LISTA DI VIDEO ONDEMAND DA CONVERTIRE
         $ondemandVideoList = explode(",", $row['ondemand_actions_convert_list']);
         
-        $errorsCount = $mainactions->ConvertOnDemandVideos($ondemandVideoList, $onDemandMp4RecordFilepath, $onDemandFlvRecordFilepath);
+        $errorsCount = $mainactions->ConvertOnDemandVideos($ondemandVideoList, $ondemand_mp4_record_filepath, $ondemand_flash_record_filepath);
         
         if ($errorsCount == 0)
         {
