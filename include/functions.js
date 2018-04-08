@@ -8,13 +8,13 @@ OndemandMp4Loading = function()
   root.children().each(function( index )
   {
       var panelobj = $(this).find('div.panel-collapse');
-      alert( index + " Pannello con GroupId: " + panelobj.attr('id'));
+      //alert( index + " Pannello con GroupId: " + panelobj.attr('id'));
 
       if ( panelobj.hasClass("collapse in") )
       {
           ulleft = panelobj.find('ul.checked-list-box');
           var ulleft_id = ulleft.attr('id');
-          alert("Oggetto ulleft: " + ulleft_id);
+          //alert("Oggetto ulleft: " + ulleft_id);
 
           panelobj.find('li.video_list_element').each(function( index )
           {
