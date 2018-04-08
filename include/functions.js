@@ -14,7 +14,7 @@ OndemandMp4Loading = function()
       {
           ulleft = panelobj.find('ul.checked-list-box');
           var ulleft_id = ulleft.attr('id');
-          //alert("Oggetto ulleft: " + ulleft_id);
+          alert("Oggetto ulleft: " + ulleft_id);
 
           panelobj.find('li.video_list_element').each(function( index )
           {
