@@ -123,10 +123,10 @@ if($userIsLogged)
 		</div> <!-- FINE DIV PANEL-BODY INTERNO -->
 	     </div>
 	 </div>
+        </br>
+         <?php include("include/footer.php"); ?>
       </div> <!-- FINE DIV PANEL-BODY ESTERNO -->
    </div> <!-- FINE DIV PANEL -->
-
-    <?php include("include/footer.php"); ?>
 </div> <!-- FINE DIV CONTAINER-FLUID -->
    
 <!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
