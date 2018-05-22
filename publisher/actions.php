@@ -18,6 +18,8 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../include/session.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript"> var _iub = _iub || []; _iub.csConfiguration = {"lang":"it","siteId":1168862,"cookiePolicyId":74934126,"banner":{"textColor":"#fff","backgroundColor":"#333"}}; </script><script type="text/javascript" src="//cdn.iubenda.com/cookie_solution/safemode/iubenda_cs.js" charset="UTF-8" async></script>
 </head>
 
 

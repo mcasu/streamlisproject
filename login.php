@@ -70,6 +70,11 @@ if($userIsLogged)
    
       <div class="panel-body">
 	    
+         <div class="alert alert-warning alert-dismissible" role="alert">Gentile Utente, </br>ti informiamo che abbiamo aggiornato il documento relativo alla "Privacy Policy", in ottemperanza alla prossima entrata in vigore della nuova normativa europea in materia di protezione dei dati personali UE 2016/679 (GDPR).</br>
+         Il documento è consultabile alla pagina  <a href="https://www.iubenda.com/privacy-policy/74934126" class="iubenda-black iubenda-embed " title="Privacy Policy">Privacy Policy</a> 
+   <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+   del nostro sito web.</br>Saluti fraterni dal team StreamLIS :)</div>
+         
 	 <div class="col-sm-6 col-md-4 col-md-offset-4">
 	     <div class="panel panel-default">
 		<div class="panel-body">
