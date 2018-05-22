@@ -159,5 +159,7 @@ $('#login_form').validate(
 
 </script>
 
+<?php include("../include/footer.php"); ?>
+
 </body>
 </html>
