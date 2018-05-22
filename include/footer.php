@@ -19,6 +19,6 @@
 ?>
 
 <div class="text-center" style="background-color: #333; position:absolute; bottom:0; width:100%; height:36px;">
-   <a href="https://www.iubenda.com/privacy-policy/74934126" class="iubenda-black iubenda-embed " title="Privacy Policy" style="margin-bottom: 3px; margin-top: 3px;">Privacy Policy</a> 
+   <a href="https://www.iubenda.com/privacy-policy/74934126" class="iubenda-black iubenda-embed " title="Privacy Policy" style="margin-bottom: 3px; margin-top: 6px;">Privacy Policy</a> 
    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
 </div>
