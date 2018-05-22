@@ -25,7 +25,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <body>
 
-<?php include("../include/header_publisher.php");
+<?php include("../include/header_admin.php");
 
 $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
 
