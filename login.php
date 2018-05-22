@@ -123,9 +123,10 @@ if($userIsLogged)
 		</div> <!-- FINE DIV PANEL-BODY INTERNO -->
 	     </div>
 	 </div>
-        </br>
-         <?php include("include/footer.php"); ?>
+        
+        
       </div> <!-- FINE DIV PANEL-BODY ESTERNO -->
+      <?php include("include/footer.php"); ?>
    </div> <!-- FINE DIV PANEL -->
 </div> <!-- FINE DIV CONTAINER-FLUID -->
    
