@@ -139,5 +139,6 @@ catch(Exception $e)
 }
 ?>
 
+    <?php include("../include/footer.php"); ?>
 </body>
 </html>

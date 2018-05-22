@@ -26,5 +26,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 
 <iframe height="700" width="100%" src="/stat"></iframe>
 
+    <?php include("../include/footer.php"); ?>
 </body>
 </html>

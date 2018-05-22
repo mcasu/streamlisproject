@@ -155,6 +155,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_viewer.php");
     
     <script type="text/javascript" src="/js/bistri/jwconference-viewer.js"></script>
     
+    <?php include("../include/footer.php"); ?>
 </body>
     
 </html>

@@ -176,6 +176,7 @@ $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
     <!--<script src="/js/adapter.js"></script>-->
     <script src="/js/common.js"></script>
     
+    <?php include("../include/footer.php"); ?>
 </body>
     
 </html>

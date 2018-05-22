@@ -659,5 +659,6 @@ try
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Vuoi convertire subito i video o schedulare l'operazione la prossima notte?</p>
 </div>
     
+    <?php include("../include/footer.php"); ?>
 </body>
 </html>

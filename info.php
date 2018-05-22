@@ -28,5 +28,6 @@ Commercial support is available at
 phpinfo();
 ?>
 
+    <?php include("include/footer.php"); ?>
 </body>
 </html>

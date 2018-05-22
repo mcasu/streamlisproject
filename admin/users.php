@@ -316,5 +316,6 @@ $(document).ready(function()
 
 </script>
     
+    <?php include("../include/footer.php"); ?>
 </body>
 </html>
