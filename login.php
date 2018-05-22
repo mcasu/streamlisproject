@@ -72,7 +72,7 @@ if($userIsLogged)
 	    
           <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
           <div class="alert alert-warning alert-dismissible" role="alert"><h4 class="text-justify">Gentile Utente, </br></br>ti informiamo che abbiamo aggiornato il documento relativo alla "Privacy Policy", in ottemperanza alla prossima entrata in vigore della nuova normativa europea in materia di protezione dei dati personali UE 2016/679 (GDPR).</br>
-         Il documento è consultabile alla pagina  <a href="https://www.iubenda.com/privacy-policy/74934126" class="iubenda-embed" title="Privacy Policy"><b>Privacy Policy</b></a> del nostro sito web.</br></br>
+         Il documento è consultabile alla pagina  <a href="https://www.iubenda.com/privacy-policy/74934126" class="iubenda-black iubenda-embed" title="Privacy Policy"><b>Privacy Policy</b></a> del nostro sito web.</br></br>
          Saluti fraterni dal team StreamLIS :)</h4></div>
          
 	 <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -113,9 +113,9 @@ if($userIsLogged)
 				   <div class="controls">
 				       <input required type="password" class="form-control" placeholder="Password" name='password' id='password' maxlength="128"/><br/>
 				   </div>
-				  <label class="pull-right">
+<!--				  <label class="pull-right">
 				     <a href='reset-pwd-req.php'>Password dimenticata?</a>
-				  </label>
+				  </label>-->
 			       </div>
 			   </div>
 			 
