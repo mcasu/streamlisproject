@@ -125,6 +125,8 @@ if($userIsLogged)
 	 </div>
       </div> <!-- FINE DIV PANEL-BODY ESTERNO -->
    </div> <!-- FINE DIV PANEL -->
+
+    <?php include("include/footer.php"); ?>
 </div> <!-- FINE DIV CONTAINER-FLUID -->
    
 <!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
@@ -159,8 +161,5 @@ $('#login_form').validate(
 
 </script>
 
-<div style="position: absolute">
-    <?php include("include/footer.php"); ?>
-</div>
 </body>
 </html>
