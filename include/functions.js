@@ -144,7 +144,7 @@ ExecActionsVideoConversion = function(acid)
         type: "POST",
         url: "/cron/ondemand_convert_video.php",
         data: params,
-        async: false,
+        async: true,
         cache: false,
         success: function(res)
         {
