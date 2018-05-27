@@ -216,7 +216,8 @@ $(document).ready(function()
                     }
                     else if (result === "0")
                     {
-                        var acid = GetActionsConvertIdByOndemandId(ondemandIdList);
+                        var acid = GetActionsConvertIdByOndemandId(checkedItems[0]);
+                        alert ("Elemento selezionato: " + checkedItems[0]);
                         
                         // Lancio la conversione
                         ExecActionsVideoConversion(acid);
