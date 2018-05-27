@@ -145,11 +145,11 @@ ExecActionsVideoConversion = function(acid)
         url: "/cron/ondemand_convert_video.php",
         data: params,
         async: true,
-        cache: false,
-        success: function(res)
-        {
-            result = res;
-        }
+        cache: false
+//        success: function(res)
+//        {
+//            result = res;
+//        }
     });
     
     return result;
