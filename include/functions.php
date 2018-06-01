@@ -970,7 +970,7 @@ function GetLiveVideoInfoFileSize($dbactions, $liveTmpFlashPath, $streamName)
 function CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId)
 {
     $userSelectedData = array();
-    $dbactions->GetUserById($userSelectedId, &$userSelectedData);
+    $dbactions->GetUserById($userSelectedId, $userSelectedData);
     
     $userSelectedIsFromMyGroup = $userSelectedData['user_group_id'] == $groupCurrentId ? true : false;
     
