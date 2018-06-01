@@ -582,36 +582,72 @@ $primaryKey = 'id_user';
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier.
-$columns = array(
-    array( 'db' => '`u`.id_user', 'dt' => 0 , 'field' => 'id_user'),
-    array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
-    array( 'db' => '`u`.email', 'dt' => 2 , 'field' => 'email'),
-    array( 'db' => '`u`.username', 'dt' => 3 , 'field' => 'username'),                
-    array( 'db' => '`g`.group_name', 'dt' => 4 , 'field' => 'group_name'),   
-    array( 'db' => '`u`.user_role_id', 'dt' => 5 ,
+
+if (empty($groupId))
+{
+    $columns = array(
+        array( 'db' => '`u`.id_user', 'dt' => 0 , 'field' => 'id_user'),
+        array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
+        array( 'db' => '`u`.email', 'dt' => 2 , 'field' => 'email'),
+        array( 'db' => '`u`.username', 'dt' => 3 , 'field' => 'username'),                
+        array( 'db' => '`g`.group_name', 'dt' => 4 , 'field' => 'group_name'),   
+        array( 'db' => '`u`.user_role_id', 'dt' => 5 ,
+                'formatter' => function( $d, $row ) {
+                switch ($d) 
+                {
+                    case 1:
+                        return '<span class="label label-success">Admin</span>';
+                    case 2:
+                        return '<span class="label label-default">Viewer</span>';
+                    case 3:
+                        return '<span class="label label-warning">Publisher</span>';
+                }
+            }, 'field' => 'user_role_id'),
+        array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
+        array(
+            'db' => '`u`.id',
+            'dt' => 'DT_RowId',
             'formatter' => function( $d, $row ) {
-            switch ($d) 
-            {
-                case 1:
-                    return '<span class="label label-success">Admin</span>';
-                case 2:
-                    return '<span class="label label-default">Viewer</span>';
-                case 3:
-                    return '<span class="label label-warning">Publisher</span>';
-            }
-        }, 'field' => 'user_role_id'),
-    array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
-    array(
-        'db' => '`u`.id',
-        'dt' => 'DT_RowId',
-        'formatter' => function( $d, $row ) {
-            // Technically a DOM id cannot start with an integer, so we prefix
-            // a string. This can also be useful if you have multiple tables
-            // to ensure that the id is unique with a different prefix
-            return 'row_'.$d;
-        }, 'field' => 'id')
-);
- 
+                // Technically a DOM id cannot start with an integer, so we prefix
+                // a string. This can also be useful if you have multiple tables
+                // to ensure that the id is unique with a different prefix
+                return 'row_'.$d;
+            }, 'field' => 'id')
+    );
+        
+}
+else
+{
+    $columns = array(
+        array( 'db' => '`u`.id_user', 'dt' => 0 , 'field' => 'id_user'),
+        array( 'db' => '`u`.name', 'dt' => 1 , 'field' => 'name'),
+        array( 'db' => '`u`.username', 'dt' => 2 , 'field' => 'username'),                
+        array( 'db' => '`g`.group_name', 'dt' => 3 , 'field' => 'group_name'),   
+        array( 'db' => '`u`.user_role_id', 'dt' => 4 ,
+                'formatter' => function( $d, $row ) {
+                switch ($d) 
+                {
+                    case 1:
+                        return '<span class="label label-success">Admin</span>';
+                    case 2:
+                        return '<span class="label label-default">Viewer</span>';
+                    case 3:
+                        return '<span class="label label-warning">Publisher</span>';
+                }
+            }, 'field' => 'user_role_id'),
+        array( 'db' => 'user_logged', 'dt' => 5 , 'field' => 'user_logged'),
+        array(
+            'db' => '`u`.id',
+            'dt' => 'DT_RowId',
+            'formatter' => function( $d, $row ) {
+                // Technically a DOM id cannot start with an integer, so we prefix
+                // a string. This can also be useful if you have multiple tables
+                // to ensure that the id is unique with a different prefix
+                return 'row_'.$d;
+            }, 'field' => 'id')
+    );    
+}
+
 // SQL server connection information
 $sql_details = array(
     'user' => $uname,

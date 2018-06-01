@@ -126,7 +126,7 @@ $(document).ready(function()
         {
             var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
             {
-                return jQuery(row[5]).text();
+                return jQuery(row[4]).text();
             } );
                 
             if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
