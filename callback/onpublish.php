@@ -44,7 +44,13 @@ if(isset($_POST['pageurl']))
 $mysqldate = date("Y-m-d"); 
 $mysqltime = date("H:i:s"); 
 
-	
+
+if (!$dbactions->PublishCodeExists($publish_code))
+{
+    error_log("PUBLISHING DENIED! Publish code [".strtolower($publish_code)."] not exists.\n" . $dbactions->GetErrorMessage());
+    exit -1;
+}
+
 /*** Save live publish info into database ***/
 if (!$dbactions->OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$stream_name,$mysqldate,$mysqltime))
 {

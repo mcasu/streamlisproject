@@ -2330,6 +2330,36 @@ class DBActions
         
     }
     
+    function PublishCodeExists($publishCode)
+    {
+        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+
+        if(!$this->connection)
+        {
+            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
+            return false;
+        }
+        if(!mysql_select_db($this->database, $this->connection))
+        {
+            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
+            return false;
+        }
+        
+        $querySelect = 'SELECT count(*) FROM `groups` WHERE publish_code like \''. $publishCode . '\' GROUP BY publish_code';
+        
+        $resultSelect = mysql_query($querySelect ,$this->connection);
+        if(!$resultSelect)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery: $querySelect");
+            return false;
+        }
+        
+        $row = mysql_fetch_assoc($resultSelect);
+        
+        return $row[0] > 0 ? true : false;
+        
+    }
+    
     function SanitizeForSQL($str)
     {
         if( function_exists( "mysql_real_escape_string" ) )
