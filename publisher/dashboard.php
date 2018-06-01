@@ -47,7 +47,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 try
 {
     echo '<h4 style="margin-left:6px;">La tua email è <b>'.
-            '<span class="label label-info">' . $mainactions->UserEmail() . '</span>';
+            '<span class="label label-warning">' . $mainactions->UserEmail() . '</span>';
     echo '</b></h4><br/>';
     
     $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());

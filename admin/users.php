@@ -59,7 +59,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
 		<h3>Utente modificato con successo!</h3>
             </div>
             
-            <table class="table table-hover" id="users_table">
+            <table class="table table-hover" id="users_table" style="width:100%">
                 <thead>
                     <tr class="head">
                         <th>ID</th>
