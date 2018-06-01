@@ -57,7 +57,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
                 <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
             </div>
             
-            <table class="table table-hover" id="users_table">
+            <table class="table table-hover" id="users_table" style="width:100%">
                 <thead>
                     <tr class="head">
                         <th>ID</th>
