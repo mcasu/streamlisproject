@@ -264,7 +264,7 @@ class SSP {
 			 $limit";
         }
 
-        error_log("QUERY: [" . $query . "]"); 
+        //error_log("QUERY: [" . $query . "]"); 
         
         $data = SSP::sql_exec( $db, $bindings,$query);
 
