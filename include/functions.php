@@ -57,6 +57,7 @@ switch ($fname)
         $userId = filter_input(INPUT_POST, 'userId');
         return GetDataTableOndemandActionsConvert($dbactions, $host, $uname, $pwd, $database, $userId);      
     case "get_datatable_users":
+        $groupId = filter_input(INPUT_POST, 'groupId');
         return GetDataTableUsers($host, $uname, $pwd, $database, $groupId);        
     case "get_datatable_groups":
         return GetDataTableGroups($host, $uname, $pwd, $database);          
