@@ -2356,7 +2356,7 @@ class DBActions
         
         $row = mysql_fetch_assoc($resultSelect);
         
-        return $row[0] > 0 ? true : false;
+        return $row['count'] > 0 ? true : false;
         
     }
     
