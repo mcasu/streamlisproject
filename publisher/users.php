@@ -40,6 +40,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
         <div class="panel-heading">
             <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
             <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
+            <button type="button" class="btn btn-success right" id="btn_user_add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo utente</button>
         </div>
 
         <div class="panel-body">
