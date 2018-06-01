@@ -633,7 +633,9 @@ $where = empty($groupId) ? NULL : ' WHERE users.user_group_id in('.
  
 //require( 'ssp.class.php' );
 require( 'ssp.php' );
- 
+
+error_log("QUERY: [" . $sql_details . $join . $where . "]");
+
 echo json_encode(
     SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns, $join, $where)
 );
