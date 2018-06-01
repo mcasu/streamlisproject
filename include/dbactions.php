@@ -2354,9 +2354,9 @@ class DBActions
             return false;
         }
         
-        $row = mysql_fetch_assoc($resultSelect);
+        $row = mysql_fetch_array($resultSelect);
         
-        return $row['count'] > 0 ? true : false;
+        return $row[0] > 0 ? true : false;
         
     }
     
