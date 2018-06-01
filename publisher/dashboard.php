@@ -93,7 +93,6 @@ echo '<div class="container-fluid">';
 			    
                             echo '<div class="container-fluid" style="overflow:auto">';
 			    echo '<table class="table table-hover table-condensed">';
-				echo '<caption>Lista degli utenti loggati</caption>';
                                   echo '<thead>
                                     <tr>
                                       <th scope="col">NOME</th>
