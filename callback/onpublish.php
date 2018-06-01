@@ -48,7 +48,11 @@ $mysqltime = date("H:i:s");
 if (!$dbactions->PublishCodeExists($stream_name))
 {
     error_log("PUBLISHING DENIED! Publish code [".strtolower($stream_name)."] not exists.\n" . $dbactions->GetErrorMessage());
-    exit(-1);
+    header('HTTP/1.1 403 Forbidden');
+    // Set our response code
+    http_response_code(403);
+    echo "<h1>403 Forbidden - Stream name non valido.</h1><br/>";
+    exit;
 }
 
 /*** Save live publish info into database ***/
