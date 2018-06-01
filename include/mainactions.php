@@ -139,20 +139,20 @@ class MainActions
 
         $mailSubject = $this->sitename . " - Creazione nuovo utente: ".$uservars['name'];
 
-        $mailBody = "Ciao caro fratello <b>".$this->UserFullName()."</b>, \r\n\r\n".
-            "Un nuovo utente è stato creato. ".
-            "Di seguito puoi vedere le sue credenziali:\r\n".
-            "\r\n".
-            "Nome completo: ".$uservars['name']."\r\n".
-            "Congregazione o gruppo: ".$uservars['group_name']."\r\n\r\n".
+        $mailBody = "Ciao caro fratello <b>".$this->UserFullName()."</b>, </br></br>".
+            "Un nuovo utente è stato creato. </br>".
+            "Di seguito puoi vedere le sue credenziali:</br></br>".
                 
-            "Username: ".$uservars['username']."\r\n".
-            "Password: ".$uservars['password']."\r\n".
-            "\r\n".
-            "L'utente potrà fare login qui: https://www.streamlis.it/login.php\r\n".
-            "\r\n".
-            "\r\n".
-            "Grazie per la collaborazione,\r\n".
+            "Nome completo: ".$uservars['name']."</br>".
+            "Congregazione o gruppo: ".$uservars['group_name']."</br></br>".
+                
+            "<b>Username:</b> ".$uservars['username']."</br>".
+            "<b>Password:</b> ".$uservars['password']."</br>".
+            "</br>".
+            "L'utente potrà fare login qui: https://www.streamlis.it/login.php </br>".
+            "</br>".
+            "</br>".
+            "Grazie per la collaborazione,</br>".
             $this->sitename;
 
         if (!$this->SendMail($mailTo, $mailSubject, $mailBody, true))
