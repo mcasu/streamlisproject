@@ -46,9 +46,13 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
 <?php
 try
 {
+    echo '<h4 style="margin-left:6px;">La tua email è <b>'.
+            '<span class="label label-info">' . $mainactions->UserEmail() . '</span>';
+    echo '</b></h4><br/>';
+    
     $publishCode = $dbactions->GetPublishCodeByGroupId($mainactions->UserGroupId());
     
-    echo '<h4 style="margin-left:4px;">Il tuo nome stream è <b>'.
+    echo '<h4 style="margin-left:6px;">Il tuo nome stream è <b>'.
             '<span class="label label-info">' . $publishCode . '</span>';
     echo '</b></h4><br/>';
 
