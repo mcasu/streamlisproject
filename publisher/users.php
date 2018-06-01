@@ -83,6 +83,7 @@ $(document).ready(function()
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
+        "responsive": true,
         "aoColumnDefs": [{ "bSortable": true, "aTargets": [ 0 ] }],
         "order": [[ 1, 'asc' ], [ 3, 'asc' ]],
         "processing": true,
