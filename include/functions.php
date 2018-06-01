@@ -57,7 +57,7 @@ switch ($fname)
         $userId = filter_input(INPUT_POST, 'userId');
         return GetDataTableOndemandActionsConvert($dbactions, $host, $uname, $pwd, $database, $userId);      
     case "get_datatable_users":
-        return GetDataTableUsers($host, $uname, $pwd, $database);        
+        return GetDataTableUsers($host, $uname, $pwd, $database, $groupId);        
     case "get_datatable_groups":
         return GetDataTableGroups($host, $uname, $pwd, $database);          
     case "delete_ondemand_actions_join":
