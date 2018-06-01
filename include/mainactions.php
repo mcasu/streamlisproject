@@ -139,15 +139,15 @@ class MainActions
 
         $mailSubject = $this->sitename . " - Creazione nuovo utente: ".$uservars['name'];
 
-        $mailBody = "Ciao caro fratello <b>".$this->UserFullName()."</b>, \r\n\r\n".
+        $mailBody = "Ciao caro fratello ".$this->UserFullName().", \r\n\r\n".
             "Un nuovo utente è stato creato. ".
             "Di seguito puoi vedere le sue credenziali:\r\n".
             "\r\n".
             "Nome completo: ".$uservars['name']."\r\n".
             "Congregazione o gruppo: ".$uservars['group_name']."\r\n\r\n".
                 
-            "<b>Username:</b> ".$uservars['username']."\r\n".
-            "<b>Password:</b> ".$uservars['password']."\r\n".
+            "Username: ".$uservars['username']."\r\n".
+            "Password: ".$uservars['password']."\r\n".
             "\r\n".
             "L'utente potrà fare login qui: https://www.streamlis.it/login.php\r\n".
             "\r\n".
