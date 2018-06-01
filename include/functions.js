@@ -286,4 +286,24 @@ StreamVideoSizeUpdate = function()
 
 };
    
+   
+CheckIfUserSelectedIsMine = function(userSelectedId, groupCurrentId) 
+{
+    var params = 'fname=check_if_user_selected_is_mine&userSelectedId=' + userSelectedId + '&groupCurrentId=' + groupCurrentId;
+    var result;
+    jQuery.ajax({
+        type: "POST",
+        url: "/include/functions.php",
+        data: params,
+        async: false,
+        cache: false,
+        success: function(res)
+        {
+            result = res;
+        }
+    });
+    
+    return result;
+};   
+   
 })(jQuery);

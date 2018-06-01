@@ -40,7 +40,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
         <div class="panel-heading">
             <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
             <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
-            <!--<button type="button" class="btn btn-info right" style="float:right;" id="btn_user_add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo utente</button>-->
+            <button type="button" class="btn btn-info right" style="float:right;" id="btn_user_add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo utente</button>
         </div>
 
         <div class="panel-body">
@@ -101,7 +101,8 @@ $(document).ready(function()
     });
     
     $("#btn_user_delete").prop('disabled', true);
-    $("#btn_user_resetpwd").hide();
+    $("#btn_user_resetpwd").prop('disabled', true);
+    $("#btn_user_add").prop('disabled', true);
     $("#resetpwd_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
@@ -125,31 +126,35 @@ $(document).ready(function()
         
         if (usersTableRowSelected > 0)
         {
-            var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
-            {
-                return jQuery(row[4]).text();
-            } );
-                
-            if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
-            {
-                $("#btn_user_delete").prop('disabled', false);
-            }
-            
             if (usersTableRowSelected === 1)
             {
-                if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
+                var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
                 {
-                    $("#btn_user_resetpwd").show();
+                    return jQuery(row[4]).text();
+                } );
+            
+                var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
+                {
+                    return jQuery(row[0]).text();
+                } );
+                var userSelectedIsMine = CheckIfUserSelectedIsMine(userSelectedId, groupId);
+                console.log("Utente selezionato mio? " + userSelectedIsMine);
+            
+                if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) && userSelectedIsMine === "true")
+                {
+                    $("#btn_user_resetpwd").prop('disabled', false);
+                    $("#btn_user_delete").prop('disabled', false);
                 }
             }
             else
             {
-                $("#btn_user_resetpwd").hide();
+                $("#btn_user_resetpwd").prop('disabled', true);
+                $("#btn_user_delete").prop('disabled', true);
             }
         }
         else
         {
-            $("#btn_user_resetpwd").hide();
+            $("#btn_user_resetpwd").prop('disabled', true);
             $("#btn_user_delete").prop('disabled', true);
         }
     });    

@@ -86,6 +86,10 @@ switch ($fname)
     case "get_live_videoinfo_filesize":
         $streamName = filter_input(INPUT_POST, 'streamName');
         return GetLiveVideoInfoFileSize($dbactions, $live_tmp_flash_path, $streamName);
+    case "check_if_user_selected_is_mine":
+        $userSelectedId = filter_input(INPUT_POST, 'userSelectedId');
+        $groupCurrentId = filter_input(INPUT_POST, 'groupCurrentId');
+        return CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId);
     default:
         break;
 }
@@ -960,5 +964,28 @@ function GetLiveVideoInfoFileSize($dbactions, $liveTmpFlashPath, $streamName)
     
         echo $filesize;
         return true;
+    }
+}
+
+function CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId)
+{
+    $userSelectedData = array();
+    $dbactions->GetUserById($userSelectedId, $userSelectedData);
+    
+    $userSelectedIsFromMyGroup = $userSelectedData['user_group_id'] == $groupCurrentId ? true : false;
+    
+    $userSelectedGroupData = $dbactions->GetGroupById($userSelectedData['user_group_id']);
+    $userSelectedGroupIsCongregation = $userSelectedGroupData['group_role'] == 1 ? true : false;
+    
+    
+    if ($userSelectedIsFromMyGroup || !$userSelectedGroupIsCongregation)
+    {
+        echo "true";
+        return true;
+    }
+    else
+    {
+        echo "false";
+        return false;
     }
 }
