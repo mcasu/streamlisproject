@@ -53,7 +53,7 @@ if (!$dbactions->PublishCodeExists($stream_name))
     $mailTo = array();
     $mailTo[] = array("email" => $mainactions->admin_email, "name" => "admin");
 
-    $mailSubject = $this->sitename . " - Tentativo di connession con stream name non valido [" . $stream_name . "]";
+    $mailSubject = $mainactions->sitename . " - Tentativo di connession con stream name non valido [" . $stream_name . "]";
 
     $mailBody = '<html><body>'.
         'Il sistema ha rilevato un tentativo di connessione con stream name non valido. Di seguito i dettagli:<br/><br/>'.
