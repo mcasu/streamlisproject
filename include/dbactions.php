@@ -431,7 +431,7 @@ class DBActions
                 values
                 (
                 "' . $this->SanitizeForSQL($uservars['name']) . '",
-                "' . (array_key_exists('email',$uservars) && !empty($uservars['email'])) ? $this->SanitizeForSQL($uservars['email']) : NULL . '",
+                "' . array_key_exists('email',$uservars) ? $this->SanitizeForSQL($uservars['email']) : NULL . '",
                 "' . $this->SanitizeForSQL($uservars['username']) . '",
                 "' . md5($uservars['password']) . '",
                 "' . $this->SanitizeForSQL($row_group['group_id']) . '",
