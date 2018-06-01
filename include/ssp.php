@@ -264,6 +264,8 @@ class SSP {
 			 $limit";
         }
 
+        error_log("QUERY: [" . $query . "]"); 
+        
         $data = SSP::sql_exec( $db, $bindings,$query);
 
         // Data set length after filtering

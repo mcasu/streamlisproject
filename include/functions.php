@@ -623,9 +623,9 @@ $sql_details = array(
 $join = "FROM `{$table}` AS `u` INNER JOIN `groups` AS `g` ON (`u`.`user_group_id` = `g`.`group_id`)";
 //$where = empty($userId) ? NULL : 'ondemand_actions_user_id = ' . $userId;
 
-$where = empty($groupId) ? NULL : " WHERE `u`.user_group_id in(".
+$where = empty($groupId) ? NULL : "WHERE u.user_group_id in(".
                         "select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id ".
-                        "where group_links.publisher_id = \''.$groupId.'\' order by viewer_id) or `u`.user_group_id = \''.$groupId.'\' ";
+                        "where group_links.publisher_id = \''.$groupId.'\' order by viewer_id) or u.user_group_id = \''.$groupId.'\' ";
  
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
@@ -634,8 +634,6 @@ $where = empty($groupId) ? NULL : " WHERE `u`.user_group_id in(".
  
 //require( 'ssp.class.php' );
 require( 'ssp.php' );
-
-error_log("QUERY: [" . $sql_details . $join . $where . "]");
 
 echo json_encode(
     SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns, $join, $where)
