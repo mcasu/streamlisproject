@@ -92,9 +92,10 @@ echo '<div class="container-fluid">';
 			    echo '<br/>';
 			    
                             echo '<div class="container-fluid" style="overflow:auto">';
-			    echo '<table class="table table-hover">';
-				echo '<tr class="head">';
-				echo '<th>NOME</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>TIPO</th><th>ULTIMO LOGIN</th>';
+			    echo '<table class="table table-hover table-sm">';
+				echo '<caption>Lista degli utenti loggati</caption>';
+                                echo '<tr class="head">';
+				echo '<th>NOME</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>ULTIMO LOGIN</th>';
 				echo '</tr>';
 			    
 				while($row = mysql_fetch_array($result))
@@ -118,7 +119,6 @@ echo '<div class="container-fluid">';
 						echo "<td>" . $user_name . "</td>";
 						echo "<td>" . $username . "</td>";
 						echo "<td>" . $user_group_name . "</td>";
-						echo "<td>" . $user_role_name . "</td>";
 						echo "<td>" . $user_last_login . "</td>";
 					echo '</tr>';
 				}    
