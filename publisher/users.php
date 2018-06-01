@@ -124,33 +124,25 @@ $(document).ready(function()
         $(this).toggleClass('selected');
         
         var usersTableRowSelected = usersTable.rows('.selected').data().length;
-        
-        if (usersTableRowSelected > 0)
+
+        if (usersTableRowSelected === 1)
         {
-            if (usersTableRowSelected === 1)
+            var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
             {
-                var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
-                {
-                    return jQuery(row[4]).text();
-                } );
-            
-                var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
-                {
-                    return row[0];
-                } );
-                var userSelectedIsMine = CheckIfUserSelectedIsMine(userSelectedId, groupId);
-                console.log("Utente selezionato mio? " + userSelectedIsMine);
-            
-                if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) && userSelectedIsMine === "true")
-                {
-                    $("#btn_user_resetpwd").prop('disabled', false);
-                    $("#btn_user_delete").prop('disabled', false);
-                }
-            }
-            else
+                return jQuery(row[4]).text();
+            } );
+
+            var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
             {
-                $("#btn_user_resetpwd").prop('disabled', true);
-                $("#btn_user_delete").prop('disabled', true);
+                return row[0];
+            } );
+            var userSelectedIsMine = CheckIfUserSelectedIsMine(userSelectedId, groupId);
+            console.log("Utente selezionato mio? " + userSelectedIsMine);
+
+            if ( ((userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0)) && userSelectedIsMine === "true")
+            {
+                $("#btn_user_resetpwd").prop('disabled', false);
+                $("#btn_user_delete").prop('disabled', false);
             }
         }
         else
@@ -158,6 +150,7 @@ $(document).ready(function()
             $("#btn_user_resetpwd").prop('disabled', true);
             $("#btn_user_delete").prop('disabled', true);
         }
+
     });    
 
     $("#btn_user_delete").click(function()
