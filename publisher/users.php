@@ -136,7 +136,7 @@ $(document).ready(function()
             
                 var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
                 {
-                    return jQuery(row[1]).text();
+                    return row[0];
                 } );
                 var userSelectedIsMine = CheckIfUserSelectedIsMine(userSelectedId, groupId);
                 console.log("Utente selezionato mio? " + userSelectedIsMine);
