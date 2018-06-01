@@ -94,9 +94,14 @@ echo '<div class="container-fluid">';
                             echo '<div class="container-fluid" style="overflow:auto">';
 			    echo '<table class="table table-hover table-sm">';
 				echo '<caption>Lista degli utenti loggati</caption>';
-                                echo '<tr class="head">';
-				echo '<th>NOME</th><th>USERNAME</th><th>CONGREGAZIONE</th><th>ULTIMO LOGIN</th>';
-				echo '</tr>';
+                                  echo '<thead>
+                                    <tr>
+                                      <th scope="col">NOME</th>
+                                      <th scope="col">USERNAME</th>
+                                      <th scope="col">CONGREGAZIONE</th>
+                                      <th scope="col">ULTIMO LOGIN</th>
+                                    </tr>
+                                  </thead>';
 			    
 				while($row = mysql_fetch_array($result))
 				{
