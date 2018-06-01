@@ -92,7 +92,7 @@ echo '<div class="container-fluid">';
 			    echo '<br/>';
 			    
                             echo '<div class="container-fluid" style="overflow:auto">';
-			    echo '<table class="table table-hover table-sm">';
+			    echo '<table class="table table-hover table-condensed">';
 				echo '<caption>Lista degli utenti loggati</caption>';
                                   echo '<thead>
                                     <tr>

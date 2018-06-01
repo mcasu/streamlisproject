@@ -6,6 +6,12 @@
     border-color: #fff;
 }
 
+.table > thead > tr > th {
+    background-color: #333;
+    color: #fff;
+    border-color: #fff;
+}
+
 .table > tbody > tr > th {
     background-color: #333;
     color: #fff;
