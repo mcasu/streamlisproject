@@ -970,7 +970,7 @@ function GetLiveVideoInfoFileSize($dbactions, $liveTmpFlashPath, $streamName)
 function CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId)
 {
     $userSelectedData = array();
-    $dbactions->GetUserById($userSelectedId, $userSelectedData);
+    $dbactions->GetUserById($userSelectedId, &$userSelectedData);
     
     $userSelectedIsFromMyGroup = $userSelectedData['user_group_id'] == $groupCurrentId ? true : false;
     
@@ -978,7 +978,7 @@ function CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId)
     $userSelectedGroupIsCongregation = $userSelectedGroupData['group_role'] == 1 ? true : false;
     
     
-    if ($userSelectedIsFromMyGroup)
+    if ($userSelectedIsFromMyGroup || !$userSelectedGroupIsCongregation)
     {
         echo "true";
         return true;
