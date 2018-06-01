@@ -978,7 +978,7 @@ function CheckIfUserSelectedIsMine($dbactions, $userSelectedId, $groupCurrentId)
     $userSelectedGroupIsCongregation = $userSelectedGroupData['group_role'] == 1 ? true : false;
     
     
-    if ($userSelectedIsFromMyGroup || !$userSelectedGroupIsCongregation)
+    if ($userSelectedIsFromMyGroup)
     {
         echo "true";
         return true;
