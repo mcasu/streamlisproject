@@ -11,95 +11,212 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Stream LIS - Utenti</title>
 	
-    <link rel="stylesheet" href="../style/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../style/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="../style/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link rel='stylesheet' type='text/css' href='../style/admin.css'/>
     
     <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type='text/javascript' src='../js/jquery.validate.js'></script>
     <script type="text/javascript" src="../include/session.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     
+    <script type="text/javascript"> var _iub = _iub || []; _iub.csConfiguration = {"lang":"it","siteId":1168862,"cookiePolicyId":74934126,"banner":{"textColor":"#fff","backgroundColor":"#333"}}; </script><script type="text/javascript" src="//cdn.iubenda.com/cookie_solution/safemode/iubenda_cs.js" charset="UTF-8" async></script>
+</head>
+
+<body>
+<?php include("../include/header_publisher.php"); ?>
+
+<input type="hidden" class="groupid" id="<?=$mainactions->UserGroupId();?>"/>;
+    
+<div class="container-fluid">
+    <div class="panel panel-default">
+
+        <h3>ELENCO UTENTI ASSOCIATI:</h3>
+        <br/>
+        
+        <div class="panel-heading">
+            <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
+            <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
+            <button type="button" class="btn btn-primary" id="btn_user_edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</button>
+        </div>
+
+        <div class="panel-body">
+            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
+            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password effettuato con successo!</h3>
+                <h5>Le nuove credenziali sono state spedite via mail all'indirizzo <?= $mainactions->UserEmail(); ?></h5>
+            </div>
+            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Reset password fallito!</h3>
+                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
+            </div>
+            <div id="user_updated_alert_success" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h3>Utente modificato con successo!</h3>
+            </div>
+            
+            <table class="table table-hover" id="users_table">
+                <thead>
+                    <tr class="head">
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>MAIL</th>
+                        <th>USERNAME</th>
+                        <th>CONGREGAZIONE</th>
+                        <th>TIPO</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+    <div id="divUserEdit"></div>
+</div>
+
 <script type="text/javascript">
     
 $(document).ready(function()
 {
-    $('#users_table').DataTable({
+    var groupId = $('.groupid').attr('id');
+    var selectedUser = [];
+    var usersTable = $('#users_table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 1, 'asc' ], [ 4, 'asc' ]]
+        "order": [[ 1, 'asc' ], [ 4, 'asc' ]],
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/include/functions.php",
+            "type": "POST",
+            "data": { fname : "get_datatable_users", groupId : groupId }
+        },
+        "rowCallback": function( row, data )
+        {
+            if ( $.inArray(data.DT_RowId, selectedUser) !== -1 ) 
+            {
+                $(row).addClass('selected');
+            }
+        }
     });
     
     $("#btn_user_delete").prop('disabled', true);
     $("#btn_user_resetpwd").hide();
+    $("#btn_user_edit").hide();
     $("#resetpwd_alert_success").hide();
+    $("#user_updated_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
-    $("input:radio").click(function(lastSelectedRow)
+    $('#users_table tbody').on( 'click', 'tr', function () 
     {
-        $("#btn_user_resetpwd").hide();
+        var id = this.id;
+        var index = $.inArray(id, selectedUser);
+ 
+        if ( index === -1 ) 
+        {
+            selectedUser.push( id );
+        } 
+        else 
+        {
+            selectedUser.splice( index, 1 );
+        }
         
-	$("#users_table").find("tr").removeClass("active");
-	
-	var isChecked = $(this).prop("checked");
-	var selectedRow = $(this).parent("td").parent("tr");
-    
-	if (isChecked)
-	{
-	    selectedRow.addClass("active");
-	    $("#btn_user_delete").prop('disabled', false);
-            
-            var role = selectedRow.find(".userRole").attr('name');
-            if (role === "normal" || role === "viewer")
+        $(this).toggleClass('selected');
+        
+        var usersTableRowSelected = usersTable.rows('.selected').data().length;
+        
+        if (usersTableRowSelected > 0)
+        {
+            var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row) 
             {
-                $("#btn_user_resetpwd").show();
+                return jQuery(row[5]).text();
+            } );
+                
+            if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
+            {
+                $("#btn_user_delete").prop('disabled', false);
             }
-	    //selectedRow.css({ "background-color": "#D4FFAA", "color": "GhostWhite" });
-	}
-	else
-	{
-	    selectedRow.removeClass("active");
-	    //selectedRow.css({ "background-color": '', "color": "black" });
-	}
-	
-    });
+            
+            if (usersTableRowSelected === 1)
+            {
+                if ( (userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0) )
+                {
+                    $("#btn_user_resetpwd").show();
+                }
+                
+                $("#btn_user_edit").show();
+            }
+            else
+            {
+                $("#btn_user_resetpwd").hide();
+                $("#btn_user_edit").hide();
+            }
+        }
+        else
+        {
+            $("#btn_user_resetpwd").hide();
+            $("#btn_user_edit").hide();
+            $("#btn_user_delete").prop('disabled', true);
+        }
+    });    
 
     $("#btn_user_delete").click(function()
     {
-	var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
-	
-	var tr_id=tr_obj.attr('id');
-	//alert("Vuoi cancellare id: " + tr_id);
-	
-	if (confirm("Vuoi davvero eliminare l'utente con ID [" + tr_id + "]?"))
+        console.log("Numero utenti selezionati: " + usersTable.rows('.selected').data().length);
+        
+        var userSelectedIds = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
+        
+        console.log("User id selezionati: " + userSelectedIds);
+        
+        if (confirm("Vuoi davvero eliminare gli utenti selezionati?"))
 	{
-	    $.post("user_delete.php",{user_id:tr_id},
-	    function(data,status)
-	    {
-		    //alert("Data: " + data + "\nStatus: " + status);
-		    tr_obj.fadeOut(1000, function() 
-		    {
-			    tr_obj.remove();
-			    $("#btn_user_delete").prop('disabled', true);
-		    });
-	    });
-	}
+            $.post("/include/functions.php",{fname:"users_delete",userIds:userSelectedIds.toString()},
+            function(data,status)
+            {
+                //alert("Data: " + data + "\nStatus: " + status);
+                
+                if (status === "success")
+                {
+                    usersTable.$('.selected').remove();
+                    $("#btn_user_delete").prop('disabled', true);
+                }
+            });            
+            
+        }
     });
 
     $("#btn_user_resetpwd").click(function()
     {
-        var tr_obj = $('input[name=user_selected]:checked').parent("td").parent("tr");
-	var tr_id=tr_obj.attr('id');
+        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[0];
+        } );
         
-        if (confirm("Vuoi davvero cambiare la password dell'utente con ID [" + tr_id + "]?"))
+        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row) 
+        {
+            return row[1];
+        } );
+        
+        if (confirm("Vuoi davvero cambiare la password dell'utente " + userSelectedName + " (ID #" + userSelectedId + ") ?"))
 	{
             $("#resetpwd_alert_success").hide();
             $("#resetpwd_alert_fail").hide();
     
             var userAdminId = $('.inputUserData').attr('id');
-            $.post("../include/functions.php",{fname:"users_resetpwd", userId:tr_id, userAdminId:userAdminId},
+            var userId = userSelectedId[0];
+            $.post("../include/functions.php",{
+                fname:"users_resetpwd",
+                userToResetId:userId, 
+                userAdminId:userAdminId},
 	    function(data,status)
 	    {
 		    //alert("Data: " + data + "\nStatus: " + status);
@@ -115,120 +232,93 @@ $(document).ready(function()
         }
     });
     
+    $("#btn_user_edit").click(function(e)
+    {
+        e.preventDefault();
+        var lastRowSelected = $(usersTable.rows('.selected'));
+        
+        var userEditDlg = $('#divUserEdit').dialog({
+            title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
+            resizable: true,
+            autoOpen:false,
+            modal: true,
+            hide: 'fade',
+            width:600,
+            height:620,
+            buttons: [
+               {
+                    text: "Salva",
+                    click: function() {
+
+                        $("#user_updated_alert_success").hide();
+
+                        var userId = $('#userId').val();
+                        var fullName = $('#name').val();
+                        var email = $('#email').val();
+                        var username = $('#username').val();
+                        var groupName = $('#group_name').val();
+                        var roleName = $('#user_role_name').val();
+
+                        // Recupero i dati del form e salvo nel database
+                        $.post("/include/functions.php",{
+                            fname:"user_update",
+                            userId:userId,
+                            fullName:fullName,
+                            email:email,
+                            username:username,
+                            groupName:groupName,
+                            roleName:roleName},
+                        function(data,status)
+                        {
+                            //alert("Data: " + data + "\nStatus: " + status);
+
+                            if (status === "success")
+                            {
+                                $('#divUserEdit').dialog("close");
+                                usersTable.ajax.reload( function ( json ) {
+                                    //$('#users_table tbody tr').removeClass('selected');
+                                    //lastRowSelected.addClass('selected');
+                                }, false);
+                                $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
+                                $("#user_updated_alert_success").show();
+                            }
+                        }); 
+
+
+                   }
+               },
+               {
+                   text: "Chiudi",
+                   click: function() {
+                       $('#divUserEdit').dialog("close");
+                   }
+               }
+            ]
+        });        
+        
+        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
+        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row){return row[1];});
+        var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
+        var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
+        var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
+        var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
+        
+        userEditDlg.load('user_edit.php');
+        
+        userEditDlg.data('userId',userSelectedId);
+        userEditDlg.data('name',userSelectedName);
+        userEditDlg.data('email',userSelectedEmail);
+        userEditDlg.data('username',userSelectedUsername);
+        userEditDlg.data('group',userSelectedGroup);
+        userEditDlg.data('role',userSelectedRole);
+        
+        userEditDlg.dialog('open');
+    });
+    
 });
 
 </script>
     
-    <script type="text/javascript"> var _iub = _iub || []; _iub.csConfiguration = {"lang":"it","siteId":1168862,"cookiePolicyId":74934126,"banner":{"textColor":"#fff","backgroundColor":"#333"}}; </script><script type="text/javascript" src="//cdn.iubenda.com/cookie_solution/safemode/iubenda_cs.js" charset="UTF-8" async></script>
-</head>
-
-
-<body>
-<?php include("../include/header_publisher.php"); ?>
-
-
-<div class="container-fluid">
-    <div class="panel panel-default">
-        
-        <h3>ELENCO UTENTI ASSOCIATI:</h3>
-        <br/>
-        
-        <div class="panel-heading">
-            <button type="button" class="btn btn-danger" id="btn_user_delete">Elimina utente</button>
-            <button type="button" class="btn btn-primary" id="btn_user_resetpwd">Reset password</button>
-        </div>
-
-        <div class="panel-body">
-            <input class="inputUserData" id="<?= $mainactions->UserId(); ?>" type="hidden"/>
-            <div id="resetpwd_alert_success" class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password effettuato con successo!</h3>
-                <h5>Le nuove credenziali sono state spedite al tuo account di posta elettronica.</h5>
-            </div>
-            <div id="resetpwd_alert_fail" class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Reset password fallito!</h3>
-                <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
-            </div>
-            
-            <table class="table table-hover" id="users_table">
-
-            <?php
-
-            try
-            {
-                $result = $dbactions->GetUsersByPublisher($mainactions->UserGroupId());
-
-                if ($result)
-                {
-                    echo '<thead>';
-                        echo '<tr class="head">';
-                            echo'<th></th>';
-                            echo '<th>NOME</th>';
-                            echo '<th>ID</th>';
-                            echo '<th>MAIL</th>';
-                            echo '<th>USERNAME</th>';
-                            echo '<th>CONGREGAZIONE</th>';
-                            echo '<th>TIPO</th>';
-                        echo '</tr>';
-                    echo '</thead>';
-                    
-                    echo '<tbody>';
-                    $index = 0;
-                    while ($row = mysql_fetch_array($result))
-                    {
-                        $values[0]=$row['name'];
-                        $values[1]=$row['user_id'];
-                        $values[2]=$row['email'];
-                        $values[3]=$row['username'];
-                        $values[4]=$row['group_name'];
-                        $values[5]=$row['role_name'];
-                        
-                        if ($values[5] == "admin" || $values[5] == "publisher")
-                        {
-                            continue;
-                        }
-                        
-                        echo '<tr class="users_table" id="' .$values[1].'">';
-                                    echo '<td><input type="radio" name="user_selected" /></td>';
-                                    echo '<td>' . $values[0] . '</td>';
-                                    echo '<td>' . $values[1] . '</td>';
-                                    echo '<td>' . $values[2] . '</td>';
-                                    echo '<td>' . $values[3] . '</td>';
-                                    echo '<td>' . $values[4] . '</td>';
-                                    echo '<td class="userRole" name="' . $values[5] . '">';
-                                        if ($values[5] == "admin")
-                                        {
-                                            echo '<span class="label label-success">' . $values[5] . '</span>';
-                                        }
-                                        elseif ($values[5] == "publisher")
-                                        {
-                                            echo '<span class="label label-warning">' . $values[5] . '</span>';
-                                        }
-                                        else
-                                        {
-                                            echo '<span class="label label-default">' . $values[5] . '</span>';
-                                        }
-                                    echo '</td>';
-                        echo '</tr>';
-                        
-                        $index++;
-                    }
-                    echo '</tbody>';
-
-                }
-            }
-            catch (Exception $e) 
-            {
-                error_log('ERROR - Publisher users.php - '.$e->getMessage());
-            }                
-
-            ?>
-            </table>
-        </div>
-    </div>
-</div>
-
     <?php include("../include/footer.php"); ?>
 </body>
 </html>

@@ -146,12 +146,7 @@ ExecActionsVideoConversion = function(acid)
         data: params,
         async: true,
         cache: false
-//        success: function(res)
-//        {
-//            result = res;
-//        }
     });
-    alert ("Action id: " + acid);
     return result;
 };
 

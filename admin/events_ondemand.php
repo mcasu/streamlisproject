@@ -186,7 +186,7 @@ $(document).ready(function()
         
         $( "#ondemand-convert-dialog-confirm" ).dialog({
             resizable: false,
-            closeOnEscape: false,
+            closeOnEscape: true,
             height: "auto",
             width: 400,
             modal: true,

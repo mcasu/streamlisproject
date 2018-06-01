@@ -85,13 +85,13 @@ if(isset($_POST['submitted']))
 		    <input type="text" class="form-control" placeholder="Nome utente completo" name='name' id='name' value='<?php echo $utils->SafeDisplay('name') ?>' maxlength="128" /><br/>
 		</div>
 	    </div>
-	    <div class="control-group">
-		<!-- CAMPO INDIRIZZO EMAIL -->
+<!--	    <div class="control-group">
+		 CAMPO INDIRIZZO EMAIL 
 		<label for='email' >Indirizzo email:</label><br/>
 		<div class="controls">
 		    <input type="email" class="form-control" placeholder="Indirizzo Email" name='email' id='email' value='<?php echo $utils->SafeDisplay('email') ?>' maxlength="128" /><br/>
 		</div>
-	    </div>
+	    </div>-->
 	</div>
 	
 	<div class="form-group">
@@ -215,10 +215,10 @@ jQuery(document).ready(function ()
 		required: true,
 		minlength: 4
 	    },
-	    email: {
-		required: true,
-		email: true
-	    },
+//	    email: {
+//		required: true,
+//		email: true
+//	    },
 	    username: {
 		required: true,
 		minlength: 6
