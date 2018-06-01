@@ -60,7 +60,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
                     <tr class="head">
                         <th>ID</th>
                         <th>NOME</th>
-                        <th>MAIL</th>
                         <th>USERNAME</th>
                         <th>CONGREGAZIONE</th>
                         <th>TIPO</th>
@@ -83,7 +82,7 @@ $(document).ready(function()
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": true, "aTargets": [ 0 ] }],
-        "order": [[ 1, 'asc' ], [ 4, 'asc' ]],
+        "order": [[ 1, 'asc' ], [ 3, 'asc' ]],
         "processing": true,
         "serverSide": true,
         "ajax": {
