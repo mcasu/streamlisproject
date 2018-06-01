@@ -151,7 +151,7 @@ ExecActionsVideoConversion = function(acid)
 //            result = res;
 //        }
     });
-    
+    alert ("Action id: " + acid);
     return result;
 };
 

@@ -186,6 +186,7 @@ $(document).ready(function()
         
         $( "#ondemand-convert-dialog-confirm" ).dialog({
             resizable: false,
+            closeOnEscape: false,
             height: "auto",
             width: 400,
             modal: true,
@@ -217,17 +218,18 @@ $(document).ready(function()
                     else if (result === "0")
                     {
                         var acid = GetActionsConvertIdByOndemandId(checkedItems[0]);
-                        alert ("Elemento selezionato: " + checkedItems[0]);
-
+                        
+                        // Lancio la conversione
+                        ExecActionsVideoConversion(acid);
+                        
                         $(".alert-success").show();
                         $(".alert-danger").hide();    
                         $(".alert-warning").hide();
                         $(".alert-success").html('<button type="button" class="close" data-dismiss="alert">' +
                                     '<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
-                                    '<h4 style="margin-top: 2px;"><b>OPERAZIONE RIUSCITA!</b>\nConversione in corso. Per maggiori dettagli vedi la pagina delle operazioni.</h4>');                
+                                    '<h4 style="margin-top: 2px;"><b>Conversione in corso...</b>\nPer maggiori dettagli vedi la pagina delle operazioni.</h4>');                
                             
-                        // Lancio la conversione
-                        ExecActionsVideoConversion(acid);
+                        
                     }
                     
                   $( this ).dialog( "close" );
