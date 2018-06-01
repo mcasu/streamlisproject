@@ -289,7 +289,7 @@ StreamVideoSizeUpdate = function()
    
 CheckIfUserSelectedIsMine = function(userSelectedId, groupCurrentId) 
 {
-    console.log("User id: " + userSelectedId);
+    console.log("User id: " + userSelectedId + " Group current id: " + groupCurrentId);
     var params = 'fname=check_if_user_selected_is_mine&userSelectedId=' + userSelectedId + '&groupCurrentId=' + groupCurrentId;
     var result;
     jQuery.ajax({
