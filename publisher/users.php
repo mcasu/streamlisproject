@@ -83,7 +83,7 @@ $(document).ready(function()
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Italian.json"
         },
         "aoColumnDefs": [{ "bSortable": false, "aTargets": [ 0 ] }],
-        "order": [[ 1, 'asc' ], [ 4, 'asc' ]],
+        "order": [[ 0, 'asc' ], [ 4, 'asc' ]],
         "processing": true,
         "serverSide": true,
         "ajax": {
