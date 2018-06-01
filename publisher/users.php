@@ -40,7 +40,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
         <div class="panel-heading">
             <button type="button" class="btn btn-danger" id="btn_user_delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Elimina utente</button>
             <button type="button" class="btn btn-primary" id="btn_user_resetpwd"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset password</button>
-            <button type="button" class="btn btn-primary" id="btn_user_edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Modifica</button>
         </div>
 
         <div class="panel-body">
@@ -54,10 +53,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h3>Reset password fallito!</h3>
                 <h5>Contatta l'amministratore di sistema per risolvere il problema.</h5>
-            </div>
-            <div id="user_updated_alert_success" class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h3>Utente modificato con successo!</h3>
             </div>
             
             <table class="table table-hover" id="users_table">
@@ -75,7 +70,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_publisher.php");
         </div>
     </div>
     
-    <div id="divUserEdit"></div>
 </div>
 
 <script type="text/javascript">
@@ -108,9 +102,7 @@ $(document).ready(function()
     
     $("#btn_user_delete").prop('disabled', true);
     $("#btn_user_resetpwd").hide();
-    $("#btn_user_edit").hide();
     $("#resetpwd_alert_success").hide();
-    $("#user_updated_alert_success").hide();
     $("#resetpwd_alert_fail").hide();
     
     $('#users_table tbody').on( 'click', 'tr', function () 
@@ -149,19 +141,15 @@ $(document).ready(function()
                 {
                     $("#btn_user_resetpwd").show();
                 }
-                
-                $("#btn_user_edit").show();
             }
             else
             {
                 $("#btn_user_resetpwd").hide();
-                $("#btn_user_edit").hide();
             }
         }
         else
         {
             $("#btn_user_resetpwd").hide();
-            $("#btn_user_edit").hide();
             $("#btn_user_delete").prop('disabled', true);
         }
     });    
@@ -230,89 +218,6 @@ $(document).ready(function()
                     }
 	    });
         }
-    });
-    
-    $("#btn_user_edit").click(function(e)
-    {
-        e.preventDefault();
-        var lastRowSelected = $(usersTable.rows('.selected'));
-        
-        var userEditDlg = $('#divUserEdit').dialog({
-            title: 'Modifica utente id #' + $.map(usersTable.rows('.selected').data(), function (row){return row[0];}),
-            resizable: true,
-            autoOpen:false,
-            modal: true,
-            hide: 'fade',
-            width:600,
-            height:620,
-            buttons: [
-               {
-                    text: "Salva",
-                    click: function() {
-
-                        $("#user_updated_alert_success").hide();
-
-                        var userId = $('#userId').val();
-                        var fullName = $('#name').val();
-                        var email = $('#email').val();
-                        var username = $('#username').val();
-                        var groupName = $('#group_name').val();
-                        var roleName = $('#user_role_name').val();
-
-                        // Recupero i dati del form e salvo nel database
-                        $.post("/include/functions.php",{
-                            fname:"user_update",
-                            userId:userId,
-                            fullName:fullName,
-                            email:email,
-                            username:username,
-                            groupName:groupName,
-                            roleName:roleName},
-                        function(data,status)
-                        {
-                            //alert("Data: " + data + "\nStatus: " + status);
-
-                            if (status === "success")
-                            {
-                                $('#divUserEdit').dialog("close");
-                                usersTable.ajax.reload( function ( json ) {
-                                    //$('#users_table tbody tr').removeClass('selected');
-                                    //lastRowSelected.addClass('selected');
-                                }, false);
-                                $("#user_updated_alert_success h3").text("Utente con id #" +  userId + " modificato con successo!");
-                                $("#user_updated_alert_success").show();
-                            }
-                        }); 
-
-
-                   }
-               },
-               {
-                   text: "Chiudi",
-                   click: function() {
-                       $('#divUserEdit').dialog("close");
-                   }
-               }
-            ]
-        });        
-        
-        var userSelectedId = $.map(usersTable.rows('.selected').data(), function (row){return row[0];});
-        var userSelectedName = $.map(usersTable.rows('.selected').data(), function (row){return row[1];});
-        var userSelectedEmail = $.map(usersTable.rows('.selected').data(), function (row){return row[2];});
-        var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
-        var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
-        var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
-        
-        userEditDlg.load('user_edit.php');
-        
-        userEditDlg.data('userId',userSelectedId);
-        userEditDlg.data('name',userSelectedName);
-        userEditDlg.data('email',userSelectedEmail);
-        userEditDlg.data('username',userSelectedUsername);
-        userEditDlg.data('group',userSelectedGroup);
-        userEditDlg.data('role',userSelectedRole);
-        
-        userEditDlg.dialog('open');
     });
     
 });
