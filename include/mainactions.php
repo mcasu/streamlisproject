@@ -579,7 +579,10 @@ class MainActions
     function CollectRegistrationSubmission(&$uservars)
     {
         $uservars['name'] = $this->utilsInstance->Sanitize($_POST['name']);
-        $uservars['email'] = $_POST['email'] ? $this->utilsInstance->Sanitize($_POST['email']) : NULL;
+        if (array_key_exists('email',$uservars)) 
+        {
+            $uservars['email'] = $_POST['email'] ? $this->utilsInstance->Sanitize($_POST['email']) : NULL;
+        }
         $uservars['username'] = $this->utilsInstance->Sanitize($_POST['username']);
         $uservars['password'] = $this->utilsInstance->Sanitize($_POST['password']);
         
