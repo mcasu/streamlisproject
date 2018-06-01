@@ -48,6 +48,28 @@ $mysqltime = date("H:i:s");
 if (!$dbactions->PublishCodeExists($stream_name))
 {
     error_log("PUBLISHING DENIED! Publish code [".strtolower($stream_name)."] not exists.\n" . $dbactions->GetErrorMessage());
+    
+     // Sent mail 
+    $mailTo = array();
+    $mailTo[] = array("email" => $mainactions->admin_email, "name" => "admin");
+
+    $mailSubject = $this->sitename . " - Tentativo di connession con stream name non valido [" . $stream_name . "]";
+
+    $mailBody = '<html><body>'.
+        'Il sistema ha rilevato un tentativo di connessione con stream name non valido. Di seguito i dettagli:<br/><br/>'.
+        
+        '<span style="margin-left:2em">Data/ora: ['. $mysqldate .' - '.$mysqltime.']</span><br/><br/>'.
+        '<span style="margin-left:2em">Nginx client id: ['. $nginx_id .']</span><br/>'.
+        '<span style="margin-left:2em">Stream name: ['. $stream_name .']</span><br/><br/>'.
+        '<span style="margin-left:2em">Ip address: ['. $client_addr .']</span><br/><br/>'.
+
+        '<br/><br/>'.
+        'Grazie per la collaborazione,<br/>'.
+        $mainactions->sitename.
+        '</body></html>';
+
+    $mainactions->SendMail($mailTo, $mailSubject, $mailBody, true);
+    
     header('HTTP/1.1 403 Forbidden');
     // Set our response code
     http_response_code(403);
