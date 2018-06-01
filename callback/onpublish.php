@@ -45,9 +45,9 @@ $mysqldate = date("Y-m-d");
 $mysqltime = date("H:i:s"); 
 
 
-if (!$dbactions->PublishCodeExists($publish_code))
+if (!$dbactions->PublishCodeExists($stream_name))
 {
-    error_log("PUBLISHING DENIED! Publish code [".strtolower($publish_code)."] not exists.\n" . $dbactions->GetErrorMessage());
+    error_log("PUBLISHING DENIED! Publish code [".strtolower($stream_name)."] not exists.\n" . $dbactions->GetErrorMessage());
     exit -1;
 }
 
