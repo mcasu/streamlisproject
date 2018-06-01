@@ -48,7 +48,7 @@ $mysqltime = date("H:i:s");
 if (!$dbactions->PublishCodeExists($stream_name))
 {
     error_log("PUBLISHING DENIED! Publish code [".strtolower($stream_name)."] not exists.\n" . $dbactions->GetErrorMessage());
-    exit -1;
+    exit(-1);
 }
 
 /*** Save live publish info into database ***/
