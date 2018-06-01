@@ -146,8 +146,8 @@ class MainActions
             '<span style="margin-left:2em">Nome completo: '.$uservars['name'].'</span><br/>'.
             '<span style="margin-left:2em">Congregazione o gruppo: '.$uservars['group_name'].'</span><br/><br/>'.
                 
-            '<b>Username:</b> <span style="color:#FFFFFF"><span style="background-color:#3399ff">'.$uservars['username'].'</span></span><br/>'.
-            '<b>Password:</b>  <span style="color:#FFFFFF"><span style="background-color:#3399ff">'.$uservars['password'].'</span></span><br/>'. 
+            '<span style="margin-left:2em"><b>Username:</b> <span style="color:#FFFFFF"><span style="background-color:#3399ff">'.$uservars['username'].'</span></span></span><br/>'.
+            '<span style="margin-left:2em"><b>Password:</b> <span style="color:#FFFFFF"><span style="background-color:#3399ff"> '.$uservars['password'].'</span></span></span><br/>'. 
             '<br/>'.
             'L\'utente potrà fare login qui: https://www.streamlis.it/login.php <br/>'.
             '<br/><br/>'.
