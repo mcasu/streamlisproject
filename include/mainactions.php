@@ -140,15 +140,14 @@ class MainActions
         $mailSubject = $this->sitename . " - Creazione nuovo utente: ".$uservars['name'];
 
         $mailBody = '<html><body>'.
-            'Ciao caro fratello <b>'.$this->UserFullName().'</b>, <br/><br/><br/>'.
-            'Un nuovo utente è stato creato. <br/>'.
-            'Di seguito puoi vedere le sue credenziali:<br/><br/>'.
+            'Ciao caro fratello <b>'.$this->UserFullName().'</b>, <br/><br/>'.
+            'Un nuovo utente è stato creato. Di seguito puoi vedere le sue credenziali:<br/><br/>'.
+             
+            '<span style="margin-left:2em">Nome completo: '.$uservars['name'].'</span><br/>'.
+            '<span style="margin-left:2em">Congregazione o gruppo: '.$uservars['group_name'].'</span><br/><br/>'.
                 
-            'Nome completo: '.$uservars['name'].'<br/>'.
-            'Congregazione o gruppo: '.$uservars['group_name'].'<br/><br/>'.
-                
-            '<b>Username:</b> <span style="color:#FFFFFF"><strong><span style="background-color:#696969">'.$uservars['username'].'</span></strong></span><br/>'.
-            '<b>Password:</b> <span style="color:#FFFFFF"><strong><span style="background-color:#696969">'.$uservars['password'].'</span></strong></span><br/>'. 
+            '<b>Username:</b> <span style="color:#FFFFFF"><span style="background-color:#3399ff">'.$uservars['username'].'</span></span><br/>'.
+            '<b>Password:</b>  <span style="color:#FFFFFF"><span style="background-color:#3399ff">'.$uservars['password'].'</span></span><br/>'. 
             '<br/>'.
             'L\'utente potrà fare login qui: https://www.streamlis.it/login.php <br/>'.
             '<br/><br/>'.
