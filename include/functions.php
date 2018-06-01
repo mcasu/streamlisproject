@@ -625,7 +625,7 @@ $join = "FROM `{$table}` AS `u` INNER JOIN `groups` AS `g` ON (`u`.`user_group_i
 
 $where = empty($groupId) ? NULL : "`u`.user_group_id in(".
                         "select group_links.viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id ".
-                        "where group_links.publisher_id = \'".$groupId."\' order by viewer_id) or `u`.user_group_id = \'".$groupId."\' ";
+                        "where group_links.publisher_id = '".$groupId."' order by viewer_id) or `u`.user_group_id = '".$groupId."' ";
  
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
