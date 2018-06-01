@@ -139,7 +139,7 @@ class MainActions
 
         $mailSubject = $this->sitename . " - Creazione nuovo utente: ".$uservars['name'];
 
-        $mailBody = "Ciao caro fratello ".$this->UserFullName().", \r\n\r\n".
+        $mailBody = "Ciao caro fratello <b>".$this->UserFullName()."</b>, \r\n\r\n".
             "Un nuovo utente è stato creato. ".
             "Di seguito puoi vedere le sue credenziali:\r\n".
             "\r\n".
@@ -155,7 +155,7 @@ class MainActions
             "Grazie per la collaborazione,\r\n".
             $this->sitename;
 
-        if (!$this->SendMail($mailTo, $mailSubject, $mailBody))
+        if (!$this->SendMail($mailTo, $mailSubject, $mailBody, true))
         {
             error_log("\ERROR - CreateUser() SendMail() FAILED!");
         }
