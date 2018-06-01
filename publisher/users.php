@@ -137,7 +137,7 @@ $(document).ready(function()
                 return row[0];
             } );
             var userSelectedIsMine = CheckIfUserSelectedIsMine(userSelectedId, groupId);
-            console.log("Utente selezionato mio? " + userSelectedIsMine);
+            //console.log("Utente selezionato mio? " + userSelectedIsMine);
 
             if ( ((userSelectedRole.indexOf("Viewer") >= 0) || (userSelectedRole.indexOf("Publisher") >= 0)) && userSelectedIsMine === "true")
             {
