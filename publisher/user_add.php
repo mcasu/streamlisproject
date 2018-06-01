@@ -216,10 +216,6 @@ jQuery(document).ready(function ()
 		required: true,
 		minlength: 4
 	    },
-//	    email: {
-//		required: true,
-//		email: true
-//	    },
 	    username: {
 		required: true,
 		minlength: 6

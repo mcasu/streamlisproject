@@ -238,7 +238,7 @@ jQuery(document).ready(function ()
 		minlength: 4
 	    },
 	    email: {
-		required: true,
+		required: false,
 		email: true
 	    },
 	    username: {
