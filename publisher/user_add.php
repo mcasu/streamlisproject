@@ -134,8 +134,9 @@ if(isset($_POST['submitted']))
 
                             while($row = mysql_fetch_array($viewers))
                             {
-                                    $group = $row['viewer_name'];
-                                    echo '<option value="' . $group . '">' . $group . '</option>"';
+                                if ($row['role_id'] == 1) continue;
+                                $group = $row['viewer_name'];
+                                echo '<option value="' . $group . '">' . $group . '</option>"';
                             }
                         }
                         catch(Exception $e)
