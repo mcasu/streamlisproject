@@ -420,7 +420,9 @@ class DBActions
         }
         $row_role = mysql_fetch_assoc($result);
 
-        $insert_query = 'insert into users (
+        if (array_key_exists('email',$uservars))
+        {
+            $insert_query = 'insert into users (
                 name,
                 email,
                 username,
@@ -431,12 +433,32 @@ class DBActions
                 values
                 (
                 "' . $this->SanitizeForSQL($uservars['name']) . '",
-                "' . array_key_exists('email',$uservars) ? $this->SanitizeForSQL($uservars['email']) : NULL . '",
+                "' . $this->SanitizeForSQL($uservars['email']) . '",
                 "' . $this->SanitizeForSQL($uservars['username']) . '",
                 "' . md5($uservars['password']) . '",
                 "' . $this->SanitizeForSQL($row_group['group_id']) . '",
                 "' . $this->SanitizeForSQL($row_role['role_id']) . '"
                 )';
+        }
+        else
+        {
+            $insert_query = 'insert into users (
+                name,
+                username,
+                password,
+                user_group_id,
+                user_role_id
+                )
+                values
+                (
+                "' . $this->SanitizeForSQL($uservars['name']) . '",
+                "' . $this->SanitizeForSQL($uservars['username']) . '",
+                "' . md5($uservars['password']) . '",
+                "' . $this->SanitizeForSQL($row_group['group_id']) . '",
+                "' . $this->SanitizeForSQL($row_role['role_id']) . '"
+                )';
+        }
+
         if(!mysql_query( $insert_query ,$this->connection))
         {
             $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
