@@ -398,7 +398,7 @@ class DBActions
         return true;
     }
 
-    function InsertIntoDB(&$uservars)
+    function InsertIntoDB($uservars)
     {
         $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
 
