@@ -608,6 +608,10 @@ if (empty($groupId))
                 }
             }, 'field' => 'user_role_id'),
         array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
+        array( 'db' => 'u.last_login', 'dt' => 7 , 
+        'formatter' => function( $d, $row ) {
+            return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
+        }, 'field' => 'last_login'),
         array(
             'db' => '`u`.id',
             'dt' => 'DT_RowId',
@@ -640,6 +644,10 @@ else
                 }
             }, 'field' => 'user_role_id'),
         array( 'db' => 'user_logged', 'dt' => 5 , 'field' => 'user_logged'),
+        array( 'db' => 'u.last_login', 'dt' => 6 , 
+        'formatter' => function( $d, $row ) {
+            return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
+        }, 'field' => 'last_login'),
         array(
             'db' => '`u`.id',
             'dt' => 'DT_RowId',
