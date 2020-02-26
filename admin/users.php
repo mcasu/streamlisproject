@@ -69,6 +69,7 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                         <th>CONGREGAZIONE</th>
                         <th>TIPO</th>
                         <th>ULTIMO LOGIN</th>
+                        <th>PERMESSI</th>
                     </tr>
                 </thead>
             </table>

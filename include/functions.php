@@ -613,7 +613,17 @@ if (empty($groupId))
         'formatter' => function( $d, $row ) {
             return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
         }, 'field' => 'last_login'),
-        array( 'db' => 'users_viewall', 'dt' => 8 , 'field' => 'users_viewall'),
+        array( 'db' => 'users_viewall', 'dt' => 8 , 
+        'formatter' => function( $d, $row ) 
+        {
+            switch ($d) 
+            {
+                case "true":
+                    return '<span class="label label-success">VEDE TUTTE LE CONGREGAZIONI</span>';
+                case "false":
+                    return '<span class="label label-default">VEDE SOLO LA SUA CONGREGAZIONE</span>';
+            }
+        },'field' => 'users_viewall'),
         array(
             'db' => '`u`.id',
             'dt' => 'DT_RowId',
