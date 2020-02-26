@@ -76,10 +76,17 @@ try
     while($row = mysql_fetch_array($publishers))
     {
        	$publisher_id=$row['publisher_id'];
+<<<<<<< HEAD
         // if ($publisher_id != $mainactions->UserGroupId())
         // {
         //      continue;
         // }
+=======
+        if ($publisher_id != $mainactions->UserGroupId())
+        {
+             continue;
+        }
+>>>>>>> refs/remotes/origin/dev
         
 	$publisher_name=$row['publisher_name'];
 	$publisher_code=$row['publisher_code'];
