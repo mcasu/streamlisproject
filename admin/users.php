@@ -305,9 +305,12 @@ $(document).ready(function()
         var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
         var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
-        var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[7]).text();});
+        var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){
+            alert("userSelectedViewall: " + jQuery(row[6]).text() + " " + jQuery(row[7]).text());
+            return jQuery(row[7]).text();
+        });
 
-        alert("userSelectedViewall: " + return jQuery(row[6]).text() + " " + return jQuery(row[7]).text());
+        
 
         userEditDlg.load('user_edit.php');
         
