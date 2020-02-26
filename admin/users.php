@@ -307,6 +307,8 @@ $(document).ready(function()
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
         var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[7]).text();});
 
+        alert("userSelectedViewall: " + return jQuery(row[6]).text() + " " + return jQuery(row[7]).text());
+
         userEditDlg.load('user_edit.php');
         
         userEditDlg.data('userId',userSelectedId);
