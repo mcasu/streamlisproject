@@ -75,7 +75,8 @@ try
 
     while($row = mysql_fetch_array($publishers))
     {
-       	$publisher_id=$row['publisher_id'];
+		   $publisher_id=$row['publisher_id'];
+		   error_log("USER PERMISSION: " + $mainactions->UserPermission());
         if ($mainactions->UserPermission() == false && $publisher_id != $mainactions->UserGroupId())
         {
              continue;
