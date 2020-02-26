@@ -160,7 +160,7 @@ input:checked + .slider:before {
                     <!-- CAMPO UTENTE VEDE TUTTO -->
                     <label for='permissions' >Utente vede tutte le congregazioni: </label>
                     <label class="switch">
-                        <input type="checkbox" name="users_viewall" id="users_viewall">
+                        <input type="checkbox" value="off" name="users_viewall" id="users_viewall">
                         <span class="slider round"></span>
                     </label>
                 </div>
