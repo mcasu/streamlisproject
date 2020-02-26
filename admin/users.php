@@ -68,7 +68,6 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                         <th>USERNAME</th>
                         <th>CONGREGAZIONE</th>
                         <th>TIPO</th>
-                        <th>ULTIMO LOGIN</th>
                         <th>PERMESSI</th>
                     </tr>
                 </thead>
@@ -308,7 +307,7 @@ $(document).ready(function()
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
         var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){
             //alert("userSelectedViewall: " + row[7] + " " + row[8]);
-            return row[8];
+            return row[6];
         });
 
         

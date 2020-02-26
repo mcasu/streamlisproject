@@ -608,22 +608,22 @@ if (empty($groupId))
                         return '<span class="label label-warning">Publisher</span>';
                 }
             }, 'field' => 'user_role_id'),
-        array( 'db' => 'user_logged', 'dt' => 6 , 'field' => 'user_logged'),
-        array( 'db' => 'u.last_login', 'dt' => 7 , 
-        'formatter' => function( $d, $row ) {
-            return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
-        }, 'field' => 'last_login'),
-        array( 'db' => 'users_viewall', 'dt' => 8 , 
-        'formatter' => function( $d, $row ) 
-        {
-            switch ($d) 
+        array( 'db' => 'users_viewall', 'dt' => 6 , 
+            'formatter' => function( $d, $row ) 
             {
-                case "true":
-                    return '<span class="label label-success">VEDE TUTTE LE CONGREGAZIONI</span>';
-                case "false":
-                    return '<span class="label label-default">VEDE SOLO LA SUA CONGREGAZIONE</span>';
-            }
-        },'field' => 'users_viewall'),
+                switch ($d) 
+                {
+                    case "true":
+                        return '<span class="label label-success">VEDE TUTTE LE CONGREGAZIONI</span>';
+                    case "false":
+                        return '<span class="label label-default">VEDE SOLO LA SUA CONGREGAZIONE</span>';
+                }
+            },'field' => 'users_viewall'),
+        array( 'db' => 'u.last_login', 'dt' => 7 , 
+            'formatter' => function( $d, $row ) {
+                return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
+            }, 'field' => 'last_login'),
+        array( 'db' => 'user_logged', 'dt' => 8 , 'field' => 'user_logged'),
         array(
             'db' => '`u`.id',
             'dt' => 'DT_RowId',
