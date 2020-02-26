@@ -246,10 +246,10 @@ jQuery(document).ready(function ()
     $("#users_viewall").click(function() { 
                     if ($("#users_viewall").checked == true) { 
                         //$("#users_viewall").value = 0;
-                        alert("Check box in Checked " ); 
+                        alert("Check box in Checked " + $("#users_viewall").checked); 
                     } else { 
                         //$("#users_viewall").value = 1;
-                        alert("Check box is Unchecked " ); 
+                        alert("Check box is Unchecked " + $("#users_viewall").checked); 
                     } 
                 });
 });
