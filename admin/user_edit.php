@@ -183,7 +183,14 @@ jQuery(document).ready(function ()
     $('#user_role_name option[value="' + $('#divUserEdit').data('role').toString().toLowerCase() + '"]').prop('selected', true);
 
     //alert("VIEWALL: " + $('#divUserEdit').data('viewall'));
-    $("#users_viewall").prop('checked', $('#divUserEdit').data('viewall'));
+    if ($('#divUserEdit').data('viewall') == "true")
+    {
+        $("#users_viewall").prop('checked', true);
+    }
+    else
+    {
+        $("#users_viewall").prop('checked', false);
+    }
     
     var options = {};
     options.common =
