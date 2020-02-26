@@ -64,11 +64,12 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                     <tr class="head">
                         <th>ID</th>
                         <th>NOME</th>
-                        <th>MAIL</th>
+                        <th>EMAIL</th>
                         <th>USERNAME</th>
                         <th>CONGREGAZIONE</th>
                         <th>TIPO</th>
                         <th>PERMESSI</th>
+                        <th>ULTIMO ACCESSO</th>
                     </tr>
                 </thead>
             </table>
