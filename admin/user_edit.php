@@ -160,7 +160,7 @@ input:checked + .slider:before {
                     <!-- CAMPO UTENTE VEDE TUTTO -->
                     <label for='permissions' >Utente vede tutte le congregazioni: </label>
                     <label class="switch">
-                        <input type="checkbox" value ="0" name="users_viewall" id="users_viewall">
+                        <input type="checkbox" name="users_viewall" id="users_viewall">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -246,10 +246,10 @@ jQuery(document).ready(function ()
     $("#users_viewall").click(function() { 
                     if ($("input[type=checkbox]").prop( 
                       ":checked")) { 
-                        $("#users_viewall").value = 1;
+                        $("#users_viewall").value = 0;
                         alert("Check box in Checked " + $("#users_viewall").val()); 
                     } else { 
-                        $("#users_viewall").value = 0;
+                        $("#users_viewall").value = 1;
                         alert("Check box is Unchecked " + $("#users_viewall").val()); 
                     } 
                 });
