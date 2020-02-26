@@ -182,6 +182,7 @@ jQuery(document).ready(function ()
     $('#group_name option[value="' + $('#divUserEdit').data('group') + '"]').prop('selected', true);
     $('#user_role_name option[value="' + $('#divUserEdit').data('role').toString().toLowerCase() + '"]').prop('selected', true);
 
+    alert("VIEWALL: " + $('#divUserEdit').data('viewall'));
     $("#users_viewall").prop('checked', $('#divUserEdit').data('viewall'));
     
     var options = {};
