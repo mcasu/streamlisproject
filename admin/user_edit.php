@@ -245,10 +245,10 @@ jQuery(document).ready(function ()
 
     $("#users_viewall").click(function() { 
                     if ($('input[type=checkbox]').prop('checked') == true) { 
-                        $("#users_viewall").value = 0;
+                        $('input[type=checkbox]').value = "0";
                         alert("Check box in Checked " + $('input[type=checkbox]').val()); 
                     } else { 
-                        $("#users_viewall").value = 1;
+                        $('input[type=checkbox]').value = "1";
                         alert("Check box is Unchecked " + $('input[type=checkbox]').val()); 
                     } 
                 });
