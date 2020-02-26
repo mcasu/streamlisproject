@@ -247,10 +247,10 @@ jQuery(document).ready(function ()
                     if ($("input[type=checkbox]").prop( 
                       ":checked")) { 
                         $("#users_viewall").value = 1;
-                        alert("Check box in Checked " + $("#users_viewall").value); 
+                        alert("Check box in Checked " + $("#users_viewall").val()); 
                     } else { 
                         $("#users_viewall").value = 0;
-                        alert("Check box is Unchecked " + $("#users_viewall").value); 
+                        alert("Check box is Unchecked " + $("#users_viewall").val()); 
                     } 
                 });
 });
