@@ -38,7 +38,7 @@ switch ($fname)
         $username = filter_input(INPUT_POST, 'username');
         $groupName = filter_input(INPUT_POST, 'groupName');
         $roleName = filter_input(INPUT_POST, 'roleName');
-        $viewall = filter_input(INPUT_POST, 'users_viewall');
+        $viewall = filter_input(INPUT_POST, 'viewall');
         return UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName, $viewall);        
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
