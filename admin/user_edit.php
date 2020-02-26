@@ -182,6 +182,7 @@ jQuery(document).ready(function ()
     $('#group_name option[value="' + $('#divUserEdit').data('group') + '"]').prop('selected', true);
     $('#user_role_name option[value="' + $('#divUserEdit').data('role').toString().toLowerCase() + '"]').prop('selected', true);
     
+    
     var options = {};
     options.common =
     {
@@ -245,11 +246,11 @@ jQuery(document).ready(function ()
 
     $("#users_viewall").click(function() { 
                     if ($('input[type=checkbox]').prop('checked') == true) { 
-                        $('input[type=checkbox]').value = "0";
-                        alert("Check box in Checked " + $('input[type=checkbox]').val()); 
+                        //$('input[type=checkbox]').value = "0";
+                        //alert("Check box in Checked "); 
                     } else { 
-                        $('input[type=checkbox]').value = "1";
-                        alert("Check box is Unchecked " + $('input[type=checkbox]').val()); 
+                        //$('input[type=checkbox]').value = "1";
+                        //alert("Check box is Unchecked "); 
                     } 
                 });
 });

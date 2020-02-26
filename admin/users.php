@@ -258,7 +258,7 @@ $(document).ready(function()
                         var username = $('#username').val();
                         var groupName = $('#group_name').val();
                         var roleName = $('#user_role_name').val();
-                        var viewall = $('#users_viewall').val();
+                        var viewall = $('#users_viewall').prop('checked');
 
                         // Recupero i dati del form e salvo nel database
                         $.post("/include/functions.php",{
