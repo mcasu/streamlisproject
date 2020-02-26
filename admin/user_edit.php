@@ -182,7 +182,7 @@ jQuery(document).ready(function ()
     $('#group_name option[value="' + $('#divUserEdit').data('group') + '"]').prop('selected', true);
     $('#user_role_name option[value="' + $('#divUserEdit').data('role').toString().toLowerCase() + '"]').prop('selected', true);
 
-    alert("VIEWALL: " + $('#divUserEdit').data('viewall'));
+    //alert("VIEWALL: " + $('#divUserEdit').data('viewall'));
     $("#users_viewall").prop('checked', $('#divUserEdit').data('viewall'));
     
     var options = {};
@@ -245,16 +245,6 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
-
-    $("#users_viewall").click(function() { 
-                    if ($('input[type=checkbox]').prop('checked') == true) { 
-                        //$('input[type=checkbox]').value = "0";
-                        //alert("Check box in Checked "); 
-                    } else { 
-                        //$('input[type=checkbox]').value = "1";
-                        //alert("Check box is Unchecked "); 
-                    } 
-                });
 });
 
 </script>
