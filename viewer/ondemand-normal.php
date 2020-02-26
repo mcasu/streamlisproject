@@ -76,10 +76,10 @@ try
     while($row = mysql_fetch_array($publishers))
     {
        	$publisher_id=$row['publisher_id'];
-        // if ($publisher_id != $mainactions->UserGroupId())
-        // {
-        //      continue;
-        // }
+        if ($mainactions->UserPermission() == false && $publisher_id != $mainactions->UserGroupId())
+        {
+             continue;
+        }
         
 	$publisher_name=$row['publisher_name'];
 	$publisher_code=$row['publisher_code'];

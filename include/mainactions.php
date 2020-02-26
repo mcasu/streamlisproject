@@ -99,6 +99,11 @@ class MainActions
 
 	    return $_SESSION["userdata"]['user_role_id']; 
     }
+
+    function UserPermission()
+    {
+        return isset($_SESSION["userdata"]['users_viewall'])?$_SESSION["userdata"]['users_viewall']:'';
+    }
 /*** FINE MEMBERS ***/
 
     function SetAdminEmail($email)
@@ -599,6 +604,15 @@ class MainActions
         else
         {
             $uservars['user_role_name'] = $this->utilsInstance->Sanitize($_POST['user_role_name']);
+        }
+
+        if(!isset($_POST['users_viewall']) || empty($_POST['users_viewall']))
+        {
+            $uservars['users_viewall'] = "false";
+        }
+        else
+        {
+            $uservars['users_viewall'] = $this->utilsInstance->Sanitize($_POST['users_viewall']);
         }
     }
     

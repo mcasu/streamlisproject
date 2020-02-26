@@ -142,6 +142,7 @@ class DBActions
         $userdata['user_email'] = $row['email'];
         $userdata['user_group_id'] = $row['user_group_id'];
         $userdata['user_role_id'] = $row['user_role_id'];
+        $userdata['users_viewall'] = $row['users_viewall'];
 	
         $select_query = "select * from groups where group_id='".$row['user_group_id']. "'";
 
