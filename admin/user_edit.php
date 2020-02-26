@@ -64,34 +64,41 @@ include(getenv("DOCUMENT_ROOT") . "/include/check_role_admin.php");
                                 echo 'No Results';
                             }
                         ?>
-                </select>
+                    </select>
                 <br/>
-                <!-- CAMPO TIPO UTENTE -->
-                <label for='roles' >Tipo di utente:</label><br/>
-                <select class="form-control" name="user_role_name" id="user_role_name">
-                <?php
-                    try
-                    {
-                        /*** query the database ***/
-                        $result = $dbactions->GetUserRoles();
-
-                        if (!$result)
+                    <!-- CAMPO TIPO UTENTE -->
+                    <label for='roles' >Tipo di utente:</label><br/>
+                    <select class="form-control" name="user_role_name" id="user_role_name">
+                    <?php
+                        try
                         {
-                                error_log("No Results");
-                        }
+                            /*** query the database ***/
+                            $result = $dbactions->GetUserRoles();
 
-                        while($row = mysql_fetch_array($result))
-                        {
-                                $user_role_name=$row['user_role_name'];
-                                echo '<option value="' . $user_role_name . '">' . $user_role_name . '</option>"';
+                            if (!$result)
+                            {
+                                    error_log("No Results");
+                            }
+
+                            while($row = mysql_fetch_array($result))
+                            {
+                                    $user_role_name=$row['user_role_name'];
+                                    echo '<option value="' . $user_role_name . '">' . $user_role_name . '</option>"';
+                            }
                         }
-                    }
-                    catch(PDOException $e)
-                    {
-                        echo 'No Results';
-                    }
-                ?>
-                </select>
+                        catch(PDOException $e)
+                        {
+                            echo 'No Results';
+                        }
+                    ?>
+                    </select>
+                <br/>
+                    <!-- CAMPO UTENTE VEDE TUTTO -->
+                    <label for='permissions' >Utente vede tutte le congregazioni: </label>
+                    <label class="switch">
+                        <input type="checkbox" name="users_viewall" id="users_viewall">
+                        <span class="slider round"></span>
+                    </label>
                 </div>
                 <br/>
                 </fieldset>

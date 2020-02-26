@@ -1120,7 +1120,7 @@ class DBActions
             return $result;
     }
     
-    function UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName)
+    function UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName, $viewall)
     {
         if(!$this->DBLogin())
         {
@@ -1131,7 +1131,8 @@ class DBActions
         $query = 'update users set name = "'.$fullName.'", email = "' . $email . '", username = "' . $username . '",'.
                 ' user_group_id = (select groups.group_id from groups where LOWER(groups.group_name) = "'. strtolower($groupName) .'" LIMIT 1),'.
                 ' user_role_id = (select user_roles.role_id from user_roles where LOWER(user_roles.role_name) = "'. strtolower($roleName) .'" LIMIT 1) '.
-                'where id_user = \''.$userId.'\'';
+                ' users_viewall = \''.$viewall.'\''.
+                ' where id_user = \''.$userId.'\'';
         
         $result = mysql_query($query ,$this->connection);
         if(!$result)

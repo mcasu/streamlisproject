@@ -207,7 +207,7 @@ $(document).ready(function()
         } );
         
         if (confirm("Vuoi davvero cambiare la password dell'utente " + userSelectedName + " (ID #" + userSelectedId + ") ?"))
-	{
+	    {
             $("#resetpwd_alert_success").hide();
             $("#resetpwd_alert_fail").hide();
     
@@ -258,6 +258,7 @@ $(document).ready(function()
                         var username = $('#username').val();
                         var groupName = $('#group_name').val();
                         var roleName = $('#user_role_name').val();
+                        var viewall = $('#users_viewall').val();
 
                         // Recupero i dati del form e salvo nel database
                         $.post("/include/functions.php",{
@@ -267,7 +268,8 @@ $(document).ready(function()
                             email:email,
                             username:username,
                             groupName:groupName,
-                            roleName:roleName},
+                            roleName:roleName,
+                            viewall:viewall},
                         function(data,status)
                         {
                             //alert("Data: " + data + "\nStatus: " + status);
@@ -302,7 +304,8 @@ $(document).ready(function()
         var userSelectedUsername = $.map(usersTable.rows('.selected').data(), function (row){return row[3];});
         var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
-        
+        var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){return row[6];});
+
         userEditDlg.load('user_edit.php');
         
         userEditDlg.data('userId',userSelectedId);
@@ -311,6 +314,7 @@ $(document).ready(function()
         userEditDlg.data('username',userSelectedUsername);
         userEditDlg.data('group',userSelectedGroup);
         userEditDlg.data('role',userSelectedRole);
+        userEditDlg.data('viewall',userSelectedViewall);
         
         userEditDlg.dialog('open');
     });

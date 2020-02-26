@@ -38,7 +38,8 @@ switch ($fname)
         $username = filter_input(INPUT_POST, 'username');
         $groupName = filter_input(INPUT_POST, 'groupName');
         $roleName = filter_input(INPUT_POST, 'roleName');
-        return UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName);        
+        $viewall = filter_input(INPUT_POST, 'viewall');
+        return UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName, $viewall);        
     case "mark_ondemand_video_to_join":
         $ondemandIdList = filter_input(INPUT_POST, 'ondemandIdList');
         $userId = filter_input(INPUT_POST, 'userId');
@@ -867,9 +868,9 @@ function DeleteGroups($dbactions, $groupIds)
     return TRUE;
 }
 
-function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName)
+function UpdateUser($dbactions, $userId, $fullName, $email, $username, $groupName, $roleName, $viewall)
 {
-    if (!$dbactions->UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName))
+    if (!$dbactions->UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName, $viewall))
     {
         error_log("ERROR - functions.php UpdateUser() FAILED! " . $dbactions->GetErrorMessage());
         return FALSE;
