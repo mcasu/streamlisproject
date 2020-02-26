@@ -307,7 +307,7 @@ $(document).ready(function()
         var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
         var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){
-            alert("userSelectedViewall: " + row[6]);
+            //alert("userSelectedViewall: " + row[6]);
             return row[6];
         });
 
