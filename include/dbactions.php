@@ -1130,7 +1130,7 @@ class DBActions
         
         $query = 'update users set name = "'.$fullName.'", email = "' . $email . '", username = "' . $username . '",'.
                 ' user_group_id = (select groups.group_id from groups where LOWER(groups.group_name) = "'. strtolower($groupName) .'" LIMIT 1),'.
-                ' user_role_id = (select user_roles.role_id from user_roles where LOWER(user_roles.role_name) = "'. strtolower($roleName) .'" LIMIT 1) '.
+                ' user_role_id = (select user_roles.role_id from user_roles where LOWER(user_roles.role_name) = "'. strtolower($roleName) .'" LIMIT 1), '.
                 ' users_viewall = \''.$viewall.'\''.
                 ' where id_user = \''.$userId.'\'';
         
