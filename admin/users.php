@@ -259,6 +259,7 @@ $(document).ready(function()
                         var groupName = $('#group_name').val();
                         var roleName = $('#user_role_name').val();
                         var viewall = $('#users_viewall').prop('checked');
+                        alert("Viewall: "+ $('#users_viewall').prop('checked'));
 
                         // Recupero i dati del form e salvo nel database
                         $.post("/include/functions.php",{
