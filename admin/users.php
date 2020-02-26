@@ -306,8 +306,8 @@ $(document).ready(function()
         var userSelectedGroup = $.map(usersTable.rows('.selected').data(), function (row){return row[4];});
         var userSelectedRole = $.map(usersTable.rows('.selected').data(), function (row){return jQuery(row[5]).text();});
         var userSelectedViewall = $.map(usersTable.rows('.selected').data(), function (row){
-            alert("userSelectedViewall: " + jQuery(row[6]).text() + " " + jQuery(row[7]).text());
-            return jQuery(row[7]).text();
+            alert("userSelectedViewall: " + jQuery(row[7]).text() + " " + jQuery(row[8]).text());
+            return jQuery(row[8]).text();
         });
 
         

@@ -613,6 +613,7 @@ if (empty($groupId))
         'formatter' => function( $d, $row ) {
             return strftime("%A %d %B %Y %H:%M:%S", strtotime($d));
         }, 'field' => 'last_login'),
+        array( 'db' => 'users_viewall', 'dt' => 8 , 'field' => 'users_viewall'),
         array(
             'db' => '`u`.id',
             'dt' => 'DT_RowId',
