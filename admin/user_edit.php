@@ -160,7 +160,7 @@ input:checked + .slider:before {
                     <!-- CAMPO UTENTE VEDE TUTTO -->
                     <label for='permissions' >Utente vede tutte le congregazioni: </label>
                     <label class="switch">
-                        <input type="checkbox" name="users_viewall" id="users_viewall">
+                        <input type="checkbox" value ="0" name="users_viewall" id="users_viewall">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -242,6 +242,17 @@ jQuery(document).ready(function ()
 	    element.addClass('valid').closest('.control-group').removeClass('error').addClass('success').addClass('has-success');
 	}
     });
+
+    $("#users_viewall").click(function() { 
+                    if ($("input[type=checkbox]").prop( 
+                      ":checked")) { 
+                        $("#users_viewall").value = 1;
+                        alert("Check box in Checked " + $("#users_viewall").value); 
+                    } else { 
+                        $("#users_viewall").value = 0;
+                        alert("Check box is Unchecked " + $("#users_viewall").value); 
+                    } 
+                });
 });
 
 </script>
