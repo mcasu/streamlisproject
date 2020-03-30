@@ -134,17 +134,9 @@ class DBActions
         
         $select_query = "select * from groups where group_id='".$row['user_group_id']. "'";
         $stm = $this->pdoConn->query($query);
+        $stm->setFetchMode(PDO::FETCH_ASSOC);
         $row_group = $stm->fetch();
-
-/*      $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
-        {
-                $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
-                return false;
-        } */
-
-        //$row_group = mysql_fetch_assoc($result);
-
+        
         if (!$row_group)
         {
                 $this->HandleError("Error getting group data.");
