@@ -495,7 +495,7 @@ try
                                                             $strtoremove_lenght = strlen($ondemand_publish_code);
                                                             $ondemand_datetime = substr($path_parts['filename'], $strtoremove_lenght + 1);
 
-                                                            list($ondemand_onlydate, $ondemand_onlytime) = split("_", $ondemand_datetime);
+                                                            list($ondemand_onlydate, $ondemand_onlytime) = preg_split("_", $ondemand_datetime);
 
                                                             $ondemand_date = strftime("%A %d %B %Y", strtotime($ondemand_onlydate));
                                                         }
