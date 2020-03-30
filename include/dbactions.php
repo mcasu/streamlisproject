@@ -1,5 +1,7 @@
 <?PHP
 
+include_once('mysql-fix.php');
+
 class DBActions
 {
     var $error_message;
@@ -23,44 +25,16 @@ class DBActions
         
         try 
         {
-            $this->pdoConn = new PDO($connectionString,$this->username,$this->pwd);
+            $this->connection = mysql_connect($host,$uname,$pwd);
+            mysql_select_db($database, $this->connection);
+            mysql_query("SET NAMES 'UTF8'", $this->connection);
+
+            $this->pdoConn = new PDO($connectionString,$uname,$pwd);
         } 
         catch (PDOException $pe) 
         {
             error_log("ERROR - " . $pe->getMessage());
             die($pe->getMessage());
-        }
-        
-    }
-
-    function DBLogin()
-    {
-        try 
-        {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-            if(!mysql_query("SET NAMES 'UTF8'",$this->connection))
-            {
-                $this->HandleDBError('Error setting utf8 encoding');
-                return false;
-            }
-            return true;
-            
-        } 
-        catch (Exception $e) 
-        {
-            $this->HandleDBError('ERROR - Database login failed! ' . $e->getMessage());
-            return false;
         }
         
     }
@@ -79,42 +53,56 @@ class DBActions
     
     function IsGroupFieldUnique($groupvars,$fieldname)
     {
-        if(!$this->DBLogin())
+/*      if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
         
         $field_val = $this->SanitizeForSQL($groupvars[$fieldname]);
-        $qry = "select group_name from groups where $fieldname='".$field_val."'";
-        $result = mysql_query($qry,$this->connection);
-        if($result && mysql_num_rows($result) > 0)
+        //$query = "select group_name from groups where $fieldname='".$field_val."'";
+        $queryCount = "select COUNT(*) from groups where $fieldname='".$field_val."'";
+
+        $results = $this->pdoConn->query($queryCount);
+        if ($results && $results->fetchColumn() > 0)
         {
             return false;
         }
+
         return true;
     }
 
     function CheckLoginInDB($username,$password)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
+
         $username = $this->SanitizeForSQL($username);
         $pwdmd5 = md5($password);
-        $qry = "select * from users where username='$username' and password='$pwdmd5'";
+        $query = "select * from users where username='$username' and password='$pwdmd5'";
+        $queryCount = "select COUNT(*) from users where username='$username' and password='$pwdmd5'";
 
+        $results = $this->pdoConn->query($queryCount);
+        if (!$results || $results->fetchColumn() <= 0)
+        {
+            $this->HandleError("ERRORE LOGIN - Il nome utente o la password inseriti non sono validi.");
+            return false;
+        }
+        $row = $this->pdoConn->query($query);
+/* 
         $result = mysql_query($qry,$this->connection);
 
         if(!$result || mysql_num_rows($result) <= 0)
         {
             $this->HandleError("ERRORE LOGIN - Il nome utente o la password inseriti non sono validi.");
             return false;
-        }
+        } */
 
-        $row = mysql_fetch_assoc($result);
+        //$row = mysql_fetch_assoc($result);
+       
 	
 //	$session_alive_time = time() - strtotime($row['last_update']);
 //	
@@ -134,52 +122,53 @@ class DBActions
 //		//session_destroy();
 //	}
 	
-	$userdata = array();
-	
-	$userdata['user_id']  = $row['id_user'];
-	$userdata['username']  = $row['username'];
+        $userdata = array();
+        $userdata['user_id']  = $row['id_user'];
+        $userdata['username']  = $row['username'];
         $userdata['user_fullname']  = $row['name'];
         $userdata['user_email'] = $row['email'];
         $userdata['user_group_id'] = $row['user_group_id'];
         $userdata['user_role_id'] = $row['user_role_id'];
         $userdata['users_viewall'] = $row['users_viewall'];
-	
+        
         $select_query = "select * from groups where group_id='".$row['user_group_id']. "'";
+        $row_group = $this->pdoConn->query($query);
 
-        $result = mysql_query($select_query ,$this->connection);
+/*      $result = mysql_query($select_query ,$this->connection);
         if(!$result)
         {
                 $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
                 return false;
-        }
+        } */
 
-        $row_group = mysql_fetch_assoc($result);
+        //$row_group = mysql_fetch_assoc($result);
+
         if (!$row_group)
         {
                 $this->HandleError("Error getting group data.");
                 return false;
         }
         
-	$userdata['user_group_name'] = $row_group['group_name'];
+	    $userdata['user_group_name'] = $row_group['group_name'];
 
         return $userdata;
     }
 
     function ChangePasswordInDB($user_rec, $newpwd)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
 
         $newpwd = $this->SanitizeForSQL($newpwd);
 
-        $qry = "update users set password='".md5($newpwd)."' Where  id_user=".$user_rec['id_user']."";
+        $query = "update users set password='".md5($newpwd)."' Where  id_user=".$user_rec['id_user']."";
 
-        if(!mysql_query( $qry ,$this->connection))
+        if(!$this->pdoConn->query($query))
         {
-            $this->HandleDBError("Error updating the password \nquery:$qry");
+            $this->HandleDBError("Error updating the password \nquery:$query");
             return false;
         }
         return true;
@@ -187,19 +176,19 @@ class DBActions
     
     function UpdateUserLoginStatus($username, $status, $mysqlTime = NULL, $islogin = false)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
 
-	$query = 'update users set user_logged = "'.$status.'", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';
-	if ($islogin)
-	{
-		$query = 'update users set user_logged = "'.$status.'", last_login = "' . $mysqlTime . '", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';	
-	}
+        $query = 'update users set user_logged = "'.$status.'", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';
+        if ($islogin)
+        {
+            $query = 'update users set user_logged = "'.$status.'", last_login = "' . $mysqlTime . '", last_update = "' . $mysqlTime . '" where username = "'.$username.'"';	
+        }
         
-        if(!mysql_query( $query ,$this->connection))
+        if(!$this->pdoConn->query($query))
         {
             $this->HandleDBError("Error updating the user login status \nquery:$query");
             return false;
@@ -210,24 +199,18 @@ class DBActions
     
     function CleanLoginOlderThan($seconds)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             return false;
-        }
+        } */
 	
         $query = 'UPDATE users SET user_logged = "0" WHERE user_logged = "1" and TIMESTAMPDIFF(SECOND,last_update,now()) > \''.$seconds.'\'';
-
+        
         try 
         {
-            $result = mysql_query($query ,$this->connection);
-            $affectedRows = mysql_affected_rows($this->connection);
-            
-            if(!$result)
-            {
-                $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n");
-                return false;
-            }
-	} 
+            $affectedRows = $this->pdoConn->exec($query);
+            //$affectedRows = mysql_affected_rows($this->connection);
+	    } 
         catch (Exception $e) 
         {
             $this->HandleDBError("Error updating the user login status \nQuery: " .$query. "\n". $e->getMessage());
@@ -239,162 +222,176 @@ class DBActions
     
     function GetGroupById($groupId)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-	$select_query = 'select * from groups where group_id = ' . $groupId;
+        } */
 
-        $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
+	    $query = 'select * from groups where group_id = ' . $groupId;
+
+        $row = $this->pdoConn->query($query);
+        if(!$row)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        $row = mysql_fetch_array($result);
+        //$row = mysql_fetch_array($result);
 
-	return $row;
+	    return $row;
     }
 
     function GetGroupByToken($groupToken)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-	$select_query = 'select * from groups where group_token = \'' . $groupToken . '\'';
+        } */
 
-        $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
+	    $query = 'select * from groups where group_token = \'' . $groupToken . '\'';
+
+        $row = $this->pdoConn->query($query);
+        if(!$row)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        $row = mysql_fetch_array($result);
+        //$row = mysql_fetch_array($result);
 
-	return $row;
+	    return $row;
     }    
     
     function GetGroupIdByName($group_name)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-	$select_query = 'select group_id from groups where group_name =\'' . $group_name . '\'';
+        } */
+        
+        $query = 'select group_id from groups where group_name =\'' . $group_name . '\'';
 
-        $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
+        $row = $this->pdoConn->query($query);
+        if(!$row)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        $row = mysql_fetch_array($result);
+        //$row = mysql_fetch_array($result);
 
-	return $row['group_id'];
+	    return $row['group_id'];
     }
     
     function UpdateGroupLiveToken($groupId)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-        $token = md5(uniqid());
-	$updateQuery = 'UPDATE `groups` SET `group_token`=\''. $token .'\' WHERE group_id =\''. $groupId .'\'';
+        } */
 
-        $result = mysql_query($updateQuery ,$this->connection);
-        if(!$result)
+        $token = md5(uniqid());
+	    $updateQuery = 'UPDATE `groups` SET `group_token`=\''. $token .'\' WHERE group_id =\''. $groupId .'\'';
+
+        //$result = mysql_query($updateQuery ,$this->connection);
+        if(!$this->pdoConn->query($query))
         {
             $this->HandleDBError("Error updating data from the table\nquery:$updateQuery");
             return false;
         }
-
-	return $result;
+	    return true;
     }
     
     function GetPublishCodeByGroupId($group_id)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-	$select_query = 'select publish_code from groups where group_id =\'' . $group_id . '\'';
+        } */
 
-        $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
+	    $query = 'select publish_code from groups where group_id =\'' . $group_id . '\'';
+        $row = $this->pdoConn->query($query);
+        if(!$row)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        $row = mysql_fetch_array($result);
+        //$row = mysql_fetch_array($result);
 
-	return $row['publish_code'];
+	    return $row['publish_code'];
     }
     
     function GetGroupNameByPublishCode($publish_code)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
-	$select_query = 'select group_name from groups where publish_code =\'' . $publish_code . '\'';
+        } */
 
-        $result = mysql_query($select_query ,$this->connection);
-        if(!$result)
+	    $query = 'select group_name from groups where publish_code =\'' . $publish_code . '\'';
+
+        $row = $this->pdoConn->query($query);
+        if(!$row)
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        $row = mysql_fetch_array($result);
+        //$row = mysql_fetch_array($result);
 
-	return $row['group_name'];
+	    return $row['group_name'];
     }
 
     function GetUserById($user_id,&$user_rec)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
+
         $id = $this->SanitizeForSQL($user_id);
+        $query = "select * from users where id_user='$id'";
+        $queryCount = "select COUNT(*) from users where id_user='$id'";
 
-        $result = mysql_query("Select * from users where id_user='$id'",$this->connection);
-
-        if(!$result || mysql_num_rows($result) <= 0)
+        $results = $this->pdoConn->query($queryCount);
+        if(!$results || $results->fetchColumn() <= 0)
         {
             $this->HandleError("There is no user with ID: $id");
             return false;
         }
-        $user_rec = mysql_fetch_assoc($result);
+        $stm = $this->pdoConn->prepare($query);
+        $stm->execute();
+        $user_rec = $stm->fetch(PDO::FETCH_ASSOC);
+        //$user_rec = mysql_fetch_assoc($result);
 
         return true;
     }
     
     function GetUserByUsername($username,&$user_rec)
     {
-	if(!$this->DBLogin())
+/* 	    if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
+
         $name = $this->SanitizeForSQL($username);
+        $query = "select * from users where username='$name'";
+        $queryCount = "select COUNT(*) from users where username='$name'";
 
-        $result = mysql_query("Select * from users where username='$name'",$this->connection);
-
-        if(!$result || mysql_num_rows($result) <= 0)
+        $results = $this->pdoConn->query($queryCount);
+        if(!$results || $results->fetchColumn() <= 0)
         {
             $this->HandleError("Non esistono utenti con username: $name");
             return false;
         }
-        $user_rec = mysql_fetch_assoc($result);
+        $stm = $this->pdoConn->prepare($query);
+        $stm->execute();
+        $user_rec = $stm->fetch(PDO::FETCH_ASSOC);
+        //$user_rec = mysql_fetch_assoc($result);
 
         return true;
     }
@@ -470,21 +467,25 @@ class DBActions
 
     function InsertGroupIntoDB(&$groupvars)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
         
         $select_query_role = 'select * from group_roles where role_name =\'' . $groupvars['group_role_name'] . '\'';
-
-        $result = mysql_query($select_query_role ,$this->connection);
-        if(!$result)
+        $row_role = null;
+        try
         {
-            $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role");
+            $stm = $this->pdoConn->prepare($select_query_role);
+            $stm->execute();
+            $row_role = $stm->fetch(PDO::FETCH_ASSOC);
+        }
+        catch(Exception $e)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query_role". "\n". $e->getMessage());
             return false;
         }
-        $row_role = mysql_fetch_assoc($result);
 
         $publish_code = $this->ParseGroupName($groupvars['group_name']);
 
@@ -504,7 +505,7 @@ class DBActions
         "' . md5(uniqid()) . '"
         )';
 
-        if(!mysql_query( $insert_query ,$this->connection))
+        if(!$this->pdoConn->query($insert_query))
         {
             $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
             return false;
@@ -519,73 +520,34 @@ class DBActions
 
     function PublishNameAlreadyExists($app_name,$stream_name)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        $select_query = 'select * from live where app_name=\''.$app_name.'\' and stream_name=\''.$stream_name.'\'';      
 
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
+        $result = mysql_query($select_query ,$this->connection);
+        if(!$result)
+        {
+            $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
+            return false;
+        }
 
-            $select_query = 'select * from live where app_name=\''.$app_name.'\' and stream_name=\''.$stream_name.'\'';      
+        $num_rows = mysql_num_rows($result);
 
-            $result = mysql_query($select_query ,$this->connection);
-            if(!$result)
-            {
-                $this->HandleDBError("Error selecting data from the table\nquery:$select_query");
-                return false;
-            }
-
-            $num_rows = mysql_num_rows($result);
-
-            return $num_rows;
+        return $num_rows;
     }
 
     function DeletePublishNameDuplicated($app_name,$stream_name)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        $delete_query = 'delete from live where app_name = "' . $this->SanitizeForSQL($app_name) . '" and stream_name = "' . $this->SanitizeForSQL($stream_name) . '"';
 
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
-            $delete_query = 'delete from live where app_name = "' . $this->SanitizeForSQL($app_name) . '" and stream_name = "' . $this->SanitizeForSQL($stream_name) . '"';
-
-            if(!mysql_query( $delete_query ,$this->connection))
-            {
-                $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
-                return false;
-            }
-            return true;
+        if(!mysql_query( $delete_query ,$this->connection))
+        {
+            $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
+            return false;
+        }
+        return true;
     }
 
     function SaveEventoDb($nginx_id,$mysqldate,$mysqltime,$event_call,$app_name,$stream_name,$client_addr,$flash_ver,$page_url,$username = null)
     {
-
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
 
             $insert_query = 'insert into events (
             nginx_id,
@@ -622,20 +584,6 @@ class DBActions
 	
     function OnPublish($nginx_id,$app_name,$stream_name,$client_addr,$publish_code,$mysqldate,$mysqltime)
         {
-
-                $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-                if(!$this->connection)
-                {
-                    $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                    return false;
-                }
-                if(!mysql_select_db($this->database, $this->connection))
-                {
-                    $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                    return false;
-                }
-
                 $insert_query = 'insert into live (
                 nginx_id,
 		live_date,
@@ -667,19 +615,6 @@ class DBActions
 
     function InsertEventsLiveToken($eventsLiveId, $token)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-
         $update_query = 'UPDATE `live` SET `live_token`="' . $token . '" '
                 . 'WHERE live_id = ' . $eventsLiveId;
         
@@ -693,19 +628,6 @@ class DBActions
     
     function GetEventsLiveData($token)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }        
-        
         $selectQuery = 'SELECT * FROM `live` WHERE live_token = "' . $token . '"';
         
         $result = mysql_query($selectQuery ,$this->connection);
@@ -720,19 +642,6 @@ class DBActions
                 
     function OnPublishDone($nginx_id,$app_name,$stream_name,$client_addr)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $delete_query = 'delete from live where nginx_id = "' . $this->SanitizeForSQL($nginx_id) . '"';
 
             if(!mysql_query( $delete_query ,$this->connection))
@@ -745,18 +654,6 @@ class DBActions
 
     function UpdateOndemandEvent($ondemandId, $ondemandEventInfos)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         if (!isset($ondemandId))
         {
             $this->HandleDBError("UpdateOndemandEvent() - Parametro \$ondemandId non valido!");
@@ -810,19 +707,6 @@ class DBActions
             $mysqldate = null)
     {
 
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $insert_query = 'insert into ondemand (
             ondemand_publish_code,
             ondemand_path,
@@ -860,19 +744,6 @@ class DBActions
 
     function GetGroups()
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select group_id,group_name,group_type,role_id as group_role_id,publish_code,role_name as group_role_name from groups INNER JOIN group_roles ON groups.group_role = group_roles.role_id order by group_name';      
 
             $result = mysql_query($select_query ,$this->connection);
@@ -886,19 +757,6 @@ class DBActions
 
     function GetUserLoggedByLoginTime($publisher_id = NULL)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'SELECT users.id_user as user_id, '.
                             'users.name, '.
                             'users.email, '.
@@ -938,19 +796,6 @@ class DBActions
 
     function GetUsersByPublisher($publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'SELECT users.id_user as user_id, '.
                             'users.name, '.
                             'users.email, '.
@@ -982,19 +827,6 @@ class DBActions
 
     function GetUserNumbersByRole($publisher_id = NULL)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'SELECT user_role_id, '.
                             'user_roles.role_name as role_name, '.
                             'count(*) as user_number '.
@@ -1025,19 +857,6 @@ class DBActions
 
     function GetEventOndemandNumberByPublisher()
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'SELECT groups.group_name as publisher_name, groups.publish_code, count(*) as event_number FROM ondemand INNER JOIN groups ON ondemand.ondemand_publish_code = groups.publish_code '.
             'group by groups.publish_code order by groups.group_name';
 
@@ -1052,19 +871,6 @@ class DBActions
 
     function GetUserRoles()
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select role_id,role_name as user_role_name from user_roles order by role_name';   
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1078,56 +884,42 @@ class DBActions
 
     function DeleteUsers($userIds)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
 
         $delete_query = 'delete from users where id_user in ('.$userIds.')';
-
-        $result = mysql_query($delete_query ,$this->connection);
-        if(!$result)
+        $results = $this->pdoConn->query($delete_query);
+        if(!$results)
         {
             $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
             return false;
         }
-        return $result;
+        return $results;
     }    
     
     function DeleteUser($user_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $delete_query = 'delete from users where id_user = \''.$user_id.'\'';
 
-            $result = mysql_query($delete_query ,$this->connection);
-            if(!$result)
+            $results = $this->pdoConn->query($delete_query);
+            if(!$results)
             {
                 $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
                 return false;
             }
-            return $result;
+            return $results;
     }
     
     function UpdateUser($userId, $fullName, $email, $username, $groupName, $roleName, $viewall)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
         
         $query = 'update users set name = "'.$fullName.'", email = "' . $email . '", username = "' . $username . '",'.
                 ' user_group_id = (select groups.group_id from groups where LOWER(groups.group_name) = "'. strtolower($groupName) .'" LIMIT 1),'.
@@ -1135,7 +927,7 @@ class DBActions
                 ' users_viewall = \''.$viewall.'\''.
                 ' where id_user = \''.$userId.'\'';
         
-        $result = mysql_query($query ,$this->connection);
+        $result = $this->pdoConn->query($query);
         if(!$result)
         {
             $this->HandleDBError("Error updating data from the table\nquery:$query");
@@ -1147,19 +939,6 @@ class DBActions
 
     function DeleteGroup($group_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $delete_query = 'delete from groups where group_id = \''.$group_id.'\'';
 
             $result = mysql_query($delete_query ,$this->connection);
@@ -1190,42 +969,29 @@ class DBActions
 
     function DeleteGroups($groupIds)
     {
-        if(!$this->DBLogin())
+/*         if(!$this->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
 
         $delete_query = 'delete from groups where group_id in ('.$groupIds.')';
 
-        $result = mysql_query($delete_query ,$this->connection);
-        if(!$result)
+        $results = $this->pdoConn->query($delete_query);
+        if(!$results)
         {
             $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
             return false;
         }
-        return $result;
+        return $results;
     }     
     
     
     function DeleteEventOnDemand($ondemand_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $delete_query = 'delete from ondemand where ondemand_id = \''.$ondemand_id.'\'';
 
-            $result = mysql_query($delete_query ,$this->connection);
+            $result = $this->pdoConn->query($delete_query);
             if(!$result)
             {
                 $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
@@ -1236,19 +1002,6 @@ class DBActions
     
     function DeleteAllEventsLive()
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $delete_query = 'DELETE FROM live';
 
         $result = mysql_query($delete_query ,$this->connection);
@@ -1262,19 +1015,6 @@ class DBActions
 
     function AddViewersLink($viewer_list, $publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $viewers = explode("|", $viewer_list);
 
             foreach ($viewers as $viewtoadd)
@@ -1303,19 +1043,6 @@ class DBActions
 
     function DelViewersLink($viewer_list, $publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $viewers = explode("|", $viewer_list);
 
             $str = implode(",", $viewers);
@@ -1337,19 +1064,6 @@ class DBActions
 
     function GetViewersByPublisher($publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'SELECT group_links.viewer_id, '.
                     'groups.group_name as viewer_name, '.
                     'groups.group_type, '.
@@ -1376,19 +1090,6 @@ class DBActions
 
     function GetGroupsToLinkAvailable($publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select groups.group_name,groups.group_id,groups.group_role from groups where group_id not in (select viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where publisher_id = \''.$publisher_id.'\') AND group_id != ' .$publisher_id. ' order by group_name;';
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1402,19 +1103,6 @@ class DBActions
     
     function GetViewersAvailable($publisher_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select groups.group_name,groups.group_id from groups where group_role = \'2\' and group_id not in (select viewer_id from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where publisher_id = \''.$publisher_id.'\') order by group_name;';
             /*$select_query = 'select group_links.viewer_id, groups.group_name as viewer_name from group_links INNER JOIN groups ON group_links.viewer_id = groups.group_id where group_links.publisher_id != \''.$publisher_id.'\' order by viewer_name';*/
 
@@ -1429,19 +1117,6 @@ class DBActions
 
     function GetPublishersByViewer($viewer_id)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select group_links.publisher_id, groups.group_name as publisher_name, groups.publish_code as publisher_code '.
                             'from group_links '.
                             'INNER JOIN groups ON group_links.publisher_id = groups.group_id '.
@@ -1462,19 +1137,6 @@ class DBActions
 
     function GetGroupRoles()
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select role_id,role_name as group_role_name from group_roles order by role_name'; 
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1488,19 +1150,6 @@ class DBActions
 
     function GetLiveEventsById($eventsLiveId)
     {	
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select * from live where live_id = '.$eventsLiveId;
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1514,19 +1163,6 @@ class DBActions
     
     function GetLiveEventsByPublisher($publish_code)
     {	
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select * from live where stream_name = \''.$publish_code.'\' order by app_name,live_date';
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1540,19 +1176,6 @@ class DBActions
 
     function GetTodayLastLivePlayersNumber($stream_name)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-
         $date_now = date('Y-m-d');
 
         $select_query = 'select e1.* from events e1 '.
@@ -1592,19 +1215,6 @@ class DBActions
 
     function GetOndemandEventsByPublisher($publish_code)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select * from ondemand where ondemand_publish_code = \''.$publish_code.'\' order by ondemand_filename';
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1618,19 +1228,6 @@ class DBActions
 
     function GetOndemandEventById($eventId)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $select_query = 'select * from ondemand where ondemand_id = \''.$eventId.'\';';
 
             $result = mysql_query($select_query ,$this->connection);
@@ -1644,19 +1241,6 @@ class DBActions
     
     function GetOndemandEventsByIds($eventIdArray)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $ondemandIdsToString = join(",", $eventIdArray);
             $select_query = 'SELECT * FROM ondemand WHERE ondemand_id in ( '.$ondemandIdsToString.' ) ORDER BY ondemand_date, ondemand_time';
 
@@ -1671,91 +1255,70 @@ class DBActions
 
     function GetUserTotalNumber()
     {
-        $this->DBLogin();
+/*         $this->DBLogin(); */
         
         $queryCount = 'select count(*) as user_total from users';
         
-        $result = mysql_query($queryCount, $this->connection);
-        if(!$result)
+        $row = $this->pdoConn->query($queryCount);
+        if(!$row)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
-        $row = mysql_fetch_array($result);
-                
         return $row['user_total'];
     }
     
     function GetUserLoggedNumber()
     {
-        $this->DBLogin();
+        //$this->DBLogin();
         
         $queryCount = 'select count(*) as user_logged from users where users.user_logged = \'1\'';
         
-        $result = mysql_query($queryCount, $this->connection);
-        if(!$result)
+        $row = $this->pdoConn->query($queryCount);
+        if(!$row)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
-        $row = mysql_fetch_array($result);
-                
         return $row['user_logged'];
     }
     
     function GetCongregationTotalNumber()
     {
-        $this->DBLogin();
+        //$this->DBLogin();
         
         $queryCount = 'select count(*) as congregation_total from groups where group_type = \'Congregazione\'';
         
-        $result = mysql_query($queryCount, $this->connection);
-        if(!$result)
+        $row = $this->pdoConn->query($queryCount);
+        if(!$row)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
-        $row = mysql_fetch_array($result);
-                
         return $row['congregation_total'];
     }    
     
     function GetGroupTotalNumber()
     {
-        $this->DBLogin();
+        //$this->DBLogin();
         
         $queryCount = 'select count(*) as group_total from groups where group_type = \'Gruppo\'';
         
-        $result = mysql_query($queryCount, $this->connection);
-        if(!$result)
+        $row = $this->pdoConn->query($queryCount);
+        if(!$row)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
-        $row = mysql_fetch_array($result);
-                
         return $row['group_total'];
     }     
     
     function GetUsers($onlyLogged = false)
     {
-            $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-            if(!$this->connection)
-            {
-                $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-                return false;
-            }
-            if(!mysql_select_db($this->database, $this->connection))
-            {
-                $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-                return false;
-            }
-
             $query_select = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
 
             $query_where = '';
@@ -1783,19 +1346,6 @@ class DBActions
 
     function CheckIfOndemandVideoIsMarkedToConvert($ondemandId)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM ondemand WHERE ondemand_id = ' . $ondemandId . ' and ondemand_convert_id is not NULL';
         
         $result = mysql_query($query_select ,$this->connection);
@@ -1810,19 +1360,6 @@ class DBActions
     
     function CheckIfOndemandVideoIsMarkedToJoin($ondemandId)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM ondemand WHERE ondemand_id = ' . $ondemandId . ' and ondemand_join_id is not NULL';
         
         $result = mysql_query($query_select ,$this->connection);
@@ -1837,19 +1374,6 @@ class DBActions
     
     function MarkOndemandVideoToJoin($ondemandIdList, $userId)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-       
         // Genero un id univoco di 12 caratteri
         $ondemandJoinId = substr(uniqid("join_"), 0, 15);
         
@@ -1877,19 +1401,6 @@ class DBActions
     
     function MarkOndemandVideoToConvert($ondemandIdList, $userId = -1)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-       
         // Genero un id univoco di 12 caratteri
         $ondemandConvertId = substr(uniqid("conv_"), 0, 15);
         
@@ -1917,19 +1428,6 @@ class DBActions
     
         function UnMarkOndemandVideoToConvert($ondemandIdList)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-       
         $query_total = 'UPDATE ondemand SET ondemand_convert_id = null WHERE ondemand_id in ('. $ondemandIdList . ')';
         
         $result_update = mysql_query($query_total ,$this->connection);
@@ -1953,19 +1451,6 @@ class DBActions
     
     function SetOndemandActionsJoinStatus($actionsJoinId, $actionsJoinStatus = 0)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_update = 'UPDATE ondemand_actions_join SET ondemand_actions_join_status = ' . $actionsJoinStatus . ' WHERE ondemand_actions_join_id = "'. $actionsJoinId . '"';
         
         $result_update = mysql_query($query_update ,$this->connection);
@@ -1999,19 +1484,6 @@ class DBActions
     
     function GetAllOnDemandActionsJoin()
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM ondemand_actions_join WHERE ondemand_actions_join_status = 0 ORDER BY ondemand_actions_join_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -2066,19 +1538,6 @@ class DBActions
     
     function GetAllOnDemandActionsConvert()
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM ondemand_actions_convert WHERE ondemand_actions_convert_status = 0 ORDER BY ondemand_actions_convert_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -2093,19 +1552,6 @@ class DBActions
     
     function GetActionsConvertIdByOnDemandId($ondemandId)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT ondemand_convert_id FROM ondemand WHERE ondemand_id = ' . $ondemandId;
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -2119,19 +1565,6 @@ class DBActions
     }     
     function GetOnDemandActionsConvertById($actionsConvertId)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM ondemand_actions_convert WHERE ondemand_actions_convert_status = 0 AND ondemand_actions_convert_id = "' . $actionsConvertId . '" ORDER BY ondemand_actions_convert_date';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -2146,19 +1579,6 @@ class DBActions
     
     function DeleteOnDemandActionsJoin($joinIds)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $count = 0;
         $joinIdsToString = null;
         foreach ($joinIds as $id) 
@@ -2186,19 +1606,6 @@ class DBActions
     
     function DeleteOnDemandActionsConvert($convertIds)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $count = 0;
         $convertIdsToString = null;
         foreach ($convertIds as $id) 
@@ -2226,19 +1633,6 @@ class DBActions
     
     function ResetOndemandVideoActionsJoin($joinIds)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-
         $count = 0;
         $joinIdsToString = null;
         foreach ($joinIds as $id) 
@@ -2266,19 +1660,6 @@ class DBActions
     
     function ResetOndemandVideoActionsConvert($convertIds)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-
         $count = 0;
         $convertIdsToString = null;
         foreach ($convertIds as $id) 
@@ -2306,19 +1687,6 @@ class DBActions
     
     function GetLiveVideoFileName($streamName)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $query_select = 'SELECT * FROM live WHERE stream_name = \''.$streamName.'\' ORDER BY live_date,live_id DESC LIMIT 1';
         
         $result_select = mysql_query($query_select ,$this->connection);
@@ -2334,19 +1702,6 @@ class DBActions
     
     function PublishCodeExists($publishCode)
     {
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
-
-        if(!$this->connection)
-        {
-            $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
-            return false;
-        }
-        if(!mysql_select_db($this->database, $this->connection))
-        {
-            $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
-            return false;
-        }
-        
         $querySelect = 'SELECT count(*) FROM `groups` WHERE publish_code like \''. $publishCode . '\' GROUP BY publish_code';
         
         $resultSelect = mysql_query($querySelect ,$this->connection);

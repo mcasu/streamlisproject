@@ -650,11 +650,12 @@ class MainActions
         
     function SaveUserDataIntoDatabase(&$uservars)
     {
-        if(!$this->dbactionsInstance->DBLogin())
+/*         if(!$this->dbactionsInstance->DBLogin())
         {
             $this->HandleError("Database login failed!");
             return false;
-        }
+        } */
+        
         if(!$this->dbactionsInstance->IsFieldUnique($uservars,'username'))
         {
             $this->HandleError("Lo username scelto è già utilizzato. Per favore cambia il tuo uername.");
