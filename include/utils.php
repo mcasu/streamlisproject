@@ -85,10 +85,10 @@ class Utils
     public function SecondsToTime($seconds)
     {
         // extract hours
-        $hours = floor($seconds / (60 * 60));
+        $hours = floor((float)$seconds / (60 * 60));
      
         // extract minutes
-        $divisor_for_minutes = $seconds % (60 * 60);
+        $divisor_for_minutes = (float)$seconds % (60 * 60);
         $minutes = floor($divisor_for_minutes / 60);
      
         // extract the remaining seconds
