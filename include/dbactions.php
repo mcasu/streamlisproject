@@ -92,6 +92,7 @@ class DBActions
             return false;
         }
         $stm = $this->pdoConn->query($query);
+        $stm->setFetchMode(PDO::FETCH_ASSOC);
         $row = $stm->fetch();
 /* 
         $result = mysql_query($qry,$this->connection);
@@ -136,7 +137,7 @@ class DBActions
         $stm = $this->pdoConn->query($query);
         $stm->setFetchMode(PDO::FETCH_ASSOC);
         $row_group = $stm->fetch();
-        
+
         if (!$row_group)
         {
                 $this->HandleError("Error getting group data.");
