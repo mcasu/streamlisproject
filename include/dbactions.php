@@ -91,7 +91,8 @@ class DBActions
             $this->HandleError("ERRORE LOGIN - Il nome utente o la password inseriti non sono validi.");
             return false;
         }
-        $row = $this->pdoConn->query($query);
+        $stm = $this->pdoConn->query($query);
+        $row = $stm->fetch();
 /* 
         $result = mysql_query($qry,$this->connection);
 
@@ -132,7 +133,8 @@ class DBActions
         $userdata['users_viewall'] = $row['users_viewall'];
         
         $select_query = "select * from groups where group_id='".$row['user_group_id']. "'";
-        $row_group = $this->pdoConn->query($query);
+        $stm = $this->pdoConn->query($query);
+        $row_group = $stm->fetch();
 
 /*      $result = mysql_query($select_query ,$this->connection);
         if(!$result)
@@ -230,14 +232,14 @@ class DBActions
 
 	    $query = 'select * from groups where group_id = ' . $groupId;
 
-        $row = $this->pdoConn->query($query);
-        if(!$row)
+        $stm = $this->pdoConn->query($query);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        //$row = mysql_fetch_array($result);
 
+        $row = $stm->fetch();
 	    return $row;
     }
 
@@ -251,14 +253,14 @@ class DBActions
 
 	    $query = 'select * from groups where group_token = \'' . $groupToken . '\'';
 
-        $row = $this->pdoConn->query($query);
-        if(!$row)
+        $stm = $this->pdoConn->query($query);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        //$row = mysql_fetch_array($result);
 
+        $row = $stm->fetch();
 	    return $row;
     }    
     
@@ -272,14 +274,14 @@ class DBActions
         
         $query = 'select group_id from groups where group_name =\'' . $group_name . '\'';
 
-        $row = $this->pdoConn->query($query);
-        if(!$row)
+        $stm = $this->pdoConn->query($query);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        //$row = mysql_fetch_array($result);
 
+        $row = $stm->fetch();
 	    return $row['group_id'];
     }
     
@@ -312,14 +314,14 @@ class DBActions
         } */
 
 	    $query = 'select publish_code from groups where group_id =\'' . $group_id . '\'';
-        $row = $this->pdoConn->query($query);
-        if(!$row)
+        $stm = $this->pdoConn->query($query);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        //$row = mysql_fetch_array($result);
 
+        $row = $stm->fetch();
 	    return $row['publish_code'];
     }
     
@@ -333,14 +335,14 @@ class DBActions
 
 	    $query = 'select group_name from groups where publish_code =\'' . $publish_code . '\'';
 
-        $row = $this->pdoConn->query($query);
-        if(!$row)
+        $stm = $this->pdoConn->query($query);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery:$query");
             return false;
         }
-        //$row = mysql_fetch_array($result);
 
+        $row = $stm->fetch();
 	    return $row['group_name'];
     }
 
@@ -365,7 +367,6 @@ class DBActions
         $stm = $this->pdoConn->prepare($query);
         $stm->execute();
         $user_rec = $stm->fetch(PDO::FETCH_ASSOC);
-        //$user_rec = mysql_fetch_assoc($result);
 
         return true;
     }
@@ -391,7 +392,6 @@ class DBActions
         $stm = $this->pdoConn->prepare($query);
         $stm->execute();
         $user_rec = $stm->fetch(PDO::FETCH_ASSOC);
-        //$user_rec = mysql_fetch_assoc($result);
 
         return true;
     }
@@ -891,13 +891,13 @@ class DBActions
         } */
 
         $delete_query = 'delete from users where id_user in ('.$userIds.')';
-        $results = $this->pdoConn->query($delete_query);
-        if(!$results)
+        $stm = $this->pdoConn->query($delete_query);
+        if(!$stm)
         {
             $this->HandleDBError("Error deleting data from the table\nquery:$delete_query");
             return false;
         }
-        return $results;
+        return $stm;
     }    
     
     function DeleteUser($user_id)
@@ -1259,13 +1259,14 @@ class DBActions
         
         $queryCount = 'select count(*) as user_total from users';
         
-        $row = $this->pdoConn->query($queryCount);
-        if(!$row)
+        $stm = $this->pdoConn->query($queryCount);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
+        $row = $stm->fetch();
         return $row['user_total'];
     }
     
@@ -1275,13 +1276,14 @@ class DBActions
         
         $queryCount = 'select count(*) as user_logged from users where users.user_logged = \'1\'';
         
-        $row = $this->pdoConn->query($queryCount);
-        if(!$row)
+        $stm = $this->pdoConn->query($queryCount);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
+        $row = $stm->fetch();
         return $row['user_logged'];
     }
     
@@ -1291,13 +1293,14 @@ class DBActions
         
         $queryCount = 'select count(*) as congregation_total from groups where group_type = \'Congregazione\'';
         
-        $row = $this->pdoConn->query($queryCount);
-        if(!$row)
+        $stm = $this->pdoConn->query($queryCount);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
+        $row = $stm->fetch();
         return $row['congregation_total'];
     }    
     
@@ -1307,13 +1310,14 @@ class DBActions
         
         $queryCount = 'select count(*) as group_total from groups where group_type = \'Gruppo\'';
         
-        $row = $this->pdoConn->query($queryCount);
-        if(!$row)
+        $stm = $this->pdoConn->query($queryCount);
+        if(!$stm)
         {
             $this->HandleDBError("Error selecting data from the table\nquery: $queryCount");
             return false;
         }
         
+        $row = $stm->fetch();
         return $row['group_total'];
     }     
     
