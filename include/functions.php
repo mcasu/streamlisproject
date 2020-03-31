@@ -480,8 +480,12 @@ $columns = array(
             try
             {
                 $dbactions->GetUserById($d, $userData);
+                if (!$userData)
+                {
+                    return "N/A";
+                }
                 $groupData = $dbactions->GetGroupById($userData['user_group_id']);
-                if (!$userData || $d == -1)
+                if ($d == -1)
                 {
                     return "N/A";
                 }
