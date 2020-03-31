@@ -143,6 +143,10 @@ $img_filename = $ondemand_path.strtolower($stream_name)."/".$ondemand_filename.'
     
 try
 {
+    if ($frame == null)
+    {
+        throw new Exception;
+    }
     // Save the image to disk
     imagejpeg($frame->toGDImage(), $img_filename, 100);
             
@@ -160,7 +164,7 @@ try
 } 
 catch (Exception $ex) 
 {
-    error_log("ERROR - Unable to create video thumbnail ".$img_filename);
+    error_log("ERROR - Unable to create video thumbnail ".$img_filename. " - ".$ex->getMessage());
 }
 
 // AGGIUNGO OPERAZIONE PER CONVERTIRE IN MP4 IL VIDEO //
