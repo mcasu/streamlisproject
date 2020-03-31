@@ -145,7 +145,7 @@ try
 {
     if ($frame == null)
     {
-        throw new Exception;
+        throw new Exception("Object frame is null.");
     }
     // Save the image to disk
     imagejpeg($frame->toGDImage(), $img_filename, 100);
@@ -164,7 +164,7 @@ try
 } 
 catch (Exception $ex) 
 {
-    error_log("ERROR - Unable to create video thumbnail ".$img_filename. " - ".$ex->getMessage());
+    error_log("ERROR - Unable to create video thumbnail ".$img_filename. " - ".$ex->getMessage()."\n");
 }
 
 // AGGIUNGO OPERAZIONE PER CONVERTIRE IN MP4 IL VIDEO //
