@@ -477,10 +477,21 @@ $columns = array(
         'dt'        => 3,
         'formatter' => function( $d, $row ) use ($dbactions) {
             $userData = array(); 
-            $dbactions->GetUserById($d, $userData);
-            $groupData = $dbactions->GetGroupById($userData['user_group_id']);
-            
-            return $d != -1 ? $groupData['group_name'] : "N/A";
+            try
+            {
+                $dbactions->GetUserById($d, $userData);
+                $groupData = $dbactions->GetGroupById($userData['user_group_id']);
+                if (!$userData || $d == -1)
+                {
+                    return "N/A";
+                }
+                //return $d != -1 ? $groupData['group_name'] : "N/A";
+                return $groupData['group_name'];
+            }
+            catch(Exeption $e)
+            {
+                return "N/A";
+            }
         }), 
     array( 'db' => 'ondemand_actions_convert_status', 'dt' => 4,
         'formatter' => function( $d, $row ) {
