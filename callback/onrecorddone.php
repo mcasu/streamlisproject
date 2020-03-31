@@ -27,7 +27,7 @@ $record_tmp_dir = $path_parts['dirname'];
 $strtoremove_lenght = strlen($stream_name);
 $ondemand_datetime = substr($ondemand_filename, $strtoremove_lenght + 1);
 
-list($ondemand_onlydate, $ondemand_onlytime) = preg_split("_", $ondemand_datetime);
+list($ondemand_onlydate, $ondemand_onlytime) = preg_split("#_#", $ondemand_datetime);
 
 $date_temp = strftime("%Y-%m-%d", strtotime($ondemand_onlydate));
 //$time_temp = strftime("%H:%M:%S", strtotime(str_replace("-",":", $ondemand_onlytime)));
