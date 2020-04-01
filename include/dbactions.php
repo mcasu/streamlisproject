@@ -392,6 +392,7 @@ class DBActions
     function InsertIntoDB($uservars)
     {
         error_log("\n INFO - " . print_r($uservars,true));
+
         $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
 
         $result = mysql_query($select_query_group ,$this->connection);
@@ -401,6 +402,7 @@ class DBActions
             return false;
         }
         $row_group = mysql_fetch_assoc($result);
+        error_log("\n INFO - " . print_r($row_group,true));
 
         $select_query_role = 'select * from user_roles where role_name =\'' . $uservars['user_role_name'] . '\'';
 
@@ -411,6 +413,7 @@ class DBActions
             return false;
         }
         $row_role = mysql_fetch_assoc($result);
+        error_log("\n INFO - " . print_r($row_role,true));
 
         if (array_key_exists('email',$uservars))
         {
@@ -451,6 +454,7 @@ class DBActions
                 )';
         }
 
+        error_log("\n INSERT QUERY: [ " . $insert_query . "]\n");
         if(!mysql_query( $insert_query ,$this->connection))
         {
             $this->HandleDBError("Error inserting data to the table\nquery:$insert_query");
