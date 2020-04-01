@@ -662,7 +662,7 @@ class MainActions
             return false;
         }
 	
-	$user_id = $this->dbactionsInstance->InsertIntoDB($uservars);
+	    $user_id = $this->dbactionsInstance->InsertIntoDB($uservars);
         if(!$user_id)
         {
             $this->HandleError("Inserting to Database failed!");

@@ -391,6 +391,7 @@ class DBActions
 
     function InsertIntoDB($uservars)
     {
+        error_log("\n INFO - " . print_r($uservars,true));
         $select_query_group = 'select * from groups where group_name =\'' . $uservars['group_name'] . '\'';
 
         $result = mysql_query($select_query_group ,$this->connection);
