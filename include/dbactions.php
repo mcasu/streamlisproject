@@ -1321,7 +1321,7 @@ class DBActions
     
     function GetUsers($onlyLogged = false)
     {
-            $query_select = 'select id_user as user_id,name as user_name,email as user_mail,phone_number,username,password,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
+            $query_select = 'select id_user as user_id,name as user_name,email as user_mail,username,password,user_group_id,group_name as user_group_name,user_role_id,role_name as user_role_name,user_logged,last_login,last_update from users ';
 
             $query_where = '';
             if ($onlyLogged)
